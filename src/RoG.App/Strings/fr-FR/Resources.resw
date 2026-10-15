@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Texte der Windows-App – Français.
+  Schlüssel mit Punkt gehören zu x:Uid (Element.Eigenschaft), Schlüssel ohne Punkt liest der Code
+  (RoG.Core.Localization.StringKeys). Deutsch zuerst, EN/FR immer mitpflegen – tests/RoG.Core.Tests/Localization prüft
+  Vollständigkeit und gleiche Schlüssel in allen drei Sprachen.
+-->
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>Rebels of Gaming</value>
+  </data>
+  <data name="Common_ComingSoon" xml:space="preserve">
+    <value>Cette section arrive dans une prochaine version.</value>
+  </data>
+  <data name="Error_access_denied" xml:space="preserve">
+    <value>La connexion a été annulée.</value>
+  </data>
+  <data name="Error_account_suspended" xml:space="preserve">
+    <value>Ton compte est suspendu.</value>
+  </data>
+  <data name="Error_browser_failed" xml:space="preserve">
+    <value>Le navigateur n’a pas pu être ouvert.</value>
+  </data>
+  <data name="Error_forbidden" xml:space="preserve">
+    <value>Tu n’as pas l’autorisation pour cela.</value>
+  </data>
+  <data name="Error_insufficient_scope" xml:space="preserve">
+    <value>Cette connexion ne le permet pas. Reconnecte-toi pour autoriser l’accès.</value>
+  </data>
+  <data name="Error_invalid_grant" xml:space="preserve">
+    <value>Le code de connexion a expiré ou n’est pas valide. Recommence la connexion.</value>
+  </data>
+  <data name="Error_invalid_request" xml:space="preserve">
+    <value>La demande de connexion n’était pas valide. Réessaie.</value>
+  </data>
+  <data name="Error_invalid_scope" xml:space="preserve">
+    <value>Aucune des autorisations demandées ne correspond à ton compte.</value>
+  </data>
+  <data name="Error_login_timeout" xml:space="preserve">
+    <value>La connexion a pris trop de temps. Recommence.</value>
+  </data>
+  <data name="Error_missing_code" xml:space="preserve">
+    <value>Aucun code de connexion n’est revenu du navigateur. Réessaie.</value>
+  </data>
+  <data name="Error_network_error" xml:space="preserve">
+    <value>Pas de connexion au serveur. Vérifie ta connexion Internet.</value>
+  </data>
+  <data name="Error_not_found" xml:space="preserve">
+    <value>Introuvable.</value>
+  </data>
+  <data name="Error_rate_limited" xml:space="preserve">
+    <value>Trop de requêtes. Merci de patienter un instant.</value>
+  </data>
+  <data name="Error_server_error" xml:space="preserve">
+    <value>Une erreur est survenue sur le serveur. Réessaie plus tard.</value>
+  </data>
+  <data name="Error_state_mismatch" xml:space="preserve">
+    <value>La réponse du navigateur ne correspond pas à cette connexion. Réessaie.</value>
+  </data>
+  <data name="Error_timeout" xml:space="preserve">
+    <value>Le serveur ne répond pas. Réessaie dans un instant.</value>
+  </data>
+  <data name="Error_too_many_attempts" xml:space="preserve">
+    <value>Trop de tentatives. Merci d’attendre une minute.</value>
+  </data>
+  <data name="Error_too_many_devices" xml:space="preserve">
+    <value>Trop d’appareils connectés. Déconnecte un appareil sur le site sous Compte → Applications et appareils.</value>
+  </data>
+  <data name="Error_unauthenticated" xml:space="preserve">
+    <value>Ta session a expiré. Merci de te reconnecter.</value>
+  </data>
+  <data name="Error_unknown_error" xml:space="preserve">
+    <value>Une erreur s’est produite. Réessaie.</value>
+  </data>
+  <data name="Error_unsupported_response_type" xml:space="preserve">
+    <value>La demande de connexion n’est pas prise en charge.</value>
+  </data>
+  <data name="Error_validation_failed" xml:space="preserve">
+    <value>Merci de vérifier ta saisie.</value>
+  </data>
+  <data name="HomePage_ComingSoonText.Text" xml:space="preserve">
+    <value>L’application Windows est en cours de création. Le ticker en direct, les actualités et les squads arrivent dans les prochaines étapes.</value>
+  </data>
+  <data name="HomePage_ComingSoonTitle.Text" xml:space="preserve">
+    <value>EN CONSTRUCTION</value>
+  </data>
+  <data name="HomePage_GuestHint.Message" xml:space="preserve">
+    <value>Tu vois le contenu public. Connecte-toi dans « Compte » pour tout utiliser.</value>
+  </data>
+  <data name="HomePage_GuestHint.Title" xml:space="preserve">
+    <value>Mode invité</value>
+  </data>
+  <data name="HomePage_TickerEvent.Text" xml:space="preserve">
+    <value>PROCHAIN ÉVÉNEMENT</value>
+  </data>
+  <data name="HomePage_TickerOnline.Text" xml:space="preserve">
+    <value>EN LIGNE</value>
+  </data>
+  <data name="HomePage_TickerServers.Text" xml:space="preserve">
+    <value>SUR LES SERVEURS</value>
+  </data>
+  <data name="HomePage_Title.Text" xml:space="preserve">
+    <value>ACCUEIL</value>
+  </data>
+  <data name="LoginPage_Cancel.Content" xml:space="preserve">
+    <value>ANNULER</value>
+  </data>
+  <data name="LoginPage_Error.Title" xml:space="preserve">
+    <value>Échec de la connexion</value>
+  </data>
+  <data name="LoginPage_Guest.Content" xml:space="preserve">
+    <value>PARCOURIR SANS CONNEXION</value>
+  </data>
+  <data name="LoginPage_Privacy.Text" xml:space="preserve">
+    <value>L’application ne conserve qu’un jeton d’appareil dans le Gestionnaire d’identification Windows. La déconnexion le révoque immédiatement.</value>
+  </data>
+  <data name="LoginPage_SignIn.Content" xml:space="preserve">
+    <value>SE CONNECTER DANS LE NAVIGATEUR</value>
+  </data>
+  <data name="LoginPage_Subtitle.Text" xml:space="preserve">
+    <value>Connecte-toi avec ton compte RoG – dans le navigateur avec Discord ou par e-mail.</value>
+  </data>
+  <data name="LoginPage_Title.Text" xml:space="preserve">
+    <value>REBELS OF GAMING</value>
+  </data>
+  <data name="LoginPage_Waiting.Text" xml:space="preserve">
+    <value>Le navigateur est ouvert. Termine la connexion là-bas – l’application continue automatiquement.</value>
+  </data>
+  <data name="Loopback_Failure" xml:space="preserve">
+    <value>La connexion n’a pas abouti. Tu peux fermer cette fenêtre et réessayer dans l’application.</value>
+  </data>
+  <data name="Loopback_Success" xml:space="preserve">
+    <value>Connexion terminée. Tu peux fermer cette fenêtre et revenir à l’application.</value>
+  </data>
+  <data name="Loopback_Title" xml:space="preserve">
+    <value>Rebels of Gaming</value>
+  </data>
+  <data name="Nav_Account" xml:space="preserve">
+    <value>Compte</value>
+  </data>
+  <data name="Nav_Admin" xml:space="preserve">
+    <value>Administration</value>
+  </data>
+  <data name="Nav_Calendar" xml:space="preserve">
+    <value>Événements</value>
+  </data>
+  <data name="Nav_Forum" xml:space="preserve">
+    <value>Forum</value>
+  </data>
+  <data name="Nav_Home" xml:space="preserve">
+    <value>Accueil</value>
+  </data>
+  <data name="Nav_Members" xml:space="preserve">
+    <value>Membres</value>
+  </data>
+  <data name="Nav_Messages" xml:space="preserve">
+    <value>Messages</value>
+  </data>
+  <data name="Nav_News" xml:space="preserve">
+    <value>Actualités</value>
+  </data>
+  <data name="Nav_Servers" xml:space="preserve">
+    <value>Serveurs</value>
+  </data>
+  <data name="Nav_Squads" xml:space="preserve">
+    <value>Squads</value>
+  </data>
+  <data name="Nav_Wiki" xml:space="preserve">
+    <value>Wiki</value>
+  </data>
+  <data name="Shell_NavAccount.Content" xml:space="preserve">
+    <value>Compte</value>
+  </data>
+  <data name="Shell_NavAdmin.Content" xml:space="preserve">
+    <value>Administration</value>
+  </data>
+  <data name="Shell_NavCalendar.Content" xml:space="preserve">
+    <value>Événements</value>
+  </data>
+  <data name="Shell_NavForum.Content" xml:space="preserve">
+    <value>Forum</value>
+  </data>
+  <data name="Shell_NavHome.Content" xml:space="preserve">
+    <value>Accueil</value>
+  </data>
+  <data name="Shell_NavMembers.Content" xml:space="preserve">
+    <value>Membres</value>
+  </data>
+  <data name="Shell_NavMessages.Content" xml:space="preserve">
+    <value>Messages</value>
+  </data>
+  <data name="Shell_NavNews.Content" xml:space="preserve">
+    <value>Actualités</value>
+  </data>
+  <data name="Shell_NavServers.Content" xml:space="preserve">
+    <value>Serveurs</value>
+  </data>
+  <data name="Shell_NavSquads.Content" xml:space="preserve">
+    <value>Squads</value>
+  </data>
+  <data name="Shell_NavWiki.Content" xml:space="preserve">
+    <value>Wiki</value>
+  </data>
+  <data name="Shell_TitleBar.Text" xml:space="preserve">
+    <value>REBELS OF GAMING</value>
+  </data>
+</root>

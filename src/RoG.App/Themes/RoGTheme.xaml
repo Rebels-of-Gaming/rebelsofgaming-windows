@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  RoG-Design als ResourceDictionary – Tokens wie auf der Website (docs/DESIGN.md im Website-Repo, CLAUDE.md):
+  bg #1C1F26 · bg2 #242832 · bg3 #2D3240 · line #3A4050 · ink #F1EFEA · muted #A8ACB6 · red #E0324A ·
+  action-red #D62C43 · gold #D4AE3C · green #3DDC84 (+ blue #4F8CFF für „im Voice“ wie in der Mobile-App).
+  90 % dunkel / 8 % Off-White / 2 % Akzent. Rot = Aktion/Status, Gold = Rang/Auszeichnung.
+  Nur Dunkel-Design (App.xaml: RequestedTheme="Dark"). Seiten verwenden nur diese Schlüssel, keine Einweg-Farben.
+-->
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Farben -->
+    <Color x:Key="RoGBgColor">#FF1C1F26</Color>
+    <Color x:Key="RoGBg2Color">#FF242832</Color>
+    <Color x:Key="RoGBg3Color">#FF2D3240</Color>
+    <Color x:Key="RoGLineColor">#FF3A4050</Color>
+    <Color x:Key="RoGInkColor">#FFF1EFEA</Color>
+    <Color x:Key="RoGMutedColor">#FFA8ACB6</Color>
+    <Color x:Key="RoGRedColor">#FFE0324A</Color>
+    <Color x:Key="RoGActionRedColor">#FFD62C43</Color>
+    <Color x:Key="RoGRedPressedColor">#FFF04A60</Color>
+    <Color x:Key="RoGGoldColor">#FFD4AE3C</Color>
+    <Color x:Key="RoGGreenColor">#FF3DDC84</Color>
+    <Color x:Key="RoGBlueColor">#FF4F8CFF</Color>
+    <Color x:Key="RoGOfflineColor">#FF6B7080</Color>
+
+    <SolidColorBrush x:Key="RoGBgBrush" Color="{StaticResource RoGBgColor}" />
+    <SolidColorBrush x:Key="RoGBg2Brush" Color="{StaticResource RoGBg2Color}" />
+    <SolidColorBrush x:Key="RoGBg3Brush" Color="{StaticResource RoGBg3Color}" />
+    <SolidColorBrush x:Key="RoGLineBrush" Color="{StaticResource RoGLineColor}" />
+    <SolidColorBrush x:Key="RoGInkBrush" Color="{StaticResource RoGInkColor}" />
+    <SolidColorBrush x:Key="RoGMutedBrush" Color="{StaticResource RoGMutedColor}" />
+    <SolidColorBrush x:Key="RoGRedBrush" Color="{StaticResource RoGRedColor}" />
+    <SolidColorBrush x:Key="RoGActionRedBrush" Color="{StaticResource RoGActionRedColor}" />
+    <SolidColorBrush x:Key="RoGRedPressedBrush" Color="{StaticResource RoGRedPressedColor}" />
+    <SolidColorBrush x:Key="RoGGoldBrush" Color="{StaticResource RoGGoldColor}" />
+    <SolidColorBrush x:Key="RoGGreenBrush" Color="{StaticResource RoGGreenColor}" />
+    <SolidColorBrush x:Key="RoGBlueBrush" Color="{StaticResource RoGBlueColor}" />
+
+    <!-- Status-Punkte: grün online · blau Voice · rot auf RoG-Server · gold im Spiel · grau offline -->
+    <SolidColorBrush x:Key="RoGStatusOnlineBrush" Color="{StaticResource RoGGreenColor}" />
+    <SolidColorBrush x:Key="RoGStatusVoiceBrush" Color="{StaticResource RoGBlueColor}" />
+    <SolidColorBrush x:Key="RoGStatusServerBrush" Color="{StaticResource RoGRedColor}" />
+    <SolidColorBrush x:Key="RoGStatusInGameBrush" Color="{StaticResource RoGGoldColor}" />
+    <SolidColorBrush x:Key="RoGStatusOfflineBrush" Color="{StaticResource RoGOfflineColor}" />
+
+    <!-- WinUI-Systemfarben auf RoG umbiegen (Akzent = Rot, Flächen = bg/bg2) -->
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Dark">
+            <Color x:Key="SystemAccentColor">#FFE0324A</Color>
+            <Color x:Key="SystemAccentColorLight1">#FFF04A60</Color>
+            <Color x:Key="SystemAccentColorLight2">#FFF46A7C</Color>
+            <Color x:Key="SystemAccentColorLight3">#FFF8909E</Color>
+            <Color x:Key="SystemAccentColorDark1">#FFD62C43</Color>
+            <Color x:Key="SystemAccentColorDark2">#FFB02236</Color>
+            <Color x:Key="SystemAccentColorDark3">#FF8A1A2A</Color>
+            <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush" Color="#FF1C1F26" />
+            <SolidColorBrush x:Key="NavigationViewDefaultPaneBackground" Color="#FF242832" />
+            <SolidColorBrush x:Key="NavigationViewExpandedPaneBackground" Color="#FF242832" />
+            <SolidColorBrush x:Key="NavigationViewTopPaneBackground" Color="#FF242832" />
+            <SolidColorBrush x:Key="NavigationViewContentBackground" Color="#FF1C1F26" />
+            <SolidColorBrush x:Key="NavigationViewContentGridBorderBrush" Color="#FF3A4050" />
+            <SolidColorBrush x:Key="TextFillColorPrimaryBrush" Color="#FFF1EFEA" />
+            <SolidColorBrush x:Key="TextFillColorSecondaryBrush" Color="#FFA8ACB6" />
+            <SolidColorBrush x:Key="CardBackgroundFillColorDefaultBrush" Color="#FF242832" />
+            <SolidColorBrush x:Key="CardStrokeColorDefaultBrush" Color="#FF3A4050" />
+            <!-- Primärknopf: Rot auf Off-White (Kontrast AA) -->
+            <SolidColorBrush x:Key="AccentButtonBackground" Color="#FFD62C43" />
+            <SolidColorBrush x:Key="AccentButtonBackgroundPointerOver" Color="#FFE0324A" />
+            <SolidColorBrush x:Key="AccentButtonBackgroundPressed" Color="#FFF04A60" />
+            <SolidColorBrush x:Key="AccentButtonForeground" Color="#FFF1EFEA" />
+            <SolidColorBrush x:Key="AccentButtonForegroundPointerOver" Color="#FFF1EFEA" />
+            <SolidColorBrush x:Key="AccentButtonForegroundPressed" Color="#FFF1EFEA" />
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+
+    <!-- Schriften: Barlow Condensed (eingebettet, SIL OFL 1.1, Fonts/OFL.txt) für Anzeige-Texte in Versalien; Text = Segoe UI Variable (System). -->
+    <FontFamily x:Key="RoGDisplayFont">ms-appx:///Fonts/BarlowCondensed-Bold.ttf#Barlow Condensed</FontFamily>
+    <FontFamily x:Key="RoGDisplaySemiBoldFont">ms-appx:///Fonts/BarlowCondensed-SemiBold.ttf#Barlow Condensed SemiBold</FontFamily>
+    <FontFamily x:Key="RoGTextFont">Segoe UI Variable Text, Segoe UI</FontFamily>
+
+    <!-- Abstände und Radien -->
+    <CornerRadius x:Key="RoGCardRadius">12</CornerRadius>
+    <CornerRadius x:Key="RoGControlRadius">8</CornerRadius>
+    <Thickness x:Key="RoGPagePadding">32,24,32,32</Thickness>
+    <Thickness x:Key="RoGCardPadding">20</Thickness>
+    <x:Double x:Key="RoGReadingWidth">720</x:Double>
+
+    <!-- Textstile -->
+    <Style x:Key="RoGDisplayTextStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource RoGDisplayFont}" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="40" />
+        <Setter Property="CharacterSpacing" Value="40" />
+        <Setter Property="Foreground" Value="{StaticResource RoGInkBrush}" />
+        <Setter Property="TextWrapping" Value="WrapWholeWords" />
+    </Style>
+
+    <Style x:Key="RoGTitleTextStyle" TargetType="TextBlock" BasedOn="{StaticResource RoGDisplayTextStyle}">
+        <Setter Property="FontSize" Value="28" />
+    </Style>
+
+    <Style x:Key="RoGSectionTextStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource RoGDisplaySemiBoldFont}" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="CharacterSpacing" Value="60" />
+        <Setter Property="Foreground" Value="{StaticResource RoGMutedBrush}" />
+    </Style>
+
+    <Style x:Key="RoGBodyTextStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource RoGTextFont}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="LineHeight" Value="22" />
+        <Setter Property="Foreground" Value="{StaticResource RoGInkBrush}" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <Style x:Key="RoGMutedTextStyle" TargetType="TextBlock" BasedOn="{StaticResource RoGBodyTextStyle}">
+        <Setter Property="Foreground" Value="{StaticResource RoGMutedBrush}" />
+    </Style>
+
+    <!-- Karte (bg2, Linie, Radius) -->
+    <Style x:Key="RoGCardStyle" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource RoGBg2Brush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource RoGLineBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="{StaticResource RoGCardRadius}" />
+        <Setter Property="Padding" Value="{StaticResource RoGCardPadding}" />
+    </Style>
+
+    <!-- Knöpfe -->
+    <Style x:Key="RoGPrimaryButtonStyle" TargetType="Button" BasedOn="{StaticResource AccentButtonStyle}">
+        <Setter Property="FontFamily" Value="{StaticResource RoGDisplaySemiBoldFont}" />
+        <Setter Property="FontSize" Value="17" />
+        <Setter Property="CharacterSpacing" Value="40" />
+        <Setter Property="Padding" Value="20,10" />
+        <Setter Property="MinHeight" Value="44" />
+        <Setter Property="CornerRadius" Value="{StaticResource RoGControlRadius}" />
+    </Style>
+
+    <Style x:Key="RoGSecondaryButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+        <Setter Property="FontFamily" Value="{StaticResource RoGDisplaySemiBoldFont}" />
+        <Setter Property="FontSize" Value="17" />
+        <Setter Property="CharacterSpacing" Value="40" />
+        <Setter Property="Padding" Value="20,10" />
+        <Setter Property="MinHeight" Value="44" />
+        <Setter Property="Background" Value="{StaticResource RoGBg3Brush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource RoGLineBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource RoGInkBrush}" />
+        <Setter Property="CornerRadius" Value="{StaticResource RoGControlRadius}" />
+    </Style>
+
+    <!-- Status-Punkt (Ellipse 10×10), Farbe über Fill aus RoGStatus*Brush -->
+    <Style x:Key="RoGStatusDotStyle" TargetType="Ellipse">
+        <Setter Property="Width" Value="10" />
+        <Setter Property="Height" Value="10" />
+        <Setter Property="Stroke" Value="{StaticResource RoGBg2Brush}" />
+        <Setter Property="StrokeThickness" Value="2" />
+    </Style>
+</ResourceDictionary>

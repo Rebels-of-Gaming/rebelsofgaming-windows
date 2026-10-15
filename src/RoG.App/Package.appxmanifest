@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  MSIX-Manifest der Windows-App.
+  Identity Name/Publisher sind PLATZHALTER: Die echten Werte vergibt das Partner Center bei der Namensreservierung
+  (Produktverwaltung → Produktidentität) – siehe docs/STORE.md. Version = Directory.Build.props RoGVersion + ".0"
+  (ein Test in tests/RoG.Core.Tests prüft das). Die vierte Stelle muss für den Store 0 bleiben.
+-->
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:uap5="http://schemas.microsoft.com/appx/manifest/uap/windows10/5"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  IgnorableNamespaces="uap uap5 rescap">
+
+  <Identity
+    Name="RebelsofGaming.App"
+    Publisher="CN=PLATZHALTER"
+    Version="0.1.0.0" />
+
+  <Properties>
+    <DisplayName>Rebels of Gaming</DisplayName>
+    <PublisherDisplayName>Rebels of Gaming</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.17763.0" MaxVersionTested="10.0.26100.0" />
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.26100.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+
+  <Applications>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="$targetentrypoint$">
+      <uap:VisualElements
+        DisplayName="Rebels of Gaming"
+        Description="Clan-App der Rebels of Gaming: News, Squads, Nachrichten, Termine, Server und mehr."
+        BackgroundColor="transparent"
+        Square150x150Logo="Assets\Square150x150Logo.png"
+        Square44x44Logo="Assets\Square44x44Logo.png">
+        <uap:DefaultTile
+          ShortName="RoG"
+          Wide310x150Logo="Assets\Wide310x150Logo.png"
+          Square71x71Logo="Assets\Square71x71Logo.png"
+          Square310x310Logo="Assets\Square310x310Logo.png">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+            <uap:ShowOn Tile="wide310x150Logo" />
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile>
+        <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#1C1F26" />
+      </uap:VisualElements>
+
+      <Extensions>
+        <!-- Autostart: standardmäßig aus, Einstellungen → „Mit Windows starten“ (StartupTask.RequestEnableAsync). -->
+        <uap5:Extension Category="windows.startupTask">
+          <uap5:StartupTask TaskId="RoGStartup" Enabled="false" DisplayName="Rebels of Gaming" />
+        </uap5:Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <!-- internetClient: API, Reverb. runFullTrust: Desktop-App (WinUI 3); erlaubt auch den Login-Rücksprung an 127.0.0.1. -->
+    <Capability Name="internetClient" />
+    <rescap:Capability Name="runFullTrust" />
+  </Capabilities>
+</Package>

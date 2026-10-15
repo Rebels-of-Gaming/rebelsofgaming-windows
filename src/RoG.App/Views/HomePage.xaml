@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="RoG.App.Views.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="{StaticResource RoGBgBrush}">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Padding="{StaticResource RoGPagePadding}" Spacing="24">
+            <TextBlock x:Uid="HomePage_Title" Style="{StaticResource RoGDisplayTextStyle}" Text="START" />
+
+            <InfoBar
+                x:Name="GuestHint"
+                x:Uid="HomePage_GuestHint"
+                IsClosable="True"
+                Severity="Informational" />
+
+            <!-- Platzhalter: Live-Ticker, Squads, News kommen in Stufe 1/2 (docs/WINDOWS-PFLICHTENHEFT.md). -->
+            <Grid ColumnSpacing="16" RowSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Style="{StaticResource RoGCardStyle}">
+                    <StackPanel Spacing="8">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Ellipse Fill="{StaticResource RoGStatusOnlineBrush}" Style="{StaticResource RoGStatusDotStyle}" />
+                            <TextBlock x:Uid="HomePage_TickerOnline" Style="{StaticResource RoGSectionTextStyle}" Text="ONLINE" />
+                        </StackPanel>
+                        <TextBlock Style="{StaticResource RoGTitleTextStyle}" Text="–" />
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="1" Style="{StaticResource RoGCardStyle}">
+                    <StackPanel Spacing="8">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Ellipse Fill="{StaticResource RoGStatusServerBrush}" Style="{StaticResource RoGStatusDotStyle}" />
+                            <TextBlock x:Uid="HomePage_TickerServers" Style="{StaticResource RoGSectionTextStyle}" Text="AUF SERVERN" />
+                        </StackPanel>
+                        <TextBlock Style="{StaticResource RoGTitleTextStyle}" Text="–" />
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="2" Style="{StaticResource RoGCardStyle}">
+                    <StackPanel Spacing="8">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Ellipse Fill="{StaticResource RoGStatusInGameBrush}" Style="{StaticResource RoGStatusDotStyle}" />
+                            <TextBlock x:Uid="HomePage_TickerEvent" Style="{StaticResource RoGSectionTextStyle}" Text="NÄCHSTES EVENT" />
+                        </StackPanel>
+                        <TextBlock Style="{StaticResource RoGTitleTextStyle}" Text="–" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Border MaxWidth="{StaticResource RoGReadingWidth}" HorizontalAlignment="Left" Style="{StaticResource RoGCardStyle}">
+                <StackPanel Spacing="8">
+                    <TextBlock x:Uid="HomePage_ComingSoonTitle" Style="{StaticResource RoGSectionTextStyle}" Text="IM AUFBAU" />
+                    <TextBlock
+                        x:Uid="HomePage_ComingSoonText"
+                        Style="{StaticResource RoGBodyTextStyle}"
+                        Text="Die Windows-App entsteht gerade. Live-Ticker, News und Squads folgen in den nächsten Stufen." />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

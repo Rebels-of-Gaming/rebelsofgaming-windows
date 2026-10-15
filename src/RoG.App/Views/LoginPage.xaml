@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="RoG.App.Views.LoginPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="{StaticResource RoGBgBrush}">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid MinHeight="520" Padding="24">
+            <Border
+                MaxWidth="440"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Style="{StaticResource RoGCardStyle}"
+                Padding="32">
+                <StackPanel Spacing="20">
+                    <!-- Rote Akzentlinie wie die Login-Karte der Website -->
+                    <Rectangle
+                        Height="3"
+                        Margin="-32,-32,-32,0"
+                        Fill="{StaticResource RoGRedBrush}"
+                        RadiusX="2"
+                        RadiusY="2" />
+                    <Image
+                        Width="112"
+                        Height="112"
+                        HorizontalAlignment="Center"
+                        Source="ms-appx:///Assets/rog-badge-512.png"
+                        AutomationProperties.AccessibilityView="Raw" />
+
+                    <StackPanel Spacing="6">
+                        <TextBlock
+                            x:Uid="LoginPage_Title"
+                            HorizontalAlignment="Center"
+                            HorizontalTextAlignment="Center"
+                            Style="{StaticResource RoGTitleTextStyle}"
+                            Text="REBELS OF GAMING" />
+                        <TextBlock
+                            x:Uid="LoginPage_Subtitle"
+                            HorizontalAlignment="Center"
+                            HorizontalTextAlignment="Center"
+                            Style="{StaticResource RoGMutedTextStyle}"
+                            Text="Melde dich mit deinem RoG-Konto an – im Browser mit Discord oder E-Mail." />
+                    </StackPanel>
+
+                    <InfoBar
+                        x:Uid="LoginPage_Error"
+                        IsClosable="False"
+                        IsOpen="{x:Bind ViewModel.HasError, Mode=OneWay}"
+                        Message="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}"
+                        Severity="Error" />
+
+                    <StackPanel Spacing="12" Visibility="{x:Bind ViewModel.IsIdle, Mode=OneWay}">
+                        <Button
+                            x:Uid="LoginPage_SignIn"
+                            HorizontalAlignment="Stretch"
+                            Command="{x:Bind ViewModel.SignInCommand}"
+                            Content="IM BROWSER ANMELDEN"
+                            Style="{StaticResource RoGPrimaryButtonStyle}" />
+                        <Button
+                            x:Uid="LoginPage_Guest"
+                            HorizontalAlignment="Stretch"
+                            Command="{x:Bind ViewModel.BrowseAsGuestCommand}"
+                            Content="OHNE ANMELDUNG UMSEHEN"
+                            Style="{StaticResource RoGSecondaryButtonStyle}" />
+                    </StackPanel>
+
+                    <StackPanel Spacing="12" Visibility="{x:Bind ViewModel.IsBusy, Mode=OneWay}">
+                        <ProgressRing HorizontalAlignment="Center" IsActive="{x:Bind ViewModel.IsBusy, Mode=OneWay}" />
+                        <TextBlock
+                            x:Uid="LoginPage_Waiting"
+                            HorizontalAlignment="Center"
+                            HorizontalTextAlignment="Center"
+                            Style="{StaticResource RoGMutedTextStyle}"
+                            Text="Der Browser ist geöffnet. Schließe die Anmeldung dort ab – danach geht es hier automatisch weiter." />
+                        <Button
+                            x:Uid="LoginPage_Cancel"
+                            HorizontalAlignment="Center"
+                            Command="{x:Bind ViewModel.CancelCommand}"
+                            Content="ABBRECHEN"
+                            Style="{StaticResource RoGSecondaryButtonStyle}" />
+                    </StackPanel>
+
+                    <TextBlock
+                        x:Uid="LoginPage_Privacy"
+                        HorizontalAlignment="Center"
+                        HorizontalTextAlignment="Center"
+                        FontSize="12"
+                        Style="{StaticResource RoGMutedTextStyle}"
+                        Text="Die App speichert nur ein Geräte-Token in der Windows-Anmeldeinformationsverwaltung. Abmelden widerruft es sofort." />
+                </StackPanel>
+            </Border>
+        </Grid>
+    </ScrollViewer>
+</Page>

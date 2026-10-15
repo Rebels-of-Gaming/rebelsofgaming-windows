@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="RoG.App.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid Background="{StaticResource RoGBgBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Eigene Titelleiste (ExtendsContentIntoTitleBar) -->
+        <Grid x:Name="AppTitleBar" Grid.Row="0" Background="{StaticResource RoGBg2Brush}">
+            <StackPanel Margin="16,0,0,0" VerticalAlignment="Center" Orientation="Horizontal" Spacing="10">
+                <Image Width="18" Height="18" Source="ms-appx:///Assets/Square44x44Logo.targetsize-24_altform-unplated.png" />
+                <TextBlock
+                    x:Uid="Shell_TitleBar"
+                    VerticalAlignment="Center"
+                    FontFamily="{StaticResource RoGDisplaySemiBoldFont}"
+                    FontSize="14"
+                    CharacterSpacing="60"
+                    Foreground="{StaticResource RoGMutedBrush}"
+                    Text="REBELS OF GAMING" />
+            </StackPanel>
+        </Grid>
+
+        <!--
+          Seitenleiste wie das Tablet-Layout der Mobile-App: breit = aufgeklappt (Left), mittel = nur Symbole
+          (LeftCompact), schmal = Menü-Knopf (LeftMinimal). Schwellen 600/840 epx wie in der Mobile-App.
+        -->
+        <NavigationView
+            x:Name="NavView"
+            Grid.Row="1"
+            CompactModeThresholdWidth="600"
+            ExpandedModeThresholdWidth="840"
+            IsBackButtonVisible="Collapsed"
+            IsSettingsVisible="False"
+            PaneDisplayMode="Auto"
+            SelectionChanged="OnNavigationSelectionChanged"
+            Visibility="Collapsed">
+            <NavigationView.MenuItems>
+                <NavigationViewItem x:Uid="Shell_NavHome" Content="Start" Icon="Home" Tag="Nav_Home" />
+                <NavigationViewItem x:Uid="Shell_NavNews" Content="News" Icon="PreviewLink" Tag="Nav_News" />
+                <NavigationViewItem x:Uid="Shell_NavSquads" Content="Squads" Icon="People" Tag="Nav_Squads" />
+                <NavigationViewItem x:Uid="Shell_NavMessages" Content="Nachrichten" Icon="Message" Tag="Nav_Messages" />
+                <NavigationViewItem x:Uid="Shell_NavCalendar" Content="Termine" Icon="Calendar" Tag="Nav_Calendar" />
+                <NavigationViewItem x:Uid="Shell_NavServers" Content="Server" Icon="World" Tag="Nav_Servers" />
+                <NavigationViewItem x:Uid="Shell_NavForum" Content="Forum" Icon="Comment" Tag="Nav_Forum" />
+                <NavigationViewItem x:Uid="Shell_NavWiki" Content="Wiki" Icon="Library" Tag="Nav_Wiki" />
+                <NavigationViewItem x:Uid="Shell_NavMembers" Content="Mitglieder" Icon="ContactInfo" Tag="Nav_Members" />
+            </NavigationView.MenuItems>
+            <NavigationView.FooterMenuItems>
+                <NavigationViewItem x:Uid="Shell_NavAdmin" Content="Verwaltung" Icon="Admin" Tag="Nav_Admin" />
+                <NavigationViewItem x:Uid="Shell_NavAccount" Content="Konto" Icon="Contact" Tag="Nav_Account" />
+            </NavigationView.FooterMenuItems>
+            <Frame x:Name="ContentFrame" />
+        </NavigationView>
+
+        <!-- Login liegt über der Shell, solange weder Token noch Gastmodus da sind. -->
+        <Frame x:Name="LoginFrame" Grid.Row="1" Visibility="Collapsed" />
+    </Grid>
+</Window>

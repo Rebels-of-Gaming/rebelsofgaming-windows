@@ -97,5 +97,9 @@ public sealed class AppServices : IDisposable
         Localizer.GetString(StringKeys.LoopbackSuccess),
         Localizer.GetString(StringKeys.LoopbackFailure));
 
-    public void Dispose() => Api.Dispose();
+    public void Dispose()
+    {
+        Api.Dispose();
+        (Tokens as IDisposable)?.Dispose();
+    }
 }

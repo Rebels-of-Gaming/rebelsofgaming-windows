@@ -9,7 +9,7 @@ namespace RoG.App.Services;
 /// Windows-Benutzer gebunden). Nicht geheime Metadaten (Konto-ID, Name, Scopes, Gerätename) liegen als JSON im
 /// App-Datenordner – nie der Token selbst.
 /// </summary>
-public sealed class PasswordVaultTokenStore(string metadataPath) : ITokenStore
+public sealed class PasswordVaultTokenStore(string metadataPath) : ITokenStore, IDisposable
 {
     private const string Resource = "RebelsOfGaming.DeviceToken";
     private const int ElementNotFound = unchecked((int)0x80070490);
@@ -140,6 +140,8 @@ public sealed class PasswordVaultTokenStore(string metadataPath) : ITokenStore
             // nichts gespeichert
         }
     }
+
+    public void Dispose() => _lock.Dispose();
 
     private sealed record Metadata(string UserId, string UserName, List<string> Scopes, string DeviceName, DateTimeOffset CreatedAt);
 }

@@ -11,7 +11,7 @@ namespace RoG.App.ViewModels;
 /// Login-Seite: „Im Browser anmelden“ (PKCE + Loopback, RoG.Core.Auth.AppLoginFlow) oder „Ohne Anmeldung umsehen“
 /// (Gastmodus, öffentliche Endpunkte ohne Token).
 /// </summary>
-public sealed partial class LoginViewModel(AppServices services) : ObservableObject
+public sealed partial class LoginViewModel(AppServices services) : ObservableObject, IDisposable
 {
     private CancellationTokenSource? _cts;
 
@@ -35,14 +35,14 @@ public sealed partial class LoginViewModel(AppServices services) : ObservableObj
     {
         ErrorMessage = null;
         IsBusy = true;
-        _cts = new CancellationTokenSource();
+        var cts = _cts = new CancellationTokenSource();
         try
         {
             var http = services.Api.Http;
             var flow = new AppLoginFlow(services.Environment, http, services.Browser, services.Tokens);
-            var scopes = await AppScopes.ResolveAsync(http, _cts.Token);
+            var scopes = await AppScopes.ResolveAsync(http, cts.Token);
             var deviceName = DeviceName.ForWindows(Environment.UserName);
-            await flow.LoginAsync(scopes, deviceName, services.LoopbackTexts(), cancellationToken: _cts.Token);
+            await flow.LoginAsync(scopes, deviceName, services.LoopbackTexts(), cancellationToken: cts.Token);
             await services.UpdateSettingsAsync(s => s with { GuestMode = false });
             Completed?.Invoke(this, EventArgs.Empty);
         }
@@ -63,8 +63,11 @@ public sealed partial class LoginViewModel(AppServices services) : ObservableObj
         finally
         {
             IsBusy = false;
-            _cts?.Dispose();
-            _cts = null;
+            cts.Dispose();
+            if (ReferenceEquals(_cts, cts))
+            {
+                _cts = null;
+            }
         }
     }
 
@@ -76,5 +79,12 @@ public sealed partial class LoginViewModel(AppServices services) : ObservableObj
     {
         await services.UpdateSettingsAsync(s => s with { GuestMode = true });
         Completed?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void Dispose()
+    {
+        // Nur abbrechen – SignInAsync räumt seine CancellationTokenSource im finally selbst auf.
+        _cts?.Cancel();
+        _cts = null;
     }
 }

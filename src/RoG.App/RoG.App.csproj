@@ -31,8 +31,6 @@
     <GenerateTestArtifacts>true</GenerateTestArtifacts>
     <AppxPackageDir>$(MSBuildThisFileDirectory)..\..\artifacts\msix\</AppxPackageDir>
 
-    <!-- Erster Build auf der VM: XAML-Compiler/CsWinRT erzeugen Warnungen, die wir erst sehen müssen. -->
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <!-- Kein Trimming/AOT in Stufe 0; kommt mit dem Feinschliff (Startzeit). -->
     <PublishTrimmed>false</PublishTrimmed>
   </PropertyGroup>

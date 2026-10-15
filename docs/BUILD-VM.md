@@ -16,6 +16,11 @@ Testergebnisse und Pakete zurück. Diese Anleitung beschreibt, was du einmalig e
 Nie Passwörter, nie private Schlüssel schicken. Die Werte kommen in `~/.config/rog-windows/build-vm.env` auf dev-linux
 (nicht ins Repo, Vorlage `scripts/build-vm.env.example`).
 
+> **Stand 15.10.2026:** Der Owner hat statt SSH einen **GitHub-Actions-Runner auf Windows** eingerichtet (Organisation
+> Rebels-of-Gaming). Gebaut wird damit über `.github/workflows/ci.yml` (Job „WinUI-App“, `runs-on: [self-hosted, Windows]`),
+> die Ergebnisse (Logs, Testberichte, MSIX) liegen als Artefakt `windows-artifacts` am Lauf. Die Werkzeuge aus Abschnitt 3
+> müssen auf dem Runner installiert sein; SSH (Abschnitte 4–5, `scripts/remote-build.sh`) ist damit optional.
+
 ## 1. Wo läuft die VM?
 
 **Hetzner fällt aus:** Hetzner Cloud bietet keine Windows-Abbilder an, und eine selbst installierte Windows-Lizenz auf

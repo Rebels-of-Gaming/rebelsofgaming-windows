@@ -125,7 +125,9 @@ try {
         $common = @(
             'build', $AppProject, '-c', $Configuration, '-p:Platform=x64',
             '-p:GenerateAppxPackageOnBuild=true', '-p:AppxBundle=Always', "-p:AppxBundlePlatforms=$($Platforms -join '|')",
-            "-p:AppxPackageDir=$MsixDir\"
+            "-p:AppxPackageDir=$MsixDir\",
+            # Symbolpaket (.appxsym) braucht mspdbcmf.exe aus Visual Studio (FastLink-PDB-Umwandlung) – ohne VS aus.
+            '-p:AppxSymbolPackageEnabled=false'
         )
         if ($Mode -eq 'Store') {
             Invoke-Checked 'MSIX für den Store' {

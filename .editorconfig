@@ -14,11 +14,15 @@ indent_size = 2
 [*.md]
 trim_trailing_whitespace = false
 
-[*.{ps1,cmd,bat}]
+# PowerShell: UTF-8 mit BOM, sonst liest Windows PowerShell 5.1 Umlaute falsch
+[*.ps1]
+charset = utf-8-bom
+
+[*.{cmd,bat}]
 end_of_line = crlf
 
 [*.sln]
-end_of_line = crlf
+charset = utf-8-bom
 indent_style = tab
 
 [*.cs]

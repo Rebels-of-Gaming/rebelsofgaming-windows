@@ -16,6 +16,9 @@
     <ApplicationIcon>Assets\AppIcon.ico</ApplicationIcon>
     <Platforms>x64;ARM64</Platforms>
     <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
+    <!-- Ohne -r (MSIX-Bündel baut je Plattform) die RID aus der Plattform ableiten. -->
+    <RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == '' And '$(Platform)' == 'x64'">win-x64</RuntimeIdentifier>
+    <RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == '' And '$(Platform)' == 'ARM64'">win-arm64</RuntimeIdentifier>
     <PublishProfile>win-$(Platform).pubxml</PublishProfile>
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>

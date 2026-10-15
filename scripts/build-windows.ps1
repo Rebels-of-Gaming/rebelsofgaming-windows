@@ -86,11 +86,15 @@ try {
     $sdk = (& dotnet --version)
     Write-Host ".NET SDK: $sdk"
     $msbuild = Find-MSBuild
-    if ($msbuild) { Write-Host "MSBuild:  $msbuild" } else { Write-Host 'MSBuild:  nicht gefunden – App-Build über dotnet (Paketierung braucht Visual Studio Build Tools).' -ForegroundColor Yellow }
+    if ($msbuild) { Write-Host "MSBuild:  $msbuild (nur Info – gebaut und paketiert wird mit dotnet)" } else { Write-Host 'MSBuild:  nicht gefunden (nicht nötig – gebaut und paketiert wird mit dotnet).' }
     $winSdk = Get-ChildItem 'C:\Program Files (x86)\Windows Kits\10\bin' -Directory -ErrorAction SilentlyContinue | Where-Object Name -Match '^10\.' | Sort-Object Name | Select-Object -Last 1
     if ($winSdk) { Write-Host "Windows SDK: $($winSdk.Name)" } else { Write-Host 'Windows SDK: nicht gefunden (MSIX-Werkzeuge kommen dann nur aus dem NuGet-Paket Microsoft.Windows.SDK.BuildTools).' -ForegroundColor Yellow }
     $summary.dotnet = $sdk
     $summary.msbuild = $msbuild
+
+    if ($Mode -eq 'Sideload' -and -not $CertificateThumbprint) {
+        throw 'Sideload braucht -CertificateThumbprint bzw. ROG_SIGNING_THUMBPRINT (Testzertifikat, docs/BUILD-VM.md Abschnitt 6).'
+    }
 
     Invoke-Checked 'Restore' { dotnet restore $Solution -p:Platform=x64 "-bl:$Logs\restore.binlog" }
 
@@ -107,7 +111,7 @@ try {
 
     foreach ($platform in $Platforms) {
         $rid = if ($platform -eq 'ARM64') { 'win-arm64' } else { 'win-x64' }
-        if ($Mode -eq 'Build' -or -not $msbuild) {
+        if ($Mode -eq 'Build') {
             Invoke-Checked "App bauen ($platform)" {
                 dotnet build $AppProject -c $Configuration -p:Platform=$platform -r $rid "-bl:$Logs\app-$platform.binlog"
             }
@@ -115,22 +119,23 @@ try {
     }
 
     if ($Mode -ne 'Build') {
-        if (-not $msbuild) { throw 'Für MSIX-Pakete wird MSBuild aus Visual Studio 2022/Build Tools gebraucht (docs/BUILD-VM.md).' }
+        # Paketieren mit dem .NET SDK (dotnet build) statt MSBuild.exe: Den Build Tools 2026 auf dem Runner fehlt der
+        # .NET-SDK-Resolver (MSB4236 „Microsoft.NET.Sdk nicht gefunden“). Die MSIX-Werkzeuge kommen aus dem NuGet-Paket
+        # Microsoft.Windows.SDK.BuildTools(.MSIX) (EnableMsixTooling), Visual Studio wird dafür nicht gebraucht.
         $common = @(
-            $AppProject, '/restore', "/p:Configuration=$Configuration", '/p:Platform=x64',
-            '/p:GenerateAppxPackageOnBuild=true', '/p:AppxBundle=Always', "/p:AppxBundlePlatforms=$($Platforms -join '|')",
-            "/p:AppxPackageDir=$MsixDir\", '/m', '/nologo', '/v:minimal'
+            'build', $AppProject, '-c', $Configuration, '-p:Platform=x64',
+            '-p:GenerateAppxPackageOnBuild=true', '-p:AppxBundle=Always', "-p:AppxBundlePlatforms=$($Platforms -join '|')",
+            "-p:AppxPackageDir=$MsixDir\"
         )
         if ($Mode -eq 'Store') {
             Invoke-Checked 'MSIX für den Store' {
-                & $msbuild @common '/p:UapAppxPackageBuildMode=StoreUpload' '/p:AppxPackageSigningEnabled=false' "/bl:$Logs\msix-store.binlog"
+                dotnet @common '-p:UapAppxPackageBuildMode=StoreUpload' '-p:AppxPackageSigningEnabled=false' "-bl:$Logs\msix-store.binlog"
             }
         }
         else {
-            if (-not $CertificateThumbprint) { throw 'Sideload braucht -CertificateThumbprint bzw. ROG_SIGNING_THUMBPRINT (Testzertifikat, docs/BUILD-VM.md Abschnitt 6).' }
             Invoke-Checked 'MSIX zum Testen (signiert)' {
-                & $msbuild @common '/p:UapAppxPackageBuildMode=SideloadOnly' '/p:AppxPackageSigningEnabled=true' `
-                    "/p:PackageCertificateThumbprint=$CertificateThumbprint" "/bl:$Logs\msix-sideload.binlog"
+                dotnet @common '-p:UapAppxPackageBuildMode=SideloadOnly' '-p:AppxPackageSigningEnabled=true' `
+                    "-p:PackageCertificateThumbprint=$CertificateThumbprint" "-bl:$Logs\msix-sideload.binlog"
             }
         }
         $summary.packages = @(Get-ChildItem $MsixDir -Recurse -Include *.msix, *.msixbundle, *.msixupload | ForEach-Object { $_.FullName.Substring($Root.Length + 1) })

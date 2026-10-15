@@ -73,7 +73,7 @@ Im Installer diese Workloads/Komponenten wählen:
 | **.NET-Desktopentwicklung** (Build Tools: „.NET-Desktop-Buildtools“) | C#, MSBuild, .NET-Desktop |
 | **Entwicklung von Windows-Anwendungen** bzw. „WinUI-Anwendungsentwicklung“ (enthält *Windows App SDK C#-Vorlagen*) | WinUI 3 / Windows App SDK |
 | Einzelne Komponente **Windows 11 SDK (10.0.26100)** | Windows SDK, `makeappx`, `signtool` |
-| Einzelne Komponente **MSIX-Paketerstellungstools** | `.msix`/`.msixupload` aus `msbuild` |
+| Einzelne Komponente **MSIX-Paketerstellungstools** | optional – `build-windows.ps1` paketiert mit `dotnet build` über das NuGet-Paket; nur für Visual Studio |
 
 Per Kommandozeile (Paket-ID mit `winget search BuildTools` prüfen – sie heißt je nach Version
 `Microsoft.VisualStudio.BuildTools` oder `Microsoft.VisualStudio.2026.BuildTools`):
@@ -171,6 +171,20 @@ Export-Certificate -Cert $cert -FilePath "$HOME\rog-test.cer"     # .cer (öffen
 Store-Reservierung (siehe `docs/STORE.md`) ein neues Testzertifikat mit dem echten `CN=…` erzeugen. Auf einem Testrechner
 die `.cer` als Administrator nach „Lokaler Computer → Vertrauenswürdige Personen“ importieren, dann das `.msix`
 doppelklicken. Zertifikate (`.pfx`) nie ins Repo.
+
+**GitHub-Actions-Runner (`rog-win-1`):** Der Runner-Dienst läuft als **`NETWORK SERVICE`**
+(NuGet-Cache unter `C:\Windows\ServiceProfiles\NetworkService\.nuget`). `CurrentUser\My` ist dort der Speicher dieses
+Dienstkontos, nicht der von `builder` – ein interaktiv erzeugtes Zertifikat findet der Lauf nicht. Zwei Wege:
+
+1. **Dienst unter `builder` laufen lassen** (empfohlen): `services.msc` → „GitHub Actions Runner (…)“ → Anmelden →
+   Konto `.\builder` + Passwort, Dienst neu starten. Dann obige Befehle als `builder` ausführen; die Benutzervariable
+   `ROG_SIGNING_THUMBPRINT` sieht der Dienst nach dem Neustart.
+2. **Zertifikat ins Konto `NETWORK SERVICE` importieren:** als Administrator die `.pfx` exportieren und mit
+   `psexec -u "NT AUTHORITY\NETWORK SERVICE" -i powershell` → `Import-PfxCertificate -FilePath … -CertStoreLocation Cert:\CurrentUser\My`
+   importieren; `ROG_SIGNING_THUMBPRINT=<Fingerabdruck>` in `C:\runner\actions-runner\.env` eintragen und den Dienst neu starten.
+
+Danach: `gh workflow run ci.yml --ref develop -f mode=Sideload` – das signierte `.msixbundle` liegt im Artefakt
+`windows-artifacts` unter `msix/`.
 
 ## 7. Prüfen und erster Build (macht Claude)
 

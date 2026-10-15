@@ -13,3 +13,6 @@ Stufe 0 – Fundament (Version 0.1.0, noch nicht im Store).
 - Echtzeit-Client für Reverb (Pusher-Protokoll 7) mit privaten und Presence-Kanälen, Ping/Pong und Neuverbindung
 - Einstellungen, Sprachen DE/EN/FR, RoG-Design als ResourceDictionary, Login-Seite, Startseite (Platzhalter), Seitenleiste
 - Build-Skripte für die Windows-VM (`scripts/build-windows.ps1`, `scripts/remote-build.sh`) und Anleitungen (`docs/BUILD-VM.md`, `docs/STORE.md`)
+- CI auf GitHub Actions: Core + Tests unter Linux, WinUI-App (x64 + ARM64) auf dem Windows-Runner; erster grüner App-Build
+- MSIX-Pakete (Store-Upload `.msixupload`, Sideload) werden mit `dotnet build` erzeugt – Visual Studio wird dafür nicht gebraucht
+- Korrigiert: Reihenfolge der Theme-Ressourcen (XAML WMC0035), Freigabe von Abbruch-Token und Tresor-Sperre (CA1001); Warnungen gelten jetzt auch in der App als Fehler

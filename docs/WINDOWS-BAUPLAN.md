@@ -7,7 +7,7 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 
 | Stufe | Inhalt | Status | Commit |
 |---|---|---|---|
-| 0 | Fundament | fertig auf dev-linux (Core + Tests grün); **App-Projekt noch nie gebaut** – wartet auf die Build-VM | siehe `git log` (develop) |
+| 0 | Fundament | fertig: Core + Tests grün (Linux), **App baut auf dem Windows-Runner `rog-win-1`** (x64 + ARM64, CI-Job „WinUI-App (Windows)“), Store-Paket `.msixupload` entsteht; noch nie gestartet | siehe `git log` (develop) |
 | 1 | Konto + Start | offen | |
 | 2 | Community lesen | offen | |
 | 3 | Echtzeit + Desktop-Integration | offen | |
@@ -59,13 +59,16 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 
 ### Stufe 0 – bewusst offen
 
-- **App nie gebaut/gestartet** – keine Windows-Maschine. Erwartbar sind beim ersten VM-Build kleinere Korrekturen (XAML,
-  Windows App SDK 2.x-APIs, Schriftnamen). `TreatWarningsAsErrors` ist für `RoG.App` deshalb vorerst aus.
+- **App gebaut, aber nie gestartet.** Erster grüner Build am 15.10.2026 auf `rog-win-1` (einzige XAML-Korrektur:
+  Theme-Wörterbücher vor die direkten Einträge, WMC0035; danach CA1001 behoben, `TreatWarningsAsErrors` jetzt auch
+  für `RoG.App` an). Store-Modus erzeugt `RoG.App_0.1.0.0_x64_ARM64_bundle.msixupload`. Start/Bedienung ungetestet.
+- **Sideload-Pakete** brauchen ein Testzertifikat für das Dienstkonto des Runners (`docs/BUILD-VM.md` Abschnitt 6) –
+  noch nicht eingerichtet.
 - Keine Geräte-Registrierung (`POST /v1/devices`), kein `/v1/me`, kein Abmelden in der Oberfläche → Stufe 1
 - Reverb noch nicht in der App verdrahtet (nur Core + Tests) → Stufe 3
 - Keine Tray-/Toast-/Jumplist-Funktionen, kein Single-Instance → Stufe 1/3
 - ETag-Cache nur im Speicher; persistenter Offline-Cache → Stufe 4
-- Keine CI; Build-VM existiert noch nicht (Anleitung `docs/BUILD-VM.md`)
+- CI: GitHub Actions mit Linux-Runner (Core + Tests) und Windows-Runner `rog-win-1` (App, MSIX über `mode=Store|Sideload`)
 
 ## Datenschutz (Stand Stufe 0)
 
@@ -128,6 +131,12 @@ docs/
 14. **Remote-Build per tar über SSH** (nicht `git bundle`): enthält auch nicht committete Änderungen (Arbeitskopie,
     `--committed` für HEAD), braucht auf der VM kein Git-Remote; Windows bringt `tar.exe` mit. PowerShell-Befehle per
     `-EncodedCommand`, damit die Standard-Shell des OpenSSH-Servers egal ist.
+15. **App und MSIX werden mit `dotnet build` gebaut, nicht mit MSBuild.exe.** Den Build Tools 2026 auf `rog-win-1` fehlt
+    der .NET-SDK-Resolver (MSB4236, vswhere meldet `isComplete: 0`); die MSIX-Werkzeuge kommen ohnehin aus dem NuGet-Paket
+    `Microsoft.Windows.SDK.BuildTools.MSIX`. Visual Studio ist damit für CI nicht nötig. Folge: **kein Symbolpaket**
+    (`.appxsym`, braucht `mspdbcmf.exe` aus Visual Studio) – Absturzberichte im Partner Center zeigen dann keine
+    Funktionsnamen. Bei Bedarf später Build Tools vervollständigen und `AppxSymbolPackageEnabled` im Skript wieder an.
+16. **RuntimeIdentifier aus `Platform`** (`RoG.App.csproj`), damit der Bündel-Build je Plattform ohne `-r` läuft.
 
 ## Offene Fragen (an Wahke)
 

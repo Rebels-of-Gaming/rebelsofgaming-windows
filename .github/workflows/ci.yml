@@ -33,6 +33,15 @@ jobs:
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
+      - name: Werkzeuge prüfen
+        shell: powershell
+        run: |
+          $missing = @()
+          foreach ($tool in 'pwsh', 'git', 'dotnet') { if (-not (Get-Command $tool -ErrorAction SilentlyContinue)) { $missing += $tool } }
+          $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+          if (Test-Path $vswhere) { & $vswhere -latest -products * -property displayName } else { $missing += 'Visual Studio / Build Tools' }
+          if (Get-Command dotnet -ErrorAction SilentlyContinue) { dotnet --list-sdks }
+          if ($missing.Count -gt 0) { Write-Error ("Auf dem Runner fehlt: " + ($missing -join ', ') + " – siehe docs/BUILD-VM.md Abschnitt 3"); exit 1 }
       - name: Build, Tests, MSIX
         shell: pwsh
         run: ./scripts/build-windows.ps1 -Mode '${{ github.event.inputs.mode || 'Build' }}'

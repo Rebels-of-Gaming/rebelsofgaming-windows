@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Plattformunabhängiger Kern der Windows-App: API-Client (aus openapi/openapi.json generiert), HTTP-Pipeline,
+    App-Login (PKCE + Loopback), Echtzeit (Reverb/Pusher), Einstellungen, Übersetzungsschlüssel.
+    Baut und testet unter Linux; die WinUI-App (src/RoG.App) referenziert dieses Projekt.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>RoG.Core</RootNamespace>
+    <AssemblyName>RoG.Core</AssemblyName>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- CS1591/CS1573: fehlende XML-Kommentare bzw. param-Tags – dokumentiert wird, was nicht selbsterklärend ist. -->
+    <NoWarn>$(NoWarn);CS1591;CS1573</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Config/environments.json" LogicalName="RoG.Core.Config.environments.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="RoG.Core.Tests" />
+  </ItemGroup>
+
+</Project>

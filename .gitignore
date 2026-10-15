@@ -1,0 +1,36 @@
+# Build
+bin/
+obj/
+artifacts/
+TestResults/
+*.binlog
+
+# MSIX / Signatur – Zertifikate und Pakete nie ins Repo
+*.pfx
+*.cer
+*.msix
+*.msixbundle
+*.msixupload
+*.appx
+*.appxbundle
+*.appxupload
+AppPackages/
+BundleArtifacts/
+
+# Visual Studio / Rider / VS Code
+.vs/
+.idea/
+*.user
+*.suo
+*.DotSettings.user
+.vscode/*
+!.vscode/extensions.json
+
+# Generierung
+openapi/openapi.normalized.json
+openapi/*.tmp
+
+# Lokale Konfiguration (Build-VM-Zugang liegt in ~/.config/rog-windows/, nie hier)
+build-vm.env
+*.env
+!build-vm.env.example

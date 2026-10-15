@@ -1,0 +1,42 @@
+<Project>
+  <!--
+    Gemeinsame Einstellungen für alle Projekte.
+
+    Windows-only-Projekte (WinUI 3, MSIX) setzen in ihrer .csproj VOR dem SDK-Import nichts selbst –
+    stattdessen steht ihr Name unten in RoGWindowsOnlyProjects. Unter Linux/macOS werden sie von
+    Directory.Build.targets komplett übersprungen (kein Restore, kein Build, kein Test), damit
+    `dotnet build RoG.sln` und `dotnet test RoG.sln` auf dev-linux nur Core und Tests bauen.
+  -->
+  <PropertyGroup>
+    <RoGVersion>0.1.0</RoGVersion>
+    <Version>$(RoGVersion)</Version>
+    <AssemblyVersion>$(RoGVersion).0</AssemblyVersion>
+    <FileVersion>$(RoGVersion).0</FileVersion>
+    <Company>Rebels of Gaming</Company>
+    <Product>Rebels of Gaming für Windows</Product>
+    <Copyright>© Rebels of Gaming</Copyright>
+
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <InvariantGlobalization>false</InvariantGlobalization>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <RoGIsWindowsHost>$([MSBuild]::IsOSPlatform('Windows'))</RoGIsWindowsHost>
+    <RoGWindowsOnlyProjects>;RoG.App;</RoGWindowsOnlyProjects>
+    <RoGIsWindowsOnlyProject Condition="$(RoGWindowsOnlyProjects.Contains(';$(MSBuildProjectName);'))">true</RoGIsWindowsOnlyProject>
+    <RoGSkipProject Condition="'$(RoGIsWindowsOnlyProject)' == 'true' And '$(RoGIsWindowsHost)' != 'true'">true</RoGSkipProject>
+  </PropertyGroup>
+
+  <!-- Übersprungene Projekte: Windows-TFM unter Linux nur auswerten dürfen (NETSDK1100), Hinweis „Restore übersprungen“ ist gewollt. -->
+  <PropertyGroup Condition="'$(RoGSkipProject)' == 'true'">
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <NoWarn>$(NoWarn);NU1503</NoWarn>
+  </PropertyGroup>
+</Project>

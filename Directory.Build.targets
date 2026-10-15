@@ -1,0 +1,9 @@
+<Project>
+  <!--
+    Windows-only-Projekte (RoGWindowsOnlyProjects in Directory.Build.props) auf Nicht-Windows-Hosts überspringen.
+    Der Import muss bedingt sein: Ein Target mit falscher Condition ersetzt das SDK-Target trotzdem.
+    So laufen `dotnet restore|build|test RoG.sln` unter Linux nur für Core und Tests, die WinUI-App baut auf der
+    Windows-VM (scripts/build-windows.ps1).
+  -->
+  <Import Project="$(MSBuildThisFileDirectory)build/SkipOnNonWindows.targets" Condition="'$(RoGSkipProject)' == 'true'" />
+</Project>

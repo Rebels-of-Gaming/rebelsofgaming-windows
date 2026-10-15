@@ -1,0 +1,24 @@
+{
+  "_comment": "Einzige Stelle mit Domains. Werte wie in der Website (config/domains.php). Auswahl über Einstellungen → Umgebung (Standard production).",
+  "environments": {
+    "production": {
+      "api": "https://api.rebelsofgaming.com/v1/",
+      "web": "https://rebelsofgaming.com/",
+      "wiki": "https://wiki.rebelsofgaming.com/",
+      "status": "https://status.rogclan.de/"
+    },
+    "staging": {
+      "api": "https://api.rebelsofgaming.dev/v1/",
+      "web": "https://rebelsofgaming.dev/",
+      "wiki": "https://wiki.rebelsofgaming.dev/",
+      "status": "https://status.rogclan.de/"
+    },
+    "local": {
+      "api": "http://api.rog.test/v1/",
+      "web": "http://rog.test/",
+      "wiki": "http://wiki.rog.test/",
+      "status": "https://status.rogclan.de/"
+    }
+  },
+  "clientId": "rog-app"
+}

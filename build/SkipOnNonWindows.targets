@@ -1,0 +1,21 @@
+<Project>
+  <!--
+    Wird nur importiert, wenn RoGSkipProject=true (Windows-only-Projekt auf Linux/macOS, siehe Directory.Build.props).
+    Ersetzt die gleichnamigen SDK-Ziele (letzte Definition gewinnt) durch leere Ziele: kein Restore, kein Build, kein Test.
+  -->
+  <Target Name="_IsProjectRestoreSupported" Returns="" />
+  <Target Name="Restore">
+    <Message Importance="high" Text="$(MSBuildProjectName): übersprungen (nur unter Windows baubar)" />
+  </Target>
+  <Target Name="Build">
+    <Message Importance="high" Text="$(MSBuildProjectName): übersprungen (nur unter Windows baubar)" />
+  </Target>
+  <Target Name="Rebuild" />
+  <Target Name="Clean" />
+  <Target Name="VSTest" />
+  <Target Name="Pack" />
+  <Target Name="Publish" />
+  <Target Name="GetTargetPath" Returns="" />
+  <Target Name="GetTargetFrameworks" Returns="" />
+  <Target Name="GetCopyToOutputDirectoryItems" Returns="" />
+</Project>

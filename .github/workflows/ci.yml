@@ -15,6 +15,10 @@ jobs:
     name: Core + Tests (Linux)
     runs-on: [self-hosted, Linux, rog]
     timeout-minutes: 30
+    env:
+      # Eigene Runner ohne root: .NET ins Benutzerverzeichnis statt /usr/share/dotnet
+      DOTNET_INSTALL_DIR: ${{ github.workspace }}/../.dotnet
+      DOTNET_CLI_TELEMETRY_OPTOUT: '1'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4

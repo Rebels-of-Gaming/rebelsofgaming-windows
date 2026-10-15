@@ -39,7 +39,7 @@ jobs:
           $missing = @()
           foreach ($tool in 'git', 'dotnet') { if (-not (Get-Command $tool -ErrorAction SilentlyContinue)) { $missing += $tool } }
           $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
-          if (Test-Path $vswhere) { & $vswhere -latest -products * -version '[18.0,19.0)' -property displayName; if (-not (& $vswhere -latest -products * -version '[18.0,19.0)' -property installationPath)) { $missing += 'Visual Studio/Build Tools 2026' } } else { $missing += 'Visual Studio / Build Tools' }
+          if (Test-Path $vswhere) { & $vswhere -all -prerelease -products * -version '[18.0,19.0)' -format text | Select-String 'displayName|isComplete|isLaunchable|installationPath'; if (-not (& $vswhere -all -prerelease -latest -products * -version '[18.0,19.0)' -requires Microsoft.Component.MSBuild -property installationPath)) { $missing += 'Visual Studio/Build Tools 2026' } } else { $missing += 'Visual Studio / Build Tools' }
           if (Get-Command dotnet -ErrorAction SilentlyContinue) { dotnet --list-sdks }
           if ($missing.Count -gt 0) { Write-Error ("Auf dem Runner fehlt: " + ($missing -join ', ') + " - siehe docs/BUILD-VM.md Abschnitt 3"); exit 1 }
       - name: Build, Tests, MSIX

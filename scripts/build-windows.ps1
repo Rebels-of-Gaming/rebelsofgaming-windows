@@ -68,7 +68,11 @@ function Invoke-Checked([string] $name, [scriptblock] $block) {
 function Find-MSBuild {
     $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio\Installer\vswhere.exe'
     if (-not (Test-Path $vswhere)) { return $null }
-    $path = & $vswhere -latest -products * -requires Microsoft.Component.MSBuild -find 'MSBuild\**\Bin\MSBuild.exe' | Select-Object -First 1
+    # .NET 10 braucht MSBuild 18 (Visual Studio/Build Tools 2026) – ältere Installationen (2022) daneben ignorieren
+    $path = & $vswhere -latest -products * -version '[18.0,19.0)' -requires Microsoft.Component.MSBuild -find 'MSBuild\**\Bin\MSBuild.exe' | Select-Object -First 1
+    if (-not $path) {
+        $path = & $vswhere -latest -products * -requires Microsoft.Component.MSBuild -find 'MSBuild\**\Bin\MSBuild.exe' | Select-Object -First 1
+    }
     if ($path -and (Test-Path $path)) { return $path }
     return $null
 }

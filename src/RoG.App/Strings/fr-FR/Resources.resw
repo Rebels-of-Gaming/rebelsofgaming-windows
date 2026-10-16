@@ -2552,4 +2552,13 @@
   <data name="Shell_Offline.Message" xml:space="preserve">
     <value>Pas de connexion – tu vois le dernier état chargé. Ce que tu envoies partira dès que tu seras de nouveau en ligne.</value>
   </data>
+  <data name="Servers_HistoryEmpty" xml:space="preserve">
+    <value>Pas encore d’historique.</value>
+  </data>
+  <data name="Servers_HistorySummary" xml:space="preserve">
+    <value>Pic {0} joueurs · disponible {1} %</value>
+  </data>
+  <data name="ServerCard_History.Header" xml:space="preserve">
+    <value>Fréquentation (24 h)</value>
+  </data>
 </root>

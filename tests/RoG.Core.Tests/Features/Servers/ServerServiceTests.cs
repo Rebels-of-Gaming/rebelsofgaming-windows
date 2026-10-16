@@ -109,3 +109,24 @@ public class ServerControlMappingTests
         Assert.True(server.Control!.Any);
     }
 }
+
+public class ServerHistoryTests
+{
+    [Fact]
+    public void Polyline_scales_to_slots_and_width()
+    {
+        var t = new DateTimeOffset(2026, 10, 16, 0, 0, 0, TimeSpan.Zero);
+        var history = new ServerHistory("24h", 30, 99.5,
+        [
+            new ServerLoadPoint(t, 0, 20),
+            new ServerLoadPoint(t.AddMinutes(30), 10, 20),
+            new ServerLoadPoint(t.AddMinutes(60), 20, 20),
+        ]);
+
+        var line = history.Polyline(200, 50);
+
+        Assert.Equal([(0d, 50d), (100d, 25d), (200d, 0d)], line);
+        Assert.Equal(20, history.Peak);
+        Assert.Empty(new ServerHistory("24h", 30, null, []).Polyline(200, 50));
+    }
+}

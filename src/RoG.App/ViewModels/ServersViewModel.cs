@@ -188,6 +188,51 @@ public sealed partial class ServerItemViewModel : ObservableObject
 
     public IRelayCommand CopyCommand { get; }
 
+    /// <summary>Breite der Verlaufslinie in der Karte (epx).</summary>
+    public const double HistoryWidth = 280;
+
+    private bool _historyLoaded;
+
+    /// <summary>Auslastung der letzten 24 h als Linie (Punkte relativ zu <see cref="HistoryWidth"/>×60).</summary>
+    [ObservableProperty]
+    public partial Microsoft.UI.Xaml.Media.PointCollection? HistoryPoints { get; set; }
+
+    [ObservableProperty]
+    public partial string HistoryText { get; set; } = string.Empty;
+
+    /// <summary>Verlauf beim ersten Aufklappen laden (eine Anfrage je Karte).</summary>
+    public async Task LoadHistoryAsync()
+    {
+        if (_historyLoaded)
+        {
+            return;
+        }
+
+        _historyLoaded = true;
+        var l = App.Services.Localizer;
+        try
+        {
+            var history = await new ServerService(App.Services.Api.Client).HistoryAsync(Server.Slug);
+            var points = new Microsoft.UI.Xaml.Media.PointCollection();
+            foreach (var (x, y) in history.Polyline(HistoryWidth, 60))
+            {
+                points.Add(new Windows.Foundation.Point(x, y));
+            }
+
+            HistoryPoints = points;
+            HistoryText = history.Points.Count == 0
+                ? l.GetString(StringKeys.ServersHistoryEmpty)
+                : string.Format(CultureInfo.CurrentCulture, l.GetString(StringKeys.ServersHistorySummary),
+                    history.Peak.ToString("0", CultureInfo.CurrentCulture),
+                    history.Uptime is { } up ? up.ToString("0.#", CultureInfo.CurrentCulture) : "–");
+        }
+        catch (Exception ex) when (ex is ApiProblemException or RoG.Core.Api.Generated.GeneratedApiException)
+        {
+            _historyLoaded = false;
+            HistoryText = l.GetString(StringKeys.ServersHistoryEmpty);
+        }
+    }
+
     /// <summary>Steuern (Power/Konsole) – nur mit Rechten an diesem Server (<c>control</c> aus der API).</summary>
     public bool CanControl => Server.Control?.Any == true;
 

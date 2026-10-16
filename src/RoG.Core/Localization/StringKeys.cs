@@ -426,6 +426,10 @@ public static class StringKeys
     public const string EventsNewLocationOnline = "EventsNew_Location_online";
     public const string EventsNewLocationAddress = "EventsNew_Location_address";
 
+    // Server-Verlauf ({0} = Spitze, {1} = Verfügbarkeit in %)
+    public const string ServersHistoryEmpty = "Servers_HistoryEmpty";
+    public const string ServersHistorySummary = "Servers_HistorySummary";
+
     // App-Sperre
     public const string LockPrompt = "Lock_Prompt";
 

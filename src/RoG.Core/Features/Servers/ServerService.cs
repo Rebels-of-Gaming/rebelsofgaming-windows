@@ -1,3 +1,4 @@
+using RoG.Core.Api;
 using RoG.Core.Api.Generated;
 
 namespace RoG.Core.Features.Servers;
@@ -29,6 +30,18 @@ public sealed class ServerService(IRoGApiClient client)
         }
 
         return result;
+    }
+
+    /// <summary>Auslastungsverlauf (letzte 24 h in Zeitfenstern, wie die Website).</summary>
+    public async Task<ServerHistory> HistoryAsync(string slug, CancellationToken cancellationToken = default)
+    {
+        var d = (await client.V1_servers_historyAsync(slug, cancellationToken).ConfigureAwait(false)).Data;
+        return new ServerHistory(
+            d.Range,
+            d.Bucket_minutes,
+            d.Uptime,
+            d.Points.Select(p => new ServerLoadPoint(ApiValues.Time(p.At) ?? DateTimeOffset.MinValue, p.Players, p.Max))
+                .Where(p => p.At != DateTimeOffset.MinValue).OrderBy(p => p.At).ToList());
     }
 
     internal static GameServer Map(ServerResource s)

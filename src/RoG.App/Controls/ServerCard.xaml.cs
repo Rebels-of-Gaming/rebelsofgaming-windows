@@ -16,4 +16,6 @@ public sealed partial class ServerCard : UserControl
         get => (ServerItemViewModel?)GetValue(ItemProperty);
         set => SetValue(ItemProperty, value);
     }
+
+    private void OnHistoryExpanding(Expander sender, ExpanderExpandingEventArgs args) => _ = Item?.LoadHistoryAsync();
 }

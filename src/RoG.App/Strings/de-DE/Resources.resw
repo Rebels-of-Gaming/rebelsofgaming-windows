@@ -2552,4 +2552,13 @@
   <data name="Shell_Offline.Message" xml:space="preserve">
     <value>Keine Verbindung – du siehst den zuletzt geladenen Stand. Gesendetes geht raus, sobald du wieder online bist.</value>
   </data>
+  <data name="Servers_HistoryEmpty" xml:space="preserve">
+    <value>Noch kein Verlauf.</value>
+  </data>
+  <data name="Servers_HistorySummary" xml:space="preserve">
+    <value>Spitze {0} Spieler · erreichbar {1} %</value>
+  </data>
+  <data name="ServerCard_History.Header" xml:space="preserve">
+    <value>Auslastung (24 h)</value>
+  </data>
 </root>

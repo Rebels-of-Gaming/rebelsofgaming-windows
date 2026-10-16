@@ -44,6 +44,16 @@
                     Text="{x:Bind Item.Address, Mode=OneWay}" />
             </StackPanel>
 
+            <!-- Auslastung der letzten 24 h -->
+            <Expander x:Uid="ServerCard_History" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Expanding="OnHistoryExpanding">
+                <StackPanel Spacing="6">
+                    <Border Width="280" Height="60" HorizontalAlignment="Left" Background="{StaticResource RoGBg3Brush}" CornerRadius="4">
+                        <Polyline Points="{x:Bind Item.HistoryPoints, Mode=OneWay}" Stroke="{StaticResource RoGRedBrush}" StrokeThickness="2" />
+                    </Border>
+                    <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Item.HistoryText, Mode=OneWay}" />
+                </StackPanel>
+            </Expander>
+
             <!-- Spielerliste (nur für Mitglieder von der API geliefert) -->
             <Expander
                 HorizontalAlignment="Stretch"

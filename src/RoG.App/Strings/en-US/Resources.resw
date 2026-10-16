@@ -2552,4 +2552,13 @@
   <data name="Shell_Offline.Message" xml:space="preserve">
     <value>No connection – you are seeing the last loaded state. Anything you send goes out once you are back online.</value>
   </data>
+  <data name="Servers_HistoryEmpty" xml:space="preserve">
+    <value>No history yet.</value>
+  </data>
+  <data name="Servers_HistorySummary" xml:space="preserve">
+    <value>Peak {0} players · up {1} %</value>
+  </data>
+  <data name="ServerCard_History.Header" xml:space="preserve">
+    <value>Load (24 h)</value>
+  </data>
 </root>

@@ -67,3 +67,28 @@ public sealed record ServerAbilities(
 {
     public bool Any => Power || Console || FilesRead || FilesWrite || FilesApprove || Backups || Rcon || Bans;
 }
+
+/// <summary>Messpunkt der Auslastung (Spieler im Mittel je Zeitfenster).</summary>
+public sealed record ServerLoadPoint(DateTimeOffset At, double Players, int Max);
+
+/// <summary>Verlauf eines Servers (Guide 18 „history“): Zeitraum, Fenstergröße, Verfügbarkeit, Punkte.</summary>
+public sealed record ServerHistory(string Range, int BucketMinutes, double? Uptime, IReadOnlyList<ServerLoadPoint> Points)
+{
+    public double Peak => Points.Count == 0 ? 0 : Points.Max(p => p.Players);
+
+    /// <summary>
+    /// Punkte für eine Linie in einem Rechteck <paramref name="width"/>×<paramref name="height"/> (y nach unten):
+    /// x gleichmäßig, y relativ zu den Slots (bzw. zum Höchstwert, falls Slots unbekannt).
+    /// </summary>
+    public IReadOnlyList<(double X, double Y)> Polyline(double width, double height)
+    {
+        if (Points.Count == 0 || width <= 0 || height <= 0)
+        {
+            return [];
+        }
+
+        var top = Math.Max(1, Math.Max(Points.Max(p => p.Max), Peak));
+        var step = Points.Count == 1 ? 0 : width / (Points.Count - 1);
+        return Points.Select((p, i) => (Math.Round(i * step, 2), Math.Round(height - Math.Clamp(p.Players / top, 0, 1) * height, 2))).ToList();
+    }
+}

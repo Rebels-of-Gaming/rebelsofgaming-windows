@@ -1220,4 +1220,43 @@
   <data name="LinksPage_List.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Kurzlinks</value>
   </data>
+  <data name="Profile_Saved" xml:space="preserve">
+    <value>Profil gespeichert.</value>
+  </data>
+  <data name="Profile_ImageSaved" xml:space="preserve">
+    <value>Bild hochgeladen – es erscheint, sobald der Server es verarbeitet hat.</value>
+  </data>
+  <data name="AccountPage_EditProfile.Header" xml:space="preserve">
+    <value>Profil bearbeiten</value>
+  </data>
+  <data name="AccountPage_ChangeAvatar.Content" xml:space="preserve">
+    <value>AVATAR ÄNDERN</value>
+  </data>
+  <data name="AccountPage_ChangeBanner.Content" xml:space="preserve">
+    <value>BANNER ÄNDERN</value>
+  </data>
+  <data name="AccountPage_Motto.Header" xml:space="preserve">
+    <value>Motto</value>
+  </data>
+  <data name="AccountPage_Bio.Header" xml:space="preserve">
+    <value>Über mich</value>
+  </data>
+  <data name="AccountPage_City.Header" xml:space="preserve">
+    <value>Stadt</value>
+  </data>
+  <data name="AccountPage_Country.Header" xml:space="preserve">
+    <value>Land</value>
+  </data>
+  <data name="AccountPage_ShowOnMap.Header" xml:space="preserve">
+    <value>Auf der Mitgliederkarte zeigen (nur Stadt)</value>
+  </data>
+  <data name="AccountPage_ShowOnline.Header" xml:space="preserve">
+    <value>Online-Status zeigen</value>
+  </data>
+  <data name="AccountPage_HallOfFame.Header" xml:space="preserve">
+    <value>In der Hall of Fame erwähnt werden</value>
+  </data>
+  <data name="AccountPage_SaveProfile.Content" xml:space="preserve">
+    <value>SPEICHERN</value>
+  </data>
 </root>

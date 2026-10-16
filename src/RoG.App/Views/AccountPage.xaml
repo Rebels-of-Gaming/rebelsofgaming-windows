@@ -82,6 +82,42 @@
                 </StackPanel>
             </Border>
 
+            <!-- Profil bearbeiten -->
+            <Expander
+                x:Uid="AccountPage_EditProfile"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Stretch"
+                Expanding="OnEditExpanding"
+                Visibility="{x:Bind ViewModel.ShowProfile, Mode=OneWay}">
+                <StackPanel Spacing="12">
+                    <InfoBar
+                        IsOpen="{x:Bind Editor.IsFeedbackOpen, Mode=TwoWay}"
+                        Message="{x:Bind Editor.FeedbackMessage, Mode=OneWay}"
+                        Severity="{x:Bind Editor.FeedbackSeverity, Mode=OneWay}" />
+                    <ProgressRing IsActive="{x:Bind Editor.IsLoading, Mode=OneWay}" />
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Button x:Uid="AccountPage_ChangeAvatar" Click="OnAvatarClick" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                        <Button x:Uid="AccountPage_ChangeBanner" Click="OnBannerClick" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                    </StackPanel>
+                    <TextBox x:Uid="AccountPage_Motto" MaxLength="120" Text="{x:Bind Editor.Motto, Mode=TwoWay}" />
+                    <TextBox
+                        x:Uid="AccountPage_Bio"
+                        MinHeight="100"
+                        AcceptsReturn="True"
+                        MaxLength="2000"
+                        Text="{x:Bind Editor.Bio, Mode=TwoWay}"
+                        TextWrapping="Wrap" />
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <TextBox x:Uid="AccountPage_City" MinWidth="220" Text="{x:Bind Editor.City, Mode=TwoWay}" />
+                        <TextBox x:Uid="AccountPage_Country" MinWidth="160" Text="{x:Bind Editor.Country, Mode=TwoWay}" />
+                    </StackPanel>
+                    <ToggleSwitch x:Uid="AccountPage_ShowOnMap" IsOn="{x:Bind Editor.ShowOnMap, Mode=TwoWay}" />
+                    <ToggleSwitch x:Uid="AccountPage_ShowOnline" IsOn="{x:Bind Editor.ShowOnlineStatus, Mode=TwoWay}" />
+                    <ToggleSwitch x:Uid="AccountPage_HallOfFame" IsOn="{x:Bind Editor.HallOfFameConsent, Mode=TwoWay}" />
+                    <Button x:Uid="AccountPage_SaveProfile" Command="{x:Bind Editor.SaveCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                </StackPanel>
+            </Expander>
+
             <!-- Aktionen -->
             <StackPanel
                 Orientation="Horizontal"

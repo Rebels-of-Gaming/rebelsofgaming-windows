@@ -8,7 +8,7 @@
     `dotnet build RoG.sln` und `dotnet test RoG.sln` auf dev-linux nur Core und Tests bauen.
   -->
   <PropertyGroup>
-    <RoGVersion>2.0.1</RoGVersion>
+    <RoGVersion>2.1.0</RoGVersion>
     <Version>$(RoGVersion)</Version>
     <AssemblyVersion>$(RoGVersion).0</AssemblyVersion>
     <FileVersion>$(RoGVersion).0</FileVersion>

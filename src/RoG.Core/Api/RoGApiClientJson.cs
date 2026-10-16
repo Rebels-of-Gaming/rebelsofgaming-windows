@@ -6,8 +6,14 @@ namespace RoG.Core.Api.Generated;
 /// <summary>JSON-Einstellungen des generierten Clients ergänzen (Haken aus NSwag: <c>UpdateJsonSerializerSettings</c>).</summary>
 public partial class RoGApiClient
 {
-    static partial void UpdateJsonSerializerSettings(JsonSerializerOptions settings) =>
+    static partial void UpdateJsonSerializerSettings(JsonSerializerOptions settings)
+    {
         settings.Converters.Add(new EmptyArrayAsDictionaryConverterFactory());
+
+        // Nicht gesetzte Felder nicht mitsenden: Ein PATCH mit `"birthday": null` würde sonst Daten löschen, die die App
+        // gar nicht ändern wollte. Zum Leeren eines Textfelds einen leeren String senden.
+        settings.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+    }
 }
 
 /// <summary>

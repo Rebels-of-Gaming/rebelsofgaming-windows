@@ -18,6 +18,7 @@ Stufe 0 – Fundament (Version 0.1.0, noch nicht im Store).
 - Korrigiert: Reihenfolge der Theme-Ressourcen (XAML WMC0035), Freigabe von Abbruch-Token und Tresor-Sperre (CA1001); Warnungen gelten jetzt auch in der App als Fehler
 - Server-Seite: Gameserver mit Live-Stand, „Verbinden“ über Steam (`steam://connect`) und Enemy Territory (`et://`), sonst Adresse kopieren (Minecraft) mit Hinweis im Spiel
 - Store-Identität der bestehenden App „Rebels of Gaming“ (`wahke.RebelsofGaming`); Version 2.0.0, weil im Store schon 1.0.4.0 liegt
+- 2.1.0: Benachrichtigungen mit Windows-Toasts, Tray-Symbol, Sprungliste, Autostart, Direktnachrichten mit eigenem Chat-Fenster, Forum, Uploads mit Drag & Drop und Strg+V, Galerie, Downloads, Kurzlinks, Profil bearbeiten, News, Squads, Mitglieder, Termine mit Zusage, TeamSpeak/Discord, Matches, Info, Suche
 - Konto-Seite mit Abmelden, Einstellungen (Sprache, Versionen, Lizenzen), Startseite mit Live-Ticker, nur eine App-Instanz, Fensterposition wird gemerkt
 - Korrigiert: API-Client sendet Auswahlwerte jetzt wie erwartet (`windows`), wertet `201 Created` als Erfolg und verträgt `[]` statt `{}`
 - Testpakete (Sideload) signiert der Windows-Runner mit einem selbst angelegten Testzertifikat (`RoG-Test.cer` im Artefakt)

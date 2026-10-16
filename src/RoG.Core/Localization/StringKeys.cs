@@ -154,6 +154,10 @@ public static class StringKeys
     public const string AccountSignOutText = "Account_SignOutText";
     public const string AccountSignOutConfirm = "Account_SignOutConfirm";
 
+    // Profil bearbeiten
+    public const string ProfileSaved = "Profile_Saved";
+    public const string ProfileImageSaved = "Profile_ImageSaved";
+
     // Einstellungen ({0} = Version)
     public const string SettingsLanguageSystem = "Settings_LanguageSystem";
     public const string SettingsAppVersion = "Settings_AppVersion";

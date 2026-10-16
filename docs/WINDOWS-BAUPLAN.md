@@ -8,11 +8,11 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 | Stufe | Inhalt | Status | Commit |
 |---|---|---|---|
 | 0 | Fundament | fertig: Core + Tests grün (Linux), **App baut auf dem Windows-Runner `rog-win-1`** (x64 + ARM64, CI-Job „WinUI-App (Windows)“), Store-Paket `.msixupload` entsteht; noch nie gestartet | siehe `git log` (develop) |
-| 1 | Konto + Start | in Arbeit (2.0.1): Konto, Abmelden, Gerät, Einstellungen, Live-Ticker, Einzelinstanz, Fensterzustand | siehe `git log` (develop) |
-| 2 | Community lesen | fast fertig (16.10.2026): News, Squads, Mitglieder/Team, Termine (+ Zusage), Server/TeamSpeak/Discord mit „Verbinden“, Matches/Hall of Fame, Info (Regeln/Seiten/Recht), Suche | siehe `git log` (develop) |
-| 3 | Echtzeit + Desktop-Integration | offen | |
-| 4 | Kommunikation | offen | |
-| 5 | Medien | offen | |
+| 1 | Konto + Start | fertig (2.0.1): Konto, Abmelden, Gerät, Einstellungen, Live-Ticker, Einzelinstanz, Fensterzustand | siehe `git log` (develop) |
+| 2 | Community lesen | fertig (2.1.0, Reste siehe unten): News, Squads, Mitglieder/Team, Termine (+ Zusage), Server/TeamSpeak/Discord mit „Verbinden“, Matches/Hall of Fame, Info (Regeln/Seiten/Recht), Suche | siehe `git log` (develop) |
+| 3 | Echtzeit + Desktop-Integration | fertig (2.1.0): Reverb, Glocke, Toasts, Tray, Badge, Sprungliste, `rog:`, Autostart; WNS nach Lücke W1 | siehe `git log` |
+| 4 | Kommunikation | fast fertig (2.1.0): DMs mit Pop-out, Forum lesen+schreiben, Zusagen, Tastenkürzel; offen: Offline-Warteschlange | siehe `git log` |
+| 5 | Medien | fast fertig (2.1.0): Uploads (Drag & Drop, Strg+V), Galerie, Downloads, Kurzlinks, Profil bearbeiten; offen: Teilen-Ziel, Galerie-Upload | siehe `git log` |
 | 6 | Clan-Prozesse | offen | |
 | 7 | Server-Steuerung | offen | |
 | 8 | Wiki | offen | |
@@ -75,6 +75,23 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 - Werkzeuge: `scripts/resw-set.py` (Texte DE/EN/FR setzen), `scripts/bump-version.sh`.
 - Offen in Stufe 1: Liste-Detail-Gerüst und gemeinsame UI-Bausteine (kommen mit den ersten Listen in Stufe 2),
   Startseite mit Squads/News (Stufe 2).
+
+### Stufen 3–5 (2.1.0, 16.10.2026)
+
+- **Echtzeit:** `RealtimeHub` (Core) verbindet Reverb mit `live`, `servers` und `private-App.Models.User.{id}`
+  (Laravel-Ereignis `Illuminate\Notifications\Events\BroadcastNotificationCreated`, `.inbox.changed`,
+  `.messages.unread`), weitere Kanäle (Chat, Forum-Thema) per Abo; App-Seite `RealtimeService` (UI-Thread, Zähler).
+- **Desktop:** Glocke mit Zähler (InfoBadge) und Benachrichtigungs-Seite, Windows-Toasts (`AppNotificationManager`,
+  Klick öffnet das Ziel), Taskleisten-Badge, **Tray-Symbol** (eigenes `Shell_NotifyIcon`, Menü, Schließen in den
+  Infobereich), **Sprungliste**, Protokoll **`rog:`** (Manifest), Autostart startet versteckt im Tray, Einstellungen
+  für Toasts/Tray/Autostart, Tastenkürzel Strg+1…9, Strg+, und Strg+K.
+- **Kommunikation:** Direktnachrichten (Liste, Chat mit Antworten, Enter/Umschalt+Enter, live, Pop-out-Fenster mit
+  „immer im Vordergrund“, „Nachricht senden“ im Profil), Forum (Bereiche, Themen, Beiträge nativ, Reaktionen,
+  Umfragen, Zitieren, BBCode-Leiste, Vorschau, Strg+Enter, neues Thema, live neue Beiträge).
+- **Medien:** Uploads über pre-signed URL (Token geht nie an den Speicher), Drag & Drop, Strg+V-Screenshots,
+  Link automatisch kopieren, Kurzlinks, Galerie mit Vollbild (Pfeile, Zoom), Downloads mit SHA-256-Prüfung und
+  „Im Ordner zeigen“, Profil bearbeiten (Texte, Ort, Einwilligungen, Avatar, Banner).
+- **Client-Korrekturen:** generierte Anfragen senden keine `null`-Felder mehr (ein PATCH hätte sonst Daten gelöscht).
 
 ### Stufe 2 – Community lesen (16.10.2026)
 

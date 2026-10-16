@@ -118,7 +118,9 @@ public sealed class MediaService(IRoGApiClient client, HttpClient storage)
     /// <summary>Nur der Dateiname, ohne Pfadteile und ungültige Zeichen (der Name kommt vom Server).</summary>
     internal static string SafeFileName(string? name)
     {
-        var file = Path.GetFileName(name ?? string.Empty);
+        // Selbst trennen statt Path.GetFileName: Unter Windows gilt „a:b“ sonst als Laufwerk und der Name wird zu „b“
+        var raw = name ?? string.Empty;
+        var file = raw[(raw.LastIndexOfAny(['/', '\\']) + 1)..];
         foreach (var c in Path.GetInvalidFileNameChars().Concat(['\\', '/', ':', '*', '?', '"', '<', '>', '|']))
         {
             file = file.Replace(c, '_');

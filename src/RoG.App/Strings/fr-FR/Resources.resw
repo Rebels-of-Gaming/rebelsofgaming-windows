@@ -1220,4 +1220,43 @@
   <data name="LinksPage_List.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Liens courts</value>
   </data>
+  <data name="Profile_Saved" xml:space="preserve">
+    <value>Profil enregistré.</value>
+  </data>
+  <data name="Profile_ImageSaved" xml:space="preserve">
+    <value>Image envoyée – elle apparaît dès que le serveur l’a traitée.</value>
+  </data>
+  <data name="AccountPage_EditProfile.Header" xml:space="preserve">
+    <value>Modifier le profil</value>
+  </data>
+  <data name="AccountPage_ChangeAvatar.Content" xml:space="preserve">
+    <value>CHANGER L’AVATAR</value>
+  </data>
+  <data name="AccountPage_ChangeBanner.Content" xml:space="preserve">
+    <value>CHANGER LA BANNIÈRE</value>
+  </data>
+  <data name="AccountPage_Motto.Header" xml:space="preserve">
+    <value>Devise</value>
+  </data>
+  <data name="AccountPage_Bio.Header" xml:space="preserve">
+    <value>À propos de moi</value>
+  </data>
+  <data name="AccountPage_City.Header" xml:space="preserve">
+    <value>Ville</value>
+  </data>
+  <data name="AccountPage_Country.Header" xml:space="preserve">
+    <value>Pays</value>
+  </data>
+  <data name="AccountPage_ShowOnMap.Header" xml:space="preserve">
+    <value>Afficher sur la carte des membres (ville uniquement)</value>
+  </data>
+  <data name="AccountPage_ShowOnline.Header" xml:space="preserve">
+    <value>Afficher le statut en ligne</value>
+  </data>
+  <data name="AccountPage_HallOfFame.Header" xml:space="preserve">
+    <value>Être mentionné dans le Hall of Fame</value>
+  </data>
+  <data name="AccountPage_SaveProfile.Content" xml:space="preserve">
+    <value>ENREGISTRER</value>
+  </data>
 </root>

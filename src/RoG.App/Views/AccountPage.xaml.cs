@@ -11,10 +11,35 @@ public sealed partial class AccountPage : Page
     public AccountPage()
     {
         ViewModel = new AccountViewModel(App.Services);
+        Editor = new ProfileEditViewModel(App.Services);
         InitializeComponent();
     }
 
     public AccountViewModel ViewModel { get; }
+
+    public ProfileEditViewModel Editor { get; }
+
+    private void OnEditExpanding(Expander sender, ExpanderExpandingEventArgs args) => _ = Editor.LoadAsync(silent: true);
+
+    private async void OnAvatarClick(object sender, RoutedEventArgs e) => await PickImageAsync(banner: false);
+
+    private async void OnBannerClick(object sender, RoutedEventArgs e) => await PickImageAsync(banner: true);
+
+    private async Task PickImageAsync(bool banner)
+    {
+        var picker = new Windows.Storage.Pickers.FileOpenPicker { ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail };
+        foreach (var ext in new[] { ".png", ".jpg", ".jpeg", ".gif", ".webp" })
+        {
+            picker.FileTypeFilter.Add(ext);
+        }
+
+        WinRT.Interop.InitializeWithWindow.Initialize(picker, App.MainWindowHandle);
+        if (await picker.PickSingleFileAsync() is { } file)
+        {
+            await Editor.SetImageAsync(file, banner);
+            await ViewModel.LoadAsync();
+        }
+    }
 
     protected override async void OnNavigatedTo(NavigationEventArgs e)
     {

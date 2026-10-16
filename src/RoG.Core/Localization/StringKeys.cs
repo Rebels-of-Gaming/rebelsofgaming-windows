@@ -240,6 +240,24 @@ public static class StringKeys
     public const string ApprovalRejected = "Approval_Rejected";
     public const string ApprovalOutdated = "Approval_Outdated";
 
+    // Statistiken (Zeitraum/Kennzahl/Award werden als "Stats_Period_" + Wert usw. gebildet)
+    public const string StatsMyRank = "Stats_MyRank";
+    public const string StatsAwardsTitle = "Stats_AwardsTitle";
+    public const string StatsPeriod7d = "Stats_Period_7d";
+    public const string StatsPeriod30d = "Stats_Period_30d";
+    public const string StatsPeriodAll = "Stats_Period_all";
+    public const string StatsMetricKills = "Stats_Metric_kills";
+    public const string StatsMetricKd = "Stats_Metric_kd";
+    public const string StatsMetricPlaytime = "Stats_Metric_playtime";
+    public const string StatsMetricRounds = "Stats_Metric_rounds";
+    public const string StatsMetricHeadshots = "Stats_Metric_headshots";
+    public const string StatsAwardMostKills = "Stats_Award_most_kills";
+    public const string StatsAwardBestKd = "Stats_Award_best_kd";
+    public const string StatsAwardMostHeadshots = "Stats_Award_most_headshots";
+    public const string StatsAwardObjectiveHero = "Stats_Award_objective_hero";
+    public const string StatsAwardMostPlaytime = "Stats_Award_most_playtime";
+    public const string HomeOnboardingProgress = "Home_OnboardingProgress";
+
     // App-Sperre
     public const string LockPrompt = "Lock_Prompt";
 

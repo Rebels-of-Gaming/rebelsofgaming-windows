@@ -1796,4 +1796,73 @@
   <data name="Approval_Reject.Content" xml:space="preserve">
     <value>REJECT</value>
   </data>
+  <data name="Stats_MyRank" xml:space="preserve">
+    <value>Your rank: {0}</value>
+  </data>
+  <data name="Stats_AwardsTitle" xml:space="preserve">
+    <value>WEEKLY AWARDS {0}</value>
+  </data>
+  <data name="Stats_Period_7d" xml:space="preserve">
+    <value>7 days</value>
+  </data>
+  <data name="Stats_Period_30d" xml:space="preserve">
+    <value>30 days</value>
+  </data>
+  <data name="Stats_Period_all" xml:space="preserve">
+    <value>All time</value>
+  </data>
+  <data name="Stats_Metric_kills" xml:space="preserve">
+    <value>Kills</value>
+  </data>
+  <data name="Stats_Metric_kd" xml:space="preserve">
+    <value>K/D</value>
+  </data>
+  <data name="Stats_Metric_playtime" xml:space="preserve">
+    <value>Playtime</value>
+  </data>
+  <data name="Stats_Metric_rounds" xml:space="preserve">
+    <value>Rounds</value>
+  </data>
+  <data name="Stats_Metric_headshots" xml:space="preserve">
+    <value>Headshots</value>
+  </data>
+  <data name="Stats_Award_most_kills" xml:space="preserve">
+    <value>Most kills</value>
+  </data>
+  <data name="Stats_Award_best_kd" xml:space="preserve">
+    <value>Best K/D</value>
+  </data>
+  <data name="Stats_Award_most_headshots" xml:space="preserve">
+    <value>Headhunter</value>
+  </data>
+  <data name="Stats_Award_objective_hero" xml:space="preserve">
+    <value>Objective hero</value>
+  </data>
+  <data name="Stats_Award_most_playtime" xml:space="preserve">
+    <value>Marathon player</value>
+  </data>
+  <data name="Home_OnboardingProgress" xml:space="preserve">
+    <value>{0} % done</value>
+  </data>
+  <data name="MatchesPage_TabStats.Text" xml:space="preserve">
+    <value>Stats</value>
+  </data>
+  <data name="Stats_Game.Header" xml:space="preserve">
+    <value>Game</value>
+  </data>
+  <data name="Stats_Period.Header" xml:space="preserve">
+    <value>Period</value>
+  </data>
+  <data name="Stats_Metric.Header" xml:space="preserve">
+    <value>Ranking by</value>
+  </data>
+  <data name="Stats_State.EmptyText" xml:space="preserve">
+    <value>No stats for this game in the period yet.</value>
+  </data>
+  <data name="HomePage_OnboardingTitle.Text" xml:space="preserve">
+    <value>YOUR START WITH THE REBELS</value>
+  </data>
+  <data name="HomePage_OnboardingDo.Content" xml:space="preserve">
+    <value>Do it</value>
+  </data>
 </root>

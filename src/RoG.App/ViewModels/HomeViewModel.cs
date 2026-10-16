@@ -40,6 +40,18 @@ public sealed partial class HomeViewModel(AppServices services) : ObservableObje
     [ObservableProperty]
     public partial bool HasVotes { get; set; }
 
+    /// <summary>„Dein Start bei den Rebels“ – nur solange nicht alles erledigt ist.</summary>
+    public ObservableCollection<OnboardingStepViewModel> OnboardingSteps { get; } = [];
+
+    [ObservableProperty]
+    public partial bool HasOnboarding { get; set; }
+
+    [ObservableProperty]
+    public partial double OnboardingProgress { get; set; }
+
+    [ObservableProperty]
+    public partial string OnboardingText { get; set; } = string.Empty;
+
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsEmpty))]
     public partial bool IsLoading { get; set; }
@@ -150,6 +162,24 @@ public sealed partial class HomeViewModel(AppServices services) : ObservableObje
             {
                 HasVotes = false;
             }
+
+            try
+            {
+                var onboarding = await new RoG.Core.Features.Stats.StatsService(services.Api.Client).OnboardingAsync();
+                OnboardingSteps.Clear();
+                foreach (var step in onboarding.Steps)
+                {
+                    OnboardingSteps.Add(new OnboardingStepViewModel(step, services));
+                }
+
+                OnboardingProgress = onboarding.Progress;
+                OnboardingText = string.Format(CultureInfo.CurrentCulture, services.Localizer.GetString(StringKeys.HomeOnboardingProgress), onboarding.Progress);
+                HasOnboarding = !onboarding.Complete && OnboardingSteps.Count > 0;
+            }
+            catch (Exception ex) when (ex is ApiProblemException or RoG.Core.Api.Generated.GeneratedApiException)
+            {
+                HasOnboarding = false;
+            }
         }
     }
 
@@ -208,4 +238,21 @@ public sealed partial class HomeLinkItem(string title, string meta, Func<bool> o
 
     [RelayCommand]
     private void Open() => open();
+}
+
+/// <summary>Schritt der Onboarding-Checkliste; „Erledigen“ öffnet die Website-Seite dazu.</summary>
+public sealed partial class OnboardingStepViewModel(RoG.Core.Features.Stats.OnboardingStep step, AppServices services)
+{
+    public string Label => (step.Done ? "☑ " : "☐ ") + step.Label;
+
+    public bool CanOpen => !step.Done && step.Url is not null;
+
+    [RelayCommand]
+    private async Task OpenAsync()
+    {
+        if (step.Url is { } url)
+        {
+            await services.Browser.OpenAsync(url);
+        }
+    }
 }

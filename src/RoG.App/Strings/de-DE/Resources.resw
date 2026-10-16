@@ -1796,4 +1796,73 @@
   <data name="Approval_Reject.Content" xml:space="preserve">
     <value>ABLEHNEN</value>
   </data>
+  <data name="Stats_MyRank" xml:space="preserve">
+    <value>Dein Platz: {0}</value>
+  </data>
+  <data name="Stats_AwardsTitle" xml:space="preserve">
+    <value>WOCHEN-AWARDS {0}</value>
+  </data>
+  <data name="Stats_Period_7d" xml:space="preserve">
+    <value>7 Tage</value>
+  </data>
+  <data name="Stats_Period_30d" xml:space="preserve">
+    <value>30 Tage</value>
+  </data>
+  <data name="Stats_Period_all" xml:space="preserve">
+    <value>Gesamt</value>
+  </data>
+  <data name="Stats_Metric_kills" xml:space="preserve">
+    <value>Kills</value>
+  </data>
+  <data name="Stats_Metric_kd" xml:space="preserve">
+    <value>K/D</value>
+  </data>
+  <data name="Stats_Metric_playtime" xml:space="preserve">
+    <value>Spielzeit</value>
+  </data>
+  <data name="Stats_Metric_rounds" xml:space="preserve">
+    <value>Runden</value>
+  </data>
+  <data name="Stats_Metric_headshots" xml:space="preserve">
+    <value>Kopftreffer</value>
+  </data>
+  <data name="Stats_Award_most_kills" xml:space="preserve">
+    <value>Meiste Kills</value>
+  </data>
+  <data name="Stats_Award_best_kd" xml:space="preserve">
+    <value>Beste K/D</value>
+  </data>
+  <data name="Stats_Award_most_headshots" xml:space="preserve">
+    <value>Kopfjäger</value>
+  </data>
+  <data name="Stats_Award_objective_hero" xml:space="preserve">
+    <value>Objective-Held</value>
+  </data>
+  <data name="Stats_Award_most_playtime" xml:space="preserve">
+    <value>Dauerbrenner</value>
+  </data>
+  <data name="Home_OnboardingProgress" xml:space="preserve">
+    <value>{0} % erledigt</value>
+  </data>
+  <data name="MatchesPage_TabStats.Text" xml:space="preserve">
+    <value>Statistiken</value>
+  </data>
+  <data name="Stats_Game.Header" xml:space="preserve">
+    <value>Spiel</value>
+  </data>
+  <data name="Stats_Period.Header" xml:space="preserve">
+    <value>Zeitraum</value>
+  </data>
+  <data name="Stats_Metric.Header" xml:space="preserve">
+    <value>Wertung</value>
+  </data>
+  <data name="Stats_State.EmptyText" xml:space="preserve">
+    <value>Für dieses Spiel gibt es im Zeitraum noch keine Werte.</value>
+  </data>
+  <data name="HomePage_OnboardingTitle.Text" xml:space="preserve">
+    <value>DEIN START BEI DEN REBELS</value>
+  </data>
+  <data name="HomePage_OnboardingDo.Content" xml:space="preserve">
+    <value>Erledigen</value>
+  </data>
 </root>

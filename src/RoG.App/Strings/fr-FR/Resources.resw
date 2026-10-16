@@ -1796,4 +1796,73 @@
   <data name="Approval_Reject.Content" xml:space="preserve">
     <value>REFUSER</value>
   </data>
+  <data name="Stats_MyRank" xml:space="preserve">
+    <value>Ta place : {0}</value>
+  </data>
+  <data name="Stats_AwardsTitle" xml:space="preserve">
+    <value>AWARDS DE LA SEMAINE {0}</value>
+  </data>
+  <data name="Stats_Period_7d" xml:space="preserve">
+    <value>7 jours</value>
+  </data>
+  <data name="Stats_Period_30d" xml:space="preserve">
+    <value>30 jours</value>
+  </data>
+  <data name="Stats_Period_all" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="Stats_Metric_kills" xml:space="preserve">
+    <value>Kills</value>
+  </data>
+  <data name="Stats_Metric_kd" xml:space="preserve">
+    <value>K/D</value>
+  </data>
+  <data name="Stats_Metric_playtime" xml:space="preserve">
+    <value>Temps de jeu</value>
+  </data>
+  <data name="Stats_Metric_rounds" xml:space="preserve">
+    <value>Manches</value>
+  </data>
+  <data name="Stats_Metric_headshots" xml:space="preserve">
+    <value>Headshots</value>
+  </data>
+  <data name="Stats_Award_most_kills" xml:space="preserve">
+    <value>Le plus de kills</value>
+  </data>
+  <data name="Stats_Award_best_kd" xml:space="preserve">
+    <value>Meilleur K/D</value>
+  </data>
+  <data name="Stats_Award_most_headshots" xml:space="preserve">
+    <value>Chasseur de têtes</value>
+  </data>
+  <data name="Stats_Award_objective_hero" xml:space="preserve">
+    <value>Héros des objectifs</value>
+  </data>
+  <data name="Stats_Award_most_playtime" xml:space="preserve">
+    <value>Marathonien</value>
+  </data>
+  <data name="Home_OnboardingProgress" xml:space="preserve">
+    <value>{0} % fait</value>
+  </data>
+  <data name="MatchesPage_TabStats.Text" xml:space="preserve">
+    <value>Statistiques</value>
+  </data>
+  <data name="Stats_Game.Header" xml:space="preserve">
+    <value>Jeu</value>
+  </data>
+  <data name="Stats_Period.Header" xml:space="preserve">
+    <value>Période</value>
+  </data>
+  <data name="Stats_Metric.Header" xml:space="preserve">
+    <value>Classement par</value>
+  </data>
+  <data name="Stats_State.EmptyText" xml:space="preserve">
+    <value>Pas encore de stats pour ce jeu sur la période.</value>
+  </data>
+  <data name="HomePage_OnboardingTitle.Text" xml:space="preserve">
+    <value>TES DÉBUTS CHEZ LES REBELS</value>
+  </data>
+  <data name="HomePage_OnboardingDo.Content" xml:space="preserve">
+    <value>Faire</value>
+  </data>
 </root>

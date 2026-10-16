@@ -18,6 +18,7 @@
             <SelectorBar x:Name="TabBar" SelectionChanged="OnTabChanged">
                 <SelectorBarItem x:Uid="MatchesPage_TabMatches" IsSelected="True" />
                 <SelectorBarItem x:Uid="MatchesPage_TabHall" />
+                <SelectorBarItem x:Uid="MatchesPage_TabStats" />
             </SelectorBar>
         </StackPanel>
 
@@ -252,6 +253,62 @@
                             </ItemsRepeater.ItemTemplate>
                         </ItemsRepeater>
                     </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+        <!-- Statistiken -->
+        <Grid x:Name="StatsPanel" Grid.Row="1" Padding="24,0,24,24" RowSpacing="12" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <ComboBox x:Uid="Stats_Game" MinWidth="180" ItemsSource="{x:Bind Stats.Games}" SelectedItem="{x:Bind Stats.SelectedGame, Mode=TwoWay}" />
+                <ComboBox x:Uid="Stats_Period" MinWidth="140" ItemsSource="{x:Bind Stats.Periods}" SelectedItem="{x:Bind Stats.SelectedPeriod, Mode=TwoWay}" />
+                <ComboBox x:Uid="Stats_Metric" MinWidth="140" ItemsSource="{x:Bind Stats.Metrics}" SelectedItem="{x:Bind Stats.SelectedMetric, Mode=TwoWay}" />
+            </StackPanel>
+            <controls:StateView
+                x:Uid="Stats_State"
+                Grid.Row="1"
+                ErrorMessage="{x:Bind Stats.ErrorMessage, Mode=OneWay}"
+                IsEmpty="{x:Bind Stats.IsEmpty, Mode=OneWay}"
+                IsLoading="{x:Bind Stats.IsLoading, Mode=OneWay}"
+                RetryCommand="{x:Bind Stats.RefreshCommand}" />
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Visibility="{x:Bind Stats.ShowContent, Mode=OneWay}">
+                <StackPanel MaxWidth="{StaticResource RoGReadingWidth}" HorizontalAlignment="Left" Spacing="16">
+                    <TextBlock Foreground="{StaticResource RoGGoldBrush}" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Stats.MyRankText, Mode=OneWay}" Visibility="{x:Bind Stats.HasMyRank, Mode=OneWay}" />
+                    <ItemsControl ItemsSource="{x:Bind Stats.Rows}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:LeaderboardRowViewModel">
+                                <Grid Padding="0,6" ColumnSpacing="12">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Foreground="{StaticResource RoGGoldBrush}" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Rank}" />
+                                    <StackPanel Grid.Column="1">
+                                        <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Name}" />
+                                        <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Details}" />
+                                    </StackPanel>
+                                    <TextBlock Grid.Column="2" VerticalAlignment="Center" FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Value}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <TextBlock Style="{StaticResource RoGSectionTextStyle}" Text="{x:Bind Stats.AwardsTitle, Mode=OneWay}" Visibility="{x:Bind Stats.HasAwards, Mode=OneWay}" />
+                    <ItemsControl ItemsSource="{x:Bind Stats.Awards}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:AwardRowViewModel">
+                                <StackPanel Padding="0,4">
+                                    <TextBlock Foreground="{StaticResource RoGGoldBrush}" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Label}" />
+                                    <TextBlock Style="{StaticResource RoGBodyTextStyle}">
+                                        <Run Text="{x:Bind Members}" /><Run Text=" · " /><Run Text="{x:Bind Value}" />
+                                    </TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

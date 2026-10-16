@@ -44,6 +44,24 @@
                 Style="{StaticResource RoGPrimaryButtonStyle}"
                 Visibility="{x:Bind ViewModel.HasVotes, Mode=OneWay}" />
 
+            <Border Style="{StaticResource RoGCardStyle}" Visibility="{x:Bind ViewModel.HasOnboarding, Mode=OneWay}">
+                <StackPanel Spacing="8">
+                    <TextBlock x:Uid="HomePage_OnboardingTitle" Style="{StaticResource RoGSectionTextStyle}" />
+                    <ProgressBar Maximum="100" Value="{x:Bind ViewModel.OnboardingProgress, Mode=OneWay}" />
+                    <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind ViewModel.OnboardingText, Mode=OneWay}" />
+                    <ItemsControl ItemsSource="{x:Bind ViewModel.OnboardingSteps}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:OnboardingStepViewModel">
+                                <StackPanel Padding="0,2" Orientation="Horizontal" Spacing="12">
+                                    <TextBlock VerticalAlignment="Center" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Label}" />
+                                    <HyperlinkButton x:Uid="HomePage_OnboardingDo" Padding="0" Command="{x:Bind OpenCommand}" Visibility="{x:Bind CanOpen}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+
             <TextBlock x:Uid="HomePage_LiveTitle" Style="{StaticResource RoGSectionTextStyle}" />
 
             <ProgressRing

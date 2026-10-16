@@ -11,10 +11,13 @@ public sealed partial class MatchesPage : Page
     public MatchesPage()
     {
         ViewModel = new MatchesViewModel(App.Services);
+        Stats = new StatsViewModel(App.Services);
         InitializeComponent();
     }
 
     public MatchesViewModel ViewModel { get; }
+
+    public StatsViewModel Stats { get; }
 
     protected override async void OnNavigatedTo(NavigationEventArgs e)
     {
@@ -26,17 +29,22 @@ public sealed partial class MatchesPage : Page
 
     private async void OnTabChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args)
     {
-        if (MatchesPanel is null || HallPanel is null)
+        if (MatchesPanel is null || HallPanel is null || StatsPanel is null)
         {
             return; // feuert schon beim Aufbau
         }
 
-        var hall = sender.SelectedItem is not null && sender.Items.IndexOf(sender.SelectedItem) == 1;
-        MatchesPanel.Visibility = hall ? Visibility.Collapsed : Visibility.Visible;
-        HallPanel.Visibility = hall ? Visibility.Visible : Visibility.Collapsed;
-        if (hall)
+        var index = sender.SelectedItem is null ? 0 : sender.Items.IndexOf(sender.SelectedItem);
+        MatchesPanel.Visibility = index == 0 ? Visibility.Visible : Visibility.Collapsed;
+        HallPanel.Visibility = index == 1 ? Visibility.Visible : Visibility.Collapsed;
+        StatsPanel.Visibility = index == 2 ? Visibility.Visible : Visibility.Collapsed;
+        if (index == 1)
         {
             await ViewModel.Hall.LoadAsync(silent: true);
+        }
+        else if (index == 2 && Stats.Rows.Count == 0)
+        {
+            await Stats.LoadAsync();
         }
     }
 }

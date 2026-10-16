@@ -104,6 +104,13 @@ public sealed class WikiService(IRoGApiClient client, HttpClient http, Uri? wiki
     public async Task RestoreAsync(string revisionId, CancellationToken cancellationToken = default) =>
         await client.V1_wiki_revisions_restoreAsync(revisionId, cancellationToken).ConfigureAwait(false);
 
+    /// <summary>Vorschlag freigeben (Prüfpflicht, Recht <c>wiki.approve</c>).</summary>
+    public async Task ApproveAsync(string revisionId, CancellationToken cancellationToken = default) =>
+        await client.V1_wiki_revisions_approveAsync(revisionId, cancellationToken).ConfigureAwait(false);
+
+    public async Task RejectAsync(string revisionId, CancellationToken cancellationToken = default) =>
+        await client.V1_wiki_revisions_rejectAsync(revisionId, cancellationToken).ConfigureAwait(false);
+
     /// <summary>Vorschau ohne Speichern (30/min) – liefert HTML wie die Seite.</summary>
     public async Task<string> RenderAsync(string pageId, string content, string format, string title, CancellationToken cancellationToken = default)
     {

@@ -132,6 +132,8 @@
                                         <StackPanel Orientation="Horizontal" Spacing="12">
                                             <HyperlinkButton x:Uid="WikiPage_Compare" Padding="0" Command="{x:Bind CompareCommand}" />
                                             <HyperlinkButton x:Uid="Config_Rollback" Padding="0" Command="{x:Bind RestoreCommand}" Visibility="{x:Bind CanRestore}" />
+                                            <HyperlinkButton x:Uid="Approval_ApproveLink" Padding="0" Command="{x:Bind ApproveCommand}" Visibility="{x:Bind CanDecide}" />
+                                            <HyperlinkButton x:Uid="Approval_RejectLink" Padding="0" Command="{x:Bind RejectCommand}" Visibility="{x:Bind CanDecide}" />
                                         </StackPanel>
                                     </StackPanel>
                                 </DataTemplate>

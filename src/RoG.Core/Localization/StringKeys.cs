@@ -275,6 +275,8 @@ public static class StringKeys
     public const string WikiSaved = "Wiki_Saved";
     public const string WikiPending = "Wiki_Pending";
     public const string WikiConflict = "Wiki_Conflict";
+    public const string WikiApproved = "Wiki_Approved";
+    public const string WikiRejected = "Wiki_Rejected";
 
     // Moderation (Typ/Grund/Bereich werden als "Mod_Type_" + Wert usw. gebildet)
     public const string ModStatusOpen = "Mod_StatusOpen";

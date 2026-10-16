@@ -74,6 +74,9 @@ public sealed partial class WikiViewModel : LoadableViewModel
 
     public bool CanWatch => Services.CurrentUser is not null;
 
+    /// <summary>Vorschläge freigeben/ablehnen (Prüfpflicht) – Recht <c>wiki.approve</c> (global oder im Squad des Bereichs).</summary>
+    public bool CanApprove => Services.CurrentUser is { } me && me.CanAnywhere("wiki.approve") && me.HasScope("wiki:write");
+
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(ShowReader))]
     public partial bool IsEditing { get; set; }
@@ -318,6 +321,16 @@ public sealed partial class WikiViewModel : LoadableViewModel
         HasDiff = true;
     });
 
+    internal async Task DecideAsync(WikiRevisionItemViewModel revision, bool approve)
+    {
+        if (Article is { } page && await RunAsync(() => approve ? _wiki.ApproveAsync(revision.Id) : _wiki.RejectAsync(revision.Id)))
+        {
+            Show(Services.Localizer.GetString(approve ? StringKeys.WikiApproved : StringKeys.WikiRejected), InfoBarSeverity.Success);
+            await OpenPageAsync(page.Id);
+            await LoadRevisionsAsync();
+        }
+    }
+
     internal async Task RestoreAsync(WikiRevisionItemViewModel revision)
     {
         if (Article is { } page && await RunAsync(() => _wiki.RestoreAsync(revision.Id)))
@@ -450,10 +463,18 @@ public sealed partial class WikiRevisionItemViewModel(WikiRevision revision, Wik
         revision.Status == "approved" ? null : revision.Status,
     }.Where(s => !string.IsNullOrEmpty(s)));
 
-    public bool CanRestore => owner.CanEdit;
+    public bool CanRestore => owner.CanEdit && revision.Status == "approved";
+
+    public bool CanDecide => owner.CanApprove && revision.Status == "pending";
 
     [RelayCommand]
     private Task CompareAsync() => owner.CompareAsync(this);
+
+    [RelayCommand]
+    private Task ApproveAsync() => owner.DecideAsync(this, approve: true);
+
+    [RelayCommand]
+    private Task RejectAsync() => owner.DecideAsync(this, approve: false);
 
     [RelayCommand]
     private Task RestoreAsync() => owner.RestoreAsync(this);

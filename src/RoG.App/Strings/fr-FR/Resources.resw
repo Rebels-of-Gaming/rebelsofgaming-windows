@@ -2453,4 +2453,16 @@
   <data name="MediaPage_Submit.Content" xml:space="preserve">
     <value>PROPOSER</value>
   </data>
+  <data name="Wiki_Approved" xml:space="preserve">
+    <value>Proposition validée.</value>
+  </data>
+  <data name="Wiki_Rejected" xml:space="preserve">
+    <value>Proposition refusée.</value>
+  </data>
+  <data name="Approval_ApproveLink.Content" xml:space="preserve">
+    <value>Valider</value>
+  </data>
+  <data name="Approval_RejectLink.Content" xml:space="preserve">
+    <value>Refuser</value>
+  </data>
 </root>

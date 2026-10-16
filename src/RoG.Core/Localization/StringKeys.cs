@@ -53,6 +53,9 @@ public static class StringKeys
     public const string VoiceTsLaunched = "Voice_TsLaunched";
     public const string VoiceTsMissing = "Voice_TsMissing";
 
+    // Suche ({0} = Suchbegriff)
+    public const string SearchHeader = "Search_Header";
+
     // Matches
     public const string MatchesWin = "Matches_Win";
     public const string MatchesLoss = "Matches_Loss";

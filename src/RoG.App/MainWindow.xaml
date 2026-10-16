@@ -39,6 +39,19 @@
             PaneDisplayMode="Auto"
             SelectionChanged="OnNavigationSelectionChanged"
             Visibility="Collapsed">
+            <NavigationView.AutoSuggestBox>
+                <AutoSuggestBox
+                    x:Name="SearchBox"
+                    x:Uid="Shell_Search"
+                    QueryIcon="Find"
+                    QuerySubmitted="OnSearchSubmitted" />
+            </NavigationView.AutoSuggestBox>
+            <NavigationView.KeyboardAccelerators>
+                <KeyboardAccelerator
+                    Key="K"
+                    Invoked="OnSearchAccelerator"
+                    Modifiers="Control" />
+            </NavigationView.KeyboardAccelerators>
             <NavigationView.MenuItems>
                 <NavigationViewItem x:Uid="Shell_NavHome" Content="Start" Icon="Home" Tag="Nav_Home" />
                 <NavigationViewItem x:Uid="Shell_NavNews" Content="News" Icon="PreviewLink" Tag="Nav_News" />

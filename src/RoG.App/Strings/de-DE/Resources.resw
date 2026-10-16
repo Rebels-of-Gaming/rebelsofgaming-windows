@@ -770,4 +770,16 @@
   <data name="MatchesPage_Honorary.Text" xml:space="preserve">
     <value>EHRENMITGLIEDER</value>
   </data>
+  <data name="Search_Header" xml:space="preserve">
+    <value>Suche: „{0}“</value>
+  </data>
+  <data name="SearchPage_State.EmptyText" xml:space="preserve">
+    <value>Nichts gefunden. Versuch ein anderes Wort (mindestens 2 Zeichen).</value>
+  </data>
+  <data name="Shell_Search.PlaceholderText" xml:space="preserve">
+    <value>Suchen (Strg+K)</value>
+  </data>
+  <data name="Shell_Search.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Überall suchen</value>
+  </data>
 </root>

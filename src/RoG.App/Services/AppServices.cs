@@ -79,6 +79,11 @@ public sealed class AppServices : IDisposable
 
     public void RequestSignIn() => SignInRequested?.Invoke(this, EventArgs.Empty);
 
+    /// <summary>Vom Hauptfenster gesetzt: öffnet einen Bereich (optional mit Eintrag); <c>false</c> = gibt es in der App nicht.</summary>
+    public Func<RoG.Core.Navigation.AppRoute, bool>? Navigator { get; set; }
+
+    public bool Navigate(RoG.Core.Navigation.AppRoute route) => Navigator?.Invoke(route) ?? false;
+
     public IClipboardService Clipboard { get; } = new WindowsClipboard();
 
     public IExternalLauncher Launcher { get; } = new WindowsExternalLauncher();

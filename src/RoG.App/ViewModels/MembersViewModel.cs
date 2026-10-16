@@ -49,9 +49,26 @@ public sealed partial class MembersViewModel : LoadableViewModel
     [NotifyPropertyChangedFor(nameof(IsDetailOpen), nameof(ShowSelectHint))]
     public partial MemberListItem? Selected { get; set; }
 
-    public bool IsDetailOpen => Selected is not null;
+    /// <summary>Detail per Link geöffnet, ohne dass der Eintrag in der geladenen Liste steht.</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsDetailOpen), nameof(ShowSelectHint))]
+    public partial bool DetailForced { get; set; }
 
-    public bool ShowSelectHint => Selected is null;
+    public bool IsDetailOpen => Selected is not null || DetailForced;
+
+    public bool ShowSelectHint => !IsDetailOpen;
+
+    /// <summary>Liste laden und den Eintrag <paramref name="slug"/> öffnen (Suche, Links, später Deep Links).</summary>
+    public async Task OpenAsync(string slug)
+    {
+        await LoadAsync();
+        Selected = Items.FirstOrDefault(i => i.Slug == slug);
+        if (Selected is null)
+        {
+            DetailForced = true;
+            await Detail.ShowAsync(slug);
+        }
+    }
 
     protected override bool HasData => Items.Count > 0;
 
@@ -135,6 +152,11 @@ public sealed partial class MembersViewModel : LoadableViewModel
 
     partial void OnSelectedChanged(MemberListItem? value)
     {
+        if (value is not null)
+        {
+            DetailForced = false;
+        }
+
         if (value is not null)
         {
             _ = Detail.ShowAsync(value.Slug);

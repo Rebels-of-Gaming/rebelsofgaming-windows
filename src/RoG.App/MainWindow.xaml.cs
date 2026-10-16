@@ -6,6 +6,7 @@ using RoG.App.Services;
 using RoG.App.Views;
 using RoG.Core.Api;
 using RoG.Core.Localization;
+using RoG.Core.Navigation;
 using RoG.Core.Settings;
 using Windows.Graphics;
 
@@ -47,6 +48,7 @@ public sealed partial class MainWindow : Window
         services.Api.Handler.Unauthorized += OnUnauthorized;
         services.SignInRequested += (_, _) => ShowLogin();
         services.CurrentUserChanged += (_, _) => UpdateAccountItem();
+        services.Navigator = Navigate;
         _ = InitializeAsync();
     }
 
@@ -142,6 +144,76 @@ public sealed partial class MainWindow : Window
         permission.EndsWith(".manage", StringComparison.Ordinal) || permission.StartsWith("roles.", StringComparison.Ordinal)
         || permission.StartsWith("moderation.", StringComparison.Ordinal) || permission.StartsWith("admin.", StringComparison.Ordinal);
 
+    /// <summary>Navigations-Schlüssel je Bereich (Suche hat keinen Eintrag in der Seitenleiste).</summary>
+    private static string? TagOf(AppSection section) => section switch
+    {
+        AppSection.Home => StringKeys.NavHome,
+        AppSection.News => StringKeys.NavNews,
+        AppSection.Squads => StringKeys.NavSquads,
+        AppSection.Members => StringKeys.NavMembers,
+        AppSection.Calendar => StringKeys.NavCalendar,
+        AppSection.Servers => StringKeys.NavServers,
+        AppSection.Matches => StringKeys.NavMatches,
+        AppSection.Info => StringKeys.NavInfo,
+        AppSection.Forum => StringKeys.NavForum,
+        AppSection.Wiki => StringKeys.NavWiki,
+        AppSection.Messages => StringKeys.NavMessages,
+        AppSection.Account => StringKeys.NavAccount,
+        _ => null,
+    };
+
+    private string? _pendingKey;
+
+    /// <summary>Bereich öffnen, optional mit Eintrag; <c>false</c>, wenn es den Bereich in der App (noch) nicht gibt.</summary>
+    public bool Navigate(AppRoute route)
+    {
+        if (route.Section == AppSection.Search)
+        {
+            NavView.SelectedItem = null;
+            ContentFrame.Navigate(typeof(SearchPage), route.Key ?? string.Empty);
+            return true;
+        }
+
+        var tag = TagOf(route.Section);
+        if (tag is null || !s_pages.TryGetValue(tag, out var page))
+        {
+            return false;
+        }
+
+        var item = AllItems().FirstOrDefault(i => i.Tag as string == tag);
+        if (item is not null && !ReferenceEquals(NavView.SelectedItem, item))
+        {
+            _pendingKey = route.Key;
+            NavView.SelectedItem = item; // navigiert in OnNavigationSelectionChanged
+        }
+        else
+        {
+            ContentFrame.Navigate(page, route.Key);
+        }
+
+        return true;
+    }
+
+    private void OnSearchSubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+    {
+        var query = args.QueryText?.Trim();
+        if (!string.IsNullOrEmpty(query))
+        {
+            Navigate(new AppRoute(AppSection.Search, query));
+        }
+    }
+
+    private void OnSearchAccelerator(Microsoft.UI.Xaml.Input.KeyboardAccelerator sender, Microsoft.UI.Xaml.Input.KeyboardAcceleratorInvokedEventArgs args)
+    {
+        args.Handled = true;
+        if (NavView.PaneDisplayMode == NavigationViewPaneDisplayMode.LeftMinimal || !NavView.IsPaneOpen)
+        {
+            NavView.IsPaneOpen = true;
+        }
+
+        SearchBox.Focus(FocusState.Keyboard);
+    }
+
     private void OnNavigationSelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
     {
         string key;
@@ -155,7 +227,8 @@ public sealed partial class MainWindow : Window
             key = tag;
             if (s_pages.TryGetValue(tag, out var page))
             {
-                ContentFrame.Navigate(page);
+                ContentFrame.Navigate(page, _pendingKey);
+                _pendingKey = null;
             }
             else
             {

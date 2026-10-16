@@ -19,10 +19,21 @@ public sealed partial class MembersPage : Page
     protected override async void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
-        await ViewModel.LoadAsync();
+        if (e.Parameter is string { Length: > 0 } slug)
+        {
+            await ViewModel.OpenAsync(slug);
+        }
+        else
+        {
+            await ViewModel.LoadAsync();
+        }
     }
 
-    private void OnDetailClosed(object? sender, EventArgs e) => ViewModel.Selected = null;
+    private void OnDetailClosed(object? sender, EventArgs e)
+    {
+        ViewModel.Selected = null;
+        ViewModel.DetailForced = false;
+    }
 
     private void OnModeChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args) =>
         ViewModel.TeamMode = sender.SelectedItem is not null && sender.Items.IndexOf(sender.SelectedItem) == 1;

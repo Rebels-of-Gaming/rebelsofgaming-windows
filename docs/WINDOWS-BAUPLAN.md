@@ -11,12 +11,12 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 | 1 | Konto + Start | fertig (2.0.1): Konto, Abmelden, Gerät, Einstellungen, Live-Ticker, Einzelinstanz, Fensterzustand | siehe `git log` (develop) |
 | 2 | Community lesen | fertig (2.1.0, Reste siehe unten): News, Squads, Mitglieder/Team, Termine (+ Zusage), Server/TeamSpeak/Discord mit „Verbinden“, Matches/Hall of Fame, Info (Regeln/Seiten/Recht), Suche | siehe `git log` (develop) |
 | 3 | Echtzeit + Desktop-Integration | fertig (2.1.0): Reverb, Glocke, Toasts, Tray, Badge, Sprungliste, `rog:`, Autostart; WNS nach Lücke W1 | siehe `git log` |
-| 4 | Kommunikation | fast fertig (2.1.0): DMs mit Pop-out, Forum lesen+schreiben, Zusagen, Tastenkürzel; offen: Offline-Warteschlange | siehe `git log` |
+| 4 | Kommunikation | fertig (2.3.x): DMs mit Pop-out, Forum lesen+schreiben, Zusagen, Tastenkürzel, Offline-Warteschlange (DMs nur im Speicher), Melden | siehe `git log` |
 | 5 | Medien | fast fertig (2.1.0): Uploads (Drag & Drop, Strg+V), Galerie, Downloads, Kurzlinks, Profil bearbeiten; offen: Teilen-Ziel, Galerie-Upload | siehe `git log` |
 | 6 | Clan-Prozesse | fast fertig (2.2.2): Bewerben, eigene Bewerbungen, Votes, Abwesenheiten, Geräte/Datenexport/Konto löschen, Regel-Hinweis, Onboarding-Kachel, Statistiken (Ranglisten, Wochen-Awards), Mitgliederkarte im eigenen Fenster; offen: Trial-Verwaltung für Squad-Leitung (kommt mit Stufe 9) | siehe `git log` |
 | 7 | Server-Steuerung | fast fertig (2.2.0): Steuer-Fenster mit Power, Ressourcen, Live-Konsole (Historie), Configs (Diff, Versionen, Rollback, Anträge), Backups, RCON, Sperren, Vier-Augen-Freigaben, App-Sperre mit Windows Hello; offen: Dateioperationen, Formular-Vorlagen/Map-Rotation, Whitelist | siehe `git log` |
 | 8 | Wiki | fast fertig (2.3.0): Bereiche, Seitenbaum, Suche, Seite nativ mit Links in der App, Offline-Kopien, Bearbeiten mit Vorschau und Konflikterkennung, Versionen mit Vergleich/Wiederherstellen, Beobachten; offen: neue Seite anlegen, Dateien/Bilder hochladen, Kategorien-Ansicht, Inhaltsverzeichnis mit Sprung | siehe `git log` |
-| 9 | Verwaltung + Moderation | in Arbeit (2.3.1): Verwaltungs-Seite mit Moderation (Meldungen, Mitglied verwarnen/sperren, Sperren, Mod-Log, Wortfilter); offen: Verwaltungsbereiche (Mitglieder/Rollen, Bewerbungen, Squads, Inhalte, Audit-Log …) | siehe `git log` |
+| 9 | Verwaltung + Moderation | in Arbeit (2.3.x): Verwaltung mit Übersicht (Kennzahlen, Systemstatus, Audit-Log), Bewerbungen (Squad-Leitung), Moderation (Meldungen, verwarnen/sperren, Sperren, Mod-Log, Wortfilter); offen: Mitglieder/Rollen-Oberfläche (Dienst steht), Squads, Inhalte, Termine/Matches, Server-Verwaltung … | siehe `git log` |
 | 10 | Feinschliff + Store | offen | |
 
 ### Stufe 0 – was steht (15.10.2026)
@@ -118,6 +118,21 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 - **App-Sperre mit Windows Hello** (Einstellungen, nur wenn Hello eingerichtet; Einschalten erst nach erfolgreicher
   Prüfung): beim Start und nach 5 Minuten außerhalb des Vordergrunds; Ausweg „Stattdessen abmelden“.
 
+### Offline, Melden, Verwaltung (2.3.1–2.3.3, 16.10.2026)
+
+- **Offline-Warteschlange** (`Outbox`, Core): DMs, Forenantworten und Zusagen ohne Netz werden mit festem
+  Idempotency-Key gemerkt und beim Start, bei Netzwechsel und jede Minute gesendet; Netz-/Server-/Rate-Fehler →
+  später erneut, andere Fehler → verworfen mit Windows-Hinweis. **DMs nur im Speicher** (Pflichtenheft 7).
+- **DPAPI** (`IPayloadProtector`, App: `DataProtectionProvider("LOCAL=user")`) für Wiki-Offline-Kopien und die
+  Warteschlange.
+- **Melden** (Chat-Kontextmenü, Forenbeitrag, News-Kommentar, Profil) mit Grund und Kommentar.
+- **Verwaltung:** Übersicht (Kennzahlen, Systemstatus mit Ampel, Audit-Log mit Suche), Bewerbungen für die
+  Squad-Leitung (Liste/Detail, Entscheidungen, Aufgaben, Notizen, Erinnern), Moderation.
+- **Werkzeug:** `scripts/check-app-syntax.sh` prüft die Syntax der App unter Linux (Roslyn des SDK) vor dem Push.
+- **XAML-Fallstrick:** `CheckBox.IsChecked` ist `bool?` – TwoWay-`x:Bind` an `bool` führte zu einem internen
+  Fehler des XAML-Compilers ohne Meldungstext (WMC9999). Bei Fehlern sichert die CI jetzt `input.json`/`output.json`
+  des XAML-Compilers im Artefakt.
+
 ### Stufe 8 – Wiki (2.3.0, 16.10.2026)
 
 - **Core:** `WikiService` (Bereiche, Baum flach mit Tiefe, Seite per ID oder Adresse inkl. Weiterleitungen, Versionen,
@@ -187,8 +202,10 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   die Hello-Prüfung macht Windows, die App sieht keine biometrischen Daten.
 - Ab 2.2.2: Kartenkacheln kommen nur vom Server der Plattform (signierte Vorlage, nie direkt von OpenStreetMap);
   sie liegen höchstens im Bild-Cache von WinUI während der Laufzeit.
-- Ab 2.3.0: gelesene Wiki-Seiten (gerendertes HTML, Titel, Bereich) als JSON unter `wiki/` im App-Datenordner, je
-  Sprache; Abmelden löscht den Ordner, Deinstallation ebenso.
+- Ab 2.3.0: gelesene Wiki-Seiten (gerendertes HTML, Titel, Bereich) unter `wiki/` im App-Datenordner, je Sprache,
+  **mit DPAPI verschlüsselt** (ab 2.3.3); Abmelden löscht den Ordner, Deinstallation ebenso.
+- Ab 2.3.3: Offline-Warteschlange `outbox.dat` (Forenantworten, Zusagen; DPAPI-verschlüsselt) – **Direktnachrichten
+  nie auf der Platte**, nur im Speicher bis zum Senden. Abmelden leert die Warteschlange.
 - Keine Übermittlung an Dritte, keine Telemetrie (`DOTNET_CLI_TELEMETRY_OPTOUT` auch in den Skripten). Schriften eingebettet.
 
 ## Verzeichnisstruktur

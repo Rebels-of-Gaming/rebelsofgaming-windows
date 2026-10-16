@@ -683,4 +683,91 @@
   <data name="ServersPage_DiscordState.EmptyText" xml:space="preserve">
     <value>Personne n’est en vocal Discord pour le moment.</value>
   </data>
+  <data name="Nav_Info" xml:space="preserve">
+    <value>Infos</value>
+  </data>
+  <data name="Shell_NavInfo.Content" xml:space="preserve">
+    <value>Infos</value>
+  </data>
+  <data name="Info_GroupRules" xml:space="preserve">
+    <value>Règles</value>
+  </data>
+  <data name="Info_GroupPages" xml:space="preserve">
+    <value>À propos de RoG</value>
+  </data>
+  <data name="Info_GroupLegal" xml:space="preserve">
+    <value>Mentions légales</value>
+  </data>
+  <data name="Info_NeedsAcceptance" xml:space="preserve">
+    <value>Merci de lire et d’accepter</value>
+  </data>
+  <data name="Info_Accepted" xml:space="preserve">
+    <value>Merci – tu as accepté les règles.</value>
+  </data>
+  <data name="InfoPage_Title.Text" xml:space="preserve">
+    <value>INFOS</value>
+  </data>
+  <data name="InfoPage_State.EmptyText" xml:space="preserve">
+    <value>Rien ici pour le moment.</value>
+  </data>
+  <data name="InfoPage_List.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Règles et pages</value>
+  </data>
+  <data name="InfoPage_SelectHint.Text" xml:space="preserve">
+    <value>Choisis une page à gauche.</value>
+  </data>
+  <data name="InfoPage_Accept.Content" xml:space="preserve">
+    <value>LU ET ACCEPTÉ</value>
+  </data>
+  <data name="Nav_Matches" xml:space="preserve">
+    <value>Matchs</value>
+  </data>
+  <data name="Shell_NavMatches.Content" xml:space="preserve">
+    <value>Matchs</value>
+  </data>
+  <data name="Matches_Win" xml:space="preserve">
+    <value>VICTOIRE</value>
+  </data>
+  <data name="Matches_Loss" xml:space="preserve">
+    <value>DÉFAITE</value>
+  </data>
+  <data name="Matches_Draw" xml:space="preserve">
+    <value>NUL</value>
+  </data>
+  <data name="Matches_Open" xml:space="preserve">
+    <value>À VENIR</value>
+  </data>
+  <data name="MatchesPage_Title.Text" xml:space="preserve">
+    <value>MATCHS</value>
+  </data>
+  <data name="MatchesPage_TabMatches.Text" xml:space="preserve">
+    <value>Matchs</value>
+  </data>
+  <data name="MatchesPage_TabHall.Text" xml:space="preserve">
+    <value>Hall of Fame</value>
+  </data>
+  <data name="MatchesPage_State.EmptyText" xml:space="preserve">
+    <value>Pas encore de matchs.</value>
+  </data>
+  <data name="MatchesPage_List.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Matchs</value>
+  </data>
+  <data name="MatchesPage_SelectHint.Text" xml:space="preserve">
+    <value>Choisis un match à gauche.</value>
+  </data>
+  <data name="MatchesPage_Maps.Text" xml:space="preserve">
+    <value>CARTES</value>
+  </data>
+  <data name="MatchesPage_Lineup.Text" xml:space="preserve">
+    <value>LINE-UP</value>
+  </data>
+  <data name="MatchesPage_Trophies.Text" xml:space="preserve">
+    <value>TROPHÉES</value>
+  </data>
+  <data name="MatchesPage_Milestones.Text" xml:space="preserve">
+    <value>ÉTAPES</value>
+  </data>
+  <data name="MatchesPage_Honorary.Text" xml:space="preserve">
+    <value>MEMBRES D’HONNEUR</value>
+  </data>
 </root>

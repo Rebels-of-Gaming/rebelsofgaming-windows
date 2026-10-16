@@ -49,6 +49,8 @@
                 <NavigationViewItem x:Uid="Shell_NavForum" Content="Forum" Icon="Comment" Tag="Nav_Forum" />
                 <NavigationViewItem x:Uid="Shell_NavWiki" Content="Wiki" Icon="Library" Tag="Nav_Wiki" />
                 <NavigationViewItem x:Uid="Shell_NavMembers" Content="Mitglieder" Icon="ContactInfo" Tag="Nav_Members" />
+                <NavigationViewItem x:Uid="Shell_NavMatches" Content="Matches" Icon="Flag" Tag="Nav_Matches" />
+                <NavigationViewItem x:Uid="Shell_NavInfo" Content="Info" Icon="Page" Tag="Nav_Info" />
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>
                 <NavigationViewItem x:Name="AdminItem" x:Uid="Shell_NavAdmin" Content="Verwaltung" Icon="Admin" Tag="Nav_Admin" Visibility="Collapsed" />

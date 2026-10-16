@@ -21,6 +21,8 @@ public static class StringKeys
     public const string NavForum = "Nav_Forum";
     public const string NavWiki = "Nav_Wiki";
     public const string NavMembers = "Nav_Members";
+    public const string NavInfo = "Nav_Info";
+    public const string NavMatches = "Nav_Matches";
     public const string NavAdmin = "Nav_Admin";
     public const string NavAccount = "Nav_Account";
 
@@ -50,6 +52,19 @@ public static class StringKeys
     public const string VoiceTsOffline = "Voice_TsOffline";
     public const string VoiceTsLaunched = "Voice_TsLaunched";
     public const string VoiceTsMissing = "Voice_TsMissing";
+
+    // Matches
+    public const string MatchesWin = "Matches_Win";
+    public const string MatchesLoss = "Matches_Loss";
+    public const string MatchesDraw = "Matches_Draw";
+    public const string MatchesOpen = "Matches_Open";
+
+    // Info
+    public const string InfoGroupRules = "Info_GroupRules";
+    public const string InfoGroupPages = "Info_GroupPages";
+    public const string InfoGroupLegal = "Info_GroupLegal";
+    public const string InfoNeedsAcceptance = "Info_NeedsAcceptance";
+    public const string InfoAccepted = "Info_Accepted";
 
     // Termine ({0}/{1}/{2} = Zusagen/Vielleicht/Plätze)
     public const string EventsCounts = "Events_Counts";

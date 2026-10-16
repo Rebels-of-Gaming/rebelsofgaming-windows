@@ -59,6 +59,8 @@ dotnet_naming_style.pascal.capitalization = pascal_case
 dotnet_diagnostic.CA2007.severity = none
 # Lokalisierung läuft über Ressourcen der App, nicht über CultureInfo-Overloads im Kern
 dotnet_diagnostic.CA1303.severity = none
+# CA1859: Befehls-Methoden ([RelayCommand]) geben bewusst Task statt Task<bool> zurück
+dotnet_diagnostic.CA1859.severity = none
 # Generierter Client
 [src/RoG.Core/Api/Generated/**.cs]
 generated_code = true
@@ -68,6 +70,4 @@ dotnet_analyzer_diagnostic.severity = none
 # Testnamen mit Unterstrichen sind gewollt
 dotnet_diagnostic.CA1707.severity = none
 dotnet_diagnostic.CA2000.severity = none
-# CA1859: Befehls-Methoden ([RelayCommand]) geben bewusst Task statt Task<bool> zurück
-dotnet_diagnostic.CA1859.severity = none
 dotnet_diagnostic.CA1861.severity = none

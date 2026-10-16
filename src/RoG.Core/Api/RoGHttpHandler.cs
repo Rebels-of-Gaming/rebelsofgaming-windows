@@ -66,6 +66,18 @@ public sealed class RoGHttpHandler : DelegatingHandler
     /// <summary>Wird bei <c>401</c> auf eine Anfrage mit Token ausgelöst – die App verwirft den Token und zeigt den Login.</summary>
     public event EventHandler<ApiProblem>? Unauthorized;
 
+    /// <summary>
+    /// Eine GET-Anfrage wurde ohne Netz bzw. bei Serverstörung aus dem Cache beantwortet (Kopf <c>X-RoG-Cache: stale</c>) –
+    /// die App zeigt „offline, letzter Stand“.
+    /// </summary>
+    public event EventHandler<Uri?>? ServedStale;
+
+    /// <summary>Gespeicherte Antworten verwerfen (Abmelden, Kontowechsel).</summary>
+    public void ClearCache() => _etags?.Clear();
+
+    /// <summary>Kopf an Antworten aus dem Cache: <c>etag</c> (304) oder <c>stale</c> (Offline-Rückfall).</summary>
+    public const string CacheHeader = "X-RoG-Cache";
+
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
@@ -81,8 +93,11 @@ public sealed class RoGHttpHandler : DelegatingHandler
         if (cacheKey is not null && _etags!.TryGet(cacheKey, out var entry))
         {
             cached = entry;
-            request.Headers.IfNoneMatch.Clear();
-            request.Headers.TryAddWithoutValidation("If-None-Match", entry.ETag);
+            if (entry.ETag.Length > 0)
+            {
+                request.Headers.IfNoneMatch.Clear();
+                request.Headers.TryAddWithoutValidation("If-None-Match", entry.ETag);
+            }
         }
 
         // Body puffern, damit Wiederholungen denselben Inhalt (und denselben Idempotency-Key) senden.
@@ -106,11 +121,21 @@ public sealed class RoGHttpHandler : DelegatingHandler
             }
             catch (HttpRequestException ex)
             {
+                if (isGet && cached is not null)
+                {
+                    return Stale(request, cached);
+                }
+
                 throw new ApiProblemException(ApiProblem.Network(), ex);
             }
             catch (TaskCanceledException ex) when (!cancellationToken.IsCancellationRequested)
             {
                 // HttpClient.Timeout
+                if (isGet && cached is not null)
+                {
+                    return Stale(request, cached);
+                }
+
                 throw new ApiProblemException(ApiProblem.Network(timeout: true), ex);
             }
 
@@ -146,6 +171,12 @@ public sealed class RoGHttpHandler : DelegatingHandler
                 Unauthorized?.Invoke(this, problem);
             }
 
+            // Serverstörung: letzten Stand zeigen statt Fehlerseite (externe Ausfälle machen keine Seite kaputt)
+            if (isGet && cached is not null && status >= 500)
+            {
+                return Stale(request, cached);
+            }
+
             throw new ApiProblemException(problem);
         }
     }
@@ -178,10 +209,22 @@ public sealed class RoGHttpHandler : DelegatingHandler
         }
     }
 
+    private HttpResponseMessage Stale(HttpRequestMessage request, EtagEntry cached)
+    {
+        var response = FromCache(request, cached);
+        response.Headers.Remove(CacheHeader);
+        response.Headers.TryAddWithoutValidation(CacheHeader, "stale");
+        ServedStale?.Invoke(this, request.RequestUri);
+        return response;
+    }
+
+    /// <summary>
+    /// Antwort merken: mit ETag für <c>If-None-Match</c>, ohne ETag nur als Rückfall ohne Netz. Nie bei <c>no-store</c>.
+    /// </summary>
     private async Task StoreEtagAsync(string key, HttpResponseMessage response, CancellationToken cancellationToken)
     {
-        var etag = response.Headers.ETag?.ToString();
-        if (string.IsNullOrEmpty(etag) || response.Headers.CacheControl?.NoStore == true)
+        var etag = response.Headers.ETag?.ToString() ?? string.Empty;
+        if (response.Headers.CacheControl?.NoStore == true)
         {
             return;
         }
@@ -207,8 +250,12 @@ public sealed class RoGHttpHandler : DelegatingHandler
             response.Content.Headers.TryAddWithoutValidation("Content-Type", cached.ContentType);
         }
 
-        response.Headers.TryAddWithoutValidation("ETag", cached.ETag);
-        response.Headers.TryAddWithoutValidation("X-RoG-Cache", "etag");
+        if (cached.ETag.Length > 0)
+        {
+            response.Headers.TryAddWithoutValidation("ETag", cached.ETag);
+        }
+
+        response.Headers.TryAddWithoutValidation(CacheHeader, "etag");
         return response;
     }
 

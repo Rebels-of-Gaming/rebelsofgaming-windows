@@ -55,6 +55,9 @@ public sealed class AppServices : IDisposable
 
     public RoGApi Api { get; }
 
+    /// <summary>Antwort-Cache leeren (Abmelden: Inhalte gehören zum Konto).</summary>
+    public void ClearCaches() => Api.Handler.ClearCache();
+
     public ILocalizer Localizer { get; }
 
     public IBrowserLauncher Browser { get; }
@@ -134,7 +137,10 @@ public sealed class AppServices : IDisposable
         var environment = RoGEnvironment.Get(settings.Environment);
         var tokens = new PasswordVaultTokenStore(Path.Combine(localFolder, "account.json"));
         var apiContext = new ApiContext(language, AppVersion);
-        var api = new RoGApi(environment, tokens, apiContext);
+        // Persistenter, verschlüsselter Antwort-Cache: letzter Stand sofort und ohne Netz (DMs nie auf der Platte)
+        var cache = new PersistentEtagCache(Path.Combine(localFolder, "cache"), new DpapiProtector());
+        await cache.LoadAsync();
+        var api = new RoGApi(environment, tokens, apiContext, cache);
 
         return new AppServices(settingsStore, settings, language, environment, tokens, apiContext, api, new ResourceLocalizer(), new LauncherBrowser());
     }

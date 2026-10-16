@@ -206,6 +206,7 @@ public sealed partial class MainWindow : Window, IDisposable
         {
             _services.WikiOffline.Clear(); // kann Mitglieder-Bereiche enthalten
             _services.Outbox.Clear();
+            _services.ClearCaches();
         }
         catch (IOException)
         {

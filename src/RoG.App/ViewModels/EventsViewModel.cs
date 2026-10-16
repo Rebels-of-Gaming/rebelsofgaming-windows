@@ -23,6 +23,14 @@ public sealed partial class EventsViewModel : LoadableViewModel
     {
         _events = new EventService(services.Api.Client);
         Detail = new EventDetailViewModel(services, _events);
+        Detail.Deleted += (_, id) =>
+        {
+            if (Items.FirstOrDefault(i => i.Id == id) is { } row)
+            {
+                Items.Remove(row);
+                Selected = null;
+            }
+        };
         Detail.Changed += (_, item) =>
         {
             var row = Items.FirstOrDefault(i => i.Id == item.Id);
@@ -36,6 +44,56 @@ public sealed partial class EventsViewModel : LoadableViewModel
     public ObservableCollection<EventRowViewModel> Items { get; } = [];
 
     public EventDetailViewModel Detail { get; }
+
+    /// <summary>Termine anlegen: Recht <c>events.manage</c> (global = clanweit, im Squad = Squad-Termine) + Scope.</summary>
+    public bool CanManage => Services.CurrentUser is { } me && me.CanAnywhere("events.manage") && me.HasScope("events:write");
+
+    /// <summary>Auswahl für den Dialog „Neuer Termin“: Typen und die Bereiche, in denen man Termine anlegen darf.</summary>
+    public async Task<(IReadOnlyList<SettingsOption> Types, IReadOnlyList<SettingsOption> Scopes)> CreateOptionsAsync()
+    {
+        var admin = new EventAdminService(Services.Api.Client, Services.Api.Http);
+        var types = (await admin.TypesAsync()).Select(t => new SettingsOption(t.Key, t.Label)).ToList();
+        var me = Services.CurrentUser;
+        var scopes = new List<SettingsOption>();
+        if (me?.Can("events.manage") == true)
+        {
+            scopes.Add(new SettingsOption(string.Empty, Services.Localizer.GetString(StringKeys.EventsScopeClan)));
+        }
+
+        var squadIds = me?.Permissions.Where(p => p.Key.StartsWith("squad:", StringComparison.Ordinal) && p.Value.Contains("events.manage"))
+            .Select(p => p.Key["squad:".Length..]).ToHashSet() ?? [];
+        if (squadIds.Count > 0)
+        {
+            foreach (var squad in await new RoG.Core.Features.Squads.SquadService(Services.Api.Client).ListAsync())
+            {
+                if (squadIds.Contains(squad.Id))
+                {
+                    scopes.Add(new SettingsOption(squad.Id, squad.Name));
+                }
+            }
+        }
+
+        return (types, scopes);
+    }
+
+    /// <summary>Anlegen, Liste neu laden und den neuen Termin öffnen; Rückgabe = Fehlermeldung oder <c>null</c>.</summary>
+    public async Task<string?> CreateAsync(EventDraft draft)
+    {
+        try
+        {
+            var id = await new EventAdminService(Services.Api.Client, Services.Api.Http).CreateAsync(draft);
+            await OpenAsync(id);
+            return null;
+        }
+        catch (ApiProblemException ex)
+        {
+            return ex.Problem.Code == "validation_failed" && ex.Problem.Detail is { } d ? d : Services.Localizer.GetError(ex.Problem.Code);
+        }
+        catch (Exception ex) when (ex is RoG.Core.Api.Generated.GeneratedApiException or HttpRequestException or ArgumentException)
+        {
+            return Services.Localizer.GetError(ApiProblem.Codes.Unknown);
+        }
+    }
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsDetailOpen), nameof(ShowSelectHint))]
@@ -332,6 +390,77 @@ public sealed partial class EventDetailViewModel(AppServices services, EventServ
         FeedbackSeverity = severity;
         IsFeedbackOpen = true;
     }
+
+    /// <summary>Absagen/Löschen nur für Verwalter (der Server prüft den Bereich des Termins).</summary>
+    public bool CanManage => Services.CurrentUser is { } me && me.CanAnywhere("events.manage") && me.HasScope("events:write");
+
+    /// <summary>Rückfrage (Titel, Text, „ganze Serie“-Option) – setzt die Seite; Rückgabe (ok, Serie).</summary>
+    public Func<string, string, Task<(bool Ok, bool Series)>>? ConfirmSeries { get; set; }
+
+    [RelayCommand]
+    private async Task CancelEventAsync()
+    {
+        if (_item is not { } item || ConfirmSeries is null)
+        {
+            return;
+        }
+
+        var (ok, series) = await ConfirmSeries(Services.Localizer.GetString(StringKeys.EventsCancelTitle), item.Title);
+        if (!ok)
+        {
+            return;
+        }
+
+        try
+        {
+            await new EventAdminService(Services.Api.Client, Services.Api.Http).CancelAsync(item.Id, series);
+            Show(Services.Localizer.GetString(StringKeys.EventsCancelDone), InfoBarSeverity.Success);
+            var updated = await events.GetAsync(item.Id);
+            Apply(updated);
+            Changed?.Invoke(this, updated);
+        }
+        catch (ApiProblemException ex)
+        {
+            Show(Services.Localizer.GetError(ex.Problem.Code), InfoBarSeverity.Error);
+        }
+        catch (RoG.Core.Api.Generated.GeneratedApiException)
+        {
+            Show(Services.Localizer.GetError(ApiProblem.Codes.Unknown), InfoBarSeverity.Error);
+        }
+    }
+
+    [RelayCommand]
+    private async Task DeleteEventAsync()
+    {
+        if (_item is not { } item || ConfirmSeries is null)
+        {
+            return;
+        }
+
+        var (ok, series) = await ConfirmSeries(Services.Localizer.GetString(StringKeys.EventsDeleteTitle), item.Title);
+        if (!ok)
+        {
+            return;
+        }
+
+        try
+        {
+            await new EventAdminService(Services.Api.Client, Services.Api.Http).DeleteAsync(item.Id, series);
+            Show(Services.Localizer.GetString(StringKeys.EventsDeleted), InfoBarSeverity.Success);
+            Deleted?.Invoke(this, item.Id);
+        }
+        catch (ApiProblemException ex)
+        {
+            Show(Services.Localizer.GetError(ex.Problem.Code), InfoBarSeverity.Error);
+        }
+        catch (RoG.Core.Api.Generated.GeneratedApiException)
+        {
+            Show(Services.Localizer.GetError(ApiProblem.Codes.Unknown), InfoBarSeverity.Error);
+        }
+    }
+
+    /// <summary>Termin gelöscht – die Liste entfernt ihn.</summary>
+    public event EventHandler<string>? Deleted;
 
     /// <summary>„Fr., 17. Oktober 2026 · 20:00–22:00“.</summary>
     internal static string WhenOf(EventItem item)

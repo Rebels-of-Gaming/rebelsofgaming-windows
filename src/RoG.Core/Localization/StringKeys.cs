@@ -400,6 +400,32 @@ public static class StringKeys
     public const string GallerySubmitted = "Gallery_Submitted";
     public const string GallerySubmittedPending = "Gallery_SubmittedPending";
 
+    // Termine verwalten (Ort-Typ als "EventsNew_Location_" + Wert)
+    public const string EventsScopeClan = "Events_ScopeClan";
+    public const string EventsCancelTitle = "Events_CancelTitle";
+    public const string EventsCancelDone = "Events_CancelDone";
+    public const string EventsDeleteTitle = "Events_DeleteTitle";
+    public const string EventsDeleted = "Events_Deleted";
+    public const string EventsWholeSeries = "Events_WholeSeries";
+    public const string EventsNewType = "EventsNew_Type";
+    public const string EventsNewScope = "EventsNew_Scope";
+    public const string EventsNewTitle = "EventsNew_Title";
+    public const string EventsNewDate = "EventsNew_Date";
+    public const string EventsNewTime = "EventsNew_Time";
+    public const string EventsNewDuration = "EventsNew_Duration";
+    public const string EventsNewLocationType = "EventsNew_LocationType";
+    public const string EventsNewLocation = "EventsNew_Location";
+    public const string EventsNewMandatory = "EventsNew_Mandatory";
+    public const string EventsNewWeekly = "EventsNew_Weekly";
+    public const string EventsNewCount = "EventsNew_Count";
+    public const string EventsNewDialogTitle = "EventsNew_DialogTitle";
+    public const string EventsNewCreate = "EventsNew_Create";
+    public const string EventsNewLocationTeamspeak = "EventsNew_Location_teamspeak";
+    public const string EventsNewLocationDiscord = "EventsNew_Location_discord";
+    public const string EventsNewLocationServer = "EventsNew_Location_server";
+    public const string EventsNewLocationOnline = "EventsNew_Location_online";
+    public const string EventsNewLocationAddress = "EventsNew_Location_address";
+
     // App-Sperre
     public const string LockPrompt = "Lock_Prompt";
 

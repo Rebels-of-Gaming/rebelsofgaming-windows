@@ -2,6 +2,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Navigation;
+using RoG.App.Services;
 using RoG.App.ViewModels;
 using RoG.Core.Features.Uploads;
 using Windows.ApplicationModel.DataTransfer;

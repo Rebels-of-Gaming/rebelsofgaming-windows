@@ -18,11 +18,17 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <TextBlock
-                    x:Uid="EventsPage_Title"
-                    Margin="24,24,24,12"
-                    Style="{StaticResource RoGDisplayTextStyle}"
-                    Text="TERMINE" />
+                <Grid Margin="24,24,24,12" ColumnSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        x:Uid="EventsPage_Title"
+                        Style="{StaticResource RoGDisplayTextStyle}"
+                        Text="TERMINE" />
+                    <Button x:Uid="EventsPage_New" Grid.Column="1" VerticalAlignment="Center" Click="OnNewEventClick" Style="{StaticResource RoGPrimaryButtonStyle}" Visibility="{x:Bind ViewModel.CanManage}" />
+                </Grid>
                 <controls:StateView
                     x:Uid="EventsPage_State"
                     Grid.Row="1"
@@ -156,6 +162,10 @@
                             x:Uid="Common_OpenInBrowser"
                             Command="{x:Bind ViewModel.Detail.OpenInBrowserCommand}"
                             Style="{StaticResource RoGSecondaryButtonStyle}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Spacing="8" Visibility="{x:Bind ViewModel.Detail.CanManage}">
+                        <Button x:Uid="EventsPage_Cancel" Command="{x:Bind ViewModel.Detail.CancelEventCommand}" />
+                        <Button x:Uid="EventsPage_Delete" Command="{x:Bind ViewModel.Detail.DeleteEventCommand}" />
                     </StackPanel>
 
                     <TextBlock IsTextSelectionEnabled="True" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind ViewModel.Detail.Description, Mode=OneWay}" />

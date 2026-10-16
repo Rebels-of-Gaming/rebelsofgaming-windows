@@ -2465,4 +2465,85 @@
   <data name="Approval_RejectLink.Content" xml:space="preserve">
     <value>Ablehnen</value>
   </data>
+  <data name="Events_ScopeClan" xml:space="preserve">
+    <value>Clanweit</value>
+  </data>
+  <data name="Events_CancelTitle" xml:space="preserve">
+    <value>Termin absagen?</value>
+  </data>
+  <data name="Events_DeleteTitle" xml:space="preserve">
+    <value>Termin endgültig löschen?</value>
+  </data>
+  <data name="Events_Deleted" xml:space="preserve">
+    <value>Termin gelöscht.</value>
+  </data>
+  <data name="Events_WholeSeries" xml:space="preserve">
+    <value>Für alle folgenden Termine der Serie</value>
+  </data>
+  <data name="EventsNew_Type" xml:space="preserve">
+    <value>Art</value>
+  </data>
+  <data name="EventsNew_Scope" xml:space="preserve">
+    <value>Für</value>
+  </data>
+  <data name="EventsNew_Title" xml:space="preserve">
+    <value>Titel *</value>
+  </data>
+  <data name="EventsNew_Date" xml:space="preserve">
+    <value>Datum *</value>
+  </data>
+  <data name="EventsNew_Time" xml:space="preserve">
+    <value>Uhrzeit (Luxemburg)</value>
+  </data>
+  <data name="EventsNew_Duration" xml:space="preserve">
+    <value>Dauer (Minuten)</value>
+  </data>
+  <data name="EventsNew_LocationType" xml:space="preserve">
+    <value>Ort</value>
+  </data>
+  <data name="EventsNew_Location" xml:space="preserve">
+    <value>Kanal, Server oder Adresse</value>
+  </data>
+  <data name="EventsNew_Mandatory" xml:space="preserve">
+    <value>Pflichttermin</value>
+  </data>
+  <data name="EventsNew_Weekly" xml:space="preserve">
+    <value>Jede Woche wiederholen</value>
+  </data>
+  <data name="EventsNew_Count" xml:space="preserve">
+    <value>Anzahl Termine</value>
+  </data>
+  <data name="EventsNew_DialogTitle" xml:space="preserve">
+    <value>Neuer Termin</value>
+  </data>
+  <data name="EventsNew_Create" xml:space="preserve">
+    <value>Anlegen</value>
+  </data>
+  <data name="EventsNew_Location_teamspeak" xml:space="preserve">
+    <value>TeamSpeak</value>
+  </data>
+  <data name="EventsNew_Location_discord" xml:space="preserve">
+    <value>Discord</value>
+  </data>
+  <data name="EventsNew_Location_server" xml:space="preserve">
+    <value>Gameserver</value>
+  </data>
+  <data name="EventsNew_Location_online" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="EventsNew_Location_address" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="EventsPage_New.Content" xml:space="preserve">
+    <value>NEUER TERMIN</value>
+  </data>
+  <data name="EventsPage_Cancel.Content" xml:space="preserve">
+    <value>Absagen</value>
+  </data>
+  <data name="EventsPage_Delete.Content" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="Events_CancelDone" xml:space="preserve">
+    <value>Abgesagt – Zusagende werden benachrichtigt.</value>
+  </data>
 </root>

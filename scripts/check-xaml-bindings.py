@@ -38,7 +38,7 @@ for path in SOURCES:
             members.setdefault(p.group(2), p.group(1).rstrip("?"))
         if kind == "record":
             continue  # Toolkit-Generatoren ([RelayCommand], [ObservableProperty]) erzeugen in records nichts
-        for p in re.finditer(r"\[RelayCommand[^\]]*\]\s*(?:\[[^\]]*\]\s*)*(?:public|private|internal|protected)?\s*(?:async\s+)?[\w<>]+\s+(\w+?)(?:Async)?\(", body):
+        for p in re.finditer(r"\[(?:[\w.]*\.)?RelayCommand[^\]]*\]\s*(?:\[[^\]]*\]\s*)*(?:public|private|internal|protected)?\s*(?:async\s+)?[\w<>]+\s+(\w+?)(?:Async)?\(", body):
             members.setdefault(p.group(1) + "Command", "ICommand")
 
 def members_of(t):

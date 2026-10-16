@@ -430,6 +430,10 @@ public static class StringKeys
     public const string ServersHistoryEmpty = "Servers_HistoryEmpty";
     public const string ServersHistorySummary = "Servers_HistorySummary";
 
+    // Squad-Statistiken und Turniere ({0} = Anzahl)
+    public const string SquadStatsEmpty = "SquadStats_Empty";
+    public const string TournamentParticipants = "Tournament_Participants";
+
     // App-Sperre
     public const string LockPrompt = "Lock_Prompt";
 

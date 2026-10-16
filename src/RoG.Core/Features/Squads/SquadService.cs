@@ -98,3 +98,48 @@ public sealed class SquadService(IRoGApiClient client)
         ApiValues.Image(header?.Url, header?.Variants?.Select(v => (v.Width, v.Url)), 1280),
         leader, ApiValues.Text(clanTag));
 }
+
+/// <summary>Squad-Wertung eines Spielers (nur über die Spieler-ID erkannte Werte, Guide 19).</summary>
+public sealed record SquadStatsRow(string Name, bool Substitute, int Rounds, int Kills, int Deaths, double? Kd, TimeSpan Playtime);
+
+public sealed record SquadStats(string? GameName, string Period, IReadOnlyList<SquadStatsRow> Members, IReadOnlyList<(string Weapon, int Kills)> Weapons)
+{
+    public int TotalKills => Members.Sum(m => m.Kills);
+
+    public int TotalRounds => Members.Sum(m => m.Rounds);
+}
+
+/// <summary>Turnier (Guide 14): Veranstalter, Zeitraum, Platzierung.</summary>
+public sealed record Tournament(string Name, string? Organizer, string? GameShort, string? SquadName, DateOnly? StartsOn, DateOnly? EndsOn, int? Placement, int? Participants, Uri? Url);
+
+/// <summary>Squad-Statistiken und Turniere (lesend).</summary>
+public sealed class SquadExtrasService(IRoGApiClient client)
+{
+    public async Task<SquadStats> StatsAsync(string squadSlug, string period = "30d", CancellationToken cancellationToken = default)
+    {
+        var d = (await client.V1_squads_statsAsync(squadSlug, period, cancellationToken).ConfigureAwait(false)).Data;
+        return new SquadStats(
+            d.Game?.Name,
+            d.Period,
+            d.Members.Select(m => new SquadStatsRow(m.Member.Name, m.Substitute, m.Rounds, m.Kills, m.Deaths, m.Kd, TimeSpan.FromSeconds(m.Seconds)))
+                .OrderByDescending(m => m.Kills).ToList(),
+            d.Weapons.Select(w => (w.Weapon, w.Kills)).OrderByDescending(w => w.Kills).Take(5).ToList());
+    }
+
+    public async Task<IReadOnlyList<Tournament>> TournamentsAsync(string? squadSlug = null, CancellationToken cancellationToken = default)
+    {
+        var response = await client.V1_tournaments_indexAsync(squadSlug, cancellationToken: cancellationToken).ConfigureAwait(false);
+        return response.Data.Select(t => new Tournament(
+                t.Name,
+                ApiValues.Text(t.Organizer),
+                t.Game?.Short,
+                t.Squad?.Name,
+                DateOnly.TryParse(t.Starts_on, System.Globalization.CultureInfo.InvariantCulture, out var s) ? s : null,
+                DateOnly.TryParse(t.Ends_on, System.Globalization.CultureInfo.InvariantCulture, out var e) ? e : null,
+                t.Placement,
+                t.Participants_count,
+                ApiValues.WebUri(t.Url)))
+            .OrderByDescending(t => t.StartsOn)
+            .ToList();
+    }
+}

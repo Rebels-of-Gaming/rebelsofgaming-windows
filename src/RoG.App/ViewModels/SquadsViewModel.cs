@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 using RoG.App.Services;
+using RoG.Core.Api;
 using RoG.Core.Features.Servers;
 using RoG.Core.Features.Squads;
 using RoG.Core.Localization;
@@ -204,7 +205,45 @@ public sealed partial class SquadDetailViewModel(AppServices services, SquadServ
 
         _slug = slug;
         Name = null;
+        StatsText = string.Empty;
+        _statsLoaded = false;
         return LoadAsync();
+    }
+
+    private bool _statsLoaded;
+
+    /// <summary>Squad-Wertung der letzten 30 Tage (Top 10, Waffen) – beim ersten Aufklappen geladen.</summary>
+    [ObservableProperty]
+    public partial string StatsText { get; set; } = string.Empty;
+
+    public async Task LoadStatsAsync()
+    {
+        if (_statsLoaded || _slug is null)
+        {
+            return;
+        }
+
+        _statsLoaded = true;
+        var l = Services.Localizer;
+        try
+        {
+            var stats = await new SquadExtrasService(Services.Api.Client).StatsAsync(_slug);
+            if (stats.Members.Count == 0)
+            {
+                StatsText = l.GetString(StringKeys.SquadStatsEmpty);
+                return;
+            }
+
+            var lines = stats.Members.Take(10).Select((m, i) => string.Format(CultureInfo.CurrentCulture, "{0}. {1}{2} – {3} K · {4} D · K/D {5} · {6} R",
+                i + 1, m.Name, m.Substitute ? " (E)" : string.Empty, m.Kills, m.Deaths, m.Kd?.ToString("0.00", CultureInfo.CurrentCulture) ?? "–", m.Rounds));
+            var weapons = stats.Weapons.Count > 0 ? "\n\n" + string.Join(" · ", stats.Weapons.Select(w => $"{w.Weapon} {w.Kills}")) : string.Empty;
+            StatsText = (stats.GameName is { } g ? g + "\n" : string.Empty) + string.Join("\n", lines) + weapons;
+        }
+        catch (Exception ex) when (ex is ApiProblemException or RoG.Core.Api.Generated.GeneratedApiException)
+        {
+            _statsLoaded = false;
+            StatsText = ex is ApiProblemException p ? l.GetError(p.Problem.Code) : l.GetError(ApiProblem.Codes.Unknown);
+        }
     }
 
     protected override async Task LoadCoreAsync(CancellationToken cancellationToken)

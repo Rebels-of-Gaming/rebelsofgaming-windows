@@ -204,6 +204,11 @@
                         </ItemsRepeater>
                     </StackPanel>
 
+                    <!-- Statistiken -->
+                    <Expander x:Uid="SquadsPage_Stats" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Expanding="OnStatsExpanding">
+                        <TextBlock FontFamily="Consolas" FontSize="13" IsTextSelectionEnabled="True" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind ViewModel.Detail.StatsText, Mode=OneWay}" TextWrapping="Wrap" />
+                    </Expander>
+
                     <!-- Server -->
                     <StackPanel Spacing="12" Visibility="{x:Bind ViewModel.Detail.HasServers, Mode=OneWay}">
                         <TextBlock x:Uid="SquadsPage_Servers" Style="{StaticResource RoGSectionTextStyle}" />

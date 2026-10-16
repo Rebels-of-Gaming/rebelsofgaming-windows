@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using RoG.App.Services;
 using RoG.Core.Features.Stats;
 using RoG.Core.Localization;
@@ -136,3 +137,43 @@ public sealed class LeaderboardRowViewModel(LeaderboardEntry entry, string metri
 }
 
 public sealed record AwardRowViewModel(string Label, string Value, string Members);
+
+/// <summary>Turniere (Matches-Seite): Name, Veranstalter, Zeitraum, Platzierung; Link öffnet die Turnierseite.</summary>
+public sealed partial class TournamentsViewModel(AppServices services) : LoadableViewModel(services)
+{
+    public ObservableCollection<TournamentRowViewModel> Items { get; } = [];
+
+    protected override bool HasData => Items.Count > 0;
+
+    protected override async Task LoadCoreAsync(CancellationToken cancellationToken)
+    {
+        var list = await new RoG.Core.Features.Squads.SquadExtrasService(Services.Api.Client).TournamentsAsync(cancellationToken: cancellationToken);
+        Items.Clear();
+        foreach (var t in list)
+        {
+            Items.Add(new TournamentRowViewModel(t, Services));
+        }
+    }
+}
+
+public sealed partial class TournamentRowViewModel(RoG.Core.Features.Squads.Tournament tournament, AppServices services)
+{
+    public string Title { get; } = tournament.GameShort is { } g ? $"{tournament.Name} · {g}" : tournament.Name;
+
+    public string Meta { get; } = string.Join(" · ", new[]
+    {
+        tournament.StartsOn?.ToString("d", CultureInfo.CurrentCulture) + (tournament.EndsOn is { } e && e != tournament.StartsOn ? "–" + e.ToString("d", CultureInfo.CurrentCulture) : string.Empty),
+        tournament.Organizer,
+        tournament.SquadName,
+        tournament.Participants is { } n ? string.Format(CultureInfo.CurrentCulture, services.Localizer.GetString(StringKeys.TournamentParticipants), n) : null,
+    }.Where(s => !string.IsNullOrEmpty(s)));
+
+    public string Placement { get; } = tournament.Placement is { } p ? p.ToString(CultureInfo.CurrentCulture) + "." : string.Empty;
+
+    public bool HasPlacement => tournament.Placement is not null;
+
+    public bool HasUrl => tournament.Url is not null;
+
+    [RelayCommand]
+    private Task OpenAsync() => tournament.Url is { } url ? services.Browser.OpenAsync(url) : Task.CompletedTask;
+}

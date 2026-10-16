@@ -12,12 +12,15 @@ public sealed partial class MatchesPage : Page
     {
         ViewModel = new MatchesViewModel(App.Services);
         Stats = new StatsViewModel(App.Services);
+        Tournaments = new TournamentsViewModel(App.Services);
         InitializeComponent();
     }
 
     public MatchesViewModel ViewModel { get; }
 
     public StatsViewModel Stats { get; }
+
+    public TournamentsViewModel Tournaments { get; }
 
     protected override async void OnNavigatedTo(NavigationEventArgs e)
     {
@@ -29,7 +32,7 @@ public sealed partial class MatchesPage : Page
 
     private async void OnTabChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args)
     {
-        if (MatchesPanel is null || HallPanel is null || StatsPanel is null)
+        if (MatchesPanel is null || HallPanel is null || StatsPanel is null || TournamentsPanel is null)
         {
             return; // feuert schon beim Aufbau
         }
@@ -38,6 +41,7 @@ public sealed partial class MatchesPage : Page
         MatchesPanel.Visibility = index == 0 ? Visibility.Visible : Visibility.Collapsed;
         HallPanel.Visibility = index == 1 ? Visibility.Visible : Visibility.Collapsed;
         StatsPanel.Visibility = index == 2 ? Visibility.Visible : Visibility.Collapsed;
+        TournamentsPanel.Visibility = index == 3 ? Visibility.Visible : Visibility.Collapsed;
         if (index == 1)
         {
             await ViewModel.Hall.LoadAsync(silent: true);
@@ -45,6 +49,10 @@ public sealed partial class MatchesPage : Page
         else if (index == 2 && Stats.Rows.Count == 0)
         {
             await Stats.LoadAsync();
+        }
+        else if (index == 3 && Tournaments.Items.Count == 0)
+        {
+            await Tournaments.LoadAsync();
         }
     }
 }

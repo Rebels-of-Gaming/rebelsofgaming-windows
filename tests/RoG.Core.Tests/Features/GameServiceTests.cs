@@ -32,3 +32,25 @@ public class GameServiceTests
         Assert.Equal("ET: Legacy", Assert.Single(et.Links).Label);
     }
 }
+
+public class SquadExtrasServiceTests
+{
+    [Fact]
+    public async Task Tournaments_are_sorted_newest_first()
+    {
+        var stub = new StubHttpHandler((_, _) => StubHttpHandler.Json(HttpStatusCode.OK, """
+            {"data":[
+              {"id":"1","slug":"a","name":"Cup A","organizer":"ESL","organizer_type":"external","game":{"id":"g","slug":"et","short":"ET"},
+               "squad":null,"starts_on":"2026-03-01","ends_on":null,"placement":2,"participants_count":16,"url":"https://example.org/a","description":null},
+              {"id":"2","slug":"b","name":"Cup B","organizer":null,"organizer_type":"internal","game":null,
+               "squad":{"id":"s","slug":"et","name":"RoG ET"},"starts_on":"2026-09-01","ends_on":"2026-09-02","placement":null,"participants_count":null,"url":null,"description":null}]}
+            """));
+        using var api = new RoGApi(RoGEnvironment.Get(RoGEnvironment.Production), new InMemoryTokenStore(), new ApiContext(), innerHandler: stub);
+
+        var list = await new RoG.Core.Features.Squads.SquadExtrasService(api.Client).TournamentsAsync();
+
+        Assert.Equal(["Cup B", "Cup A"], list.Select(t => t.Name));
+        Assert.Equal(2, list[1].Placement);
+        Assert.Equal(new DateOnly(2026, 9, 2), list[0].EndsOn);
+    }
+}

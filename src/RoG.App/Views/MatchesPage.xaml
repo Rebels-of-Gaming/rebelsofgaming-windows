@@ -19,6 +19,7 @@
                 <SelectorBarItem x:Uid="MatchesPage_TabMatches" IsSelected="True" />
                 <SelectorBarItem x:Uid="MatchesPage_TabHall" />
                 <SelectorBarItem x:Uid="MatchesPage_TabStats" />
+                <SelectorBarItem x:Uid="MatchesPage_TabTournaments" />
             </SelectorBar>
         </StackPanel>
 
@@ -310,6 +311,36 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </StackPanel>
+            </ScrollViewer>
+        </Grid>
+        <!-- Turniere -->
+        <Grid x:Name="TournamentsPanel" Grid.Row="1" Padding="24,0,24,24" Visibility="Collapsed">
+            <controls:StateView
+                x:Uid="Tournaments_State"
+                ErrorMessage="{x:Bind Tournaments.ErrorMessage, Mode=OneWay}"
+                IsEmpty="{x:Bind Tournaments.IsEmpty, Mode=OneWay}"
+                IsLoading="{x:Bind Tournaments.IsLoading, Mode=OneWay}"
+                RetryCommand="{x:Bind Tournaments.RefreshCommand}" />
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="{x:Bind Tournaments.ShowContent, Mode=OneWay}">
+                <ItemsControl MaxWidth="{StaticResource RoGReadingWidth}" HorizontalAlignment="Left" ItemsSource="{x:Bind Tournaments.Items}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="vm:TournamentRowViewModel">
+                            <Grid Padding="0,8" ColumnSpacing="12" AutomationProperties.Name="{x:Bind Title}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="48" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock FontFamily="{StaticResource RoGDisplaySemiBoldFont}" FontSize="24" Foreground="{StaticResource RoGGoldBrush}" Text="{x:Bind Placement}" Visibility="{x:Bind HasPlacement}" />
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Title}" TextWrapping="Wrap" />
+                                    <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" TextWrapping="Wrap" />
+                                </StackPanel>
+                                <Button x:Uid="Common_OpenInBrowser" Grid.Column="2" VerticalAlignment="Center" Command="{x:Bind OpenCommand}" Visibility="{x:Bind HasUrl}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </ScrollViewer>
         </Grid>
     </Grid>

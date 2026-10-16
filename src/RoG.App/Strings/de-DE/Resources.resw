@@ -2582,4 +2582,19 @@
   <data name="SquadsPage_GamesState.EmptyText" xml:space="preserve">
     <value>Keine Spiele eingetragen.</value>
   </data>
+  <data name="SquadStats_Empty" xml:space="preserve">
+    <value>Noch keine Werte in den letzten 30 Tagen.</value>
+  </data>
+  <data name="Tournament_Participants" xml:space="preserve">
+    <value>{0} Teilnehmer</value>
+  </data>
+  <data name="SquadsPage_Stats.Header" xml:space="preserve">
+    <value>Statistiken (30 Tage)</value>
+  </data>
+  <data name="MatchesPage_TabTournaments.Text" xml:space="preserve">
+    <value>Turniere</value>
+  </data>
+  <data name="Tournaments_State.EmptyText" xml:space="preserve">
+    <value>Noch keine Turniere eingetragen.</value>
+  </data>
 </root>

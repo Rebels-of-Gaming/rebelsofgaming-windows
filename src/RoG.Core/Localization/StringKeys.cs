@@ -372,6 +372,13 @@ public static class StringKeys
     public const string AdminSystemDown = "Admin_System_down";
     public const string AdminSystemUnknown = "Admin_System_unknown";
 
+    // Offline-Warteschlange
+    public const string OutboxQueued = "Outbox_Queued";
+    public const string OutboxFailedTitle = "Outbox_FailedTitle";
+    public const string OutboxLabelMessage = "Outbox_LabelMessage";
+    public const string OutboxLabelForum = "Outbox_LabelForum";
+    public const string OutboxLabelRsvp = "Outbox_LabelRsvp";
+
     // App-Sperre
     public const string LockPrompt = "Lock_Prompt";
 

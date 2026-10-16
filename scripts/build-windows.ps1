@@ -181,6 +181,9 @@ catch {
     $summary.error = $_.Exception.Message
     Write-Host ''
     Write-Host "FEHLER: $($_.Exception.Message)" -ForegroundColor Red
+    # Ein-/Ausgabe des XAML-Compilers sichern – bei „Xaml Internal Error“ steht dort mehr als im Log
+    Get-ChildItem (Join-Path $Root 'src\RoG.App\obj') -Recurse -Include 'input.json', 'output.json', '*.xaml.log' -ErrorAction SilentlyContinue |
+        ForEach-Object { Copy-Item $_.FullName (Join-Path $Logs ('xaml-' + $_.Directory.Name + '-' + $_.Name)) -ErrorAction SilentlyContinue }
 }
 finally {
     Pop-Location

@@ -1,6 +1,7 @@
 using System.Text.Json;
 using RoG.Core.Api;
 using RoG.Core.Api.Generated;
+using RoG.Core.Security;
 using File = System.IO.File;
 
 namespace RoG.Core.Features.Wiki;
@@ -216,10 +217,10 @@ public sealed class WikiService(IRoGApiClient client, HttpClient http, Uri? wiki
 }
 
 /// <summary>
-/// Offline-Kopien gelesener Wiki-Seiten (Pflichtenheft „offline verfügbar“): JSON je Seite im App-Datenordner,
-/// je Sprache. Inhalte sind schon gerendertes HTML der API, nie Tokens.
+/// Offline-Kopien gelesener Wiki-Seiten (Pflichtenheft „offline verfügbar“): je Seite und Sprache eine Datei im
+/// App-Datenordner, verschlüsselt über <see cref="IPayloadProtector"/> (DPAPI). Inhalte sind gerendertes HTML, nie Tokens.
 /// </summary>
-public sealed class WikiOfflineStore(string folder)
+public sealed class WikiOfflineStore(string folder, IPayloadProtector protector)
 {
     private static readonly JsonSerializerOptions s_json = new() { WriteIndented = false };
 
@@ -229,31 +230,19 @@ public sealed class WikiOfflineStore(string folder)
         Directory.CreateDirectory(folder);
         var target = PathFor(page.Id, page.Locale);
         var temp = target + ".tmp";
-        await File.WriteAllTextAsync(temp, JsonSerializer.Serialize(page, s_json), cancellationToken).ConfigureAwait(false);
+        var data = await protector.ProtectAsync(JsonSerializer.SerializeToUtf8Bytes(page, s_json), cancellationToken).ConfigureAwait(false);
+        await File.WriteAllBytesAsync(temp, data, cancellationToken).ConfigureAwait(false);
         File.Move(temp, target, overwrite: true);
     }
 
     public async Task<WikiArticle?> LoadAsync(string id, string locale, CancellationToken cancellationToken = default)
     {
         var path = PathFor(id, locale);
-        if (!File.Exists(path))
-        {
-            return null;
-        }
-
-        try
-        {
-            return JsonSerializer.Deserialize<WikiArticle>(await File.ReadAllTextAsync(path, cancellationToken).ConfigureAwait(false), s_json);
-        }
-        catch (JsonException)
-        {
-            File.Delete(path);
-            return null;
-        }
+        return File.Exists(path) ? await ReadAsync(path, cancellationToken).ConfigureAwait(false) : null;
     }
 
-    /// <summary>Alle offline gespeicherten Seiten (für die Liste ohne Netz).</summary>
-    public IReadOnlyList<WikiArticle> All(string locale)
+    /// <summary>Alle offline gespeicherten Seiten einer Sprache (für die Liste ohne Netz).</summary>
+    public async Task<IReadOnlyList<WikiArticle>> AllAsync(string locale, CancellationToken cancellationToken = default)
     {
         if (!Directory.Exists(folder))
         {
@@ -261,18 +250,11 @@ public sealed class WikiOfflineStore(string folder)
         }
 
         var pages = new List<WikiArticle>();
-        foreach (var path in Directory.EnumerateFiles(folder, $"*.{locale}.json"))
+        foreach (var path in Directory.EnumerateFiles(folder, $"*.{locale}.dat"))
         {
-            try
+            if (await ReadAsync(path, cancellationToken).ConfigureAwait(false) is { } page)
             {
-                if (JsonSerializer.Deserialize<WikiArticle>(File.ReadAllText(path), s_json) is { } page)
-                {
-                    pages.Add(page);
-                }
-            }
-            catch (JsonException)
-            {
-                // kaputte Datei überspringen
+                pages.Add(page);
             }
         }
 
@@ -288,6 +270,22 @@ public sealed class WikiOfflineStore(string folder)
         }
     }
 
+    private async Task<WikiArticle?> ReadAsync(string path, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var data = await protector.UnprotectAsync(await File.ReadAllBytesAsync(path, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+            return JsonSerializer.Deserialize<WikiArticle>(data, s_json);
+        }
+#pragma warning disable CA1031 // fremde/beschädigte Datei (anderer Benutzer, alte Version) – verwerfen
+        catch (Exception ex) when (ex is not OperationCanceledException)
+#pragma warning restore CA1031
+        {
+            File.Delete(path);
+            return null;
+        }
+    }
+
     private string PathFor(string id, string locale)
     {
         if (id.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0 || id.Contains("..", StringComparison.Ordinal) || locale.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0)
@@ -295,7 +293,7 @@ public sealed class WikiOfflineStore(string folder)
             throw new ArgumentException("Ungültige Seiten-ID", nameof(id));
         }
 
-        return Path.Combine(folder, $"{id}.{locale}.json");
+        return Path.Combine(folder, $"{id}.{locale}.dat");
     }
 }
 

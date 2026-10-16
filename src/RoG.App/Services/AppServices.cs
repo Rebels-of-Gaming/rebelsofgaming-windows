@@ -107,9 +107,19 @@ public sealed class AppServices : IDisposable
         }
     }
 
-    /// <summary>Offline-Kopien gelesener Wiki-Seiten (App-Datenordner, beim Abmelden gelöscht).</summary>
-    public RoG.Core.Features.Wiki.WikiOfflineStore WikiOffline { get; } =
-        new(Path.Combine(ApplicationData.Current.LocalFolder.Path, "wiki"));
+    /// <summary>DPAPI für lokale Caches (an den Windows-Benutzer gebunden).</summary>
+    public DpapiProtector Protector { get; } = new();
+
+    private RoG.Core.Features.Wiki.WikiOfflineStore? _wikiOffline;
+    private RoG.Core.Offline.Outbox? _outbox;
+
+    /// <summary>Offline-Kopien gelesener Wiki-Seiten (verschlüsselt, beim Abmelden gelöscht).</summary>
+    public RoG.Core.Features.Wiki.WikiOfflineStore WikiOffline =>
+        _wikiOffline ??= new(Path.Combine(ApplicationData.Current.LocalFolder.Path, "wiki"), Protector);
+
+    /// <summary>Offline-Warteschlange für DMs (nur Speicher), Forenantworten und Zusagen (verschlüsselt).</summary>
+    public RoG.Core.Offline.Outbox Outbox =>
+        _outbox ??= new(Api.Http, Path.Combine(ApplicationData.Current.LocalFolder.Path, "outbox.dat"), Protector);
 
     public static async Task<AppServices> CreateAsync()
     {

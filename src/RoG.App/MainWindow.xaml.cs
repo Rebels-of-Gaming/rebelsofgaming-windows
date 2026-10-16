@@ -205,6 +205,7 @@ public sealed partial class MainWindow : Window, IDisposable
         try
         {
             _services.WikiOffline.Clear(); // kann Mitglieder-Bereiche enthalten
+            _services.Outbox.Clear();
         }
         catch (IOException)
         {
@@ -298,6 +299,45 @@ public sealed partial class MainWindow : Window, IDisposable
         NavView.MenuItems.Concat(NavView.FooterMenuItems).OfType<NavigationViewItem>();
 
     /// <summary>Profil laden und Gerät melden (bei jedem Start, Guide 35). Offline bleibt der Name aus dem Token-Speicher.</summary>
+    private DispatcherTimer? _outboxTimer;
+
+    /// <summary>
+    /// Offline-Warteschlange: gespeicherte Aktionen laden und senden – jetzt, bei Netzwechsel und jede Minute, solange
+    /// etwas wartet. Endgültig abgelehnte Aktionen meldet ein Hinweis.
+    /// </summary>
+    private void StartOutbox()
+    {
+        if (_outboxTimer is not null)
+        {
+            _ = _services.Outbox.FlushAsync();
+            return;
+        }
+
+        var outbox = _services.Outbox;
+        outbox.Failed += (_, failure) => DispatcherQueue.TryEnqueue(() =>
+            ToastService.ShowInfo(
+                _services.Localizer.GetString(StringKeys.OutboxFailedTitle),
+                $"{failure.Item.Label}: {_services.Localizer.GetError(failure.Problem.Code)}"));
+        Windows.Networking.Connectivity.NetworkInformation.NetworkStatusChanged += _ =>
+            DispatcherQueue.TryEnqueue(() => _ = outbox.FlushAsync());
+        _outboxTimer = new DispatcherTimer { Interval = TimeSpan.FromMinutes(1) };
+        _outboxTimer.Tick += (_, _) =>
+        {
+            if (outbox.Count > 0)
+            {
+                _ = outbox.FlushAsync();
+            }
+        };
+        _outboxTimer.Start();
+        _ = LoadAndFlushAsync();
+
+        async Task LoadAndFlushAsync()
+        {
+            await outbox.LoadAsync();
+            await outbox.FlushAsync();
+        }
+    }
+
     private async Task LoadUserAsync()
     {
         UpdateAccountItem();
@@ -313,6 +353,7 @@ public sealed partial class MainWindow : Window, IDisposable
         {
             _services.CurrentUser = await _services.Account.GetMeAsync();
             _ = _services.Account.RegisterDeviceAsync(AppServices.AppVersion);
+            StartOutbox();
             _ = PromptPendingRulesAsync();
         }
         catch (ApiProblemException)

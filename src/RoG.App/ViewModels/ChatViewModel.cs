@@ -122,6 +122,13 @@ public sealed partial class ChatViewModel : LoadableViewModel, IDisposable
             QuoteTarget = null;
             Append(sent);
         }
+        catch (ApiProblemException ex) when (ex.Problem.IsNetworkError)
+        {
+            await Services.Outbox.EnqueueAsync(RoG.Core.Offline.OutboxKind.DirectMessage, ConversationId, new { body = text.Trim(), quote_id = quote }, Services.Localizer.GetString(StringKeys.OutboxLabelMessage));
+            Draft = string.Empty;
+            QuoteTarget = null;
+            ShowError(Services.Localizer.GetString(StringKeys.OutboxQueued));
+        }
         catch (ApiProblemException ex)
         {
             ShowError(Services.Localizer.GetError(ex.Problem.Code));

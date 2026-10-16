@@ -75,8 +75,9 @@ public sealed partial class ApplicationsAdminViewModel(AppServices services, Act
     [ObservableProperty]
     public partial string NewMessage { get; set; } = string.Empty;
 
+    /// <summary><c>bool?</c> wegen <c>CheckBox.IsChecked</c> (TwoWay-x:Bind braucht denselben Typ).</summary>
     [ObservableProperty]
-    public partial bool MessageInternal { get; set; } = true;
+    public partial bool? MessageInternal { get; set; } = true;
 
     [ObservableProperty]
     public partial SettingsOption? SelectedDecision { get; set; }
@@ -185,7 +186,7 @@ public sealed partial class ApplicationsAdminViewModel(AppServices services, Act
     [RelayCommand]
     private async Task SendMessageAsync()
     {
-        if (Detail is { } d && !string.IsNullOrWhiteSpace(NewMessage) && await RunAsync(() => _admin.MessageAsync(d.Id, NewMessage, MessageInternal)))
+        if (Detail is { } d && !string.IsNullOrWhiteSpace(NewMessage) && await RunAsync(() => _admin.MessageAsync(d.Id, NewMessage, MessageInternal == true)))
         {
             NewMessage = string.Empty;
             await OpenAsync(d.Id);
@@ -258,10 +259,11 @@ public sealed partial class AdminTaskViewModel(ApplicationTask task, Application
 
     public string Title => task.Title;
 
+    /// <summary><c>bool?</c> wegen <c>CheckBox.IsChecked</c> (TwoWay-x:Bind braucht denselben Typ).</summary>
     [ObservableProperty]
-    public partial bool Done { get; set; } = task.Done;
+    public partial bool? Done { get; set; } = task.Done;
 
-    partial void OnDoneChanged(bool value) => _ = owner.ToggleTaskAsync(this, value);
+    partial void OnDoneChanged(bool? value) => _ = owner.ToggleTaskAsync(this, value == true);
 
     [RelayCommand]
     private Task DeleteAsync() => owner.DeleteTaskAsync(this);

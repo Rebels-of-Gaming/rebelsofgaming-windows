@@ -413,6 +413,13 @@ public sealed partial class ThreadViewModel(AppServices services, ForumService f
             Show(Services.Localizer.GetString(StringKeys.ForumReplySent), InfoBarSeverity.Success);
             await LoadAsync(silent: true);
         }
+        catch (ApiProblemException ex) when (ex.Problem.IsNetworkError)
+        {
+            await Services.Outbox.EnqueueAsync(RoG.Core.Offline.OutboxKind.ForumReply, _threadId, new { body = Draft.Trim() }, Services.Localizer.GetString(StringKeys.OutboxLabelForum));
+            Draft = string.Empty;
+            ShowPreview = false;
+            Show(Services.Localizer.GetString(StringKeys.OutboxQueued), InfoBarSeverity.Informational);
+        }
         catch (ApiProblemException ex)
         {
             Show(Services.Localizer.GetError(ex.Problem.Code), InfoBarSeverity.Error);

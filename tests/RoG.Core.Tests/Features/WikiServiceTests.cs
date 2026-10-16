@@ -94,13 +94,14 @@ public class WikiServiceTests
         var folder = Path.Combine(Path.GetTempPath(), "rog-wiki-" + Guid.NewGuid().ToString("N"));
         try
         {
-            var store = new WikiOfflineStore(folder);
+            var store = new WikiOfflineStore(folder, new XorProtector());
             var page = new WikiArticle("01J", "et", "technik", "Technik", "de", "ET", "wikitext", null, "<p>x</p>", [], [], "r1", null, null, null);
             await store.SaveAsync(page);
 
             Assert.Equal("ET", (await store.LoadAsync("01J", "de"))?.Title);
-            Assert.Single(store.All("de"));
-            Assert.Empty(store.All("en"));
+            Assert.Single(await store.AllAsync("de"));
+            Assert.Empty(await store.AllAsync("en"));
+            Assert.DoesNotContain("<p>x</p>", File.ReadAllText(Directory.GetFiles(folder).Single()), StringComparison.Ordinal);
             await Assert.ThrowsAsync<ArgumentException>(() => store.LoadAsync("../x", "de"));
             store.Clear();
             Assert.Null(await store.LoadAsync("01J", "de"));
@@ -113,4 +114,12 @@ public class WikiServiceTests
             }
         }
     }
+}
+
+/// <summary>Einfache umkehrbare „Verschlüsselung“ für Tests: prüft, dass wirklich der Protector benutzt wird.</summary>
+internal sealed class XorProtector : RoG.Core.Security.IPayloadProtector
+{
+    public Task<byte[]> ProtectAsync(byte[] data, CancellationToken cancellationToken = default) => Task.FromResult(data.Select(b => (byte)(b ^ 0x5A)).ToArray());
+
+    public Task<byte[]> UnprotectAsync(byte[] data, CancellationToken cancellationToken = default) => ProtectAsync(data, cancellationToken);
 }

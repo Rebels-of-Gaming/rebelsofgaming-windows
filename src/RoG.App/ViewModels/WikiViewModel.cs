@@ -148,7 +148,7 @@ public sealed partial class WikiViewModel : LoadableViewModel
         {
             // Ohne Netz: offline gespeicherte Seiten zeigen
             Items.Clear();
-            foreach (var page in Services.WikiOffline.All(Services.Language))
+            foreach (var page in await Services.WikiOffline.AllAsync(Services.Language, cancellationToken))
             {
                 Items.Add(new WikiListItem(page.Id, page.Title, page.NamespaceName, 0));
             }

@@ -2369,4 +2369,19 @@
   <data name="AdminPage_AuditSearch.PlaceholderText" xml:space="preserve">
     <value>Rechercher dans le journal</value>
   </data>
+  <data name="Outbox_Queued" xml:space="preserve">
+    <value>Pas de connexion – enregistré, envoi automatique dès que tu es de nouveau en ligne.</value>
+  </data>
+  <data name="Outbox_FailedTitle" xml:space="preserve">
+    <value>Envoi impossible</value>
+  </data>
+  <data name="Outbox_LabelMessage" xml:space="preserve">
+    <value>Message privé</value>
+  </data>
+  <data name="Outbox_LabelForum" xml:space="preserve">
+    <value>Message du forum</value>
+  </data>
+  <data name="Outbox_LabelRsvp" xml:space="preserve">
+    <value>Réponse à l’événement</value>
+  </data>
 </root>

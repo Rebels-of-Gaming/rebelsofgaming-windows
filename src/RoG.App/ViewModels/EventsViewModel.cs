@@ -256,6 +256,12 @@ public sealed partial class EventDetailViewModel(AppServices services, EventServ
             Changed?.Invoke(this, updated);
             Show(Format(StringKeys.EventsRsvpSaved, RsvpLabel(result, Services.Localizer)), InfoBarSeverity.Success);
         }
+        catch (ApiProblemException ex) when (ex.Problem.IsNetworkError)
+        {
+            var status = answer switch { Rsvp.Yes => "yes", Rsvp.Maybe => "maybe", _ => "no" };
+            await Services.Outbox.EnqueueAsync(RoG.Core.Offline.OutboxKind.EventRsvp, item.Id, new { status }, Services.Localizer.GetString(StringKeys.OutboxLabelRsvp));
+            Show(Services.Localizer.GetString(StringKeys.OutboxQueued), InfoBarSeverity.Informational);
+        }
         catch (ApiProblemException ex)
         {
             Show(Services.Localizer.GetError(ex.Problem.Code), InfoBarSeverity.Error);

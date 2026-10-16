@@ -1562,4 +1562,133 @@
   <data name="SettingsPage_AppLockHint.Text" xml:space="preserve">
     <value>Windows Hello ist auf diesem PC nicht eingerichtet (Windows-Einstellungen → Konten → Anmeldeoptionen).</value>
   </data>
+  <data name="Common_Confirm" xml:space="preserve">
+    <value>Bestätigen</value>
+  </data>
+  <data name="Config_AfterSave" xml:space="preserve">
+    <value>Nur speichern</value>
+  </data>
+  <data name="Config_AfterExec" xml:space="preserve">
+    <value>Speichern + neu laden</value>
+  </data>
+  <data name="Config_AfterRestart" xml:space="preserve">
+    <value>Speichern + Neustart</value>
+  </data>
+  <data name="Config_Unchanged" xml:space="preserve">
+    <value>Keine Änderungen.</value>
+  </data>
+  <data name="Config_Saved" xml:space="preserve">
+    <value>Config gespeichert.</value>
+  </data>
+  <data name="Config_Pending" xml:space="preserve">
+    <value>Als Antrag eingereicht – jemand mit Freigaberecht muss zustimmen.</value>
+  </data>
+  <data name="Config_RollbackTitle" xml:space="preserve">
+    <value>Diese Version zurückspielen?</value>
+  </data>
+  <data name="Backup_Created" xml:space="preserve">
+    <value>Backup gestartet – du bekommst eine Benachrichtigung, wenn es fertig ist.</value>
+  </data>
+  <data name="Backup_RestoreTitle" xml:space="preserve">
+    <value>Backup wiederherstellen?</value>
+  </data>
+  <data name="Backup_RestoreText" xml:space="preserve">
+    <value>„{0}“ überschreibt die Dateien des Servers. Der Server wird dafür gestoppt.</value>
+  </data>
+  <data name="Backup_RestoreStarted" xml:space="preserve">
+    <value>Wiederherstellung läuft.</value>
+  </data>
+  <data name="Backup_DeleteTitle" xml:space="preserve">
+    <value>Backup endgültig löschen?</value>
+  </data>
+  <data name="Backup_Failed" xml:space="preserve">
+    <value>fehlgeschlagen</value>
+  </data>
+  <data name="Backup_Running" xml:space="preserve">
+    <value>läuft …</value>
+  </data>
+  <data name="Backup_Locked" xml:space="preserve">
+    <value>gesperrt</value>
+  </data>
+  <data name="Backup_Lock" xml:space="preserve">
+    <value>Sperren</value>
+  </data>
+  <data name="Backup_Unlock" xml:space="preserve">
+    <value>Entsperren</value>
+  </data>
+  <data name="Error_backup_locked" xml:space="preserve">
+    <value>Das Backup ist gesperrt – erst entsperren.</value>
+  </data>
+  <data name="Error_backup_busy" xml:space="preserve">
+    <value>Das Backup wird gerade geändert – gleich noch einmal versuchen.</value>
+  </data>
+  <data name="Error_backup_not_found" xml:space="preserve">
+    <value>Backup nicht gefunden.</value>
+  </data>
+  <data name="Error_config_changed" xml:space="preserve">
+    <value>Die Datei wurde inzwischen geändert – neu laden und erneut versuchen.</value>
+  </data>
+  <data name="Error_file_operation_forbidden" xml:space="preserve">
+    <value>Diese Dateioperation ist nicht erlaubt.</value>
+  </data>
+  <data name="Error_pterodactyl_write_blocked" xml:space="preserve">
+    <value>Steuerung ist auf dieser Instanz gesperrt.</value>
+  </data>
+  <data name="Console_TabConsole.Text" xml:space="preserve">
+    <value>Konsole</value>
+  </data>
+  <data name="Console_TabConfigs.Text" xml:space="preserve">
+    <value>Configs</value>
+  </data>
+  <data name="Console_TabBackups.Text" xml:space="preserve">
+    <value>Backups</value>
+  </data>
+  <data name="Config_File.Header" xml:space="preserve">
+    <value>Datei</value>
+  </data>
+  <data name="Config_Empty.Text" xml:space="preserve">
+    <value>Für diesen Server sind keine Configs freigegeben.</value>
+  </data>
+  <data name="Config_Editor.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Inhalt der Config</value>
+  </data>
+  <data name="Config_Note.PlaceholderText" xml:space="preserve">
+    <value>Notiz zur Änderung (optional)</value>
+  </data>
+  <data name="Config_Preview.Content" xml:space="preserve">
+    <value>PRÜFEN</value>
+  </data>
+  <data name="Config_Save.Content" xml:space="preserve">
+    <value>SPEICHERN</value>
+  </data>
+  <data name="Config_DiffTitle.Text" xml:space="preserve">
+    <value>ÄNDERUNGEN</value>
+  </data>
+  <data name="Config_VersionsTitle.Text" xml:space="preserve">
+    <value>VERSIONEN</value>
+  </data>
+  <data name="Config_Rollback.Content" xml:space="preserve">
+    <value>Zurückspielen</value>
+  </data>
+  <data name="Backup_Name.PlaceholderText" xml:space="preserve">
+    <value>Name (optional)</value>
+  </data>
+  <data name="Backup_Create.Content" xml:space="preserve">
+    <value>BACKUP ERSTELLEN</value>
+  </data>
+  <data name="Backup_Reload.Content" xml:space="preserve">
+    <value>Aktualisieren</value>
+  </data>
+  <data name="Backup_Empty.Text" xml:space="preserve">
+    <value>Noch keine Backups.</value>
+  </data>
+  <data name="Backup_Download.Content" xml:space="preserve">
+    <value>Herunterladen</value>
+  </data>
+  <data name="Backup_Restore.Content" xml:space="preserve">
+    <value>Wiederherstellen</value>
+  </data>
+  <data name="Backup_Delete.Content" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
 </root>

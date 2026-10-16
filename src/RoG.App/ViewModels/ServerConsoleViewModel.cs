@@ -253,7 +253,8 @@ public sealed partial class ServerConsoleViewModel : ObservableObject, IAsyncDis
         LineAdded?.Invoke(this, EventArgs.Empty);
     }
 
-    private void Show(string text, InfoBarSeverity severity)
+    /// <summary>Rückmeldung im Fenster (auch für die Reiter Configs und Backups).</summary>
+    public void Show(string text, InfoBarSeverity severity)
     {
         IsFeedbackOpen = false;
         FeedbackMessage = text;

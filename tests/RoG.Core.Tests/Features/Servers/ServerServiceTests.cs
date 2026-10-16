@@ -105,7 +105,7 @@ public class ServerControlMappingTests
 
         var server = Assert.Single(await new ServerService(api.Client).GetAllAsync());
 
-        Assert.Equal(new ServerAbilities(Power: true, Console: true, ConsoleCommand: true, CanCommand: false), server.Control);
+        Assert.Equal(new ServerAbilities(Power: true, Console: true, ConsoleCommand: true, CanCommand: false, ConfigApproval: true), server.Control);
         Assert.True(server.Control!.Any);
     }
 }

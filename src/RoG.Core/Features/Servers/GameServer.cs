@@ -52,7 +52,16 @@ public sealed record GameServer(
 /// Wirksame Steuerungsrechte an einem Server (<c>control</c> aus der API, sonst <c>null</c>). Der Token-Scope gilt
 /// zusätzlich – das prüft der Server; die App blendet nur aus, was sicher nicht geht.
 /// </summary>
-public sealed record ServerAbilities(bool Power, bool Console, bool ConsoleCommand, bool CanCommand)
+public sealed record ServerAbilities(
+    bool Power,
+    bool Console,
+    bool ConsoleCommand,
+    bool CanCommand,
+    bool FilesRead = false,
+    bool FilesWrite = false,
+    bool FilesApprove = false,
+    bool Backups = false,
+    bool ConfigApproval = false)
 {
-    public bool Any => Power || Console;
+    public bool Any => Power || Console || FilesRead || FilesWrite || Backups;
 }

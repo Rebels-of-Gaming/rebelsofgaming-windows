@@ -35,6 +35,7 @@ public static class StringKeys
 
     public const string ComingSoon = "Common_ComingSoon";
     public const string CommonCancel = "Common_Cancel";
+    public const string CommonConfirm = "Common_Confirm";
     public const string CommonRetry = "Common_Retry";
     public const string CommonLoading = "Common_Loading";
     public const string CommonEmpty = "Common_Empty";
@@ -208,6 +209,25 @@ public static class StringKeys
     public const string ConsoleKillText = "Console_KillText";
     public const string ConsoleKillConfirm = "Console_KillConfirm";
 
+    // Configs und Backups ({0} = Name)
+    public const string ConfigAfterSave = "Config_AfterSave";
+    public const string ConfigAfterExec = "Config_AfterExec";
+    public const string ConfigAfterRestart = "Config_AfterRestart";
+    public const string ConfigUnchanged = "Config_Unchanged";
+    public const string ConfigSaved = "Config_Saved";
+    public const string ConfigPending = "Config_Pending";
+    public const string ConfigRollbackTitle = "Config_RollbackTitle";
+    public const string BackupCreated = "Backup_Created";
+    public const string BackupRestoreTitle = "Backup_RestoreTitle";
+    public const string BackupRestoreText = "Backup_RestoreText";
+    public const string BackupRestoreStarted = "Backup_RestoreStarted";
+    public const string BackupDeleteTitle = "Backup_DeleteTitle";
+    public const string BackupFailed = "Backup_Failed";
+    public const string BackupRunning = "Backup_Running";
+    public const string BackupLocked = "Backup_Locked";
+    public const string BackupLock = "Backup_Lock";
+    public const string BackupUnlock = "Backup_Unlock";
+
     // App-Sperre
     public const string LockPrompt = "Lock_Prompt";
 
@@ -266,7 +286,8 @@ public static class StringKeys
         "state_mismatch", "browser_failed", "login_timeout", "missing_code",
         "checksum_mismatch", "download_failed", "upload_failed",
         "discord_required", "already_member", "application_blocked",
-        "console_unavailable", "approval_required",
+        "console_unavailable", "approval_required", "backup_locked", "backup_busy", "backup_not_found",
+        "config_changed", "file_operation_forbidden", "pterodactyl_write_blocked",
     ];
 
     /// <summary>Alle Schlüssel aus Code – für den Vollständigkeitstest.</summary>

@@ -1562,4 +1562,133 @@
   <data name="SettingsPage_AppLockHint.Text" xml:space="preserve">
     <value>Windows Hello is not set up on this PC (Windows Settings → Accounts → Sign-in options).</value>
   </data>
+  <data name="Common_Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="Config_AfterSave" xml:space="preserve">
+    <value>Save only</value>
+  </data>
+  <data name="Config_AfterExec" xml:space="preserve">
+    <value>Save + reload</value>
+  </data>
+  <data name="Config_AfterRestart" xml:space="preserve">
+    <value>Save + restart</value>
+  </data>
+  <data name="Config_Unchanged" xml:space="preserve">
+    <value>No changes.</value>
+  </data>
+  <data name="Config_Saved" xml:space="preserve">
+    <value>Config saved.</value>
+  </data>
+  <data name="Config_Pending" xml:space="preserve">
+    <value>Submitted for approval – someone with approval rights must agree.</value>
+  </data>
+  <data name="Config_RollbackTitle" xml:space="preserve">
+    <value>Restore this version?</value>
+  </data>
+  <data name="Backup_Created" xml:space="preserve">
+    <value>Backup started – you will get a notification when it is done.</value>
+  </data>
+  <data name="Backup_RestoreTitle" xml:space="preserve">
+    <value>Restore backup?</value>
+  </data>
+  <data name="Backup_RestoreText" xml:space="preserve">
+    <value>“{0}” overwrites the server files. The server is stopped for this.</value>
+  </data>
+  <data name="Backup_RestoreStarted" xml:space="preserve">
+    <value>Restore in progress.</value>
+  </data>
+  <data name="Backup_DeleteTitle" xml:space="preserve">
+    <value>Delete backup permanently?</value>
+  </data>
+  <data name="Backup_Failed" xml:space="preserve">
+    <value>failed</value>
+  </data>
+  <data name="Backup_Running" xml:space="preserve">
+    <value>running …</value>
+  </data>
+  <data name="Backup_Locked" xml:space="preserve">
+    <value>locked</value>
+  </data>
+  <data name="Backup_Lock" xml:space="preserve">
+    <value>Lock</value>
+  </data>
+  <data name="Backup_Unlock" xml:space="preserve">
+    <value>Unlock</value>
+  </data>
+  <data name="Error_backup_locked" xml:space="preserve">
+    <value>The backup is locked – unlock it first.</value>
+  </data>
+  <data name="Error_backup_busy" xml:space="preserve">
+    <value>The backup is being changed – try again shortly.</value>
+  </data>
+  <data name="Error_backup_not_found" xml:space="preserve">
+    <value>Backup not found.</value>
+  </data>
+  <data name="Error_config_changed" xml:space="preserve">
+    <value>The file has changed in the meantime – reload and try again.</value>
+  </data>
+  <data name="Error_file_operation_forbidden" xml:space="preserve">
+    <value>This file operation is not allowed.</value>
+  </data>
+  <data name="Error_pterodactyl_write_blocked" xml:space="preserve">
+    <value>Control is disabled on this instance.</value>
+  </data>
+  <data name="Console_TabConsole.Text" xml:space="preserve">
+    <value>Console</value>
+  </data>
+  <data name="Console_TabConfigs.Text" xml:space="preserve">
+    <value>Configs</value>
+  </data>
+  <data name="Console_TabBackups.Text" xml:space="preserve">
+    <value>Backups</value>
+  </data>
+  <data name="Config_File.Header" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="Config_Empty.Text" xml:space="preserve">
+    <value>No configs are enabled for this server.</value>
+  </data>
+  <data name="Config_Editor.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Config content</value>
+  </data>
+  <data name="Config_Note.PlaceholderText" xml:space="preserve">
+    <value>Note for the change (optional)</value>
+  </data>
+  <data name="Config_Preview.Content" xml:space="preserve">
+    <value>CHECK</value>
+  </data>
+  <data name="Config_Save.Content" xml:space="preserve">
+    <value>SAVE</value>
+  </data>
+  <data name="Config_DiffTitle.Text" xml:space="preserve">
+    <value>CHANGES</value>
+  </data>
+  <data name="Config_VersionsTitle.Text" xml:space="preserve">
+    <value>VERSIONS</value>
+  </data>
+  <data name="Config_Rollback.Content" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="Backup_Name.PlaceholderText" xml:space="preserve">
+    <value>Name (optional)</value>
+  </data>
+  <data name="Backup_Create.Content" xml:space="preserve">
+    <value>CREATE BACKUP</value>
+  </data>
+  <data name="Backup_Reload.Content" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="Backup_Empty.Text" xml:space="preserve">
+    <value>No backups yet.</value>
+  </data>
+  <data name="Backup_Download.Content" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="Backup_Restore.Content" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="Backup_Delete.Content" xml:space="preserve">
+    <value>Delete</value>
+  </data>
 </root>

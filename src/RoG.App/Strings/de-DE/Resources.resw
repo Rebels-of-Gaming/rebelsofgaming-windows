@@ -437,4 +437,61 @@
   <data name="SettingsPage_LicensesText.Text" xml:space="preserve">
     <value>Schrift Barlow Condensed © The Barlow Project Authors, SIL Open Font License 1.1. Windows App SDK, .NET und CommunityToolkit.Mvvm © Microsoft und .NET Foundation, MIT-Lizenz.</value>
   </data>
+  <data name="Content_OpenVideo" xml:space="preserve">
+    <value>Video im Browser öffnen</value>
+  </data>
+  <data name="Content_OpenImage" xml:space="preserve">
+    <value>Bild im Browser öffnen</value>
+  </data>
+  <data name="Content_OpenEmbed" xml:space="preserve">
+    <value>Inhalt im Browser öffnen</value>
+  </data>
+  <data name="Content_Spoiler" xml:space="preserve">
+    <value>Spoiler</value>
+  </data>
+  <data name="Common_Retry" xml:space="preserve">
+    <value>Erneut versuchen</value>
+  </data>
+  <data name="Common_Loading" xml:space="preserve">
+    <value>Wird geladen</value>
+  </data>
+  <data name="Common_Empty" xml:space="preserve">
+    <value>Hier gibt es noch nichts.</value>
+  </data>
+  <data name="Common_Back" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+  <data name="Common_LinkCopied" xml:space="preserve">
+    <value>Link kopiert.</value>
+  </data>
+  <data name="Common_CopyFailed" xml:space="preserve">
+    <value>Kopieren hat nicht geklappt – die Zwischenablage ist gerade belegt.</value>
+  </data>
+  <data name="News_Comments" xml:space="preserve">
+    <value>KOMMENTARE ({0})</value>
+  </data>
+  <data name="News_ReadingMinutes" xml:space="preserve">
+    <value>{0} Min. Lesezeit</value>
+  </data>
+  <data name="NewsPage_Title.Text" xml:space="preserve">
+    <value>NEWS</value>
+  </data>
+  <data name="NewsPage_State.EmptyText" xml:space="preserve">
+    <value>Noch keine News.</value>
+  </data>
+  <data name="NewsPage_List.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>News</value>
+  </data>
+  <data name="NewsPage_SelectHint.Text" xml:space="preserve">
+    <value>Wähle links eine News aus.</value>
+  </data>
+  <data name="Common_LoadMore.Content" xml:space="preserve">
+    <value>MEHR LADEN</value>
+  </data>
+  <data name="Common_OpenInBrowser.Content" xml:space="preserve">
+    <value>IM BROWSER ÖFFNEN</value>
+  </data>
+  <data name="Common_CopyLink.Content" xml:space="preserve">
+    <value>LINK KOPIEREN</value>
+  </data>
 </root>

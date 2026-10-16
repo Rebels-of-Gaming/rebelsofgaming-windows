@@ -79,8 +79,12 @@ public sealed class AppServices : IDisposable
 
     public void RequestSignIn() => SignInRequested?.Invoke(this, EventArgs.Empty);
 
+    public IClipboardService Clipboard { get; } = new WindowsClipboard();
+
+    public IExternalLauncher Launcher { get; } = new WindowsExternalLauncher();
+
     /// <summary>Spiele-Links und Zwischenablage für „Verbinden“ auf Gameservern.</summary>
-    public ServerConnector ServerConnector { get; } = new(new WindowsExternalLauncher(), new WindowsClipboard());
+    public ServerConnector ServerConnector => field ??= new ServerConnector(Launcher, Clipboard);
 
     /// <summary>„2.0.0“ aus der Paketversion (vierte Stelle ist im Store immer 0).</summary>
     public static string AppVersion

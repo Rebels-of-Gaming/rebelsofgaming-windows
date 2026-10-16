@@ -30,6 +30,22 @@ public static class StringKeys
 
     public const string ComingSoon = "Common_ComingSoon";
     public const string CommonCancel = "Common_Cancel";
+    public const string CommonRetry = "Common_Retry";
+    public const string CommonLoading = "Common_Loading";
+    public const string CommonEmpty = "Common_Empty";
+    public const string CommonBack = "Common_Back";
+    public const string CommonLinkCopied = "Common_LinkCopied";
+    public const string CommonCopyFailed = "Common_CopyFailed";
+
+    // News ({0} = Anzahl bzw. Minuten)
+    public const string NewsComments = "News_Comments";
+    public const string NewsReadingMinutes = "News_ReadingMinutes";
+
+    // Inhalte (HTML der API)
+    public const string ContentOpenVideo = "Content_OpenVideo";
+    public const string ContentOpenImage = "Content_OpenImage";
+    public const string ContentOpenEmbed = "Content_OpenEmbed";
+    public const string ContentSpoiler = "Content_Spoiler";
 
     // Start ({0} = Name)
     public const string HomeGreeting = "Home_Greeting";

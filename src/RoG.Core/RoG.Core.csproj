@@ -19,6 +19,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- HTML der API (News, Wiki, Seiten) in ein natives Dokumentmodell zerlegen; MIT-Lizenz -->
+    <PackageReference Include="AngleSharp" />
+  </ItemGroup>
+
+  <ItemGroup>
     <InternalsVisibleTo Include="RoG.Core.Tests" />
   </ItemGroup>
 

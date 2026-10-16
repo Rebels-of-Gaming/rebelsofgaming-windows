@@ -437,4 +437,61 @@
   <data name="SettingsPage_LicensesText.Text" xml:space="preserve">
     <value>Police Barlow Condensed © The Barlow Project Authors, SIL Open Font License 1.1. Windows App SDK, .NET et CommunityToolkit.Mvvm © Microsoft et .NET Foundation, licence MIT.</value>
   </data>
+  <data name="Content_OpenVideo" xml:space="preserve">
+    <value>Ouvrir la vidéo dans le navigateur</value>
+  </data>
+  <data name="Content_OpenImage" xml:space="preserve">
+    <value>Ouvrir l’image dans le navigateur</value>
+  </data>
+  <data name="Content_OpenEmbed" xml:space="preserve">
+    <value>Ouvrir le contenu dans le navigateur</value>
+  </data>
+  <data name="Content_Spoiler" xml:space="preserve">
+    <value>Spoiler</value>
+  </data>
+  <data name="Common_Retry" xml:space="preserve">
+    <value>Réessayer</value>
+  </data>
+  <data name="Common_Loading" xml:space="preserve">
+    <value>Chargement</value>
+  </data>
+  <data name="Common_Empty" xml:space="preserve">
+    <value>Rien ici pour le moment.</value>
+  </data>
+  <data name="Common_Back" xml:space="preserve">
+    <value>Retour</value>
+  </data>
+  <data name="Common_LinkCopied" xml:space="preserve">
+    <value>Lien copié.</value>
+  </data>
+  <data name="Common_CopyFailed" xml:space="preserve">
+    <value>La copie a échoué – le presse-papiers est occupé.</value>
+  </data>
+  <data name="News_Comments" xml:space="preserve">
+    <value>COMMENTAIRES ({0})</value>
+  </data>
+  <data name="News_ReadingMinutes" xml:space="preserve">
+    <value>{0} min de lecture</value>
+  </data>
+  <data name="NewsPage_Title.Text" xml:space="preserve">
+    <value>ACTUS</value>
+  </data>
+  <data name="NewsPage_State.EmptyText" xml:space="preserve">
+    <value>Pas encore d’actus.</value>
+  </data>
+  <data name="NewsPage_List.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Actus</value>
+  </data>
+  <data name="NewsPage_SelectHint.Text" xml:space="preserve">
+    <value>Choisis une actu à gauche.</value>
+  </data>
+  <data name="Common_LoadMore.Content" xml:space="preserve">
+    <value>CHARGER PLUS</value>
+  </data>
+  <data name="Common_OpenInBrowser.Content" xml:space="preserve">
+    <value>OUVRIR DANS LE NAVIGATEUR</value>
+  </data>
+  <data name="Common_CopyLink.Content" xml:space="preserve">
+    <value>COPIER LE LIEN</value>
+  </data>
 </root>

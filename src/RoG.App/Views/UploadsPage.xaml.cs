@@ -16,10 +16,29 @@ public sealed partial class UploadsPage : Page
     public UploadsPage()
     {
         ViewModel = new UploadsViewModel(App.Services);
+        Links = new ShortLinksViewModel(App.Services);
         InitializeComponent();
     }
 
     public UploadsViewModel ViewModel { get; }
+
+    public ShortLinksViewModel Links { get; }
+
+    private async void OnTabChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args)
+    {
+        if (UploadsPanel is null || LinksPanel is null)
+        {
+            return; // feuert schon beim Aufbau
+        }
+
+        var links = sender.SelectedItem is not null && sender.Items.IndexOf(sender.SelectedItem) == 1;
+        UploadsPanel.Visibility = links ? Visibility.Collapsed : Visibility.Visible;
+        LinksPanel.Visibility = links ? Visibility.Visible : Visibility.Collapsed;
+        if (links)
+        {
+            await Links.LoadAsync(silent: true);
+        }
+    }
 
     protected override async void OnNavigatedTo(NavigationEventArgs e)
     {

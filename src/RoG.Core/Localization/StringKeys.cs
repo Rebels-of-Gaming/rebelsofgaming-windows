@@ -75,6 +75,13 @@ public static class StringKeys
     public const string MediaDownloadCount = "Media_DownloadCount";
     public const string MediaDownloaded = "Media_Downloaded";
 
+    // Kurzlinks ({0} = Klicks)
+    public const string LinksClicks = "Links_Clicks";
+    public const string LinksBlocked = "Links_Blocked";
+    public const string LinksInactive = "Links_Inactive";
+    public const string LinksCreated = "Links_Created";
+    public const string LinksCreatedCopied = "Links_CreatedCopied";
+
     // Uploads ({0} = Datei, {1}/{2} = Nummer/Anzahl)
     public const string UploadsPublic = "Uploads_Public";
     public const string UploadsMembers = "Uploads_Members";

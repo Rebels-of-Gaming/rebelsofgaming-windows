@@ -25,129 +25,197 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBlock x:Uid="UploadsPage_Title" Style="{StaticResource RoGDisplayTextStyle}" Text="UPLOADS" />
-
-        <!-- Ablagefläche -->
-        <Border
-            x:Name="DropZone"
-            Grid.Row="1"
-            Padding="24"
-            Background="{StaticResource RoGBg2Brush}"
-            BorderBrush="{StaticResource RoGLineBrush}"
-            BorderThickness="2"
-            CornerRadius="{StaticResource RoGCardRadius}"
-            Visibility="{x:Bind ViewModel.ShowUploader, Mode=OneWay}">
-            <StackPanel Spacing="12">
-                <StackPanel Orientation="Horizontal" Spacing="12">
-                    <FontIcon FontSize="28" Foreground="{StaticResource RoGRedBrush}" Glyph="&#xE898;" />
-                    <TextBlock
-                        x:Uid="UploadsPage_DropHint"
-                        VerticalAlignment="Center"
-                        Style="{StaticResource RoGBodyTextStyle}" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Spacing="12">
-                    <Button x:Uid="UploadsPage_Pick" Click="OnPickClick" Style="{StaticResource RoGPrimaryButtonStyle}" />
-                    <Button x:Uid="UploadsPage_Paste" Click="OnPasteClick" Style="{StaticResource RoGSecondaryButtonStyle}" />
-                    <ComboBox
-                        x:Uid="UploadsPage_Visibility"
-                        MinWidth="180"
-                        ItemsSource="{x:Bind ViewModel.Visibilities}"
-                        SelectedItem="{x:Bind ViewModel.SelectedVisibility, Mode=TwoWay}" />
-                    <ToggleSwitch x:Uid="UploadsPage_CopyLink" IsOn="{x:Bind ViewModel.CopyLink, Mode=TwoWay}" />
-                </StackPanel>
-                <StackPanel Spacing="4" Visibility="{x:Bind ViewModel.IsUploading, Mode=OneWay}">
-                    <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind ViewModel.ProgressText, Mode=OneWay}" />
-                    <ProgressBar Maximum="100" Value="{x:Bind ViewModel.Progress, Mode=OneWay}" />
-                </StackPanel>
-            </StackPanel>
-        </Border>
-
-        <InfoBar
-            Grid.Row="2"
-            IsOpen="{x:Bind ViewModel.IsFeedbackOpen, Mode=TwoWay}"
-            Message="{x:Bind ViewModel.FeedbackMessage, Mode=OneWay}"
-            Severity="{x:Bind ViewModel.FeedbackSeverity, Mode=OneWay}" />
-
-        <!-- Gast -->
-        <StackPanel
-            Grid.Row="3"
-            MaxWidth="420"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Spacing="12"
-            Visibility="{x:Bind ViewModel.IsGuest, Mode=OneWay}">
-            <TextBlock x:Uid="UploadsPage_Guest" HorizontalTextAlignment="Center" Style="{StaticResource RoGMutedTextStyle}" />
-            <Button
-                x:Uid="AccountPage_SignIn"
-                HorizontalAlignment="Center"
-                Command="{x:Bind ViewModel.SignInCommand}"
-                Style="{StaticResource RoGPrimaryButtonStyle}" />
+        <StackPanel Spacing="12">
+            <TextBlock x:Uid="UploadsPage_Title" Style="{StaticResource RoGDisplayTextStyle}" Text="UPLOADS" />
+            <SelectorBar SelectionChanged="OnTabChanged">
+                <SelectorBarItem x:Uid="UploadsPage_TabUploads" IsSelected="True" />
+                <SelectorBarItem x:Uid="UploadsPage_TabLinks" />
+            </SelectorBar>
         </StackPanel>
 
-        <controls:StateView
-            x:Uid="UploadsPage_State"
-            Grid.Row="3"
-            ErrorMessage="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}"
-            IsEmpty="{x:Bind ViewModel.IsEmptyForMember, Mode=OneWay}"
-            IsLoading="{x:Bind ViewModel.IsLoading, Mode=OneWay}"
-            RetryCommand="{x:Bind ViewModel.RefreshCommand}" />
+        <Grid x:Name="UploadsPanel" Grid.Row="1" Grid.RowSpan="3" RowSpacing="16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <!-- Ablagefläche -->
+            <Border
+                x:Name="DropZone"
+                Padding="24"
+                Background="{StaticResource RoGBg2Brush}"
+                BorderBrush="{StaticResource RoGLineBrush}"
+                BorderThickness="2"
+                CornerRadius="{StaticResource RoGCardRadius}"
+                Visibility="{x:Bind ViewModel.ShowUploader, Mode=OneWay}">
+                <StackPanel Spacing="12">
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <FontIcon FontSize="28" Foreground="{StaticResource RoGRedBrush}" Glyph="&#xE898;" />
+                        <TextBlock
+                            x:Uid="UploadsPage_DropHint"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource RoGBodyTextStyle}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <Button x:Uid="UploadsPage_Pick" Click="OnPickClick" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                        <Button x:Uid="UploadsPage_Paste" Click="OnPasteClick" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                        <ComboBox
+                            x:Uid="UploadsPage_Visibility"
+                            MinWidth="180"
+                            ItemsSource="{x:Bind ViewModel.Visibilities}"
+                            SelectedItem="{x:Bind ViewModel.SelectedVisibility, Mode=TwoWay}" />
+                        <ToggleSwitch x:Uid="UploadsPage_CopyLink" IsOn="{x:Bind ViewModel.CopyLink, Mode=TwoWay}" />
+                    </StackPanel>
+                    <StackPanel Spacing="4" Visibility="{x:Bind ViewModel.IsUploading, Mode=OneWay}">
+                        <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind ViewModel.ProgressText, Mode=OneWay}" />
+                        <ProgressBar Maximum="100" Value="{x:Bind ViewModel.Progress, Mode=OneWay}" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
 
-        <ScrollViewer
-            Grid.Row="3"
-            VerticalScrollBarVisibility="Auto"
-            Visibility="{x:Bind ViewModel.ShowContent, Mode=OneWay}">
-            <StackPanel Spacing="12">
-                <ItemsRepeater ItemsSource="{x:Bind ViewModel.Items}">
-                    <ItemsRepeater.Layout>
-                        <UniformGridLayout
-                            ItemsStretch="Fill"
-                            MinColumnSpacing="12"
-                            MinItemWidth="300"
-                            MinRowSpacing="12" />
-                    </ItemsRepeater.Layout>
-                    <ItemsRepeater.ItemTemplate>
-                        <DataTemplate x:DataType="vm:UploadItemViewModel">
-                            <Border Style="{StaticResource RoGCardStyle}" Padding="12" AutomationProperties.Name="{x:Bind Title}">
-                                <Grid ColumnSpacing="12">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="80" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Border
-                                        Width="80"
-                                        Height="80"
-                                        Background="{StaticResource RoGBg3Brush}"
-                                        CornerRadius="{StaticResource RoGControlRadius}">
-                                        <Image Source="{x:Bind Thumb}" Stretch="UniformToFill" AutomationProperties.AccessibilityView="Raw" />
-                                    </Border>
-                                    <StackPanel Grid.Column="1" Spacing="4">
-                                        <TextBlock
-                                            FontWeight="SemiBold"
-                                            Style="{StaticResource RoGBodyTextStyle}"
-                                            Text="{x:Bind Title}"
-                                            TextTrimming="CharacterEllipsis" />
-                                        <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" />
-                                        <StackPanel Orientation="Horizontal" Spacing="4" Visibility="{x:Bind HasLinks}">
-                                            <Button x:Uid="UploadsPage_CopyDirect" Padding="8,2" Command="{x:Bind CopyDirectCommand}" />
-                                            <Button x:Uid="UploadsPage_CopyBbCode" Padding="8,2" Command="{x:Bind CopyBbCodeCommand}" />
-                                            <Button x:Uid="UploadsPage_CopyMarkdown" Padding="8,2" Command="{x:Bind CopyMarkdownCommand}" />
-                                            <Button x:Uid="UploadsPage_Open" Padding="8,2" Command="{x:Bind OpenCommand}">
-                                                <FontIcon FontSize="12" Glyph="&#xE8A7;" />
-                                            </Button>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsRepeater.ItemTemplate>
-                </ItemsRepeater>
+            <InfoBar
+                Grid.Row="1"
+                IsOpen="{x:Bind ViewModel.IsFeedbackOpen, Mode=TwoWay}"
+                Message="{x:Bind ViewModel.FeedbackMessage, Mode=OneWay}"
+                Severity="{x:Bind ViewModel.FeedbackSeverity, Mode=OneWay}" />
+
+            <!-- Gast -->
+            <StackPanel
+                Grid.Row="2"
+                MaxWidth="420"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Spacing="12"
+                Visibility="{x:Bind ViewModel.IsGuest, Mode=OneWay}">
+                <TextBlock x:Uid="UploadsPage_Guest" HorizontalTextAlignment="Center" Style="{StaticResource RoGMutedTextStyle}" />
                 <Button
-                    x:Uid="Common_LoadMore"
-                    HorizontalAlignment="Stretch"
-                    Command="{x:Bind ViewModel.LoadMoreCommand}"
-                    Style="{StaticResource RoGSecondaryButtonStyle}"
-                    Visibility="{x:Bind ViewModel.HasMore, Mode=OneWay}" />
+                    x:Uid="AccountPage_SignIn"
+                    HorizontalAlignment="Center"
+                    Command="{x:Bind ViewModel.SignInCommand}"
+                    Style="{StaticResource RoGPrimaryButtonStyle}" />
             </StackPanel>
-        </ScrollViewer>
+
+            <controls:StateView
+                x:Uid="UploadsPage_State"
+                Grid.Row="2"
+                ErrorMessage="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}"
+                IsEmpty="{x:Bind ViewModel.IsEmptyForMember, Mode=OneWay}"
+                IsLoading="{x:Bind ViewModel.IsLoading, Mode=OneWay}"
+                RetryCommand="{x:Bind ViewModel.RefreshCommand}" />
+
+            <ScrollViewer
+                Grid.Row="2"
+                VerticalScrollBarVisibility="Auto"
+                Visibility="{x:Bind ViewModel.ShowContent, Mode=OneWay}">
+                <StackPanel Spacing="12">
+                    <ItemsRepeater ItemsSource="{x:Bind ViewModel.Items}">
+                        <ItemsRepeater.Layout>
+                            <UniformGridLayout
+                                ItemsStretch="Fill"
+                                MinColumnSpacing="12"
+                                MinItemWidth="300"
+                                MinRowSpacing="12" />
+                        </ItemsRepeater.Layout>
+                        <ItemsRepeater.ItemTemplate>
+                            <DataTemplate x:DataType="vm:UploadItemViewModel">
+                                <Border Style="{StaticResource RoGCardStyle}" Padding="12" AutomationProperties.Name="{x:Bind Title}">
+                                    <Grid ColumnSpacing="12">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="80" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Border
+                                            Width="80"
+                                            Height="80"
+                                            Background="{StaticResource RoGBg3Brush}"
+                                            CornerRadius="{StaticResource RoGControlRadius}">
+                                            <Image Source="{x:Bind Thumb}" Stretch="UniformToFill" AutomationProperties.AccessibilityView="Raw" />
+                                        </Border>
+                                        <StackPanel Grid.Column="1" Spacing="4">
+                                            <TextBlock
+                                                FontWeight="SemiBold"
+                                                Style="{StaticResource RoGBodyTextStyle}"
+                                                Text="{x:Bind Title}"
+                                                TextTrimming="CharacterEllipsis" />
+                                            <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" />
+                                            <StackPanel Orientation="Horizontal" Spacing="4" Visibility="{x:Bind HasLinks}">
+                                                <Button x:Uid="UploadsPage_CopyDirect" Padding="8,2" Command="{x:Bind CopyDirectCommand}" />
+                                                <Button x:Uid="UploadsPage_CopyBbCode" Padding="8,2" Command="{x:Bind CopyBbCodeCommand}" />
+                                                <Button x:Uid="UploadsPage_CopyMarkdown" Padding="8,2" Command="{x:Bind CopyMarkdownCommand}" />
+                                                <Button x:Uid="UploadsPage_Open" Padding="8,2" Command="{x:Bind OpenCommand}">
+                                                    <FontIcon FontSize="12" Glyph="&#xE8A7;" />
+                                                </Button>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsRepeater.ItemTemplate>
+                    </ItemsRepeater>
+                    <Button
+                        x:Uid="Common_LoadMore"
+                        HorizontalAlignment="Stretch"
+                        Command="{x:Bind ViewModel.LoadMoreCommand}"
+                        Style="{StaticResource RoGSecondaryButtonStyle}"
+                        Visibility="{x:Bind ViewModel.HasMore, Mode=OneWay}" />
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+        <!-- Kurzlinks -->
+        <Grid x:Name="LinksPanel" Grid.Row="1" Grid.RowSpan="3" RowSpacing="16" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Border Style="{StaticResource RoGCardStyle}">
+                <StackPanel Spacing="12">
+                    <TextBox x:Uid="LinksPage_Target" InputScope="Url" Text="{x:Bind Links.Target, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <TextBox x:Uid="LinksPage_Code" MinWidth="200" Text="{x:Bind Links.Code, Mode=TwoWay}" />
+                        <TextBox x:Uid="LinksPage_LinkTitle" MinWidth="260" Text="{x:Bind Links.Title, Mode=TwoWay}" />
+                    </StackPanel>
+                    <Button x:Uid="LinksPage_Create" Command="{x:Bind Links.CreateCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                </StackPanel>
+            </Border>
+            <InfoBar
+                Grid.Row="1"
+                IsOpen="{x:Bind Links.IsFeedbackOpen, Mode=TwoWay}"
+                Message="{x:Bind Links.FeedbackMessage, Mode=OneWay}"
+                Severity="{x:Bind Links.FeedbackSeverity, Mode=OneWay}" />
+            <controls:StateView
+                x:Uid="LinksPage_State"
+                Grid.Row="2"
+                ErrorMessage="{x:Bind Links.ErrorMessage, Mode=OneWay}"
+                IsEmpty="{x:Bind Links.IsEmpty, Mode=OneWay}"
+                IsLoading="{x:Bind Links.IsLoading, Mode=OneWay}"
+                RetryCommand="{x:Bind Links.RefreshCommand}" />
+            <ListView
+                x:Uid="LinksPage_List"
+                Grid.Row="2"
+                MaxWidth="{StaticResource RoGReadingWidth}"
+                HorizontalAlignment="Left"
+                ItemsSource="{x:Bind Links.Items}"
+                SelectionMode="None"
+                Visibility="{x:Bind Links.ShowContent, Mode=OneWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:ShortLinkItemViewModel">
+                        <Grid Padding="0,8" ColumnSpacing="12" AutomationProperties.Name="{x:Bind Short}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Spacing="2">
+                                <TextBlock FontFamily="Consolas" Foreground="{StaticResource RoGRedBrush}" IsTextSelectionEnabled="True" Text="{x:Bind Short}" />
+                                <TextBlock MaxLines="1" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Target}" TextTrimming="CharacterEllipsis" />
+                                <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" />
+                            </StackPanel>
+                            <Button x:Uid="Common_Copy" Grid.Column="1" VerticalAlignment="Center" Command="{x:Bind CopyCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
     </Grid>
 </Page>

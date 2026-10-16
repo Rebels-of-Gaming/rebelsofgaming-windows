@@ -1178,4 +1178,46 @@
   <data name="MediaPage_CloseViewer.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Fermer (Échap)</value>
   </data>
+  <data name="Links_Clicks" xml:space="preserve">
+    <value>{0} clics</value>
+  </data>
+  <data name="Links_Blocked" xml:space="preserve">
+    <value>bloqué</value>
+  </data>
+  <data name="Links_Inactive" xml:space="preserve">
+    <value>inactif</value>
+  </data>
+  <data name="Links_Created" xml:space="preserve">
+    <value>Lien court créé.</value>
+  </data>
+  <data name="Links_CreatedCopied" xml:space="preserve">
+    <value>Lien court créé et copié.</value>
+  </data>
+  <data name="UploadsPage_TabUploads.Text" xml:space="preserve">
+    <value>Envois</value>
+  </data>
+  <data name="UploadsPage_TabLinks.Text" xml:space="preserve">
+    <value>Liens courts</value>
+  </data>
+  <data name="LinksPage_Target.Header" xml:space="preserve">
+    <value>Adresse cible</value>
+  </data>
+  <data name="LinksPage_Target.PlaceholderText" xml:space="preserve">
+    <value>https://…</value>
+  </data>
+  <data name="LinksPage_Code.Header" xml:space="preserve">
+    <value>Code personnalisé (facultatif)</value>
+  </data>
+  <data name="LinksPage_LinkTitle.Header" xml:space="preserve">
+    <value>Titre (facultatif)</value>
+  </data>
+  <data name="LinksPage_Create.Content" xml:space="preserve">
+    <value>CRÉER UN LIEN COURT</value>
+  </data>
+  <data name="LinksPage_State.EmptyText" xml:space="preserve">
+    <value>Pas encore de liens courts.</value>
+  </data>
+  <data name="LinksPage_List.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Liens courts</value>
+  </data>
 </root>

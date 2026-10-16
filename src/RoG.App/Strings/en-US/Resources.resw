@@ -2342,4 +2342,31 @@
   <data name="AdminPage_Internal.Content" xml:space="preserve">
     <value>Internal only (note for leadership)</value>
   </data>
+  <data name="Admin_SystemNever" xml:space="preserve">
+    <value>Monitoring has not run yet.</value>
+  </data>
+  <data name="Admin_System_ok" xml:space="preserve">
+    <value>All good</value>
+  </data>
+  <data name="Admin_System_degraded" xml:space="preserve">
+    <value>Degraded</value>
+  </data>
+  <data name="Admin_System_down" xml:space="preserve">
+    <value>Down</value>
+  </data>
+  <data name="Admin_System_unknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="AdminPage_TabOverview.Text" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+  <data name="AdminPage_SystemTitle.Text" xml:space="preserve">
+    <value>SYSTEM STATUS</value>
+  </data>
+  <data name="AdminPage_AuditTitle.Text" xml:space="preserve">
+    <value>AUDIT LOG</value>
+  </data>
+  <data name="AdminPage_AuditSearch.PlaceholderText" xml:space="preserve">
+    <value>Search audit log</value>
+  </data>
 </root>

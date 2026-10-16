@@ -2342,4 +2342,31 @@
   <data name="AdminPage_Internal.Content" xml:space="preserve">
     <value>Nur intern (Notiz für die Leitung)</value>
   </data>
+  <data name="Admin_SystemNever" xml:space="preserve">
+    <value>Die Überwachung ist noch nicht gelaufen.</value>
+  </data>
+  <data name="Admin_System_ok" xml:space="preserve">
+    <value>Alles in Ordnung</value>
+  </data>
+  <data name="Admin_System_degraded" xml:space="preserve">
+    <value>Eingeschränkt</value>
+  </data>
+  <data name="Admin_System_down" xml:space="preserve">
+    <value>Gestört</value>
+  </data>
+  <data name="Admin_System_unknown" xml:space="preserve">
+    <value>Unbekannt</value>
+  </data>
+  <data name="AdminPage_TabOverview.Text" xml:space="preserve">
+    <value>Übersicht</value>
+  </data>
+  <data name="AdminPage_SystemTitle.Text" xml:space="preserve">
+    <value>SYSTEMSTATUS</value>
+  </data>
+  <data name="AdminPage_AuditTitle.Text" xml:space="preserve">
+    <value>AUDIT-LOG</value>
+  </data>
+  <data name="AdminPage_AuditSearch.PlaceholderText" xml:space="preserve">
+    <value>Audit-Log durchsuchen</value>
+  </data>
 </root>

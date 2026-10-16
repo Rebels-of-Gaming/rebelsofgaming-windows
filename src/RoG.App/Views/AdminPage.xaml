@@ -3,6 +3,7 @@
     x:Class="RoG.App.Views.AdminPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:admin="using:RoG.Core.Features.Admin"
     xmlns:vm="using:RoG.App.ViewModels"
     Background="{StaticResource RoGBgBrush}">
 
@@ -15,6 +16,7 @@
         </Grid.RowDefinitions>
         <TextBlock x:Uid="AdminPage_Title" Style="{StaticResource RoGDisplayTextStyle}" Text="VERWALTUNG" />
         <SelectorBar x:Name="Tabs" Grid.Row="1" SelectionChanged="OnTabChanged">
+            <SelectorBarItem x:Name="OverviewTab" x:Uid="AdminPage_TabOverview" />
             <SelectorBarItem x:Name="ApplicationsTab" x:Uid="AdminPage_TabApplications" />
             <SelectorBarItem x:Name="ReportsTab" x:Uid="AdminPage_TabReports" />
             <SelectorBarItem x:Name="BansTab" x:Uid="AdminPage_TabBans" />
@@ -34,6 +36,64 @@
             Style="{StaticResource RoGMutedTextStyle}"
             TextWrapping="Wrap"
             Visibility="Collapsed" />
+
+        <!-- Übersicht -->
+        <ScrollViewer x:Name="OverviewPanel" Grid.Row="3" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+            <StackPanel Spacing="16">
+                <ItemsRepeater ItemsSource="{x:Bind Overview.Kpis}">
+                    <ItemsRepeater.Layout>
+                        <UniformGridLayout MinColumnSpacing="12" MinItemHeight="88" MinItemWidth="180" MinRowSpacing="12" />
+                    </ItemsRepeater.Layout>
+                    <ItemsRepeater.ItemTemplate>
+                        <DataTemplate x:DataType="admin:Kpi">
+                            <Border Style="{StaticResource RoGCardStyle}" AutomationProperties.Name="{x:Bind Label}">
+                                <StackPanel Spacing="4">
+                                    <TextBlock FontFamily="{StaticResource RoGDisplaySemiBoldFont}" FontSize="32" Foreground="{StaticResource RoGInkBrush}" Text="{x:Bind Value}" />
+                                    <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Label}" TextTrimming="CharacterEllipsis" />
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+
+                <StackPanel Spacing="8" Visibility="{x:Bind Overview.CanSystem}">
+                    <TextBlock x:Uid="AdminPage_SystemTitle" Style="{StaticResource RoGSectionTextStyle}" />
+                    <TextBlock FontWeight="SemiBold" Foreground="{x:Bind Overview.SystemBrush, Mode=OneWay}" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Overview.SystemText, Mode=OneWay}" />
+                    <ItemsControl MaxWidth="{StaticResource RoGReadingWidth}" HorizontalAlignment="Left" ItemsSource="{x:Bind Overview.Checks}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:SystemCheckViewModel">
+                                <Grid Padding="0,4" ColumnSpacing="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock FontWeight="SemiBold" Foreground="{x:Bind IconBrush}" Text="{x:Bind Icon}" />
+                                    <StackPanel Grid.Column="1">
+                                        <TextBlock Style="{StaticResource RoGBodyTextStyle}">
+                                            <Run FontWeight="SemiBold" Text="{x:Bind Label}" /><Run Text="  " /><Run Foreground="{StaticResource RoGMutedBrush}" Text="{x:Bind Value}" />
+                                        </TextBlock>
+                                        <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Help}" TextWrapping="Wrap" Visibility="{x:Bind HasHelp}" />
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+
+                <StackPanel Spacing="8" Visibility="{x:Bind Overview.CanAudit}">
+                    <TextBlock x:Uid="AdminPage_AuditTitle" Style="{StaticResource RoGSectionTextStyle}" />
+                    <AutoSuggestBox x:Uid="AdminPage_AuditSearch" MaxWidth="420" HorizontalAlignment="Left" QueryIcon="Find" QuerySubmitted="OnAuditSearch" Text="{x:Bind Overview.AuditSearch, Mode=TwoWay}" />
+                    <ItemsControl MaxWidth="{StaticResource RoGReadingWidth}" HorizontalAlignment="Left" ItemsSource="{x:Bind Overview.Audit}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="x:String">
+                                <TextBlock Padding="0,3" FontSize="13" IsTextSelectionEnabled="True" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind}" TextWrapping="Wrap" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <Button x:Uid="Common_LoadMore" Command="{x:Bind Overview.MoreAuditCommand}" Visibility="{x:Bind Overview.HasMoreAudit, Mode=OneWay}" />
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
 
         <!-- Bewerbungen -->
         <Grid x:Name="ApplicationsPanel" Grid.Row="3" ColumnSpacing="16" Visibility="Collapsed">

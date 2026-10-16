@@ -2342,4 +2342,31 @@
   <data name="AdminPage_Internal.Content" xml:space="preserve">
     <value>Interne uniquement (note pour la direction)</value>
   </data>
+  <data name="Admin_SystemNever" xml:space="preserve">
+    <value>La surveillance n’a pas encore tourné.</value>
+  </data>
+  <data name="Admin_System_ok" xml:space="preserve">
+    <value>Tout va bien</value>
+  </data>
+  <data name="Admin_System_degraded" xml:space="preserve">
+    <value>Dégradé</value>
+  </data>
+  <data name="Admin_System_down" xml:space="preserve">
+    <value>En panne</value>
+  </data>
+  <data name="Admin_System_unknown" xml:space="preserve">
+    <value>Inconnu</value>
+  </data>
+  <data name="AdminPage_TabOverview.Text" xml:space="preserve">
+    <value>Vue d’ensemble</value>
+  </data>
+  <data name="AdminPage_SystemTitle.Text" xml:space="preserve">
+    <value>ÉTAT DU SYSTÈME</value>
+  </data>
+  <data name="AdminPage_AuditTitle.Text" xml:space="preserve">
+    <value>JOURNAL D’AUDIT</value>
+  </data>
+  <data name="AdminPage_AuditSearch.PlaceholderText" xml:space="preserve">
+    <value>Rechercher dans le journal</value>
+  </data>
 </root>

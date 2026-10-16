@@ -365,6 +365,13 @@ public static class StringKeys
     public const string AppAdminResultReject = "AppAdmin_Result_reject";
     public const string AppAdminResultTie = "AppAdmin_Result_tie";
 
+    // Verwaltung – Übersicht (Systemstatus als "Admin_System_" + Wert)
+    public const string AdminSystemNever = "Admin_SystemNever";
+    public const string AdminSystemOk = "Admin_System_ok";
+    public const string AdminSystemDegraded = "Admin_System_degraded";
+    public const string AdminSystemDown = "Admin_System_down";
+    public const string AdminSystemUnknown = "Admin_System_unknown";
+
     // App-Sperre
     public const string LockPrompt = "Lock_Prompt";
 

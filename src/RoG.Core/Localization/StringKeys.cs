@@ -54,6 +54,20 @@ public static class StringKeys
     public const string VoiceTsLaunched = "Voice_TsLaunched";
     public const string VoiceTsMissing = "Voice_TsMissing";
 
+    // Forum ({0}/{1} = Themen/Beiträge bzw. Anzahl)
+    public const string ForumCategoryStats = "Forum_CategoryStats";
+    public const string ForumReplies = "Forum_Replies";
+    public const string ForumBlockedAuthor = "Forum_BlockedAuthor";
+    public const string ForumEdited = "Forum_Edited";
+    public const string ForumPending = "Forum_Pending";
+    public const string ForumPollVoters = "Forum_PollVoters";
+    public const string ForumPollClosed = "Forum_PollClosed";
+    public const string ForumReplySent = "Forum_ReplySent";
+    public const string ForumNewThread = "Forum_NewThread";
+    public const string ForumNewThreadTitle = "Forum_NewThreadTitle";
+    public const string ForumNewThreadBody = "Forum_NewThreadBody";
+    public const string ForumCreate = "Forum_Create";
+
     // Nachrichten
     public const string MessagesDeleted = "Messages_Deleted";
 

@@ -118,6 +118,24 @@ public sealed partial class RealtimeService : ObservableObject, IAsyncDisposable
         });
     }
 
+    /// <summary>Beliebigen Kanal verfolgen (z. B. <c>private-forum.threads.{id}</c>); Rückruf im UI-Thread mit Ereignisname ohne Punkt.</summary>
+    public IDisposable WatchChannel(string channelName, Action<string, string> onEvent)
+    {
+        var channel = _hub.Subscribe(channelName);
+        if (channel is null)
+        {
+            return new Subscription(null);
+        }
+
+        void Handler(object? sender, ReverbEvent e) => OnUi(() => onEvent(e.Name.TrimStart('.'), e.DataJson));
+        channel.EventReceived += Handler;
+        return new Subscription(() =>
+        {
+            channel.EventReceived -= Handler;
+            _ = _hub.UnsubscribeAsync(channelName);
+        });
+    }
+
     private static string? MessageIdOf(string json)
     {
         try

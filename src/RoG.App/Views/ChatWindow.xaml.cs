@@ -5,7 +5,7 @@ using RoG.App.ViewModels;
 namespace RoG.App.Views;
 
 /// <summary>Chat in eigenem Fenster; je Unterhaltung höchstens eins (erneutes Öffnen holt es nach vorn).</summary>
-public sealed partial class ChatWindow : Window
+public sealed partial class ChatWindow : Window, IDisposable
 {
     private static readonly Dictionary<string, ChatWindow> s_open = new(StringComparer.Ordinal);
     private readonly ChatViewModel _viewModel;
@@ -24,7 +24,7 @@ public sealed partial class ChatWindow : Window
         Closed += (_, _) =>
         {
             s_open.Remove(conversationId);
-            _viewModel.Dispose();
+            Dispose();
         };
         _ = _viewModel.LoadAsync();
     }
@@ -40,6 +40,8 @@ public sealed partial class ChatWindow : Window
         window.Activate();
         window.Chat.FocusComposer();
     }
+
+    public void Dispose() => _viewModel.Dispose();
 
     private void OnTopChanged(object sender, RoutedEventArgs e)
     {

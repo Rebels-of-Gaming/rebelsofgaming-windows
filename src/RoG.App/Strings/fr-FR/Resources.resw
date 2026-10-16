@@ -914,4 +914,136 @@
   <data name="MembersPage_SendMessage.Content" xml:space="preserve">
     <value>ENVOYER UN MESSAGE</value>
   </data>
+  <data name="Forum_CategoryStats" xml:space="preserve">
+    <value>{0} sujets · {1} messages</value>
+  </data>
+  <data name="Forum_Replies" xml:space="preserve">
+    <value>{0} réponses</value>
+  </data>
+  <data name="Forum_BlockedAuthor" xml:space="preserve">
+    <value>Personne bloquée</value>
+  </data>
+  <data name="Forum_Edited" xml:space="preserve">
+    <value>modifié</value>
+  </data>
+  <data name="Forum_Pending" xml:space="preserve">
+    <value>en attente de validation</value>
+  </data>
+  <data name="Forum_PollVoters" xml:space="preserve">
+    <value>{0} votes</value>
+  </data>
+  <data name="Forum_PollClosed" xml:space="preserve">
+    <value>terminé</value>
+  </data>
+  <data name="Forum_ReplySent" xml:space="preserve">
+    <value>Réponse envoyée.</value>
+  </data>
+  <data name="Forum_NewThread" xml:space="preserve">
+    <value>Nouveau sujet</value>
+  </data>
+  <data name="Forum_NewThreadTitle" xml:space="preserve">
+    <value>Titre</value>
+  </data>
+  <data name="Forum_NewThreadBody" xml:space="preserve">
+    <value>Texte (BBCode)</value>
+  </data>
+  <data name="Forum_Create" xml:space="preserve">
+    <value>Créer</value>
+  </data>
+  <data name="ForumPage_Title.Text" xml:space="preserve">
+    <value>FORUM</value>
+  </data>
+  <data name="ForumPage_State.EmptyText" xml:space="preserve">
+    <value>Aucune section visible.</value>
+  </data>
+  <data name="ForumPage_Categories.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Sections du forum</value>
+  </data>
+  <data name="ForumPage_Threads.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Sujets</value>
+  </data>
+  <data name="ForumPage_NewThread.Content" xml:space="preserve">
+    <value>NOUVEAU SUJET</value>
+  </data>
+  <data name="ForumPage_SelectHint.Text" xml:space="preserve">
+    <value>Choisis une section et un sujet à gauche.</value>
+  </data>
+  <data name="ForumPage_Vote.Content" xml:space="preserve">
+    <value>Voter</value>
+  </data>
+  <data name="ForumPage_Reveal.Content" xml:space="preserve">
+    <value>Afficher quand même</value>
+  </data>
+  <data name="ForumPage_Quote.Content" xml:space="preserve">
+    <value>Citer</value>
+  </data>
+  <data name="ForumPage_ReplyTitle.Text" xml:space="preserve">
+    <value>RÉPONDRE</value>
+  </data>
+  <data name="ForumPage_ReplyBox.PlaceholderText" xml:space="preserve">
+    <value>Ta réponse (BBCode) – Ctrl+Entrée envoie</value>
+  </data>
+  <data name="ForumPage_ReplyBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Réponse</value>
+  </data>
+  <data name="ForumPage_Send.Content" xml:space="preserve">
+    <value>ENVOYER</value>
+  </data>
+  <data name="ForumPage_Preview.Content" xml:space="preserve">
+    <value>APERÇU</value>
+  </data>
+  <data name="ForumPage_Back.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Retour aux sections</value>
+  </data>
+  <data name="ForumPage_Back.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Retour aux sections</value>
+  </data>
+  <data name="ForumPage_React.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Réagir</value>
+  </data>
+  <data name="ForumPage_React.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Réagir</value>
+  </data>
+  <data name="ForumPage_Bold.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Gras</value>
+  </data>
+  <data name="ForumPage_Bold.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Gras</value>
+  </data>
+  <data name="ForumPage_Italic.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Italique</value>
+  </data>
+  <data name="ForumPage_Italic.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Italique</value>
+  </data>
+  <data name="ForumPage_Underline.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Souligné</value>
+  </data>
+  <data name="ForumPage_Underline.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Souligné</value>
+  </data>
+  <data name="ForumPage_QuoteTag.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Citation</value>
+  </data>
+  <data name="ForumPage_QuoteTag.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Citation</value>
+  </data>
+  <data name="ForumPage_Code.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="ForumPage_Code.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="ForumPage_Spoiler.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Spoiler</value>
+  </data>
+  <data name="ForumPage_Spoiler.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Spoiler</value>
+  </data>
+  <data name="ForumPage_Link.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Lien</value>
+  </data>
+  <data name="ForumPage_Link.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Lien</value>
+  </data>
 </root>

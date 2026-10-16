@@ -68,4 +68,6 @@ dotnet_analyzer_diagnostic.severity = none
 # Testnamen mit Unterstrichen sind gewollt
 dotnet_diagnostic.CA1707.severity = none
 dotnet_diagnostic.CA2000.severity = none
+# CA1859: Befehls-Methoden ([RelayCommand]) geben bewusst Task statt Task<bool> zurück
+dotnet_diagnostic.CA1859.severity = none
 dotnet_diagnostic.CA1861.severity = none

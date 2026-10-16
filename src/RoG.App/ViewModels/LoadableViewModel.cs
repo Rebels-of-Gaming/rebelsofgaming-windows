@@ -13,6 +13,7 @@ namespace RoG.App.ViewModels;
 public abstract partial class LoadableViewModel(AppServices services) : ObservableObject
 {
     private bool _running;
+    private bool _pending;
 
     protected AppServices Services { get; } = services;
 
@@ -41,6 +42,8 @@ public abstract partial class LoadableViewModel(AppServices services) : Observab
     {
         if (_running)
         {
+            // Läuft schon (z. B. neue Suche während des Ladens) – danach noch einmal mit dem neuesten Stand
+            _pending = true;
             return;
         }
 
@@ -70,6 +73,12 @@ public abstract partial class LoadableViewModel(AppServices services) : Observab
             _running = false;
             IsLoading = false;
             DataChanged();
+        }
+
+        if (_pending)
+        {
+            _pending = false;
+            await LoadAsync(silent: true);
         }
     }
 

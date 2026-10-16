@@ -22,6 +22,7 @@ public sealed partial class MainWindow : Window
         [StringKeys.NavNews] = typeof(NewsPage),
         [StringKeys.NavSquads] = typeof(SquadsPage),
         [StringKeys.NavMembers] = typeof(MembersPage),
+        [StringKeys.NavCalendar] = typeof(EventsPage),
         [StringKeys.NavAccount] = typeof(AccountPage),
     };
 

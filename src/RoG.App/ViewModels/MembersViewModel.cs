@@ -16,7 +16,7 @@ public sealed partial class MembersViewModel : LoadableViewModel
 {
     private readonly MemberService _members;
     private string? _cursor;
-    private CancellationTokenSource? _searchDelay;
+    private int _searchVersion;
 
     public MembersViewModel(AppServices services)
         : base(services)
@@ -124,17 +124,12 @@ public sealed partial class MembersViewModel : LoadableViewModel
 
     private async Task ReloadDelayedAsync()
     {
-        _searchDelay?.Cancel();
-        _searchDelay?.Dispose();
-        var cts = _searchDelay = new CancellationTokenSource();
-        try
+        // Nur die letzte Eingabe innerhalb von 350 ms lädt
+        var version = ++_searchVersion;
+        await Task.Delay(350);
+        if (version == _searchVersion)
         {
-            await Task.Delay(350, cts.Token);
             await LoadAsync();
-        }
-        catch (TaskCanceledException)
-        {
-            // neuer Tastendruck
         }
     }
 

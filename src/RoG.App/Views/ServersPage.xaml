@@ -12,6 +12,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -26,7 +27,7 @@
                 x:Uid="ServersPage_Refresh"
                 Grid.Column="1"
                 VerticalAlignment="Center"
-                Command="{x:Bind ViewModel.RefreshCommand}"
+                Click="OnRefreshClick"
                 Style="{StaticResource RoGSecondaryButtonStyle}">
                 <FontIcon FontSize="16" Glyph="&#xE72C;" />
                 <Button.KeyboardAccelerators>
@@ -36,21 +37,37 @@
             </Button>
         </Grid>
 
-        <TextBlock
-            x:Uid="ServersPage_Intro"
+        <SelectorBar
+            x:Name="TabBar"
             Grid.Row="1"
+            SelectionChanged="OnTabChanged">
+            <SelectorBarItem x:Uid="ServersPage_TabGame" IsSelected="True" />
+            <SelectorBarItem x:Uid="ServersPage_TabTeamSpeak" />
+            <SelectorBarItem x:Uid="ServersPage_TabDiscord" />
+        </SelectorBar>
+
+        <TextBlock
+            x:Name="GameIntro"
+            x:Uid="ServersPage_Intro"
+            Grid.Row="2"
             MaxWidth="{StaticResource RoGReadingWidth}"
             HorizontalAlignment="Left"
             Style="{StaticResource RoGMutedTextStyle}" />
 
         <!-- Rückmeldung zu Verbinden/Kopieren -->
         <InfoBar
-            Grid.Row="2"
+            Grid.Row="3"
             IsOpen="{x:Bind ViewModel.IsFeedbackOpen, Mode=TwoWay}"
             Message="{x:Bind ViewModel.FeedbackMessage, Mode=OneWay}"
             Severity="{x:Bind ViewModel.FeedbackSeverity, Mode=OneWay}" />
 
-        <Grid Grid.Row="3">
+        <InfoBar
+            Grid.Row="3"
+            IsOpen="{x:Bind Voice.IsFeedbackOpen, Mode=TwoWay}"
+            Message="{x:Bind Voice.FeedbackMessage, Mode=OneWay}"
+            Severity="{x:Bind Voice.FeedbackSeverity, Mode=OneWay}" />
+
+        <Grid x:Name="GamePanel" Grid.Row="4">
             <!-- Laden -->
             <ProgressRing
                 x:Uid="ServersPage_Loading"
@@ -115,6 +132,112 @@
                     </ItemsRepeater.ItemTemplate>
                 </ItemsRepeater>
             </ScrollViewer>
+        </Grid>
+
+        <!-- TeamSpeak -->
+        <Grid
+            x:Name="TeamSpeakPanel"
+            Grid.Row="2"
+            Grid.RowSpan="3"
+            RowSpacing="12"
+            Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid ColumnSpacing="12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Spacing="2">
+                    <TextBlock Style="{StaticResource RoGTitleTextStyle}" Text="{x:Bind Voice.TeamSpeakTitle, Mode=OneWay}" />
+                    <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Voice.TeamSpeakStatus, Mode=OneWay}" />
+                    <ToggleSwitch x:Uid="ServersPage_ShowEmptyChannels" IsOn="{x:Bind Voice.ShowEmptyChannels, Mode=TwoWay}" />
+                </StackPanel>
+                <Button
+                    x:Uid="ServersPage_TsConnect"
+                    Grid.Column="1"
+                    VerticalAlignment="Top"
+                    Command="{x:Bind Voice.ConnectCommand}"
+                    IsEnabled="{x:Bind Voice.CanConnect, Mode=OneWay}"
+                    Style="{StaticResource RoGPrimaryButtonStyle}" />
+            </Grid>
+            <controls:StateView
+                Grid.Row="1"
+                ErrorMessage="{x:Bind Voice.ErrorMessage, Mode=OneWay}"
+                IsLoading="{x:Bind Voice.IsLoading, Mode=OneWay}"
+                RetryCommand="{x:Bind Voice.RefreshCommand}" />
+            <ListView
+                x:Uid="ServersPage_TsList"
+                Grid.Row="1"
+                ItemsSource="{x:Bind Voice.TeamSpeakRows}"
+                SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:VoiceRow">
+                        <StackPanel
+                            Margin="{x:Bind Indent}"
+                            Orientation="Horizontal"
+                            Spacing="8"
+                            AutomationProperties.Name="{x:Bind Text}">
+                            <FontIcon
+                                FontSize="14"
+                                Foreground="{x:Bind Foreground}"
+                                Glyph="{x:Bind Glyph}"
+                                AutomationProperties.AccessibilityView="Raw" />
+                            <TextBlock Foreground="{x:Bind Foreground}" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Text}" />
+                            <TextBlock
+                                Foreground="{StaticResource RoGGoldBrush}"
+                                Style="{StaticResource RoGBodyTextStyle}"
+                                Text="{x:Bind Detail}"
+                                Visibility="{x:Bind HasDetail}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <!-- Discord -->
+        <Grid
+            x:Name="DiscordPanel"
+            Grid.Row="2"
+            Grid.RowSpan="3"
+            Visibility="Collapsed">
+            <controls:StateView
+                x:Uid="ServersPage_DiscordState"
+                ErrorMessage="{x:Bind Voice.ErrorMessage, Mode=OneWay}"
+                IsEmpty="{x:Bind Voice.ShowDiscordEmpty, Mode=OneWay}"
+                IsLoading="{x:Bind Voice.IsLoading, Mode=OneWay}"
+                RetryCommand="{x:Bind Voice.RefreshCommand}" />
+            <ListView
+                x:Uid="ServersPage_DiscordList"
+                ItemsSource="{x:Bind Voice.DiscordRows}"
+                SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:VoiceRow">
+                        <StackPanel
+                            Margin="{x:Bind Indent}"
+                            Orientation="Horizontal"
+                            Spacing="8"
+                            AutomationProperties.Name="{x:Bind Text}">
+                            <FontIcon
+                                FontSize="14"
+                                Foreground="{x:Bind Foreground}"
+                                Glyph="{x:Bind Glyph}"
+                                Visibility="{x:Bind IsChannel}"
+                                AutomationProperties.AccessibilityView="Raw" />
+                            <PersonPicture
+                                Width="24"
+                                Height="24"
+                                DisplayName="{x:Bind Text}"
+                                ProfilePicture="{x:Bind Avatar}"
+                                Visibility="{x:Bind IsPerson}"
+                                AutomationProperties.AccessibilityView="Raw" />
+                            <TextBlock Foreground="{x:Bind Foreground}" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Text}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
     </Grid>
 </Page>

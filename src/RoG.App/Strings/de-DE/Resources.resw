@@ -593,4 +593,94 @@
   <data name="MembersPage_Platforms.Text" xml:space="preserve">
     <value>SPIELE-ACCOUNTS</value>
   </data>
+  <data name="Events_Counts" xml:space="preserve">
+    <value>{0} Zusagen · {1} vielleicht</value>
+  </data>
+  <data name="Events_CountsMax" xml:space="preserve">
+    <value>{0} Zusagen · {1} vielleicht · {2} Plätze</value>
+  </data>
+  <data name="Events_Cancelled" xml:space="preserve">
+    <value>Abgesagt</value>
+  </data>
+  <data name="Events_Mandatory" xml:space="preserve">
+    <value>Pflichttermin</value>
+  </data>
+  <data name="Events_RsvpYes" xml:space="preserve">
+    <value>Du bist dabei</value>
+  </data>
+  <data name="Events_RsvpMaybe" xml:space="preserve">
+    <value>Du bist vielleicht dabei</value>
+  </data>
+  <data name="Events_RsvpNo" xml:space="preserve">
+    <value>Du hast abgesagt</value>
+  </data>
+  <data name="Events_RsvpSaved" xml:space="preserve">
+    <value>Gespeichert: {0}.</value>
+  </data>
+  <data name="Events_NoCalendarApp" xml:space="preserve">
+    <value>Keine Kalender-App gefunden. Öffne den Termin im Browser und lade dort die .ics-Datei.</value>
+  </data>
+  <data name="EventsPage_Title.Text" xml:space="preserve">
+    <value>TERMINE</value>
+  </data>
+  <data name="EventsPage_State.EmptyText" xml:space="preserve">
+    <value>In den nächsten 60 Tagen steht nichts an.</value>
+  </data>
+  <data name="EventsPage_List.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Termine</value>
+  </data>
+  <data name="EventsPage_SelectHint.Text" xml:space="preserve">
+    <value>Wähle links einen Termin aus.</value>
+  </data>
+  <data name="EventsPage_Rsvp.Text" xml:space="preserve">
+    <value>DEINE ANTWORT</value>
+  </data>
+  <data name="EventsPage_Yes.Content" xml:space="preserve">
+    <value>Dabei</value>
+  </data>
+  <data name="EventsPage_Maybe.Content" xml:space="preserve">
+    <value>Vielleicht</value>
+  </data>
+  <data name="EventsPage_No.Content" xml:space="preserve">
+    <value>Absagen</value>
+  </data>
+  <data name="EventsPage_AddToCalendar.Content" xml:space="preserve">
+    <value>IN KALENDER ÜBERNEHMEN</value>
+  </data>
+  <data name="Voice_TsOnline" xml:space="preserve">
+    <value>{0} von {1} online</value>
+  </data>
+  <data name="Voice_TsOffline" xml:space="preserve">
+    <value>TeamSpeak ist gerade nicht erreichbar.</value>
+  </data>
+  <data name="Voice_TsLaunched" xml:space="preserve">
+    <value>TeamSpeak startet und verbindet dich mit {0}.</value>
+  </data>
+  <data name="Voice_TsMissing" xml:space="preserve">
+    <value>TeamSpeak ist nicht installiert. Die Adresse {0} ist kopiert – in TeamSpeak: Verbindungen → Verbinden → Strg+V.</value>
+  </data>
+  <data name="ServersPage_TabGame.Text" xml:space="preserve">
+    <value>Gameserver</value>
+  </data>
+  <data name="ServersPage_TabTeamSpeak.Text" xml:space="preserve">
+    <value>TeamSpeak</value>
+  </data>
+  <data name="ServersPage_TabDiscord.Text" xml:space="preserve">
+    <value>Discord-Voice</value>
+  </data>
+  <data name="ServersPage_ShowEmptyChannels.Header" xml:space="preserve">
+    <value>Leere Kanäle zeigen</value>
+  </data>
+  <data name="ServersPage_TsConnect.Content" xml:space="preserve">
+    <value>TEAMSPEAK VERBINDEN</value>
+  </data>
+  <data name="ServersPage_TsList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>TeamSpeak-Kanäle</value>
+  </data>
+  <data name="ServersPage_DiscordList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Discord-Sprachkanäle</value>
+  </data>
+  <data name="ServersPage_DiscordState.EmptyText" xml:space="preserve">
+    <value>Gerade ist niemand im Discord-Voice.</value>
+  </data>
 </root>

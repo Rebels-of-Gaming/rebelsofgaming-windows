@@ -45,6 +45,23 @@ public static class StringKeys
     public const string PresenceIngame = "Presence_Ingame";
     public const string PresenceOffline = "Presence_Offline";
 
+    // Voice ({0}/{1} = Personen/Plätze bzw. Server/Adresse)
+    public const string VoiceTsOnline = "Voice_TsOnline";
+    public const string VoiceTsOffline = "Voice_TsOffline";
+    public const string VoiceTsLaunched = "Voice_TsLaunched";
+    public const string VoiceTsMissing = "Voice_TsMissing";
+
+    // Termine ({0}/{1}/{2} = Zusagen/Vielleicht/Plätze)
+    public const string EventsCounts = "Events_Counts";
+    public const string EventsCountsMax = "Events_CountsMax";
+    public const string EventsCancelled = "Events_Cancelled";
+    public const string EventsMandatory = "Events_Mandatory";
+    public const string EventsRsvpYes = "Events_RsvpYes";
+    public const string EventsRsvpMaybe = "Events_RsvpMaybe";
+    public const string EventsRsvpNo = "Events_RsvpNo";
+    public const string EventsRsvpSaved = "Events_RsvpSaved";
+    public const string EventsNoCalendarApp = "Events_NoCalendarApp";
+
     // Squads
     public const string SquadsLeader = "Squads_Leader";
     public const string SquadsClanLevel = "Squads_ClanLevel";

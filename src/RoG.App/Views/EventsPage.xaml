@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="RoG.App.Views.EventsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:RoG.App.Controls"
+    xmlns:vm="using:RoG.App.ViewModels"
+    Background="{StaticResource RoGBgBrush}">
+
+    <Page.KeyboardAccelerators>
+        <KeyboardAccelerator Key="F5" Invoked="OnRefreshInvoked" />
+    </Page.KeyboardAccelerators>
+
+    <controls:ListDetailPanel DetailClosed="OnDetailClosed" IsDetailOpen="{x:Bind ViewModel.IsDetailOpen, Mode=OneWay}">
+        <controls:ListDetailPanel.List>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    x:Uid="EventsPage_Title"
+                    Margin="24,24,24,12"
+                    Style="{StaticResource RoGDisplayTextStyle}"
+                    Text="TERMINE" />
+                <controls:StateView
+                    x:Uid="EventsPage_State"
+                    Grid.Row="1"
+                    ErrorMessage="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}"
+                    IsEmpty="{x:Bind ViewModel.IsEmpty, Mode=OneWay}"
+                    IsLoading="{x:Bind ViewModel.IsLoading, Mode=OneWay}"
+                    RetryCommand="{x:Bind ViewModel.RefreshCommand}" />
+                <ListView
+                    x:Uid="EventsPage_List"
+                    Grid.Row="1"
+                    Padding="12,0,12,12"
+                    ItemsSource="{x:Bind ViewModel.Items}"
+                    SelectedItem="{x:Bind ViewModel.Selected, Mode=TwoWay}"
+                    Visibility="{x:Bind ViewModel.ShowContent, Mode=OneWay}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="vm:EventRowViewModel">
+                            <StackPanel Opacity="{x:Bind Opacity}" AutomationProperties.Name="{x:Bind Title}">
+                                <TextBlock
+                                    Margin="0,12,0,4"
+                                    FontFamily="{StaticResource RoGDisplaySemiBoldFont}"
+                                    FontSize="13"
+                                    CharacterSpacing="60"
+                                    Foreground="{StaticResource RoGMutedBrush}"
+                                    Text="{x:Bind DayHeader}"
+                                    Visibility="{x:Bind ShowDayHeader}" />
+                                <Grid Padding="0,6" ColumnSpacing="12">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4" />
+                                        <ColumnDefinition Width="52" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Rectangle Fill="{x:Bind TypeBrush}" RadiusX="2" RadiusY="2" />
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        FontWeight="SemiBold"
+                                        Style="{StaticResource RoGBodyTextStyle}"
+                                        Text="{x:Bind Time}" />
+                                    <StackPanel Grid.Column="2" Spacing="1">
+                                        <TextBlock
+                                            FontWeight="SemiBold"
+                                            Style="{StaticResource RoGBodyTextStyle}"
+                                            Text="{x:Bind Title}"
+                                            TextTrimming="CharacterEllipsis" />
+                                        <TextBlock
+                                            FontSize="12"
+                                            MaxLines="1"
+                                            Style="{StaticResource RoGMutedTextStyle}"
+                                            Text="{x:Bind Subtitle}"
+                                            TextTrimming="CharacterEllipsis" />
+                                        <TextBlock
+                                            FontSize="12"
+                                            Foreground="{StaticResource RoGGreenBrush}"
+                                            Text="{x:Bind RsvpText}"
+                                            Visibility="{x:Bind HasRsvp}" />
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </controls:ListDetailPanel.List>
+
+        <!-- Termin -->
+        <Grid>
+            <TextBlock
+                x:Uid="EventsPage_SelectHint"
+                Margin="32"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Style="{StaticResource RoGMutedTextStyle}"
+                Visibility="{x:Bind ViewModel.ShowSelectHint, Mode=OneWay}" />
+            <controls:StateView
+                ErrorMessage="{x:Bind ViewModel.Detail.ErrorMessage, Mode=OneWay}"
+                IsLoading="{x:Bind ViewModel.Detail.IsLoading, Mode=OneWay}"
+                RetryCommand="{x:Bind ViewModel.Detail.RefreshCommand}" />
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="{x:Bind ViewModel.Detail.ShowContent, Mode=OneWay}">
+                <StackPanel
+                    MaxWidth="{StaticResource RoGReadingWidth}"
+                    Padding="32,24,32,32"
+                    HorizontalAlignment="Left"
+                    Spacing="16">
+                    <StackPanel Spacing="4">
+                        <TextBlock
+                            FontFamily="{StaticResource RoGDisplaySemiBoldFont}"
+                            FontSize="14"
+                            CharacterSpacing="60"
+                            Foreground="{x:Bind ViewModel.Detail.TypeBrush, Mode=OneWay}"
+                            Text="{x:Bind ViewModel.Detail.TypeLabel, Mode=OneWay}" />
+                        <TextBlock
+                            IsTextSelectionEnabled="True"
+                            Style="{StaticResource RoGTitleTextStyle}"
+                            Text="{x:Bind ViewModel.Detail.Title, Mode=OneWay}"
+                            AutomationProperties.HeadingLevel="Level1" />
+                        <TextBlock Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind ViewModel.Detail.When, Mode=OneWay}" />
+                        <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind ViewModel.Detail.Where, Mode=OneWay}" />
+                        <TextBlock Foreground="{StaticResource RoGGoldBrush}" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind ViewModel.Detail.Flags, Mode=OneWay}" />
+                        <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind ViewModel.Detail.Counts, Mode=OneWay}" />
+                    </StackPanel>
+
+                    <InfoBar
+                        IsOpen="{x:Bind ViewModel.Detail.IsFeedbackOpen, Mode=TwoWay}"
+                        Message="{x:Bind ViewModel.Detail.FeedbackMessage, Mode=OneWay}"
+                        Severity="{x:Bind ViewModel.Detail.FeedbackSeverity, Mode=OneWay}" />
+
+                    <!-- Zusage -->
+                    <StackPanel Spacing="8" Visibility="{x:Bind ViewModel.Detail.CanRespond, Mode=OneWay}">
+                        <TextBlock x:Uid="EventsPage_Rsvp" Style="{StaticResource RoGSectionTextStyle}" />
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <ToggleButton
+                                x:Uid="EventsPage_Yes"
+                                Command="{x:Bind ViewModel.Detail.RespondYesCommand}"
+                                IsChecked="{x:Bind ViewModel.Detail.IsYes, Mode=OneWay}" />
+                            <ToggleButton
+                                x:Uid="EventsPage_Maybe"
+                                Command="{x:Bind ViewModel.Detail.RespondMaybeCommand}"
+                                IsChecked="{x:Bind ViewModel.Detail.IsMaybe, Mode=OneWay}" />
+                            <ToggleButton
+                                x:Uid="EventsPage_No"
+                                Command="{x:Bind ViewModel.Detail.RespondNoCommand}"
+                                IsChecked="{x:Bind ViewModel.Detail.IsNo, Mode=OneWay}" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Button
+                            x:Uid="EventsPage_AddToCalendar"
+                            Command="{x:Bind ViewModel.Detail.AddToCalendarCommand}"
+                            Style="{StaticResource RoGSecondaryButtonStyle}" />
+                        <Button
+                            x:Uid="Common_OpenInBrowser"
+                            Command="{x:Bind ViewModel.Detail.OpenInBrowserCommand}"
+                            Style="{StaticResource RoGSecondaryButtonStyle}" />
+                    </StackPanel>
+
+                    <TextBlock IsTextSelectionEnabled="True" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind ViewModel.Detail.Description, Mode=OneWay}" />
+
+                    <controls:ServerCard Item="{x:Bind ViewModel.Detail.Server, Mode=OneWay}" Visibility="{x:Bind ViewModel.Detail.HasServer, Mode=OneWay}" />
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </controls:ListDetailPanel>
+</Page>

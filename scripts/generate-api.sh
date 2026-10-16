@@ -35,4 +35,6 @@ if grep -qE 'public partial class (System|Task|Object|String|Type|Uri|Exception)
   echo "Fehler: generierte Klasse kollidiert mit einem System-Typ – Umbenennung in scripts/generate-api.sh ergänzen." >&2
   exit 1
 fi
+# 201 & Co. als Erfolg, Enum-Werte wie in der API (`windows` statt `Windows`) – Details im Skript
+python3 scripts/postprocess-client.py "$OUT"
 echo "Fertig: src/RoG.Core/Api/Generated/RoGApiClient.g.cs ($(wc -l < src/RoG.Core/Api/Generated/RoGApiClient.g.cs) Zeilen)"

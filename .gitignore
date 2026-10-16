@@ -34,3 +34,4 @@ openapi/*.tmp
 build-vm.env
 *.env
 !build-vm.env.example
+.claude/settings.local.json

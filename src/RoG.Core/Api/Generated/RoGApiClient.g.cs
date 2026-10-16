@@ -16270,12 +16270,12 @@ namespace RoG.Core.Api.Generated
                         else
                         if (status_ == 201)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Response68>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Response67>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new GeneratedApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new GeneratedApiException<Response68>("A server side error occurred.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 401)
@@ -17662,12 +17662,12 @@ namespace RoG.Core.Api.Generated
                         else
                         if (status_ == 201)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Response80>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Response79>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new GeneratedApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new GeneratedApiException<Response80>("A server side error occurred.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 401)
@@ -20355,12 +20355,12 @@ namespace RoG.Core.Api.Generated
                         else
                         if (status_ == 201)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Response104>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Response103>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new GeneratedApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new GeneratedApiException<Response104>("A server side error occurred.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 401)
@@ -20542,12 +20542,12 @@ namespace RoG.Core.Api.Generated
                         else
                         if (status_ == 201)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Response107>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Response106>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new GeneratedApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new GeneratedApiException<Response107>("A server side error occurred.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 401)
@@ -20749,12 +20749,12 @@ namespace RoG.Core.Api.Generated
                         else
                         if (status_ == 201)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Response110>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Response109>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new GeneratedApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new GeneratedApiException<Response110>("A server side error occurred.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 401)
@@ -21450,12 +21450,12 @@ namespace RoG.Core.Api.Generated
                         else
                         if (status_ == 201)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Response116>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Response115>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new GeneratedApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new GeneratedApiException<Response116>("A server side error occurred.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 401)
@@ -25664,12 +25664,12 @@ namespace RoG.Core.Api.Generated
                         else
                         if (status_ == 201)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Response153>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Response152>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new GeneratedApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new GeneratedApiException<Response153>("A server side error occurred.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 401)
@@ -25980,12 +25980,12 @@ namespace RoG.Core.Api.Generated
                         else
                         if (status_ == 201)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Response157>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Response156>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new GeneratedApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new GeneratedApiException<Response157>("A server side error occurred.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 401)
@@ -28419,12 +28419,12 @@ namespace RoG.Core.Api.Generated
                         else
                         if (status_ == 202)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Response174>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Response173>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new GeneratedApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new GeneratedApiException<Response174>("A server side error occurred.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 401)
@@ -29437,12 +29437,12 @@ namespace RoG.Core.Api.Generated
                         else
                         if (status_ == 202)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Response183>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Response182>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new GeneratedApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new GeneratedApiException<Response183>("A server side error occurred.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 401)
@@ -29562,12 +29562,12 @@ namespace RoG.Core.Api.Generated
                         else
                         if (status_ == 202)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Response185>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Response184>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new GeneratedApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new GeneratedApiException<Response185>("A server side error occurred.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 401)
@@ -32051,12 +32051,12 @@ namespace RoG.Core.Api.Generated
                         else
                         if (status_ == 201)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Response203>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Response202>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new GeneratedApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new GeneratedApiException<Response203>("`DeviceResource`", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 401)
@@ -52388,12 +52388,12 @@ namespace RoG.Core.Api.Generated
                         else
                         if (status_ == 201)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Response359>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Response358>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new GeneratedApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new GeneratedApiException<Response359>("A server side error occurred.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 401)
@@ -53388,12 +53388,12 @@ namespace RoG.Core.Api.Generated
                         else
                         if (status_ == 201)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Response367>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Response366>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new GeneratedApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new GeneratedApiException<Response367>("A server side error occurred.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 401)
@@ -57688,12 +57688,12 @@ namespace RoG.Core.Api.Generated
                         else
                         if (status_ == 201)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Response406>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Response405>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new GeneratedApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new GeneratedApiException<Response406>("`PermissionOverrideResource`", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 401)
@@ -67055,12 +67055,12 @@ namespace RoG.Core.Api.Generated
                         else
                         if (status_ == 201)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Response484>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Response483>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new GeneratedApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new GeneratedApiException<Response484>("A server side error occurred.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 401)
@@ -67593,12 +67593,12 @@ namespace RoG.Core.Api.Generated
                         else
                         if (status_ == 201)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Response491>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Response490>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new GeneratedApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new GeneratedApiException<Response491>("A server side error occurred.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 401)
@@ -69894,12 +69894,12 @@ namespace RoG.Core.Api.Generated
                         else
                         if (status_ == 201)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Response513>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Response512>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new GeneratedApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new GeneratedApiException<Response513>("A server side error occurred.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 401)
@@ -70004,12 +70004,12 @@ namespace RoG.Core.Api.Generated
                         else
                         if (status_ == 201)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Response515>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Response514>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new GeneratedApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new GeneratedApiException<Response515>("A server side error occurred.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 401)
@@ -70752,9 +70752,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"discord")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"discord")]
         Discord = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"teamspeak")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"teamspeak")]
         Teamspeak = 1,
 
     }
@@ -71099,12 +71101,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"discord")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"discord")]
         Discord = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"steam")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"steam")]
         Steam = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"upload")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"upload")]
         Upload = 2,
 
     }
@@ -71169,12 +71174,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"site")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"site")]
         Site = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"forum")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"forum")]
         Forum = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"gameserver")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"gameserver")]
         Gameserver = 2,
 
     }
@@ -71233,12 +71241,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"day")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"day")]
         Day = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"month")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"month")]
         Month = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"year")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"year")]
         Year = 2,
 
     }
@@ -71504,12 +71515,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"public")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"public")]
         Public = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"members")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"members")]
         Members = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"squad")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"squad")]
         Squad = 2,
 
     }
@@ -71576,15 +71590,19 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"clan_invite")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"clan_invite")]
         Clan_invite = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"referral")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"referral")]
         Referral = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"creator_code")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"creator_code")]
         Creator_code = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"support_creator")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"support_creator")]
         Support_creator = 3,
 
     }
@@ -71761,12 +71779,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"none")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"none")]
         None = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"flag")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"flag")]
         Flag = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"former")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"former")]
         Former = 2,
 
     }
@@ -71776,9 +71797,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"privacy")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"privacy")]
         Privacy = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"imprint")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"imprint")]
         Imprint = 1,
 
     }
@@ -71788,9 +71811,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"starter")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"starter")]
         Starter = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"substitute")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"substitute")]
         Substitute = 1,
 
     }
@@ -71804,18 +71829,23 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"discord")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"discord")]
         Discord = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"teamspeak")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"teamspeak")]
         Teamspeak = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"server")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"server")]
         Server = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"address")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"address")]
         Address = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"online")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"online")]
         Online = 4,
 
     }
@@ -72052,12 +72082,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"demo")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"demo")]
         Demo = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"vod")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"vod")]
         Vod = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"other")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"other")]
         Other = 2,
 
     }
@@ -72158,12 +72191,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"scheduled")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"scheduled")]
         Scheduled = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"finished")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"finished")]
         Finished = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"cancelled")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"cancelled")]
         Cancelled = 2,
 
     }
@@ -72173,12 +72209,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"clanwar")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"clanwar")]
         Clanwar = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"scrim")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"scrim")]
         Scrim = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"tournament")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"tournament")]
         Tournament = 2,
 
     }
@@ -72348,12 +72387,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"draft")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"draft")]
         Draft = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"scheduled")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"scheduled")]
         Scheduled = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"published")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"published")]
         Published = 2,
 
     }
@@ -72363,9 +72405,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"public")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"public")]
         Public = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"members")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"members")]
         Members = 1,
 
     }
@@ -72379,9 +72423,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"internal")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"internal")]
         Internal = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"external")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"external")]
         External = 1,
 
     }
@@ -72496,15 +72542,19 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"pc")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"pc")]
         Pc = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"console")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"console")]
         Console = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"mobile")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"mobile")]
         Mobile = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"crossplay")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"crossplay")]
         Crossplay = 3,
 
     }
@@ -72533,12 +72583,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"open")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"open")]
         Open = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"full")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"full")]
         Full = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"waitlist")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"waitlist")]
         Waitlist = 2,
 
     }
@@ -72548,21 +72601,27 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"spam")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"spam")]
         Spam = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"insult")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"insult")]
         Insult = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"harassment")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"harassment")]
         Harassment = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"illegal")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"illegal")]
         Illegal = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"cheating")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"cheating")]
         Cheating = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"other")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"other")]
         Other = 5,
 
     }
@@ -72572,12 +72631,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"open")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"open")]
         Open = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"resolved")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"resolved")]
         Resolved = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"dismissed")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"dismissed")]
         Dismissed = 2,
 
     }
@@ -72701,12 +72763,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"rank")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"rank")]
         Rank = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"squad")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"squad")]
         Squad = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"extra")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"extra")]
         Extra = 2,
 
     }
@@ -72716,12 +72781,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"yes")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"yes")]
         Yes = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"maybe")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"maybe")]
         Maybe = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"no")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"no")]
         No = 2,
 
     }
@@ -72731,12 +72799,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"clan")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"clan")]
         Clan = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"game")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"game")]
         Game = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"squad")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"squad")]
         Squad = 2,
 
     }
@@ -72750,12 +72821,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"public")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"public")]
         Public = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"members")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"members")]
         Members = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"squad")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"squad")]
         Squad = 2,
 
     }
@@ -73901,18 +73975,23 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"supercell_coc")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"supercell_coc")]
         Supercell_coc = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"supercell_bs")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"supercell_bs")]
         Supercell_bs = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"supercell_cr")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"supercell_cr")]
         Supercell_cr = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"faceit")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"faceit")]
         Faceit = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"riot")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"riot")]
         Riot = 4,
 
     }
@@ -74112,12 +74191,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"dark")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"dark")]
         Dark = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"light")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"light")]
         Light = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"system")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"system")]
         System = 2,
 
     }
@@ -74170,12 +74252,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"trophy")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"trophy")]
         Trophy = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"milestone")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"milestone")]
         Milestone = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"award")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"award")]
         Award = 2,
 
     }
@@ -74484,12 +74569,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"public")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"public")]
         Public = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"members")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"members")]
         Members = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"private")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"private")]
         Private = 2,
 
     }
@@ -74499,12 +74587,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"yes")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"yes")]
         Yes = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"no")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"no")]
         No = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"abstain")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"abstain")]
         Abstain = 2,
 
     }
@@ -74674,12 +74765,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"block")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"block")]
         Block = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"replace")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"replace")]
         Replace = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"review")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"review")]
         Review = 2,
 
     }
@@ -75013,9 +75107,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"submitted_at")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"submitted_at")]
         Submitted_at = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"-submitted_at")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"-submitted_at")]
         Minussubmitted_at = 1,
 
     }
@@ -75131,21 +75227,27 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"created_at")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"created_at")]
         Created_at = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"-created_at")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"-created_at")]
         Minuscreated_at = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"size")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"size")]
         Size = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"-size")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"-size")]
         Minussize = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"views")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"views")]
         Views = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"-views")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"-views")]
         Minusviews = 5,
 
     }
@@ -77158,15 +77260,19 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"created_at")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"created_at")]
         Created_at = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"-created_at")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"-created_at")]
         Minuscreated_at = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"clicks")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"clicks")]
         Clicks = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"-clicks")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"-clicks")]
         Minusclicks = 3,
 
     }
@@ -77278,9 +77384,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"played_at")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"played_at")]
         Played_at = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"-played_at")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"-played_at")]
         Minusplayed_at = 1,
 
     }
@@ -77566,21 +77674,27 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"name")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"name")]
         Name = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"-name")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"-name")]
         Minusname = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"joined_at")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"joined_at")]
         Joined_at = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"-joined_at")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"-joined_at")]
         Minusjoined_at = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"last_seen_at")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"last_seen_at")]
         Last_seen_at = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"-last_seen_at")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"-last_seen_at")]
         Minuslast_seen_at = 5,
 
     }
@@ -77590,21 +77704,27 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"name")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"name")]
         Name = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"-name")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"-name")]
         Minusname = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"joined_at")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"joined_at")]
         Joined_at = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"-joined_at")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"-joined_at")]
         Minusjoined_at = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"last_seen_at")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"last_seen_at")]
         Last_seen_at = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"-last_seen_at")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"-last_seen_at")]
         Minuslast_seen_at = 5,
 
     }
@@ -78065,9 +78185,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"me")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"me")]
         Me = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"everyone")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"everyone")]
         Everyone = 1,
 
     }
@@ -78188,12 +78310,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"de")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"de")]
         De = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"en")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"en")]
         En = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"fr")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"fr")]
         Fr = 2,
 
     }
@@ -78515,15 +78640,19 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"sort")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"sort")]
         Sort = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"-sort")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"-sort")]
         Minussort = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"name")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"name")]
         Name = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"-name")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"-name")]
         Minusname = 3,
 
     }
@@ -78782,15 +78911,19 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"name")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"name")]
         Name = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"-name")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"-name")]
         Minusname = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sort")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"sort")]
         Sort = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"-sort")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"-sort")]
         Minussort = 3,
 
     }
@@ -78970,24 +79103,31 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"members")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"members")]
         Members = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"squads")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"squads")]
         Squads = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"news")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"news")]
         News = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"forum")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"forum")]
         Forum = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"wiki")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"wiki")]
         Wiki = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"downloads")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"downloads")]
         Downloads = 5,
 
         [System.Runtime.Serialization.EnumMember(Value = @"pages")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"pages")]
         Pages = 6,
 
     }
@@ -78997,27 +79137,35 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"debug")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"debug")]
         Debug = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"info")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"info")]
         Info = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"notice")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"notice")]
         Notice = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"warning")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"warning")]
         Warning = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"error")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"error")]
         Error = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"critical")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"critical")]
         Critical = 5,
 
         [System.Runtime.Serialization.EnumMember(Value = @"alert")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"alert")]
         Alert = 6,
 
         [System.Runtime.Serialization.EnumMember(Value = @"emergency")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"emergency")]
         Emergency = 7,
 
     }
@@ -79027,6 +79175,7 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"all")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"all")]
         All = 0,
 
     }
@@ -79091,15 +79240,19 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"pending")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"pending")]
         Pending = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"succeeded")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"succeeded")]
         Succeeded = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"failed")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"failed")]
         Failed = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"skipped")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"skipped")]
         Skipped = 3,
 
     }
@@ -79109,36 +79262,47 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"server.status_changed")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"server.status_changed")]
         Server_status_changed = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"news.published")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"news.published")]
         News_published = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"event.created")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"event.created")]
         Event_created = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"event.updated")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"event.updated")]
         Event_updated = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"event.cancelled")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"event.cancelled")]
         Event_cancelled = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"match.finished")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"match.finished")]
         Match_finished = 5,
 
         [System.Runtime.Serialization.EnumMember(Value = @"rules.updated")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"rules.updated")]
         Rules_updated = 6,
 
         [System.Runtime.Serialization.EnumMember(Value = @"squad.created")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"squad.created")]
         Squad_created = 7,
 
         [System.Runtime.Serialization.EnumMember(Value = @"squad.archived")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"squad.archived")]
         Squad_archived = 8,
 
         [System.Runtime.Serialization.EnumMember(Value = @"legal.published")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"legal.published")]
         Legal_published = 9,
 
         [System.Runtime.Serialization.EnumMember(Value = @"ping")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"ping")]
         Ping = 10,
 
     }
@@ -79345,12 +79509,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"de")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"de")]
         De = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"en")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"en")]
         En = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"fr")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"fr")]
         Fr = 2,
 
     }
@@ -79360,27 +79527,35 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"ok")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"ok")]
         Ok = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"missing")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"missing")]
         Missing = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"empty")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"empty")]
         Empty = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"same")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"same")]
         Same = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"overridden")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"overridden")]
         Overridden = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"outdated")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"outdated")]
         Outdated = 5,
 
         [System.Runtime.Serialization.EnumMember(Value = @"attention")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"attention")]
         Attention = 6,
 
         [System.Runtime.Serialization.EnumMember(Value = @"locked")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"locked")]
         Locked = 7,
 
     }
@@ -79390,12 +79565,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"de")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"de")]
         De = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"en")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"en")]
         En = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"fr")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"fr")]
         Fr = 2,
 
     }
@@ -79405,129 +79583,171 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"core")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"core")]
         Core = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"applications")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"applications")]
         Applications = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"audit")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"audit")]
         Audit = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"auth")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"auth")]
         Auth = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"cms")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"cms")]
         Cms = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"contact")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"contact")]
         Contact = 5,
 
         [System.Runtime.Serialization.EnumMember(Value = @"devices")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"devices")]
         Devices = 6,
 
         [System.Runtime.Serialization.EnumMember(Value = @"discord")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"discord")]
         Discord = 7,
 
         [System.Runtime.Serialization.EnumMember(Value = @"downloads")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"downloads")]
         Downloads = 8,
 
         [System.Runtime.Serialization.EnumMember(Value = @"events")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"events")]
         Events = 9,
 
         [System.Runtime.Serialization.EnumMember(Value = @"faceit")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"faceit")]
         Faceit = 10,
 
         [System.Runtime.Serialization.EnumMember(Value = @"forum")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"forum")]
         Forum = 11,
 
         [System.Runtime.Serialization.EnumMember(Value = @"games")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"games")]
         Games = 12,
 
         [System.Runtime.Serialization.EnumMember(Value = @"hall-of-fame")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"hall-of-fame")]
         HallOfFame = 13,
 
         [System.Runtime.Serialization.EnumMember(Value = @"legal")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"legal")]
         Legal = 14,
 
         [System.Runtime.Serialization.EnumMember(Value = @"matches")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"matches")]
         Matches = 15,
 
         [System.Runtime.Serialization.EnumMember(Value = @"media")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"media")]
         Media = 16,
 
         [System.Runtime.Serialization.EnumMember(Value = @"members")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"members")]
         Members = 17,
 
         [System.Runtime.Serialization.EnumMember(Value = @"messages")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"messages")]
         Messages = 18,
 
         [System.Runtime.Serialization.EnumMember(Value = @"moderation")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"moderation")]
         Moderation = 19,
 
         [System.Runtime.Serialization.EnumMember(Value = @"news")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"news")]
         News = 20,
 
         [System.Runtime.Serialization.EnumMember(Value = @"notifications")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"notifications")]
         Notifications = 21,
 
         [System.Runtime.Serialization.EnumMember(Value = @"platforms")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"platforms")]
         Platforms = 22,
 
         [System.Runtime.Serialization.EnumMember(Value = @"presence")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"presence")]
         Presence = 23,
 
         [System.Runtime.Serialization.EnumMember(Value = @"profile")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"profile")]
         Profile = 24,
 
         [System.Runtime.Serialization.EnumMember(Value = @"roles")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"roles")]
         Roles = 25,
 
         [System.Runtime.Serialization.EnumMember(Value = @"rules")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"rules")]
         Rules = 26,
 
         [System.Runtime.Serialization.EnumMember(Value = @"search")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"search")]
         Search = 27,
 
         [System.Runtime.Serialization.EnumMember(Value = @"servers")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"servers")]
         Servers = 28,
 
         [System.Runtime.Serialization.EnumMember(Value = @"settings")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"settings")]
         Settings = 29,
 
         [System.Runtime.Serialization.EnumMember(Value = @"short-links")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"short-links")]
         ShortLinks = 30,
 
         [System.Runtime.Serialization.EnumMember(Value = @"squads")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"squads")]
         Squads = 31,
 
         [System.Runtime.Serialization.EnumMember(Value = @"stats")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"stats")]
         Stats = 32,
 
         [System.Runtime.Serialization.EnumMember(Value = @"steam")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"steam")]
         Steam = 33,
 
         [System.Runtime.Serialization.EnumMember(Value = @"supercell")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"supercell")]
         Supercell = 34,
 
         [System.Runtime.Serialization.EnumMember(Value = @"system")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"system")]
         System = 35,
 
         [System.Runtime.Serialization.EnumMember(Value = @"teamspeak")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"teamspeak")]
         Teamspeak = 36,
 
         [System.Runtime.Serialization.EnumMember(Value = @"translations")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"translations")]
         Translations = 37,
 
         [System.Runtime.Serialization.EnumMember(Value = @"twitch")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"twitch")]
         Twitch = 38,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uploads")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"uploads")]
         Uploads = 39,
 
         [System.Runtime.Serialization.EnumMember(Value = @"webhooks")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"webhooks")]
         Webhooks = 40,
 
         [System.Runtime.Serialization.EnumMember(Value = @"wiki")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"wiki")]
         Wiki = 41,
 
     }
@@ -90308,9 +90528,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"squad")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"squad")]
         Squad = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"server")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"server")]
         Server = 1,
 
     }
@@ -90774,21 +90996,27 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"windows")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"windows")]
         Windows = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"android")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"android")]
         Android = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"ios")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"ios")]
         Ios = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"macos")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"macos")]
         Macos = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"linux")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"linux")]
         Linux = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"other")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"other")]
         Other = 5,
 
     }
@@ -90798,9 +91026,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"fcm")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"fcm")]
         Fcm = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"apns")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"apns")]
         Apns = 1,
 
     }
@@ -90810,9 +91040,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"production")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"production")]
         Production = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sandbox")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"sandbox")]
         Sandbox = 1,
 
     }
@@ -90868,9 +91100,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"aes128gcm")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"aes128gcm")]
         Aes128gcm = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"aesgcm")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"aesgcm")]
         Aesgcm = 1,
 
     }
@@ -91381,312 +91615,415 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"menu")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"menu")]
         Menu = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"x")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"x")]
         X = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"search")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"search")]
         Search = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"search-check")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"search-check")]
         SearchCheck = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"bell")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"bell")]
         Bell = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"message")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"message")]
         Message = 5,
 
         [System.Runtime.Serialization.EnumMember(Value = @"user")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"user")]
         User = 6,
 
         [System.Runtime.Serialization.EnumMember(Value = @"users")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"users")]
         Users = 7,
 
         [System.Runtime.Serialization.EnumMember(Value = @"logout")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"logout")]
         Logout = 8,
 
         [System.Runtime.Serialization.EnumMember(Value = @"settings")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"settings")]
         Settings = 9,
 
         [System.Runtime.Serialization.EnumMember(Value = @"shield")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"shield")]
         Shield = 10,
 
         [System.Runtime.Serialization.EnumMember(Value = @"shield-check")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"shield-check")]
         ShieldCheck = 11,
 
         [System.Runtime.Serialization.EnumMember(Value = @"gamepad")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"gamepad")]
         Gamepad = 12,
 
         [System.Runtime.Serialization.EnumMember(Value = @"server")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"server")]
         Server = 13,
 
         [System.Runtime.Serialization.EnumMember(Value = @"calendar")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"calendar")]
         Calendar = 14,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chevron-down")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chevron-down")]
         ChevronDown = 15,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chevron-up")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chevron-up")]
         ChevronUp = 16,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chevron-right")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chevron-right")]
         ChevronRight = 17,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chevron-left")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chevron-left")]
         ChevronLeft = 18,
 
         [System.Runtime.Serialization.EnumMember(Value = @"check")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"check")]
         Check = 19,
 
         [System.Runtime.Serialization.EnumMember(Value = @"plus")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"plus")]
         Plus = 20,
 
         [System.Runtime.Serialization.EnumMember(Value = @"minus")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"minus")]
         Minus = 21,
 
         [System.Runtime.Serialization.EnumMember(Value = @"more")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"more")]
         More = 22,
 
         [System.Runtime.Serialization.EnumMember(Value = @"paperclip")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"paperclip")]
         Paperclip = 23,
 
         [System.Runtime.Serialization.EnumMember(Value = @"quote")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"quote")]
         Quote = 24,
 
         [System.Runtime.Serialization.EnumMember(Value = @"pin")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"pin")]
         Pin = 25,
 
         [System.Runtime.Serialization.EnumMember(Value = @"eye-off")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"eye-off")]
         EyeOff = 26,
 
         [System.Runtime.Serialization.EnumMember(Value = @"flag")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"flag")]
         Flag = 27,
 
         [System.Runtime.Serialization.EnumMember(Value = @"merge")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"merge")]
         Merge = 28,
 
         [System.Runtime.Serialization.EnumMember(Value = @"move")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"move")]
         Move = 29,
 
         [System.Runtime.Serialization.EnumMember(Value = @"history")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"history")]
         History = 30,
 
         [System.Runtime.Serialization.EnumMember(Value = @"smile")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"smile")]
         Smile = 31,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chart")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chart")]
         Chart = 32,
 
         [System.Runtime.Serialization.EnumMember(Value = @"at")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"at")]
         At = 33,
 
         [System.Runtime.Serialization.EnumMember(Value = @"mail")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"mail")]
         Mail = 34,
 
         [System.Runtime.Serialization.EnumMember(Value = @"trash")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"trash")]
         Trash = 35,
 
         [System.Runtime.Serialization.EnumMember(Value = @"pencil")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"pencil")]
         Pencil = 36,
 
         [System.Runtime.Serialization.EnumMember(Value = @"external")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"external")]
         External = 37,
 
         [System.Runtime.Serialization.EnumMember(Value = @"copy")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"copy")]
         Copy = 38,
 
         [System.Runtime.Serialization.EnumMember(Value = @"key")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"key")]
         Key = 39,
 
         [System.Runtime.Serialization.EnumMember(Value = @"lock")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"lock")]
         Lock = 40,
 
         [System.Runtime.Serialization.EnumMember(Value = @"activity")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"activity")]
         Activity = 41,
 
         [System.Runtime.Serialization.EnumMember(Value = @"dashboard")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"dashboard")]
         Dashboard = 42,
 
         [System.Runtime.Serialization.EnumMember(Value = @"scroll")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"scroll")]
         Scroll = 43,
 
         [System.Runtime.Serialization.EnumMember(Value = @"eye")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"eye")]
         Eye = 44,
 
         [System.Runtime.Serialization.EnumMember(Value = @"alert")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"alert")]
         Alert = 45,
 
         [System.Runtime.Serialization.EnumMember(Value = @"info")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"info")]
         Info = 46,
 
         [System.Runtime.Serialization.EnumMember(Value = @"clock")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"clock")]
         Clock = 47,
 
         [System.Runtime.Serialization.EnumMember(Value = @"arrow-right")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"arrow-right")]
         ArrowRight = 48,
 
         [System.Runtime.Serialization.EnumMember(Value = @"arrow-left")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"arrow-left")]
         ArrowLeft = 49,
 
         [System.Runtime.Serialization.EnumMember(Value = @"trophy")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"trophy")]
         Trophy = 50,
 
         [System.Runtime.Serialization.EnumMember(Value = @"swords")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"swords")]
         Swords = 51,
 
         [System.Runtime.Serialization.EnumMember(Value = @"home")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"home")]
         Home = 52,
 
         [System.Runtime.Serialization.EnumMember(Value = @"globe")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"globe")]
         Globe = 53,
 
         [System.Runtime.Serialization.EnumMember(Value = @"link")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"link")]
         Link = 54,
 
         [System.Runtime.Serialization.EnumMember(Value = @"printer")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"printer")]
         Printer = 55,
 
         [System.Runtime.Serialization.EnumMember(Value = @"vote")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"vote")]
         Vote = 56,
 
         [System.Runtime.Serialization.EnumMember(Value = @"inbox")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"inbox")]
         Inbox = 57,
 
         [System.Runtime.Serialization.EnumMember(Value = @"clipboard")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"clipboard")]
         Clipboard = 58,
 
         [System.Runtime.Serialization.EnumMember(Value = @"thumbs-up")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"thumbs-up")]
         ThumbsUp = 59,
 
         [System.Runtime.Serialization.EnumMember(Value = @"thumbs-down")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"thumbs-down")]
         ThumbsDown = 60,
 
         [System.Runtime.Serialization.EnumMember(Value = @"hourglass")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"hourglass")]
         Hourglass = 61,
 
         [System.Runtime.Serialization.EnumMember(Value = @"send")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"send")]
         Send = 62,
 
         [System.Runtime.Serialization.EnumMember(Value = @"note")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"note")]
         Note = 63,
 
         [System.Runtime.Serialization.EnumMember(Value = @"megaphone")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"megaphone")]
         Megaphone = 64,
 
         [System.Runtime.Serialization.EnumMember(Value = @"plug")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"plug")]
         Plug = 65,
 
         [System.Runtime.Serialization.EnumMember(Value = @"headset")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"headset")]
         Headset = 66,
 
         [System.Runtime.Serialization.EnumMember(Value = @"unlink")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"unlink")]
         Unlink = 67,
 
         [System.Runtime.Serialization.EnumMember(Value = @"volume")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"volume")]
         Volume = 68,
 
         [System.Runtime.Serialization.EnumMember(Value = @"folder")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"folder")]
         Folder = 69,
 
         [System.Runtime.Serialization.EnumMember(Value = @"moon")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"moon")]
         Moon = 70,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sun")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"sun")]
         Sun = 71,
 
         [System.Runtime.Serialization.EnumMember(Value = @"book")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"book")]
         Book = 72,
 
         [System.Runtime.Serialization.EnumMember(Value = @"code")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"code")]
         Code = 73,
 
         [System.Runtime.Serialization.EnumMember(Value = @"layers")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"layers")]
         Layers = 74,
 
         [System.Runtime.Serialization.EnumMember(Value = @"ban")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"ban")]
         Ban = 75,
 
         [System.Runtime.Serialization.EnumMember(Value = @"download")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"download")]
         Download = 76,
 
         [System.Runtime.Serialization.EnumMember(Value = @"crown")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"crown")]
         Crown = 77,
 
         [System.Runtime.Serialization.EnumMember(Value = @"radio")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"radio")]
         Radio = 78,
 
         [System.Runtime.Serialization.EnumMember(Value = @"mic")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"mic")]
         Mic = 79,
 
         [System.Runtime.Serialization.EnumMember(Value = @"smartphone")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"smartphone")]
         Smartphone = 80,
 
         [System.Runtime.Serialization.EnumMember(Value = @"monitor")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"monitor")]
         Monitor = 81,
 
         [System.Runtime.Serialization.EnumMember(Value = @"clipboard-check")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"clipboard-check")]
         ClipboardCheck = 82,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sparkles")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"sparkles")]
         Sparkles = 83,
 
         [System.Runtime.Serialization.EnumMember(Value = @"filter")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"filter")]
         Filter = 84,
 
         [System.Runtime.Serialization.EnumMember(Value = @"refresh")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"refresh")]
         Refresh = 85,
 
         [System.Runtime.Serialization.EnumMember(Value = @"image")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"image")]
         Image = 86,
 
         [System.Runtime.Serialization.EnumMember(Value = @"upload")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"upload")]
         Upload = 87,
 
         [System.Runtime.Serialization.EnumMember(Value = @"qr-code")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"qr-code")]
         QrCode = 88,
 
         [System.Runtime.Serialization.EnumMember(Value = @"newspaper")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"newspaper")]
         Newspaper = 89,
 
         [System.Runtime.Serialization.EnumMember(Value = @"file")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"file")]
         File = 90,
 
         [System.Runtime.Serialization.EnumMember(Value = @"handshake")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"handshake")]
         Handshake = 91,
 
         [System.Runtime.Serialization.EnumMember(Value = @"layout")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"layout")]
         Layout = 92,
 
         [System.Runtime.Serialization.EnumMember(Value = @"grip")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"grip")]
         Grip = 93,
 
         [System.Runtime.Serialization.EnumMember(Value = @"play")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"play")]
         Play = 94,
 
         [System.Runtime.Serialization.EnumMember(Value = @"pause")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"pause")]
         Pause = 95,
 
         [System.Runtime.Serialization.EnumMember(Value = @"discord")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"discord")]
         Discord = 96,
 
         [System.Runtime.Serialization.EnumMember(Value = @"steam")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"steam")]
         Steam = 97,
 
         [System.Runtime.Serialization.EnumMember(Value = @"twitch")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"twitch")]
         Twitch = 98,
 
         [System.Runtime.Serialization.EnumMember(Value = @"fist")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"fist")]
         Fist = 99,
 
         [System.Runtime.Serialization.EnumMember(Value = @"platform-shapes")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"platform-shapes")]
         PlatformShapes = 100,
 
         [System.Runtime.Serialization.EnumMember(Value = @"platform-orb")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"platform-orb")]
         PlatformOrb = 101,
 
         [System.Runtime.Serialization.EnumMember(Value = @"platform-handheld")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"platform-handheld")]
         PlatformHandheld = 102,
 
     }
@@ -91816,15 +92153,19 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"single")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"single")]
         Single = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"following")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"following")]
         Following = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"all")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"all")]
         All = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"series")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"series")]
         Series = 3,
 
     }
@@ -91882,21 +92223,27 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"steam_id")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"steam_id")]
         Steam_id = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"guid")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"guid")]
         Guid = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"player_tag")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"player_tag")]
         Player_tag = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"riot_id")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"riot_id")]
         Riot_id = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"battletag")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"battletag")]
         Battletag = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uid")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"uid")]
         Uid = 5,
 
     }
@@ -91906,15 +92253,19 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"server")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"server")]
         Server = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"api")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"api")]
         Api = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"manual")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"manual")]
         Manual = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"none")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"none")]
         None = 3,
 
     }
@@ -91969,312 +92320,415 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"menu")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"menu")]
         Menu = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"x")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"x")]
         X = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"search")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"search")]
         Search = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"search-check")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"search-check")]
         SearchCheck = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"bell")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"bell")]
         Bell = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"message")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"message")]
         Message = 5,
 
         [System.Runtime.Serialization.EnumMember(Value = @"user")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"user")]
         User = 6,
 
         [System.Runtime.Serialization.EnumMember(Value = @"users")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"users")]
         Users = 7,
 
         [System.Runtime.Serialization.EnumMember(Value = @"logout")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"logout")]
         Logout = 8,
 
         [System.Runtime.Serialization.EnumMember(Value = @"settings")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"settings")]
         Settings = 9,
 
         [System.Runtime.Serialization.EnumMember(Value = @"shield")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"shield")]
         Shield = 10,
 
         [System.Runtime.Serialization.EnumMember(Value = @"shield-check")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"shield-check")]
         ShieldCheck = 11,
 
         [System.Runtime.Serialization.EnumMember(Value = @"gamepad")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"gamepad")]
         Gamepad = 12,
 
         [System.Runtime.Serialization.EnumMember(Value = @"server")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"server")]
         Server = 13,
 
         [System.Runtime.Serialization.EnumMember(Value = @"calendar")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"calendar")]
         Calendar = 14,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chevron-down")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chevron-down")]
         ChevronDown = 15,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chevron-up")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chevron-up")]
         ChevronUp = 16,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chevron-right")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chevron-right")]
         ChevronRight = 17,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chevron-left")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chevron-left")]
         ChevronLeft = 18,
 
         [System.Runtime.Serialization.EnumMember(Value = @"check")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"check")]
         Check = 19,
 
         [System.Runtime.Serialization.EnumMember(Value = @"plus")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"plus")]
         Plus = 20,
 
         [System.Runtime.Serialization.EnumMember(Value = @"minus")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"minus")]
         Minus = 21,
 
         [System.Runtime.Serialization.EnumMember(Value = @"more")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"more")]
         More = 22,
 
         [System.Runtime.Serialization.EnumMember(Value = @"paperclip")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"paperclip")]
         Paperclip = 23,
 
         [System.Runtime.Serialization.EnumMember(Value = @"quote")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"quote")]
         Quote = 24,
 
         [System.Runtime.Serialization.EnumMember(Value = @"pin")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"pin")]
         Pin = 25,
 
         [System.Runtime.Serialization.EnumMember(Value = @"eye-off")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"eye-off")]
         EyeOff = 26,
 
         [System.Runtime.Serialization.EnumMember(Value = @"flag")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"flag")]
         Flag = 27,
 
         [System.Runtime.Serialization.EnumMember(Value = @"merge")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"merge")]
         Merge = 28,
 
         [System.Runtime.Serialization.EnumMember(Value = @"move")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"move")]
         Move = 29,
 
         [System.Runtime.Serialization.EnumMember(Value = @"history")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"history")]
         History = 30,
 
         [System.Runtime.Serialization.EnumMember(Value = @"smile")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"smile")]
         Smile = 31,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chart")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chart")]
         Chart = 32,
 
         [System.Runtime.Serialization.EnumMember(Value = @"at")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"at")]
         At = 33,
 
         [System.Runtime.Serialization.EnumMember(Value = @"mail")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"mail")]
         Mail = 34,
 
         [System.Runtime.Serialization.EnumMember(Value = @"trash")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"trash")]
         Trash = 35,
 
         [System.Runtime.Serialization.EnumMember(Value = @"pencil")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"pencil")]
         Pencil = 36,
 
         [System.Runtime.Serialization.EnumMember(Value = @"external")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"external")]
         External = 37,
 
         [System.Runtime.Serialization.EnumMember(Value = @"copy")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"copy")]
         Copy = 38,
 
         [System.Runtime.Serialization.EnumMember(Value = @"key")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"key")]
         Key = 39,
 
         [System.Runtime.Serialization.EnumMember(Value = @"lock")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"lock")]
         Lock = 40,
 
         [System.Runtime.Serialization.EnumMember(Value = @"activity")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"activity")]
         Activity = 41,
 
         [System.Runtime.Serialization.EnumMember(Value = @"dashboard")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"dashboard")]
         Dashboard = 42,
 
         [System.Runtime.Serialization.EnumMember(Value = @"scroll")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"scroll")]
         Scroll = 43,
 
         [System.Runtime.Serialization.EnumMember(Value = @"eye")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"eye")]
         Eye = 44,
 
         [System.Runtime.Serialization.EnumMember(Value = @"alert")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"alert")]
         Alert = 45,
 
         [System.Runtime.Serialization.EnumMember(Value = @"info")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"info")]
         Info = 46,
 
         [System.Runtime.Serialization.EnumMember(Value = @"clock")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"clock")]
         Clock = 47,
 
         [System.Runtime.Serialization.EnumMember(Value = @"arrow-right")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"arrow-right")]
         ArrowRight = 48,
 
         [System.Runtime.Serialization.EnumMember(Value = @"arrow-left")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"arrow-left")]
         ArrowLeft = 49,
 
         [System.Runtime.Serialization.EnumMember(Value = @"trophy")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"trophy")]
         Trophy = 50,
 
         [System.Runtime.Serialization.EnumMember(Value = @"swords")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"swords")]
         Swords = 51,
 
         [System.Runtime.Serialization.EnumMember(Value = @"home")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"home")]
         Home = 52,
 
         [System.Runtime.Serialization.EnumMember(Value = @"globe")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"globe")]
         Globe = 53,
 
         [System.Runtime.Serialization.EnumMember(Value = @"link")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"link")]
         Link = 54,
 
         [System.Runtime.Serialization.EnumMember(Value = @"printer")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"printer")]
         Printer = 55,
 
         [System.Runtime.Serialization.EnumMember(Value = @"vote")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"vote")]
         Vote = 56,
 
         [System.Runtime.Serialization.EnumMember(Value = @"inbox")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"inbox")]
         Inbox = 57,
 
         [System.Runtime.Serialization.EnumMember(Value = @"clipboard")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"clipboard")]
         Clipboard = 58,
 
         [System.Runtime.Serialization.EnumMember(Value = @"thumbs-up")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"thumbs-up")]
         ThumbsUp = 59,
 
         [System.Runtime.Serialization.EnumMember(Value = @"thumbs-down")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"thumbs-down")]
         ThumbsDown = 60,
 
         [System.Runtime.Serialization.EnumMember(Value = @"hourglass")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"hourglass")]
         Hourglass = 61,
 
         [System.Runtime.Serialization.EnumMember(Value = @"send")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"send")]
         Send = 62,
 
         [System.Runtime.Serialization.EnumMember(Value = @"note")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"note")]
         Note = 63,
 
         [System.Runtime.Serialization.EnumMember(Value = @"megaphone")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"megaphone")]
         Megaphone = 64,
 
         [System.Runtime.Serialization.EnumMember(Value = @"plug")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"plug")]
         Plug = 65,
 
         [System.Runtime.Serialization.EnumMember(Value = @"headset")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"headset")]
         Headset = 66,
 
         [System.Runtime.Serialization.EnumMember(Value = @"unlink")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"unlink")]
         Unlink = 67,
 
         [System.Runtime.Serialization.EnumMember(Value = @"volume")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"volume")]
         Volume = 68,
 
         [System.Runtime.Serialization.EnumMember(Value = @"folder")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"folder")]
         Folder = 69,
 
         [System.Runtime.Serialization.EnumMember(Value = @"moon")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"moon")]
         Moon = 70,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sun")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"sun")]
         Sun = 71,
 
         [System.Runtime.Serialization.EnumMember(Value = @"book")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"book")]
         Book = 72,
 
         [System.Runtime.Serialization.EnumMember(Value = @"code")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"code")]
         Code = 73,
 
         [System.Runtime.Serialization.EnumMember(Value = @"layers")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"layers")]
         Layers = 74,
 
         [System.Runtime.Serialization.EnumMember(Value = @"ban")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"ban")]
         Ban = 75,
 
         [System.Runtime.Serialization.EnumMember(Value = @"download")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"download")]
         Download = 76,
 
         [System.Runtime.Serialization.EnumMember(Value = @"crown")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"crown")]
         Crown = 77,
 
         [System.Runtime.Serialization.EnumMember(Value = @"radio")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"radio")]
         Radio = 78,
 
         [System.Runtime.Serialization.EnumMember(Value = @"mic")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"mic")]
         Mic = 79,
 
         [System.Runtime.Serialization.EnumMember(Value = @"smartphone")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"smartphone")]
         Smartphone = 80,
 
         [System.Runtime.Serialization.EnumMember(Value = @"monitor")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"monitor")]
         Monitor = 81,
 
         [System.Runtime.Serialization.EnumMember(Value = @"clipboard-check")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"clipboard-check")]
         ClipboardCheck = 82,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sparkles")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"sparkles")]
         Sparkles = 83,
 
         [System.Runtime.Serialization.EnumMember(Value = @"filter")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"filter")]
         Filter = 84,
 
         [System.Runtime.Serialization.EnumMember(Value = @"refresh")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"refresh")]
         Refresh = 85,
 
         [System.Runtime.Serialization.EnumMember(Value = @"image")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"image")]
         Image = 86,
 
         [System.Runtime.Serialization.EnumMember(Value = @"upload")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"upload")]
         Upload = 87,
 
         [System.Runtime.Serialization.EnumMember(Value = @"qr-code")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"qr-code")]
         QrCode = 88,
 
         [System.Runtime.Serialization.EnumMember(Value = @"newspaper")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"newspaper")]
         Newspaper = 89,
 
         [System.Runtime.Serialization.EnumMember(Value = @"file")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"file")]
         File = 90,
 
         [System.Runtime.Serialization.EnumMember(Value = @"handshake")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"handshake")]
         Handshake = 91,
 
         [System.Runtime.Serialization.EnumMember(Value = @"layout")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"layout")]
         Layout = 92,
 
         [System.Runtime.Serialization.EnumMember(Value = @"grip")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"grip")]
         Grip = 93,
 
         [System.Runtime.Serialization.EnumMember(Value = @"play")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"play")]
         Play = 94,
 
         [System.Runtime.Serialization.EnumMember(Value = @"pause")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"pause")]
         Pause = 95,
 
         [System.Runtime.Serialization.EnumMember(Value = @"discord")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"discord")]
         Discord = 96,
 
         [System.Runtime.Serialization.EnumMember(Value = @"steam")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"steam")]
         Steam = 97,
 
         [System.Runtime.Serialization.EnumMember(Value = @"twitch")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"twitch")]
         Twitch = 98,
 
         [System.Runtime.Serialization.EnumMember(Value = @"fist")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"fist")]
         Fist = 99,
 
         [System.Runtime.Serialization.EnumMember(Value = @"platform-shapes")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"platform-shapes")]
         PlatformShapes = 100,
 
         [System.Runtime.Serialization.EnumMember(Value = @"platform-orb")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"platform-orb")]
         PlatformOrb = 101,
 
         [System.Runtime.Serialization.EnumMember(Value = @"platform-handheld")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"platform-handheld")]
         PlatformHandheld = 102,
 
     }
@@ -92302,45 +92756,59 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"flag")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"flag")]
         Flag = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"fist")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"fist")]
         Fist = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"trophy")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"trophy")]
         Trophy = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"users")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"users")]
         Users = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"gamepad")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"gamepad")]
         Gamepad = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"server")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"server")]
         Server = 5,
 
         [System.Runtime.Serialization.EnumMember(Value = @"discord")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"discord")]
         Discord = 6,
 
         [System.Runtime.Serialization.EnumMember(Value = @"globe")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"globe")]
         Globe = 7,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sparkles")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"sparkles")]
         Sparkles = 8,
 
         [System.Runtime.Serialization.EnumMember(Value = @"crown")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"crown")]
         Crown = 9,
 
         [System.Runtime.Serialization.EnumMember(Value = @"swords")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"swords")]
         Swords = 10,
 
         [System.Runtime.Serialization.EnumMember(Value = @"calendar")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"calendar")]
         Calendar = 11,
 
         [System.Runtime.Serialization.EnumMember(Value = @"megaphone")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"megaphone")]
         Megaphone = 12,
 
         [System.Runtime.Serialization.EnumMember(Value = @"home")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"home")]
         Home = 13,
 
     }
@@ -92841,9 +93309,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"allow")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"allow")]
         Allow = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"deny")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"deny")]
         Deny = 1,
 
     }
@@ -92853,9 +93323,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"squad")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"squad")]
         Squad = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"server")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"server")]
         Server = 1,
 
     }
@@ -93294,12 +93766,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"de")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"de")]
         De = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"en")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"en")]
         En = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"fr")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"fr")]
         Fr = 2,
 
     }
@@ -93309,1260 +93784,1679 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Abidjan")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Abidjan")]
         Africa_Abidjan = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Accra")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Accra")]
         Africa_Accra = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Addis_Ababa")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Addis_Ababa")]
         Africa_Addis_Ababa = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Algiers")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Algiers")]
         Africa_Algiers = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Asmara")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Asmara")]
         Africa_Asmara = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Bamako")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Bamako")]
         Africa_Bamako = 5,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Bangui")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Bangui")]
         Africa_Bangui = 6,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Banjul")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Banjul")]
         Africa_Banjul = 7,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Bissau")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Bissau")]
         Africa_Bissau = 8,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Blantyre")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Blantyre")]
         Africa_Blantyre = 9,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Brazzaville")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Brazzaville")]
         Africa_Brazzaville = 10,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Bujumbura")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Bujumbura")]
         Africa_Bujumbura = 11,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Cairo")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Cairo")]
         Africa_Cairo = 12,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Casablanca")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Casablanca")]
         Africa_Casablanca = 13,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Ceuta")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Ceuta")]
         Africa_Ceuta = 14,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Conakry")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Conakry")]
         Africa_Conakry = 15,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Dakar")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Dakar")]
         Africa_Dakar = 16,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Dar_es_Salaam")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Dar_es_Salaam")]
         Africa_Dar_es_Salaam = 17,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Djibouti")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Djibouti")]
         Africa_Djibouti = 18,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Douala")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Douala")]
         Africa_Douala = 19,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/El_Aaiun")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/El_Aaiun")]
         Africa_El_Aaiun = 20,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Freetown")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Freetown")]
         Africa_Freetown = 21,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Gaborone")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Gaborone")]
         Africa_Gaborone = 22,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Harare")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Harare")]
         Africa_Harare = 23,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Johannesburg")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Johannesburg")]
         Africa_Johannesburg = 24,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Juba")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Juba")]
         Africa_Juba = 25,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Kampala")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Kampala")]
         Africa_Kampala = 26,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Khartoum")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Khartoum")]
         Africa_Khartoum = 27,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Kigali")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Kigali")]
         Africa_Kigali = 28,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Kinshasa")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Kinshasa")]
         Africa_Kinshasa = 29,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Lagos")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Lagos")]
         Africa_Lagos = 30,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Libreville")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Libreville")]
         Africa_Libreville = 31,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Lome")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Lome")]
         Africa_Lome = 32,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Luanda")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Luanda")]
         Africa_Luanda = 33,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Lubumbashi")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Lubumbashi")]
         Africa_Lubumbashi = 34,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Lusaka")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Lusaka")]
         Africa_Lusaka = 35,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Malabo")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Malabo")]
         Africa_Malabo = 36,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Maputo")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Maputo")]
         Africa_Maputo = 37,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Maseru")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Maseru")]
         Africa_Maseru = 38,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Mbabane")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Mbabane")]
         Africa_Mbabane = 39,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Mogadishu")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Mogadishu")]
         Africa_Mogadishu = 40,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Monrovia")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Monrovia")]
         Africa_Monrovia = 41,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Nairobi")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Nairobi")]
         Africa_Nairobi = 42,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Ndjamena")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Ndjamena")]
         Africa_Ndjamena = 43,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Niamey")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Niamey")]
         Africa_Niamey = 44,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Nouakchott")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Nouakchott")]
         Africa_Nouakchott = 45,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Ouagadougou")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Ouagadougou")]
         Africa_Ouagadougou = 46,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Porto-Novo")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Porto-Novo")]
         Africa_PortoNovo = 47,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Sao_Tome")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Sao_Tome")]
         Africa_Sao_Tome = 48,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Tripoli")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Tripoli")]
         Africa_Tripoli = 49,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Tunis")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Tunis")]
         Africa_Tunis = 50,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Africa/Windhoek")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Africa/Windhoek")]
         Africa_Windhoek = 51,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Adak")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Adak")]
         America_Adak = 52,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Anchorage")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Anchorage")]
         America_Anchorage = 53,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Anguilla")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Anguilla")]
         America_Anguilla = 54,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Antigua")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Antigua")]
         America_Antigua = 55,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Araguaina")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Araguaina")]
         America_Araguaina = 56,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Argentina/Buenos_Aires")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Argentina/Buenos_Aires")]
         America_Argentina_Buenos_Aires = 57,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Argentina/Catamarca")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Argentina/Catamarca")]
         America_Argentina_Catamarca = 58,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Argentina/Cordoba")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Argentina/Cordoba")]
         America_Argentina_Cordoba = 59,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Argentina/Jujuy")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Argentina/Jujuy")]
         America_Argentina_Jujuy = 60,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Argentina/La_Rioja")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Argentina/La_Rioja")]
         America_Argentina_La_Rioja = 61,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Argentina/Mendoza")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Argentina/Mendoza")]
         America_Argentina_Mendoza = 62,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Argentina/Rio_Gallegos")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Argentina/Rio_Gallegos")]
         America_Argentina_Rio_Gallegos = 63,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Argentina/Salta")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Argentina/Salta")]
         America_Argentina_Salta = 64,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Argentina/San_Juan")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Argentina/San_Juan")]
         America_Argentina_San_Juan = 65,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Argentina/San_Luis")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Argentina/San_Luis")]
         America_Argentina_San_Luis = 66,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Argentina/Tucuman")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Argentina/Tucuman")]
         America_Argentina_Tucuman = 67,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Argentina/Ushuaia")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Argentina/Ushuaia")]
         America_Argentina_Ushuaia = 68,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Aruba")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Aruba")]
         America_Aruba = 69,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Asuncion")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Asuncion")]
         America_Asuncion = 70,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Atikokan")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Atikokan")]
         America_Atikokan = 71,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Bahia")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Bahia")]
         America_Bahia = 72,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Bahia_Banderas")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Bahia_Banderas")]
         America_Bahia_Banderas = 73,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Barbados")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Barbados")]
         America_Barbados = 74,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Belem")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Belem")]
         America_Belem = 75,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Belize")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Belize")]
         America_Belize = 76,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Blanc-Sablon")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Blanc-Sablon")]
         America_BlancSablon = 77,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Boa_Vista")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Boa_Vista")]
         America_Boa_Vista = 78,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Bogota")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Bogota")]
         America_Bogota = 79,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Boise")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Boise")]
         America_Boise = 80,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Cambridge_Bay")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Cambridge_Bay")]
         America_Cambridge_Bay = 81,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Campo_Grande")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Campo_Grande")]
         America_Campo_Grande = 82,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Cancun")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Cancun")]
         America_Cancun = 83,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Caracas")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Caracas")]
         America_Caracas = 84,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Cayenne")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Cayenne")]
         America_Cayenne = 85,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Cayman")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Cayman")]
         America_Cayman = 86,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Chicago")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Chicago")]
         America_Chicago = 87,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Chihuahua")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Chihuahua")]
         America_Chihuahua = 88,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Ciudad_Juarez")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Ciudad_Juarez")]
         America_Ciudad_Juarez = 89,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Costa_Rica")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Costa_Rica")]
         America_Costa_Rica = 90,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Coyhaique")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Coyhaique")]
         America_Coyhaique = 91,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Creston")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Creston")]
         America_Creston = 92,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Cuiaba")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Cuiaba")]
         America_Cuiaba = 93,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Curacao")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Curacao")]
         America_Curacao = 94,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Danmarkshavn")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Danmarkshavn")]
         America_Danmarkshavn = 95,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Dawson")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Dawson")]
         America_Dawson = 96,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Dawson_Creek")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Dawson_Creek")]
         America_Dawson_Creek = 97,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Denver")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Denver")]
         America_Denver = 98,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Detroit")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Detroit")]
         America_Detroit = 99,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Dominica")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Dominica")]
         America_Dominica = 100,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Edmonton")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Edmonton")]
         America_Edmonton = 101,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Eirunepe")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Eirunepe")]
         America_Eirunepe = 102,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/El_Salvador")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/El_Salvador")]
         America_El_Salvador = 103,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Fort_Nelson")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Fort_Nelson")]
         America_Fort_Nelson = 104,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Fortaleza")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Fortaleza")]
         America_Fortaleza = 105,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Glace_Bay")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Glace_Bay")]
         America_Glace_Bay = 106,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Goose_Bay")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Goose_Bay")]
         America_Goose_Bay = 107,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Grand_Turk")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Grand_Turk")]
         America_Grand_Turk = 108,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Grenada")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Grenada")]
         America_Grenada = 109,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Guadeloupe")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Guadeloupe")]
         America_Guadeloupe = 110,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Guatemala")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Guatemala")]
         America_Guatemala = 111,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Guayaquil")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Guayaquil")]
         America_Guayaquil = 112,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Guyana")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Guyana")]
         America_Guyana = 113,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Halifax")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Halifax")]
         America_Halifax = 114,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Havana")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Havana")]
         America_Havana = 115,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Hermosillo")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Hermosillo")]
         America_Hermosillo = 116,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Indiana/Indianapolis")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Indiana/Indianapolis")]
         America_Indiana_Indianapolis = 117,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Indiana/Knox")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Indiana/Knox")]
         America_Indiana_Knox = 118,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Indiana/Marengo")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Indiana/Marengo")]
         America_Indiana_Marengo = 119,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Indiana/Petersburg")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Indiana/Petersburg")]
         America_Indiana_Petersburg = 120,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Indiana/Tell_City")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Indiana/Tell_City")]
         America_Indiana_Tell_City = 121,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Indiana/Vevay")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Indiana/Vevay")]
         America_Indiana_Vevay = 122,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Indiana/Vincennes")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Indiana/Vincennes")]
         America_Indiana_Vincennes = 123,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Indiana/Winamac")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Indiana/Winamac")]
         America_Indiana_Winamac = 124,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Inuvik")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Inuvik")]
         America_Inuvik = 125,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Iqaluit")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Iqaluit")]
         America_Iqaluit = 126,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Jamaica")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Jamaica")]
         America_Jamaica = 127,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Juneau")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Juneau")]
         America_Juneau = 128,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Kentucky/Louisville")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Kentucky/Louisville")]
         America_Kentucky_Louisville = 129,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Kentucky/Monticello")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Kentucky/Monticello")]
         America_Kentucky_Monticello = 130,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Kralendijk")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Kralendijk")]
         America_Kralendijk = 131,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/La_Paz")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/La_Paz")]
         America_La_Paz = 132,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Lima")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Lima")]
         America_Lima = 133,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Los_Angeles")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Los_Angeles")]
         America_Los_Angeles = 134,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Lower_Princes")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Lower_Princes")]
         America_Lower_Princes = 135,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Maceio")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Maceio")]
         America_Maceio = 136,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Managua")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Managua")]
         America_Managua = 137,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Manaus")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Manaus")]
         America_Manaus = 138,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Marigot")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Marigot")]
         America_Marigot = 139,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Martinique")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Martinique")]
         America_Martinique = 140,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Matamoros")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Matamoros")]
         America_Matamoros = 141,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Mazatlan")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Mazatlan")]
         America_Mazatlan = 142,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Menominee")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Menominee")]
         America_Menominee = 143,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Merida")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Merida")]
         America_Merida = 144,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Metlakatla")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Metlakatla")]
         America_Metlakatla = 145,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Mexico_City")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Mexico_City")]
         America_Mexico_City = 146,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Miquelon")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Miquelon")]
         America_Miquelon = 147,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Moncton")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Moncton")]
         America_Moncton = 148,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Monterrey")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Monterrey")]
         America_Monterrey = 149,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Montevideo")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Montevideo")]
         America_Montevideo = 150,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Montserrat")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Montserrat")]
         America_Montserrat = 151,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Nassau")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Nassau")]
         America_Nassau = 152,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/New_York")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/New_York")]
         America_New_York = 153,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Nome")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Nome")]
         America_Nome = 154,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Noronha")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Noronha")]
         America_Noronha = 155,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/North_Dakota/Beulah")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/North_Dakota/Beulah")]
         America_North_Dakota_Beulah = 156,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/North_Dakota/Center")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/North_Dakota/Center")]
         America_North_Dakota_Center = 157,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/North_Dakota/New_Salem")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/North_Dakota/New_Salem")]
         America_North_Dakota_New_Salem = 158,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Nuuk")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Nuuk")]
         America_Nuuk = 159,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Ojinaga")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Ojinaga")]
         America_Ojinaga = 160,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Panama")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Panama")]
         America_Panama = 161,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Paramaribo")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Paramaribo")]
         America_Paramaribo = 162,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Phoenix")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Phoenix")]
         America_Phoenix = 163,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Port-au-Prince")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Port-au-Prince")]
         America_PortAuPrince = 164,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Port_of_Spain")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Port_of_Spain")]
         America_Port_of_Spain = 165,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Porto_Velho")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Porto_Velho")]
         America_Porto_Velho = 166,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Puerto_Rico")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Puerto_Rico")]
         America_Puerto_Rico = 167,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Punta_Arenas")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Punta_Arenas")]
         America_Punta_Arenas = 168,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Rankin_Inlet")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Rankin_Inlet")]
         America_Rankin_Inlet = 169,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Recife")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Recife")]
         America_Recife = 170,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Regina")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Regina")]
         America_Regina = 171,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Resolute")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Resolute")]
         America_Resolute = 172,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Rio_Branco")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Rio_Branco")]
         America_Rio_Branco = 173,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Santarem")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Santarem")]
         America_Santarem = 174,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Santiago")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Santiago")]
         America_Santiago = 175,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Santo_Domingo")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Santo_Domingo")]
         America_Santo_Domingo = 176,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Sao_Paulo")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Sao_Paulo")]
         America_Sao_Paulo = 177,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Scoresbysund")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Scoresbysund")]
         America_Scoresbysund = 178,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Sitka")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Sitka")]
         America_Sitka = 179,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/St_Barthelemy")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/St_Barthelemy")]
         America_St_Barthelemy = 180,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/St_Johns")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/St_Johns")]
         America_St_Johns = 181,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/St_Kitts")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/St_Kitts")]
         America_St_Kitts = 182,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/St_Lucia")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/St_Lucia")]
         America_St_Lucia = 183,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/St_Thomas")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/St_Thomas")]
         America_St_Thomas = 184,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/St_Vincent")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/St_Vincent")]
         America_St_Vincent = 185,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Swift_Current")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Swift_Current")]
         America_Swift_Current = 186,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Tegucigalpa")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Tegucigalpa")]
         America_Tegucigalpa = 187,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Thule")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Thule")]
         America_Thule = 188,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Tijuana")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Tijuana")]
         America_Tijuana = 189,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Toronto")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Toronto")]
         America_Toronto = 190,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Tortola")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Tortola")]
         America_Tortola = 191,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Vancouver")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Vancouver")]
         America_Vancouver = 192,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Whitehorse")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Whitehorse")]
         America_Whitehorse = 193,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Winnipeg")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Winnipeg")]
         America_Winnipeg = 194,
 
         [System.Runtime.Serialization.EnumMember(Value = @"America/Yakutat")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"America/Yakutat")]
         America_Yakutat = 195,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Antarctica/Casey")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Antarctica/Casey")]
         Antarctica_Casey = 196,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Antarctica/Davis")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Antarctica/Davis")]
         Antarctica_Davis = 197,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Antarctica/DumontDUrville")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Antarctica/DumontDUrville")]
         Antarctica_DumontDUrville = 198,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Antarctica/Macquarie")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Antarctica/Macquarie")]
         Antarctica_Macquarie = 199,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Antarctica/Mawson")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Antarctica/Mawson")]
         Antarctica_Mawson = 200,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Antarctica/McMurdo")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Antarctica/McMurdo")]
         Antarctica_McMurdo = 201,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Antarctica/Palmer")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Antarctica/Palmer")]
         Antarctica_Palmer = 202,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Antarctica/Rothera")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Antarctica/Rothera")]
         Antarctica_Rothera = 203,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Antarctica/Syowa")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Antarctica/Syowa")]
         Antarctica_Syowa = 204,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Antarctica/Troll")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Antarctica/Troll")]
         Antarctica_Troll = 205,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Antarctica/Vostok")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Antarctica/Vostok")]
         Antarctica_Vostok = 206,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Arctic/Longyearbyen")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Arctic/Longyearbyen")]
         Arctic_Longyearbyen = 207,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Aden")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Aden")]
         Asia_Aden = 208,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Almaty")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Almaty")]
         Asia_Almaty = 209,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Amman")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Amman")]
         Asia_Amman = 210,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Anadyr")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Anadyr")]
         Asia_Anadyr = 211,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Aqtau")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Aqtau")]
         Asia_Aqtau = 212,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Aqtobe")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Aqtobe")]
         Asia_Aqtobe = 213,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Ashgabat")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Ashgabat")]
         Asia_Ashgabat = 214,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Atyrau")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Atyrau")]
         Asia_Atyrau = 215,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Baghdad")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Baghdad")]
         Asia_Baghdad = 216,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Bahrain")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Bahrain")]
         Asia_Bahrain = 217,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Baku")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Baku")]
         Asia_Baku = 218,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Bangkok")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Bangkok")]
         Asia_Bangkok = 219,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Barnaul")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Barnaul")]
         Asia_Barnaul = 220,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Beirut")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Beirut")]
         Asia_Beirut = 221,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Bishkek")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Bishkek")]
         Asia_Bishkek = 222,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Brunei")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Brunei")]
         Asia_Brunei = 223,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Chita")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Chita")]
         Asia_Chita = 224,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Colombo")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Colombo")]
         Asia_Colombo = 225,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Damascus")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Damascus")]
         Asia_Damascus = 226,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Dhaka")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Dhaka")]
         Asia_Dhaka = 227,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Dili")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Dili")]
         Asia_Dili = 228,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Dubai")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Dubai")]
         Asia_Dubai = 229,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Dushanbe")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Dushanbe")]
         Asia_Dushanbe = 230,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Famagusta")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Famagusta")]
         Asia_Famagusta = 231,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Gaza")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Gaza")]
         Asia_Gaza = 232,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Hebron")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Hebron")]
         Asia_Hebron = 233,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Ho_Chi_Minh")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Ho_Chi_Minh")]
         Asia_Ho_Chi_Minh = 234,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Hong_Kong")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Hong_Kong")]
         Asia_Hong_Kong = 235,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Hovd")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Hovd")]
         Asia_Hovd = 236,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Irkutsk")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Irkutsk")]
         Asia_Irkutsk = 237,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Jakarta")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Jakarta")]
         Asia_Jakarta = 238,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Jayapura")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Jayapura")]
         Asia_Jayapura = 239,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Jerusalem")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Jerusalem")]
         Asia_Jerusalem = 240,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Kabul")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Kabul")]
         Asia_Kabul = 241,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Kamchatka")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Kamchatka")]
         Asia_Kamchatka = 242,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Karachi")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Karachi")]
         Asia_Karachi = 243,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Kathmandu")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Kathmandu")]
         Asia_Kathmandu = 244,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Khandyga")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Khandyga")]
         Asia_Khandyga = 245,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Kolkata")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Kolkata")]
         Asia_Kolkata = 246,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Krasnoyarsk")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Krasnoyarsk")]
         Asia_Krasnoyarsk = 247,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Kuala_Lumpur")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Kuala_Lumpur")]
         Asia_Kuala_Lumpur = 248,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Kuching")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Kuching")]
         Asia_Kuching = 249,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Kuwait")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Kuwait")]
         Asia_Kuwait = 250,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Macau")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Macau")]
         Asia_Macau = 251,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Magadan")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Magadan")]
         Asia_Magadan = 252,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Makassar")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Makassar")]
         Asia_Makassar = 253,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Manila")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Manila")]
         Asia_Manila = 254,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Muscat")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Muscat")]
         Asia_Muscat = 255,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Nicosia")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Nicosia")]
         Asia_Nicosia = 256,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Novokuznetsk")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Novokuznetsk")]
         Asia_Novokuznetsk = 257,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Novosibirsk")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Novosibirsk")]
         Asia_Novosibirsk = 258,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Omsk")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Omsk")]
         Asia_Omsk = 259,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Oral")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Oral")]
         Asia_Oral = 260,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Phnom_Penh")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Phnom_Penh")]
         Asia_Phnom_Penh = 261,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Pontianak")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Pontianak")]
         Asia_Pontianak = 262,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Pyongyang")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Pyongyang")]
         Asia_Pyongyang = 263,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Qatar")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Qatar")]
         Asia_Qatar = 264,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Qostanay")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Qostanay")]
         Asia_Qostanay = 265,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Qyzylorda")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Qyzylorda")]
         Asia_Qyzylorda = 266,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Riyadh")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Riyadh")]
         Asia_Riyadh = 267,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Sakhalin")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Sakhalin")]
         Asia_Sakhalin = 268,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Samarkand")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Samarkand")]
         Asia_Samarkand = 269,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Seoul")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Seoul")]
         Asia_Seoul = 270,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Shanghai")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Shanghai")]
         Asia_Shanghai = 271,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Singapore")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Singapore")]
         Asia_Singapore = 272,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Srednekolymsk")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Srednekolymsk")]
         Asia_Srednekolymsk = 273,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Taipei")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Taipei")]
         Asia_Taipei = 274,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Tashkent")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Tashkent")]
         Asia_Tashkent = 275,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Tbilisi")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Tbilisi")]
         Asia_Tbilisi = 276,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Tehran")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Tehran")]
         Asia_Tehran = 277,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Thimphu")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Thimphu")]
         Asia_Thimphu = 278,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Tokyo")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Tokyo")]
         Asia_Tokyo = 279,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Tomsk")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Tomsk")]
         Asia_Tomsk = 280,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Ulaanbaatar")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Ulaanbaatar")]
         Asia_Ulaanbaatar = 281,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Urumqi")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Urumqi")]
         Asia_Urumqi = 282,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Ust-Nera")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Ust-Nera")]
         Asia_UstNera = 283,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Vientiane")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Vientiane")]
         Asia_Vientiane = 284,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Vladivostok")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Vladivostok")]
         Asia_Vladivostok = 285,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Yakutsk")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Yakutsk")]
         Asia_Yakutsk = 286,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Yangon")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Yangon")]
         Asia_Yangon = 287,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Yekaterinburg")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Yekaterinburg")]
         Asia_Yekaterinburg = 288,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Asia/Yerevan")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Asia/Yerevan")]
         Asia_Yerevan = 289,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Atlantic/Azores")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Atlantic/Azores")]
         Atlantic_Azores = 290,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Atlantic/Bermuda")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Atlantic/Bermuda")]
         Atlantic_Bermuda = 291,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Atlantic/Canary")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Atlantic/Canary")]
         Atlantic_Canary = 292,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Atlantic/Cape_Verde")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Atlantic/Cape_Verde")]
         Atlantic_Cape_Verde = 293,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Atlantic/Faroe")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Atlantic/Faroe")]
         Atlantic_Faroe = 294,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Atlantic/Madeira")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Atlantic/Madeira")]
         Atlantic_Madeira = 295,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Atlantic/Reykjavik")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Atlantic/Reykjavik")]
         Atlantic_Reykjavik = 296,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Atlantic/South_Georgia")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Atlantic/South_Georgia")]
         Atlantic_South_Georgia = 297,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Atlantic/St_Helena")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Atlantic/St_Helena")]
         Atlantic_St_Helena = 298,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Atlantic/Stanley")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Atlantic/Stanley")]
         Atlantic_Stanley = 299,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Australia/Adelaide")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Australia/Adelaide")]
         Australia_Adelaide = 300,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Australia/Brisbane")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Australia/Brisbane")]
         Australia_Brisbane = 301,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Australia/Broken_Hill")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Australia/Broken_Hill")]
         Australia_Broken_Hill = 302,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Australia/Darwin")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Australia/Darwin")]
         Australia_Darwin = 303,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Australia/Eucla")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Australia/Eucla")]
         Australia_Eucla = 304,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Australia/Hobart")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Australia/Hobart")]
         Australia_Hobart = 305,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Australia/Lindeman")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Australia/Lindeman")]
         Australia_Lindeman = 306,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Australia/Lord_Howe")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Australia/Lord_Howe")]
         Australia_Lord_Howe = 307,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Australia/Melbourne")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Australia/Melbourne")]
         Australia_Melbourne = 308,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Australia/Perth")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Australia/Perth")]
         Australia_Perth = 309,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Australia/Sydney")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Australia/Sydney")]
         Australia_Sydney = 310,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Amsterdam")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Amsterdam")]
         Europe_Amsterdam = 311,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Andorra")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Andorra")]
         Europe_Andorra = 312,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Astrakhan")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Astrakhan")]
         Europe_Astrakhan = 313,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Athens")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Athens")]
         Europe_Athens = 314,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Belgrade")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Belgrade")]
         Europe_Belgrade = 315,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Berlin")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Berlin")]
         Europe_Berlin = 316,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Bratislava")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Bratislava")]
         Europe_Bratislava = 317,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Brussels")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Brussels")]
         Europe_Brussels = 318,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Bucharest")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Bucharest")]
         Europe_Bucharest = 319,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Budapest")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Budapest")]
         Europe_Budapest = 320,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Busingen")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Busingen")]
         Europe_Busingen = 321,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Chisinau")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Chisinau")]
         Europe_Chisinau = 322,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Copenhagen")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Copenhagen")]
         Europe_Copenhagen = 323,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Dublin")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Dublin")]
         Europe_Dublin = 324,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Gibraltar")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Gibraltar")]
         Europe_Gibraltar = 325,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Guernsey")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Guernsey")]
         Europe_Guernsey = 326,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Helsinki")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Helsinki")]
         Europe_Helsinki = 327,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Isle_of_Man")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Isle_of_Man")]
         Europe_Isle_of_Man = 328,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Istanbul")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Istanbul")]
         Europe_Istanbul = 329,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Jersey")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Jersey")]
         Europe_Jersey = 330,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Kaliningrad")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Kaliningrad")]
         Europe_Kaliningrad = 331,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Kirov")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Kirov")]
         Europe_Kirov = 332,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Kyiv")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Kyiv")]
         Europe_Kyiv = 333,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Lisbon")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Lisbon")]
         Europe_Lisbon = 334,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Ljubljana")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Ljubljana")]
         Europe_Ljubljana = 335,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/London")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/London")]
         Europe_London = 336,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Luxembourg")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Luxembourg")]
         Europe_Luxembourg = 337,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Madrid")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Madrid")]
         Europe_Madrid = 338,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Malta")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Malta")]
         Europe_Malta = 339,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Mariehamn")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Mariehamn")]
         Europe_Mariehamn = 340,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Minsk")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Minsk")]
         Europe_Minsk = 341,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Monaco")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Monaco")]
         Europe_Monaco = 342,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Moscow")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Moscow")]
         Europe_Moscow = 343,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Oslo")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Oslo")]
         Europe_Oslo = 344,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Paris")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Paris")]
         Europe_Paris = 345,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Podgorica")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Podgorica")]
         Europe_Podgorica = 346,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Prague")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Prague")]
         Europe_Prague = 347,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Riga")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Riga")]
         Europe_Riga = 348,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Rome")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Rome")]
         Europe_Rome = 349,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Samara")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Samara")]
         Europe_Samara = 350,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/San_Marino")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/San_Marino")]
         Europe_San_Marino = 351,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Sarajevo")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Sarajevo")]
         Europe_Sarajevo = 352,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Saratov")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Saratov")]
         Europe_Saratov = 353,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Simferopol")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Simferopol")]
         Europe_Simferopol = 354,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Skopje")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Skopje")]
         Europe_Skopje = 355,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Sofia")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Sofia")]
         Europe_Sofia = 356,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Stockholm")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Stockholm")]
         Europe_Stockholm = 357,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Tallinn")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Tallinn")]
         Europe_Tallinn = 358,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Tirane")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Tirane")]
         Europe_Tirane = 359,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Ulyanovsk")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Ulyanovsk")]
         Europe_Ulyanovsk = 360,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Vaduz")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Vaduz")]
         Europe_Vaduz = 361,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Vatican")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Vatican")]
         Europe_Vatican = 362,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Vienna")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Vienna")]
         Europe_Vienna = 363,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Vilnius")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Vilnius")]
         Europe_Vilnius = 364,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Volgograd")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Volgograd")]
         Europe_Volgograd = 365,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Warsaw")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Warsaw")]
         Europe_Warsaw = 366,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Zagreb")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Zagreb")]
         Europe_Zagreb = 367,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Europe/Zurich")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Europe/Zurich")]
         Europe_Zurich = 368,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Indian/Antananarivo")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Indian/Antananarivo")]
         Indian_Antananarivo = 369,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Indian/Chagos")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Indian/Chagos")]
         Indian_Chagos = 370,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Indian/Christmas")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Indian/Christmas")]
         Indian_Christmas = 371,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Indian/Cocos")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Indian/Cocos")]
         Indian_Cocos = 372,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Indian/Comoro")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Indian/Comoro")]
         Indian_Comoro = 373,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Indian/Kerguelen")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Indian/Kerguelen")]
         Indian_Kerguelen = 374,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Indian/Mahe")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Indian/Mahe")]
         Indian_Mahe = 375,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Indian/Maldives")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Indian/Maldives")]
         Indian_Maldives = 376,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Indian/Mauritius")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Indian/Mauritius")]
         Indian_Mauritius = 377,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Indian/Mayotte")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Indian/Mayotte")]
         Indian_Mayotte = 378,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Indian/Reunion")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Indian/Reunion")]
         Indian_Reunion = 379,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Apia")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Apia")]
         Pacific_Apia = 380,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Auckland")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Auckland")]
         Pacific_Auckland = 381,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Bougainville")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Bougainville")]
         Pacific_Bougainville = 382,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Chatham")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Chatham")]
         Pacific_Chatham = 383,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Chuuk")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Chuuk")]
         Pacific_Chuuk = 384,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Easter")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Easter")]
         Pacific_Easter = 385,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Efate")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Efate")]
         Pacific_Efate = 386,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Fakaofo")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Fakaofo")]
         Pacific_Fakaofo = 387,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Fiji")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Fiji")]
         Pacific_Fiji = 388,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Funafuti")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Funafuti")]
         Pacific_Funafuti = 389,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Galapagos")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Galapagos")]
         Pacific_Galapagos = 390,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Gambier")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Gambier")]
         Pacific_Gambier = 391,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Guadalcanal")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Guadalcanal")]
         Pacific_Guadalcanal = 392,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Guam")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Guam")]
         Pacific_Guam = 393,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Honolulu")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Honolulu")]
         Pacific_Honolulu = 394,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Kanton")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Kanton")]
         Pacific_Kanton = 395,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Kiritimati")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Kiritimati")]
         Pacific_Kiritimati = 396,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Kosrae")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Kosrae")]
         Pacific_Kosrae = 397,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Kwajalein")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Kwajalein")]
         Pacific_Kwajalein = 398,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Majuro")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Majuro")]
         Pacific_Majuro = 399,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Marquesas")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Marquesas")]
         Pacific_Marquesas = 400,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Midway")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Midway")]
         Pacific_Midway = 401,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Nauru")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Nauru")]
         Pacific_Nauru = 402,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Niue")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Niue")]
         Pacific_Niue = 403,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Norfolk")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Norfolk")]
         Pacific_Norfolk = 404,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Noumea")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Noumea")]
         Pacific_Noumea = 405,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Pago_Pago")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Pago_Pago")]
         Pacific_Pago_Pago = 406,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Palau")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Palau")]
         Pacific_Palau = 407,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Pitcairn")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Pitcairn")]
         Pacific_Pitcairn = 408,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Pohnpei")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Pohnpei")]
         Pacific_Pohnpei = 409,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Port_Moresby")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Port_Moresby")]
         Pacific_Port_Moresby = 410,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Rarotonga")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Rarotonga")]
         Pacific_Rarotonga = 411,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Saipan")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Saipan")]
         Pacific_Saipan = 412,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Tahiti")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Tahiti")]
         Pacific_Tahiti = 413,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Tarawa")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Tarawa")]
         Pacific_Tarawa = 414,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Tongatapu")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Tongatapu")]
         Pacific_Tongatapu = 415,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Wake")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Wake")]
         Pacific_Wake = 416,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Pacific/Wallis")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"Pacific/Wallis")]
         Pacific_Wallis = 417,
 
         [System.Runtime.Serialization.EnumMember(Value = @"UTC")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"UTC")]
         UTC = 418,
 
     }
@@ -94587,12 +95481,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"instant")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"instant")]
         Instant = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"daily")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"daily")]
         Daily = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"weekly")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"weekly")]
         Weekly = 2,
 
     }
@@ -95202,15 +96099,19 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"spam")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"spam")]
         Spam = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"mentions")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"mentions")]
         Mentions = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"account_age")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"account_age")]
         Account_age = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"raid")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"raid")]
         Raid = 3,
 
     }
@@ -95292,9 +96193,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"resolved")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"resolved")]
         Resolved = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"dismissed")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"dismissed")]
         Dismissed = 1,
 
     }
@@ -95319,9 +96222,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"add")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"add")]
         Add = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"remove")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"remove")]
         Remove = 1,
 
     }
@@ -95331,312 +96236,415 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"menu")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"menu")]
         Menu = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"x")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"x")]
         X = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"search")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"search")]
         Search = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"search-check")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"search-check")]
         SearchCheck = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"bell")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"bell")]
         Bell = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"message")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"message")]
         Message = 5,
 
         [System.Runtime.Serialization.EnumMember(Value = @"user")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"user")]
         User = 6,
 
         [System.Runtime.Serialization.EnumMember(Value = @"users")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"users")]
         Users = 7,
 
         [System.Runtime.Serialization.EnumMember(Value = @"logout")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"logout")]
         Logout = 8,
 
         [System.Runtime.Serialization.EnumMember(Value = @"settings")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"settings")]
         Settings = 9,
 
         [System.Runtime.Serialization.EnumMember(Value = @"shield")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"shield")]
         Shield = 10,
 
         [System.Runtime.Serialization.EnumMember(Value = @"shield-check")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"shield-check")]
         ShieldCheck = 11,
 
         [System.Runtime.Serialization.EnumMember(Value = @"gamepad")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"gamepad")]
         Gamepad = 12,
 
         [System.Runtime.Serialization.EnumMember(Value = @"server")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"server")]
         Server = 13,
 
         [System.Runtime.Serialization.EnumMember(Value = @"calendar")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"calendar")]
         Calendar = 14,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chevron-down")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chevron-down")]
         ChevronDown = 15,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chevron-up")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chevron-up")]
         ChevronUp = 16,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chevron-right")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chevron-right")]
         ChevronRight = 17,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chevron-left")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chevron-left")]
         ChevronLeft = 18,
 
         [System.Runtime.Serialization.EnumMember(Value = @"check")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"check")]
         Check = 19,
 
         [System.Runtime.Serialization.EnumMember(Value = @"plus")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"plus")]
         Plus = 20,
 
         [System.Runtime.Serialization.EnumMember(Value = @"minus")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"minus")]
         Minus = 21,
 
         [System.Runtime.Serialization.EnumMember(Value = @"more")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"more")]
         More = 22,
 
         [System.Runtime.Serialization.EnumMember(Value = @"paperclip")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"paperclip")]
         Paperclip = 23,
 
         [System.Runtime.Serialization.EnumMember(Value = @"quote")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"quote")]
         Quote = 24,
 
         [System.Runtime.Serialization.EnumMember(Value = @"pin")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"pin")]
         Pin = 25,
 
         [System.Runtime.Serialization.EnumMember(Value = @"eye-off")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"eye-off")]
         EyeOff = 26,
 
         [System.Runtime.Serialization.EnumMember(Value = @"flag")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"flag")]
         Flag = 27,
 
         [System.Runtime.Serialization.EnumMember(Value = @"merge")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"merge")]
         Merge = 28,
 
         [System.Runtime.Serialization.EnumMember(Value = @"move")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"move")]
         Move = 29,
 
         [System.Runtime.Serialization.EnumMember(Value = @"history")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"history")]
         History = 30,
 
         [System.Runtime.Serialization.EnumMember(Value = @"smile")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"smile")]
         Smile = 31,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chart")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chart")]
         Chart = 32,
 
         [System.Runtime.Serialization.EnumMember(Value = @"at")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"at")]
         At = 33,
 
         [System.Runtime.Serialization.EnumMember(Value = @"mail")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"mail")]
         Mail = 34,
 
         [System.Runtime.Serialization.EnumMember(Value = @"trash")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"trash")]
         Trash = 35,
 
         [System.Runtime.Serialization.EnumMember(Value = @"pencil")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"pencil")]
         Pencil = 36,
 
         [System.Runtime.Serialization.EnumMember(Value = @"external")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"external")]
         External = 37,
 
         [System.Runtime.Serialization.EnumMember(Value = @"copy")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"copy")]
         Copy = 38,
 
         [System.Runtime.Serialization.EnumMember(Value = @"key")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"key")]
         Key = 39,
 
         [System.Runtime.Serialization.EnumMember(Value = @"lock")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"lock")]
         Lock = 40,
 
         [System.Runtime.Serialization.EnumMember(Value = @"activity")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"activity")]
         Activity = 41,
 
         [System.Runtime.Serialization.EnumMember(Value = @"dashboard")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"dashboard")]
         Dashboard = 42,
 
         [System.Runtime.Serialization.EnumMember(Value = @"scroll")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"scroll")]
         Scroll = 43,
 
         [System.Runtime.Serialization.EnumMember(Value = @"eye")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"eye")]
         Eye = 44,
 
         [System.Runtime.Serialization.EnumMember(Value = @"alert")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"alert")]
         Alert = 45,
 
         [System.Runtime.Serialization.EnumMember(Value = @"info")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"info")]
         Info = 46,
 
         [System.Runtime.Serialization.EnumMember(Value = @"clock")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"clock")]
         Clock = 47,
 
         [System.Runtime.Serialization.EnumMember(Value = @"arrow-right")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"arrow-right")]
         ArrowRight = 48,
 
         [System.Runtime.Serialization.EnumMember(Value = @"arrow-left")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"arrow-left")]
         ArrowLeft = 49,
 
         [System.Runtime.Serialization.EnumMember(Value = @"trophy")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"trophy")]
         Trophy = 50,
 
         [System.Runtime.Serialization.EnumMember(Value = @"swords")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"swords")]
         Swords = 51,
 
         [System.Runtime.Serialization.EnumMember(Value = @"home")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"home")]
         Home = 52,
 
         [System.Runtime.Serialization.EnumMember(Value = @"globe")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"globe")]
         Globe = 53,
 
         [System.Runtime.Serialization.EnumMember(Value = @"link")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"link")]
         Link = 54,
 
         [System.Runtime.Serialization.EnumMember(Value = @"printer")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"printer")]
         Printer = 55,
 
         [System.Runtime.Serialization.EnumMember(Value = @"vote")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"vote")]
         Vote = 56,
 
         [System.Runtime.Serialization.EnumMember(Value = @"inbox")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"inbox")]
         Inbox = 57,
 
         [System.Runtime.Serialization.EnumMember(Value = @"clipboard")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"clipboard")]
         Clipboard = 58,
 
         [System.Runtime.Serialization.EnumMember(Value = @"thumbs-up")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"thumbs-up")]
         ThumbsUp = 59,
 
         [System.Runtime.Serialization.EnumMember(Value = @"thumbs-down")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"thumbs-down")]
         ThumbsDown = 60,
 
         [System.Runtime.Serialization.EnumMember(Value = @"hourglass")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"hourglass")]
         Hourglass = 61,
 
         [System.Runtime.Serialization.EnumMember(Value = @"send")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"send")]
         Send = 62,
 
         [System.Runtime.Serialization.EnumMember(Value = @"note")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"note")]
         Note = 63,
 
         [System.Runtime.Serialization.EnumMember(Value = @"megaphone")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"megaphone")]
         Megaphone = 64,
 
         [System.Runtime.Serialization.EnumMember(Value = @"plug")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"plug")]
         Plug = 65,
 
         [System.Runtime.Serialization.EnumMember(Value = @"headset")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"headset")]
         Headset = 66,
 
         [System.Runtime.Serialization.EnumMember(Value = @"unlink")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"unlink")]
         Unlink = 67,
 
         [System.Runtime.Serialization.EnumMember(Value = @"volume")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"volume")]
         Volume = 68,
 
         [System.Runtime.Serialization.EnumMember(Value = @"folder")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"folder")]
         Folder = 69,
 
         [System.Runtime.Serialization.EnumMember(Value = @"moon")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"moon")]
         Moon = 70,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sun")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"sun")]
         Sun = 71,
 
         [System.Runtime.Serialization.EnumMember(Value = @"book")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"book")]
         Book = 72,
 
         [System.Runtime.Serialization.EnumMember(Value = @"code")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"code")]
         Code = 73,
 
         [System.Runtime.Serialization.EnumMember(Value = @"layers")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"layers")]
         Layers = 74,
 
         [System.Runtime.Serialization.EnumMember(Value = @"ban")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"ban")]
         Ban = 75,
 
         [System.Runtime.Serialization.EnumMember(Value = @"download")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"download")]
         Download = 76,
 
         [System.Runtime.Serialization.EnumMember(Value = @"crown")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"crown")]
         Crown = 77,
 
         [System.Runtime.Serialization.EnumMember(Value = @"radio")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"radio")]
         Radio = 78,
 
         [System.Runtime.Serialization.EnumMember(Value = @"mic")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"mic")]
         Mic = 79,
 
         [System.Runtime.Serialization.EnumMember(Value = @"smartphone")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"smartphone")]
         Smartphone = 80,
 
         [System.Runtime.Serialization.EnumMember(Value = @"monitor")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"monitor")]
         Monitor = 81,
 
         [System.Runtime.Serialization.EnumMember(Value = @"clipboard-check")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"clipboard-check")]
         ClipboardCheck = 82,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sparkles")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"sparkles")]
         Sparkles = 83,
 
         [System.Runtime.Serialization.EnumMember(Value = @"filter")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"filter")]
         Filter = 84,
 
         [System.Runtime.Serialization.EnumMember(Value = @"refresh")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"refresh")]
         Refresh = 85,
 
         [System.Runtime.Serialization.EnumMember(Value = @"image")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"image")]
         Image = 86,
 
         [System.Runtime.Serialization.EnumMember(Value = @"upload")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"upload")]
         Upload = 87,
 
         [System.Runtime.Serialization.EnumMember(Value = @"qr-code")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"qr-code")]
         QrCode = 88,
 
         [System.Runtime.Serialization.EnumMember(Value = @"newspaper")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"newspaper")]
         Newspaper = 89,
 
         [System.Runtime.Serialization.EnumMember(Value = @"file")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"file")]
         File = 90,
 
         [System.Runtime.Serialization.EnumMember(Value = @"handshake")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"handshake")]
         Handshake = 91,
 
         [System.Runtime.Serialization.EnumMember(Value = @"layout")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"layout")]
         Layout = 92,
 
         [System.Runtime.Serialization.EnumMember(Value = @"grip")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"grip")]
         Grip = 93,
 
         [System.Runtime.Serialization.EnumMember(Value = @"play")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"play")]
         Play = 94,
 
         [System.Runtime.Serialization.EnumMember(Value = @"pause")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"pause")]
         Pause = 95,
 
         [System.Runtime.Serialization.EnumMember(Value = @"discord")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"discord")]
         Discord = 96,
 
         [System.Runtime.Serialization.EnumMember(Value = @"steam")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"steam")]
         Steam = 97,
 
         [System.Runtime.Serialization.EnumMember(Value = @"twitch")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"twitch")]
         Twitch = 98,
 
         [System.Runtime.Serialization.EnumMember(Value = @"fist")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"fist")]
         Fist = 99,
 
         [System.Runtime.Serialization.EnumMember(Value = @"platform-shapes")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"platform-shapes")]
         PlatformShapes = 100,
 
         [System.Runtime.Serialization.EnumMember(Value = @"platform-orb")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"platform-orb")]
         PlatformOrb = 101,
 
         [System.Runtime.Serialization.EnumMember(Value = @"platform-handheld")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"platform-handheld")]
         PlatformHandheld = 102,
 
     }
@@ -95646,312 +96654,415 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"menu")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"menu")]
         Menu = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"x")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"x")]
         X = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"search")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"search")]
         Search = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"search-check")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"search-check")]
         SearchCheck = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"bell")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"bell")]
         Bell = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"message")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"message")]
         Message = 5,
 
         [System.Runtime.Serialization.EnumMember(Value = @"user")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"user")]
         User = 6,
 
         [System.Runtime.Serialization.EnumMember(Value = @"users")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"users")]
         Users = 7,
 
         [System.Runtime.Serialization.EnumMember(Value = @"logout")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"logout")]
         Logout = 8,
 
         [System.Runtime.Serialization.EnumMember(Value = @"settings")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"settings")]
         Settings = 9,
 
         [System.Runtime.Serialization.EnumMember(Value = @"shield")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"shield")]
         Shield = 10,
 
         [System.Runtime.Serialization.EnumMember(Value = @"shield-check")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"shield-check")]
         ShieldCheck = 11,
 
         [System.Runtime.Serialization.EnumMember(Value = @"gamepad")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"gamepad")]
         Gamepad = 12,
 
         [System.Runtime.Serialization.EnumMember(Value = @"server")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"server")]
         Server = 13,
 
         [System.Runtime.Serialization.EnumMember(Value = @"calendar")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"calendar")]
         Calendar = 14,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chevron-down")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chevron-down")]
         ChevronDown = 15,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chevron-up")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chevron-up")]
         ChevronUp = 16,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chevron-right")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chevron-right")]
         ChevronRight = 17,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chevron-left")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chevron-left")]
         ChevronLeft = 18,
 
         [System.Runtime.Serialization.EnumMember(Value = @"check")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"check")]
         Check = 19,
 
         [System.Runtime.Serialization.EnumMember(Value = @"plus")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"plus")]
         Plus = 20,
 
         [System.Runtime.Serialization.EnumMember(Value = @"minus")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"minus")]
         Minus = 21,
 
         [System.Runtime.Serialization.EnumMember(Value = @"more")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"more")]
         More = 22,
 
         [System.Runtime.Serialization.EnumMember(Value = @"paperclip")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"paperclip")]
         Paperclip = 23,
 
         [System.Runtime.Serialization.EnumMember(Value = @"quote")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"quote")]
         Quote = 24,
 
         [System.Runtime.Serialization.EnumMember(Value = @"pin")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"pin")]
         Pin = 25,
 
         [System.Runtime.Serialization.EnumMember(Value = @"eye-off")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"eye-off")]
         EyeOff = 26,
 
         [System.Runtime.Serialization.EnumMember(Value = @"flag")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"flag")]
         Flag = 27,
 
         [System.Runtime.Serialization.EnumMember(Value = @"merge")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"merge")]
         Merge = 28,
 
         [System.Runtime.Serialization.EnumMember(Value = @"move")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"move")]
         Move = 29,
 
         [System.Runtime.Serialization.EnumMember(Value = @"history")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"history")]
         History = 30,
 
         [System.Runtime.Serialization.EnumMember(Value = @"smile")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"smile")]
         Smile = 31,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chart")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chart")]
         Chart = 32,
 
         [System.Runtime.Serialization.EnumMember(Value = @"at")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"at")]
         At = 33,
 
         [System.Runtime.Serialization.EnumMember(Value = @"mail")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"mail")]
         Mail = 34,
 
         [System.Runtime.Serialization.EnumMember(Value = @"trash")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"trash")]
         Trash = 35,
 
         [System.Runtime.Serialization.EnumMember(Value = @"pencil")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"pencil")]
         Pencil = 36,
 
         [System.Runtime.Serialization.EnumMember(Value = @"external")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"external")]
         External = 37,
 
         [System.Runtime.Serialization.EnumMember(Value = @"copy")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"copy")]
         Copy = 38,
 
         [System.Runtime.Serialization.EnumMember(Value = @"key")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"key")]
         Key = 39,
 
         [System.Runtime.Serialization.EnumMember(Value = @"lock")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"lock")]
         Lock = 40,
 
         [System.Runtime.Serialization.EnumMember(Value = @"activity")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"activity")]
         Activity = 41,
 
         [System.Runtime.Serialization.EnumMember(Value = @"dashboard")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"dashboard")]
         Dashboard = 42,
 
         [System.Runtime.Serialization.EnumMember(Value = @"scroll")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"scroll")]
         Scroll = 43,
 
         [System.Runtime.Serialization.EnumMember(Value = @"eye")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"eye")]
         Eye = 44,
 
         [System.Runtime.Serialization.EnumMember(Value = @"alert")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"alert")]
         Alert = 45,
 
         [System.Runtime.Serialization.EnumMember(Value = @"info")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"info")]
         Info = 46,
 
         [System.Runtime.Serialization.EnumMember(Value = @"clock")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"clock")]
         Clock = 47,
 
         [System.Runtime.Serialization.EnumMember(Value = @"arrow-right")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"arrow-right")]
         ArrowRight = 48,
 
         [System.Runtime.Serialization.EnumMember(Value = @"arrow-left")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"arrow-left")]
         ArrowLeft = 49,
 
         [System.Runtime.Serialization.EnumMember(Value = @"trophy")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"trophy")]
         Trophy = 50,
 
         [System.Runtime.Serialization.EnumMember(Value = @"swords")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"swords")]
         Swords = 51,
 
         [System.Runtime.Serialization.EnumMember(Value = @"home")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"home")]
         Home = 52,
 
         [System.Runtime.Serialization.EnumMember(Value = @"globe")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"globe")]
         Globe = 53,
 
         [System.Runtime.Serialization.EnumMember(Value = @"link")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"link")]
         Link = 54,
 
         [System.Runtime.Serialization.EnumMember(Value = @"printer")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"printer")]
         Printer = 55,
 
         [System.Runtime.Serialization.EnumMember(Value = @"vote")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"vote")]
         Vote = 56,
 
         [System.Runtime.Serialization.EnumMember(Value = @"inbox")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"inbox")]
         Inbox = 57,
 
         [System.Runtime.Serialization.EnumMember(Value = @"clipboard")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"clipboard")]
         Clipboard = 58,
 
         [System.Runtime.Serialization.EnumMember(Value = @"thumbs-up")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"thumbs-up")]
         ThumbsUp = 59,
 
         [System.Runtime.Serialization.EnumMember(Value = @"thumbs-down")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"thumbs-down")]
         ThumbsDown = 60,
 
         [System.Runtime.Serialization.EnumMember(Value = @"hourglass")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"hourglass")]
         Hourglass = 61,
 
         [System.Runtime.Serialization.EnumMember(Value = @"send")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"send")]
         Send = 62,
 
         [System.Runtime.Serialization.EnumMember(Value = @"note")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"note")]
         Note = 63,
 
         [System.Runtime.Serialization.EnumMember(Value = @"megaphone")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"megaphone")]
         Megaphone = 64,
 
         [System.Runtime.Serialization.EnumMember(Value = @"plug")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"plug")]
         Plug = 65,
 
         [System.Runtime.Serialization.EnumMember(Value = @"headset")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"headset")]
         Headset = 66,
 
         [System.Runtime.Serialization.EnumMember(Value = @"unlink")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"unlink")]
         Unlink = 67,
 
         [System.Runtime.Serialization.EnumMember(Value = @"volume")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"volume")]
         Volume = 68,
 
         [System.Runtime.Serialization.EnumMember(Value = @"folder")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"folder")]
         Folder = 69,
 
         [System.Runtime.Serialization.EnumMember(Value = @"moon")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"moon")]
         Moon = 70,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sun")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"sun")]
         Sun = 71,
 
         [System.Runtime.Serialization.EnumMember(Value = @"book")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"book")]
         Book = 72,
 
         [System.Runtime.Serialization.EnumMember(Value = @"code")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"code")]
         Code = 73,
 
         [System.Runtime.Serialization.EnumMember(Value = @"layers")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"layers")]
         Layers = 74,
 
         [System.Runtime.Serialization.EnumMember(Value = @"ban")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"ban")]
         Ban = 75,
 
         [System.Runtime.Serialization.EnumMember(Value = @"download")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"download")]
         Download = 76,
 
         [System.Runtime.Serialization.EnumMember(Value = @"crown")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"crown")]
         Crown = 77,
 
         [System.Runtime.Serialization.EnumMember(Value = @"radio")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"radio")]
         Radio = 78,
 
         [System.Runtime.Serialization.EnumMember(Value = @"mic")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"mic")]
         Mic = 79,
 
         [System.Runtime.Serialization.EnumMember(Value = @"smartphone")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"smartphone")]
         Smartphone = 80,
 
         [System.Runtime.Serialization.EnumMember(Value = @"monitor")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"monitor")]
         Monitor = 81,
 
         [System.Runtime.Serialization.EnumMember(Value = @"clipboard-check")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"clipboard-check")]
         ClipboardCheck = 82,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sparkles")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"sparkles")]
         Sparkles = 83,
 
         [System.Runtime.Serialization.EnumMember(Value = @"filter")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"filter")]
         Filter = 84,
 
         [System.Runtime.Serialization.EnumMember(Value = @"refresh")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"refresh")]
         Refresh = 85,
 
         [System.Runtime.Serialization.EnumMember(Value = @"image")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"image")]
         Image = 86,
 
         [System.Runtime.Serialization.EnumMember(Value = @"upload")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"upload")]
         Upload = 87,
 
         [System.Runtime.Serialization.EnumMember(Value = @"qr-code")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"qr-code")]
         QrCode = 88,
 
         [System.Runtime.Serialization.EnumMember(Value = @"newspaper")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"newspaper")]
         Newspaper = 89,
 
         [System.Runtime.Serialization.EnumMember(Value = @"file")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"file")]
         File = 90,
 
         [System.Runtime.Serialization.EnumMember(Value = @"handshake")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"handshake")]
         Handshake = 91,
 
         [System.Runtime.Serialization.EnumMember(Value = @"layout")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"layout")]
         Layout = 92,
 
         [System.Runtime.Serialization.EnumMember(Value = @"grip")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"grip")]
         Grip = 93,
 
         [System.Runtime.Serialization.EnumMember(Value = @"play")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"play")]
         Play = 94,
 
         [System.Runtime.Serialization.EnumMember(Value = @"pause")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"pause")]
         Pause = 95,
 
         [System.Runtime.Serialization.EnumMember(Value = @"discord")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"discord")]
         Discord = 96,
 
         [System.Runtime.Serialization.EnumMember(Value = @"steam")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"steam")]
         Steam = 97,
 
         [System.Runtime.Serialization.EnumMember(Value = @"twitch")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"twitch")]
         Twitch = 98,
 
         [System.Runtime.Serialization.EnumMember(Value = @"fist")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"fist")]
         Fist = 99,
 
         [System.Runtime.Serialization.EnumMember(Value = @"platform-shapes")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"platform-shapes")]
         PlatformShapes = 100,
 
         [System.Runtime.Serialization.EnumMember(Value = @"platform-orb")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"platform-orb")]
         PlatformOrb = 101,
 
         [System.Runtime.Serialization.EnumMember(Value = @"platform-handheld")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"platform-handheld")]
         PlatformHandheld = 102,
 
     }
@@ -95979,45 +97090,59 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"flag")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"flag")]
         Flag = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"fist")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"fist")]
         Fist = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"trophy")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"trophy")]
         Trophy = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"users")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"users")]
         Users = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"gamepad")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"gamepad")]
         Gamepad = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"server")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"server")]
         Server = 5,
 
         [System.Runtime.Serialization.EnumMember(Value = @"discord")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"discord")]
         Discord = 6,
 
         [System.Runtime.Serialization.EnumMember(Value = @"globe")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"globe")]
         Globe = 7,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sparkles")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"sparkles")]
         Sparkles = 8,
 
         [System.Runtime.Serialization.EnumMember(Value = @"crown")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"crown")]
         Crown = 9,
 
         [System.Runtime.Serialization.EnumMember(Value = @"swords")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"swords")]
         Swords = 10,
 
         [System.Runtime.Serialization.EnumMember(Value = @"calendar")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"calendar")]
         Calendar = 11,
 
         [System.Runtime.Serialization.EnumMember(Value = @"megaphone")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"megaphone")]
         Megaphone = 12,
 
         [System.Runtime.Serialization.EnumMember(Value = @"home")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"home")]
         Home = 13,
 
     }
@@ -96081,45 +97206,59 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"flag")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"flag")]
         Flag = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"fist")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"fist")]
         Fist = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"trophy")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"trophy")]
         Trophy = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"users")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"users")]
         Users = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"gamepad")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"gamepad")]
         Gamepad = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"server")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"server")]
         Server = 5,
 
         [System.Runtime.Serialization.EnumMember(Value = @"discord")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"discord")]
         Discord = 6,
 
         [System.Runtime.Serialization.EnumMember(Value = @"globe")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"globe")]
         Globe = 7,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sparkles")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"sparkles")]
         Sparkles = 8,
 
         [System.Runtime.Serialization.EnumMember(Value = @"crown")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"crown")]
         Crown = 9,
 
         [System.Runtime.Serialization.EnumMember(Value = @"swords")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"swords")]
         Swords = 10,
 
         [System.Runtime.Serialization.EnumMember(Value = @"calendar")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"calendar")]
         Calendar = 11,
 
         [System.Runtime.Serialization.EnumMember(Value = @"megaphone")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"megaphone")]
         Megaphone = 12,
 
         [System.Runtime.Serialization.EnumMember(Value = @"home")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"home")]
         Home = 13,
 
     }
@@ -96129,18 +97268,23 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"website")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"website")]
         Website = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"discord")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"discord")]
         Discord = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"discord_voice")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"discord_voice")]
         Discord_voice = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"teamspeak")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"teamspeak")]
         Teamspeak = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"gameserver")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"gameserver")]
         Gameserver = 4,
 
     }
@@ -96267,15 +97411,19 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"single")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"single")]
         Single = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"following")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"following")]
         Following = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"all")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"all")]
         All = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"series")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"series")]
         Series = 3,
 
     }
@@ -96384,15 +97532,19 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"single")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"single")]
         Single = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"following")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"following")]
         Following = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"all")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"all")]
         All = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"series")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"series")]
         Series = 3,
 
     }
@@ -96496,261 +97648,347 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"absences:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"absences:read")]
         AbsencesRead = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"absences:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"absences:write")]
         AbsencesWrite = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"account:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"account:write")]
         AccountWrite = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"admin:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"admin:read")]
         AdminRead = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"applications:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"applications:read")]
         ApplicationsRead = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"applications:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"applications:write")]
         ApplicationsWrite = 5,
 
         [System.Runtime.Serialization.EnumMember(Value = @"audit:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"audit:read")]
         AuditRead = 6,
 
         [System.Runtime.Serialization.EnumMember(Value = @"bot")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"bot")]
         Bot = 7,
 
         [System.Runtime.Serialization.EnumMember(Value = @"cms:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"cms:read")]
         CmsRead = 8,
 
         [System.Runtime.Serialization.EnumMember(Value = @"cms:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"cms:write")]
         CmsWrite = 9,
 
         [System.Runtime.Serialization.EnumMember(Value = @"devices:manage")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"devices:manage")]
         DevicesManage = 10,
 
         [System.Runtime.Serialization.EnumMember(Value = @"downloads:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"downloads:read")]
         DownloadsRead = 11,
 
         [System.Runtime.Serialization.EnumMember(Value = @"downloads:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"downloads:write")]
         DownloadsWrite = 12,
 
         [System.Runtime.Serialization.EnumMember(Value = @"events:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"events:read")]
         EventsRead = 13,
 
         [System.Runtime.Serialization.EnumMember(Value = @"events:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"events:write")]
         EventsWrite = 14,
 
         [System.Runtime.Serialization.EnumMember(Value = @"forum:moderate")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"forum:moderate")]
         ForumModerate = 15,
 
         [System.Runtime.Serialization.EnumMember(Value = @"forum:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"forum:read")]
         ForumRead = 16,
 
         [System.Runtime.Serialization.EnumMember(Value = @"forum:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"forum:write")]
         ForumWrite = 17,
 
         [System.Runtime.Serialization.EnumMember(Value = @"gallery:manage")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"gallery:manage")]
         GalleryManage = 18,
 
         [System.Runtime.Serialization.EnumMember(Value = @"gallery:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"gallery:read")]
         GalleryRead = 19,
 
         [System.Runtime.Serialization.EnumMember(Value = @"gallery:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"gallery:write")]
         GalleryWrite = 20,
 
         [System.Runtime.Serialization.EnumMember(Value = @"games:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"games:read")]
         GamesRead = 21,
 
         [System.Runtime.Serialization.EnumMember(Value = @"games:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"games:write")]
         GamesWrite = 22,
 
         [System.Runtime.Serialization.EnumMember(Value = @"halloffame:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"halloffame:read")]
         HalloffameRead = 23,
 
         [System.Runtime.Serialization.EnumMember(Value = @"halloffame:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"halloffame:write")]
         HalloffameWrite = 24,
 
         [System.Runtime.Serialization.EnumMember(Value = @"inactivity:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"inactivity:read")]
         InactivityRead = 25,
 
         [System.Runtime.Serialization.EnumMember(Value = @"inactivity:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"inactivity:write")]
         InactivityWrite = 26,
 
         [System.Runtime.Serialization.EnumMember(Value = @"integrations:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"integrations:read")]
         IntegrationsRead = 27,
 
         [System.Runtime.Serialization.EnumMember(Value = @"integrations:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"integrations:write")]
         IntegrationsWrite = 28,
 
         [System.Runtime.Serialization.EnumMember(Value = @"legal:manage")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"legal:manage")]
         LegalManage = 29,
 
         [System.Runtime.Serialization.EnumMember(Value = @"links:manage")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"links:manage")]
         LinksManage = 30,
 
         [System.Runtime.Serialization.EnumMember(Value = @"links:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"links:read")]
         LinksRead = 31,
 
         [System.Runtime.Serialization.EnumMember(Value = @"links:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"links:write")]
         LinksWrite = 32,
 
         [System.Runtime.Serialization.EnumMember(Value = @"matches:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"matches:read")]
         MatchesRead = 33,
 
         [System.Runtime.Serialization.EnumMember(Value = @"matches:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"matches:write")]
         MatchesWrite = 34,
 
         [System.Runtime.Serialization.EnumMember(Value = @"member-notes:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"member-notes:read")]
         MemberNotesRead = 35,
 
         [System.Runtime.Serialization.EnumMember(Value = @"member-notes:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"member-notes:write")]
         MemberNotesWrite = 36,
 
         [System.Runtime.Serialization.EnumMember(Value = @"members:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"members:read")]
         MembersRead = 37,
 
         [System.Runtime.Serialization.EnumMember(Value = @"members:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"members:write")]
         MembersWrite = 38,
 
         [System.Runtime.Serialization.EnumMember(Value = @"messages:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"messages:read")]
         MessagesRead = 39,
 
         [System.Runtime.Serialization.EnumMember(Value = @"messages:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"messages:write")]
         MessagesWrite = 40,
 
         [System.Runtime.Serialization.EnumMember(Value = @"moderation:manage")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"moderation:manage")]
         ModerationManage = 41,
 
         [System.Runtime.Serialization.EnumMember(Value = @"moderation:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"moderation:read")]
         ModerationRead = 42,
 
         [System.Runtime.Serialization.EnumMember(Value = @"moderation:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"moderation:write")]
         ModerationWrite = 43,
 
         [System.Runtime.Serialization.EnumMember(Value = @"news:comment")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"news:comment")]
         NewsComment = 44,
 
         [System.Runtime.Serialization.EnumMember(Value = @"news:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"news:read")]
         NewsRead = 45,
 
         [System.Runtime.Serialization.EnumMember(Value = @"news:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"news:write")]
         NewsWrite = 46,
 
         [System.Runtime.Serialization.EnumMember(Value = @"notifications:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"notifications:read")]
         NotificationsRead = 47,
 
         [System.Runtime.Serialization.EnumMember(Value = @"notifications:templates")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"notifications:templates")]
         NotificationsTemplates = 48,
 
         [System.Runtime.Serialization.EnumMember(Value = @"notifications:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"notifications:write")]
         NotificationsWrite = 49,
 
         [System.Runtime.Serialization.EnumMember(Value = @"profile:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"profile:read")]
         ProfileRead = 50,
 
         [System.Runtime.Serialization.EnumMember(Value = @"profile:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"profile:write")]
         ProfileWrite = 51,
 
         [System.Runtime.Serialization.EnumMember(Value = @"registration:manage")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"registration:manage")]
         RegistrationManage = 52,
 
         [System.Runtime.Serialization.EnumMember(Value = @"reports:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"reports:write")]
         ReportsWrite = 53,
 
         [System.Runtime.Serialization.EnumMember(Value = @"roles:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"roles:read")]
         RolesRead = 54,
 
         [System.Runtime.Serialization.EnumMember(Value = @"roles:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"roles:write")]
         RolesWrite = 55,
 
         [System.Runtime.Serialization.EnumMember(Value = @"rules:accept")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"rules:accept")]
         RulesAccept = 56,
 
         [System.Runtime.Serialization.EnumMember(Value = @"rules:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"rules:read")]
         RulesRead = 57,
 
         [System.Runtime.Serialization.EnumMember(Value = @"rules:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"rules:write")]
         RulesWrite = 58,
 
         [System.Runtime.Serialization.EnumMember(Value = @"search:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"search:read")]
         SearchRead = 59,
 
         [System.Runtime.Serialization.EnumMember(Value = @"servers:backups")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"servers:backups")]
         ServersBackups = 60,
 
         [System.Runtime.Serialization.EnumMember(Value = @"servers:console")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"servers:console")]
         ServersConsole = 61,
 
         [System.Runtime.Serialization.EnumMember(Value = @"servers:files")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"servers:files")]
         ServersFiles = 62,
 
         [System.Runtime.Serialization.EnumMember(Value = @"servers:manage")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"servers:manage")]
         ServersManage = 63,
 
         [System.Runtime.Serialization.EnumMember(Value = @"servers:power")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"servers:power")]
         ServersPower = 64,
 
         [System.Runtime.Serialization.EnumMember(Value = @"servers:rcon")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"servers:rcon")]
         ServersRcon = 65,
 
         [System.Runtime.Serialization.EnumMember(Value = @"servers:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"servers:read")]
         ServersRead = 66,
 
         [System.Runtime.Serialization.EnumMember(Value = @"settings:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"settings:read")]
         SettingsRead = 67,
 
         [System.Runtime.Serialization.EnumMember(Value = @"settings:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"settings:write")]
         SettingsWrite = 68,
 
         [System.Runtime.Serialization.EnumMember(Value = @"squads:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"squads:read")]
         SquadsRead = 69,
 
         [System.Runtime.Serialization.EnumMember(Value = @"squads:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"squads:write")]
         SquadsWrite = 70,
 
         [System.Runtime.Serialization.EnumMember(Value = @"stats:manage")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"stats:manage")]
         StatsManage = 71,
 
         [System.Runtime.Serialization.EnumMember(Value = @"stats:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"stats:read")]
         StatsRead = 72,
 
         [System.Runtime.Serialization.EnumMember(Value = @"system:manage")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"system:manage")]
         SystemManage = 73,
 
         [System.Runtime.Serialization.EnumMember(Value = @"system:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"system:read")]
         SystemRead = 74,
 
         [System.Runtime.Serialization.EnumMember(Value = @"teamspeak:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"teamspeak:read")]
         TeamspeakRead = 75,
 
         [System.Runtime.Serialization.EnumMember(Value = @"tokens:manage")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"tokens:manage")]
         TokensManage = 76,
 
         [System.Runtime.Serialization.EnumMember(Value = @"translations:manage")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"translations:manage")]
         TranslationsManage = 77,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uploads:manage")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"uploads:manage")]
         UploadsManage = 78,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uploads:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"uploads:read")]
         UploadsRead = 79,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uploads:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"uploads:write")]
         UploadsWrite = 80,
 
         [System.Runtime.Serialization.EnumMember(Value = @"webhooks:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"webhooks:read")]
         WebhooksRead = 81,
 
         [System.Runtime.Serialization.EnumMember(Value = @"webhooks:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"webhooks:write")]
         WebhooksWrite = 82,
 
         [System.Runtime.Serialization.EnumMember(Value = @"wiki:manage")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"wiki:manage")]
         WikiManage = 83,
 
         [System.Runtime.Serialization.EnumMember(Value = @"wiki:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"wiki:read")]
         WikiRead = 84,
 
         [System.Runtime.Serialization.EnumMember(Value = @"wiki:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"wiki:write")]
         WikiWrite = 85,
 
     }
@@ -97154,312 +98392,415 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"menu")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"menu")]
         Menu = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"x")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"x")]
         X = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"search")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"search")]
         Search = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"search-check")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"search-check")]
         SearchCheck = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"bell")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"bell")]
         Bell = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"message")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"message")]
         Message = 5,
 
         [System.Runtime.Serialization.EnumMember(Value = @"user")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"user")]
         User = 6,
 
         [System.Runtime.Serialization.EnumMember(Value = @"users")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"users")]
         Users = 7,
 
         [System.Runtime.Serialization.EnumMember(Value = @"logout")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"logout")]
         Logout = 8,
 
         [System.Runtime.Serialization.EnumMember(Value = @"settings")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"settings")]
         Settings = 9,
 
         [System.Runtime.Serialization.EnumMember(Value = @"shield")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"shield")]
         Shield = 10,
 
         [System.Runtime.Serialization.EnumMember(Value = @"shield-check")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"shield-check")]
         ShieldCheck = 11,
 
         [System.Runtime.Serialization.EnumMember(Value = @"gamepad")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"gamepad")]
         Gamepad = 12,
 
         [System.Runtime.Serialization.EnumMember(Value = @"server")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"server")]
         Server = 13,
 
         [System.Runtime.Serialization.EnumMember(Value = @"calendar")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"calendar")]
         Calendar = 14,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chevron-down")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chevron-down")]
         ChevronDown = 15,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chevron-up")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chevron-up")]
         ChevronUp = 16,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chevron-right")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chevron-right")]
         ChevronRight = 17,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chevron-left")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chevron-left")]
         ChevronLeft = 18,
 
         [System.Runtime.Serialization.EnumMember(Value = @"check")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"check")]
         Check = 19,
 
         [System.Runtime.Serialization.EnumMember(Value = @"plus")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"plus")]
         Plus = 20,
 
         [System.Runtime.Serialization.EnumMember(Value = @"minus")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"minus")]
         Minus = 21,
 
         [System.Runtime.Serialization.EnumMember(Value = @"more")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"more")]
         More = 22,
 
         [System.Runtime.Serialization.EnumMember(Value = @"paperclip")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"paperclip")]
         Paperclip = 23,
 
         [System.Runtime.Serialization.EnumMember(Value = @"quote")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"quote")]
         Quote = 24,
 
         [System.Runtime.Serialization.EnumMember(Value = @"pin")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"pin")]
         Pin = 25,
 
         [System.Runtime.Serialization.EnumMember(Value = @"eye-off")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"eye-off")]
         EyeOff = 26,
 
         [System.Runtime.Serialization.EnumMember(Value = @"flag")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"flag")]
         Flag = 27,
 
         [System.Runtime.Serialization.EnumMember(Value = @"merge")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"merge")]
         Merge = 28,
 
         [System.Runtime.Serialization.EnumMember(Value = @"move")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"move")]
         Move = 29,
 
         [System.Runtime.Serialization.EnumMember(Value = @"history")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"history")]
         History = 30,
 
         [System.Runtime.Serialization.EnumMember(Value = @"smile")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"smile")]
         Smile = 31,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chart")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chart")]
         Chart = 32,
 
         [System.Runtime.Serialization.EnumMember(Value = @"at")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"at")]
         At = 33,
 
         [System.Runtime.Serialization.EnumMember(Value = @"mail")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"mail")]
         Mail = 34,
 
         [System.Runtime.Serialization.EnumMember(Value = @"trash")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"trash")]
         Trash = 35,
 
         [System.Runtime.Serialization.EnumMember(Value = @"pencil")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"pencil")]
         Pencil = 36,
 
         [System.Runtime.Serialization.EnumMember(Value = @"external")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"external")]
         External = 37,
 
         [System.Runtime.Serialization.EnumMember(Value = @"copy")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"copy")]
         Copy = 38,
 
         [System.Runtime.Serialization.EnumMember(Value = @"key")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"key")]
         Key = 39,
 
         [System.Runtime.Serialization.EnumMember(Value = @"lock")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"lock")]
         Lock = 40,
 
         [System.Runtime.Serialization.EnumMember(Value = @"activity")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"activity")]
         Activity = 41,
 
         [System.Runtime.Serialization.EnumMember(Value = @"dashboard")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"dashboard")]
         Dashboard = 42,
 
         [System.Runtime.Serialization.EnumMember(Value = @"scroll")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"scroll")]
         Scroll = 43,
 
         [System.Runtime.Serialization.EnumMember(Value = @"eye")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"eye")]
         Eye = 44,
 
         [System.Runtime.Serialization.EnumMember(Value = @"alert")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"alert")]
         Alert = 45,
 
         [System.Runtime.Serialization.EnumMember(Value = @"info")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"info")]
         Info = 46,
 
         [System.Runtime.Serialization.EnumMember(Value = @"clock")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"clock")]
         Clock = 47,
 
         [System.Runtime.Serialization.EnumMember(Value = @"arrow-right")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"arrow-right")]
         ArrowRight = 48,
 
         [System.Runtime.Serialization.EnumMember(Value = @"arrow-left")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"arrow-left")]
         ArrowLeft = 49,
 
         [System.Runtime.Serialization.EnumMember(Value = @"trophy")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"trophy")]
         Trophy = 50,
 
         [System.Runtime.Serialization.EnumMember(Value = @"swords")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"swords")]
         Swords = 51,
 
         [System.Runtime.Serialization.EnumMember(Value = @"home")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"home")]
         Home = 52,
 
         [System.Runtime.Serialization.EnumMember(Value = @"globe")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"globe")]
         Globe = 53,
 
         [System.Runtime.Serialization.EnumMember(Value = @"link")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"link")]
         Link = 54,
 
         [System.Runtime.Serialization.EnumMember(Value = @"printer")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"printer")]
         Printer = 55,
 
         [System.Runtime.Serialization.EnumMember(Value = @"vote")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"vote")]
         Vote = 56,
 
         [System.Runtime.Serialization.EnumMember(Value = @"inbox")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"inbox")]
         Inbox = 57,
 
         [System.Runtime.Serialization.EnumMember(Value = @"clipboard")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"clipboard")]
         Clipboard = 58,
 
         [System.Runtime.Serialization.EnumMember(Value = @"thumbs-up")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"thumbs-up")]
         ThumbsUp = 59,
 
         [System.Runtime.Serialization.EnumMember(Value = @"thumbs-down")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"thumbs-down")]
         ThumbsDown = 60,
 
         [System.Runtime.Serialization.EnumMember(Value = @"hourglass")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"hourglass")]
         Hourglass = 61,
 
         [System.Runtime.Serialization.EnumMember(Value = @"send")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"send")]
         Send = 62,
 
         [System.Runtime.Serialization.EnumMember(Value = @"note")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"note")]
         Note = 63,
 
         [System.Runtime.Serialization.EnumMember(Value = @"megaphone")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"megaphone")]
         Megaphone = 64,
 
         [System.Runtime.Serialization.EnumMember(Value = @"plug")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"plug")]
         Plug = 65,
 
         [System.Runtime.Serialization.EnumMember(Value = @"headset")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"headset")]
         Headset = 66,
 
         [System.Runtime.Serialization.EnumMember(Value = @"unlink")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"unlink")]
         Unlink = 67,
 
         [System.Runtime.Serialization.EnumMember(Value = @"volume")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"volume")]
         Volume = 68,
 
         [System.Runtime.Serialization.EnumMember(Value = @"folder")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"folder")]
         Folder = 69,
 
         [System.Runtime.Serialization.EnumMember(Value = @"moon")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"moon")]
         Moon = 70,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sun")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"sun")]
         Sun = 71,
 
         [System.Runtime.Serialization.EnumMember(Value = @"book")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"book")]
         Book = 72,
 
         [System.Runtime.Serialization.EnumMember(Value = @"code")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"code")]
         Code = 73,
 
         [System.Runtime.Serialization.EnumMember(Value = @"layers")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"layers")]
         Layers = 74,
 
         [System.Runtime.Serialization.EnumMember(Value = @"ban")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"ban")]
         Ban = 75,
 
         [System.Runtime.Serialization.EnumMember(Value = @"download")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"download")]
         Download = 76,
 
         [System.Runtime.Serialization.EnumMember(Value = @"crown")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"crown")]
         Crown = 77,
 
         [System.Runtime.Serialization.EnumMember(Value = @"radio")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"radio")]
         Radio = 78,
 
         [System.Runtime.Serialization.EnumMember(Value = @"mic")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"mic")]
         Mic = 79,
 
         [System.Runtime.Serialization.EnumMember(Value = @"smartphone")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"smartphone")]
         Smartphone = 80,
 
         [System.Runtime.Serialization.EnumMember(Value = @"monitor")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"monitor")]
         Monitor = 81,
 
         [System.Runtime.Serialization.EnumMember(Value = @"clipboard-check")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"clipboard-check")]
         ClipboardCheck = 82,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sparkles")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"sparkles")]
         Sparkles = 83,
 
         [System.Runtime.Serialization.EnumMember(Value = @"filter")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"filter")]
         Filter = 84,
 
         [System.Runtime.Serialization.EnumMember(Value = @"refresh")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"refresh")]
         Refresh = 85,
 
         [System.Runtime.Serialization.EnumMember(Value = @"image")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"image")]
         Image = 86,
 
         [System.Runtime.Serialization.EnumMember(Value = @"upload")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"upload")]
         Upload = 87,
 
         [System.Runtime.Serialization.EnumMember(Value = @"qr-code")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"qr-code")]
         QrCode = 88,
 
         [System.Runtime.Serialization.EnumMember(Value = @"newspaper")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"newspaper")]
         Newspaper = 89,
 
         [System.Runtime.Serialization.EnumMember(Value = @"file")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"file")]
         File = 90,
 
         [System.Runtime.Serialization.EnumMember(Value = @"handshake")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"handshake")]
         Handshake = 91,
 
         [System.Runtime.Serialization.EnumMember(Value = @"layout")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"layout")]
         Layout = 92,
 
         [System.Runtime.Serialization.EnumMember(Value = @"grip")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"grip")]
         Grip = 93,
 
         [System.Runtime.Serialization.EnumMember(Value = @"play")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"play")]
         Play = 94,
 
         [System.Runtime.Serialization.EnumMember(Value = @"pause")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"pause")]
         Pause = 95,
 
         [System.Runtime.Serialization.EnumMember(Value = @"discord")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"discord")]
         Discord = 96,
 
         [System.Runtime.Serialization.EnumMember(Value = @"steam")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"steam")]
         Steam = 97,
 
         [System.Runtime.Serialization.EnumMember(Value = @"twitch")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"twitch")]
         Twitch = 98,
 
         [System.Runtime.Serialization.EnumMember(Value = @"fist")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"fist")]
         Fist = 99,
 
         [System.Runtime.Serialization.EnumMember(Value = @"platform-shapes")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"platform-shapes")]
         PlatformShapes = 100,
 
         [System.Runtime.Serialization.EnumMember(Value = @"platform-orb")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"platform-orb")]
         PlatformOrb = 101,
 
         [System.Runtime.Serialization.EnumMember(Value = @"platform-handheld")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"platform-handheld")]
         PlatformHandheld = 102,
 
     }
@@ -97493,312 +98834,415 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"menu")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"menu")]
         Menu = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"x")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"x")]
         X = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"search")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"search")]
         Search = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"search-check")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"search-check")]
         SearchCheck = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"bell")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"bell")]
         Bell = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"message")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"message")]
         Message = 5,
 
         [System.Runtime.Serialization.EnumMember(Value = @"user")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"user")]
         User = 6,
 
         [System.Runtime.Serialization.EnumMember(Value = @"users")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"users")]
         Users = 7,
 
         [System.Runtime.Serialization.EnumMember(Value = @"logout")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"logout")]
         Logout = 8,
 
         [System.Runtime.Serialization.EnumMember(Value = @"settings")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"settings")]
         Settings = 9,
 
         [System.Runtime.Serialization.EnumMember(Value = @"shield")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"shield")]
         Shield = 10,
 
         [System.Runtime.Serialization.EnumMember(Value = @"shield-check")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"shield-check")]
         ShieldCheck = 11,
 
         [System.Runtime.Serialization.EnumMember(Value = @"gamepad")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"gamepad")]
         Gamepad = 12,
 
         [System.Runtime.Serialization.EnumMember(Value = @"server")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"server")]
         Server = 13,
 
         [System.Runtime.Serialization.EnumMember(Value = @"calendar")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"calendar")]
         Calendar = 14,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chevron-down")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chevron-down")]
         ChevronDown = 15,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chevron-up")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chevron-up")]
         ChevronUp = 16,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chevron-right")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chevron-right")]
         ChevronRight = 17,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chevron-left")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chevron-left")]
         ChevronLeft = 18,
 
         [System.Runtime.Serialization.EnumMember(Value = @"check")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"check")]
         Check = 19,
 
         [System.Runtime.Serialization.EnumMember(Value = @"plus")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"plus")]
         Plus = 20,
 
         [System.Runtime.Serialization.EnumMember(Value = @"minus")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"minus")]
         Minus = 21,
 
         [System.Runtime.Serialization.EnumMember(Value = @"more")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"more")]
         More = 22,
 
         [System.Runtime.Serialization.EnumMember(Value = @"paperclip")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"paperclip")]
         Paperclip = 23,
 
         [System.Runtime.Serialization.EnumMember(Value = @"quote")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"quote")]
         Quote = 24,
 
         [System.Runtime.Serialization.EnumMember(Value = @"pin")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"pin")]
         Pin = 25,
 
         [System.Runtime.Serialization.EnumMember(Value = @"eye-off")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"eye-off")]
         EyeOff = 26,
 
         [System.Runtime.Serialization.EnumMember(Value = @"flag")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"flag")]
         Flag = 27,
 
         [System.Runtime.Serialization.EnumMember(Value = @"merge")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"merge")]
         Merge = 28,
 
         [System.Runtime.Serialization.EnumMember(Value = @"move")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"move")]
         Move = 29,
 
         [System.Runtime.Serialization.EnumMember(Value = @"history")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"history")]
         History = 30,
 
         [System.Runtime.Serialization.EnumMember(Value = @"smile")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"smile")]
         Smile = 31,
 
         [System.Runtime.Serialization.EnumMember(Value = @"chart")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"chart")]
         Chart = 32,
 
         [System.Runtime.Serialization.EnumMember(Value = @"at")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"at")]
         At = 33,
 
         [System.Runtime.Serialization.EnumMember(Value = @"mail")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"mail")]
         Mail = 34,
 
         [System.Runtime.Serialization.EnumMember(Value = @"trash")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"trash")]
         Trash = 35,
 
         [System.Runtime.Serialization.EnumMember(Value = @"pencil")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"pencil")]
         Pencil = 36,
 
         [System.Runtime.Serialization.EnumMember(Value = @"external")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"external")]
         External = 37,
 
         [System.Runtime.Serialization.EnumMember(Value = @"copy")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"copy")]
         Copy = 38,
 
         [System.Runtime.Serialization.EnumMember(Value = @"key")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"key")]
         Key = 39,
 
         [System.Runtime.Serialization.EnumMember(Value = @"lock")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"lock")]
         Lock = 40,
 
         [System.Runtime.Serialization.EnumMember(Value = @"activity")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"activity")]
         Activity = 41,
 
         [System.Runtime.Serialization.EnumMember(Value = @"dashboard")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"dashboard")]
         Dashboard = 42,
 
         [System.Runtime.Serialization.EnumMember(Value = @"scroll")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"scroll")]
         Scroll = 43,
 
         [System.Runtime.Serialization.EnumMember(Value = @"eye")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"eye")]
         Eye = 44,
 
         [System.Runtime.Serialization.EnumMember(Value = @"alert")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"alert")]
         Alert = 45,
 
         [System.Runtime.Serialization.EnumMember(Value = @"info")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"info")]
         Info = 46,
 
         [System.Runtime.Serialization.EnumMember(Value = @"clock")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"clock")]
         Clock = 47,
 
         [System.Runtime.Serialization.EnumMember(Value = @"arrow-right")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"arrow-right")]
         ArrowRight = 48,
 
         [System.Runtime.Serialization.EnumMember(Value = @"arrow-left")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"arrow-left")]
         ArrowLeft = 49,
 
         [System.Runtime.Serialization.EnumMember(Value = @"trophy")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"trophy")]
         Trophy = 50,
 
         [System.Runtime.Serialization.EnumMember(Value = @"swords")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"swords")]
         Swords = 51,
 
         [System.Runtime.Serialization.EnumMember(Value = @"home")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"home")]
         Home = 52,
 
         [System.Runtime.Serialization.EnumMember(Value = @"globe")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"globe")]
         Globe = 53,
 
         [System.Runtime.Serialization.EnumMember(Value = @"link")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"link")]
         Link = 54,
 
         [System.Runtime.Serialization.EnumMember(Value = @"printer")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"printer")]
         Printer = 55,
 
         [System.Runtime.Serialization.EnumMember(Value = @"vote")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"vote")]
         Vote = 56,
 
         [System.Runtime.Serialization.EnumMember(Value = @"inbox")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"inbox")]
         Inbox = 57,
 
         [System.Runtime.Serialization.EnumMember(Value = @"clipboard")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"clipboard")]
         Clipboard = 58,
 
         [System.Runtime.Serialization.EnumMember(Value = @"thumbs-up")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"thumbs-up")]
         ThumbsUp = 59,
 
         [System.Runtime.Serialization.EnumMember(Value = @"thumbs-down")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"thumbs-down")]
         ThumbsDown = 60,
 
         [System.Runtime.Serialization.EnumMember(Value = @"hourglass")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"hourglass")]
         Hourglass = 61,
 
         [System.Runtime.Serialization.EnumMember(Value = @"send")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"send")]
         Send = 62,
 
         [System.Runtime.Serialization.EnumMember(Value = @"note")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"note")]
         Note = 63,
 
         [System.Runtime.Serialization.EnumMember(Value = @"megaphone")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"megaphone")]
         Megaphone = 64,
 
         [System.Runtime.Serialization.EnumMember(Value = @"plug")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"plug")]
         Plug = 65,
 
         [System.Runtime.Serialization.EnumMember(Value = @"headset")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"headset")]
         Headset = 66,
 
         [System.Runtime.Serialization.EnumMember(Value = @"unlink")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"unlink")]
         Unlink = 67,
 
         [System.Runtime.Serialization.EnumMember(Value = @"volume")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"volume")]
         Volume = 68,
 
         [System.Runtime.Serialization.EnumMember(Value = @"folder")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"folder")]
         Folder = 69,
 
         [System.Runtime.Serialization.EnumMember(Value = @"moon")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"moon")]
         Moon = 70,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sun")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"sun")]
         Sun = 71,
 
         [System.Runtime.Serialization.EnumMember(Value = @"book")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"book")]
         Book = 72,
 
         [System.Runtime.Serialization.EnumMember(Value = @"code")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"code")]
         Code = 73,
 
         [System.Runtime.Serialization.EnumMember(Value = @"layers")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"layers")]
         Layers = 74,
 
         [System.Runtime.Serialization.EnumMember(Value = @"ban")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"ban")]
         Ban = 75,
 
         [System.Runtime.Serialization.EnumMember(Value = @"download")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"download")]
         Download = 76,
 
         [System.Runtime.Serialization.EnumMember(Value = @"crown")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"crown")]
         Crown = 77,
 
         [System.Runtime.Serialization.EnumMember(Value = @"radio")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"radio")]
         Radio = 78,
 
         [System.Runtime.Serialization.EnumMember(Value = @"mic")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"mic")]
         Mic = 79,
 
         [System.Runtime.Serialization.EnumMember(Value = @"smartphone")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"smartphone")]
         Smartphone = 80,
 
         [System.Runtime.Serialization.EnumMember(Value = @"monitor")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"monitor")]
         Monitor = 81,
 
         [System.Runtime.Serialization.EnumMember(Value = @"clipboard-check")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"clipboard-check")]
         ClipboardCheck = 82,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sparkles")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"sparkles")]
         Sparkles = 83,
 
         [System.Runtime.Serialization.EnumMember(Value = @"filter")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"filter")]
         Filter = 84,
 
         [System.Runtime.Serialization.EnumMember(Value = @"refresh")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"refresh")]
         Refresh = 85,
 
         [System.Runtime.Serialization.EnumMember(Value = @"image")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"image")]
         Image = 86,
 
         [System.Runtime.Serialization.EnumMember(Value = @"upload")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"upload")]
         Upload = 87,
 
         [System.Runtime.Serialization.EnumMember(Value = @"qr-code")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"qr-code")]
         QrCode = 88,
 
         [System.Runtime.Serialization.EnumMember(Value = @"newspaper")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"newspaper")]
         Newspaper = 89,
 
         [System.Runtime.Serialization.EnumMember(Value = @"file")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"file")]
         File = 90,
 
         [System.Runtime.Serialization.EnumMember(Value = @"handshake")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"handshake")]
         Handshake = 91,
 
         [System.Runtime.Serialization.EnumMember(Value = @"layout")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"layout")]
         Layout = 92,
 
         [System.Runtime.Serialization.EnumMember(Value = @"grip")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"grip")]
         Grip = 93,
 
         [System.Runtime.Serialization.EnumMember(Value = @"play")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"play")]
         Play = 94,
 
         [System.Runtime.Serialization.EnumMember(Value = @"pause")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"pause")]
         Pause = 95,
 
         [System.Runtime.Serialization.EnumMember(Value = @"discord")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"discord")]
         Discord = 96,
 
         [System.Runtime.Serialization.EnumMember(Value = @"steam")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"steam")]
         Steam = 97,
 
         [System.Runtime.Serialization.EnumMember(Value = @"twitch")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"twitch")]
         Twitch = 98,
 
         [System.Runtime.Serialization.EnumMember(Value = @"fist")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"fist")]
         Fist = 99,
 
         [System.Runtime.Serialization.EnumMember(Value = @"platform-shapes")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"platform-shapes")]
         PlatformShapes = 100,
 
         [System.Runtime.Serialization.EnumMember(Value = @"platform-orb")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"platform-orb")]
         PlatformOrb = 101,
 
         [System.Runtime.Serialization.EnumMember(Value = @"platform-handheld")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"platform-handheld")]
         PlatformHandheld = 102,
 
     }
@@ -97808,21 +99252,27 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"discord_message")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"discord_message")]
         Discord_message = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"forum_post")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"forum_post")]
         Forum_post = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"gallery_item")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"gallery_item")]
         Gallery_item = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"profile")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"profile")]
         Profile = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"message")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"message")]
         Message = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"news_comment")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"news_comment")]
         News_comment = 5,
 
     }
@@ -97979,261 +99429,347 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"absences:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"absences:read")]
         AbsencesRead = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"absences:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"absences:write")]
         AbsencesWrite = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"account:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"account:write")]
         AccountWrite = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"admin:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"admin:read")]
         AdminRead = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"applications:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"applications:read")]
         ApplicationsRead = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"applications:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"applications:write")]
         ApplicationsWrite = 5,
 
         [System.Runtime.Serialization.EnumMember(Value = @"audit:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"audit:read")]
         AuditRead = 6,
 
         [System.Runtime.Serialization.EnumMember(Value = @"bot")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"bot")]
         Bot = 7,
 
         [System.Runtime.Serialization.EnumMember(Value = @"cms:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"cms:read")]
         CmsRead = 8,
 
         [System.Runtime.Serialization.EnumMember(Value = @"cms:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"cms:write")]
         CmsWrite = 9,
 
         [System.Runtime.Serialization.EnumMember(Value = @"devices:manage")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"devices:manage")]
         DevicesManage = 10,
 
         [System.Runtime.Serialization.EnumMember(Value = @"downloads:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"downloads:read")]
         DownloadsRead = 11,
 
         [System.Runtime.Serialization.EnumMember(Value = @"downloads:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"downloads:write")]
         DownloadsWrite = 12,
 
         [System.Runtime.Serialization.EnumMember(Value = @"events:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"events:read")]
         EventsRead = 13,
 
         [System.Runtime.Serialization.EnumMember(Value = @"events:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"events:write")]
         EventsWrite = 14,
 
         [System.Runtime.Serialization.EnumMember(Value = @"forum:moderate")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"forum:moderate")]
         ForumModerate = 15,
 
         [System.Runtime.Serialization.EnumMember(Value = @"forum:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"forum:read")]
         ForumRead = 16,
 
         [System.Runtime.Serialization.EnumMember(Value = @"forum:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"forum:write")]
         ForumWrite = 17,
 
         [System.Runtime.Serialization.EnumMember(Value = @"gallery:manage")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"gallery:manage")]
         GalleryManage = 18,
 
         [System.Runtime.Serialization.EnumMember(Value = @"gallery:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"gallery:read")]
         GalleryRead = 19,
 
         [System.Runtime.Serialization.EnumMember(Value = @"gallery:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"gallery:write")]
         GalleryWrite = 20,
 
         [System.Runtime.Serialization.EnumMember(Value = @"games:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"games:read")]
         GamesRead = 21,
 
         [System.Runtime.Serialization.EnumMember(Value = @"games:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"games:write")]
         GamesWrite = 22,
 
         [System.Runtime.Serialization.EnumMember(Value = @"halloffame:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"halloffame:read")]
         HalloffameRead = 23,
 
         [System.Runtime.Serialization.EnumMember(Value = @"halloffame:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"halloffame:write")]
         HalloffameWrite = 24,
 
         [System.Runtime.Serialization.EnumMember(Value = @"inactivity:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"inactivity:read")]
         InactivityRead = 25,
 
         [System.Runtime.Serialization.EnumMember(Value = @"inactivity:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"inactivity:write")]
         InactivityWrite = 26,
 
         [System.Runtime.Serialization.EnumMember(Value = @"integrations:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"integrations:read")]
         IntegrationsRead = 27,
 
         [System.Runtime.Serialization.EnumMember(Value = @"integrations:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"integrations:write")]
         IntegrationsWrite = 28,
 
         [System.Runtime.Serialization.EnumMember(Value = @"legal:manage")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"legal:manage")]
         LegalManage = 29,
 
         [System.Runtime.Serialization.EnumMember(Value = @"links:manage")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"links:manage")]
         LinksManage = 30,
 
         [System.Runtime.Serialization.EnumMember(Value = @"links:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"links:read")]
         LinksRead = 31,
 
         [System.Runtime.Serialization.EnumMember(Value = @"links:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"links:write")]
         LinksWrite = 32,
 
         [System.Runtime.Serialization.EnumMember(Value = @"matches:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"matches:read")]
         MatchesRead = 33,
 
         [System.Runtime.Serialization.EnumMember(Value = @"matches:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"matches:write")]
         MatchesWrite = 34,
 
         [System.Runtime.Serialization.EnumMember(Value = @"member-notes:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"member-notes:read")]
         MemberNotesRead = 35,
 
         [System.Runtime.Serialization.EnumMember(Value = @"member-notes:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"member-notes:write")]
         MemberNotesWrite = 36,
 
         [System.Runtime.Serialization.EnumMember(Value = @"members:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"members:read")]
         MembersRead = 37,
 
         [System.Runtime.Serialization.EnumMember(Value = @"members:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"members:write")]
         MembersWrite = 38,
 
         [System.Runtime.Serialization.EnumMember(Value = @"messages:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"messages:read")]
         MessagesRead = 39,
 
         [System.Runtime.Serialization.EnumMember(Value = @"messages:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"messages:write")]
         MessagesWrite = 40,
 
         [System.Runtime.Serialization.EnumMember(Value = @"moderation:manage")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"moderation:manage")]
         ModerationManage = 41,
 
         [System.Runtime.Serialization.EnumMember(Value = @"moderation:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"moderation:read")]
         ModerationRead = 42,
 
         [System.Runtime.Serialization.EnumMember(Value = @"moderation:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"moderation:write")]
         ModerationWrite = 43,
 
         [System.Runtime.Serialization.EnumMember(Value = @"news:comment")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"news:comment")]
         NewsComment = 44,
 
         [System.Runtime.Serialization.EnumMember(Value = @"news:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"news:read")]
         NewsRead = 45,
 
         [System.Runtime.Serialization.EnumMember(Value = @"news:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"news:write")]
         NewsWrite = 46,
 
         [System.Runtime.Serialization.EnumMember(Value = @"notifications:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"notifications:read")]
         NotificationsRead = 47,
 
         [System.Runtime.Serialization.EnumMember(Value = @"notifications:templates")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"notifications:templates")]
         NotificationsTemplates = 48,
 
         [System.Runtime.Serialization.EnumMember(Value = @"notifications:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"notifications:write")]
         NotificationsWrite = 49,
 
         [System.Runtime.Serialization.EnumMember(Value = @"profile:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"profile:read")]
         ProfileRead = 50,
 
         [System.Runtime.Serialization.EnumMember(Value = @"profile:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"profile:write")]
         ProfileWrite = 51,
 
         [System.Runtime.Serialization.EnumMember(Value = @"registration:manage")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"registration:manage")]
         RegistrationManage = 52,
 
         [System.Runtime.Serialization.EnumMember(Value = @"reports:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"reports:write")]
         ReportsWrite = 53,
 
         [System.Runtime.Serialization.EnumMember(Value = @"roles:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"roles:read")]
         RolesRead = 54,
 
         [System.Runtime.Serialization.EnumMember(Value = @"roles:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"roles:write")]
         RolesWrite = 55,
 
         [System.Runtime.Serialization.EnumMember(Value = @"rules:accept")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"rules:accept")]
         RulesAccept = 56,
 
         [System.Runtime.Serialization.EnumMember(Value = @"rules:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"rules:read")]
         RulesRead = 57,
 
         [System.Runtime.Serialization.EnumMember(Value = @"rules:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"rules:write")]
         RulesWrite = 58,
 
         [System.Runtime.Serialization.EnumMember(Value = @"search:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"search:read")]
         SearchRead = 59,
 
         [System.Runtime.Serialization.EnumMember(Value = @"servers:backups")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"servers:backups")]
         ServersBackups = 60,
 
         [System.Runtime.Serialization.EnumMember(Value = @"servers:console")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"servers:console")]
         ServersConsole = 61,
 
         [System.Runtime.Serialization.EnumMember(Value = @"servers:files")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"servers:files")]
         ServersFiles = 62,
 
         [System.Runtime.Serialization.EnumMember(Value = @"servers:manage")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"servers:manage")]
         ServersManage = 63,
 
         [System.Runtime.Serialization.EnumMember(Value = @"servers:power")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"servers:power")]
         ServersPower = 64,
 
         [System.Runtime.Serialization.EnumMember(Value = @"servers:rcon")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"servers:rcon")]
         ServersRcon = 65,
 
         [System.Runtime.Serialization.EnumMember(Value = @"servers:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"servers:read")]
         ServersRead = 66,
 
         [System.Runtime.Serialization.EnumMember(Value = @"settings:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"settings:read")]
         SettingsRead = 67,
 
         [System.Runtime.Serialization.EnumMember(Value = @"settings:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"settings:write")]
         SettingsWrite = 68,
 
         [System.Runtime.Serialization.EnumMember(Value = @"squads:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"squads:read")]
         SquadsRead = 69,
 
         [System.Runtime.Serialization.EnumMember(Value = @"squads:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"squads:write")]
         SquadsWrite = 70,
 
         [System.Runtime.Serialization.EnumMember(Value = @"stats:manage")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"stats:manage")]
         StatsManage = 71,
 
         [System.Runtime.Serialization.EnumMember(Value = @"stats:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"stats:read")]
         StatsRead = 72,
 
         [System.Runtime.Serialization.EnumMember(Value = @"system:manage")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"system:manage")]
         SystemManage = 73,
 
         [System.Runtime.Serialization.EnumMember(Value = @"system:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"system:read")]
         SystemRead = 74,
 
         [System.Runtime.Serialization.EnumMember(Value = @"teamspeak:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"teamspeak:read")]
         TeamspeakRead = 75,
 
         [System.Runtime.Serialization.EnumMember(Value = @"tokens:manage")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"tokens:manage")]
         TokensManage = 76,
 
         [System.Runtime.Serialization.EnumMember(Value = @"translations:manage")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"translations:manage")]
         TranslationsManage = 77,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uploads:manage")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"uploads:manage")]
         UploadsManage = 78,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uploads:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"uploads:read")]
         UploadsRead = 79,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uploads:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"uploads:write")]
         UploadsWrite = 80,
 
         [System.Runtime.Serialization.EnumMember(Value = @"webhooks:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"webhooks:read")]
         WebhooksRead = 81,
 
         [System.Runtime.Serialization.EnumMember(Value = @"webhooks:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"webhooks:write")]
         WebhooksWrite = 82,
 
         [System.Runtime.Serialization.EnumMember(Value = @"wiki:manage")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"wiki:manage")]
         WikiManage = 83,
 
         [System.Runtime.Serialization.EnumMember(Value = @"wiki:read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"wiki:read")]
         WikiRead = 84,
 
         [System.Runtime.Serialization.EnumMember(Value = @"wiki:write")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"wiki:write")]
         WikiWrite = 85,
 
     }
@@ -98243,6 +99779,7 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"authorization_code")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"authorization_code")]
         Authorization_code = 0,
 
     }
@@ -98282,21 +99819,27 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"steam_id")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"steam_id")]
         Steam_id = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"guid")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"guid")]
         Guid = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"player_tag")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"player_tag")]
         Player_tag = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"riot_id")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"riot_id")]
         Riot_id = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"battletag")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"battletag")]
         Battletag = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uid")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"uid")]
         Uid = 5,
 
     }
@@ -98306,15 +99849,19 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"server")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"server")]
         Server = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"api")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"api")]
         Api = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"manual")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"manual")]
         Manual = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"none")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"none")]
         None = 3,
 
     }
@@ -98399,21 +99946,27 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"steam_id")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"steam_id")]
         Steam_id = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"guid")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"guid")]
         Guid = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"player_tag")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"player_tag")]
         Player_tag = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"riot_id")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"riot_id")]
         Riot_id = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"battletag")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"battletag")]
         Battletag = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uid")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"uid")]
         Uid = 5,
 
     }
@@ -98423,15 +99976,19 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"server")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"server")]
         Server = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"api")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"api")]
         Api = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"manual")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"manual")]
         Manual = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"none")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"none")]
         None = 3,
 
     }
@@ -98510,9 +100067,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"public")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"public")]
         Public = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"members")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"members")]
         Members = 1,
 
     }
@@ -98546,9 +100105,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"public")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"public")]
         Public = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"members")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"members")]
         Members = 1,
 
     }
@@ -98804,6 +100365,7 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"all")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"all")]
         All = 0,
 
     }
@@ -98813,9 +100375,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"markdown")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"markdown")]
         Markdown = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"wikitext")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"wikitext")]
         Wikitext = 1,
 
     }
@@ -98825,12 +100389,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"de")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"de")]
         De = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"en")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"en")]
         En = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"fr")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"fr")]
         Fr = 2,
 
     }
@@ -116523,9 +118090,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"leave_clan_first")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"leave_clan_first")]
         Leave_clan_first = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"owner_cannot_delete")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"owner_cannot_delete")]
         Owner_cannot_delete = 1,
 
     }
@@ -116895,12 +118464,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"daily")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"daily")]
         Daily = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"weekly")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"weekly")]
         Weekly = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"monthly")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"monthly")]
         Monthly = 2,
 
     }
@@ -116910,9 +118482,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"day")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"day")]
         Day = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"weekday")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"weekday")]
         Weekday = 1,
 
     }
@@ -116922,18 +118496,23 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"1")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"1")]
         _1 = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"2")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"2")]
         _2 = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"3")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"3")]
         _3 = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"4")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"4")]
         _4 = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"-1")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"-1")]
         __1 = -1,
 
     }
@@ -116943,12 +118522,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"never")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"never")]
         Never = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"until")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"until")]
         Until = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"count")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"count")]
         Count = 2,
 
     }
@@ -116958,9 +118540,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"starter")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"starter")]
         Starter = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"substitute")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"substitute")]
         Substitute = 1,
 
     }
@@ -117309,12 +118893,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"daily")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"daily")]
         Daily = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"weekly")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"weekly")]
         Weekly = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"monthly")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"monthly")]
         Monthly = 2,
 
     }
@@ -117324,9 +118911,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"day")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"day")]
         Day = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"weekday")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"weekday")]
         Weekday = 1,
 
     }
@@ -117336,18 +118925,23 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"1")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"1")]
         _1 = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"2")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"2")]
         _2 = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"3")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"3")]
         _3 = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"4")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"4")]
         _4 = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"-1")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"-1")]
         __1 = -1,
 
     }
@@ -117357,12 +118951,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"never")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"never")]
         Never = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"until")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"until")]
         Until = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"count")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"count")]
         Count = 2,
 
     }
@@ -117372,12 +118969,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"daily")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"daily")]
         Daily = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"weekly")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"weekly")]
         Weekly = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"monthly")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"monthly")]
         Monthly = 2,
 
     }
@@ -117387,9 +118987,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"day")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"day")]
         Day = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"weekday")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"weekday")]
         Weekday = 1,
 
     }
@@ -117399,18 +119001,23 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"1")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"1")]
         _1 = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"2")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"2")]
         _2 = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"3")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"3")]
         _3 = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"4")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"4")]
         _4 = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"-1")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"-1")]
         __1 = -1,
 
     }
@@ -117420,12 +119027,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"never")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"never")]
         Never = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"until")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"until")]
         Until = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"count")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"count")]
         Count = 2,
 
     }
@@ -117435,12 +119045,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"daily")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"daily")]
         Daily = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"weekly")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"weekly")]
         Weekly = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"monthly")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"monthly")]
         Monthly = 2,
 
     }
@@ -117450,9 +119063,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"day")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"day")]
         Day = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"weekday")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"weekday")]
         Weekday = 1,
 
     }
@@ -117462,18 +119077,23 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"1")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"1")]
         _1 = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"2")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"2")]
         _2 = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"3")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"3")]
         _3 = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"4")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"4")]
         _4 = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"-1")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"-1")]
         __1 = -1,
 
     }
@@ -117483,12 +119103,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"never")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"never")]
         Never = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"until")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"until")]
         Until = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"count")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"count")]
         Count = 2,
 
     }
@@ -117528,9 +119151,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"starter")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"starter")]
         Starter = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"substitute")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"substitute")]
         Substitute = 1,
 
     }
@@ -117540,9 +119165,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"starter")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"starter")]
         Starter = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"substitute")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"substitute")]
         Substitute = 1,
 
     }
@@ -119470,12 +121097,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"degraded")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"degraded")]
         Degraded = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"ok")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"ok")]
         Ok = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"down")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"down")]
         Down = 2,
 
     }
@@ -123643,12 +125273,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"read")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"read")]
         Read = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"command")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"command")]
         Command = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"power")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"power")]
         Power = 2,
 
     }
@@ -124432,9 +126065,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"env")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"env")]
         Env = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"admin")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"admin")]
         Admin = 1,
 
     }
@@ -128721,12 +130356,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"disabled")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"disabled")]
         Disabled = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"active")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"active")]
         Active = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"paused")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"paused")]
         Paused = 2,
 
     }
@@ -131637,9 +133275,11 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"weekday")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"weekday")]
         Weekday = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"day")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"day")]
         Day = 1,
 
     }
@@ -131649,12 +133289,15 @@ namespace RoG.Core.Api.Generated
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"count")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"count")]
         Count = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"until")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"until")]
         Until = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"never")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"never")]
         Never = 2,
 
     }

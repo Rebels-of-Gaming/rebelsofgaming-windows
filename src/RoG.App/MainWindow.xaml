@@ -35,7 +35,7 @@
             CompactModeThresholdWidth="600"
             ExpandedModeThresholdWidth="840"
             IsBackButtonVisible="Collapsed"
-            IsSettingsVisible="False"
+            IsSettingsVisible="True"
             PaneDisplayMode="Auto"
             SelectionChanged="OnNavigationSelectionChanged"
             Visibility="Collapsed">
@@ -51,8 +51,8 @@
                 <NavigationViewItem x:Uid="Shell_NavMembers" Content="Mitglieder" Icon="ContactInfo" Tag="Nav_Members" />
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>
-                <NavigationViewItem x:Uid="Shell_NavAdmin" Content="Verwaltung" Icon="Admin" Tag="Nav_Admin" />
-                <NavigationViewItem x:Uid="Shell_NavAccount" Content="Konto" Icon="Contact" Tag="Nav_Account" />
+                <NavigationViewItem x:Name="AdminItem" x:Uid="Shell_NavAdmin" Content="Verwaltung" Icon="Admin" Tag="Nav_Admin" Visibility="Collapsed" />
+                <NavigationViewItem x:Name="AccountItem" x:Uid="Shell_NavAccount" Content="Konto" Icon="Contact" Tag="Nav_Account" />
             </NavigationView.FooterMenuItems>
             <Frame x:Name="ContentFrame" />
         </NavigationView>

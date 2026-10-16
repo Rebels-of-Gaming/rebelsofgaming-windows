@@ -120,7 +120,7 @@
     <value>Please check your input.</value>
   </data>
   <data name="HomePage_ComingSoonText.Text" xml:space="preserve">
-    <value>The Windows app is being built. Live ticker, news and squads follow in the next stages.</value>
+    <value>The Windows app is growing: servers with “Connect” are here, news, squads, messages and events are next.</value>
   </data>
   <data name="HomePage_ComingSoonTitle.Text" xml:space="preserve">
     <value>UNDER CONSTRUCTION</value>
@@ -130,15 +130,6 @@
   </data>
   <data name="HomePage_GuestHint.Title" xml:space="preserve">
     <value>Guest mode</value>
-  </data>
-  <data name="HomePage_TickerEvent.Text" xml:space="preserve">
-    <value>NEXT EVENT</value>
-  </data>
-  <data name="HomePage_TickerOnline.Text" xml:space="preserve">
-    <value>ONLINE</value>
-  </data>
-  <data name="HomePage_TickerServers.Text" xml:space="preserve">
-    <value>ON SERVERS</value>
   </data>
   <data name="HomePage_Title.Text" xml:space="preserve">
     <value>HOME</value>
@@ -322,5 +313,128 @@
   </data>
   <data name="ServerCard_Copy.Content" xml:space="preserve">
     <value>COPY ADDRESS</value>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Home_Greeting" xml:space="preserve">
+    <value>Welcome back, {0}.</value>
+  </data>
+  <data name="Home_GreetingGuest" xml:space="preserve">
+    <value>Welcome to Rebels of Gaming.</value>
+  </data>
+  <data name="Account_Joined" xml:space="preserve">
+    <value>Member since {0}</value>
+  </data>
+  <data name="Account_TwoFactorOn" xml:space="preserve">
+    <value>Two-factor sign-in is on.</value>
+  </data>
+  <data name="Account_TwoFactorOff" xml:space="preserve">
+    <value>Two-factor sign-in is off – required for admin areas in the app.</value>
+  </data>
+  <data name="Account_SignOutTitle" xml:space="preserve">
+    <value>Sign out?</value>
+  </data>
+  <data name="Account_SignOutText" xml:space="preserve">
+    <value>This device is signed out on the website and its access on this PC is deleted.</value>
+  </data>
+  <data name="Account_SignOutConfirm" xml:space="preserve">
+    <value>Sign out</value>
+  </data>
+  <data name="Settings_LanguageSystem" xml:space="preserve">
+    <value>Windows language</value>
+  </data>
+  <data name="Settings_AppVersion" xml:space="preserve">
+    <value>Rebels of Gaming for Windows v{0}</value>
+  </data>
+  <data name="Settings_PlatformVersion" xml:space="preserve">
+    <value>Platform v{0}</value>
+  </data>
+  <data name="Settings_PlatformUnavailable" xml:space="preserve">
+    <value>Platform currently unreachable</value>
+  </data>
+  <data name="HomePage_Refresh.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="HomePage_Refresh.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Refresh (F5)</value>
+  </data>
+  <data name="HomePage_LiveTitle.Text" xml:space="preserve">
+    <value>LIVE</value>
+  </data>
+  <data name="HomePage_Loading.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Loading live data</value>
+  </data>
+  <data name="HomePage_LiveEmpty.Text" xml:space="preserve">
+    <value>No live data right now.</value>
+  </data>
+  <data name="AccountPage_Title.Text" xml:space="preserve">
+    <value>ACCOUNT</value>
+  </data>
+  <data name="AccountPage_Loading.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Loading account</value>
+  </data>
+  <data name="AccountPage_GuestTitle.Text" xml:space="preserve">
+    <value>NOT SIGNED IN</value>
+  </data>
+  <data name="AccountPage_GuestText.Text" xml:space="preserve">
+    <value>Sign in to use messages, events, the forum and everything for members. Sign-in happens securely in your browser (Discord or email).</value>
+  </data>
+  <data name="AccountPage_SignIn.Content" xml:space="preserve">
+    <value>SIGN IN WITH BROWSER</value>
+  </data>
+  <data name="AccountPage_DetailsTitle.Text" xml:space="preserve">
+    <value>DETAILS</value>
+  </data>
+  <data name="AccountPage_EmailLabel.Text" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="AccountPage_SecurityLabel.Text" xml:space="preserve">
+    <value>Security</value>
+  </data>
+  <data name="AccountPage_DeviceLabel.Text" xml:space="preserve">
+    <value>This device</value>
+  </data>
+  <data name="AccountPage_OpenProfile.Content" xml:space="preserve">
+    <value>VIEW PROFILE</value>
+  </data>
+  <data name="AccountPage_ManageOnWebsite.Content" xml:space="preserve">
+    <value>MANAGE ON WEBSITE</value>
+  </data>
+  <data name="AccountPage_ManageHint.Text" xml:space="preserve">
+    <value>Email, password, passkeys, devices, data export and account deletion are on the website for now.</value>
+  </data>
+  <data name="AccountPage_SignOut.Content" xml:space="preserve">
+    <value>SIGN OUT</value>
+  </data>
+  <data name="SettingsPage_Title.Text" xml:space="preserve">
+    <value>SETTINGS</value>
+  </data>
+  <data name="SettingsPage_RestartHint.Message" xml:space="preserve">
+    <value>The new language applies after restarting the app.</value>
+  </data>
+  <data name="SettingsPage_GeneralTitle.Text" xml:space="preserve">
+    <value>GENERAL</value>
+  </data>
+  <data name="SettingsPage_Language.Header" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="SettingsPage_AboutTitle.Text" xml:space="preserve">
+    <value>ABOUT</value>
+  </data>
+  <data name="SettingsPage_Website.Content" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="SettingsPage_Status.Content" xml:space="preserve">
+    <value>Status page</value>
+  </data>
+  <data name="SettingsPage_Privacy.Content" xml:space="preserve">
+    <value>Privacy</value>
+  </data>
+  <data name="SettingsPage_LicensesTitle.Text" xml:space="preserve">
+    <value>LICENSES</value>
+  </data>
+  <data name="SettingsPage_LicensesText.Text" xml:space="preserve">
+    <value>Barlow Condensed font © The Barlow Project Authors, SIL Open Font License 1.1. Windows App SDK, .NET and CommunityToolkit.Mvvm © Microsoft and .NET Foundation, MIT license.</value>
   </data>
 </root>

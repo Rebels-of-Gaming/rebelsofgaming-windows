@@ -41,3 +41,4 @@ und meldet `X.Y.Z` als `app_version` an `/v1/devices`.
 
 - `0.1.0`: Stufe 0 – Fundament, Testpakete mit Platzhalter-Identität (nie im Store).
 - `2.0.0` (16.10.2026): echte Store-Identität, Server-Seite mit „Verbinden“ – Testpaket per Sideload.
+- `2.0.1` (16.10.2026): Stufe 1 Konto + Start (Konto, Einstellungen, Live-Ticker, Einzelinstanz). Version setzen mit `scripts/bump-version.sh patch|minor`.

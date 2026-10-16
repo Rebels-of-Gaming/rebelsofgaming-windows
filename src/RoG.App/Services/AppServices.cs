@@ -2,6 +2,7 @@ using System.Globalization;
 using RoG.Core.Api;
 using RoG.Core.Auth;
 using RoG.Core.Config;
+using RoG.Core.Features.Account;
 using RoG.Core.Features.Servers;
 using RoG.Core.Localization;
 using RoG.Core.Settings;
@@ -36,6 +37,7 @@ public sealed class AppServices : IDisposable
         Api = api;
         Localizer = localizer;
         Browser = browser;
+        Account = new AccountService(api.Client, tokens);
     }
 
     public ISettingsStore SettingsStore { get; }
@@ -56,6 +58,26 @@ public sealed class AppServices : IDisposable
     public ILocalizer Localizer { get; }
 
     public IBrowserLauncher Browser { get; }
+
+    public AccountService Account { get; }
+
+    /// <summary>Angemeldete Person (<c>/v1/me</c>); <c>null</c> im Gastmodus oder solange noch nicht geladen.</summary>
+    public UserProfile? CurrentUser
+    {
+        get;
+        set
+        {
+            field = value;
+            CurrentUserChanged?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    public event EventHandler? CurrentUserChanged;
+
+    /// <summary>Login-Seite zeigen (nach dem Abmelden oder „Anmelden“ im Gastmodus); das Hauptfenster reagiert.</summary>
+    public event EventHandler? SignInRequested;
+
+    public void RequestSignIn() => SignInRequested?.Invoke(this, EventArgs.Empty);
 
     /// <summary>Spiele-Links und Zwischenablage für „Verbinden“ auf Gameservern.</summary>
     public ServerConnector ServerConnector { get; } = new(new WindowsExternalLauncher(), new WindowsClipboard());
@@ -92,6 +114,17 @@ public sealed class AppServices : IDisposable
     {
         Settings = change(Settings);
         await SettingsStore.SaveAsync(Settings);
+    }
+
+    /// <summary>
+    /// Synchron speichern, z. B. beim Schließen des Fensters (danach endet der Prozess). Läuft auf dem Threadpool,
+    /// damit kein <c>await</c> auf den blockierten UI-Thread zurückwill.
+    /// </summary>
+    public void UpdateSettingsNow(Func<AppSettings, AppSettings> change)
+    {
+        Settings = change(Settings);
+        var snapshot = Settings;
+        Task.Run(() => SettingsStore.SaveAsync(snapshot)).GetAwaiter().GetResult();
     }
 
     /// <summary>Texte für die Seite, die der Browser nach dem Login-Rücksprung zeigt.</summary>

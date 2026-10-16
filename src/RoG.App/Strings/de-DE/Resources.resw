@@ -120,7 +120,7 @@
     <value>Bitte prüfe deine Eingaben.</value>
   </data>
   <data name="HomePage_ComingSoonText.Text" xml:space="preserve">
-    <value>Die Windows-App entsteht gerade. Live-Ticker, News und Squads folgen in den nächsten Stufen.</value>
+    <value>Die Windows-App wächst: Server mit „Verbinden“ gibt es schon, News, Squads, Nachrichten und Termine folgen.</value>
   </data>
   <data name="HomePage_ComingSoonTitle.Text" xml:space="preserve">
     <value>IM AUFBAU</value>
@@ -130,15 +130,6 @@
   </data>
   <data name="HomePage_GuestHint.Title" xml:space="preserve">
     <value>Gastmodus</value>
-  </data>
-  <data name="HomePage_TickerEvent.Text" xml:space="preserve">
-    <value>NÄCHSTES EVENT</value>
-  </data>
-  <data name="HomePage_TickerOnline.Text" xml:space="preserve">
-    <value>ONLINE</value>
-  </data>
-  <data name="HomePage_TickerServers.Text" xml:space="preserve">
-    <value>AUF SERVERN</value>
   </data>
   <data name="HomePage_Title.Text" xml:space="preserve">
     <value>START</value>
@@ -322,5 +313,128 @@
   </data>
   <data name="ServerCard_Copy.Content" xml:space="preserve">
     <value>ADRESSE KOPIEREN</value>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="Home_Greeting" xml:space="preserve">
+    <value>Willkommen zurück, {0}.</value>
+  </data>
+  <data name="Home_GreetingGuest" xml:space="preserve">
+    <value>Willkommen bei den Rebels of Gaming.</value>
+  </data>
+  <data name="Account_Joined" xml:space="preserve">
+    <value>Dabei seit {0}</value>
+  </data>
+  <data name="Account_TwoFactorOn" xml:space="preserve">
+    <value>Zwei-Faktor-Anmeldung ist aktiv.</value>
+  </data>
+  <data name="Account_TwoFactorOff" xml:space="preserve">
+    <value>Zwei-Faktor-Anmeldung ist aus – für die Verwaltung in der App nötig.</value>
+  </data>
+  <data name="Account_SignOutTitle" xml:space="preserve">
+    <value>Abmelden?</value>
+  </data>
+  <data name="Account_SignOutText" xml:space="preserve">
+    <value>Dieses Gerät wird auf der Website abgemeldet und der Zugang auf diesem PC gelöscht.</value>
+  </data>
+  <data name="Account_SignOutConfirm" xml:space="preserve">
+    <value>Abmelden</value>
+  </data>
+  <data name="Settings_LanguageSystem" xml:space="preserve">
+    <value>Windows-Sprache</value>
+  </data>
+  <data name="Settings_AppVersion" xml:space="preserve">
+    <value>Rebels of Gaming für Windows v{0}</value>
+  </data>
+  <data name="Settings_PlatformVersion" xml:space="preserve">
+    <value>Plattform v{0}</value>
+  </data>
+  <data name="Settings_PlatformUnavailable" xml:space="preserve">
+    <value>Plattform gerade nicht erreichbar</value>
+  </data>
+  <data name="HomePage_Refresh.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Aktualisieren</value>
+  </data>
+  <data name="HomePage_Refresh.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Aktualisieren (F5)</value>
+  </data>
+  <data name="HomePage_LiveTitle.Text" xml:space="preserve">
+    <value>LIVE</value>
+  </data>
+  <data name="HomePage_Loading.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Live-Daten werden geladen</value>
+  </data>
+  <data name="HomePage_LiveEmpty.Text" xml:space="preserve">
+    <value>Gerade gibt es keine Live-Daten.</value>
+  </data>
+  <data name="AccountPage_Title.Text" xml:space="preserve">
+    <value>KONTO</value>
+  </data>
+  <data name="AccountPage_Loading.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Konto wird geladen</value>
+  </data>
+  <data name="AccountPage_GuestTitle.Text" xml:space="preserve">
+    <value>NICHT ANGEMELDET</value>
+  </data>
+  <data name="AccountPage_GuestText.Text" xml:space="preserve">
+    <value>Melde dich an, um Nachrichten, Termine, Forum und alles für Mitglieder zu nutzen. Die Anmeldung läuft sicher im Browser (Discord oder E-Mail).</value>
+  </data>
+  <data name="AccountPage_SignIn.Content" xml:space="preserve">
+    <value>IM BROWSER ANMELDEN</value>
+  </data>
+  <data name="AccountPage_DetailsTitle.Text" xml:space="preserve">
+    <value>ANGABEN</value>
+  </data>
+  <data name="AccountPage_EmailLabel.Text" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="AccountPage_SecurityLabel.Text" xml:space="preserve">
+    <value>Sicherheit</value>
+  </data>
+  <data name="AccountPage_DeviceLabel.Text" xml:space="preserve">
+    <value>Dieses Gerät</value>
+  </data>
+  <data name="AccountPage_OpenProfile.Content" xml:space="preserve">
+    <value>PROFIL ANSEHEN</value>
+  </data>
+  <data name="AccountPage_ManageOnWebsite.Content" xml:space="preserve">
+    <value>AUF DER WEBSITE VERWALTEN</value>
+  </data>
+  <data name="AccountPage_ManageHint.Text" xml:space="preserve">
+    <value>E-Mail, Passwort, Passkeys, Geräte, Datenexport und Konto löschen gibt es vorerst auf der Website.</value>
+  </data>
+  <data name="AccountPage_SignOut.Content" xml:space="preserve">
+    <value>ABMELDEN</value>
+  </data>
+  <data name="SettingsPage_Title.Text" xml:space="preserve">
+    <value>EINSTELLUNGEN</value>
+  </data>
+  <data name="SettingsPage_RestartHint.Message" xml:space="preserve">
+    <value>Die neue Sprache gilt nach einem Neustart der App.</value>
+  </data>
+  <data name="SettingsPage_GeneralTitle.Text" xml:space="preserve">
+    <value>ALLGEMEIN</value>
+  </data>
+  <data name="SettingsPage_Language.Header" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
+  <data name="SettingsPage_AboutTitle.Text" xml:space="preserve">
+    <value>ÜBER DIE APP</value>
+  </data>
+  <data name="SettingsPage_Website.Content" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="SettingsPage_Status.Content" xml:space="preserve">
+    <value>Statusseite</value>
+  </data>
+  <data name="SettingsPage_Privacy.Content" xml:space="preserve">
+    <value>Datenschutz</value>
+  </data>
+  <data name="SettingsPage_LicensesTitle.Text" xml:space="preserve">
+    <value>LIZENZEN</value>
+  </data>
+  <data name="SettingsPage_LicensesText.Text" xml:space="preserve">
+    <value>Schrift Barlow Condensed © The Barlow Project Authors, SIL Open Font License 1.1. Windows App SDK, .NET und CommunityToolkit.Mvvm © Microsoft und .NET Foundation, MIT-Lizenz.</value>
   </data>
 </root>

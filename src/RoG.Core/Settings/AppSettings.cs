@@ -32,6 +32,39 @@ public sealed record AppSettings
 
     /// <summary>Gastmodus gewählt („Ohne Anmeldung umsehen“).</summary>
     public bool GuestMode { get; init; }
+
+    /// <summary>Fenstergröße und -position beim letzten Schließen (physische Pixel); <c>null</c> = Standard.</summary>
+    public WindowPlacement? Window { get; init; }
+
+    /// <summary>Zuletzt geöffneter Bereich (Navigations-Schlüssel wie <c>Nav_Servers</c>).</summary>
+    public string? LastSection { get; init; }
+}
+
+/// <summary>Gemerkter Fensterzustand.</summary>
+public sealed record WindowPlacement(int X, int Y, int Width, int Height, bool Maximized)
+{
+    /// <summary>Mindestgröße laut Pflichtenheft (360 × 500 epx, hier großzügig in Pixeln).</summary>
+    public const int MinWidth = 360;
+
+    public const int MinHeight = 500;
+
+    /// <summary>
+    /// Passt die Lage an den sichtbaren Bildschirmbereich an (Monitor abgesteckt, Auflösung geändert): zu groß → verkleinern,
+    /// außerhalb → zurück in den Bereich. <c>null</c>, wenn der gespeicherte Wert unbrauchbar ist.
+    /// </summary>
+    public WindowPlacement? FitInto(int areaX, int areaY, int areaWidth, int areaHeight)
+    {
+        if (Width < MinWidth || Height < MinHeight || areaWidth < MinWidth || areaHeight < MinHeight)
+        {
+            return null;
+        }
+
+        var w = Math.Min(Width, areaWidth);
+        var h = Math.Min(Height, areaHeight);
+        var x = Math.Clamp(X, areaX, areaX + areaWidth - w);
+        var y = Math.Clamp(Y, areaY, areaY + areaHeight - h);
+        return this with { X = x, Y = y, Width = w, Height = h };
+    }
 }
 
 /// <summary>Speicher für <see cref="AppSettings"/>.</summary>

@@ -28,6 +28,32 @@ public sealed class SettingsTests : IDisposable
     }
 
     [Fact]
+    public async Task Window_placement_and_last_section_roundtrip()
+    {
+        var store = new JsonFileSettingsStore(Path.Combine(_dir, "settings.json"));
+        await store.SaveAsync(new AppSettings { Window = new WindowPlacement(10, 20, 1280, 820, true), LastSection = "Nav_Servers" });
+
+        var loaded = await store.LoadAsync();
+
+        Assert.Equal(new WindowPlacement(10, 20, 1280, 820, true), loaded.Window);
+        Assert.Equal("Nav_Servers", loaded.LastSection);
+    }
+
+    [Fact]
+    public void Window_placement_is_fitted_into_the_visible_area()
+    {
+        // Fenster vom abgesteckten zweiten Monitor (x = 2500) auf einen 1920×1040-Bereich
+        var fitted = new WindowPlacement(2500, 100, 1280, 820, false).FitInto(0, 0, 1920, 1040);
+        Assert.Equal(new WindowPlacement(640, 100, 1280, 820, false), fitted);
+
+        // zu groß → auf den Bereich verkleinert
+        Assert.Equal(new WindowPlacement(0, 0, 1366, 728, false), new WindowPlacement(-50, -50, 2560, 1400, false).FitInto(0, 0, 1366, 728));
+
+        // unbrauchbar klein → Standard
+        Assert.Null(new WindowPlacement(0, 0, 100, 100, false).FitInto(0, 0, 1920, 1040));
+    }
+
+    [Fact]
     public async Task Settings_roundtrip_atomically()
     {
         var path = Path.Combine(_dir, "sub", "settings.json");

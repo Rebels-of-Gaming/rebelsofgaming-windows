@@ -29,6 +29,25 @@ public static class StringKeys
     public const string LoopbackFailure = "Loopback_Failure";
 
     public const string ComingSoon = "Common_ComingSoon";
+    public const string CommonCancel = "Common_Cancel";
+
+    // Start ({0} = Name)
+    public const string HomeGreeting = "Home_Greeting";
+    public const string HomeGreetingGuest = "Home_GreetingGuest";
+
+    // Konto ({0} = Datum)
+    public const string AccountJoined = "Account_Joined";
+    public const string AccountTwoFactorOn = "Account_TwoFactorOn";
+    public const string AccountTwoFactorOff = "Account_TwoFactorOff";
+    public const string AccountSignOutTitle = "Account_SignOutTitle";
+    public const string AccountSignOutText = "Account_SignOutText";
+    public const string AccountSignOutConfirm = "Account_SignOutConfirm";
+
+    // Einstellungen ({0} = Version)
+    public const string SettingsLanguageSystem = "Settings_LanguageSystem";
+    public const string SettingsAppVersion = "Settings_AppVersion";
+    public const string SettingsPlatformVersion = "Settings_PlatformVersion";
+    public const string SettingsPlatformUnavailable = "Settings_PlatformUnavailable";
 
     // Server: Hinweise zu „Verbinden“ ({0} = Servername bzw. Adresse host:port)
     public const string ServersLaunchedSteam = "Servers_LaunchedSteam";

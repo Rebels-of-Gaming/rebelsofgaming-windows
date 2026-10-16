@@ -1,4 +1,5 @@
 using Microsoft.UI.Xaml;
+using Microsoft.Windows.AppLifecycle;
 using RoG.App.Services;
 
 namespace RoG.App;
@@ -6,7 +7,7 @@ namespace RoG.App;
 /// <summary>Einstiegspunkt der WinUI-App.</summary>
 public partial class App : Application
 {
-    private MainWindow? _window;
+    private static MainWindow? s_window;
 
     public App()
     {
@@ -25,7 +26,14 @@ public partial class App : Application
     {
         // Sprache muss vor dem ersten Laden von Ressourcen (x:Uid) feststehen.
         Services = await AppServices.CreateAsync();
-        _window = new MainWindow(Services);
-        _window.Activate();
+        s_window = new MainWindow(Services);
+        s_window.Activate();
+    }
+
+    /// <summary>Zweiter Start der App (Program.Main): vorhandenes Fenster nach vorn holen.</summary>
+    internal static void OnRedirectedActivation(AppActivationArguments args)
+    {
+        var window = s_window;
+        window?.DispatcherQueue.TryEnqueue(window.BringToFront);
     }
 }

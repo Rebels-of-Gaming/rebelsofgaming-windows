@@ -120,7 +120,7 @@
     <value>Merci de vérifier ta saisie.</value>
   </data>
   <data name="HomePage_ComingSoonText.Text" xml:space="preserve">
-    <value>L’application Windows est en cours de création. Le ticker en direct, les actualités et les squads arrivent dans les prochaines étapes.</value>
+    <value>L’app Windows grandit : les serveurs avec « Se connecter » sont là, actus, squads, messages et événements arrivent.</value>
   </data>
   <data name="HomePage_ComingSoonTitle.Text" xml:space="preserve">
     <value>EN CONSTRUCTION</value>
@@ -130,15 +130,6 @@
   </data>
   <data name="HomePage_GuestHint.Title" xml:space="preserve">
     <value>Mode invité</value>
-  </data>
-  <data name="HomePage_TickerEvent.Text" xml:space="preserve">
-    <value>PROCHAIN ÉVÉNEMENT</value>
-  </data>
-  <data name="HomePage_TickerOnline.Text" xml:space="preserve">
-    <value>EN LIGNE</value>
-  </data>
-  <data name="HomePage_TickerServers.Text" xml:space="preserve">
-    <value>SUR LES SERVEURS</value>
   </data>
   <data name="HomePage_Title.Text" xml:space="preserve">
     <value>ACCUEIL</value>
@@ -322,5 +313,128 @@
   </data>
   <data name="ServerCard_Copy.Content" xml:space="preserve">
     <value>COPIER L’ADRESSE</value>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Home_Greeting" xml:space="preserve">
+    <value>Bon retour, {0}.</value>
+  </data>
+  <data name="Home_GreetingGuest" xml:space="preserve">
+    <value>Bienvenue chez Rebels of Gaming.</value>
+  </data>
+  <data name="Account_Joined" xml:space="preserve">
+    <value>Membre depuis le {0}</value>
+  </data>
+  <data name="Account_TwoFactorOn" xml:space="preserve">
+    <value>La connexion à deux facteurs est activée.</value>
+  </data>
+  <data name="Account_TwoFactorOff" xml:space="preserve">
+    <value>La connexion à deux facteurs est désactivée – nécessaire pour l’administration dans l’app.</value>
+  </data>
+  <data name="Account_SignOutTitle" xml:space="preserve">
+    <value>Se déconnecter ?</value>
+  </data>
+  <data name="Account_SignOutText" xml:space="preserve">
+    <value>Cet appareil est déconnecté du site et son accès sur ce PC est supprimé.</value>
+  </data>
+  <data name="Account_SignOutConfirm" xml:space="preserve">
+    <value>Se déconnecter</value>
+  </data>
+  <data name="Settings_LanguageSystem" xml:space="preserve">
+    <value>Langue de Windows</value>
+  </data>
+  <data name="Settings_AppVersion" xml:space="preserve">
+    <value>Rebels of Gaming pour Windows v{0}</value>
+  </data>
+  <data name="Settings_PlatformVersion" xml:space="preserve">
+    <value>Plateforme v{0}</value>
+  </data>
+  <data name="Settings_PlatformUnavailable" xml:space="preserve">
+    <value>Plateforme injoignable pour le moment</value>
+  </data>
+  <data name="HomePage_Refresh.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Actualiser</value>
+  </data>
+  <data name="HomePage_Refresh.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Actualiser (F5)</value>
+  </data>
+  <data name="HomePage_LiveTitle.Text" xml:space="preserve">
+    <value>EN DIRECT</value>
+  </data>
+  <data name="HomePage_Loading.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Chargement des données en direct</value>
+  </data>
+  <data name="HomePage_LiveEmpty.Text" xml:space="preserve">
+    <value>Aucune donnée en direct pour le moment.</value>
+  </data>
+  <data name="AccountPage_Title.Text" xml:space="preserve">
+    <value>COMPTE</value>
+  </data>
+  <data name="AccountPage_Loading.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Chargement du compte</value>
+  </data>
+  <data name="AccountPage_GuestTitle.Text" xml:space="preserve">
+    <value>NON CONNECTÉ</value>
+  </data>
+  <data name="AccountPage_GuestText.Text" xml:space="preserve">
+    <value>Connecte-toi pour utiliser les messages, les événements, le forum et tout ce qui est réservé aux membres. La connexion se fait en toute sécurité dans le navigateur (Discord ou e-mail).</value>
+  </data>
+  <data name="AccountPage_SignIn.Content" xml:space="preserve">
+    <value>SE CONNECTER DANS LE NAVIGATEUR</value>
+  </data>
+  <data name="AccountPage_DetailsTitle.Text" xml:space="preserve">
+    <value>INFORMATIONS</value>
+  </data>
+  <data name="AccountPage_EmailLabel.Text" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="AccountPage_SecurityLabel.Text" xml:space="preserve">
+    <value>Sécurité</value>
+  </data>
+  <data name="AccountPage_DeviceLabel.Text" xml:space="preserve">
+    <value>Cet appareil</value>
+  </data>
+  <data name="AccountPage_OpenProfile.Content" xml:space="preserve">
+    <value>VOIR LE PROFIL</value>
+  </data>
+  <data name="AccountPage_ManageOnWebsite.Content" xml:space="preserve">
+    <value>GÉRER SUR LE SITE</value>
+  </data>
+  <data name="AccountPage_ManageHint.Text" xml:space="preserve">
+    <value>E-mail, mot de passe, passkeys, appareils, export des données et suppression du compte se trouvent pour l’instant sur le site.</value>
+  </data>
+  <data name="AccountPage_SignOut.Content" xml:space="preserve">
+    <value>SE DÉCONNECTER</value>
+  </data>
+  <data name="SettingsPage_Title.Text" xml:space="preserve">
+    <value>PARAMÈTRES</value>
+  </data>
+  <data name="SettingsPage_RestartHint.Message" xml:space="preserve">
+    <value>La nouvelle langue s’applique après le redémarrage de l’app.</value>
+  </data>
+  <data name="SettingsPage_GeneralTitle.Text" xml:space="preserve">
+    <value>GÉNÉRAL</value>
+  </data>
+  <data name="SettingsPage_Language.Header" xml:space="preserve">
+    <value>Langue</value>
+  </data>
+  <data name="SettingsPage_AboutTitle.Text" xml:space="preserve">
+    <value>À PROPOS</value>
+  </data>
+  <data name="SettingsPage_Website.Content" xml:space="preserve">
+    <value>Site web</value>
+  </data>
+  <data name="SettingsPage_Status.Content" xml:space="preserve">
+    <value>Page de statut</value>
+  </data>
+  <data name="SettingsPage_Privacy.Content" xml:space="preserve">
+    <value>Confidentialité</value>
+  </data>
+  <data name="SettingsPage_LicensesTitle.Text" xml:space="preserve">
+    <value>LICENCES</value>
+  </data>
+  <data name="SettingsPage_LicensesText.Text" xml:space="preserve">
+    <value>Police Barlow Condensed © The Barlow Project Authors, SIL Open Font License 1.1. Windows App SDK, .NET et CommunityToolkit.Mvvm © Microsoft et .NET Foundation, licence MIT.</value>
   </data>
 </root>

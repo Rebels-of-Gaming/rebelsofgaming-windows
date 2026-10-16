@@ -24,6 +24,10 @@
     <EnableMsixTooling>true</EnableMsixTooling>
     <WindowsPackageType>MSIX</WindowsPackageType>
     <DefaultLanguage>de-DE</DefaultLanguage>
+    <!-- Eigenes Program.Main für die Einzelinstanz (AppInstance.FindOrRegisterForKey) -->
+    <DefineConstants>$(DefineConstants);DISABLE_XAML_GENERATED_MAIN</DefineConstants>
+    <!-- [LibraryImport] für SetForegroundWindow erzeugt unsicheren Code -->
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
     <!-- Store-Pakete: .msixupload mit x64 + ARM64; Signatur übernimmt der Store. Lokale Testpakete signiert die VM (siehe docs/BUILD-VM.md). -->
     <AppxBundle>Never</AppxBundle>

@@ -8,7 +8,7 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 | Stufe | Inhalt | Status | Commit |
 |---|---|---|---|
 | 0 | Fundament | fertig: Core + Tests grün (Linux), **App baut auf dem Windows-Runner `rog-win-1`** (x64 + ARM64, CI-Job „WinUI-App (Windows)“), Store-Paket `.msixupload` entsteht; noch nie gestartet | siehe `git log` (develop) |
-| 1 | Konto + Start | offen | |
+| 1 | Konto + Start | in Arbeit (2.0.1): Konto, Abmelden, Gerät, Einstellungen, Live-Ticker, Einzelinstanz, Fensterzustand | siehe `git log` (develop) |
 | 2 | Community lesen | begonnen (vorgezogen auf Wunsch des Owners, 16.10.2026): **Server-Seite mit „Verbinden“** | siehe `git log` (develop) |
 | 3 | Echtzeit + Desktop-Integration | offen | |
 | 4 | Kommunikation | offen | |
@@ -57,6 +57,25 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   Problem Details, Pipeline inkl. Idempotency/ETag/Retry/401, Reverb mit Fake-Socket inkl. Presence/Reconnect,
   Einstellungen, Sprachauflösung, .resw-Vollständigkeit + `x:Uid`, Manifest-Version/Assets/Capabilities).
 
+### Stufe 1 – Konto + Start (2.0.1, 16.10.2026)
+
+- **Core:** `AccountService` (`/v1/me` → `UserProfile` mit Rechten je Bereich und Token-Scopes inkl. Platzhalter
+  `bereich:*`, `POST /v1/devices` mit `platform: windows` + App-Version bei jedem Start, Abmelden widerruft den Token
+  und löscht ihn lokal immer, Plattform-Version aus `GET /v1`), `LiveTickerService` (`/v1/live`),
+  `WindowPlacement` (Fenster auf sichtbaren Bereich einpassen).
+- **Generierter Client repariert** (`scripts/postprocess-client.py`): Enum-Werte gingen als `Windows` statt `windows`
+  raus (System.Text.Json ignoriert `[EnumMember]`), weitere 2xx-Antworten (19 × `201 Created`) galten als Fehler,
+  PHP-`[]` für leere Objekte brach das Lesen ab (`RoGApiClientJson.cs`).
+- **App:** Konto-Seite (Profil-Kopf mit Rang in Gold, E-Mail, 2FA-Stand, Gerät, „Profil ansehen“, „Auf der Website
+  verwalten“, Abmelden mit Rückfrage; Gastmodus → „Im Browser anmelden“), Einstellungen (Sprache mit Neustart-Hinweis,
+  Versionen App/Plattform, Website/Status/Datenschutz, Lizenzen), Startseite mit Live-Ticker (Kacheln mit Symbol und
+  Status-Farbe der API, alle 30 s still aktualisiert), Seitenleiste zeigt den Namen, „Verwaltung“ nur mit Verwaltungsrecht,
+  **Einzelinstanz** (`Program.cs`, zweiter Start holt das Fenster nach vorn), **Fenstergröße/-position und letzter
+  Bereich** werden gemerkt.
+- Werkzeuge: `scripts/resw-set.py` (Texte DE/EN/FR setzen), `scripts/bump-version.sh`.
+- Offen in Stufe 1: Liste-Detail-Gerüst und gemeinsame UI-Bausteine (kommen mit den ersten Listen in Stufe 2),
+  Startseite mit Squads/News (Stufe 2).
+
 ### Vorgezogen aus Stufe 2 – Server verbinden (16.10.2026)
 
 - **Core** `Features/Servers/`: `ServerService` (`GET /v1/servers`, Cursor-Pagination, eigenes Modell `GameServer`
@@ -77,9 +96,8 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   für `RoG.App` an). Store-Modus erzeugt `RoG.App_0.1.0.0_x64_ARM64_bundle.msixupload`. Start/Bedienung ungetestet.
 - **Sideload-Pakete:** `build-windows.ps1` legt das Testzertifikat selbst im Speicher des Runner-Dienstkontos an und
   legt `RoG-Test.cer` ins Artefakt (`docs/BUILD-VM.md` Abschnitt 6).
-- Keine Geräte-Registrierung (`POST /v1/devices`), kein `/v1/me`, kein Abmelden in der Oberfläche → Stufe 1
 - Reverb noch nicht in der App verdrahtet (nur Core + Tests) → Stufe 3
-- Keine Tray-/Toast-/Jumplist-Funktionen, kein Single-Instance → Stufe 1/3
+- Keine Tray-/Toast-/Jumplist-Funktionen → Stufe 3
 - ETag-Cache nur im Speicher; persistenter Offline-Cache → Stufe 4
 - CI: GitHub Actions mit Linux-Runner (Core + Tests) und Windows-Runner `rog-win-1` (App, MSIX über `mode=Store|Sideload`)
 
@@ -155,6 +173,10 @@ docs/
     Trägt die Verwaltung einen eigenen `minecraft://…`-Link ein (Bedrock: `minecraft://?addExternalServer=Name|host:port`),
     startet die App ihn wie die anderen. `et://` braucht ET: Legacy (registriert das Schema unter Windows); fehlt es,
     wird die Adresse kopiert. Geprüft wird vorher mit `Launcher.QueryUriSupportAsync`.
+18. **Keine Umgebungswahl in den Einstellungen.** Ein Produktions-Token würde sonst an Staging gehen; die Umgebung
+    lässt sich nur in `settings.json` ändern (Entwicklung).
+19. **„Verwaltung“ in der Seitenleiste** erscheint, sobald `/v1/me` ein Recht auf `.manage`, `roles.*`, `moderation.*`
+    oder `admin.*` liefert; die einzelnen Bereiche prüfen später ihr genaues Recht + Scope.
 
 ## Offene Fragen (an Wahke)
 

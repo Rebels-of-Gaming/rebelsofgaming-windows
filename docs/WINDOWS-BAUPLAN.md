@@ -13,8 +13,8 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 | 3 | Echtzeit + Desktop-Integration | fertig (2.1.0): Reverb, Glocke, Toasts, Tray, Badge, Sprungliste, `rog:`, Autostart; WNS nach Lücke W1 | siehe `git log` |
 | 4 | Kommunikation | fast fertig (2.1.0): DMs mit Pop-out, Forum lesen+schreiben, Zusagen, Tastenkürzel; offen: Offline-Warteschlange | siehe `git log` |
 | 5 | Medien | fast fertig (2.1.0): Uploads (Drag & Drop, Strg+V), Galerie, Downloads, Kurzlinks, Profil bearbeiten; offen: Teilen-Ziel, Galerie-Upload | siehe `git log` |
-| 6 | Clan-Prozesse | offen | |
-| 7 | Server-Steuerung | offen | |
+| 6 | Clan-Prozesse | in Arbeit (2.1.1): Bewerben, eigene Bewerbungen, Votes, Abwesenheiten, Geräte/Datenexport/Konto löschen, Regel-Hinweis; offen: Trial-Ansicht für Squad-Leitung, Onboarding, Mitgliederkarte, Statistiken | siehe `git log` |
+| 7 | Server-Steuerung | in Arbeit (2.1.1): Steuer-Fenster mit Power, Ressourcen, Live-Konsole, Befehlen; offen: Configs, Backups, RCON/Bans, Windows Hello | siehe `git log` |
 | 8 | Wiki | offen | |
 | 9 | Verwaltung + Moderation | offen | |
 | 10 | Feinschliff + Store | offen | |
@@ -93,6 +93,20 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   „Im Ordner zeigen“, Profil bearbeiten (Texte, Ort, Einwilligungen, Avatar, Banner).
 - **Client-Korrekturen:** generierte Anfragen senden keine `null`-Felder mehr (ein PATCH hätte sonst Daten gelöscht).
 
+### Stufen 6–7 begonnen (2.1.1, 16.10.2026)
+
+- **Bewerbung:** Dialog aus dem Formular der API (Fragen je Typ, Geburtsdatum, Regelwerke, Trial-Zustimmung, Werber),
+  Fehler wie `discord_required` im Dialog; „Meine Bewerbungen“ auf der Konto-Seite (Fortschritt, Ablauf, Aufgaben,
+  Nachrichten, zurückziehen). Antworten gehen als Text – die Spec sagt Zahl (Lücke W9), deshalb sendet/liest die App
+  diese zwei Endpunkte selbst.
+- **Votes:** eigene Seite (`rog://votes`), auf der Startseite „Offene Abstimmungen (n)“ für Stimmberechtigte.
+- **Konto:** Geräte & Daten (angemeldete Geräte abmelden, Datenexport anfordern und als ZIP laden, Konto löschen mit
+  Passwort/Name als Bestätigung – Store-Pflicht), Abwesenheiten, Hinweis auf unbestätigte Regeln nach dem Login.
+- **Server-Steuerung:** „Steuern“ auf Server-Karten nur bei `control` aus der API; eigenes Fenster je Server mit
+  Start/Neustart/Stopp/Kill (Kill mit Rückfrage), CPU/RAM/Speicher/Laufzeit, Live-Konsole über den Wings-WebSocket
+  (kurzlebiges Token aus `console-token`, `Origin` aus der Antwort, Erneuerung bei `token expiring`), Befehle über die
+  API (Audit-Log). Vier-Augen-Pflicht (`can_command: false`) sperrt die Befehlszeile.
+
 ### Stufe 2 – Community lesen (16.10.2026)
 
 - **Gemeinsame Bausteine:** `HtmlContentParser` (Core, AngleSharp) → `RichDocument` → `RichContentView` (App, nativ:
@@ -144,6 +158,8 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   Alles im Paket-Datenordner bzw. Tresor des Windows-Benutzers; Deinstallation entfernt die Dateien, Abmelden löscht Token + `account.json`
   (Tresor-Eintrag bleibt bei Deinstallation ggf. bestehen → in Stufe 1 beim ersten Start ohne `account.json` aufräumen).
 - An die Website geht beim Login der Gerätename mit dem **Windows-Benutzernamen** (sichtbar unter Konto → Apps & Geräte).
+- Ab 2.1.1: Datenexport (ZIP) speichert die App nur auf Wunsch im Ordner „Downloads“ des Benutzers. Die Server-Konsole
+  verbindet direkt mit dem Pterodactyl-Node der Plattform (eigener Server, kurzlebiges Token aus der API).
 - Keine Übermittlung an Dritte, keine Telemetrie (`DOTNET_CLI_TELEMETRY_OPTOUT` auch in den Skripten). Schriften eingebettet.
 
 ## Verzeichnisstruktur
@@ -213,6 +229,10 @@ docs/
     lässt sich nur in `settings.json` ändern (Entwicklung).
 19. **„Verwaltung“ in der Seitenleiste** erscheint, sobald `/v1/me` ein Recht auf `.manage`, `roles.*`, `moderation.*`
     oder `admin.*` liefert; die einzelnen Bereiche prüfen später ihr genaues Recht + Scope.
+
+20. **Konsolenbefehle über die API statt über den Socket.** `POST /v1/servers/{slug}/commands` landet im Audit-Log und
+    prüft Vier-Augen-Pflicht und Scope serverseitig; der Wings-Socket dient nur zum Lesen.
+21. **Datenexport landet im Ordner „Downloads“** als `rog-datenexport-<Datum>.zip`, wie Downloads aus Medien.
 
 ## Offene Fragen (an Wahke)
 

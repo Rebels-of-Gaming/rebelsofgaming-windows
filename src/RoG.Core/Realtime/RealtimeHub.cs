@@ -79,6 +79,11 @@ public sealed class RealtimeHub : IAsyncDisposable
         return true;
     }
 
+    /// <summary>Weiteren Kanal abonnieren (z. B. <c>private-conversations.{id}</c> eines offenen Chats); ohne Verbindung <c>null</c>.</summary>
+    public ReverbChannel? Subscribe(string channelName) => _client?.Subscribe(channelName);
+
+    public Task UnsubscribeAsync(string channelName) => _client?.UnsubscribeAsync(channelName) ?? Task.CompletedTask;
+
     public async Task StopAsync()
     {
         var client = _client;

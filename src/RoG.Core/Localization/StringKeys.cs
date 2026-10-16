@@ -54,6 +54,9 @@ public static class StringKeys
     public const string VoiceTsLaunched = "Voice_TsLaunched";
     public const string VoiceTsMissing = "Voice_TsMissing";
 
+    // Nachrichten
+    public const string MessagesDeleted = "Messages_Deleted";
+
     // Suche ({0} = Suchbegriff)
     public const string SearchHeader = "Search_Header";
 

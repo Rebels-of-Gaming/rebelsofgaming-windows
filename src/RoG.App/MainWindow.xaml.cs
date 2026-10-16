@@ -32,6 +32,7 @@ public sealed partial class MainWindow : Window, IDisposable
         [StringKeys.NavMatches] = typeof(MatchesPage),
         [StringKeys.NavAccount] = typeof(AccountPage),
         [StringKeys.NavNotifications] = typeof(NotificationsPage),
+        [StringKeys.NavMessages] = typeof(MessagesPage),
     };
 
     private const string SettingsKey = "Settings";
@@ -69,6 +70,7 @@ public sealed partial class MainWindow : Window, IDisposable
             }
         };
         CreateTray();
+        AddShortcuts();
         _ = JumpListService.UpdateAsync(services.Localizer);
         ToastService.Invoked += (_, url) => DispatcherQueue.TryEnqueue(() =>
         {
@@ -377,6 +379,38 @@ public sealed partial class MainWindow : Window, IDisposable
         }
 
         AppWindow.Resize(new SizeInt32(fallback.Width, fallback.Height));
+    }
+
+    /// <summary>Strg+1…9 = Bereiche der Seitenleiste, Strg+, = Einstellungen, Strg+Umschalt+N = Benachrichtigungen.</summary>
+    private void AddShortcuts()
+    {
+        for (var i = 0; i < 9; i++)
+        {
+            var index = i;
+            var accelerator = new Microsoft.UI.Xaml.Input.KeyboardAccelerator
+            {
+                Key = Windows.System.VirtualKey.Number1 + i,
+                Modifiers = Windows.System.VirtualKeyModifiers.Control,
+            };
+            accelerator.Invoked += (_, args) =>
+            {
+                var items = NavView.MenuItems.OfType<NavigationViewItem>().Where(x => x.Visibility == Visibility.Visible).ToList();
+                if (NavView.Visibility == Visibility.Visible && index < items.Count)
+                {
+                    NavView.SelectedItem = items[index];
+                    args.Handled = true;
+                }
+            };
+            NavView.KeyboardAccelerators.Add(accelerator);
+        }
+
+        var settings = new Microsoft.UI.Xaml.Input.KeyboardAccelerator { Key = (Windows.System.VirtualKey)0xBC, Modifiers = Windows.System.VirtualKeyModifiers.Control };
+        settings.Invoked += (_, args) =>
+        {
+            NavView.SelectedItem = NavView.SettingsItem;
+            args.Handled = true;
+        };
+        NavView.KeyboardAccelerators.Add(settings);
     }
 
     /// <summary>Tray-Symbol: Linksklick öffnet, Menü mit Bereichen und Beenden.</summary>

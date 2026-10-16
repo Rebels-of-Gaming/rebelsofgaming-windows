@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="RoG.App.Views.MessagesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:RoG.App.Controls"
+    xmlns:vm="using:RoG.App.ViewModels"
+    Background="{StaticResource RoGBgBrush}">
+
+    <Page.KeyboardAccelerators>
+        <KeyboardAccelerator Key="F5" Invoked="OnRefreshInvoked" />
+        <KeyboardAccelerator
+            Key="F"
+            Invoked="OnSearchInvoked"
+            Modifiers="Control" />
+    </Page.KeyboardAccelerators>
+
+    <Grid>
+        <!-- Gast -->
+        <StackPanel
+            MaxWidth="420"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Spacing="12"
+            Visibility="{x:Bind ViewModel.IsGuest, Mode=OneWay}">
+            <TextBlock x:Uid="MessagesPage_Guest" HorizontalTextAlignment="Center" Style="{StaticResource RoGMutedTextStyle}" />
+            <Button
+                x:Uid="AccountPage_SignIn"
+                HorizontalAlignment="Center"
+                Command="{x:Bind ViewModel.SignInCommand}"
+                Style="{StaticResource RoGPrimaryButtonStyle}" />
+        </StackPanel>
+
+        <controls:ListDetailPanel
+            DetailClosed="OnDetailClosed"
+            IsDetailOpen="{x:Bind ViewModel.IsDetailOpen, Mode=OneWay}"
+            ListWidth="340"
+            Visibility="{x:Bind ViewModel.ShowConversations, Mode=OneWay}">
+            <controls:ListDetailPanel.List>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Margin="24,24,24,8" Spacing="12">
+                        <TextBlock x:Uid="MessagesPage_Title" Style="{StaticResource RoGDisplayTextStyle}" Text="NACHRICHTEN" />
+                        <AutoSuggestBox
+                            x:Name="SearchBox"
+                            x:Uid="MessagesPage_Search"
+                            QueryIcon="Find"
+                            Text="{x:Bind ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                    <controls:StateView
+                        x:Uid="MessagesPage_State"
+                        Grid.Row="1"
+                        ErrorMessage="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}"
+                        IsEmpty="{x:Bind ViewModel.IsEmpty, Mode=OneWay}"
+                        IsLoading="{x:Bind ViewModel.IsLoading, Mode=OneWay}"
+                        RetryCommand="{x:Bind ViewModel.RefreshCommand}" />
+                    <ListView
+                        x:Uid="MessagesPage_List"
+                        Grid.Row="1"
+                        Padding="8,0,8,8"
+                        ItemsSource="{x:Bind ViewModel.Items}"
+                        SelectedItem="{x:Bind ViewModel.Selected, Mode=TwoWay}"
+                        Visibility="{x:Bind ViewModel.ShowContent, Mode=OneWay}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="vm:ConversationItemViewModel">
+                                <Grid Padding="0,8" ColumnSpacing="12" AutomationProperties.Name="{x:Bind Name}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <PersonPicture
+                                        Width="40"
+                                        Height="40"
+                                        DisplayName="{x:Bind Name}"
+                                        ProfilePicture="{x:Bind Avatar}"
+                                        AutomationProperties.AccessibilityView="Raw" />
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="1">
+                                        <StackPanel Orientation="Horizontal" Spacing="6">
+                                            <FontIcon
+                                                FontSize="12"
+                                                Foreground="{StaticResource RoGMutedBrush}"
+                                                Glyph="{x:Bind KindGlyph}"
+                                                Visibility="{x:Bind HasKindGlyph}"
+                                                AutomationProperties.AccessibilityView="Raw" />
+                                            <TextBlock
+                                                FontWeight="{x:Bind NameWeight, Mode=OneWay}"
+                                                Style="{StaticResource RoGBodyTextStyle}"
+                                                Text="{x:Bind Name}"
+                                                TextTrimming="CharacterEllipsis" />
+                                        </StackPanel>
+                                        <TextBlock
+                                            FontSize="12"
+                                            MaxLines="1"
+                                            Style="{StaticResource RoGMutedTextStyle}"
+                                            Text="{x:Bind Preview}"
+                                            TextTrimming="CharacterEllipsis" />
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2" HorizontalAlignment="Right" Spacing="6">
+                                        <TextBlock FontSize="11" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Time}" />
+                                        <Ellipse
+                                            HorizontalAlignment="Right"
+                                            Fill="{x:Bind UnreadBrush, Mode=OneWay}"
+                                            Style="{StaticResource RoGStatusDotStyle}" />
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </controls:ListDetailPanel.List>
+
+            <!-- Chat -->
+            <Grid>
+                <TextBlock
+                    x:Uid="MessagesPage_SelectHint"
+                    Margin="32"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource RoGMutedTextStyle}"
+                    Visibility="{x:Bind ViewModel.ShowSelectHint, Mode=OneWay}" />
+                <Grid Visibility="{x:Bind ViewModel.IsDetailOpen, Mode=OneWay}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Padding="24,16,16,8" ColumnSpacing="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            Style="{StaticResource RoGTitleTextStyle}"
+                            Text="{x:Bind ViewModel.Chat.Title, Mode=OneWay}"
+                            TextTrimming="CharacterEllipsis"
+                            AutomationProperties.HeadingLevel="Level1" />
+                        <Button
+                            x:Uid="MessagesPage_PopOut"
+                            Grid.Column="1"
+                            Click="OnPopOutClick"
+                            Style="{StaticResource RoGSecondaryButtonStyle}">
+                            <FontIcon FontSize="16" Glyph="&#xE8A7;" />
+                        </Button>
+                    </Grid>
+                    <controls:ChatView
+                        x:Name="Chat"
+                        Grid.Row="1"
+                        ViewModel="{x:Bind ViewModel.Chat, Mode=OneWay}" />
+                </Grid>
+            </Grid>
+        </controls:ListDetailPanel>
+    </Grid>
+</Page>

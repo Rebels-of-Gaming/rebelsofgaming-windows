@@ -845,4 +845,73 @@
   <data name="SettingsPage_CloseToTray.Header" xml:space="preserve">
     <value>Rester dans la zone de notification à la fermeture</value>
   </data>
+  <data name="Messages_Deleted" xml:space="preserve">
+    <value>Message supprimé</value>
+  </data>
+  <data name="MessagesPage_Title.Text" xml:space="preserve">
+    <value>MESSAGES</value>
+  </data>
+  <data name="MessagesPage_Guest.Text" xml:space="preserve">
+    <value>Les messages sont disponibles après connexion.</value>
+  </data>
+  <data name="MessagesPage_Search.PlaceholderText" xml:space="preserve">
+    <value>Rechercher des conversations (Ctrl+F)</value>
+  </data>
+  <data name="MessagesPage_Search.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Rechercher des conversations</value>
+  </data>
+  <data name="MessagesPage_State.EmptyText" xml:space="preserve">
+    <value>Pas encore de conversations. Écris à quelqu’un depuis son profil dans « Membres ».</value>
+  </data>
+  <data name="MessagesPage_List.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Conversations</value>
+  </data>
+  <data name="MessagesPage_SelectHint.Text" xml:space="preserve">
+    <value>Choisis une conversation à gauche.</value>
+  </data>
+  <data name="MessagesPage_PopOut.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Ouvrir dans une fenêtre séparée</value>
+  </data>
+  <data name="MessagesPage_PopOut.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Ouvrir dans une fenêtre séparée</value>
+  </data>
+  <data name="ChatView_State.EmptyText" xml:space="preserve">
+    <value>Pas encore de messages – écris le premier !</value>
+  </data>
+  <data name="ChatView_List.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Historique des messages</value>
+  </data>
+  <data name="ChatView_LoadOlder.Content" xml:space="preserve">
+    <value>CHARGER LES PLUS ANCIENS</value>
+  </data>
+  <data name="ChatView_Reply.Text" xml:space="preserve">
+    <value>Répondre</value>
+  </data>
+  <data name="ChatView_CopyText.Text" xml:space="preserve">
+    <value>Copier le texte</value>
+  </data>
+  <data name="ChatView_ClearQuote.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Annuler la réponse</value>
+  </data>
+  <data name="ChatView_Composer.PlaceholderText" xml:space="preserve">
+    <value>Écrire un message – Entrée envoie, Maj+Entrée nouvelle ligne</value>
+  </data>
+  <data name="ChatView_Composer.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="ChatView_Send.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Envoyer</value>
+  </data>
+  <data name="ChatView_Send.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Envoyer (Entrée)</value>
+  </data>
+  <data name="ChatWindow_OnTop.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Toujours au premier plan</value>
+  </data>
+  <data name="ChatWindow_OnTop.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Toujours au premier plan</value>
+  </data>
+  <data name="MembersPage_SendMessage.Content" xml:space="preserve">
+    <value>ENVOYER UN MESSAGE</value>
+  </data>
 </root>

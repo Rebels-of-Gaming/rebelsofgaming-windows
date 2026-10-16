@@ -187,6 +187,7 @@ public sealed class MemberListItem(string slug, string name, Uri? avatar, string
 public sealed partial class MemberDetailViewModel(AppServices services, MemberService members) : LoadableViewModel(services)
 {
     private string? _slug;
+    private string? _id;
 
     [ObservableProperty]
     public partial string? Name { get; set; }
@@ -196,6 +197,9 @@ public sealed partial class MemberDetailViewModel(AppServices services, MemberSe
 
     [ObservableProperty]
     public partial ImageSource? Banner { get; set; }
+
+    [ObservableProperty]
+    public partial bool CanMessage { get; set; }
 
     [ObservableProperty]
     public partial string? Rank { get; set; }
@@ -254,6 +258,9 @@ public sealed partial class MemberDetailViewModel(AppServices services, MemberSe
 
         var p = await members.GetAsync(_slug, cancellationToken);
         var s = p.Summary;
+        _id = s.Id;
+        var me = Services.CurrentUser?.Id ?? (await Services.Tokens.GetAsync(cancellationToken))?.UserId;
+        CanMessage = me is not null && me != s.Id;
         Avatar = s.Avatar is null ? null : new BitmapImage(s.Avatar);
         Banner = p.Banner is null ? null : new BitmapImage(p.Banner);
         Rank = s.RankLabel;
@@ -298,6 +305,30 @@ public sealed partial class MemberDetailViewModel(AppServices services, MemberSe
 
         HasPlatforms = Platforms.Count > 0;
         Name = s.Name;
+    }
+
+    /// <summary>1:1-Unterhaltung öffnen bzw. starten und in „Nachrichten“ zeigen.</summary>
+    [RelayCommand]
+    private async Task SendMessageAsync()
+    {
+        if (_id is null)
+        {
+            return;
+        }
+
+        try
+        {
+            var conversation = await new RoG.Core.Features.Messages.MessageService(Services.Api.Client).StartDirectAsync(_id);
+            Services.Navigate(new RoG.Core.Navigation.AppRoute(RoG.Core.Navigation.AppSection.Messages, conversation));
+        }
+        catch (RoG.Core.Api.ApiProblemException ex)
+        {
+            ErrorMessage = Services.Localizer.GetError(ex.Problem.Code);
+        }
+        catch (RoG.Core.Api.Generated.GeneratedApiException)
+        {
+            ErrorMessage = Services.Localizer.GetError(RoG.Core.Api.ApiProblem.Codes.Unknown);
+        }
     }
 
     [RelayCommand]

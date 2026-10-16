@@ -1,6 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
 using RoG.Core.Api;
+using RoG.Core.Features.Messages;
 using RoG.Core.Features.Notifications;
 using RoG.Core.Realtime;
 
@@ -82,6 +83,64 @@ public sealed partial class RealtimeService : ObservableObject, IAsyncDisposable
     }
 
     public Task StopAsync() => _hub.StopAsync();
+
+    /// <summary>
+    /// Offenen Chat live verfolgen (<c>private-conversations.{id}</c>: <c>.message.sent</c>, <c>.message.deleted</c>).
+    /// Rückruf im UI-Thread; Dispose meldet ab. Ohne Echtzeit passiert nichts (die Seite lädt dann per API nach).
+    /// </summary>
+    public IDisposable WatchConversation(string conversationId, Action<ChatMessage> sent, Action<string> deleted)
+    {
+        var name = $"private-conversations.{conversationId}";
+        var channel = _hub.Subscribe(name);
+        if (channel is null)
+        {
+            return new Subscription(null);
+        }
+
+        void OnEvent(object? sender, ReverbEvent e)
+        {
+            switch (e.Name.TrimStart('.'))
+            {
+                case "message.sent" when MessageService.FromRealtime(e.DataJson) is { } message:
+                    OnUi(() => sent(message));
+                    break;
+                case "message.deleted" when MessageIdOf(e.DataJson) is { } id:
+                    OnUi(() => deleted(id));
+                    break;
+            }
+        }
+
+        channel.EventReceived += OnEvent;
+        return new Subscription(() =>
+        {
+            channel.EventReceived -= OnEvent;
+            _ = _hub.UnsubscribeAsync(name);
+        });
+    }
+
+    private static string? MessageIdOf(string json)
+    {
+        try
+        {
+            using var doc = System.Text.Json.JsonDocument.Parse(json);
+            return doc.RootElement.TryGetProperty("id", out var id) && id.ValueKind == System.Text.Json.JsonValueKind.String ? id.GetString() : null;
+        }
+        catch (System.Text.Json.JsonException)
+        {
+            return null;
+        }
+    }
+
+    private sealed class Subscription(Action? dispose) : IDisposable
+    {
+        private Action? _dispose = dispose;
+
+        public void Dispose()
+        {
+            _dispose?.Invoke();
+            _dispose = null;
+        }
+    }
 
     /// <summary>Zähler per API (Start, nach Neuverbindung, nach „alle gelesen“).</summary>
     public async Task RefreshCountersAsync()

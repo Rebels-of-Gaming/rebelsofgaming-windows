@@ -13,7 +13,8 @@
 
 .PARAMETER Mode
   Build    – nur bauen und testen (Standard)
-  Sideload – MSIX für die lokale Installation, signiert mit -CertificateThumbprint (Zertifikat im Speicher CurrentUser\My)
+  Sideload – MSIX für die lokale Installation, signiert mit -CertificateThumbprint (Zertifikat im Speicher CurrentUser\My);
+             ohne Fingerabdruck wird ein Testzertifikat gesucht bzw. einmalig angelegt, msix\RoG-Test.cer = öffentlicher Teil
   Store    – .msixupload für das Partner Center (Signatur übernimmt der Store)
 
 .EXAMPLE
@@ -77,6 +78,35 @@ function Find-MSBuild {
     return $null
 }
 
+function Get-TestCertificate([string] $thumbprint) {
+    # Testzertifikat im Speicher CurrentUser\My des ausführenden Kontos (auf dem Runner: Dienstkonto).
+    # Fehlt es, wird es einmalig selbst signiert angelegt; Subject = Publisher aus dem Manifest.
+    $manifest = [xml](Get-Content -Raw (Join-Path $Root 'src\RoG.App\Package.appxmanifest'))
+    $publisher = $manifest.Package.Identity.Publisher
+    $cert = $null
+    if ($thumbprint) {
+        $cert = Get-Item "Cert:\CurrentUser\My\$thumbprint" -ErrorAction SilentlyContinue
+        if (-not $cert) { throw "Zertifikat $thumbprint fehlt in Cert:\CurrentUser\My (docs/BUILD-VM.md Abschnitt 6)." }
+    }
+    else {
+        $cert = Get-ChildItem Cert:\CurrentUser\My |
+            Where-Object { $_.Subject -eq $publisher -and $_.FriendlyName -eq 'RoG Windows Test' -and $_.HasPrivateKey -and $_.NotAfter -gt (Get-Date).AddDays(7) } |
+            Sort-Object NotAfter -Descending | Select-Object -First 1
+        if (-not $cert) {
+            Write-Host "Lege Testzertifikat an: $publisher"
+            $created = New-SelfSignedCertificate -Type Custom -Subject $publisher -KeyUsage DigitalSignature `
+                -FriendlyName 'RoG Windows Test' -CertStoreLocation 'Cert:\CurrentUser\My' -NotAfter (Get-Date).AddYears(2) `
+                -TextExtension @('2.5.29.37={text}1.3.6.1.5.5.7.3.3', '2.5.29.19={text}')
+            $cert = Get-Item "Cert:\CurrentUser\My\$($created.Thumbprint)"
+        }
+    }
+    if ($cert.Subject -ne $publisher) { throw "Zertifikat $($cert.Thumbprint) hat Subject '$($cert.Subject)', das Manifest verlangt '$publisher'." }
+    # Nur der öffentliche Teil geht ins Artefakt – zum Import auf Testrechnern
+    [IO.File]::WriteAllBytes((Join-Path $MsixDir 'RoG-Test.cer'), $cert.RawData)
+    Write-Host "Signiere mit $($cert.Thumbprint) (gültig bis $($cert.NotAfter.ToString('yyyy-MM-dd')))"
+    return $cert.Thumbprint
+}
+
 try {
     Push-Location $Root
 
@@ -92,8 +122,9 @@ try {
     $summary.dotnet = $sdk
     $summary.msbuild = $msbuild
 
-    if ($Mode -eq 'Sideload' -and -not $CertificateThumbprint) {
-        throw 'Sideload braucht -CertificateThumbprint bzw. ROG_SIGNING_THUMBPRINT (Testzertifikat, docs/BUILD-VM.md Abschnitt 6).'
+    if ($Mode -eq 'Sideload') {
+        $CertificateThumbprint = Get-TestCertificate $CertificateThumbprint
+        $summary.certificate = 'msix\RoG-Test.cer'
     }
 
     Invoke-Checked 'Restore' { dotnet restore $Solution -p:Platform=x64 "-bl:$Logs\restore.binlog" }

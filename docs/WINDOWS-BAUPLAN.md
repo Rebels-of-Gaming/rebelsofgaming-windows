@@ -62,8 +62,8 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 - **App gebaut, aber nie gestartet.** Erster grüner Build am 15.10.2026 auf `rog-win-1` (einzige XAML-Korrektur:
   Theme-Wörterbücher vor die direkten Einträge, WMC0035; danach CA1001 behoben, `TreatWarningsAsErrors` jetzt auch
   für `RoG.App` an). Store-Modus erzeugt `RoG.App_0.1.0.0_x64_ARM64_bundle.msixupload`. Start/Bedienung ungetestet.
-- **Sideload-Pakete** brauchen ein Testzertifikat für das Dienstkonto des Runners (`docs/BUILD-VM.md` Abschnitt 6) –
-  noch nicht eingerichtet.
+- **Sideload-Pakete:** `build-windows.ps1` legt das Testzertifikat selbst im Speicher des Runner-Dienstkontos an und
+  legt `RoG-Test.cer` ins Artefakt (`docs/BUILD-VM.md` Abschnitt 6).
 - Keine Geräte-Registrierung (`POST /v1/devices`), kein `/v1/me`, kein Abmelden in der Oberfläche → Stufe 1
 - Reverb noch nicht in der App verdrahtet (nur Core + Tests) → Stufe 3
 - Keine Tray-/Toast-/Jumplist-Funktionen, kein Single-Instance → Stufe 1/3

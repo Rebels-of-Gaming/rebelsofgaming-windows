@@ -172,19 +172,19 @@ Store-Reservierung (siehe `docs/STORE.md`) ein neues Testzertifikat mit dem echt
 die `.cer` als Administrator nach „Lokaler Computer → Vertrauenswürdige Personen“ importieren, dann das `.msix`
 doppelklicken. Zertifikate (`.pfx`) nie ins Repo.
 
-**GitHub-Actions-Runner (`rog-win-1`):** Der Runner-Dienst läuft als **`NETWORK SERVICE`**
-(NuGet-Cache unter `C:\Windows\ServiceProfiles\NetworkService\.nuget`). `CurrentUser\My` ist dort der Speicher dieses
-Dienstkontos, nicht der von `builder` – ein interaktiv erzeugtes Zertifikat findet der Lauf nicht. Zwei Wege:
+**Ohne Handarbeit (Standard):** Ist `ROG_SIGNING_THUMBPRINT` nicht gesetzt, sucht `build-windows.ps1 -Mode Sideload`
+im Speicher `CurrentUser\My` des ausführenden Kontos ein Zertifikat „RoG Windows Test“ mit `Subject` = `Publisher` aus
+dem Manifest und legt es beim ersten Lauf selbst an (2 Jahre gültig). Der öffentliche Teil liegt danach als
+`msix/RoG-Test.cer` neben dem Paket. Das gilt auch für den **GitHub-Actions-Runner (`rog-win-1`)**, dessen Dienst als
+`NETWORK SERVICE` läuft: Das Zertifikat entsteht dann in dessen Speicher und bleibt dort für spätere Läufe.
+Ändert sich der `Publisher` (Store-Reservierung), entsteht automatisch ein neues – Testrechner brauchen dann die neue `.cer`.
 
-1. **Dienst unter `builder` laufen lassen** (empfohlen): `services.msc` → „GitHub Actions Runner (…)“ → Anmelden →
-   Konto `.\builder` + Passwort, Dienst neu starten. Dann obige Befehle als `builder` ausführen; die Benutzervariable
-   `ROG_SIGNING_THUMBPRINT` sieht der Dienst nach dem Neustart.
-2. **Zertifikat ins Konto `NETWORK SERVICE` importieren:** als Administrator die `.pfx` exportieren und mit
-   `psexec -u "NT AUTHORITY\NETWORK SERVICE" -i powershell` → `Import-PfxCertificate -FilePath … -CertStoreLocation Cert:\CurrentUser\My`
-   importieren; `ROG_SIGNING_THUMBPRINT=<Fingerabdruck>` in `C:\runner\actions-runner\.env` eintragen und den Dienst neu starten.
+Starten: `gh workflow run ci.yml --ref develop -f mode=Sideload` (oder auf GitHub unter Actions → CI → „Run workflow“,
+Modus `Sideload`). Das signierte `.msixbundle` und `RoG-Test.cer` liegen im Artefakt `windows-artifacts` unter `msix/`.
 
-Danach: `gh workflow run ci.yml --ref develop -f mode=Sideload` – das signierte `.msixbundle` liegt im Artefakt
-`windows-artifacts` unter `msix/`.
+**Installieren auf einem Testrechner:** `RoG-Test.cer` als Administrator importieren –
+`Import-Certificate -FilePath RoG-Test.cer -CertStoreLocation Cert:\LocalMachine\TrustedPeople` (oder Doppelklick →
+„Lokaler Computer“ → „Vertrauenswürdige Personen“) – dann das `.msixbundle` doppelklicken.
 
 ## 7. Prüfen und erster Build (macht Claude)
 

@@ -2597,4 +2597,43 @@
   <data name="Tournaments_State.EmptyText" xml:space="preserve">
     <value>Noch keine Turniere eingetragen.</value>
   </data>
+  <data name="NotifySettings_Saved" xml:space="preserve">
+    <value>Gespeichert.</value>
+  </data>
+  <data name="NotifySettings_QuietInvalid" xml:space="preserve">
+    <value>Ruhezeit bitte als HH:MM eintragen (beide Felder) oder beide leer lassen.</value>
+  </data>
+  <data name="NotifySettings_Digest_instant" xml:space="preserve">
+    <value>Einzelne E-Mails</value>
+  </data>
+  <data name="NotifySettings_Digest_daily" xml:space="preserve">
+    <value>Tägliche Zusammenfassung</value>
+  </data>
+  <data name="NotifySettings_Digest_weekly" xml:space="preserve">
+    <value>Wöchentliche Zusammenfassung</value>
+  </data>
+  <data name="SettingsPage_Notifications.Header" xml:space="preserve">
+    <value>Benachrichtigungen (Glocke, E-Mail, Discord)</value>
+  </data>
+  <data name="SettingsPage_Digest.Header" xml:space="preserve">
+    <value>E-Mails</value>
+  </data>
+  <data name="SettingsPage_QuietFrom.Header" xml:space="preserve">
+    <value>Ruhe ab</value>
+  </data>
+  <data name="SettingsPage_QuietUntil.Header" xml:space="preserve">
+    <value>Ruhe bis</value>
+  </data>
+  <data name="SettingsPage_QuietSave.Content" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="SettingsPage_ChannelBell.Content" xml:space="preserve">
+    <value>Glocke</value>
+  </data>
+  <data name="SettingsPage_ChannelMail.Content" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="SettingsPage_ChannelDiscord.Content" xml:space="preserve">
+    <value>Discord</value>
+  </data>
 </root>

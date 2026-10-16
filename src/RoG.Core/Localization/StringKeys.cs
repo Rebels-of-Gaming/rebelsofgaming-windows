@@ -434,6 +434,13 @@ public static class StringKeys
     public const string SquadStatsEmpty = "SquadStats_Empty";
     public const string TournamentParticipants = "Tournament_Participants";
 
+    // Benachrichtigungs-Einstellungen (Sammel-Mail als "NotifySettings_Digest_" + Wert)
+    public const string NotifySettingsSaved = "NotifySettings_Saved";
+    public const string NotifySettingsQuietInvalid = "NotifySettings_QuietInvalid";
+    public const string NotifySettingsDigestInstant = "NotifySettings_Digest_instant";
+    public const string NotifySettingsDigestDaily = "NotifySettings_Digest_daily";
+    public const string NotifySettingsDigestWeekly = "NotifySettings_Digest_weekly";
+
     // App-Sperre
     public const string LockPrompt = "Lock_Prompt";
 

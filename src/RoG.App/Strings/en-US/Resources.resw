@@ -2597,4 +2597,43 @@
   <data name="Tournaments_State.EmptyText" xml:space="preserve">
     <value>No tournaments yet.</value>
   </data>
+  <data name="NotifySettings_Saved" xml:space="preserve">
+    <value>Saved.</value>
+  </data>
+  <data name="NotifySettings_QuietInvalid" xml:space="preserve">
+    <value>Enter quiet hours as HH:MM (both fields) or leave both empty.</value>
+  </data>
+  <data name="NotifySettings_Digest_instant" xml:space="preserve">
+    <value>Individual emails</value>
+  </data>
+  <data name="NotifySettings_Digest_daily" xml:space="preserve">
+    <value>Daily digest</value>
+  </data>
+  <data name="NotifySettings_Digest_weekly" xml:space="preserve">
+    <value>Weekly digest</value>
+  </data>
+  <data name="SettingsPage_Notifications.Header" xml:space="preserve">
+    <value>Notifications (bell, email, Discord)</value>
+  </data>
+  <data name="SettingsPage_Digest.Header" xml:space="preserve">
+    <value>Emails</value>
+  </data>
+  <data name="SettingsPage_QuietFrom.Header" xml:space="preserve">
+    <value>Quiet from</value>
+  </data>
+  <data name="SettingsPage_QuietUntil.Header" xml:space="preserve">
+    <value>Quiet until</value>
+  </data>
+  <data name="SettingsPage_QuietSave.Content" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SettingsPage_ChannelBell.Content" xml:space="preserve">
+    <value>Bell</value>
+  </data>
+  <data name="SettingsPage_ChannelMail.Content" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="SettingsPage_ChannelDiscord.Content" xml:space="preserve">
+    <value>Discord</value>
+  </data>
 </root>

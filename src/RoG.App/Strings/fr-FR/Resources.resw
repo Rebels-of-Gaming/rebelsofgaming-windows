@@ -2597,4 +2597,43 @@
   <data name="Tournaments_State.EmptyText" xml:space="preserve">
     <value>Pas encore de tournoi.</value>
   </data>
+  <data name="NotifySettings_Saved" xml:space="preserve">
+    <value>Enregistré.</value>
+  </data>
+  <data name="NotifySettings_QuietInvalid" xml:space="preserve">
+    <value>Indique les heures calmes en HH:MM (les deux champs) ou laisse les deux vides.</value>
+  </data>
+  <data name="NotifySettings_Digest_instant" xml:space="preserve">
+    <value>E-mails individuels</value>
+  </data>
+  <data name="NotifySettings_Digest_daily" xml:space="preserve">
+    <value>Résumé quotidien</value>
+  </data>
+  <data name="NotifySettings_Digest_weekly" xml:space="preserve">
+    <value>Résumé hebdomadaire</value>
+  </data>
+  <data name="SettingsPage_Notifications.Header" xml:space="preserve">
+    <value>Notifications (cloche, e-mail, Discord)</value>
+  </data>
+  <data name="SettingsPage_Digest.Header" xml:space="preserve">
+    <value>E-mails</value>
+  </data>
+  <data name="SettingsPage_QuietFrom.Header" xml:space="preserve">
+    <value>Calme dès</value>
+  </data>
+  <data name="SettingsPage_QuietUntil.Header" xml:space="preserve">
+    <value>Calme jusqu’à</value>
+  </data>
+  <data name="SettingsPage_QuietSave.Content" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="SettingsPage_ChannelBell.Content" xml:space="preserve">
+    <value>Cloche</value>
+  </data>
+  <data name="SettingsPage_ChannelMail.Content" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="SettingsPage_ChannelDiscord.Content" xml:space="preserve">
+    <value>Discord</value>
+  </data>
 </root>

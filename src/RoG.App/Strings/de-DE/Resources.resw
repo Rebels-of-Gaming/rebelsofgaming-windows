@@ -2546,4 +2546,10 @@
   <data name="Events_CancelDone" xml:space="preserve">
     <value>Abgesagt – Zusagende werden benachrichtigt.</value>
   </data>
+  <data name="Shell_Offline.Title" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="Shell_Offline.Message" xml:space="preserve">
+    <value>Keine Verbindung – du siehst den zuletzt geladenen Stand. Gesendetes geht raus, sobald du wieder online bist.</value>
+  </data>
 </root>

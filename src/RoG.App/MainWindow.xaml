@@ -79,6 +79,19 @@
             <Frame x:Name="ContentFrame" />
         </NavigationView>
 
+        <!-- Offline: Inhalte kommen aus dem Cache (letzter Stand) – verschwindet, sobald das Netz zurück ist. -->
+        <InfoBar
+            x:Name="OfflineBar"
+            x:Uid="Shell_Offline"
+            Grid.Row="1"
+            MaxWidth="560"
+            Margin="0,8,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Canvas.ZIndex="10"
+            IsClosable="True"
+            Severity="Warning" />
+
         <!-- Login liegt über der Shell, solange weder Token noch Gastmodus da sind. -->
         <Frame x:Name="LoginFrame" Grid.Row="1" Visibility="Collapsed" />
 

@@ -58,6 +58,15 @@ public sealed partial class MainWindow : Window, IDisposable
         Activated += OnWindowActivated;
 
         services.Api.Handler.Unauthorized += OnUnauthorized;
+        services.Api.Handler.ServedStale += (_, _) => DispatcherQueue.TryEnqueue(() => OfflineBar.IsOpen = true);
+        Windows.Networking.Connectivity.NetworkInformation.NetworkStatusChanged += _ => DispatcherQueue.TryEnqueue(() =>
+        {
+            var profile = Windows.Networking.Connectivity.NetworkInformation.GetInternetConnectionProfile();
+            if (profile?.GetNetworkConnectivityLevel() == Windows.Networking.Connectivity.NetworkConnectivityLevel.InternetAccess)
+            {
+                OfflineBar.IsOpen = false;
+            }
+        });
         services.SignInRequested += (_, _) => ShowLogin();
         services.CurrentUserChanged += (_, _) => UpdateAccountItem();
         services.Navigator = Navigate;

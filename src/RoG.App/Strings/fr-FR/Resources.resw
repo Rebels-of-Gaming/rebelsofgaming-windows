@@ -2546,4 +2546,10 @@
   <data name="Events_CancelDone" xml:space="preserve">
     <value>Annulé – les participants sont prévenus.</value>
   </data>
+  <data name="Shell_Offline.Title" xml:space="preserve">
+    <value>Hors ligne</value>
+  </data>
+  <data name="Shell_Offline.Message" xml:space="preserve">
+    <value>Pas de connexion – tu vois le dernier état chargé. Ce que tu envoies partira dès que tu seras de nouveau en ligne.</value>
+  </data>
 </root>

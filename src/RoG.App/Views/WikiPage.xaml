@@ -76,7 +76,7 @@
                         <TextBlock
                             IsTextSelectionEnabled="True"
                             Style="{StaticResource RoGTitleTextStyle}"
-                            Text="{x:Bind ViewModel.Page.Title, Mode=OneWay}"
+                            Text="{x:Bind ViewModel.Article.Title, Mode=OneWay}"
                             AutomationProperties.HeadingLevel="Level1" />
                         <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind ViewModel.PageMeta, Mode=OneWay}" TextWrapping="Wrap" />
                         <TextBlock x:Uid="WikiPage_OfflineCopy" Foreground="{StaticResource RoGGoldBrush}" Style="{StaticResource RoGBodyTextStyle}" Visibility="{x:Bind ViewModel.IsOfflineCopy, Mode=OneWay}" />

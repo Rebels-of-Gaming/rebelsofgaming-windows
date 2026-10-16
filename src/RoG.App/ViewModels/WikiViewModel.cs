@@ -46,13 +46,13 @@ public sealed partial class WikiViewModel : LoadableViewModel
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsDetailOpen), nameof(ShowSelectHint), nameof(HasPage))]
-    public partial WikiPage? Page { get; set; }
+    public partial WikiArticle? Article { get; set; }
 
-    public bool IsDetailOpen => Selected is not null || Page is not null;
+    public bool IsDetailOpen => Selected is not null || Article is not null;
 
     public bool ShowSelectHint => !IsDetailOpen;
 
-    public bool HasPage => Page is not null;
+    public bool HasPage => Article is not null;
 
     [ObservableProperty]
     public partial RichDocument? Document { get; set; }
@@ -205,7 +205,7 @@ public sealed partial class WikiViewModel : LoadableViewModel
     private Task OpenPageAsync(string id) =>
         LoadPageAsync(() => _wiki.PageAsync(id, Services.Language), id);
 
-    private async Task LoadPageAsync(Func<Task<WikiPage>> load, string? offlineId)
+    private async Task LoadPageAsync(Func<Task<WikiArticle>> load, string? offlineId)
     {
         IsEditing = false;
         IsPageLoading = true;
@@ -247,9 +247,9 @@ public sealed partial class WikiViewModel : LoadableViewModel
         }
     }
 
-    private void ShowPage(WikiPage page, bool offline)
+    private void ShowPage(WikiArticle page, bool offline)
     {
-        Page = page;
+        Article = page;
         IsOfflineCopy = offline;
         Document = new HtmlContentParser(ContentPolicy.Platform, page.WebUrl ?? Services.Environment.WikiBaseUrl).Parse(page.Html);
         PageMeta = string.Join(" · ", new[]
@@ -264,7 +264,7 @@ public sealed partial class WikiViewModel : LoadableViewModel
     [RelayCommand]
     private async Task ToggleWatchAsync()
     {
-        if (Page is not { } page)
+        if (Article is not { } page)
         {
             return;
         }
@@ -272,7 +272,7 @@ public sealed partial class WikiViewModel : LoadableViewModel
         await RunAsync(async () =>
         {
             var watching = await _wiki.ToggleWatchAsync(page.Id);
-            Page = page with { Watching = watching };
+            Article = page with { Watching = watching };
             WatchLabel = Services.Localizer.GetString(watching ? StringKeys.WikiUnwatch : StringKeys.WikiWatch);
             Show(Services.Localizer.GetString(watching ? StringKeys.WikiWatching : StringKeys.WikiNotWatching), InfoBarSeverity.Success);
         });
@@ -281,7 +281,7 @@ public sealed partial class WikiViewModel : LoadableViewModel
     [RelayCommand]
     private async Task OpenInBrowserAsync()
     {
-        if (Page?.WebUrl is { } url)
+        if (Article?.WebUrl is { } url)
         {
             await Services.Browser.OpenAsync(url);
         }
@@ -290,7 +290,7 @@ public sealed partial class WikiViewModel : LoadableViewModel
     [RelayCommand]
     private async Task LoadRevisionsAsync()
     {
-        if (Page is not { } page)
+        if (Article is not { } page)
         {
             return;
         }
@@ -308,7 +308,7 @@ public sealed partial class WikiViewModel : LoadableViewModel
     internal Task CompareAsync(WikiRevisionItemViewModel revision) => RunAsync(async () =>
     {
         var old = await _wiki.RevisionContentAsync(revision.Id);
-        var current = Page?.Content ?? (Page?.RevisionId is { } id ? await _wiki.RevisionContentAsync(id) : string.Empty);
+        var current = Article?.Content ?? (Article?.RevisionId is { } id ? await _wiki.RevisionContentAsync(id) : string.Empty);
         DiffText = string.Join("\n", LineDiff.Compare(old, current).Where(l => l.Kind != ' ').Select(l => $"{l.Kind} {l.Text}"));
         if (DiffText.Length == 0)
         {
@@ -320,7 +320,7 @@ public sealed partial class WikiViewModel : LoadableViewModel
 
     internal async Task RestoreAsync(WikiRevisionItemViewModel revision)
     {
-        if (Page is { } page && await RunAsync(() => _wiki.RestoreAsync(revision.Id)))
+        if (Article is { } page && await RunAsync(() => _wiki.RestoreAsync(revision.Id)))
         {
             Show(Services.Localizer.GetString(StringKeys.WikiRestored), InfoBarSeverity.Success);
             await OpenPageAsync(page.Id);
@@ -330,7 +330,7 @@ public sealed partial class WikiViewModel : LoadableViewModel
     [RelayCommand]
     private async Task EditAsync()
     {
-        if (Page is not { } page)
+        if (Article is not { } page)
         {
             return;
         }
@@ -353,7 +353,7 @@ public sealed partial class WikiViewModel : LoadableViewModel
     private void CancelEdit() => IsEditing = false;
 
     [RelayCommand]
-    private Task PreviewAsync() => Page is not { } page ? Task.CompletedTask : RunAsync(async () =>
+    private Task PreviewAsync() => Article is not { } page ? Task.CompletedTask : RunAsync(async () =>
     {
         var html = await _wiki.RenderAsync(page.Id, EditContent, page.Format, page.Title);
         PreviewDocument = new HtmlContentParser(ContentPolicy.Platform, page.WebUrl ?? Services.Environment.WikiBaseUrl).Parse(html);
@@ -363,7 +363,7 @@ public sealed partial class WikiViewModel : LoadableViewModel
     [RelayCommand]
     private async Task SaveAsync()
     {
-        if (Page is not { } page)
+        if (Article is not { } page)
         {
             return;
         }
@@ -396,7 +396,7 @@ public sealed partial class WikiViewModel : LoadableViewModel
     public void CloseDetail()
     {
         Selected = null;
-        Page = null;
+        Article = null;
         IsEditing = false;
     }
 

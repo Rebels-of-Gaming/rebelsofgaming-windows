@@ -12,7 +12,7 @@ public sealed record WikiTreeEntry(string Id, string Slug, string Title, int Dep
 
 public sealed record WikiTocEntry(int Level, string Anchor, string Text);
 
-public sealed record WikiPage(
+public sealed record WikiArticle(
     string Id,
     string Slug,
     string NamespaceSlug,
@@ -82,11 +82,11 @@ public sealed class WikiService(IRoGApiClient client, HttpClient http, Uri? wiki
         return result;
     }
 
-    public async Task<WikiPage> PageAsync(string id, string? locale = null, CancellationToken cancellationToken = default) =>
+    public async Task<WikiArticle> PageAsync(string id, string? locale = null, CancellationToken cancellationToken = default) =>
         Map((await client.V1_wiki_pages_showAsync(id, locale, cancellationToken).ConfigureAwait(false)).Data);
 
     /// <summary>Seite über die Adresse (Links im HTML, Deep-Links); folgt Weiterleitungen wie die Website.</summary>
-    public async Task<WikiPage> PageBySlugAsync(string namespaceSlug, string slug, string? locale = null, CancellationToken cancellationToken = default)
+    public async Task<WikiArticle> PageBySlugAsync(string namespaceSlug, string slug, string? locale = null, CancellationToken cancellationToken = default)
     {
         var d = (await client.V1_wiki_pages_bySlugAsync(namespaceSlug, slug, locale, cancellationToken: cancellationToken).ConfigureAwait(false)).Data;
         return Map(JsonSerializer.Deserialize<Data422>(JsonSerializer.Serialize(d))!);
@@ -195,7 +195,7 @@ public sealed class WikiService(IRoGApiClient client, HttpClient http, Uri? wiki
             : [];
     }
 
-    internal static WikiPage Map(Data422 d) => new(
+    internal static WikiArticle Map(Data422 d) => new(
         d.Id,
         d.Slug,
         d.Namespace.Slug,
@@ -223,7 +223,7 @@ public sealed class WikiOfflineStore(string folder)
 {
     private static readonly JsonSerializerOptions s_json = new() { WriteIndented = false };
 
-    public async Task SaveAsync(WikiPage page, CancellationToken cancellationToken = default)
+    public async Task SaveAsync(WikiArticle page, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(page);
         Directory.CreateDirectory(folder);
@@ -233,7 +233,7 @@ public sealed class WikiOfflineStore(string folder)
         File.Move(temp, target, overwrite: true);
     }
 
-    public async Task<WikiPage?> LoadAsync(string id, string locale, CancellationToken cancellationToken = default)
+    public async Task<WikiArticle?> LoadAsync(string id, string locale, CancellationToken cancellationToken = default)
     {
         var path = PathFor(id, locale);
         if (!File.Exists(path))
@@ -243,7 +243,7 @@ public sealed class WikiOfflineStore(string folder)
 
         try
         {
-            return JsonSerializer.Deserialize<WikiPage>(await File.ReadAllTextAsync(path, cancellationToken).ConfigureAwait(false), s_json);
+            return JsonSerializer.Deserialize<WikiArticle>(await File.ReadAllTextAsync(path, cancellationToken).ConfigureAwait(false), s_json);
         }
         catch (JsonException)
         {
@@ -253,19 +253,19 @@ public sealed class WikiOfflineStore(string folder)
     }
 
     /// <summary>Alle offline gespeicherten Seiten (für die Liste ohne Netz).</summary>
-    public IReadOnlyList<WikiPage> All(string locale)
+    public IReadOnlyList<WikiArticle> All(string locale)
     {
         if (!Directory.Exists(folder))
         {
             return [];
         }
 
-        var pages = new List<WikiPage>();
+        var pages = new List<WikiArticle>();
         foreach (var path in Directory.EnumerateFiles(folder, $"*.{locale}.json"))
         {
             try
             {
-                if (JsonSerializer.Deserialize<WikiPage>(File.ReadAllText(path), s_json) is { } page)
+                if (JsonSerializer.Deserialize<WikiArticle>(File.ReadAllText(path), s_json) is { } page)
                 {
                     pages.Add(page);
                 }

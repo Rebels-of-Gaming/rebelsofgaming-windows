@@ -95,7 +95,7 @@ public class WikiServiceTests
         try
         {
             var store = new WikiOfflineStore(folder);
-            var page = new WikiPage("01J", "et", "technik", "Technik", "de", "ET", "wikitext", null, "<p>x</p>", [], [], "r1", null, null, null);
+            var page = new WikiArticle("01J", "et", "technik", "Technik", "de", "ET", "wikitext", null, "<p>x</p>", [], [], "r1", null, null, null);
             await store.SaveAsync(page);
 
             Assert.Equal("ET", (await store.LoadAsync("01J", "de"))?.Title);

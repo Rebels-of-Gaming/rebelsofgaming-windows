@@ -12,11 +12,11 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 | 2 | Community lesen | fertig (2.1.0, Reste siehe unten): News, Squads, Mitglieder/Team, Termine (+ Zusage), Server/TeamSpeak/Discord mit „Verbinden“, Matches/Hall of Fame, Info (Regeln/Seiten/Recht), Suche | siehe `git log` (develop) |
 | 3 | Echtzeit + Desktop-Integration | fertig (2.1.0): Reverb, Glocke, Toasts, Tray, Badge, Sprungliste, `rog:`, Autostart; WNS nach Lücke W1 | siehe `git log` |
 | 4 | Kommunikation | fertig (2.3.x): DMs mit Pop-out, Forum lesen+schreiben, Zusagen, Tastenkürzel, Offline-Warteschlange (DMs nur im Speicher), Melden | siehe `git log` |
-| 5 | Medien | fast fertig (2.1.0): Uploads (Drag & Drop, Strg+V), Galerie, Downloads, Kurzlinks, Profil bearbeiten; offen: Teilen-Ziel, Galerie-Upload | siehe `git log` |
+| 5 | Medien | fertig (2.3.4): Uploads (Drag & Drop, Strg+V, **Teilen-Ziel**), Galerie mit **Einreichen**, Downloads, Kurzlinks, Profil bearbeiten | siehe `git log` |
 | 6 | Clan-Prozesse | fast fertig (2.2.2): Bewerben, eigene Bewerbungen, Votes, Abwesenheiten, Geräte/Datenexport/Konto löschen, Regel-Hinweis, Onboarding-Kachel, Statistiken (Ranglisten, Wochen-Awards), Mitgliederkarte im eigenen Fenster; offen: Trial-Verwaltung für Squad-Leitung (kommt mit Stufe 9) | siehe `git log` |
 | 7 | Server-Steuerung | fast fertig (2.2.0): Steuer-Fenster mit Power, Ressourcen, Live-Konsole (Historie), Configs (Diff, Versionen, Rollback, Anträge), Backups, RCON, Sperren, Vier-Augen-Freigaben, App-Sperre mit Windows Hello; offen: Dateioperationen, Formular-Vorlagen/Map-Rotation, Whitelist | siehe `git log` |
 | 8 | Wiki | fast fertig (2.3.0): Bereiche, Seitenbaum, Suche, Seite nativ mit Links in der App, Offline-Kopien, Bearbeiten mit Vorschau und Konflikterkennung, Versionen mit Vergleich/Wiederherstellen, Beobachten; offen: neue Seite anlegen, Dateien/Bilder hochladen, Kategorien-Ansicht, Inhaltsverzeichnis mit Sprung | siehe `git log` |
-| 9 | Verwaltung + Moderation | in Arbeit (2.3.x): Verwaltung mit Übersicht (Kennzahlen, Systemstatus, Audit-Log), Bewerbungen (Squad-Leitung), Moderation (Meldungen, verwarnen/sperren, Sperren, Mod-Log, Wortfilter); offen: Mitglieder/Rollen-Oberfläche (Dienst steht), Squads, Inhalte, Termine/Matches, Server-Verwaltung … | siehe `git log` |
+| 9 | Verwaltung + Moderation | in Arbeit (2.3.x): Verwaltung mit Übersicht (Kennzahlen, Systemstatus, Audit-Log), Bewerbungen (Squad-Leitung), Moderation (Meldungen, verwarnen/sperren, Sperren, Mod-Log, Wortfilter); Mitglieder mit Rollen vergeben/entziehen; offen: Squads, Inhalte, Termine/Matches, Server-Verwaltung, Wiki-Freigaben … | siehe `git log` |
 | 10 | Feinschliff + Store | offen | |
 
 ### Stufe 0 – was steht (15.10.2026)
@@ -128,6 +128,9 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 - **Melden** (Chat-Kontextmenü, Forenbeitrag, News-Kommentar, Profil) mit Grund und Kommentar.
 - **Verwaltung:** Übersicht (Kennzahlen, Systemstatus mit Ampel, Audit-Log mit Suche), Bewerbungen für die
   Squad-Leitung (Liste/Detail, Entscheidungen, Aufgaben, Notizen, Erinnern), Moderation.
+- **Teilen-Ziel „An RoG hochladen“** (Manifest `windows.shareTarget`, Bilder/Clips/Bitmaps): geteilte Daten landen in
+  einem Eingang im lokalen Cache – bei laufender App kopiert sie der zweite Prozess vor dem Weiterreichen –, der
+  Uploader lädt sie hoch und räumt auf. **Galerie einreichen** mit Pflicht-Bestätigung der Rechte.
 - **Werkzeug:** `scripts/check-app-syntax.sh` prüft die Syntax der App unter Linux (Roslyn des SDK) vor dem Push.
 - **XAML-Fallstrick:** Findet der XAML-Compiler einen `x:Bind`-Namen nicht, stürzt er teils beim Formulieren der
   Meldung ab („WMC9999 … ErrorMessages.resources“, ohne Datei/Zeile). Ursache hier: `[RelayCommand]` in einem

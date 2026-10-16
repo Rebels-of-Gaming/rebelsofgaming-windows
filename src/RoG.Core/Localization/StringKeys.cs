@@ -153,6 +153,15 @@ public static class StringKeys
     public const string AccountSignOutTitle = "Account_SignOutTitle";
     public const string AccountSignOutText = "Account_SignOutText";
     public const string AccountSignOutConfirm = "Account_SignOutConfirm";
+    public const string AccountThisDevice = "Account_ThisDevice";
+    public const string AccountDeviceRemoved = "Account_DeviceRemoved";
+    public const string AccountExportRequested = "Account_ExportRequested";
+    public const string AccountExportReady = "Account_ExportReady";
+    public const string AccountExportPending = "Account_ExportPending";
+    public const string AccountDeleteTitle = "Account_DeleteTitle";
+    public const string AccountDeleteWarning = "Account_DeleteWarning";
+    public const string AccountDeleteConfirmHeader = "Account_DeleteConfirmHeader";
+    public const string AccountDeleteConfirm = "Account_DeleteConfirm";
 
     // Bewerbung ({0} = Squad, Datum, Alter, Prozent bzw. Regelwerk)
     public const string ApplyTitle = "Apply_Title";

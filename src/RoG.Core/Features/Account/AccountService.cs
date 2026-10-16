@@ -94,3 +94,68 @@ public sealed class AccountService(IRoGApiClient client, ITokenStore tokens)
             .ToDictionary(kv => kv.Key, kv => (IReadOnlyList<string>)kv.Value.ToList(), StringComparer.Ordinal),
         me.Token?.Scopes?.ToList());
 }
+
+/// <summary>Angemeldetes Gerät (Konto → Apps &amp; Geräte).</summary>
+public sealed record DeviceInfo(string Id, string Name, string Platform, string? AppVersion, bool Current, bool Push, DateTimeOffset? LastActiveAt);
+
+/// <summary>Datenexport (Art. 15/20 DSGVO): Status, Größe, Download bis zum Ablauf.</summary>
+public sealed record DataExport(string Id, string Status, long? Size, DateTimeOffset CreatedAt, DateTimeOffset? ExpiresAt)
+{
+    public bool IsReady => Status == "ready";
+}
+
+/// <summary>Konto-Sicherheit und Daten: Geräte abmelden, Datenexport, Konto löschen (Guide 10/35).</summary>
+public sealed class AccountDataService(IRoGApiClient client, ITokenStore tokens)
+{
+    public async Task<IReadOnlyList<DeviceInfo>> GetDevicesAsync(CancellationToken cancellationToken = default)
+    {
+        var response = await client.V1_devices_indexAsync(cancellationToken).ConfigureAwait(false);
+        return response.Data
+            .Select(d => new DeviceInfo(d.Id, d.Name, d.Platform, d.App_version, d.Current, d.Push, ApiValues.Time(d.Last_active_at)))
+            .OrderByDescending(d => d.Current).ThenByDescending(d => d.LastActiveAt)
+            .ToList();
+    }
+
+    /// <summary>Gerät abmelden (Token widerrufen). Ist es das eigene, wird auch lokal abgemeldet.</summary>
+    public async Task RemoveDeviceAsync(DeviceInfo device, CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(device);
+        await client.V1_devices_destroyAsync(device.Id, cancellationToken).ConfigureAwait(false);
+        if (device.Current)
+        {
+            await tokens.ClearAsync(cancellationToken).ConfigureAwait(false);
+        }
+    }
+
+    public async Task<IReadOnlyList<DataExport>> GetExportsAsync(CancellationToken cancellationToken = default)
+    {
+        var response = await client.V1_me_exports_indexAsync(cancellationToken).ConfigureAwait(false);
+        return response.Data.Select(e => new DataExport(e.Id, e.Status, e.Size, ApiValues.Time(e.Created_at) ?? DateTimeOffset.UtcNow, ApiValues.Time(e.Expires_at))).ToList();
+    }
+
+    /// <summary>Neuen Export anstoßen (läuft im Hintergrund; fertig → Benachrichtigung, dann herunterladen).</summary>
+    public async Task RequestExportAsync(CancellationToken cancellationToken = default) =>
+        await client.V1_me_exports_storeAsync(cancellationToken).ConfigureAwait(false);
+
+    /// <summary>Fertigen Export als ZIP in <paramref name="folder"/> speichern; Rückgabe = Pfad.</summary>
+    public async Task<string> DownloadExportAsync(string exportId, string folder, CancellationToken cancellationToken = default)
+    {
+        using var file = await client.V1_me_exports_downloadAsync(exportId, cancellationToken).ConfigureAwait(false);
+        Directory.CreateDirectory(folder);
+        var path = Path.Combine(folder, $"rog-datenexport-{DateTime.Now:yyyy-MM-dd-HHmm}.zip");
+        await using var target = System.IO.File.Create(path);
+        await file.Stream.CopyToAsync(target, cancellationToken).ConfigureAwait(false);
+        return path;
+    }
+
+    /// <summary>
+    /// Konto endgültig löschen (<c>DELETE /v1/me</c>): Bestätigung = Passwort bzw. Anzeigename bei Konten ohne Passwort.
+    /// Danach ist auch das Gerät abgemeldet.
+    /// </summary>
+    public async Task DeleteAccountAsync(string confirmation, CancellationToken cancellationToken = default)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(confirmation);
+        await client.V1_me_destroyAsync(new Body80 { Confirmation = confirmation }, cancellationToken).ConfigureAwait(false);
+        await tokens.ClearAsync(cancellationToken).ConfigureAwait(false);
+    }
+}

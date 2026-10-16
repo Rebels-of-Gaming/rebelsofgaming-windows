@@ -1403,4 +1403,61 @@
   <data name="VotesPage_Abstain.Content" xml:space="preserve">
     <value>ENTHALTUNG</value>
   </data>
+  <data name="Account_ThisDevice" xml:space="preserve">
+    <value>dieses Gerät</value>
+  </data>
+  <data name="Account_DeviceRemoved" xml:space="preserve">
+    <value>Gerät abgemeldet.</value>
+  </data>
+  <data name="Account_ExportRequested" xml:space="preserve">
+    <value>Export angestoßen – du bekommst eine Benachrichtigung, sobald er fertig ist.</value>
+  </data>
+  <data name="Account_ExportReady" xml:space="preserve">
+    <value>fertig</value>
+  </data>
+  <data name="Account_ExportPending" xml:space="preserve">
+    <value>wird erstellt</value>
+  </data>
+  <data name="Account_DeleteTitle" xml:space="preserve">
+    <value>Konto löschen?</value>
+  </data>
+  <data name="Account_DeleteWarning" xml:space="preserve">
+    <value>Dein Konto und deine persönlichen Daten werden endgültig gelöscht. Das lässt sich nicht rückgängig machen. Beiträge im Forum bleiben ohne deinen Namen stehen.</value>
+  </data>
+  <data name="Account_DeleteConfirmHeader" xml:space="preserve">
+    <value>Zur Bestätigung: dein Passwort (ohne Passwort: dein Anzeigename)</value>
+  </data>
+  <data name="Account_DeleteConfirm" xml:space="preserve">
+    <value>Endgültig löschen</value>
+  </data>
+  <data name="AccountPage_Data.Header" xml:space="preserve">
+    <value>Geräte &amp; Daten</value>
+  </data>
+  <data name="AccountPage_DevicesTitle.Text" xml:space="preserve">
+    <value>ANGEMELDETE GERÄTE</value>
+  </data>
+  <data name="AccountPage_DeviceRemove.Content" xml:space="preserve">
+    <value>Abmelden</value>
+  </data>
+  <data name="AccountPage_ExportTitle.Text" xml:space="preserve">
+    <value>DATENEXPORT</value>
+  </data>
+  <data name="AccountPage_ExportText.Text" xml:space="preserve">
+    <value>Alle deine Daten als ZIP-Datei (Art. 15/20 DSGVO).</value>
+  </data>
+  <data name="AccountPage_ExportRequest.Content" xml:space="preserve">
+    <value>EXPORT ANFORDERN</value>
+  </data>
+  <data name="AccountPage_ExportDownload.Content" xml:space="preserve">
+    <value>Herunterladen</value>
+  </data>
+  <data name="AccountPage_DeleteTitle.Text" xml:space="preserve">
+    <value>KONTO LÖSCHEN</value>
+  </data>
+  <data name="AccountPage_DeleteText.Text" xml:space="preserve">
+    <value>Löscht dein Konto endgültig – auch auf der Website.</value>
+  </data>
+  <data name="AccountPage_Delete.Content" xml:space="preserve">
+    <value>KONTO LÖSCHEN …</value>
+  </data>
 </root>

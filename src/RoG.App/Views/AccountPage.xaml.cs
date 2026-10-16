@@ -14,6 +14,7 @@ public sealed partial class AccountPage : Page
         Editor = new ProfileEditViewModel(App.Services);
         Absences = new AbsencesViewModel(App.Services);
         Applications = new MyApplicationsViewModel(App.Services);
+        Data = new AccountDataViewModel(App.Services);
         InitializeComponent();
     }
 
@@ -24,6 +25,55 @@ public sealed partial class AccountPage : Page
     public AbsencesViewModel Absences { get; }
 
     public MyApplicationsViewModel Applications { get; }
+
+    public AccountDataViewModel Data { get; }
+
+    private void OnDataExpanding(Expander sender, ExpanderExpandingEventArgs args) => _ = Data.LoadAsync(silent: true);
+
+    /// <summary>Konto löschen: zweistufig, mit Passwort bzw. Anzeigename als Bestätigung (Store-Pflicht: Löschen in der App).</summary>
+    private async void OnDeleteAccountClick(object sender, RoutedEventArgs e)
+    {
+        var l = App.Services.Localizer;
+        var confirmation = new TextBox { Header = l.GetString(StringKeys.AccountDeleteConfirmHeader) };
+        var error = new InfoBar { Severity = InfoBarSeverity.Error, IsClosable = false };
+        var panel = new StackPanel { Spacing = 12, MaxWidth = 440 };
+        panel.Children.Add(new TextBlock { Text = l.GetString(StringKeys.AccountDeleteWarning), TextWrapping = TextWrapping.Wrap });
+        panel.Children.Add(confirmation);
+        panel.Children.Add(error);
+        var dialog = new ContentDialog
+        {
+            XamlRoot = XamlRoot,
+            Title = l.GetString(StringKeys.AccountDeleteTitle),
+            Content = panel,
+            PrimaryButtonText = l.GetString(StringKeys.AccountDeleteConfirm),
+            CloseButtonText = l.GetString(StringKeys.CommonCancel),
+            DefaultButton = ContentDialogButton.Close,
+        };
+        dialog.PrimaryButtonClick += async (d, args) =>
+        {
+            var deferral = args.GetDeferral();
+            try
+            {
+                if (string.IsNullOrWhiteSpace(confirmation.Text))
+                {
+                    args.Cancel = true;
+                    return;
+                }
+
+                if (await Data.DeleteAccountAsync(confirmation.Text) is { } message)
+                {
+                    args.Cancel = true;
+                    error.Message = message;
+                    error.IsOpen = true;
+                }
+            }
+            finally
+            {
+                deferral.Complete();
+            }
+        };
+        await dialog.ShowAsync();
+    }
 
     private void OnApplicationsExpanding(Expander sender, ExpanderExpandingEventArgs args) => _ = Applications.LoadAsync(silent: true);
 

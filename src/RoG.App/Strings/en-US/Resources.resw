@@ -1403,4 +1403,61 @@
   <data name="VotesPage_Abstain.Content" xml:space="preserve">
     <value>ABSTAIN</value>
   </data>
+  <data name="Account_ThisDevice" xml:space="preserve">
+    <value>this device</value>
+  </data>
+  <data name="Account_DeviceRemoved" xml:space="preserve">
+    <value>Device signed out.</value>
+  </data>
+  <data name="Account_ExportRequested" xml:space="preserve">
+    <value>Export started – you will get a notification once it is ready.</value>
+  </data>
+  <data name="Account_ExportReady" xml:space="preserve">
+    <value>ready</value>
+  </data>
+  <data name="Account_ExportPending" xml:space="preserve">
+    <value>in progress</value>
+  </data>
+  <data name="Account_DeleteTitle" xml:space="preserve">
+    <value>Delete account?</value>
+  </data>
+  <data name="Account_DeleteWarning" xml:space="preserve">
+    <value>Your account and personal data will be deleted permanently. This cannot be undone. Forum posts remain without your name.</value>
+  </data>
+  <data name="Account_DeleteConfirmHeader" xml:space="preserve">
+    <value>To confirm: your password (without a password: your display name)</value>
+  </data>
+  <data name="Account_DeleteConfirm" xml:space="preserve">
+    <value>Delete permanently</value>
+  </data>
+  <data name="AccountPage_Data.Header" xml:space="preserve">
+    <value>Devices &amp; data</value>
+  </data>
+  <data name="AccountPage_DevicesTitle.Text" xml:space="preserve">
+    <value>SIGNED-IN DEVICES</value>
+  </data>
+  <data name="AccountPage_DeviceRemove.Content" xml:space="preserve">
+    <value>Sign out</value>
+  </data>
+  <data name="AccountPage_ExportTitle.Text" xml:space="preserve">
+    <value>DATA EXPORT</value>
+  </data>
+  <data name="AccountPage_ExportText.Text" xml:space="preserve">
+    <value>All your data as a ZIP file (GDPR Art. 15/20).</value>
+  </data>
+  <data name="AccountPage_ExportRequest.Content" xml:space="preserve">
+    <value>REQUEST EXPORT</value>
+  </data>
+  <data name="AccountPage_ExportDownload.Content" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="AccountPage_DeleteTitle.Text" xml:space="preserve">
+    <value>DELETE ACCOUNT</value>
+  </data>
+  <data name="AccountPage_DeleteText.Text" xml:space="preserve">
+    <value>Permanently deletes your account – on the website too.</value>
+  </data>
+  <data name="AccountPage_Delete.Content" xml:space="preserve">
+    <value>DELETE ACCOUNT …</value>
+  </data>
 </root>

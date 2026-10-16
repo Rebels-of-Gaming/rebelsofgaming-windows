@@ -196,6 +196,57 @@
                 </StackPanel>
             </Expander>
 
+            <!-- Geräte & Daten -->
+            <Expander
+                x:Uid="AccountPage_Data"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Stretch"
+                Expanding="OnDataExpanding"
+                Visibility="{x:Bind ViewModel.ShowProfile, Mode=OneWay}">
+                <StackPanel Spacing="12">
+                    <InfoBar
+                        IsOpen="{x:Bind Data.IsFeedbackOpen, Mode=TwoWay}"
+                        Message="{x:Bind Data.FeedbackMessage, Mode=OneWay}"
+                        Severity="{x:Bind Data.FeedbackSeverity, Mode=OneWay}" />
+                    <TextBlock x:Uid="AccountPage_DevicesTitle" Style="{StaticResource RoGSectionTextStyle}" />
+                    <ItemsControl ItemsSource="{x:Bind Data.Devices}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:DeviceItemViewModel">
+                                <Grid Padding="0,6" ColumnSpacing="12">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Name}" />
+                                        <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" />
+                                    </StackPanel>
+                                    <Button x:Uid="AccountPage_DeviceRemove" Grid.Column="1" Command="{x:Bind RemoveCommand}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <TextBlock x:Uid="AccountPage_ExportTitle" Style="{StaticResource RoGSectionTextStyle}" />
+                    <TextBlock x:Uid="AccountPage_ExportText" Style="{StaticResource RoGMutedTextStyle}" />
+                    <Button x:Uid="AccountPage_ExportRequest" Command="{x:Bind Data.RequestExportCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                    <ItemsControl ItemsSource="{x:Bind Data.Exports}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:ExportItemViewModel">
+                                <StackPanel Padding="0,4" Orientation="Horizontal" Spacing="12">
+                                    <TextBlock VerticalAlignment="Center" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Text}" />
+                                    <Button x:Uid="AccountPage_ExportDownload" Command="{x:Bind DownloadCommand}" Visibility="{x:Bind IsReady}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <TextBlock x:Uid="AccountPage_DeleteTitle" Foreground="{StaticResource RoGRedBrush}" Style="{StaticResource RoGSectionTextStyle}" />
+                    <TextBlock x:Uid="AccountPage_DeleteText" Style="{StaticResource RoGMutedTextStyle}" />
+                    <Button x:Uid="AccountPage_Delete" Click="OnDeleteAccountClick" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                </StackPanel>
+            </Expander>
+
             <!-- Aktionen -->
             <StackPanel
                 Orientation="Horizontal"

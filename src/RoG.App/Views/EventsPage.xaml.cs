@@ -149,6 +149,9 @@ public sealed partial class EventsPage : Page
 
     private void OnDetailClosed(object? sender, EventArgs e) => ViewModel.Selected = null;
 
+    private void OnViewModeChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args) =>
+        ViewModel.MonthMode = sender.SelectedItem is not null && sender.Items.IndexOf(sender.SelectedItem) == 1;
+
     private async void OnRefreshInvoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
     {
         args.Handled = true;

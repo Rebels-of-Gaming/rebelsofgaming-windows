@@ -18,11 +18,19 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Grid Margin="24,24,24,12" ColumnSpacing="12">
+                <Grid Margin="24,24,24,12" ColumnSpacing="12" RowSpacing="8">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <SelectorBar Grid.Row="1" Grid.ColumnSpan="2" SelectionChanged="OnViewModeChanged">
+                        <SelectorBarItem x:Uid="EventsPage_ModeList" IsSelected="True" />
+                        <SelectorBarItem x:Uid="EventsPage_ModeMonth" />
+                    </SelectorBar>
                     <TextBlock
                         x:Uid="EventsPage_Title"
                         Style="{StaticResource RoGDisplayTextStyle}"
@@ -42,7 +50,7 @@
                     Padding="12,0,12,12"
                     ItemsSource="{x:Bind ViewModel.Items}"
                     SelectedItem="{x:Bind ViewModel.Selected, Mode=TwoWay}"
-                    Visibility="{x:Bind ViewModel.ShowContent, Mode=OneWay}">
+                    Visibility="{x:Bind ViewModel.ShowList, Mode=OneWay}">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="vm:EventRowViewModel">
                             <StackPanel Opacity="{x:Bind Opacity}" AutomationProperties.Name="{x:Bind Title}">
@@ -89,6 +97,65 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+
+                <!-- Monatsansicht -->
+                <ScrollViewer Grid.Row="1" Padding="12,0,12,12" VerticalScrollBarVisibility="Auto" Visibility="{x:Bind ViewModel.MonthMode, Mode=OneWay}">
+                    <StackPanel Spacing="8">
+                        <Grid ColumnSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Button x:Uid="EventsPage_PrevMonth" Command="{x:Bind ViewModel.PreviousMonthCommand}"><FontIcon FontSize="12" Glyph="&#xE76B;" /></Button>
+                            <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource RoGSectionTextStyle}" Text="{x:Bind ViewModel.MonthTitle, Mode=OneWay}" />
+                            <Button x:Uid="EventsPage_NextMonth" Grid.Column="2" Command="{x:Bind ViewModel.NextMonthCommand}"><FontIcon FontSize="12" Glyph="&#xE76C;" /></Button>
+                        </Grid>
+                        <ItemsRepeater ItemsSource="{x:Bind ViewModel.WeekdayNames}">
+                            <ItemsRepeater.Layout>
+                                <UniformGridLayout ItemsStretch="Fill" MaximumRowsOrColumns="7" MinItemWidth="36" />
+                            </ItemsRepeater.Layout>
+                            <ItemsRepeater.ItemTemplate>
+                                <DataTemplate x:DataType="x:String">
+                                    <TextBlock HorizontalAlignment="Center" FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind}" />
+                                </DataTemplate>
+                            </ItemsRepeater.ItemTemplate>
+                        </ItemsRepeater>
+                        <ItemsRepeater ItemsSource="{x:Bind ViewModel.MonthDays}">
+                            <ItemsRepeater.Layout>
+                                <UniformGridLayout ItemsStretch="Fill" MaximumRowsOrColumns="7" MinColumnSpacing="2" MinItemHeight="44" MinItemWidth="36" MinRowSpacing="2" />
+                            </ItemsRepeater.Layout>
+                            <ItemsRepeater.ItemTemplate>
+                                <DataTemplate x:DataType="vm:MonthDayViewModel">
+                                    <Button
+                                        Padding="2"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch"
+                                        AutomationProperties.Name="{x:Bind AutomationName}"
+                                        BorderBrush="{x:Bind CellBorder}"
+                                        Command="{x:Bind SelectCommand}"
+                                        Opacity="{x:Bind Opacity}">
+                                        <StackPanel HorizontalAlignment="Center">
+                                            <TextBlock HorizontalAlignment="Center" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Number}" />
+                                            <TextBlock HorizontalAlignment="Center" FontSize="10" Foreground="{StaticResource RoGRedBrush}" Text="{x:Bind Dots}" />
+                                        </StackPanel>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsRepeater.ItemTemplate>
+                        </ItemsRepeater>
+                        <TextBlock Margin="0,8,0,0" Style="{StaticResource RoGSectionTextStyle}" Text="{x:Bind ViewModel.DayTitle, Mode=OneWay}" />
+                        <ListView ItemsSource="{x:Bind ViewModel.DayEvents}" SelectedItem="{x:Bind ViewModel.Selected, Mode=TwoWay}" SelectionMode="Single">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="vm:EventRowViewModel">
+                                    <StackPanel Padding="0,4" AutomationProperties.Name="{x:Bind Title}">
+                                        <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Title}" TextTrimming="CharacterEllipsis" />
+                                        <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Time}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
+                </ScrollViewer>
             </Grid>
         </controls:ListDetailPanel.List>
 

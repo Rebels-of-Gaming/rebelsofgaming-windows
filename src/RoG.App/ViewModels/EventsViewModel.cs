@@ -23,6 +23,13 @@ public sealed partial class EventsViewModel : LoadableViewModel
     {
         _events = new EventService(services.Api.Client);
         Detail = new EventDetailViewModel(services, _events);
+        PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(ShowContent))
+            {
+                OnPropertyChanged(nameof(ShowList));
+            }
+        };
         Detail.Deleted += (_, id) =>
         {
             if (Items.FirstOrDefault(i => i.Id == id) is { } row)
@@ -103,6 +110,101 @@ public sealed partial class EventsViewModel : LoadableViewModel
 
     public bool ShowSelectHint => Selected is null;
 
+    // ---- Monatsansicht ----
+
+    private DateOnly _month = new(DateTime.Today.Year, DateTime.Today.Month, 1);
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(ShowList))]
+    public partial bool MonthMode { get; set; }
+
+    /// <summary>Liste nur außerhalb der Monatsansicht.</summary>
+    public bool ShowList => ShowContent && !MonthMode;
+
+    public ObservableCollection<MonthDayViewModel> MonthDays { get; } = [];
+
+    public ObservableCollection<EventRowViewModel> DayEvents { get; } = [];
+
+    [ObservableProperty]
+    public partial string MonthTitle { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial string DayTitle { get; set; } = string.Empty;
+
+    public IReadOnlyList<string> WeekdayNames { get; } = Enumerable.Range(0, 7)
+        .Select(i => CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedDayName((DayOfWeek)((i + 1) % 7)))
+        .ToList();
+
+    partial void OnMonthModeChanged(bool value)
+    {
+        if (value)
+        {
+            _ = LoadMonthAsync();
+        }
+    }
+
+    [RelayCommand]
+    private Task PreviousMonthAsync()
+    {
+        _month = _month.AddMonths(-1);
+        return LoadMonthAsync();
+    }
+
+    [RelayCommand]
+    private Task NextMonthAsync()
+    {
+        _month = _month.AddMonths(1);
+        return LoadMonthAsync();
+    }
+
+    private async Task LoadMonthAsync()
+    {
+        MonthTitle = _month.ToDateTime(TimeOnly.MinValue).ToString("MMMM yyyy", CultureInfo.CurrentCulture);
+        var first = MonthGrid.FirstCell(_month.Year, _month.Month);
+        var events = new List<EventItem>();
+        try
+        {
+            string? cursor = null;
+            do
+            {
+                var page = await _events.ListAsync(new DateTimeOffset(first.ToDateTime(TimeOnly.MinValue)), 42, cursor);
+                events.AddRange(page.Items);
+                cursor = page.NextCursor;
+            }
+            while (cursor is not null && events.Count < 500);
+        }
+        catch (Exception ex) when (ex is ApiProblemException or RoG.Core.Api.Generated.GeneratedApiException)
+        {
+            ErrorMessage = ex is ApiProblemException p ? Services.Localizer.GetError(p.Problem.Code) : Services.Localizer.GetError(ApiProblem.Codes.Unknown);
+            return;
+        }
+
+        MonthDays.Clear();
+        foreach (var day in MonthGrid.Build(_month.Year, _month.Month, events, DateOnly.FromDateTime(DateTime.Today)))
+        {
+            MonthDays.Add(new MonthDayViewModel(day, this));
+        }
+
+        var today = MonthDays.FirstOrDefault(d => d.Day.IsToday) ?? MonthDays.FirstOrDefault(d => d.Day.InMonth && d.Day.Events.Count > 0);
+        ShowDay(today);
+    }
+
+    internal void ShowDay(MonthDayViewModel? day)
+    {
+        DayEvents.Clear();
+        if (day is null)
+        {
+            DayTitle = string.Empty;
+            return;
+        }
+
+        DayTitle = day.Day.Date.ToDateTime(TimeOnly.MinValue).ToString("dddd, d. MMMM", CultureInfo.CurrentCulture);
+        foreach (var e in day.Day.Events)
+        {
+            DayEvents.Add(new EventRowViewModel(e, false, Services.Localizer));
+        }
+    }
+
     protected override bool HasData => Items.Count > 0;
 
     /// <summary>Liste laden und den Termin <paramref name="id"/> öffnen (Startseite, Links).</summary>
@@ -138,6 +240,25 @@ public sealed partial class EventsViewModel : LoadableViewModel
             Detail.Show(value.Item);
         }
     }
+}
+
+/// <summary>Zelle der Monatsansicht: Tageszahl, bis zu drei Punkte für Termine, heute hervorgehoben.</summary>
+public sealed partial class MonthDayViewModel(MonthDay day, EventsViewModel owner)
+{
+    public MonthDay Day => day;
+
+    public string Number { get; } = day.Date.Day.ToString(CultureInfo.CurrentCulture);
+
+    public string Dots { get; } = new string('•', Math.Min(3, day.Events.Count));
+
+    public double Opacity => day.InMonth ? 1 : 0.4;
+
+    public Brush CellBorder => (Brush)Application.Current.Resources[day.IsToday ? "RoGRedBrush" : "RoGLineBrush"];
+
+    public string AutomationName { get; } = $"{day.Date.ToDateTime(TimeOnly.MinValue).ToString("D", CultureInfo.CurrentCulture)}: {day.Events.Count}";
+
+    [RelayCommand]
+    private void Select() => owner.ShowDay(this);
 }
 
 /// <summary>Zeile: Tagesüberschrift (beim ersten Termin des Tages), Uhrzeit, Titel, Typ-Farbe, eigene Antwort.</summary>

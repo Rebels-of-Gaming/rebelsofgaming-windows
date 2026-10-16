@@ -2561,4 +2561,16 @@
   <data name="ServerCard_History.Header" xml:space="preserve">
     <value>Fréquentation (24 h)</value>
   </data>
+  <data name="EventsPage_ModeList.Text" xml:space="preserve">
+    <value>Liste</value>
+  </data>
+  <data name="EventsPage_ModeMonth.Text" xml:space="preserve">
+    <value>Mois</value>
+  </data>
+  <data name="EventsPage_PrevMonth.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Mois précédent</value>
+  </data>
+  <data name="EventsPage_NextMonth.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Mois suivant</value>
+  </data>
 </root>

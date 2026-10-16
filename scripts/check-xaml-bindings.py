@@ -59,6 +59,10 @@ def type_of(t, member):
             return mt.split(".")[-1]
     return None
 
+# Namen wie WinUI-Typen in x:Bind-Pfaden führten zu Fehlern des XAML-Compilers (Page, Paragraph, Image, Border …)
+WINUI_TYPES = {"Page", "Paragraph", "Image", "Border", "Grid", "Run", "Frame", "Window", "Button", "TextBlock", "StackPanel",
+               "Canvas", "Ellipse", "Rectangle", "Path", "Hyperlink", "Span", "Bold", "Italic", "Style", "Brush", "Thickness"}
+
 problems = []
 for xaml in glob.glob(os.path.join(ROOT, "src", "RoG.App", "**", "*.xaml"), recursive=True):
     if "/obj/" in xaml or "/bin/" in xaml:
@@ -82,6 +86,10 @@ for xaml in glob.glob(os.path.join(ROOT, "src", "RoG.App", "**", "*.xaml"), recu
                 t = ctx
                 for step in path.split("."):
                     step = step.strip()
+                    if step in WINUI_TYPES:
+                        line = text[: text.find(value)].count("\n") + 1 if value in text else 0
+                        problems.append(f"{os.path.relpath(xaml, ROOT)}:{line}: '{step}' heißt wie ein WinUI-Typ – umbenennen (Pfad {path})")
+                        break
                     if not step or t is None:
                         break
                     if not has(t, step):

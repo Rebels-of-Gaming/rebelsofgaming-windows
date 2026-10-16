@@ -131,7 +131,9 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 - **Teilen-Ziel „An RoG hochladen“** (Manifest `windows.shareTarget`, Bilder/Clips/Bitmaps): geteilte Daten landen in
   einem Eingang im lokalen Cache – bei laufender App kopiert sie der zweite Prozess vor dem Weiterreichen –, der
   Uploader lädt sie hoch und räumt auf. **Galerie einreichen** mit Pflicht-Bestätigung der Rechte.
-- **Werkzeug:** `scripts/check-app-syntax.sh` prüft die Syntax der App unter Linux (Roslyn des SDK) vor dem Push.
+- **Werkzeug:** `scripts/check-app-syntax.sh` **kompiliert den C#-Teil der App unter Linux** (`tools/AppCompileCheck`:
+  `EnableWindowsTargeting`, Referenzen des Windows App SDK ohne dessen Build-Targets, alle Analyzer; XAML-generierter
+  Code als Platzhalter aus `xaml_stubs.py`) und prüft die `x:Bind`-Pfade. Läuft auch im Linux-Job der CI.
 - **XAML-Fallstrick:** Findet der XAML-Compiler einen `x:Bind`-Namen nicht, stürzt er teils beim Formulieren der
   Meldung ab („WMC9999 … ErrorMessages.resources“, ohne Datei/Zeile). Ursache hier: `[RelayCommand]` in einem
   `record` – die Toolkit-Generatoren erzeugen in records nichts. Abhilfe: ViewModels mit Commands/Observable immer als

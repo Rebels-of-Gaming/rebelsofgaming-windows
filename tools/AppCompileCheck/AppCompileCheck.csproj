@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    C#-Prüfung der WinUI-App unter Linux: kompiliert src/RoG.App/**/*.cs gegen die Referenzen des Windows App SDK
+    (ohne dessen Build-Targets) samt Analyzern; XAML-generierte Teile ersetzt xaml_stubs.py durch Platzhalter.
+    Findet fehlende usings, falsche Typen, CS7094, CA-Regeln … vor dem Windows-CI. Aufruf: scripts/check-app-syntax.sh
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <OutputType>Library</OutputType>
+    <RootNamespace>RoG.App</RootNamespace>
+    <AssemblyName>RoG.App.CompileCheck</AssemblyName>
+    <DefineConstants>$(DefineConstants);DISABLE_XAML_GENERATED_MAIN</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <NoWarn>$(NoWarn);CS0169;CS0649;NU1701</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../src/RoG.App/**/*.cs" Exclude="../../src/RoG.App/obj/**;../../src/RoG.App/bin/**" />
+    <Compile Include="$(BaseIntermediateOutputPath)XamlStubs.g.cs" />
+    <ProjectReference Include="../../src/RoG.Core/RoG.Core.csproj" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" ExcludeAssets="build;buildTransitive" />
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+  </ItemGroup>
+  <Target Name="GenerateXamlStubs" BeforeTargets="CoreCompile">
+    <Exec Command="python3 -I &quot;$(MSBuildThisFileDirectory)xaml_stubs.py&quot; &quot;$(MSBuildThisFileDirectory)../../src/RoG.App&quot; &quot;$(BaseIntermediateOutputPath)XamlStubs.g.cs&quot;" />
+  </Target>
+</Project>

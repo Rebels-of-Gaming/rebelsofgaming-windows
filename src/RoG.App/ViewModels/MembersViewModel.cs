@@ -42,6 +42,9 @@ public sealed partial class MembersViewModel : LoadableViewModel
 
     public bool ShowFilters => !TeamMode;
 
+    /// <summary>Karte nur angemeldet (die API erlaubt sie nur Clan-Mitgliedern und antwortet sonst mit 403).</summary>
+    public bool CanShowMap => Services.CurrentUser is not null;
+
     [ObservableProperty]
     public partial bool HasMore { get; set; }
 

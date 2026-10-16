@@ -24,7 +24,14 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <StackPanel Margin="24,24,24,8" Spacing="12">
-                    <TextBlock x:Uid="MembersPage_Title" Style="{StaticResource RoGDisplayTextStyle}" Text="MITGLIEDER" />
+                    <Grid ColumnSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Uid="MembersPage_Title" Style="{StaticResource RoGDisplayTextStyle}" Text="MITGLIEDER" />
+                        <Button x:Uid="MembersPage_Map" Grid.Column="1" VerticalAlignment="Center" Click="OnMapClick" Style="{StaticResource RoGSecondaryButtonStyle}" Visibility="{x:Bind ViewModel.CanShowMap, Mode=OneWay}" />
+                    </Grid>
                     <SelectorBar x:Name="ModeBar" SelectionChanged="OnModeChanged">
                         <SelectorBarItem x:Uid="MembersPage_ModeAll" IsSelected="True" />
                         <SelectorBarItem x:Uid="MembersPage_ModeTeam" />

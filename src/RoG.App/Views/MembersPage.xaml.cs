@@ -29,6 +29,8 @@ public sealed partial class MembersPage : Page
         }
     }
 
+    private void OnMapClick(object sender, RoutedEventArgs e) => MemberMapWindow.Open();
+
     private void OnDetailClosed(object? sender, EventArgs e)
     {
         ViewModel.Selected = null;

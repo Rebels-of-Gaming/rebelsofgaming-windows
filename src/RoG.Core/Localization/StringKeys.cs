@@ -258,6 +258,13 @@ public static class StringKeys
     public const string StatsAwardMostPlaytime = "Stats_Award_most_playtime";
     public const string HomeOnboardingProgress = "Home_OnboardingProgress";
 
+    // Mitgliederkarte
+    public const string MapTitle = "Map_Title";
+    public const string MapEmpty = "Map_Empty";
+    public const string MapNoTiles = "Map_NoTiles";
+    public const string MapZoomIn = "Map_ZoomIn";
+    public const string MapZoomOut = "Map_ZoomOut";
+
     // App-Sperre
     public const string LockPrompt = "Lock_Prompt";
 
@@ -319,7 +326,7 @@ public static class StringKeys
         "console_unavailable", "approval_required", "backup_locked", "backup_busy", "backup_not_found",
         "config_changed", "file_operation_forbidden", "pterodactyl_write_blocked",
         "forbidden_cvar", "rcon_write_blocked", "rcon_target_forbidden", "player_identity_conflict", "ban_managed_by_moderation",
-        "own_change", "change_not_pending",
+        "own_change", "change_not_pending", "members_only", "invalid_signature",
     ];
 
     /// <summary>Alle Schlüssel aus Code – für den Vollständigkeitstest.</summary>

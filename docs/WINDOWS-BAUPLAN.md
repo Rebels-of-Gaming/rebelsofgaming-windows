@@ -13,7 +13,7 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 | 3 | Echtzeit + Desktop-Integration | fertig (2.1.0): Reverb, Glocke, Toasts, Tray, Badge, Sprungliste, `rog:`, Autostart; WNS nach Lücke W1 | siehe `git log` |
 | 4 | Kommunikation | fast fertig (2.1.0): DMs mit Pop-out, Forum lesen+schreiben, Zusagen, Tastenkürzel; offen: Offline-Warteschlange | siehe `git log` |
 | 5 | Medien | fast fertig (2.1.0): Uploads (Drag & Drop, Strg+V), Galerie, Downloads, Kurzlinks, Profil bearbeiten; offen: Teilen-Ziel, Galerie-Upload | siehe `git log` |
-| 6 | Clan-Prozesse | in Arbeit (2.1.1): Bewerben, eigene Bewerbungen, Votes, Abwesenheiten, Geräte/Datenexport/Konto löschen, Regel-Hinweis; offen: Trial-Ansicht für Squad-Leitung, Onboarding, Mitgliederkarte, Statistiken | siehe `git log` |
+| 6 | Clan-Prozesse | fast fertig (2.2.2): Bewerben, eigene Bewerbungen, Votes, Abwesenheiten, Geräte/Datenexport/Konto löschen, Regel-Hinweis, Onboarding-Kachel, Statistiken (Ranglisten, Wochen-Awards), Mitgliederkarte im eigenen Fenster; offen: Trial-Verwaltung für Squad-Leitung (kommt mit Stufe 9) | siehe `git log` |
 | 7 | Server-Steuerung | fast fertig (2.2.0): Steuer-Fenster mit Power, Ressourcen, Live-Konsole (Historie), Configs (Diff, Versionen, Rollback, Anträge), Backups, RCON, Sperren, Vier-Augen-Freigaben, App-Sperre mit Windows Hello; offen: Dateioperationen, Formular-Vorlagen/Map-Rotation, Whitelist | siehe `git log` |
 | 8 | Wiki | offen | |
 | 9 | Verwaltung + Moderation | offen | |
@@ -110,6 +110,11 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   Recht aus `control.abilities`. Speichern erkennt `202` (Antrag bei Vier-Augen-Pflicht); Rollback, Wiederherstellen,
   Löschen, Sperre aufheben und Freigeben/Ablehnen mit Rückfrage. Gäste sperren per Spieler-ID/Name (Lücke W10:
   Body fehlt in der Spec), Mitglieder weiter über die Website (Rangprüfung). RCON-Ausgabe wird nicht gespeichert.
+- **Statistiken** als Reiter auf der Matches-Seite (Spiel, Zeitraum, Wertung; eigener Platz in Gold; Wochen-Awards mit
+  den Namen der Website), **Onboarding-Kachel** „Dein Start bei den Rebels“ auf der Startseite bis alles erledigt ist.
+- **Mitgliederkarte** im eigenen Fenster (Knopf „Karte“ auf der Mitglieder-Seite): eigene schlanke Kachelkarte
+  (Web-Mercator in Core, getestet), Kacheln nur über die signierte Vorlage der Plattform (alle 5 min auf Ablauf geprüft),
+  Ziehen, Mausrad, +/−, Pfeiltasten, Pins je Stadt mit Mitgliederliste, Namensnennung © OpenStreetMap mit Link.
 - **App-Sperre mit Windows Hello** (Einstellungen, nur wenn Hello eingerichtet; Einschalten erst nach erfolgreicher
   Prüfung): beim Start und nach 5 Minuten außerhalb des Vordergrunds; Ausweg „Stattdessen abmelden“.
 
@@ -167,6 +172,8 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 - Ab 2.1.1: Datenexport (ZIP) speichert die App nur auf Wunsch im Ordner „Downloads“ des Benutzers. Die Server-Konsole
   verbindet direkt mit dem Pterodactyl-Node der Plattform (eigener Server, kurzlebiges Token aus der API). Die App-Sperre speichert nur Ein/Aus in `settings.json`;
   die Hello-Prüfung macht Windows, die App sieht keine biometrischen Daten.
+- Ab 2.2.2: Kartenkacheln kommen nur vom Server der Plattform (signierte Vorlage, nie direkt von OpenStreetMap);
+  sie liegen höchstens im Bild-Cache von WinUI während der Laufzeit.
 - Keine Übermittlung an Dritte, keine Telemetrie (`DOTNET_CLI_TELEMETRY_OPTOUT` auch in den Skripten). Schriften eingebettet.
 
 ## Verzeichnisstruktur
@@ -240,6 +247,9 @@ docs/
 20. **Konsolenbefehle über die API statt über den Socket.** `POST /v1/servers/{slug}/commands` landet im Audit-Log und
     prüft Vier-Augen-Pflicht und Scope serverseitig; der Wings-Socket dient nur zum Lesen.
 21. **Datenexport landet im Ordner „Downloads“** als `rog-datenexport-<Datum>.zip`, wie Downloads aus Medien.
+
+22. **Mitgliederkarte ohne Karten-Bibliothek.** Die WinUI-`MapControl` braucht Azure Maps (Fremdanbieter, Schlüssel);
+    die App zeichnet die Kacheln der Plattform selbst. Pins nach Ort gruppiert wie die API, ohne weitere Cluster.
 
 ## Offene Fragen (an Wahke)
 

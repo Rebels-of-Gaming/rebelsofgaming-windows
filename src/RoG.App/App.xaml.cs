@@ -22,6 +22,9 @@ public partial class App : Application
     /// <summary>Fensterhandle des Hauptfensters (Datei-Dialoge brauchen es in WinUI 3).</summary>
     public static nint MainWindowHandle => s_window is null ? 0 : WinRT.Interop.WindowNative.GetWindowHandle(s_window);
 
+    /// <summary>Hauptfenster nach vorn holen (z. B. aus einem Nebenfenster wie der Karte).</summary>
+    public static void BringMainWindowToFront() => s_window?.BringToFront();
+
     /// <summary>Dienste der laufenden App (Composition Root).</summary>
     public static AppServices Services { get; private set; } = null!;
 

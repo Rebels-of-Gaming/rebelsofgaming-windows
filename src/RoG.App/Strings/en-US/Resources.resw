@@ -1865,4 +1865,28 @@
   <data name="HomePage_OnboardingDo.Content" xml:space="preserve">
     <value>Do it</value>
   </data>
+  <data name="Map_Title" xml:space="preserve">
+    <value>Member map – Rebels of Gaming</value>
+  </data>
+  <data name="Map_Empty" xml:space="preserve">
+    <value>Nobody has opted in to the map yet. You can share your own city under consents in your profile.</value>
+  </data>
+  <data name="Map_NoTiles" xml:space="preserve">
+    <value>Map tiles are not available right now – the places are still shown.</value>
+  </data>
+  <data name="Map_ZoomIn" xml:space="preserve">
+    <value>Zoom in</value>
+  </data>
+  <data name="Map_ZoomOut" xml:space="preserve">
+    <value>Zoom out</value>
+  </data>
+  <data name="Error_members_only" xml:space="preserve">
+    <value>Members only.</value>
+  </data>
+  <data name="Error_invalid_signature" xml:space="preserve">
+    <value>The link has expired – please reload.</value>
+  </data>
+  <data name="MembersPage_Map.Content" xml:space="preserve">
+    <value>MAP</value>
+  </data>
 </root>

@@ -1259,4 +1259,31 @@
   <data name="AccountPage_SaveProfile.Content" xml:space="preserve">
     <value>SPEICHERN</value>
   </data>
+  <data name="Absence_Reported" xml:space="preserve">
+    <value>Abwesenheit gemeldet – deine Squad-Leitung wird informiert.</value>
+  </data>
+  <data name="Absence_Active" xml:space="preserve">
+    <value>läuft</value>
+  </data>
+  <data name="Absence_Upcoming" xml:space="preserve">
+    <value>geplant</value>
+  </data>
+  <data name="AccountPage_Absences.Header" xml:space="preserve">
+    <value>Abwesenheit</value>
+  </data>
+  <data name="AccountPage_AbsenceFrom.Header" xml:space="preserve">
+    <value>Von</value>
+  </data>
+  <data name="AccountPage_AbsenceTo.Header" xml:space="preserve">
+    <value>Bis</value>
+  </data>
+  <data name="AccountPage_AbsenceReason.Header" xml:space="preserve">
+    <value>Grund (optional, sieht nur die Leitung)</value>
+  </data>
+  <data name="AccountPage_AbsenceReport.Content" xml:space="preserve">
+    <value>ABWESENHEIT MELDEN</value>
+  </data>
+  <data name="AccountPage_AbsenceDelete.Content" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
 </root>

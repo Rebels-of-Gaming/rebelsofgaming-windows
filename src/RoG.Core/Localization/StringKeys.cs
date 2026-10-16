@@ -154,6 +154,11 @@ public static class StringKeys
     public const string AccountSignOutText = "Account_SignOutText";
     public const string AccountSignOutConfirm = "Account_SignOutConfirm";
 
+    // Abwesenheit
+    public const string AbsenceReported = "Absence_Reported";
+    public const string AbsenceActive = "Absence_Active";
+    public const string AbsenceUpcoming = "Absence_Upcoming";
+
     // Profil bearbeiten
     public const string ProfileSaved = "Profile_Saved";
     public const string ProfileImageSaved = "Profile_ImageSaved";

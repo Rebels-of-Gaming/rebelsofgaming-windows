@@ -1259,4 +1259,31 @@
   <data name="AccountPage_SaveProfile.Content" xml:space="preserve">
     <value>SAVE</value>
   </data>
+  <data name="Absence_Reported" xml:space="preserve">
+    <value>Absence reported – your squad lead is notified.</value>
+  </data>
+  <data name="Absence_Active" xml:space="preserve">
+    <value>ongoing</value>
+  </data>
+  <data name="Absence_Upcoming" xml:space="preserve">
+    <value>planned</value>
+  </data>
+  <data name="AccountPage_Absences.Header" xml:space="preserve">
+    <value>Absence</value>
+  </data>
+  <data name="AccountPage_AbsenceFrom.Header" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="AccountPage_AbsenceTo.Header" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="AccountPage_AbsenceReason.Header" xml:space="preserve">
+    <value>Reason (optional, only leadership sees it)</value>
+  </data>
+  <data name="AccountPage_AbsenceReport.Content" xml:space="preserve">
+    <value>REPORT ABSENCE</value>
+  </data>
+  <data name="AccountPage_AbsenceDelete.Content" xml:space="preserve">
+    <value>Delete</value>
+  </data>
 </root>

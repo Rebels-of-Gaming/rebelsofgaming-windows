@@ -3,6 +3,7 @@
     x:Class="RoG.App.Views.AccountPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:RoG.App.ViewModels"
     Background="{StaticResource RoGBgBrush}">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -115,6 +116,44 @@
                     <ToggleSwitch x:Uid="AccountPage_ShowOnline" IsOn="{x:Bind Editor.ShowOnlineStatus, Mode=TwoWay}" />
                     <ToggleSwitch x:Uid="AccountPage_HallOfFame" IsOn="{x:Bind Editor.HallOfFameConsent, Mode=TwoWay}" />
                     <Button x:Uid="AccountPage_SaveProfile" Command="{x:Bind Editor.SaveCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                </StackPanel>
+            </Expander>
+
+            <!-- Abwesenheit -->
+            <Expander
+                x:Uid="AccountPage_Absences"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Stretch"
+                Expanding="OnAbsencesExpanding"
+                Visibility="{x:Bind ViewModel.ShowProfile, Mode=OneWay}">
+                <StackPanel Spacing="12">
+                    <InfoBar
+                        IsOpen="{x:Bind Absences.IsFeedbackOpen, Mode=TwoWay}"
+                        Message="{x:Bind Absences.FeedbackMessage, Mode=OneWay}"
+                        Severity="{x:Bind Absences.FeedbackSeverity, Mode=OneWay}" />
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <CalendarDatePicker x:Uid="AccountPage_AbsenceFrom" Date="{x:Bind Absences.From, Mode=TwoWay}" />
+                        <CalendarDatePicker x:Uid="AccountPage_AbsenceTo" Date="{x:Bind Absences.To, Mode=TwoWay}" />
+                    </StackPanel>
+                    <TextBox x:Uid="AccountPage_AbsenceReason" MaxLength="500" Text="{x:Bind Absences.Reason, Mode=TwoWay}" />
+                    <Button x:Uid="AccountPage_AbsenceReport" Command="{x:Bind Absences.ReportCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                    <ItemsControl ItemsSource="{x:Bind Absences.Items}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:AbsenceItemViewModel">
+                                <Grid Padding="0,6" ColumnSpacing="12">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Period}" />
+                                        <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Detail}" />
+                                    </StackPanel>
+                                    <Button x:Uid="AccountPage_AbsenceDelete" Grid.Column="1" Command="{x:Bind DeleteCommand}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </StackPanel>
             </Expander>
 

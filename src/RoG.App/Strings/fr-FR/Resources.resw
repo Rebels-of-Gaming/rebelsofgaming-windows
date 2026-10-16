@@ -1259,4 +1259,31 @@
   <data name="AccountPage_SaveProfile.Content" xml:space="preserve">
     <value>ENREGISTRER</value>
   </data>
+  <data name="Absence_Reported" xml:space="preserve">
+    <value>Absence signalée – la direction de ton squad est informée.</value>
+  </data>
+  <data name="Absence_Active" xml:space="preserve">
+    <value>en cours</value>
+  </data>
+  <data name="Absence_Upcoming" xml:space="preserve">
+    <value>prévue</value>
+  </data>
+  <data name="AccountPage_Absences.Header" xml:space="preserve">
+    <value>Absence</value>
+  </data>
+  <data name="AccountPage_AbsenceFrom.Header" xml:space="preserve">
+    <value>Du</value>
+  </data>
+  <data name="AccountPage_AbsenceTo.Header" xml:space="preserve">
+    <value>Au</value>
+  </data>
+  <data name="AccountPage_AbsenceReason.Header" xml:space="preserve">
+    <value>Motif (facultatif, visible par la direction uniquement)</value>
+  </data>
+  <data name="AccountPage_AbsenceReport.Content" xml:space="preserve">
+    <value>SIGNALER UNE ABSENCE</value>
+  </data>
+  <data name="AccountPage_AbsenceDelete.Content" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
 </root>

@@ -92,6 +92,62 @@
                 </ItemsRepeater.ItemTemplate>
             </ItemsRepeater>
 
+            <!-- Neueste News und nächste Termine -->
+            <Grid ColumnSpacing="16" RowSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Border Style="{StaticResource RoGCardStyle}" Visibility="{x:Bind ViewModel.HasNews, Mode=OneWay}">
+                    <StackPanel Spacing="8">
+                        <TextBlock x:Uid="HomePage_NewsTitle" Style="{StaticResource RoGSectionTextStyle}" />
+                        <ItemsControl ItemsSource="{x:Bind ViewModel.LatestNews}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="vm:HomeLinkItem">
+                                    <Button
+                                        Padding="8"
+                                        HorizontalAlignment="Stretch"
+                                        HorizontalContentAlignment="Left"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Command="{x:Bind OpenCommand}"
+                                        AutomationProperties.Name="{x:Bind Title}">
+                                        <StackPanel>
+                                            <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Title}" TextTrimming="CharacterEllipsis" />
+                                            <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" />
+                                        </StackPanel>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="1" Style="{StaticResource RoGCardStyle}" Visibility="{x:Bind ViewModel.HasEvents, Mode=OneWay}">
+                    <StackPanel Spacing="8">
+                        <TextBlock x:Uid="HomePage_EventsTitle" Style="{StaticResource RoGSectionTextStyle}" />
+                        <ItemsControl ItemsSource="{x:Bind ViewModel.NextEvents}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="vm:HomeLinkItem">
+                                    <Button
+                                        Padding="8"
+                                        HorizontalAlignment="Stretch"
+                                        HorizontalContentAlignment="Left"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Command="{x:Bind OpenCommand}"
+                                        AutomationProperties.Name="{x:Bind Title}">
+                                        <StackPanel>
+                                            <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Title}" TextTrimming="CharacterEllipsis" />
+                                            <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" />
+                                        </StackPanel>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
             <Border
                 MaxWidth="{StaticResource RoGReadingWidth}"
                 HorizontalAlignment="Left"

@@ -9,7 +9,7 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 |---|---|---|---|
 | 0 | Fundament | fertig: Core + Tests grün (Linux), **App baut auf dem Windows-Runner `rog-win-1`** (x64 + ARM64, CI-Job „WinUI-App (Windows)“), Store-Paket `.msixupload` entsteht; noch nie gestartet | siehe `git log` (develop) |
 | 1 | Konto + Start | in Arbeit (2.0.1): Konto, Abmelden, Gerät, Einstellungen, Live-Ticker, Einzelinstanz, Fensterzustand | siehe `git log` (develop) |
-| 2 | Community lesen | begonnen (vorgezogen auf Wunsch des Owners, 16.10.2026): **Server-Seite mit „Verbinden“** | siehe `git log` (develop) |
+| 2 | Community lesen | fast fertig (16.10.2026): News, Squads, Mitglieder/Team, Termine (+ Zusage), Server/TeamSpeak/Discord mit „Verbinden“, Matches/Hall of Fame, Info (Regeln/Seiten/Recht), Suche | siehe `git log` (develop) |
 | 3 | Echtzeit + Desktop-Integration | offen | |
 | 4 | Kommunikation | offen | |
 | 5 | Medien | offen | |
@@ -75,6 +75,25 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 - Werkzeuge: `scripts/resw-set.py` (Texte DE/EN/FR setzen), `scripts/bump-version.sh`.
 - Offen in Stufe 1: Liste-Detail-Gerüst und gemeinsame UI-Bausteine (kommen mit den ersten Listen in Stufe 2),
   Startseite mit Squads/News (Stufe 2).
+
+### Stufe 2 – Community lesen (16.10.2026)
+
+- **Gemeinsame Bausteine:** `HtmlContentParser` (Core, AngleSharp) → `RichDocument` → `RichContentView` (App, nativ:
+  Absätze, Überschriften, Listen, Zitate, Code, Bilder nur von Plattform-Hosts über https, Spoiler als Expander,
+  Tabellen; Links nur http/https/mailto), `ListDetailPanel` (≥ 760 epx nebeneinander, sonst mit Zurück/Alt+←/Esc),
+  `StateView` (Laden/Fehler mit „Erneut versuchen“/Leer), `LoadableViewModel`, `ServerCard`, `Page<T>`/`ApiValues`,
+  `AppRoute` (Website-/Wiki-Links → Bereich in der App).
+- **News** (Liste mit Titelbild, Kategorie, Lesezeit, „Mehr laden“; Artikel nativ, Link kopieren, Kommentare lesen),
+  **Squads** (Kopfbild, Logo, Rekrutierung, Trainingszeiten, Clan-Infos, Einladungs-/Ref-Links, Server mit „Verbinden“,
+  Line-up mit Rollenfarben), **Mitglieder** (Suche Strg+F, nur online, Team-Ansicht mit Zuständigkeiten, Profil mit
+  Banner, Status-Punkt, Rang, Abzeichen, Spiele-Accounts), **Termine** (60 Tage nach Tagen, Zusage/Vielleicht/Absage,
+  Server des Termins mit „Verbinden“, „In Kalender übernehmen“ als .ics), **Server** mit Reitern Gameserver /
+  **TeamSpeak** (Kanalbaum, „Verbinden“ über `ts3server://` mit RoG-Name) / **Discord-Voice**, **Matches** (Ergebnis-
+  farben, Maps, Line-up, Links) + **Hall of Fame** (Trophäen mit Medaillenfarbe, Meilensteine, Ehrenmitglieder),
+  **Info** (Regeln mit nummerierten Abschnitten und „Gelesen und akzeptiert“, CMS-Seiten, Rechtstexte),
+  **Suche** (Strg+K, Treffer öffnen den Bereich in der App), Startseite mit neuesten News und nächsten Terminen.
+- Offen in Stufe 2: Spiele-Liste, Turniere als eigene Ansicht, Squad-Reiter Galerie/Stats/Matches, Auslastungsgraph
+  der Server, Monats-/Wochenansicht im Kalender.
 
 ### Vorgezogen aus Stufe 2 – Server verbinden (16.10.2026)
 

@@ -47,6 +47,13 @@ public sealed partial class EventsViewModel : LoadableViewModel
 
     protected override bool HasData => Items.Count > 0;
 
+    /// <summary>Liste laden und den Termin <paramref name="id"/> öffnen (Startseite, Links).</summary>
+    public async Task OpenAsync(string id)
+    {
+        await LoadAsync();
+        Selected = Items.FirstOrDefault(i => i.Id == id);
+    }
+
     protected override async Task LoadCoreAsync(CancellationToken cancellationToken)
     {
         var page = await _events.ListAsync(DateTimeOffset.Now.Date, 60, null, cancellationToken);

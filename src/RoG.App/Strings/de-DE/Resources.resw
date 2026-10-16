@@ -120,7 +120,7 @@
     <value>Bitte prüfe deine Eingaben.</value>
   </data>
   <data name="HomePage_ComingSoonText.Text" xml:space="preserve">
-    <value>Die Windows-App wächst: Server mit „Verbinden“ gibt es schon, News, Squads, Nachrichten und Termine folgen.</value>
+    <value>Die Windows-App wächst: News, Squads, Mitglieder, Termine, Server mit „Verbinden“ und Matches gibt es schon – Nachrichten, Forum und Wiki folgen.</value>
   </data>
   <data name="HomePage_ComingSoonTitle.Text" xml:space="preserve">
     <value>IM AUFBAU</value>
@@ -781,5 +781,11 @@
   </data>
   <data name="Shell_Search.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Überall suchen</value>
+  </data>
+  <data name="HomePage_NewsTitle.Text" xml:space="preserve">
+    <value>NEUESTE NEWS</value>
+  </data>
+  <data name="HomePage_EventsTitle.Text" xml:space="preserve">
+    <value>NÄCHSTE TERMINE</value>
   </data>
 </root>

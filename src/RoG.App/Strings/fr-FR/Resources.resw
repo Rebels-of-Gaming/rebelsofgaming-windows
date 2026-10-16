@@ -120,7 +120,7 @@
     <value>Merci de vérifier ta saisie.</value>
   </data>
   <data name="HomePage_ComingSoonText.Text" xml:space="preserve">
-    <value>L’app Windows grandit : les serveurs avec « Se connecter » sont là, actus, squads, messages et événements arrivent.</value>
+    <value>L’app Windows grandit : actus, squads, membres, événements, serveurs avec « Se connecter » et matchs sont là – messages, forum et wiki arrivent.</value>
   </data>
   <data name="HomePage_ComingSoonTitle.Text" xml:space="preserve">
     <value>EN CONSTRUCTION</value>
@@ -781,5 +781,11 @@
   </data>
   <data name="Shell_Search.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Rechercher partout</value>
+  </data>
+  <data name="HomePage_NewsTitle.Text" xml:space="preserve">
+    <value>DERNIÈRES ACTUS</value>
+  </data>
+  <data name="HomePage_EventsTitle.Text" xml:space="preserve">
+    <value>PROCHAINS ÉVÉNEMENTS</value>
   </data>
 </root>

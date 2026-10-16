@@ -6,7 +6,10 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
 using RoG.App.Services;
 using RoG.Core.Api;
+using RoG.Core.Features.Events;
 using RoG.Core.Features.Home;
+using RoG.Core.Features.News;
+using RoG.Core.Navigation;
 using RoG.Core.Localization;
 
 namespace RoG.App.ViewModels;
@@ -15,8 +18,20 @@ namespace RoG.App.ViewModels;
 public sealed partial class HomeViewModel(AppServices services) : ObservableObject
 {
     private readonly LiveTickerService _ticker = new(services.Api.Client);
+    private readonly NewsService _news = new(services.Api.Client, services.Environment.WebBaseUrl);
+    private readonly EventService _events = new(services.Api.Client);
 
     public ObservableCollection<LiveStatItem> Stats { get; } = [];
+
+    public ObservableCollection<HomeLinkItem> LatestNews { get; } = [];
+
+    public ObservableCollection<HomeLinkItem> NextEvents { get; } = [];
+
+    [ObservableProperty]
+    public partial bool HasNews { get; set; }
+
+    [ObservableProperty]
+    public partial bool HasEvents { get; set; }
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsEmpty))]
@@ -75,6 +90,46 @@ public sealed partial class HomeViewModel(AppServices services) : ObservableObje
             IsLoading = false;
             OnPropertyChanged(nameof(IsEmpty));
         }
+
+        if (!silent || LatestNews.Count == 0)
+        {
+            await LoadTeasersAsync();
+        }
+    }
+
+    /// <summary>Neueste News und nächste Termine (je 3) – Beiwerk, Fehler bleiben still.</summary>
+    private async Task LoadTeasersAsync()
+    {
+        try
+        {
+            var news = await _news.ListAsync();
+            LatestNews.Clear();
+            foreach (var n in news.Items.Take(3))
+            {
+                LatestNews.Add(new HomeLinkItem(n.Title, NewsDetailViewModel.MetaOf(n), () => services.Navigate(new AppRoute(AppSection.News, n.Slug))));
+            }
+        }
+        catch (Exception ex) when (ex is ApiProblemException or RoG.Core.Api.Generated.GeneratedApiException)
+        {
+            // News-Kachel bleibt leer
+        }
+
+        try
+        {
+            var events = await _events.ListAsync(DateTimeOffset.Now.Date, 30);
+            NextEvents.Clear();
+            foreach (var e in events.Items.Where(e => !e.Cancelled).Take(3))
+            {
+                NextEvents.Add(new HomeLinkItem(e.Title, EventDetailViewModel.WhenOf(e), () => services.Navigate(new AppRoute(AppSection.Calendar, e.Id))));
+            }
+        }
+        catch (Exception ex) when (ex is ApiProblemException or RoG.Core.Api.Generated.GeneratedApiException)
+        {
+            // Termin-Kachel bleibt leer
+        }
+
+        HasNews = LatestNews.Count > 0;
+        HasEvents = NextEvents.Count > 0;
     }
 
     [RelayCommand]
@@ -118,4 +173,15 @@ public sealed class LiveStatItem(LiveStat stat)
     }];
 
     public string AutomationName { get; } = $"{stat.Label}: {stat.Value.ToString(CultureInfo.CurrentCulture)}";
+}
+
+/// <summary>Anklickbarer Eintrag auf der Startseite (News, Termin).</summary>
+public sealed partial class HomeLinkItem(string title, string meta, Func<bool> open)
+{
+    public string Title => title;
+
+    public string Meta => meta;
+
+    [RelayCommand]
+    private void Open() => open();
 }

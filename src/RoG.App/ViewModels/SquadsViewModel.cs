@@ -207,10 +207,46 @@ public sealed partial class SquadDetailViewModel(AppServices services, SquadServ
         Name = null;
         StatsText = string.Empty;
         _statsLoaded = false;
+        _galleryLoaded = false;
+        Gallery.Clear();
+        HasNoGallery = false;
         return LoadAsync();
     }
 
     private bool _statsLoaded;
+    private bool _galleryLoaded;
+
+    /// <summary>Neueste Galerie-Einträge des Squads (beim ersten Aufklappen).</summary>
+    public ObservableCollection<SquadGalleryItemViewModel> Gallery { get; } = [];
+
+    [ObservableProperty]
+    public partial bool HasNoGallery { get; set; }
+
+    public async Task LoadGalleryAsync()
+    {
+        if (_galleryLoaded || _slug is null)
+        {
+            return;
+        }
+
+        _galleryLoaded = true;
+        try
+        {
+            var items = await new RoG.Core.Features.Media.MediaService(Services.Api.Client, Services.StorageHttp).GetSquadItemsAsync(_slug);
+            Gallery.Clear();
+            foreach (var item in items.Where(i => i.Thumb is not null))
+            {
+                Gallery.Add(new SquadGalleryItemViewModel(item, Services));
+            }
+
+            HasNoGallery = Gallery.Count == 0;
+        }
+        catch (Exception ex) when (ex is ApiProblemException or RoG.Core.Api.Generated.GeneratedApiException)
+        {
+            _galleryLoaded = false;
+            HasNoGallery = true;
+        }
+    }
 
     /// <summary>Squad-Wertung der letzten 30 Tage (Top 10, Waffen) – beim ersten Aufklappen geladen.</summary>
     [ObservableProperty]
@@ -391,4 +427,15 @@ public sealed partial class LinkViewModel(string label, Uri url, string? code, A
         {
         }
     }
+}
+
+/// <summary>Vorschaubild der Squad-Galerie; Klick öffnet den Eintrag (Albumseite mit Lightbox).</summary>
+public sealed partial class SquadGalleryItemViewModel(RoG.Core.Features.Media.GalleryItem item, AppServices services)
+{
+    public ImageSource? Thumb { get; } = item.Thumb is { } u ? new BitmapImage(u) : null;
+
+    public string Caption { get; } = item.Caption ?? item.Author ?? string.Empty;
+
+    [RelayCommand]
+    private Task OpenAsync() => item.WebUrl is { } url ? services.Browser.OpenAsync(url) : Task.CompletedTask;
 }

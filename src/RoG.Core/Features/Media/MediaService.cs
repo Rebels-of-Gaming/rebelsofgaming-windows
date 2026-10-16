@@ -41,9 +41,16 @@ public sealed class MediaService(IRoGApiClient client, HttpClient storage)
     public async Task<bool> CanUploadAsync(string albumSlug, CancellationToken cancellationToken = default) =>
         (await client.V1_gallery_albums_showAsync(albumSlug, cancellationToken).ConfigureAwait(false)).Data.Can_upload;
 
-    public async Task<IReadOnlyList<GalleryItem>> GetItemsAsync(string albumSlug, CancellationToken cancellationToken = default)
+    public Task<IReadOnlyList<GalleryItem>> GetItemsAsync(string albumSlug, CancellationToken cancellationToken = default) =>
+        QueryItemsAsync(albumSlug, null, 200, cancellationToken);
+
+    /// <summary>Neueste Einträge aller Alben eines Squads (Squad-Seite).</summary>
+    public Task<IReadOnlyList<GalleryItem>> GetSquadItemsAsync(string squadSlug, int limit = 24, CancellationToken cancellationToken = default) =>
+        QueryItemsAsync(null, squadSlug, limit, cancellationToken);
+
+    private async Task<IReadOnlyList<GalleryItem>> QueryItemsAsync(string? albumSlug, string? squadSlug, int limit, CancellationToken cancellationToken)
     {
-        var response = await client.V1_gallery_items_indexAsync(limit: 200, filteralbum: albumSlug, cancellationToken: cancellationToken).ConfigureAwait(false);
+        var response = await client.V1_gallery_items_indexAsync(limit: limit, filtersquad: squadSlug, filteralbum: albumSlug, cancellationToken: cancellationToken).ConfigureAwait(false);
         return response.Data
             .Where(i => i.Status is null or "published" or "approved" or "ready")
             .Select(i => new GalleryItem(

@@ -2636,4 +2636,10 @@
   <data name="SettingsPage_ChannelDiscord.Content" xml:space="preserve">
     <value>Discord</value>
   </data>
+  <data name="SquadsPage_Gallery.Header" xml:space="preserve">
+    <value>Galerie</value>
+  </data>
+  <data name="SquadsPage_GalleryEmpty.Text" xml:space="preserve">
+    <value>Noch keine Bilder in den Alben dieses Squads.</value>
+  </data>
 </root>

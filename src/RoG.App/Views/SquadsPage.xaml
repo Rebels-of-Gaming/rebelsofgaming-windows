@@ -204,6 +204,25 @@
                         </ItemsRepeater>
                     </StackPanel>
 
+                    <!-- Galerie -->
+                    <Expander x:Uid="SquadsPage_Gallery" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Expanding="OnGalleryExpanding">
+                        <StackPanel Spacing="8">
+                            <TextBlock x:Uid="SquadsPage_GalleryEmpty" Style="{StaticResource RoGMutedTextStyle}" Visibility="{x:Bind ViewModel.Detail.HasNoGallery, Mode=OneWay}" />
+                            <ItemsRepeater ItemsSource="{x:Bind ViewModel.Detail.Gallery}">
+                                <ItemsRepeater.Layout>
+                                    <UniformGridLayout MinColumnSpacing="6" MinItemHeight="96" MinItemWidth="128" MinRowSpacing="6" />
+                                </ItemsRepeater.Layout>
+                                <ItemsRepeater.ItemTemplate>
+                                    <DataTemplate x:DataType="vm:SquadGalleryItemViewModel">
+                                        <Button Padding="0" AutomationProperties.Name="{x:Bind Caption}" Command="{x:Bind OpenCommand}" ToolTipService.ToolTip="{x:Bind Caption}">
+                                            <Image Width="128" Height="96" Source="{x:Bind Thumb}" Stretch="UniformToFill" />
+                                        </Button>
+                                    </DataTemplate>
+                                </ItemsRepeater.ItemTemplate>
+                            </ItemsRepeater>
+                        </StackPanel>
+                    </Expander>
+
                     <!-- Statistiken -->
                     <Expander x:Uid="SquadsPage_Stats" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Expanding="OnStatsExpanding">
                         <TextBlock FontFamily="Consolas" FontSize="13" IsTextSelectionEnabled="True" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind ViewModel.Detail.StatsText, Mode=OneWay}" TextWrapping="Wrap" />

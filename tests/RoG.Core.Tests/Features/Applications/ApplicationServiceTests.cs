@@ -77,3 +77,49 @@ public class VoteServiceTests
         Assert.Null(vote.MyVote);
     }
 }
+
+public class ApplicationAdminServiceTests
+{
+    [Fact]
+    public void Detail_sums_activity_and_reads_text_answers()
+    {
+        using var doc = System.Text.Json.JsonDocument.Parse("""
+            {"id":"a1","status":"trial","applicant":{"id":"u","slug":"nyx","name":"Nyx"},"squad":{"id":"s","slug":"et","name":"ET"},
+             "age":19,"referral":null,"answers":[{"question_id":"q","label":"Warum?","type":"textarea","answer":"Weil ET"}],
+             "ban_check":[{"key":"discord","status":"ok","message":"keine Sperre"}],
+             "tasks":[{"id":"t1","title":"Clanabend","done":false,"done_at":null}],
+             "activity":[{"date":"2026-10-15","minutes":{"discord_voice":30,"teamspeak":10}},{"date":"2026-10-16","minutes":{"discord_voice":15}}],
+             "timeline":[{"type":"note","label":"Notiz","public":false,"actor":"Wahke","at":null}],
+             "messages":[{"id":"m","internal":true,"author":"Wahke","from_applicant":false,"body":"passt","at":null}],
+             "vote":{"round":1,"eligible":6,"cast":4,"yes":3,"no":1,"abstain":0,"participation":67,"quorum_percent":50,"quorum_met":true,"result":"accept","missing":[{"id":"x","name":"Kolibri"}]},
+             "my_vote":null,"can_vote":true,"trial_ends_at":"2026-10-20T18:00:00Z"}
+            """);
+
+        var detail = ApplicationAdminService.ParseDetail(doc.RootElement);
+
+        Assert.Equal(45, detail.ActivityMinutes["discord_voice"]);
+        Assert.Equal(("Warum?", "Weil ET"), Assert.Single(detail.Answers));
+        Assert.StartsWith("🔒", detail.Timeline[0].Label, StringComparison.Ordinal);
+        Assert.True(detail.Messages[0].Internal);
+        Assert.Equal("accept", detail.Vote?.Result);
+        Assert.Equal(["Kolibri"], detail.Vote?.Missing);
+        Assert.True(detail.CanVote);
+    }
+
+    [Fact]
+    public void List_reads_cursor_and_vote()
+    {
+        using var doc = System.Text.Json.JsonDocument.Parse("""
+            {"data":[{"id":"a1","status":"voting","applicant":{"name":"Nyx"},"squad":{"name":"ET"},"submitted_at":"2026-10-01T10:00:00Z",
+                      "vote":{"cast":3,"eligible":6,"participation":50,"result":"pending"}},
+                     {"id":"a2","status":"submitted","applicant":{"name":"Rex"},"squad":{"name":"CS2"},"submitted_at":null,"vote":null}],
+             "meta":{"next_cursor":"n2"}}
+            """);
+
+        var page = ApplicationAdminService.ParseList(doc.RootElement);
+
+        Assert.Equal(50, page.Items[0].Participation);
+        Assert.Null(page.Items[1].Participation);
+        Assert.Equal("n2", page.NextCursor);
+    }
+}

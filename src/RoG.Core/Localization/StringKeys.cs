@@ -332,6 +332,39 @@ public static class StringKeys
     public const string ReportReasonMissing = "Report_ReasonMissing";
     public const string ReportThanks = "Report_Thanks";
 
+    // Bewerbungen verwalten (Status/Entscheidung/Quelle/Ergebnis werden als "AppAdmin_Status_" + Wert usw. gebildet)
+    public const string AppAdminNoActivity = "AppAdmin_NoActivity";
+    public const string AppAdminVote = "AppAdmin_Vote";
+    public const string AppAdminMissing = "AppAdmin_Missing";
+    public const string AppAdminReminded = "AppAdmin_Reminded";
+    public const string AppAdminDecided = "AppAdmin_Decided";
+    public const string AppAdminDecisionMessage = "AppAdmin_DecisionMessage";
+    public const string AppAdminStatusOpen = "AppAdmin_Status_open";
+    public const string AppAdminStatusSubmitted = "AppAdmin_Status_submitted";
+    public const string AppAdminStatusWaitlisted = "AppAdmin_Status_waitlisted";
+    public const string AppAdminStatusTrial = "AppAdmin_Status_trial";
+    public const string AppAdminStatusVoting = "AppAdmin_Status_voting";
+    public const string AppAdminStatusAccepted = "AppAdmin_Status_accepted";
+    public const string AppAdminStatusRejected = "AppAdmin_Status_rejected";
+    public const string AppAdminStatusWithdrawn = "AppAdmin_Status_withdrawn";
+    public const string AppAdminStatusCancelled = "AppAdmin_Status_cancelled";
+    public const string AppAdminStatusExpired = "AppAdmin_Status_expired";
+    public const string AppAdminDecisionRelease = "AppAdmin_Decision_release";
+    public const string AppAdminDecisionTrial = "AppAdmin_Decision_trial";
+    public const string AppAdminDecisionVote = "AppAdmin_Decision_vote";
+    public const string AppAdminDecisionAccept = "AppAdmin_Decision_accept";
+    public const string AppAdminDecisionExtend = "AppAdmin_Decision_extend";
+    public const string AppAdminDecisionReject = "AppAdmin_Decision_reject";
+    public const string AppAdminDecisionCancel = "AppAdmin_Decision_cancel";
+    public const string AppAdminSourceDiscordVoice = "AppAdmin_Source_discord_voice";
+    public const string AppAdminSourceTeamspeak = "AppAdmin_Source_teamspeak";
+    public const string AppAdminSourceWebsite = "AppAdmin_Source_website";
+    public const string AppAdminSourceGameserver = "AppAdmin_Source_gameserver";
+    public const string AppAdminResultPending = "AppAdmin_Result_pending";
+    public const string AppAdminResultAccept = "AppAdmin_Result_accept";
+    public const string AppAdminResultReject = "AppAdmin_Result_reject";
+    public const string AppAdminResultTie = "AppAdmin_Result_tie";
+
     // App-Sperre
     public const string LockPrompt = "Lock_Prompt";
 
@@ -394,7 +427,7 @@ public static class StringKeys
         "config_changed", "file_operation_forbidden", "pterodactyl_write_blocked",
         "forbidden_cvar", "rcon_write_blocked", "rcon_target_forbidden", "player_identity_conflict", "ban_managed_by_moderation",
         "own_change", "change_not_pending", "members_only", "invalid_signature", "edit_conflict", "not_pending",
-        "report_target_missing", "report_own_content", "too_many_reports", "moderation_muted", "moderation_owner", "no_gameserver_targets",
+        "report_target_missing", "report_own_content", "too_many_reports", "moderation_muted", "moderation_owner", "no_gameserver_targets", "vote_not_passed",
     ];
 
     /// <summary>Alle Schlüssel aus Code – für den Vollständigkeitstest.</summary>

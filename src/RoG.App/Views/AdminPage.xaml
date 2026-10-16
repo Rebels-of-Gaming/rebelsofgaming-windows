@@ -15,6 +15,7 @@
         </Grid.RowDefinitions>
         <TextBlock x:Uid="AdminPage_Title" Style="{StaticResource RoGDisplayTextStyle}" Text="VERWALTUNG" />
         <SelectorBar x:Name="Tabs" Grid.Row="1" SelectionChanged="OnTabChanged">
+            <SelectorBarItem x:Name="ApplicationsTab" x:Uid="AdminPage_TabApplications" />
             <SelectorBarItem x:Name="ReportsTab" x:Uid="AdminPage_TabReports" />
             <SelectorBarItem x:Name="BansTab" x:Uid="AdminPage_TabBans" />
             <SelectorBarItem x:Name="LogTab" x:Uid="AdminPage_TabLog" />
@@ -33,6 +34,79 @@
             Style="{StaticResource RoGMutedTextStyle}"
             TextWrapping="Wrap"
             Visibility="Collapsed" />
+
+        <!-- Bewerbungen -->
+        <Grid x:Name="ApplicationsPanel" Grid.Row="3" ColumnSpacing="16" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="320" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid RowSpacing="8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <ComboBox HorizontalAlignment="Stretch" ItemsSource="{x:Bind Applications.StatusOptions}" SelectedItem="{x:Bind Applications.SelectedStatus, Mode=TwoWay}" />
+                <AutoSuggestBox x:Uid="AdminPage_AppSearch" Grid.Row="1" QueryIcon="Find" QuerySubmitted="OnAppSearch" Text="{x:Bind Applications.Search, Mode=TwoWay}" />
+                <ListView Grid.Row="2" ItemsSource="{x:Bind Applications.Items}" SelectedItem="{x:Bind Applications.Selected, Mode=TwoWay}" SelectionMode="Single">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="vm:ApplicationRowViewModel">
+                            <StackPanel Padding="0,6" AutomationProperties.Name="{x:Bind Title}">
+                                <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Title}" TextTrimming="CharacterEllipsis" />
+                                <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.Footer>
+                        <Button x:Uid="Common_LoadMore" Margin="0,8" Command="{x:Bind Applications.MoreCommand}" Visibility="{x:Bind Applications.HasMore, Mode=OneWay}" />
+                    </ListView.Footer>
+                </ListView>
+            </Grid>
+            <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" Visibility="{x:Bind Applications.HasDetail, Mode=OneWay}">
+                <StackPanel MaxWidth="{StaticResource RoGReadingWidth}" HorizontalAlignment="Left" Spacing="12">
+                    <TextBlock IsTextSelectionEnabled="True" Style="{StaticResource RoGTitleTextStyle}" Text="{x:Bind Applications.Header, Mode=OneWay}" TextWrapping="Wrap" />
+                    <TextBlock Foreground="{StaticResource RoGGoldBrush}" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Applications.VoteText, Mode=OneWay}" TextWrapping="Wrap" />
+                    <StackPanel Orientation="Horizontal" Spacing="8" Visibility="{x:Bind Applications.CanReview}">
+                        <ComboBox x:Uid="AdminPage_Decision" MinWidth="200" ItemsSource="{x:Bind Applications.DecisionOptions}" SelectedItem="{x:Bind Applications.SelectedDecision, Mode=TwoWay}" />
+                        <Button x:Uid="AdminPage_DecideButton" VerticalAlignment="Bottom" Command="{x:Bind Applications.DecideCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                        <Button x:Uid="AdminPage_Remind" VerticalAlignment="Bottom" Command="{x:Bind Applications.RemindCommand}" />
+                    </StackPanel>
+                    <TextBlock x:Uid="AdminPage_Answers" Style="{StaticResource RoGSectionTextStyle}" />
+                    <TextBlock IsTextSelectionEnabled="True" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Applications.AnswersText, Mode=OneWay}" TextWrapping="Wrap" />
+                    <TextBlock x:Uid="AdminPage_Checks" Style="{StaticResource RoGSectionTextStyle}" />
+                    <TextBlock Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Applications.ChecksText, Mode=OneWay}" TextWrapping="Wrap" />
+                    <TextBlock x:Uid="AdminPage_Activity" Style="{StaticResource RoGSectionTextStyle}" />
+                    <TextBlock Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Applications.ActivityText, Mode=OneWay}" TextWrapping="Wrap" />
+                    <TextBlock x:Uid="AdminPage_Tasks" Style="{StaticResource RoGSectionTextStyle}" />
+                    <ItemsControl ItemsSource="{x:Bind Applications.Tasks}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:AdminTaskViewModel">
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <CheckBox Content="{x:Bind Title}" IsChecked="{x:Bind Done, Mode=TwoWay}" />
+                                    <HyperlinkButton x:Uid="Backup_Delete" Padding="0" Command="{x:Bind DeleteCommand}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <StackPanel Orientation="Horizontal" Spacing="8" Visibility="{x:Bind Applications.CanReview}">
+                        <TextBox x:Uid="AdminPage_NewTask" Width="280" Text="{x:Bind Applications.NewTask, Mode=TwoWay}" />
+                        <Button x:Uid="AdminPage_AddTask" Command="{x:Bind Applications.AddTaskCommand}" />
+                    </StackPanel>
+                    <TextBlock x:Uid="AdminPage_Timeline" Style="{StaticResource RoGSectionTextStyle}" />
+                    <TextBlock Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Applications.TimelineText, Mode=OneWay}" TextWrapping="Wrap" />
+                    <TextBlock x:Uid="AdminPage_Messages" Style="{StaticResource RoGSectionTextStyle}" />
+                    <TextBlock IsTextSelectionEnabled="True" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Applications.MessagesText, Mode=OneWay}" TextWrapping="Wrap" />
+                    <StackPanel Spacing="8" Visibility="{x:Bind Applications.CanReview}">
+                        <TextBox x:Uid="AdminPage_NewMessage" AcceptsReturn="True" Text="{x:Bind Applications.NewMessage, Mode=TwoWay}" TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <CheckBox x:Uid="AdminPage_Internal" IsChecked="{x:Bind Applications.MessageInternal, Mode=TwoWay}" />
+                            <Button x:Uid="AccountPage_ApplicationSend" Command="{x:Bind Applications.SendMessageCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
 
         <!-- Meldungen -->
         <Grid x:Name="ReportsPanel" Grid.Row="3" RowSpacing="8" Visibility="Collapsed">

@@ -142,6 +142,7 @@ Gleiche Identität wie die Website, nativ umgesetzt (Fluent-Steuerelemente, RoG-
 ```bash
 export PATH="$HOME/.dotnet:$HOME/.dotnet/tools:$PATH"   # .NET SDK ohne root in ~/.dotnet (siehe README)
 dotnet build RoG.sln && dotnet test RoG.sln             # Core + Tests unter Linux (App wird übersprungen)
+scripts/check-app-syntax.sh                             # Syntax von src/RoG.App unter Linux prüfen (vor jedem Push)
 scripts/generate-api.sh [--from-website]                # OpenAPI → src/RoG.Core/Api/Generated/RoGApiClient.g.cs
 scripts/remote-build.sh --check                         # Build-VM erreichbar? Werkzeuge da?
 scripts/remote-build.sh [--mode build|sideload|store]   # auf der VM bauen/testen/paketieren, Ergebnis in artifacts/remote/

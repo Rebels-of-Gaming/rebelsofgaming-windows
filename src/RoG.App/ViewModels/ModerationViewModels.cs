@@ -277,7 +277,13 @@ public sealed partial class ReportItemViewModel(ModReport report, ModerationView
 {
     public string Id => report.Id;
 
-    public string Title { get; } = $"{localizer.GetString("Mod_Type_" + report.Type) is { } t && !t.StartsWith("Mod_Type_", StringComparison.Ordinal) ? t : report.Type} · {localizer.GetString("Report_Reason_" + report.Reason) is { } r && !r.StartsWith("Report_Reason_", StringComparison.Ordinal) ? r : report.Reason}";
+    public string Title { get; } = $"{Label(localizer, "Mod_Type_", report.Type)} · {Label(localizer, "Report_Reason_", report.Reason)}";
+
+    private static string Label(ILocalizer localizer, string prefix, string value)
+    {
+        var text = localizer.GetString(prefix + value);
+        return text.StartsWith(prefix, StringComparison.Ordinal) ? value : text;
+    }
 
     public string Meta { get; } = string.Join(" · ", new[]
     {

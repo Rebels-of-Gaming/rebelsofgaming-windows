@@ -27,9 +27,6 @@ public sealed record ModLogEntry(string Action, string? Actor, string? Target, D
 
 public sealed record WordFilter(string Id, string Pattern, string Action, string? Replacement);
 
-/// <summary>Seite einer Cursor-Liste.</summary>
-public sealed record Page<T>(IReadOnlyList<T> Items, string? NextCursor);
-
 /// <summary>
 /// Moderation (Guide 28): Meldungen, Mitglied ansehen, verwarnen/zurücknehmen, sperren/aufheben, Sperrliste, Mod-Log,
 /// Wortfilter; dazu „Inhalt melden“ für alle. Hierarchie und Rechte prüft der Server.

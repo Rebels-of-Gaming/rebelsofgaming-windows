@@ -2201,4 +2201,145 @@
   <data name="ChatView_Report.Text" xml:space="preserve">
     <value>Report</value>
   </data>
+  <data name="AppAdmin_NoActivity" xml:space="preserve">
+    <value>No activity recorded yet.</value>
+  </data>
+  <data name="AppAdmin_Vote" xml:space="preserve">
+    <value>Vote: {0} for · {1} against · {2} abstain – participation {3} % (quorum {4} %) – {5}</value>
+  </data>
+  <data name="AppAdmin_Missing" xml:space="preserve">
+    <value>Still missing: {0}</value>
+  </data>
+  <data name="AppAdmin_Reminded" xml:space="preserve">
+    <value>Reminder sent.</value>
+  </data>
+  <data name="AppAdmin_Decided" xml:space="preserve">
+    <value>Decision saved.</value>
+  </data>
+  <data name="AppAdmin_DecisionMessage" xml:space="preserve">
+    <value>Message to the applicant (optional)</value>
+  </data>
+  <data name="AppAdmin_Status_open" xml:space="preserve">
+    <value>Open (all ongoing)</value>
+  </data>
+  <data name="AppAdmin_Status_submitted" xml:space="preserve">
+    <value>Submitted</value>
+  </data>
+  <data name="AppAdmin_Status_waitlisted" xml:space="preserve">
+    <value>Waitlist</value>
+  </data>
+  <data name="AppAdmin_Status_trial" xml:space="preserve">
+    <value>Trial</value>
+  </data>
+  <data name="AppAdmin_Status_voting" xml:space="preserve">
+    <value>Voting</value>
+  </data>
+  <data name="AppAdmin_Status_accepted" xml:space="preserve">
+    <value>Accepted</value>
+  </data>
+  <data name="AppAdmin_Status_rejected" xml:space="preserve">
+    <value>Rejected</value>
+  </data>
+  <data name="AppAdmin_Status_withdrawn" xml:space="preserve">
+    <value>Withdrawn</value>
+  </data>
+  <data name="AppAdmin_Status_cancelled" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="AppAdmin_Status_expired" xml:space="preserve">
+    <value>Expired</value>
+  </data>
+  <data name="AppAdmin_Decision_release" xml:space="preserve">
+    <value>Release from waitlist</value>
+  </data>
+  <data name="AppAdmin_Decision_trial" xml:space="preserve">
+    <value>Start trial</value>
+  </data>
+  <data name="AppAdmin_Decision_vote" xml:space="preserve">
+    <value>Start vote</value>
+  </data>
+  <data name="AppAdmin_Decision_accept" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="AppAdmin_Decision_extend" xml:space="preserve">
+    <value>Extend trial</value>
+  </data>
+  <data name="AppAdmin_Decision_reject" xml:space="preserve">
+    <value>Reject</value>
+  </data>
+  <data name="AppAdmin_Decision_cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="AppAdmin_Source_discord_voice" xml:space="preserve">
+    <value>Discord voice</value>
+  </data>
+  <data name="AppAdmin_Source_teamspeak" xml:space="preserve">
+    <value>TeamSpeak</value>
+  </data>
+  <data name="AppAdmin_Source_website" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="AppAdmin_Source_gameserver" xml:space="preserve">
+    <value>Game servers</value>
+  </data>
+  <data name="AppAdmin_Result_pending" xml:space="preserve">
+    <value>pending</value>
+  </data>
+  <data name="AppAdmin_Result_accept" xml:space="preserve">
+    <value>majority in favour</value>
+  </data>
+  <data name="AppAdmin_Result_reject" xml:space="preserve">
+    <value>majority against</value>
+  </data>
+  <data name="AppAdmin_Result_tie" xml:space="preserve">
+    <value>tie</value>
+  </data>
+  <data name="Error_vote_not_passed" xml:space="preserve">
+    <value>Acceptance only after a passed vote.</value>
+  </data>
+  <data name="AdminPage_TabApplications.Text" xml:space="preserve">
+    <value>Applications</value>
+  </data>
+  <data name="AdminPage_AppSearch.PlaceholderText" xml:space="preserve">
+    <value>Search name</value>
+  </data>
+  <data name="AdminPage_Decision.Header" xml:space="preserve">
+    <value>Decision</value>
+  </data>
+  <data name="AdminPage_DecideButton.Content" xml:space="preserve">
+    <value>APPLY</value>
+  </data>
+  <data name="AdminPage_Remind.Content" xml:space="preserve">
+    <value>Remind</value>
+  </data>
+  <data name="AdminPage_Answers.Text" xml:space="preserve">
+    <value>ANSWERS</value>
+  </data>
+  <data name="AdminPage_Checks.Text" xml:space="preserve">
+    <value>BAN CHECK</value>
+  </data>
+  <data name="AdminPage_Activity.Text" xml:space="preserve">
+    <value>TRIAL ACTIVITY</value>
+  </data>
+  <data name="AdminPage_Tasks.Text" xml:space="preserve">
+    <value>TASKS</value>
+  </data>
+  <data name="AdminPage_NewTask.PlaceholderText" xml:space="preserve">
+    <value>New task</value>
+  </data>
+  <data name="AdminPage_AddTask.Content" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="AdminPage_Timeline.Text" xml:space="preserve">
+    <value>TIMELINE</value>
+  </data>
+  <data name="AdminPage_Messages.Text" xml:space="preserve">
+    <value>MESSAGES AND NOTES</value>
+  </data>
+  <data name="AdminPage_NewMessage.PlaceholderText" xml:space="preserve">
+    <value>Message or note</value>
+  </data>
+  <data name="AdminPage_Internal.Content" xml:space="preserve">
+    <value>Internal only (note for leadership)</value>
+  </data>
 </root>

@@ -67,6 +67,8 @@
     <SolidColorBrush x:Key="RoGGoldBrush" Color="{StaticResource RoGGoldColor}" />
     <SolidColorBrush x:Key="RoGGreenBrush" Color="{StaticResource RoGGreenColor}" />
     <SolidColorBrush x:Key="RoGBlueBrush" Color="{StaticResource RoGBlueColor}" />
+    <!-- Abdunklung hinter Vollbild-Ansichten (Galerie) -->
+    <SolidColorBrush x:Key="RoGOverlayBrush" Color="#F0101216" />
 
     <!-- Status-Punkte: grün online · blau Voice · rot auf RoG-Server · gold im Spiel · grau offline -->
     <SolidColorBrush x:Key="RoGStatusOnlineBrush" Color="{StaticResource RoGGreenColor}" />

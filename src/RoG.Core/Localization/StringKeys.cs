@@ -24,6 +24,7 @@ public static class StringKeys
     public const string NavInfo = "Nav_Info";
     public const string NavMatches = "Nav_Matches";
     public const string NavUploads = "Nav_Uploads";
+    public const string NavMedia = "Nav_Media";
     public const string NavAdmin = "Nav_Admin";
     public const string NavAccount = "Nav_Account";
     public const string NavNotifications = "Nav_Notifications";
@@ -68,6 +69,11 @@ public static class StringKeys
     public const string ForumNewThreadTitle = "Forum_NewThreadTitle";
     public const string ForumNewThreadBody = "Forum_NewThreadBody";
     public const string ForumCreate = "Forum_Create";
+
+    // Medien ({0} = Anzahl bzw. Dateiname)
+    public const string MediaItems = "Media_Items";
+    public const string MediaDownloadCount = "Media_DownloadCount";
+    public const string MediaDownloaded = "Media_Downloaded";
 
     // Uploads ({0} = Datei, {1}/{2} = Nummer/Anzahl)
     public const string UploadsPublic = "Uploads_Public";
@@ -185,6 +191,7 @@ public static class StringKeys
         "validation_failed", "insufficient_scope", "invalid_grant", "too_many_devices", "account_suspended", "too_many_attempts",
         "invalid_request", "invalid_scope", "access_denied", "unsupported_response_type",
         "state_mismatch", "browser_failed", "login_timeout", "missing_code",
+        "checksum_mismatch", "download_failed", "upload_failed",
     ];
 
     /// <summary>Alle Schlüssel aus Code – für den Vollständigkeitstest.</summary>

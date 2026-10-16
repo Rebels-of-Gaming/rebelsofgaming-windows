@@ -1118,4 +1118,64 @@
   <data name="UploadsPage_Open.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
     <value>Open in browser</value>
   </data>
+  <data name="Nav_Media" xml:space="preserve">
+    <value>Media</value>
+  </data>
+  <data name="Shell_NavMedia.Content" xml:space="preserve">
+    <value>Media</value>
+  </data>
+  <data name="Media_Items" xml:space="preserve">
+    <value>{0} images</value>
+  </data>
+  <data name="Media_DownloadCount" xml:space="preserve">
+    <value>downloaded {0}×</value>
+  </data>
+  <data name="Media_Downloaded" xml:space="preserve">
+    <value>{0} is in your Downloads folder (checksum verified).</value>
+  </data>
+  <data name="Error_checksum_mismatch" xml:space="preserve">
+    <value>The file was corrupted (checksum mismatch) and has been deleted. Please download again.</value>
+  </data>
+  <data name="Error_download_failed" xml:space="preserve">
+    <value>The download failed. Please try again shortly.</value>
+  </data>
+  <data name="Error_upload_failed" xml:space="preserve">
+    <value>The upload to storage failed. Please try again shortly.</value>
+  </data>
+  <data name="MediaPage_Title.Text" xml:space="preserve">
+    <value>MEDIA</value>
+  </data>
+  <data name="MediaPage_TabGallery.Text" xml:space="preserve">
+    <value>Gallery</value>
+  </data>
+  <data name="MediaPage_TabDownloads.Text" xml:space="preserve">
+    <value>Downloads</value>
+  </data>
+  <data name="MediaPage_BackToAlbums.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Back to albums</value>
+  </data>
+  <data name="MediaPage_BackToAlbums.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Back to albums</value>
+  </data>
+  <data name="MediaPage_GalleryState.EmptyText" xml:space="preserve">
+    <value>No albums yet.</value>
+  </data>
+  <data name="MediaPage_DownloadsState.EmptyText" xml:space="preserve">
+    <value>No downloads yet.</value>
+  </data>
+  <data name="MediaPage_Download.Content" xml:space="preserve">
+    <value>DOWNLOAD</value>
+  </data>
+  <data name="MediaPage_ShowInFolder.Content" xml:space="preserve">
+    <value>SHOW IN FOLDER</value>
+  </data>
+  <data name="MediaPage_Previous.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Previous image</value>
+  </data>
+  <data name="MediaPage_Next.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Next image</value>
+  </data>
+  <data name="MediaPage_CloseViewer.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Close (Esc)</value>
+  </data>
 </root>

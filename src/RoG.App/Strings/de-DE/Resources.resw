@@ -1118,4 +1118,64 @@
   <data name="UploadsPage_Open.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
     <value>Im Browser öffnen</value>
   </data>
+  <data name="Nav_Media" xml:space="preserve">
+    <value>Medien</value>
+  </data>
+  <data name="Shell_NavMedia.Content" xml:space="preserve">
+    <value>Medien</value>
+  </data>
+  <data name="Media_Items" xml:space="preserve">
+    <value>{0} Bilder</value>
+  </data>
+  <data name="Media_DownloadCount" xml:space="preserve">
+    <value>{0}× geladen</value>
+  </data>
+  <data name="Media_Downloaded" xml:space="preserve">
+    <value>{0} liegt in deinem Downloads-Ordner (Prüfsumme stimmt).</value>
+  </data>
+  <data name="Error_checksum_mismatch" xml:space="preserve">
+    <value>Die Datei war beschädigt (Prüfsumme stimmt nicht) und wurde gelöscht. Bitte erneut laden.</value>
+  </data>
+  <data name="Error_download_failed" xml:space="preserve">
+    <value>Der Download hat nicht geklappt. Versuch es gleich noch einmal.</value>
+  </data>
+  <data name="Error_upload_failed" xml:space="preserve">
+    <value>Der Upload zum Speicher hat nicht geklappt. Versuch es gleich noch einmal.</value>
+  </data>
+  <data name="MediaPage_Title.Text" xml:space="preserve">
+    <value>MEDIEN</value>
+  </data>
+  <data name="MediaPage_TabGallery.Text" xml:space="preserve">
+    <value>Galerie</value>
+  </data>
+  <data name="MediaPage_TabDownloads.Text" xml:space="preserve">
+    <value>Downloads</value>
+  </data>
+  <data name="MediaPage_BackToAlbums.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Zurück zu den Alben</value>
+  </data>
+  <data name="MediaPage_BackToAlbums.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Zurück zu den Alben</value>
+  </data>
+  <data name="MediaPage_GalleryState.EmptyText" xml:space="preserve">
+    <value>Noch keine Alben.</value>
+  </data>
+  <data name="MediaPage_DownloadsState.EmptyText" xml:space="preserve">
+    <value>Noch keine Downloads.</value>
+  </data>
+  <data name="MediaPage_Download.Content" xml:space="preserve">
+    <value>HERUNTERLADEN</value>
+  </data>
+  <data name="MediaPage_ShowInFolder.Content" xml:space="preserve">
+    <value>IM ORDNER ZEIGEN</value>
+  </data>
+  <data name="MediaPage_Previous.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Vorheriges Bild</value>
+  </data>
+  <data name="MediaPage_Next.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Nächstes Bild</value>
+  </data>
+  <data name="MediaPage_CloseViewer.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Schließen (Esc)</value>
+  </data>
 </root>

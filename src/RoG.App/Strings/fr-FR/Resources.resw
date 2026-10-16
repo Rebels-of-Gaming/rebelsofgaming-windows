@@ -1118,4 +1118,64 @@
   <data name="UploadsPage_Open.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
     <value>Ouvrir dans le navigateur</value>
   </data>
+  <data name="Nav_Media" xml:space="preserve">
+    <value>Médias</value>
+  </data>
+  <data name="Shell_NavMedia.Content" xml:space="preserve">
+    <value>Médias</value>
+  </data>
+  <data name="Media_Items" xml:space="preserve">
+    <value>{0} images</value>
+  </data>
+  <data name="Media_DownloadCount" xml:space="preserve">
+    <value>téléchargé {0}×</value>
+  </data>
+  <data name="Media_Downloaded" xml:space="preserve">
+    <value>{0} est dans ton dossier Téléchargements (somme de contrôle vérifiée).</value>
+  </data>
+  <data name="Error_checksum_mismatch" xml:space="preserve">
+    <value>Le fichier était corrompu (somme de contrôle incorrecte) et a été supprimé. Télécharge-le à nouveau.</value>
+  </data>
+  <data name="Error_download_failed" xml:space="preserve">
+    <value>Le téléchargement a échoué. Réessaie dans un instant.</value>
+  </data>
+  <data name="Error_upload_failed" xml:space="preserve">
+    <value>L’envoi vers le stockage a échoué. Réessaie dans un instant.</value>
+  </data>
+  <data name="MediaPage_Title.Text" xml:space="preserve">
+    <value>MÉDIAS</value>
+  </data>
+  <data name="MediaPage_TabGallery.Text" xml:space="preserve">
+    <value>Galerie</value>
+  </data>
+  <data name="MediaPage_TabDownloads.Text" xml:space="preserve">
+    <value>Téléchargements</value>
+  </data>
+  <data name="MediaPage_BackToAlbums.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Retour aux albums</value>
+  </data>
+  <data name="MediaPage_BackToAlbums.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Retour aux albums</value>
+  </data>
+  <data name="MediaPage_GalleryState.EmptyText" xml:space="preserve">
+    <value>Pas encore d’albums.</value>
+  </data>
+  <data name="MediaPage_DownloadsState.EmptyText" xml:space="preserve">
+    <value>Pas encore de téléchargements.</value>
+  </data>
+  <data name="MediaPage_Download.Content" xml:space="preserve">
+    <value>TÉLÉCHARGER</value>
+  </data>
+  <data name="MediaPage_ShowInFolder.Content" xml:space="preserve">
+    <value>AFFICHER DANS LE DOSSIER</value>
+  </data>
+  <data name="MediaPage_Previous.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Image précédente</value>
+  </data>
+  <data name="MediaPage_Next.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Image suivante</value>
+  </data>
+  <data name="MediaPage_CloseViewer.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Fermer (Échap)</value>
+  </data>
 </root>

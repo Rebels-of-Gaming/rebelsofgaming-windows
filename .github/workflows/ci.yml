@@ -31,6 +31,12 @@ jobs:
     name: WinUI-App (Windows)
     runs-on: [self-hosted, Windows]
     timeout-minutes: 60
+    # Keine weiterlaufenden MSBuild-Knoten/Compiler-Server: sie halten sonst die Ausgabe-Pipe offen und der Schritt
+    # hängt nach erfolgreichem Build (beobachtet 16.10.2026 nach „App bauen (x64)“).
+    env:
+      MSBUILDDISABLENODEREUSE: '1'
+      DOTNET_CLI_USE_MSBUILD_SERVER: '0'
+      UseSharedCompilation: 'false'
     steps:
       - uses: actions/checkout@v4
       - name: Werkzeuge prüfen

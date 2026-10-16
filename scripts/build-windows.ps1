@@ -184,6 +184,8 @@ catch {
 }
 finally {
     Pop-Location
+    # Build-Server beenden – weiterlaufende Knoten halten sonst die Ausgabe des CI-Schritts offen
+    dotnet build-server shutdown 2>&1 | Out-Null
     $summary.seconds = [math]::Round(((Get-Date) - $started).TotalSeconds, 1)
     $summary | ConvertTo-Json -Depth 5 | Set-Content -Encoding UTF8 (Join-Path $Artifacts 'summary.json')
     Write-Host ''

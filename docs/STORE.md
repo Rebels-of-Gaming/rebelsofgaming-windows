@@ -17,7 +17,23 @@ kommen nur über den Store, es gibt keinen eigenen Updater. Versionen: `docs/VER
 Partner Center → Apps und Spiele → **Neues Produkt → MSIX- oder PWA-App** → Namen reservieren
 (Vorschlag: **„Rebels of Gaming“**, DE/EN/FR derselbe Name; reserviert bleibt er 3 Monate ohne Einreichung).
 
-Danach unter **Produktverwaltung → Produktidentität** ablesen und Claude geben (kein Geheimnis):
+**Erledigt (16.10.2026):** Es gibt schon die App „Rebels of Gaming“ (Store-ID **9PDWKHL6T188**,
+<https://apps.microsoft.com/detail/9PDWKHL6T188>, alte UWP-Version 1.0.4.0 für x86/x64). Die neue WinUI-App wird als
+**Update dieser App** eingereicht (gleiche Identität, Version ab 2.0.0) statt einer neuen App – Name und Nutzer bleiben.
+Werte im Manifest:
+
+| Feld | Wert |
+|---|---|
+| `Identity Name` | `wahke.RebelsofGaming` |
+| `Identity Publisher` | `CN=BAB3F2CF-D90F-4F06-A6BF-E1AE3CC52136` |
+| `PublisherDisplayName` | `wahke` (Anzeigename des Kontos; ändert Wahke ihn im Partner Center, hier nachziehen) |
+| Paketfamilienname (PFN) | `wahke.RebelsofGaming_dnk64872v0wr6` (für Lücke W2) |
+
+Folgen: Die neue App läuft nur noch auf Windows-Desktop (x64/ARM64, ab Windows 10 1809); x86-Geräte und ältere
+Windows-Versionen behalten die alte 1.0.4.0. Die Paket-SID (WNS) steht im Partner Center unter Produktidentität bzw.
+WNS/MPNS und wird nur bei Lücke W1 an die Website gegeben.
+
+Ursprüngliche Anleitung – unter **Produktverwaltung → Produktidentität** ablesen:
 
 | Feld im Partner Center | Ziel im Repo |
 |---|---|

@@ -16,3 +16,6 @@ Stufe 0 – Fundament (Version 0.1.0, noch nicht im Store).
 - CI auf GitHub Actions: Core + Tests unter Linux, WinUI-App (x64 + ARM64) auf dem Windows-Runner; erster grüner App-Build
 - MSIX-Pakete (Store-Upload `.msixupload`, Sideload) werden mit `dotnet build` erzeugt – Visual Studio wird dafür nicht gebraucht
 - Korrigiert: Reihenfolge der Theme-Ressourcen (XAML WMC0035), Freigabe von Abbruch-Token und Tresor-Sperre (CA1001); Warnungen gelten jetzt auch in der App als Fehler
+- Server-Seite: Gameserver mit Live-Stand, „Verbinden“ über Steam (`steam://connect`) und Enemy Territory (`et://`), sonst Adresse kopieren (Minecraft) mit Hinweis im Spiel
+- Store-Identität der bestehenden App „Rebels of Gaming“ (`wahke.RebelsofGaming`); Version 2.0.0, weil im Store schon 1.0.4.0 liegt
+- Testpakete (Sideload) signiert der Windows-Runner mit einem selbst angelegten Testzertifikat (`RoG-Test.cer` im Artefakt)

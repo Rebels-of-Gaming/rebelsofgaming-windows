@@ -4,8 +4,8 @@
 
 | | Wo | Format | Beispiel |
 |---|---|---|---|
-| **App-Version** (SemVer) | `Directory.Build.props` → `RoGVersion` (einzige Quelle für Assembly-/Dateiversion, User-Agent, Anzeige) | `X.Y.Z` | `0.1.0` |
-| **MSIX-Version** | `src/RoG.App/Package.appxmanifest` → `Identity Version` | `X.Y.Z.0` | `0.1.0.0` |
+| **App-Version** (SemVer) | `Directory.Build.props` → `RoGVersion` (einzige Quelle für Assembly-/Dateiversion, User-Agent, Anzeige) | `X.Y.Z` | `2.0.0` |
+| **MSIX-Version** | `src/RoG.App/Package.appxmanifest` → `Identity Version` | `X.Y.Z.0` | `2.0.0.0` |
 
 Die vierte Stelle der MSIX-Version muss für den Microsoft Store **0** bleiben (sie ist für den Store reserviert). Anders
 als bei der Mobile-App gibt es deshalb **keine getrennte Build-Nummer**: Jede Einreichung braucht eine höhere
@@ -17,11 +17,14 @@ und meldet `X.Y.Z` als `app_version` an `/v1/devices`.
 
 ## Regeln (SemVer)
 
-- **0.x** bis zur ersten öffentlichen Store-Veröffentlichung, **1.0.0** = erste öffentliche Version im Store.
-- **MINOR** (`0.1.0 → 0.2.0`): neue Bereiche/Funktionen, in der Regel eine abgeschlossene Bau-Stufe.
-- **PATCH** (`0.2.0 → 0.2.1`): nur Fehlerbehebungen – und jede erneute Einreichung derselben Funktionen.
-- Ab 1.0: MAJOR nur bei Brüchen, die ein Update erzwingen (z. B. neue Mindest-API der Website, neue Mindest-Windows-Version).
-- Testpakete (Sideload von der VM) dürfen dieselbe Version wie der Entwicklungsstand haben; sie gehen nie in den Store.
+- **Start bei 2.0.0.** Unter derselben Store-Identität (`wahke.RebelsofGaming`, Store-ID 9PDWKHL6T188) liegt schon die
+  alte App mit **1.0.4.0** (UWP, x86/x64). Der Store nimmt nur höhere Versionen an; 2.x = die neue native WinUI-App.
+- **Jedes Update, das Wahke bekommt** (Testpaket per Sideload oder Store-Einreichung), hat eine **höhere Version** als
+  das vorige – sonst lässt Windows das Paket nicht über die installierte Version installieren. Claude erhöht die Version
+  im selben Commit wie die Änderung bzw. direkt vor dem Paket-Lauf.
+- **MINOR** (`2.0.x → 2.1.0`): eine Bau-Stufe abgeschlossen bzw. größerer neuer Bereich.
+- **PATCH** (`2.0.0 → 2.0.1`): jedes weitere Update dazwischen (neue Teilfunktion, Fehlerbehebung, erneute Einreichung).
+- MAJOR nur bei Brüchen, die ein Update erzwingen (neue Mindest-API der Website, neue Mindest-Windows-Version).
 
 ## Ablauf je Store-Einreichung
 
@@ -36,4 +39,5 @@ und meldet `X.Y.Z` als `app_version` an `/v1/devices`.
 
 ## Historie
 
-- `0.1.0` (in Arbeit): Stufe 0 – Fundament, noch kein Paket gebaut.
+- `0.1.0`: Stufe 0 – Fundament, Testpakete mit Platzhalter-Identität (nie im Store).
+- `2.0.0` (16.10.2026): echte Store-Identität, Server-Seite mit „Verbinden“ – Testpaket per Sideload.

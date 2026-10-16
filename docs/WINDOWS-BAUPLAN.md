@@ -126,7 +126,7 @@ docs/
    (Bereiche gibt es in der App nicht; Sicherheitshinweis Guide 35). Rückfall offline: Mitglieder-Scopes.
 6. **Token-Speicher:** Token im `PasswordVault`, Metadaten ohne Token als JSON. Der Tresor ist auf ca. 2,5 KB je Passwort
    begrenzt – deshalb nicht das ganze `StoredToken` als JSON hinein.
-7. **Version 0.1.0 / MSIX 0.1.0.0.** Store verlangt eine vierte Stelle 0; `Directory.Build.props` (`RoGVersion`) ist die
+7. **Version (Start 0.1.0, ab 16.10.2026 2.0.0 wegen der alten Store-App 1.0.4.0) / MSIX X.Y.Z.0.** Store verlangt eine vierte Stelle 0; `Directory.Build.props` (`RoGVersion`) ist die
    Quelle, das Manifest wird von Hand nachgezogen (Test prüft Gleichheit). Details `docs/VERSIONIERUNG.md`.
 8. **Windows App SDK 2.5.1, Microsoft.Windows.SDK.BuildTools 10.0.28000.2705, CommunityToolkit.Mvvm 8.4.2** (neueste
    stabile Versionen laut NuGet am 15.10.2026). `TargetFramework net10.0-windows10.0.19041.0`, `TargetPlatformMinVersion`
@@ -158,8 +158,8 @@ docs/
 
 ## Offene Fragen (an Wahke)
 
-1. **Store-Name und Publisher:** Name im Partner Center reservieren („Rebels of Gaming“?), Konto als Einzelperson
-   (Privatperson in Luxemburg, Anzeigename = Publisher Display Name) – danach `Identity Name`/`Publisher` ins Manifest.
+1. ~~Store-Name und Publisher~~ – geklärt 16.10.2026: bestehende App „Rebels of Gaming“ wird weiterverwendet
+   (`docs/STORE.md` Abschnitt 2). Offen nur: Anzeigename des Herausgebers ist „wahke“ – soll im Store „Rebels of Gaming“ stehen?
 2. **Build-VM:** Wo läuft sie (eigener PC mit Hyper-V, Azure, AWS …)? Siehe `docs/BUILD-VM.md` Abschnitt 1.
 3. **Push für Windows:** WNS auf der Website ergänzen (Lücke W1) oder vorerst nur Toasts bei laufender App?
 4. **Eigene Client-ID** `rog-windows` (Lücke W6) – gewünscht?

@@ -127,7 +127,7 @@ Konsole als eigenes Fenster mit Verlauf, Befehls-Historie, Suche, ANSI-Farben.
 ## 9. Store und Auslieferung
 
 - MSIX-Single-Project, Store-Upload `.msixupload` (x64 + ARM64) aus der Build-VM (`scripts/build-windows.ps1 -Mode Store`)
-- Identität (Paketname, Publisher `CN=…`) aus dem Partner Center – bis dahin Platzhalter `RebelsofGaming.App` / `CN=PLATZHALTER`
+- Identität aus dem Partner Center: Update der bestehenden Store-App „Rebels of Gaming“ (`wahke.RebelsofGaming`, Store-ID 9PDWKHL6T188), Version ab 2.0.0
 - Store-Texte DE/EN/FR, Screenshots (1366 × 768 und größer), Datenschutz-URL `https://rebelsofgaming.com/{de|en|fr}/privacy`,
   Altersfreigabe (IARC), Kontolöschung in der App
 - Updates nur über den Store (kein eigener Updater), Versionen nach `docs/VERSIONIERUNG.md`

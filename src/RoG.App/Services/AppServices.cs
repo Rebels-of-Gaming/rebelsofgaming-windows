@@ -60,7 +60,7 @@ public sealed class AppServices : IDisposable
     /// <summary>Spiele-Links und Zwischenablage für „Verbinden“ auf Gameservern.</summary>
     public ServerConnector ServerConnector { get; } = new(new WindowsExternalLauncher(), new WindowsClipboard());
 
-    /// <summary>„0.1.0“ aus der Paketversion (vierte Stelle ist im Store immer 0).</summary>
+    /// <summary>„2.0.0“ aus der Paketversion (vierte Stelle ist im Store immer 0).</summary>
     public static string AppVersion
     {
         get

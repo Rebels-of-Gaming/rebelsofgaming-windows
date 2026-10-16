@@ -160,15 +160,15 @@ Für den Store braucht es **kein** Zertifikat (der Store signiert). Zum Installi
 deinem PC (`--mode sideload`) als Benutzer `builder` in PowerShell:
 
 ```powershell
-$cert = New-SelfSignedCertificate -Type Custom -Subject "CN=PLATZHALTER" -KeyUsage DigitalSignature `
+$cert = New-SelfSignedCertificate -Type Custom -Subject "CN=BAB3F2CF-D90F-4F06-A6BF-E1AE3CC52136" -KeyUsage DigitalSignature `
   -FriendlyName "RoG Windows Test" -CertStoreLocation "Cert:\CurrentUser\My" `
   -TextExtension @("2.5.29.37={text}1.3.6.1.5.5.7.3.3", "2.5.29.19={text}")
 [Environment]::SetEnvironmentVariable("ROG_SIGNING_THUMBPRINT", $cert.Thumbprint, "User")
 Export-Certificate -Cert $cert -FilePath "$HOME\rog-test.cer"     # .cer (öffentlich) für Testrechner
 ```
 
-`CN=PLATZHALTER` muss genau dem `Publisher` in `src/RoG.App/Package.appxmanifest` entsprechen – nach der
-Store-Reservierung (siehe `docs/STORE.md`) ein neues Testzertifikat mit dem echten `CN=…` erzeugen. Auf einem Testrechner
+Das Subject muss genau dem `Publisher` in `src/RoG.App/Package.appxmanifest` entsprechen (Store-Identität, siehe
+`docs/STORE.md`). Auf einem Testrechner
 die `.cer` als Administrator nach „Lokaler Computer → Vertrauenswürdige Personen“ importieren, dann das `.msix`
 doppelklicken. Zertifikate (`.pfx`) nie ins Repo.
 

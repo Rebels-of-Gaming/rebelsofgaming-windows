@@ -262,6 +262,9 @@ public sealed partial class MainWindow : Window, IDisposable
             case Microsoft.Windows.AppLifecycle.ExtendedActivationKind.AppNotification when args.Data is Microsoft.Windows.AppNotifications.AppNotificationActivatedEventArgs toast:
                 OpenTarget(ToastService.UrlFrom(toast));
                 return;
+            case Microsoft.Windows.AppLifecycle.ExtendedActivationKind.ShareTarget:
+                _ = OpenShareAsync(args.Data as Windows.ApplicationModel.Activation.IShareTargetActivatedEventArgs);
+                return;
         }
 
         if (route is not null)
@@ -269,6 +272,31 @@ public sealed partial class MainWindow : Window, IDisposable
             Open(route);
         }
     }
+
+    /// <summary>
+    /// Teilen-Ziel: als erste Instanz die Daten selbst in den Eingang übernehmen (sonst hat es der weiterreichende
+    /// Prozess schon getan), dann den Uploader mit den geteilten Dateien öffnen.
+    /// </summary>
+    private async Task OpenShareAsync(Windows.ApplicationModel.Activation.IShareTargetActivatedEventArgs? share)
+    {
+        if (share is not null)
+        {
+            try
+            {
+                await ShareInbox.AcceptAsync(share.ShareOperation);
+            }
+#pragma warning disable CA1031 // Vorgang gehört schon dem weiterreichenden Prozess
+            catch (Exception)
+#pragma warning restore CA1031
+            {
+            }
+        }
+
+        Open(new AppRoute(AppSection.Uploads, UploadsShareKey));
+    }
+
+    /// <summary>Schlüssel für den Uploader: geteilte Dateien aus dem Eingang hochladen.</summary>
+    public const string UploadsShareKey = "share";
 
     /// <summary>Ziel eines Toasts: Website-Link → Bereich in der App, sonst Glocke.</summary>
     private void OpenTarget(string? url)
@@ -444,6 +472,9 @@ public sealed partial class MainWindow : Window, IDisposable
         AppSection.Messages => StringKeys.NavMessages,
         AppSection.Account => StringKeys.NavAccount,
         AppSection.Notifications => StringKeys.NavNotifications,
+        AppSection.Uploads => StringKeys.NavUploads,
+        AppSection.Media => StringKeys.NavMedia,
+        AppSection.Admin => StringKeys.NavAdmin,
         _ => null,
     };
 

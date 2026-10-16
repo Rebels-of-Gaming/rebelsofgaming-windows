@@ -44,6 +44,18 @@ public sealed partial class UploadsPage : Page
     {
         base.OnNavigatedTo(e);
         await ViewModel.LoadAsync();
+        if (e.Parameter as string == MainWindow.UploadsShareKey && !ViewModel.IsGuest)
+        {
+            var files = await ShareInbox.PendingAsync();
+            try
+            {
+                await ViewModel.UploadFilesAsync(files);
+            }
+            finally
+            {
+                ShareInbox.Clear();
+            }
+        }
     }
 
     private void OnDragOver(object sender, DragEventArgs e)

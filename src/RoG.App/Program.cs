@@ -49,6 +49,12 @@ public static class Program
         {
             try
             {
+                // Teilen: Daten gehören zu diesem Prozess – vor dem Weiterreichen in den Eingang kopieren
+                if (args.Kind == ExtendedActivationKind.ShareTarget && args.Data is Windows.ApplicationModel.Activation.IShareTargetActivatedEventArgs share)
+                {
+                    await Services.ShareInbox.AcceptAsync(share.ShareOperation);
+                }
+
                 await main.RedirectActivationToAsync(args);
             }
             finally
@@ -56,7 +62,7 @@ public static class Program
                 done.Set();
             }
         });
-        done.Wait(TimeSpan.FromSeconds(5));
+        done.Wait(TimeSpan.FromSeconds(30));
         return false;
     }
 }

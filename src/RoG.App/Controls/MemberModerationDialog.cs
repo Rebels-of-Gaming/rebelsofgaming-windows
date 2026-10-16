@@ -13,6 +13,8 @@ namespace RoG.App.Controls;
 /// </summary>
 public static class MemberModerationDialog
 {
+    private static readonly string[] s_scopes = ["forum", "site", "gameserver"];
+
     public static async Task ShowAsync(XamlRoot root, ModerationViewModel moderation, string userId, string? reportId)
     {
         var l = moderation.Services.Localizer;
@@ -88,7 +90,7 @@ public static class MemberModerationDialog
         var scope = new ComboBox
         {
             Header = l.GetString(StringKeys.ModScope),
-            ItemsSource = new[] { "forum", "site", "gameserver" }.Select(s => new SettingsOption(s, l.GetString("Mod_Scope_" + s))).ToList(),
+            ItemsSource = s_scopes.Select(s => new SettingsOption(s, l.GetString("Mod_Scope_" + s))).ToList(),
             SelectedIndex = 0,
         };
         var isPublic = new CheckBox { Content = l.GetString(StringKeys.ModPublic) };

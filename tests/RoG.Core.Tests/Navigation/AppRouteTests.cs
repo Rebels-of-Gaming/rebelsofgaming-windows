@@ -46,6 +46,9 @@ public class AppUriTests
     [InlineData("rog://search?q=enemy%20territory", AppSection.Search, "enemy territory")]
     [InlineData("rog://open?url=https%3A%2F%2Frebelsofgaming.com%2Fde%2Fnews%2Fx", AppSection.News, "x")]
     [InlineData("ROG://Messages", AppSection.Messages, null)]
+    [InlineData("rog://votes", AppSection.Votes, null)]
+    [InlineData("rog://uploads", AppSection.Uploads, null)]
+    [InlineData("rog://admin", AppSection.Admin, null)]
     public void Maps_app_links(string uri, AppSection section, string? key)
     {
         var route = AppRoute.FromAppUri(new Uri(uri), s_env);

@@ -2384,4 +2384,52 @@
   <data name="Outbox_LabelRsvp" xml:space="preserve">
     <value>Termin-Zusage</value>
   </data>
+  <data name="MemberAdmin_Joined" xml:space="preserve">
+    <value>Dabei seit {0}</value>
+  </data>
+  <data name="MemberAdmin_LastSeen" xml:space="preserve">
+    <value>Zuletzt gesehen {0}</value>
+  </data>
+  <data name="MemberAdmin_ScopeGlobal" xml:space="preserve">
+    <value>Global</value>
+  </data>
+  <data name="MemberAdmin_ScopeSquad" xml:space="preserve">
+    <value>im Squad</value>
+  </data>
+  <data name="MemberAdmin_Assigned" xml:space="preserve">
+    <value>Rolle vergeben.</value>
+  </data>
+  <data name="MemberAdmin_Revoked" xml:space="preserve">
+    <value>Rolle entzogen.</value>
+  </data>
+  <data name="MemberAdmin_Status_active" xml:space="preserve">
+    <value>Aktiv</value>
+  </data>
+  <data name="MemberAdmin_Status_suspended" xml:space="preserve">
+    <value>Gesperrt</value>
+  </data>
+  <data name="MemberAdmin_Status_former" xml:space="preserve">
+    <value>Ehemalig</value>
+  </data>
+  <data name="AdminPage_TabMembers.Text" xml:space="preserve">
+    <value>Mitglieder</value>
+  </data>
+  <data name="AdminPage_MemberSearch.PlaceholderText" xml:space="preserve">
+    <value>Name, Slug oder E-Mail</value>
+  </data>
+  <data name="AdminPage_Roles.Text" xml:space="preserve">
+    <value>ROLLEN</value>
+  </data>
+  <data name="AdminPage_RevokeRole.Content" xml:space="preserve">
+    <value>Entziehen</value>
+  </data>
+  <data name="AdminPage_Role.Header" xml:space="preserve">
+    <value>Rolle</value>
+  </data>
+  <data name="AdminPage_RoleScope.Header" xml:space="preserve">
+    <value>Gültig für</value>
+  </data>
+  <data name="AdminPage_AssignRole.Content" xml:space="preserve">
+    <value>VERGEBEN</value>
+  </data>
 </root>

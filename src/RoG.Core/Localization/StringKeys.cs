@@ -379,6 +379,17 @@ public static class StringKeys
     public const string OutboxLabelForum = "Outbox_LabelForum";
     public const string OutboxLabelRsvp = "Outbox_LabelRsvp";
 
+    // Verwaltung – Mitglieder (Status als "MemberAdmin_Status_" + Wert)
+    public const string MemberAdminJoined = "MemberAdmin_Joined";
+    public const string MemberAdminLastSeen = "MemberAdmin_LastSeen";
+    public const string MemberAdminScopeGlobal = "MemberAdmin_ScopeGlobal";
+    public const string MemberAdminScopeSquad = "MemberAdmin_ScopeSquad";
+    public const string MemberAdminAssigned = "MemberAdmin_Assigned";
+    public const string MemberAdminRevoked = "MemberAdmin_Revoked";
+    public const string MemberAdminStatusActive = "MemberAdmin_Status_active";
+    public const string MemberAdminStatusSuspended = "MemberAdmin_Status_suspended";
+    public const string MemberAdminStatusFormer = "MemberAdmin_Status_former";
+
     // App-Sperre
     public const string LockPrompt = "Lock_Prompt";
 

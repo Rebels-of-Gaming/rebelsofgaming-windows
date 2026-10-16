@@ -15,17 +15,23 @@ public sealed partial class AdminPage : Page
         Moderation = new ModerationViewModel(App.Services);
         Applications = new ApplicationsAdminViewModel(App.Services, Moderation.Show) { AskDecision = AskDecisionAsync };
         Overview = new AdminOverviewViewModel(App.Services, Moderation.Show);
+        Members = new MembersAdminViewModel(App.Services, Moderation.Show)
+        {
+            CanModerate = Moderation.CanWarn || Moderation.CanBan,
+            Moderate = user => MemberModerationDialog.ShowAsync(XamlRoot, Moderation, user, null),
+        };
         InitializeComponent();
         Moderation.OpenMember = (user, report) => MemberModerationDialog.ShowAsync(XamlRoot, Moderation, user, report);
         Moderation.Confirm = ConfirmAsync;
 
         OverviewTab.Visibility = Visible(Overview.Any);
+        MembersTab.Visibility = Visible(Members.CanView);
         ApplicationsTab.Visibility = Visible(Applications.CanView);
         ReportsTab.Visibility = Visible(Moderation.CanReports);
         BansTab.Visibility = Visible(Moderation.CanReports);
         LogTab.Visibility = Visible(Moderation.CanLog);
         WordsTab.Visibility = Visible(Moderation.CanManage);
-        var any = Moderation.Any || Applications.CanView || Overview.Any;
+        var any = Moderation.Any || Applications.CanView || Overview.Any || Members.CanView;
         NoAccess.Visibility = Visible(!any);
         Tabs.Visibility = Visible(any);
         Tabs.SelectedItem = Tabs.Items.FirstOrDefault(t => t.Visibility == Visibility.Visible);
@@ -36,6 +42,10 @@ public sealed partial class AdminPage : Page
     public ApplicationsAdminViewModel Applications { get; }
 
     public AdminOverviewViewModel Overview { get; }
+
+    public MembersAdminViewModel Members { get; }
+
+    private void OnMemberSearch(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) => Members.SearchNowCommand.Execute(null);
 
     private void OnAuditSearch(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) => Overview.SearchAuditCommand.Execute(null);
 
@@ -75,13 +85,14 @@ public sealed partial class AdminPage : Page
 
     private void OnTabChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs? args)
     {
-        if (OverviewPanel is null || ApplicationsPanel is null || ReportsPanel is null || BansPanel is null || LogPanel is null || WordsPanel is null)
+        if (OverviewPanel is null || MembersPanel is null || ApplicationsPanel is null || ReportsPanel is null || BansPanel is null || LogPanel is null || WordsPanel is null)
         {
             return; // feuert schon in InitializeComponent
         }
 
         var selected = sender.SelectedItem;
         OverviewPanel.Visibility = Visible(selected == OverviewTab);
+        MembersPanel.Visibility = Visible(selected == MembersTab);
         ApplicationsPanel.Visibility = Visible(selected == ApplicationsTab);
         ReportsPanel.Visibility = Visible(selected == ReportsTab);
         BansPanel.Visibility = Visible(selected == BansTab);
@@ -90,6 +101,10 @@ public sealed partial class AdminPage : Page
         if (selected == OverviewTab && Overview.Kpis.Count == 0 && Overview.Checks.Count == 0)
         {
             _ = Overview.LoadAsync();
+        }
+        else if (selected == MembersTab && Members.Items.Count == 0)
+        {
+            _ = Members.LoadAsync(reset: true);
         }
         else if (selected == ApplicationsTab && Applications.Items.Count == 0)
         {

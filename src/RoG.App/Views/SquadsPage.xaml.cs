@@ -34,6 +34,14 @@ public sealed partial class SquadsPage : Page
         ViewModel.DetailForced = false;
     }
 
+    private async void OnApplyClick(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        if (ViewModel.Detail.Slug is { } slug && await RoG.App.Controls.ApplicationDialog.ShowAsync(XamlRoot, slug))
+        {
+            App.Services.Navigate(new RoG.Core.Navigation.AppRoute(RoG.Core.Navigation.AppSection.Account));
+        }
+    }
+
     private async void OnRefreshInvoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
     {
         args.Handled = true;

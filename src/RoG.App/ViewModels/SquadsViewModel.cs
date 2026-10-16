@@ -162,6 +162,12 @@ public sealed partial class SquadDetailViewModel(AppServices services, SquadServ
     [ObservableProperty]
     public partial bool HasServers { get; set; }
 
+    /// <summary>Bewerben möglich: angemeldet und der Squad sucht (offen oder Warteliste).</summary>
+    [ObservableProperty]
+    public partial bool CanApply { get; set; }
+
+    public string? Slug => _slug;
+
     protected override bool HasData => Name is not null;
 
     public Task ShowAsync(string slug)
@@ -194,6 +200,7 @@ public sealed partial class SquadDetailViewModel(AppServices services, SquadServ
         Logo = s.Logo is null ? null : new BitmapImage(s.Logo);
         RecruitingText = TextForRecruiting(s.Recruiting, Services.Localizer);
         RecruitingBrush = BrushForRecruiting(s.Recruiting);
+        CanApply = s.Recruiting is Recruiting.Open or Recruiting.Waitlist && await Services.Tokens.GetAsync(cancellationToken) is not null;
         Description = detail.Description;
         TrainingTimes = detail.TrainingTimes;
         ClanInfo = detail.ClanName is null && s.ClanTag is null

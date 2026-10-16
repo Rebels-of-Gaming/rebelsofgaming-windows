@@ -201,13 +201,13 @@
                 Visibility="{x:Bind Links.ShowContent, Mode=OneWay}">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="vm:ShortLinkItemViewModel">
-                        <Grid Padding="0,8" ColumnSpacing="12" AutomationProperties.Name="{x:Bind Short}">
+                        <Grid Padding="0,8" ColumnSpacing="12" AutomationProperties.Name="{x:Bind ShortUrl}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <StackPanel Spacing="2">
-                                <TextBlock FontFamily="Consolas" Foreground="{StaticResource RoGRedBrush}" IsTextSelectionEnabled="True" Text="{x:Bind Short}" />
+                                <TextBlock FontFamily="Consolas" Foreground="{StaticResource RoGRedBrush}" IsTextSelectionEnabled="True" Text="{x:Bind ShortUrl}" />
                                 <TextBlock MaxLines="1" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Target}" TextTrimming="CharacterEllipsis" />
                                 <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" />
                             </StackPanel>

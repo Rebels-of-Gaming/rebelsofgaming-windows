@@ -154,6 +154,25 @@ public static class StringKeys
     public const string AccountSignOutText = "Account_SignOutText";
     public const string AccountSignOutConfirm = "Account_SignOutConfirm";
 
+    // Bewerbung ({0} = Squad, Datum, Alter, Prozent bzw. Regelwerk)
+    public const string ApplyTitle = "Apply_Title";
+    public const string ApplyTitleFor = "Apply_TitleFor";
+    public const string ApplyWaitlist = "Apply_Waitlist";
+    public const string ApplyBirthdate = "Apply_Birthdate";
+    public const string ApplyYes = "Apply_Yes";
+    public const string ApplyNo = "Apply_No";
+    public const string ApplyAcceptRules = "Apply_AcceptRules";
+    public const string ApplyReadRules = "Apply_ReadRules";
+    public const string ApplyTrialConsent = "Apply_TrialConsent";
+    public const string ApplyReferral = "Apply_Referral";
+    public const string ApplySubmit = "Apply_Submit";
+    public const string ApplyIncomplete = "Apply_Incomplete";
+    public const string ApplySubmittedAt = "Apply_SubmittedAt";
+    public const string ApplyTrialEnds = "Apply_TrialEnds";
+    public const string ApplyVoteParticipation = "Apply_VoteParticipation";
+    public const string ApplyYou = "Apply_You";
+    public const string ApplyMessageSent = "Apply_MessageSent";
+
     // Abwesenheit
     public const string AbsenceReported = "Absence_Reported";
     public const string AbsenceActive = "Absence_Active";
@@ -208,6 +227,7 @@ public static class StringKeys
         "invalid_request", "invalid_scope", "access_denied", "unsupported_response_type",
         "state_mismatch", "browser_failed", "login_timeout", "missing_code",
         "checksum_mismatch", "download_failed", "upload_failed",
+        "discord_required", "already_member", "application_blocked",
     ];
 
     /// <summary>Alle Schlüssel aus Code – für den Vollständigkeitstest.</summary>

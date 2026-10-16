@@ -1286,4 +1286,82 @@
   <data name="AccountPage_AbsenceDelete.Content" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="Apply_Title" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="Apply_TitleFor" xml:space="preserve">
+    <value>Apply to {0}</value>
+  </data>
+  <data name="Apply_Waitlist" xml:space="preserve">
+    <value>The squad is full right now – you will be put on the waitlist.</value>
+  </data>
+  <data name="Apply_Birthdate" xml:space="preserve">
+    <value>Date of birth (at least {0} years) *</value>
+  </data>
+  <data name="Apply_Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Apply_No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Apply_AcceptRules" xml:space="preserve">
+    <value>I have read and accept “{0}” *</value>
+  </data>
+  <data name="Apply_ReadRules" xml:space="preserve">
+    <value>read</value>
+  </data>
+  <data name="Apply_TrialConsent" xml:space="preserve">
+    <value>I agree to a trial period *</value>
+  </data>
+  <data name="Apply_Referral" xml:space="preserve">
+    <value>Referred by (optional)</value>
+  </data>
+  <data name="Apply_Submit" xml:space="preserve">
+    <value>Submit application</value>
+  </data>
+  <data name="Apply_Incomplete" xml:space="preserve">
+    <value>Please fill in and confirm all required fields.</value>
+  </data>
+  <data name="Apply_SubmittedAt" xml:space="preserve">
+    <value>Submitted on {0}</value>
+  </data>
+  <data name="Apply_TrialEnds" xml:space="preserve">
+    <value>Trial until {0}</value>
+  </data>
+  <data name="Apply_VoteParticipation" xml:space="preserve">
+    <value>Vote in progress: {0} % have voted</value>
+  </data>
+  <data name="Apply_You" xml:space="preserve">
+    <value>You</value>
+  </data>
+  <data name="Apply_MessageSent" xml:space="preserve">
+    <value>Message sent to the squad.</value>
+  </data>
+  <data name="Error_discord_required" xml:space="preserve">
+    <value>To apply, your Discord account must be linked (on the website under Account).</value>
+  </data>
+  <data name="Error_already_member" xml:space="preserve">
+    <value>You are already in this squad.</value>
+  </data>
+  <data name="Error_application_blocked" xml:space="preserve">
+    <value>An application is not possible right now (open application, ban or waiting period).</value>
+  </data>
+  <data name="SquadsPage_Apply.Content" xml:space="preserve">
+    <value>APPLY</value>
+  </data>
+  <data name="AccountPage_Applications.Header" xml:space="preserve">
+    <value>My applications</value>
+  </data>
+  <data name="AccountPage_ApplicationsEmpty.Text" xml:space="preserve">
+    <value>No applications. You can apply on a squad’s page.</value>
+  </data>
+  <data name="AccountPage_ApplicationMessage.PlaceholderText" xml:space="preserve">
+    <value>Message to the squad</value>
+  </data>
+  <data name="AccountPage_ApplicationSend.Content" xml:space="preserve">
+    <value>SEND</value>
+  </data>
+  <data name="AccountPage_ApplicationWithdraw.Content" xml:space="preserve">
+    <value>WITHDRAW</value>
+  </data>
 </root>

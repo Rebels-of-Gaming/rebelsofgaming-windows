@@ -1286,4 +1286,82 @@
   <data name="AccountPage_AbsenceDelete.Content" xml:space="preserve">
     <value>Supprimer</value>
   </data>
+  <data name="Apply_Title" xml:space="preserve">
+    <value>Candidature</value>
+  </data>
+  <data name="Apply_TitleFor" xml:space="preserve">
+    <value>Postuler chez {0}</value>
+  </data>
+  <data name="Apply_Waitlist" xml:space="preserve">
+    <value>Le squad est complet – tu seras sur liste d’attente.</value>
+  </data>
+  <data name="Apply_Birthdate" xml:space="preserve">
+    <value>Date de naissance (au moins {0} ans) *</value>
+  </data>
+  <data name="Apply_Yes" xml:space="preserve">
+    <value>Oui</value>
+  </data>
+  <data name="Apply_No" xml:space="preserve">
+    <value>Non</value>
+  </data>
+  <data name="Apply_AcceptRules" xml:space="preserve">
+    <value>J’ai lu et j’accepte « {0} » *</value>
+  </data>
+  <data name="Apply_ReadRules" xml:space="preserve">
+    <value>lire</value>
+  </data>
+  <data name="Apply_TrialConsent" xml:space="preserve">
+    <value>J’accepte une période d’essai *</value>
+  </data>
+  <data name="Apply_Referral" xml:space="preserve">
+    <value>Recommandé par (facultatif)</value>
+  </data>
+  <data name="Apply_Submit" xml:space="preserve">
+    <value>Envoyer la candidature</value>
+  </data>
+  <data name="Apply_Incomplete" xml:space="preserve">
+    <value>Merci de remplir et confirmer tous les champs obligatoires.</value>
+  </data>
+  <data name="Apply_SubmittedAt" xml:space="preserve">
+    <value>Envoyée le {0}</value>
+  </data>
+  <data name="Apply_TrialEnds" xml:space="preserve">
+    <value>Période d’essai jusqu’au {0}</value>
+  </data>
+  <data name="Apply_VoteParticipation" xml:space="preserve">
+    <value>Vote en cours : {0} % ont voté</value>
+  </data>
+  <data name="Apply_You" xml:space="preserve">
+    <value>Toi</value>
+  </data>
+  <data name="Apply_MessageSent" xml:space="preserve">
+    <value>Message envoyé au squad.</value>
+  </data>
+  <data name="Error_discord_required" xml:space="preserve">
+    <value>Pour postuler, ton compte Discord doit être lié (sur le site, rubrique Compte).</value>
+  </data>
+  <data name="Error_already_member" xml:space="preserve">
+    <value>Tu fais déjà partie de ce squad.</value>
+  </data>
+  <data name="Error_application_blocked" xml:space="preserve">
+    <value>Une candidature n’est pas possible pour le moment (candidature ouverte, ban ou délai).</value>
+  </data>
+  <data name="SquadsPage_Apply.Content" xml:space="preserve">
+    <value>POSTULER</value>
+  </data>
+  <data name="AccountPage_Applications.Header" xml:space="preserve">
+    <value>Mes candidatures</value>
+  </data>
+  <data name="AccountPage_ApplicationsEmpty.Text" xml:space="preserve">
+    <value>Aucune candidature. Tu peux postuler depuis la page d’un squad.</value>
+  </data>
+  <data name="AccountPage_ApplicationMessage.PlaceholderText" xml:space="preserve">
+    <value>Message au squad</value>
+  </data>
+  <data name="AccountPage_ApplicationSend.Content" xml:space="preserve">
+    <value>ENVOYER</value>
+  </data>
+  <data name="AccountPage_ApplicationWithdraw.Content" xml:space="preserve">
+    <value>RETIRER</value>
+  </data>
 </root>

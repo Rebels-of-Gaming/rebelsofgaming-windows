@@ -109,7 +109,7 @@ public sealed partial class ShortLinksViewModel(AppServices services) : Loadable
 
 public sealed partial class ShortLinkItemViewModel(ShortLink link, ShortLinksViewModel owner, ILocalizer localizer)
 {
-    public string Short => link.ShortUrl?.ToString() ?? link.Code;
+    public string ShortUrl => link.ShortUrl?.ToString() ?? link.Code;
 
     public string Target => link.Title is null ? link.Target?.ToString() ?? string.Empty : $"{link.Title} – {link.Target}";
 
@@ -121,5 +121,5 @@ public sealed partial class ShortLinkItemViewModel(ShortLink link, ShortLinksVie
     }.Where(s => !string.IsNullOrEmpty(s)));
 
     [RelayCommand]
-    private void Copy() => owner.Copied(owner.TryCopy(Short));
+    private void Copy() => owner.Copied(owner.TryCopy(ShortUrl));
 }

@@ -119,6 +119,45 @@
                 </StackPanel>
             </Expander>
 
+            <!-- Meine Bewerbungen -->
+            <Expander
+                x:Uid="AccountPage_Applications"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Stretch"
+                Expanding="OnApplicationsExpanding"
+                Visibility="{x:Bind ViewModel.ShowProfile, Mode=OneWay}">
+                <StackPanel Spacing="12">
+                    <InfoBar
+                        IsOpen="{x:Bind Applications.IsFeedbackOpen, Mode=TwoWay}"
+                        Message="{x:Bind Applications.FeedbackMessage, Mode=OneWay}"
+                        Severity="{x:Bind Applications.FeedbackSeverity, Mode=OneWay}" />
+                    <TextBlock x:Uid="AccountPage_ApplicationsEmpty" Style="{StaticResource RoGMutedTextStyle}" Visibility="{x:Bind Applications.IsEmpty, Mode=OneWay}" />
+                    <ItemsControl ItemsSource="{x:Bind Applications.Items}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:MyApplicationViewModel">
+                                <Border Margin="0,0,0,12" Background="{StaticResource RoGBg3Brush}" CornerRadius="{StaticResource RoGControlRadius}" Padding="16">
+                                    <StackPanel Spacing="8">
+                                        <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Title}" />
+                                        <ProgressBar Maximum="100" Value="{x:Bind Progress}" />
+                                        <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Details}" />
+                                        <TextBlock Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Timeline}" />
+                                        <TextBlock Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Tasks}" Visibility="{x:Bind HasTasks}" />
+                                        <TextBlock IsTextSelectionEnabled="True" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Messages}" Visibility="{x:Bind HasMessages}" />
+                                        <StackPanel Spacing="8" Visibility="{x:Bind IsOpen}">
+                                            <TextBox x:Uid="AccountPage_ApplicationMessage" AcceptsReturn="True" Text="{x:Bind Draft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" />
+                                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                                <Button x:Uid="AccountPage_ApplicationSend" Command="{x:Bind SendCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                                                <Button x:Uid="AccountPage_ApplicationWithdraw" Command="{x:Bind WithdrawCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Expander>
+
             <!-- Abwesenheit -->
             <Expander
                 x:Uid="AccountPage_Absences"

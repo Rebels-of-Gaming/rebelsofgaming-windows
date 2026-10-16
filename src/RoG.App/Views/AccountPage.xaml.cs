@@ -13,6 +13,7 @@ public sealed partial class AccountPage : Page
         ViewModel = new AccountViewModel(App.Services);
         Editor = new ProfileEditViewModel(App.Services);
         Absences = new AbsencesViewModel(App.Services);
+        Applications = new MyApplicationsViewModel(App.Services);
         InitializeComponent();
     }
 
@@ -21,6 +22,10 @@ public sealed partial class AccountPage : Page
     public ProfileEditViewModel Editor { get; }
 
     public AbsencesViewModel Absences { get; }
+
+    public MyApplicationsViewModel Applications { get; }
+
+    private void OnApplicationsExpanding(Expander sender, ExpanderExpandingEventArgs args) => _ = Applications.LoadAsync(silent: true);
 
     private void OnAbsencesExpanding(Expander sender, ExpanderExpandingEventArgs args) => _ = Absences.LoadAsync(silent: true);
 

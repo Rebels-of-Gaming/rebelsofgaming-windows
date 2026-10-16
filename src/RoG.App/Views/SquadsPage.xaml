@@ -116,6 +116,12 @@
                                 <Ellipse Fill="{x:Bind ViewModel.Detail.RecruitingBrush, Mode=OneWay}" Style="{StaticResource RoGStatusDotStyle}" />
                                 <TextBlock Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind ViewModel.Detail.RecruitingText, Mode=OneWay}" />
                             </StackPanel>
+                            <Button
+                                x:Uid="SquadsPage_Apply"
+                                Margin="0,6,0,0"
+                                Click="OnApplyClick"
+                                Style="{StaticResource RoGPrimaryButtonStyle}"
+                                Visibility="{x:Bind ViewModel.Detail.CanApply, Mode=OneWay}" />
                         </StackPanel>
                     </Grid>
 

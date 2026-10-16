@@ -36,6 +36,12 @@ public sealed record AppSettings
     /// <summary>Fenstergröße und -position beim letzten Schließen (physische Pixel); <c>null</c> = Standard.</summary>
     public WindowPlacement? Window { get; init; }
 
+    /// <summary>Nach einem Upload den Direktlink in die Zwischenablage kopieren.</summary>
+    public bool CopyLinkAfterUpload { get; init; } = true;
+
+    /// <summary>Sichtbarkeit neuer Uploads: <c>public</c>, <c>members</c> oder <c>private</c>.</summary>
+    public string UploadVisibility { get; init; } = "public";
+
     /// <summary>Zuletzt geöffneter Bereich (Navigations-Schlüssel wie <c>Nav_Servers</c>).</summary>
     public string? LastSection { get; init; }
 }

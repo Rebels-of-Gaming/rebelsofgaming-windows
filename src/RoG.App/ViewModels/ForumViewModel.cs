@@ -328,7 +328,7 @@ public sealed partial class ThreadViewModel(AppServices services, ForumService f
         _postCursor = posts.NextCursor;
         HasMorePosts = posts.HasMore;
         Title = thread.Summary.Title;
-        _watch ??= Services.Realtime.WatchChannel($"private-forum.threads.{_threadId}", (name, _) =>
+        _watch ??= Services.Realtime.WatchChannel($"private-forum.threads.{_threadId}", (name, data) =>
         {
             if (name == "post.published")
             {

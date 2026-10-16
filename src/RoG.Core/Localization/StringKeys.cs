@@ -23,6 +23,7 @@ public static class StringKeys
     public const string NavMembers = "Nav_Members";
     public const string NavInfo = "Nav_Info";
     public const string NavMatches = "Nav_Matches";
+    public const string NavUploads = "Nav_Uploads";
     public const string NavAdmin = "Nav_Admin";
     public const string NavAccount = "Nav_Account";
     public const string NavNotifications = "Nav_Notifications";
@@ -67,6 +68,17 @@ public static class StringKeys
     public const string ForumNewThreadTitle = "Forum_NewThreadTitle";
     public const string ForumNewThreadBody = "Forum_NewThreadBody";
     public const string ForumCreate = "Forum_Create";
+
+    // Uploads ({0} = Datei, {1}/{2} = Nummer/Anzahl)
+    public const string UploadsPublic = "Uploads_Public";
+    public const string UploadsMembers = "Uploads_Members";
+    public const string UploadsPrivate = "Uploads_Private";
+    public const string UploadsUploading = "Uploads_Uploading";
+    public const string UploadsDone = "Uploads_Done";
+    public const string UploadsDoneCopied = "Uploads_DoneCopied";
+    public const string UploadsUnsupported = "Uploads_Unsupported";
+    public const string UploadsProcessing = "Uploads_Processing";
+    public const string UploadsDropCaption = "Uploads_DropCaption";
 
     // Nachrichten
     public const string MessagesDeleted = "Messages_Deleted";

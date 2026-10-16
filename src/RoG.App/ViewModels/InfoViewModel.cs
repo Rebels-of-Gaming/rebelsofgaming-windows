@@ -22,7 +22,7 @@ public sealed partial class InfoViewModel : LoadableViewModel
     {
         _info = new InfoService(services.Api.Client, services.Environment.WebBaseUrl);
         Detail = new InfoDetailViewModel(services, _info);
-        Detail.Accepted += (_, key) => _ = LoadAsync(silent: true);
+        Detail.Accepted += (sender, key) => _ = LoadAsync(silent: true);
     }
 
     public ObservableCollection<InfoItemViewModel> Items { get; } = [];

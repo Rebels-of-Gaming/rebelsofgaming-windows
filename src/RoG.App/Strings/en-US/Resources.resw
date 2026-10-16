@@ -1046,4 +1046,76 @@
   <data name="ForumPage_Link.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
     <value>Link</value>
   </data>
+  <data name="Nav_Uploads" xml:space="preserve">
+    <value>Uploads</value>
+  </data>
+  <data name="Shell_NavUploads.Content" xml:space="preserve">
+    <value>Uploads</value>
+  </data>
+  <data name="Uploads_Public" xml:space="preserve">
+    <value>Public</value>
+  </data>
+  <data name="Uploads_Members" xml:space="preserve">
+    <value>Members only</value>
+  </data>
+  <data name="Uploads_Private" xml:space="preserve">
+    <value>Private (secret link)</value>
+  </data>
+  <data name="Uploads_Uploading" xml:space="preserve">
+    <value>Uploading {0} ({1}/{2}) …</value>
+  </data>
+  <data name="Uploads_Done" xml:space="preserve">
+    <value>Uploaded.</value>
+  </data>
+  <data name="Uploads_DoneCopied" xml:space="preserve">
+    <value>Uploaded – the link is copied.</value>
+  </data>
+  <data name="Uploads_Unsupported" xml:space="preserve">
+    <value>Only images (PNG, JPG, GIF, WebP) and short videos (MP4, WebM, MOV, MKV) can be uploaded.</value>
+  </data>
+  <data name="Uploads_Processing" xml:space="preserve">
+    <value>processing</value>
+  </data>
+  <data name="Uploads_DropCaption" xml:space="preserve">
+    <value>Upload to RoG</value>
+  </data>
+  <data name="UploadsPage_Title.Text" xml:space="preserve">
+    <value>UPLOADS</value>
+  </data>
+  <data name="UploadsPage_DropHint.Text" xml:space="preserve">
+    <value>Drag images or videos here, pick them or paste a screenshot with Ctrl+V. The server removes metadata (EXIF, GPS).</value>
+  </data>
+  <data name="UploadsPage_Pick.Content" xml:space="preserve">
+    <value>CHOOSE FILES</value>
+  </data>
+  <data name="UploadsPage_Paste.Content" xml:space="preserve">
+    <value>PASTE (CTRL+V)</value>
+  </data>
+  <data name="UploadsPage_Visibility.Header" xml:space="preserve">
+    <value>Visibility</value>
+  </data>
+  <data name="UploadsPage_CopyLink.Header" xml:space="preserve">
+    <value>Copy link afterwards</value>
+  </data>
+  <data name="UploadsPage_Guest.Text" xml:space="preserve">
+    <value>Uploading is available after signing in.</value>
+  </data>
+  <data name="UploadsPage_State.EmptyText" xml:space="preserve">
+    <value>No uploads yet.</value>
+  </data>
+  <data name="UploadsPage_CopyDirect.Content" xml:space="preserve">
+    <value>Link</value>
+  </data>
+  <data name="UploadsPage_CopyBbCode.Content" xml:space="preserve">
+    <value>BBCode</value>
+  </data>
+  <data name="UploadsPage_CopyMarkdown.Content" xml:space="preserve">
+    <value>Markdown</value>
+  </data>
+  <data name="UploadsPage_Open.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Open in browser</value>
+  </data>
+  <data name="UploadsPage_Open.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Open in browser</value>
+  </data>
 </root>

@@ -89,6 +89,9 @@ public sealed class AppServices : IDisposable
 
     public IClipboardService Clipboard { get; } = new WindowsClipboard();
 
+    /// <summary>Für pre-signed Uploads direkt an den Speicher – ohne RoG-Pipeline, also ohne Geräte-Token.</summary>
+    public HttpClient StorageHttp { get; } = new() { Timeout = TimeSpan.FromMinutes(15) };
+
     public IExternalLauncher Launcher { get; } = new WindowsExternalLauncher();
 
     /// <summary>Spiele-Links und Zwischenablage für „Verbinden“ auf Gameservern.</summary>
@@ -149,6 +152,7 @@ public sealed class AppServices : IDisposable
     public void Dispose()
     {
         Api.Dispose();
+        StorageHttp.Dispose();
         (Tokens as IDisposable)?.Dispose();
     }
 }

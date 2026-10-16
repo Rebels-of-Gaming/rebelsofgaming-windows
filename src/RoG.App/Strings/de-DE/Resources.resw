@@ -1889,4 +1889,88 @@
   <data name="MembersPage_Map.Content" xml:space="preserve">
     <value>KARTE</value>
   </data>
+  <data name="Wiki_OfflineList" xml:space="preserve">
+    <value>Keine Verbindung – das sind die offline gespeicherten Seiten.</value>
+  </data>
+  <data name="Wiki_Watch" xml:space="preserve">
+    <value>Beobachten</value>
+  </data>
+  <data name="Wiki_Unwatch" xml:space="preserve">
+    <value>Nicht mehr beobachten</value>
+  </data>
+  <data name="Wiki_Watching" xml:space="preserve">
+    <value>Du wirst bei Änderungen benachrichtigt.</value>
+  </data>
+  <data name="Wiki_NotWatching" xml:space="preserve">
+    <value>Beobachtung beendet.</value>
+  </data>
+  <data name="Wiki_Restored" xml:space="preserve">
+    <value>Version wiederhergestellt.</value>
+  </data>
+  <data name="Wiki_Saved" xml:space="preserve">
+    <value>Gespeichert.</value>
+  </data>
+  <data name="Wiki_Pending" xml:space="preserve">
+    <value>Als Vorschlag gespeichert – er wird nach der Prüfung sichtbar.</value>
+  </data>
+  <data name="Wiki_Conflict" xml:space="preserve">
+    <value>{0} hat die Seite inzwischen geändert. Unterschiede siehe unten – „Speichern“ übernimmt jetzt deine Fassung.</value>
+  </data>
+  <data name="Error_edit_conflict" xml:space="preserve">
+    <value>Die Seite wurde inzwischen geändert.</value>
+  </data>
+  <data name="Error_not_pending" xml:space="preserve">
+    <value>Diese Version wartet nicht auf Freigabe.</value>
+  </data>
+  <data name="WikiPage_Title.Text" xml:space="preserve">
+    <value>WIKI</value>
+  </data>
+  <data name="WikiPage_Namespace.Header" xml:space="preserve">
+    <value>Bereich</value>
+  </data>
+  <data name="WikiPage_Search.PlaceholderText" xml:space="preserve">
+    <value>Im Wiki suchen</value>
+  </data>
+  <data name="WikiPage_State.EmptyText" xml:space="preserve">
+    <value>Keine Seiten gefunden.</value>
+  </data>
+  <data name="WikiPage_List.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Wiki-Seiten</value>
+  </data>
+  <data name="WikiPage_SelectHint.Text" xml:space="preserve">
+    <value>Wähle links eine Seite.</value>
+  </data>
+  <data name="WikiPage_OfflineCopy.Text" xml:space="preserve">
+    <value>Offline-Kopie – möglicherweise nicht aktuell.</value>
+  </data>
+  <data name="WikiPage_Edit.Content" xml:space="preserve">
+    <value>BEARBEITEN</value>
+  </data>
+  <data name="WikiPage_Editor.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Quelltext der Seite</value>
+  </data>
+  <data name="WikiPage_Summary.PlaceholderText" xml:space="preserve">
+    <value>Zusammenfassung der Änderung</value>
+  </data>
+  <data name="WikiPage_Save.Content" xml:space="preserve">
+    <value>SPEICHERN</value>
+  </data>
+  <data name="WikiPage_Preview.Content" xml:space="preserve">
+    <value>VORSCHAU</value>
+  </data>
+  <data name="Common_CancelButton.Content" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="WikiPage_PreviewTitle.Text" xml:space="preserve">
+    <value>VORSCHAU</value>
+  </data>
+  <data name="WikiPage_DiffTitle.Text" xml:space="preserve">
+    <value>UNTERSCHIEDE</value>
+  </data>
+  <data name="WikiPage_Revisions.Header" xml:space="preserve">
+    <value>Versionen</value>
+  </data>
+  <data name="WikiPage_Compare.Content" xml:space="preserve">
+    <value>Mit aktueller vergleichen</value>
+  </data>
 </root>

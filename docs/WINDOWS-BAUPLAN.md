@@ -15,7 +15,7 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 | 5 | Medien | fast fertig (2.1.0): Uploads (Drag & Drop, Strg+V), Galerie, Downloads, Kurzlinks, Profil bearbeiten; offen: Teilen-Ziel, Galerie-Upload | siehe `git log` |
 | 6 | Clan-Prozesse | fast fertig (2.2.2): Bewerben, eigene Bewerbungen, Votes, Abwesenheiten, Geräte/Datenexport/Konto löschen, Regel-Hinweis, Onboarding-Kachel, Statistiken (Ranglisten, Wochen-Awards), Mitgliederkarte im eigenen Fenster; offen: Trial-Verwaltung für Squad-Leitung (kommt mit Stufe 9) | siehe `git log` |
 | 7 | Server-Steuerung | fast fertig (2.2.0): Steuer-Fenster mit Power, Ressourcen, Live-Konsole (Historie), Configs (Diff, Versionen, Rollback, Anträge), Backups, RCON, Sperren, Vier-Augen-Freigaben, App-Sperre mit Windows Hello; offen: Dateioperationen, Formular-Vorlagen/Map-Rotation, Whitelist | siehe `git log` |
-| 8 | Wiki | offen | |
+| 8 | Wiki | fast fertig (2.3.0): Bereiche, Seitenbaum, Suche, Seite nativ mit Links in der App, Offline-Kopien, Bearbeiten mit Vorschau und Konflikterkennung, Versionen mit Vergleich/Wiederherstellen, Beobachten; offen: neue Seite anlegen, Dateien/Bilder hochladen, Kategorien-Ansicht, Inhaltsverzeichnis mit Sprung | siehe `git log` |
 | 9 | Verwaltung + Moderation | offen | |
 | 10 | Feinschliff + Store | offen | |
 
@@ -118,6 +118,19 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 - **App-Sperre mit Windows Hello** (Einstellungen, nur wenn Hello eingerichtet; Einschalten erst nach erfolgreicher
   Prüfung): beim Start und nach 5 Minuten außerhalb des Vordergrunds; Ausweg „Stattdessen abmelden“.
 
+### Stufe 8 – Wiki (2.3.0, 16.10.2026)
+
+- **Core:** `WikiService` (Bereiche, Baum flach mit Tiefe, Seite per ID oder Adresse inkl. Weiterleitungen, Versionen,
+  Quelltext einer Version, Wiederherstellen, Vorschau `POST /wiki/render`, Speichern mit `base_revision_id` →
+  `WikiEditConflictException` mit aktueller Fassung aus `409 edit_conflict`, Beobachten, Suche – `q` selbst gesendet,
+  Lücke W11), `LineDiff` (LCS, zeilenweise), `WikiOfflineStore` (JSON je Seite+Sprache, beim Abmelden gelöscht).
+  `ApiProblem` merkt sich den rohen Body für Zusatzfelder (`TryGetExtension`).
+- **App:** Wiki-Seite (Liste-Detail): Bereich, Suche, eingerückter Baum; Seite mit Meta, Beobachten, Browser,
+  Bearbeiten (Quelltext, Zusammenfassung, Vorschau, Speichern; bei Konflikt Unterschiede + bewusstes Überschreiben),
+  Versionen (vergleichen, wiederherstellen). Ohne Netz: Liste und Seiten aus der Offline-Kopie.
+- **Links in allen Inhalten** (News, Forum, Info, Wiki) öffnen Ziele der Plattform jetzt in der App (`AppRoute`),
+  alles andere im Browser.
+
 ### Stufe 2 – Community lesen (16.10.2026)
 
 - **Gemeinsame Bausteine:** `HtmlContentParser` (Core, AngleSharp) → `RichDocument` → `RichContentView` (App, nativ:
@@ -174,6 +187,8 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   die Hello-Prüfung macht Windows, die App sieht keine biometrischen Daten.
 - Ab 2.2.2: Kartenkacheln kommen nur vom Server der Plattform (signierte Vorlage, nie direkt von OpenStreetMap);
   sie liegen höchstens im Bild-Cache von WinUI während der Laufzeit.
+- Ab 2.3.0: gelesene Wiki-Seiten (gerendertes HTML, Titel, Bereich) als JSON unter `wiki/` im App-Datenordner, je
+  Sprache; Abmelden löscht den Ordner, Deinstallation ebenso.
 - Keine Übermittlung an Dritte, keine Telemetrie (`DOTNET_CLI_TELEMETRY_OPTOUT` auch in den Skripten). Schriften eingebettet.
 
 ## Verzeichnisstruktur

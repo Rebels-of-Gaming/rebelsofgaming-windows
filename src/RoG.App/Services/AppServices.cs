@@ -107,6 +107,10 @@ public sealed class AppServices : IDisposable
         }
     }
 
+    /// <summary>Offline-Kopien gelesener Wiki-Seiten (App-Datenordner, beim Abmelden gelöscht).</summary>
+    public RoG.Core.Features.Wiki.WikiOfflineStore WikiOffline { get; } =
+        new(Path.Combine(ApplicationData.Current.LocalFolder.Path, "wiki"));
+
     public static async Task<AppServices> CreateAsync()
     {
         var localFolder = ApplicationData.Current.LocalFolder.Path;

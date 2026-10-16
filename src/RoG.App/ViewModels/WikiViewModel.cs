@@ -1,0 +1,456 @@
+using System.Collections.ObjectModel;
+using System.Globalization;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using RoG.App.Services;
+using RoG.Core.Api;
+using RoG.Core.Content;
+using RoG.Core.Features.Wiki;
+using RoG.Core.Localization;
+
+namespace RoG.App.ViewModels;
+
+/// <summary>
+/// Wiki: Bereich wählen, Seitenbaum oder Suche, Seite nativ (HTML der API), Versionen mit Vergleich, Bearbeiten mit
+/// Vorschau und Konflikterkennung, Beobachten. Gelesene Seiten werden offline gespeichert und ohne Netz gezeigt.
+/// </summary>
+public sealed partial class WikiViewModel : LoadableViewModel
+{
+    private readonly WikiService _wiki;
+    private bool _namespacesLoaded;
+    private string? _baseRevisionId;
+
+    public WikiViewModel(AppServices services)
+        : base(services)
+    {
+        _wiki = new WikiService(services.Api.Client, services.Api.Http, services.Environment.WikiBaseUrl);
+    }
+
+    public ObservableCollection<SettingsOption> Namespaces { get; } = [];
+
+    public ObservableCollection<WikiListItem> Items { get; } = [];
+
+    public ObservableCollection<WikiRevisionItemViewModel> Revisions { get; } = [];
+
+    [ObservableProperty]
+    public partial SettingsOption? SelectedNamespace { get; set; }
+
+    [ObservableProperty]
+    public partial string? SearchText { get; set; }
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsDetailOpen), nameof(ShowSelectHint))]
+    public partial WikiListItem? Selected { get; set; }
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsDetailOpen), nameof(ShowSelectHint), nameof(HasPage))]
+    public partial WikiPage? Page { get; set; }
+
+    public bool IsDetailOpen => Selected is not null || Page is not null;
+
+    public bool ShowSelectHint => !IsDetailOpen;
+
+    public bool HasPage => Page is not null;
+
+    [ObservableProperty]
+    public partial RichDocument? Document { get; set; }
+
+    [ObservableProperty]
+    public partial string PageMeta { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial bool IsOfflineCopy { get; set; }
+
+    [ObservableProperty]
+    public partial bool IsPageLoading { get; set; }
+
+    [ObservableProperty]
+    public partial string WatchLabel { get; set; } = string.Empty;
+
+    /// <summary>Bearbeiten nur mit Recht <c>wiki.edit</c> (irgendwo, Squad-Bereiche) und Scope <c>wiki:write</c>; der Server prüft.</summary>
+    public bool CanEdit => Services.CurrentUser is { } me && me.CanAnywhere("wiki.edit") && me.HasScope("wiki:write");
+
+    public bool CanWatch => Services.CurrentUser is not null;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(ShowReader))]
+    public partial bool IsEditing { get; set; }
+
+    public bool ShowReader => !IsEditing;
+
+    [ObservableProperty]
+    public partial string EditContent { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial string EditSummary { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial RichDocument? PreviewDocument { get; set; }
+
+    [ObservableProperty]
+    public partial bool HasPreview { get; set; }
+
+    [ObservableProperty]
+    public partial string DiffText { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial bool HasDiff { get; set; }
+
+    [ObservableProperty]
+    public partial string? FeedbackMessage { get; set; }
+
+    [ObservableProperty]
+    public partial InfoBarSeverity FeedbackSeverity { get; set; }
+
+    [ObservableProperty]
+    public partial bool IsFeedbackOpen { get; set; }
+
+    protected override bool HasData => Items.Count > 0;
+
+    protected override async Task LoadCoreAsync(CancellationToken cancellationToken)
+    {
+        try
+        {
+            if (!_namespacesLoaded)
+            {
+                var namespaces = await _wiki.NamespacesAsync(cancellationToken);
+                Namespaces.Clear();
+                foreach (var n in namespaces)
+                {
+                    Namespaces.Add(new SettingsOption(n.Slug, n.Name));
+                }
+
+                _namespacesLoaded = true;
+                _suppressNamespace = true;
+                SelectedNamespace = Namespaces.FirstOrDefault();
+                _suppressNamespace = false;
+            }
+
+            Items.Clear();
+            if (!string.IsNullOrWhiteSpace(SearchText))
+            {
+                foreach (var hit in await _wiki.SearchAsync(SearchText, cancellationToken))
+                {
+                    Items.Add(new WikiListItem(hit.Id, hit.Title, StripMarks(hit.Snippet), 0));
+                }
+            }
+            else if (SelectedNamespace is { } ns)
+            {
+                foreach (var entry in await _wiki.TreeAsync(ns.Value, cancellationToken))
+                {
+                    Items.Add(new WikiListItem(entry.Id, entry.Title, null, entry.Depth));
+                }
+            }
+        }
+        catch (ApiProblemException ex) when (ex.Problem.IsNetworkError)
+        {
+            // Ohne Netz: offline gespeicherte Seiten zeigen
+            Items.Clear();
+            foreach (var page in Services.WikiOffline.All(Services.Language))
+            {
+                Items.Add(new WikiListItem(page.Id, page.Title, page.NamespaceName, 0));
+            }
+
+            if (Items.Count == 0)
+            {
+                throw;
+            }
+
+            Show(Services.Localizer.GetString(StringKeys.WikiOfflineList), InfoBarSeverity.Warning);
+        }
+    }
+
+    private bool _suppressNamespace;
+
+    partial void OnSelectedNamespaceChanged(SettingsOption? value)
+    {
+        if (!_suppressNamespace && _namespacesLoaded)
+        {
+            SearchText = null;
+            _ = LoadAsync();
+        }
+    }
+
+    partial void OnSelectedChanged(WikiListItem? value)
+    {
+        if (value is not null)
+        {
+            _ = OpenPageAsync(value.Id);
+        }
+    }
+
+    [RelayCommand]
+    private Task SearchAsync() => LoadAsync();
+
+    /// <summary>Deep-Link (<c>bereich/…/seite</c>) aus <c>rog://wiki/…</c> oder einem Link im Inhalt.</summary>
+    public async Task OpenPathAsync(string path)
+    {
+        var segments = path.Split('/', StringSplitOptions.RemoveEmptyEntries);
+        await LoadAsync();
+        if (segments.Length < 2)
+        {
+            if (segments.Length == 1 && Namespaces.FirstOrDefault(n => n.Value == segments[0]) is { } ns)
+            {
+                SelectedNamespace = ns;
+            }
+
+            return;
+        }
+
+        await LoadPageAsync(() => _wiki.PageBySlugAsync(segments[0], segments[^1], Services.Language), null);
+    }
+
+    private Task OpenPageAsync(string id) =>
+        LoadPageAsync(() => _wiki.PageAsync(id, Services.Language), id);
+
+    private async Task LoadPageAsync(Func<Task<WikiPage>> load, string? offlineId)
+    {
+        IsEditing = false;
+        IsPageLoading = true;
+        HasDiff = false;
+        Revisions.Clear();
+        try
+        {
+            var page = await load();
+            ShowPage(page, offline: false);
+            try
+            {
+                await Services.WikiOffline.SaveAsync(page);
+            }
+            catch (IOException)
+            {
+                // Offline-Kopie ist Beiwerk
+            }
+        }
+        catch (ApiProblemException ex) when (ex.Problem.IsNetworkError && offlineId is not null
+            && await Services.WikiOffline.LoadAsync(offlineId, Services.Language) is { } cached)
+        {
+            ShowPage(cached, offline: true);
+        }
+        catch (ApiProblemException ex)
+        {
+            Show(Services.Localizer.GetError(ex.Problem.Code), InfoBarSeverity.Error);
+        }
+        catch (RoG.Core.Api.Generated.GeneratedApiException)
+        {
+            Show(Services.Localizer.GetError(ApiProblem.Codes.Unknown), InfoBarSeverity.Error);
+        }
+        finally
+        {
+            IsPageLoading = false;
+        }
+    }
+
+    private void ShowPage(WikiPage page, bool offline)
+    {
+        Page = page;
+        IsOfflineCopy = offline;
+        Document = new HtmlContentParser(ContentPolicy.Platform, page.WebUrl ?? Services.Environment.WikiBaseUrl).Parse(page.Html);
+        PageMeta = string.Join(" · ", new[]
+        {
+            page.NamespaceName,
+            page.UpdatedAt?.ToLocalTime().ToString("g", CultureInfo.CurrentCulture),
+            page.Categories.Count > 0 ? string.Join(", ", page.Categories) : null,
+        }.Where(s => !string.IsNullOrEmpty(s)));
+        WatchLabel = Services.Localizer.GetString(page.Watching == true ? StringKeys.WikiUnwatch : StringKeys.WikiWatch);
+    }
+
+    [RelayCommand]
+    private async Task ToggleWatchAsync()
+    {
+        if (Page is not { } page)
+        {
+            return;
+        }
+
+        await RunAsync(async () =>
+        {
+            var watching = await _wiki.ToggleWatchAsync(page.Id);
+            Page = page with { Watching = watching };
+            WatchLabel = Services.Localizer.GetString(watching ? StringKeys.WikiUnwatch : StringKeys.WikiWatch);
+            Show(Services.Localizer.GetString(watching ? StringKeys.WikiWatching : StringKeys.WikiNotWatching), InfoBarSeverity.Success);
+        });
+    }
+
+    [RelayCommand]
+    private async Task OpenInBrowserAsync()
+    {
+        if (Page?.WebUrl is { } url)
+        {
+            await Services.Browser.OpenAsync(url);
+        }
+    }
+
+    [RelayCommand]
+    private async Task LoadRevisionsAsync()
+    {
+        if (Page is not { } page)
+        {
+            return;
+        }
+
+        await RunAsync(async () =>
+        {
+            Revisions.Clear();
+            foreach (var r in await _wiki.RevisionsAsync(page.Id))
+            {
+                Revisions.Add(new WikiRevisionItemViewModel(r, this));
+            }
+        });
+    }
+
+    internal Task CompareAsync(WikiRevisionItemViewModel revision) => RunAsync(async () =>
+    {
+        var old = await _wiki.RevisionContentAsync(revision.Id);
+        var current = Page?.Content ?? (Page?.RevisionId is { } id ? await _wiki.RevisionContentAsync(id) : string.Empty);
+        DiffText = string.Join("\n", LineDiff.Compare(old, current).Where(l => l.Kind != ' ').Select(l => $"{l.Kind} {l.Text}"));
+        if (DiffText.Length == 0)
+        {
+            DiffText = Services.Localizer.GetString(StringKeys.ConfigUnchanged);
+        }
+
+        HasDiff = true;
+    });
+
+    internal async Task RestoreAsync(WikiRevisionItemViewModel revision)
+    {
+        if (Page is { } page && await RunAsync(() => _wiki.RestoreAsync(revision.Id)))
+        {
+            Show(Services.Localizer.GetString(StringKeys.WikiRestored), InfoBarSeverity.Success);
+            await OpenPageAsync(page.Id);
+        }
+    }
+
+    [RelayCommand]
+    private async Task EditAsync()
+    {
+        if (Page is not { } page)
+        {
+            return;
+        }
+
+        // Quelltext: kommt mit der Seite; sonst aus der aktuellen Version
+        var content = page.Content;
+        if (content is null && page.RevisionId is { } revision)
+        {
+            await RunAsync(async () => content = await _wiki.RevisionContentAsync(revision));
+        }
+
+        EditContent = content ?? string.Empty;
+        EditSummary = string.Empty;
+        _baseRevisionId = page.RevisionId;
+        HasPreview = false;
+        IsEditing = true;
+    }
+
+    [RelayCommand]
+    private void CancelEdit() => IsEditing = false;
+
+    [RelayCommand]
+    private Task PreviewAsync() => Page is not { } page ? Task.CompletedTask : RunAsync(async () =>
+    {
+        var html = await _wiki.RenderAsync(page.Id, EditContent, page.Format, page.Title);
+        PreviewDocument = new HtmlContentParser(ContentPolicy.Platform, page.WebUrl ?? Services.Environment.WikiBaseUrl).Parse(html);
+        HasPreview = true;
+    });
+
+    [RelayCommand]
+    private async Task SaveAsync()
+    {
+        if (Page is not { } page)
+        {
+            return;
+        }
+
+        try
+        {
+            var outcome = await _wiki.SaveAsync(page.Id, page.Locale, page.Title, EditContent, page.Format, EditSummary, _baseRevisionId);
+            IsEditing = false;
+            Show(Services.Localizer.GetString(outcome == WikiSaveOutcome.Pending ? StringKeys.WikiPending : StringKeys.WikiSaved), InfoBarSeverity.Success);
+            await OpenPageAsync(page.Id);
+        }
+        catch (WikiEditConflictException conflict)
+        {
+            // Fremde Änderung: Unterschied zeigen, nächster Klick auf Speichern überschreibt bewusst
+            _baseRevisionId = conflict.CurrentRevisionId;
+            DiffText = string.Join("\n", LineDiff.Compare(conflict.CurrentContent, EditContent).Where(l => l.Kind != ' ').Select(l => $"{l.Kind} {l.Text}"));
+            HasDiff = true;
+            Show(string.Format(CultureInfo.CurrentCulture, Services.Localizer.GetString(StringKeys.WikiConflict), conflict.UpdatedBy ?? "?"), InfoBarSeverity.Warning);
+        }
+        catch (ApiProblemException ex)
+        {
+            Show(ex.Problem.Code == "validation_failed" && ex.Problem.Detail is { } d ? d : Services.Localizer.GetError(ex.Problem.Code), InfoBarSeverity.Error);
+        }
+        catch (RoG.Core.Api.Generated.GeneratedApiException)
+        {
+            Show(Services.Localizer.GetError(ApiProblem.Codes.Unknown), InfoBarSeverity.Error);
+        }
+    }
+
+    public void CloseDetail()
+    {
+        Selected = null;
+        Page = null;
+        IsEditing = false;
+    }
+
+    private async Task<bool> RunAsync(Func<Task> action)
+    {
+        try
+        {
+            await action();
+            return true;
+        }
+        catch (ApiProblemException ex)
+        {
+            Show(Services.Localizer.GetError(ex.Problem.Code), InfoBarSeverity.Error);
+        }
+        catch (Exception ex) when (ex is RoG.Core.Api.Generated.GeneratedApiException or HttpRequestException)
+        {
+            Show(Services.Localizer.GetError(ApiProblem.Codes.Unknown), InfoBarSeverity.Error);
+        }
+
+        return false;
+    }
+
+    private void Show(string text, InfoBarSeverity severity)
+    {
+        IsFeedbackOpen = false;
+        FeedbackMessage = text;
+        FeedbackSeverity = severity;
+        IsFeedbackOpen = true;
+    }
+
+    private static string StripMarks(string snippet) =>
+        System.Net.WebUtility.HtmlDecode(System.Text.RegularExpressions.Regex.Replace(snippet, "<[^>]+>", string.Empty));
+}
+
+public sealed record WikiListItem(string Id, string Title, string? Subtitle, int Depth)
+{
+    public Thickness Indent => new(Depth * 16, 0, 0, 0);
+
+    public bool HasSubtitle => !string.IsNullOrEmpty(Subtitle);
+}
+
+public sealed partial class WikiRevisionItemViewModel(WikiRevision revision, WikiViewModel owner)
+{
+    public string Id => revision.Id;
+
+    public string Text { get; } = string.Join(" · ", new[]
+    {
+        revision.CreatedAt?.ToLocalTime().ToString("g", CultureInfo.CurrentCulture),
+        revision.Author,
+        revision.Summary,
+        revision.Status == "approved" ? null : revision.Status,
+    }.Where(s => !string.IsNullOrEmpty(s)));
+
+    public bool CanRestore => owner.CanEdit;
+
+    [RelayCommand]
+    private Task CompareAsync() => owner.CompareAsync(this);
+
+    [RelayCommand]
+    private Task RestoreAsync() => owner.RestoreAsync(this);
+}

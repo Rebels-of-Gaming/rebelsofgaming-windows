@@ -108,7 +108,9 @@ public sealed partial class RichContentView : UserControl
             case LineBreakInline:
                 return new LineBreak();
             case LinkInline link:
-                var hyperlink = new Hyperlink { NavigateUri = link.Target, Foreground = Res<Brush>("RoGRedBrush") };
+                var hyperlink = new Hyperlink { Foreground = Res<Brush>("RoGRedBrush") };
+                var target = link.Target;
+                hyperlink.Click += (_, _) => OpenLink(target);
                 foreach (var child in link.Children)
                 {
                     hyperlink.Inlines.Add(BuildInline(child));
@@ -278,6 +280,18 @@ public sealed partial class RichContentView : UserControl
         var button = new HyperlinkButton { NavigateUri = image.Link, Content = picture, Padding = new Thickness(0) };
         AutomationProperties.SetName(button, image.Alt ?? image.Link.ToString());
         return button;
+    }
+
+    /// <summary>Links der Plattform (Wiki, Forum, News …) in der App öffnen, alles andere im Standardbrowser.</summary>
+    private static void OpenLink(Uri target)
+    {
+        var services = App.Services;
+        if (RoG.Core.Navigation.AppRoute.FromWebUrl(target, services.Environment) is { } route && services.Navigate(route))
+        {
+            return;
+        }
+
+        _ = services.Browser.OpenAsync(target);
     }
 
     private static HyperlinkButton BuildMediaLink(MediaLinkBlock media)

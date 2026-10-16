@@ -36,6 +36,7 @@ public sealed partial class MainWindow : Window, IDisposable
         [StringKeys.NavForum] = typeof(ForumPage),
         [StringKeys.NavUploads] = typeof(UploadsPage),
         [StringKeys.NavMedia] = typeof(MediaPage),
+        [StringKeys.NavWiki] = typeof(WikiPage),
     };
 
     private const string SettingsKey = "Settings";
@@ -198,6 +199,15 @@ public sealed partial class MainWindow : Window, IDisposable
     private void ShowLogin()
     {
         _services.CurrentUser = null;
+        try
+        {
+            _services.WikiOffline.Clear(); // kann Mitglieder-Bereiche enthalten
+        }
+        catch (IOException)
+        {
+            // gesperrte Datei – beim nächsten Abmelden erneut
+        }
+
         _ = _services.Realtime.StopAsync();
         _services.Realtime.UnreadNotifications = 0;
         _services.Realtime.UnreadMessages = 0;

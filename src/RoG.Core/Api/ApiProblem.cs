@@ -33,6 +33,35 @@ public sealed record ApiProblem
     /// <summary>Wartezeit aus <c>Retry-After</c> (429/503).</summary>
     public TimeSpan? RetryAfter { get; init; }
 
+    /// <summary>Roher JSON-Body (nur bei gültigem Objekt) – für Zusatzfelder wie <c>current</c> bei <c>edit_conflict</c>.</summary>
+    public string? RawBody { get; init; }
+
+    /// <summary>Zusatzfeld des Problems (RFC 9457 „extension member“), z. B. <c>current</c>.</summary>
+    public bool TryGetExtension(string name, out JsonElement value)
+    {
+        value = default;
+        if (RawBody is null)
+        {
+            return false;
+        }
+
+        try
+        {
+            using var doc = JsonDocument.Parse(RawBody);
+            if (doc.RootElement.TryGetProperty(name, out var found))
+            {
+                value = found.Clone();
+                return true;
+            }
+        }
+        catch (JsonException)
+        {
+            // RawBody ist nur gesetzt, wenn er gültig war
+        }
+
+        return false;
+    }
+
     public bool IsUnauthorized => Status == (int)HttpStatusCode.Unauthorized;
 
     public bool IsForbidden => Status == (int)HttpStatusCode.Forbidden;
@@ -86,7 +115,7 @@ public sealed record ApiProblem
     /// <summary>Parst einen Fehler-Body (JSON) – robust gegen leere oder fremde Bodies.</summary>
     public static ApiProblem Parse(string? body, int status, TimeSpan? retryAfter = null)
     {
-        string? code = null, type = null, title = null, detail = null, instance = null;
+        string? code = null, type = null, title = null, detail = null, instance = null, raw = null;
         var errors = new Dictionary<string, IReadOnlyList<string>>(StringComparer.Ordinal);
 
         if (!string.IsNullOrWhiteSpace(body))
@@ -97,6 +126,7 @@ public sealed record ApiProblem
                 var root = doc.RootElement;
                 if (root.ValueKind == JsonValueKind.Object)
                 {
+                    raw = body;
                     code = ReadString(root, "code") ?? ReadString(root, "error");
                     type = ReadString(root, "type");
                     title = ReadString(root, "title") ?? ReadString(root, "message");
@@ -135,6 +165,7 @@ public sealed record ApiProblem
             Instance = instance,
             Errors = errors,
             RetryAfter = retryAfter,
+            RawBody = raw,
         };
     }
 

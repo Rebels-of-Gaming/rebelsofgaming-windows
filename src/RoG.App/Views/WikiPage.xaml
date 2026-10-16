@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="RoG.App.Views.WikiPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:RoG.App.Controls"
+    xmlns:vm="using:RoG.App.ViewModels"
+    Background="{StaticResource RoGBgBrush}">
+
+    <controls:ListDetailPanel DetailClosed="OnDetailClosed" IsDetailOpen="{x:Bind ViewModel.IsDetailOpen, Mode=OneWay}">
+        <controls:ListDetailPanel.List>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackPanel Margin="24,24,24,12" Spacing="12">
+                    <TextBlock x:Uid="WikiPage_Title" Style="{StaticResource RoGDisplayTextStyle}" Text="WIKI" />
+                    <ComboBox
+                        x:Uid="WikiPage_Namespace"
+                        HorizontalAlignment="Stretch"
+                        ItemsSource="{x:Bind ViewModel.Namespaces}"
+                        SelectedItem="{x:Bind ViewModel.SelectedNamespace, Mode=TwoWay}" />
+                    <AutoSuggestBox
+                        x:Uid="WikiPage_Search"
+                        QueryIcon="Find"
+                        QuerySubmitted="OnSearchSubmitted"
+                        Text="{x:Bind ViewModel.SearchText, Mode=TwoWay}" />
+                </StackPanel>
+                <controls:StateView
+                    x:Uid="WikiPage_State"
+                    Grid.Row="1"
+                    ErrorMessage="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}"
+                    IsEmpty="{x:Bind ViewModel.IsEmpty, Mode=OneWay}"
+                    IsLoading="{x:Bind ViewModel.IsLoading, Mode=OneWay}"
+                    RetryCommand="{x:Bind ViewModel.RefreshCommand}" />
+                <ListView
+                    x:Uid="WikiPage_List"
+                    Grid.Row="1"
+                    Padding="12,0,12,12"
+                    ItemsSource="{x:Bind ViewModel.Items}"
+                    SelectedItem="{x:Bind ViewModel.Selected, Mode=TwoWay}"
+                    SelectionMode="Single"
+                    Visibility="{x:Bind ViewModel.ShowContent, Mode=OneWay}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="vm:WikiListItem">
+                            <StackPanel Margin="{x:Bind Indent}" Padding="0,6" AutomationProperties.Name="{x:Bind Title}">
+                                <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Title}" TextTrimming="CharacterEllipsis" />
+                                <TextBlock FontSize="12" MaxLines="2" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Subtitle}" TextWrapping="Wrap" Visibility="{x:Bind HasSubtitle}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </controls:ListDetailPanel.List>
+
+        <Grid>
+            <TextBlock
+                x:Uid="WikiPage_SelectHint"
+                Margin="32"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Style="{StaticResource RoGMutedTextStyle}"
+                Visibility="{x:Bind ViewModel.ShowSelectHint, Mode=OneWay}" />
+            <ProgressRing
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                IsActive="{x:Bind ViewModel.IsPageLoading, Mode=OneWay}" />
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="{x:Bind ViewModel.HasPage, Mode=OneWay}">
+                <StackPanel
+                    MaxWidth="{StaticResource RoGReadingWidth}"
+                    Padding="32,24,32,32"
+                    HorizontalAlignment="Left"
+                    Spacing="16">
+                    <StackPanel Spacing="4">
+                        <TextBlock
+                            IsTextSelectionEnabled="True"
+                            Style="{StaticResource RoGTitleTextStyle}"
+                            Text="{x:Bind ViewModel.Page.Title, Mode=OneWay}"
+                            AutomationProperties.HeadingLevel="Level1" />
+                        <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind ViewModel.PageMeta, Mode=OneWay}" TextWrapping="Wrap" />
+                        <TextBlock x:Uid="WikiPage_OfflineCopy" Foreground="{StaticResource RoGGoldBrush}" Style="{StaticResource RoGBodyTextStyle}" Visibility="{x:Bind ViewModel.IsOfflineCopy, Mode=OneWay}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Spacing="8" Visibility="{x:Bind ViewModel.ShowReader, Mode=OneWay}">
+                        <Button x:Uid="WikiPage_Edit" Command="{x:Bind ViewModel.EditCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" Visibility="{x:Bind ViewModel.CanEdit}" />
+                        <Button Command="{x:Bind ViewModel.ToggleWatchCommand}" Content="{x:Bind ViewModel.WatchLabel, Mode=OneWay}" Style="{StaticResource RoGSecondaryButtonStyle}" Visibility="{x:Bind ViewModel.CanWatch}" />
+                        <Button x:Uid="Common_OpenInBrowser" Command="{x:Bind ViewModel.OpenInBrowserCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                    </StackPanel>
+                    <InfoBar
+                        IsOpen="{x:Bind ViewModel.IsFeedbackOpen, Mode=TwoWay}"
+                        Message="{x:Bind ViewModel.FeedbackMessage, Mode=OneWay}"
+                        Severity="{x:Bind ViewModel.FeedbackSeverity, Mode=OneWay}" />
+
+                    <!-- Lesen -->
+                    <controls:RichContentView Document="{x:Bind ViewModel.Document, Mode=OneWay}" Visibility="{x:Bind ViewModel.ShowReader, Mode=OneWay}" />
+
+                    <!-- Bearbeiten -->
+                    <StackPanel Spacing="8" Visibility="{x:Bind ViewModel.IsEditing, Mode=OneWay}">
+                        <TextBox
+                            x:Uid="WikiPage_Editor"
+                            MinHeight="320"
+                            AcceptsReturn="True"
+                            FontFamily="Consolas"
+                            IsSpellCheckEnabled="True"
+                            Text="{x:Bind ViewModel.EditContent, Mode=TwoWay}"
+                            TextWrapping="Wrap" />
+                        <TextBox x:Uid="WikiPage_Summary" Text="{x:Bind ViewModel.EditSummary, Mode=TwoWay}" />
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Button x:Uid="WikiPage_Save" Command="{x:Bind ViewModel.SaveCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                            <Button x:Uid="WikiPage_Preview" Command="{x:Bind ViewModel.PreviewCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                            <Button x:Uid="Common_CancelButton" Command="{x:Bind ViewModel.CancelEditCommand}" />
+                        </StackPanel>
+                        <TextBlock x:Uid="WikiPage_PreviewTitle" Style="{StaticResource RoGSectionTextStyle}" Visibility="{x:Bind ViewModel.HasPreview, Mode=OneWay}" />
+                        <Border Padding="16" Background="{StaticResource RoGBg2Brush}" CornerRadius="{StaticResource RoGControlRadius}" Visibility="{x:Bind ViewModel.HasPreview, Mode=OneWay}">
+                            <controls:RichContentView Document="{x:Bind ViewModel.PreviewDocument, Mode=OneWay}" />
+                        </Border>
+                    </StackPanel>
+
+                    <!-- Unterschiede (Vergleich oder Konflikt) -->
+                    <StackPanel Spacing="8" Visibility="{x:Bind ViewModel.HasDiff, Mode=OneWay}">
+                        <TextBlock x:Uid="WikiPage_DiffTitle" Style="{StaticResource RoGSectionTextStyle}" />
+                        <TextBlock FontFamily="Consolas" FontSize="12" IsTextSelectionEnabled="True" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind ViewModel.DiffText, Mode=OneWay}" TextWrapping="Wrap" />
+                    </StackPanel>
+
+                    <!-- Versionen -->
+                    <Expander x:Uid="WikiPage_Revisions" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Expanding="OnRevisionsExpanding">
+                        <ItemsControl ItemsSource="{x:Bind ViewModel.Revisions}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="vm:WikiRevisionItemViewModel">
+                                    <StackPanel Padding="0,4" Spacing="2">
+                                        <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Text}" TextWrapping="Wrap" />
+                                        <StackPanel Orientation="Horizontal" Spacing="12">
+                                            <HyperlinkButton x:Uid="WikiPage_Compare" Padding="0" Command="{x:Bind CompareCommand}" />
+                                            <HyperlinkButton x:Uid="Config_Rollback" Padding="0" Command="{x:Bind RestoreCommand}" Visibility="{x:Bind CanRestore}" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Expander>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </controls:ListDetailPanel>
+</Page>

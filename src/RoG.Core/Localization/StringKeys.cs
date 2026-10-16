@@ -265,6 +265,17 @@ public static class StringKeys
     public const string MapZoomIn = "Map_ZoomIn";
     public const string MapZoomOut = "Map_ZoomOut";
 
+    // Wiki ({0} = Name)
+    public const string WikiOfflineList = "Wiki_OfflineList";
+    public const string WikiWatch = "Wiki_Watch";
+    public const string WikiUnwatch = "Wiki_Unwatch";
+    public const string WikiWatching = "Wiki_Watching";
+    public const string WikiNotWatching = "Wiki_NotWatching";
+    public const string WikiRestored = "Wiki_Restored";
+    public const string WikiSaved = "Wiki_Saved";
+    public const string WikiPending = "Wiki_Pending";
+    public const string WikiConflict = "Wiki_Conflict";
+
     // App-Sperre
     public const string LockPrompt = "Lock_Prompt";
 
@@ -326,7 +337,7 @@ public static class StringKeys
         "console_unavailable", "approval_required", "backup_locked", "backup_busy", "backup_not_found",
         "config_changed", "file_operation_forbidden", "pterodactyl_write_blocked",
         "forbidden_cvar", "rcon_write_blocked", "rcon_target_forbidden", "player_identity_conflict", "ban_managed_by_moderation",
-        "own_change", "change_not_pending", "members_only", "invalid_signature",
+        "own_change", "change_not_pending", "members_only", "invalid_signature", "edit_conflict", "not_pending",
     ];
 
     /// <summary>Alle Schlüssel aus Code – für den Vollständigkeitstest.</summary>

@@ -245,4 +245,82 @@
   <data name="Shell_TitleBar.Text" xml:space="preserve">
     <value>REBELS OF GAMING</value>
   </data>
+  <data name="Servers_LaunchedSteam" xml:space="preserve">
+    <value>Steam startet und verbindet dich mit {0}.</value>
+  </data>
+  <data name="Servers_LaunchedGame" xml:space="preserve">
+    <value>Das Spiel startet und verbindet dich mit {0}.</value>
+  </data>
+  <data name="Servers_LaunchedWeb" xml:space="preserve">
+    <value>Die Seite von {0} ist im Browser geöffnet.</value>
+  </data>
+  <data name="Servers_NoHandlerSteam" xml:space="preserve">
+    <value>Steam ist nicht installiert. Die Adresse {0} ist kopiert – im Spiel in der Konsole: connect {0}</value>
+  </data>
+  <data name="Servers_NoHandlerEt" xml:space="preserve">
+    <value>Enemy Territory (ET: Legacy) wurde nicht gefunden. Die Adresse {0} ist kopiert – im Spiel in der Konsole (^): /connect {0}</value>
+  </data>
+  <data name="Servers_NoHandlerOther" xml:space="preserve">
+    <value>Kein Programm für diesen Link gefunden. Die Adresse {0} ist kopiert.</value>
+  </data>
+  <data name="Servers_ManualMinecraft" xml:space="preserve">
+    <value>Adresse {0} kopiert. In Minecraft: Mehrspieler → Direkt verbinden → Strg+V → Server beitreten.</value>
+  </data>
+  <data name="Servers_Copied" xml:space="preserve">
+    <value>Adresse {0} kopiert.</value>
+  </data>
+  <data name="Servers_CopyFailed" xml:space="preserve">
+    <value>Die Adresse konnte nicht kopiert werden. Trag sie von Hand ein: {0}</value>
+  </data>
+  <data name="Servers_Passworded" xml:space="preserve">
+    <value>Der Server hat ein Passwort – das Spiel fragt danach.</value>
+  </data>
+  <data name="Servers_Online" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="Servers_Offline" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="Servers_Unknown" xml:space="preserve">
+    <value>Status unbekannt</value>
+  </data>
+  <data name="Servers_Players" xml:space="preserve">
+    <value>{0}/{1} Spieler</value>
+  </data>
+  <data name="Servers_PlayerListHeader" xml:space="preserve">
+    <value>Spieler ({0})</value>
+  </data>
+  <data name="Servers_ConnectAutomation" xml:space="preserve">
+    <value>Mit {0} verbinden</value>
+  </data>
+  <data name="Servers_CopyAutomation" xml:space="preserve">
+    <value>Adresse von {0} kopieren</value>
+  </data>
+  <data name="ServersPage_Title.Text" xml:space="preserve">
+    <value>SERVER</value>
+  </data>
+  <data name="ServersPage_Refresh.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Aktualisieren</value>
+  </data>
+  <data name="ServersPage_Refresh.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Aktualisieren (F5)</value>
+  </data>
+  <data name="ServersPage_Intro.Text" xml:space="preserve">
+    <value>„Verbinden“ startet das Spiel über Steam oder Enemy Territory direkt auf dem Server. Bei Minecraft kopiert die App die Adresse, du fügst sie im Spiel ein.</value>
+  </data>
+  <data name="ServersPage_Loading.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Server werden geladen</value>
+  </data>
+  <data name="ServersPage_Retry.Content" xml:space="preserve">
+    <value>ERNEUT VERSUCHEN</value>
+  </data>
+  <data name="ServersPage_Empty.Text" xml:space="preserve">
+    <value>Gerade sind keine Server eingetragen.</value>
+  </data>
+  <data name="ServerCard_Connect.Content" xml:space="preserve">
+    <value>VERBINDEN</value>
+  </data>
+  <data name="ServerCard_Copy.Content" xml:space="preserve">
+    <value>ADRESSE KOPIEREN</value>
+  </data>
 </root>

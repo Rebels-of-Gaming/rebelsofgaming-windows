@@ -30,6 +30,25 @@ public static class StringKeys
 
     public const string ComingSoon = "Common_ComingSoon";
 
+    // Server: Hinweise zu „Verbinden“ ({0} = Servername bzw. Adresse host:port)
+    public const string ServersLaunchedSteam = "Servers_LaunchedSteam";
+    public const string ServersLaunchedGame = "Servers_LaunchedGame";
+    public const string ServersLaunchedWeb = "Servers_LaunchedWeb";
+    public const string ServersNoHandlerSteam = "Servers_NoHandlerSteam";
+    public const string ServersNoHandlerEt = "Servers_NoHandlerEt";
+    public const string ServersNoHandlerOther = "Servers_NoHandlerOther";
+    public const string ServersManualMinecraft = "Servers_ManualMinecraft";
+    public const string ServersCopied = "Servers_Copied";
+    public const string ServersCopyFailed = "Servers_CopyFailed";
+    public const string ServersPassworded = "Servers_Passworded";
+    public const string ServersOnline = "Servers_Online";
+    public const string ServersOffline = "Servers_Offline";
+    public const string ServersUnknown = "Servers_Unknown";
+    public const string ServersPlayers = "Servers_Players";
+    public const string ServersPlayerListHeader = "Servers_PlayerListHeader";
+    public const string ServersConnectAutomation = "Servers_ConnectAutomation";
+    public const string ServersCopyAutomation = "Servers_CopyAutomation";
+
     /// <summary>Präfix für Fehlermeldungen: <c>Error_&lt;code&gt;</c>.</summary>
     public const string ErrorPrefix = "Error_";
 

@@ -66,6 +66,10 @@ public sealed partial class MainWindow : Window
         {
             ContentFrame.Navigate(typeof(HomePage));
         }
+        else if (key == StringKeys.NavServers)
+        {
+            ContentFrame.Navigate(typeof(ServersPage));
+        }
         else
         {
             ContentFrame.Navigate(typeof(PlaceholderPage), key);

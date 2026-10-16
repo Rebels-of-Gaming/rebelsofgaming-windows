@@ -2,6 +2,7 @@ using System.Globalization;
 using RoG.Core.Api;
 using RoG.Core.Auth;
 using RoG.Core.Config;
+using RoG.Core.Features.Servers;
 using RoG.Core.Localization;
 using RoG.Core.Settings;
 using Windows.ApplicationModel;
@@ -55,6 +56,9 @@ public sealed class AppServices : IDisposable
     public ILocalizer Localizer { get; }
 
     public IBrowserLauncher Browser { get; }
+
+    /// <summary>Spiele-Links und Zwischenablage für „Verbinden“ auf Gameservern.</summary>
+    public ServerConnector ServerConnector { get; } = new(new WindowsExternalLauncher(), new WindowsClipboard());
 
     /// <summary>„0.1.0“ aus der Paketversion (vierte Stelle ist im Store immer 0).</summary>
     public static string AppVersion

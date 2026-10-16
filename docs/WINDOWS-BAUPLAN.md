@@ -9,7 +9,7 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 |---|---|---|---|
 | 0 | Fundament | fertig: Core + Tests grün (Linux), **App baut auf dem Windows-Runner `rog-win-1`** (x64 + ARM64, CI-Job „WinUI-App (Windows)“), Store-Paket `.msixupload` entsteht; noch nie gestartet | siehe `git log` (develop) |
 | 1 | Konto + Start | offen | |
-| 2 | Community lesen | offen | |
+| 2 | Community lesen | begonnen (vorgezogen auf Wunsch des Owners, 16.10.2026): **Server-Seite mit „Verbinden“** | siehe `git log` (develop) |
 | 3 | Echtzeit + Desktop-Integration | offen | |
 | 4 | Kommunikation | offen | |
 | 5 | Medien | offen | |
@@ -56,6 +56,19 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 - **Tests:** 111 xUnit-Tests (PKCE inkl. RFC-7636-Vektor, Loopback über echte Sockets, Login-Ablauf mit Fake-Browser,
   Problem Details, Pipeline inkl. Idempotency/ETag/Retry/401, Reverb mit Fake-Socket inkl. Presence/Reconnect,
   Einstellungen, Sprachauflösung, .resw-Vollständigkeit + `x:Uid`, Manifest-Version/Assets/Capabilities).
+
+### Vorgezogen aus Stufe 2 – Server verbinden (16.10.2026)
+
+- **Core** `Features/Servers/`: `ServerService` (`GET /v1/servers`, Cursor-Pagination, eigenes Modell `GameServer`
+  statt generierter Typen), `ServerConnector` (Link aus `connect_url` der API, nur die Schemata, die die Website beim
+  Speichern erlaubt: `steam`, `et`, `wolf`, `minecraft`, `http(s)`; Programm vorhanden? → starten, sonst Adresse kopieren).
+  22 neue Tests.
+- **App** `ServersPage`: Karten mit Status-Punkt, Spiel, Map, Spieler/Slots, Adresse (markierbar), Spielerliste
+  (nur Mitglieder, von der API), „Verbinden“ + „Adresse kopieren“, InfoBar mit Hinweis je Fall (Steam fehlt → `connect`,
+  ET fehlt → `/connect`, Minecraft → Mehrspieler → Direkt verbinden), Lade-/Leer-/Fehlerzustand, F5/Strg+R,
+  stille Aktualisierung jede Minute. Auch im Gastmodus (API: `auth.optional`).
+- Noch offen für die Server-Seite (Stufe 2): Detailansicht mit Auslastungsgraph (`/servers/{id}/history`), Filter
+  nach Spiel/Squad, Profil-Links aus der Spielerliste, TeamSpeak `ts3server://`.
 
 ### Stufe 0 – bewusst offen
 
@@ -137,6 +150,11 @@ docs/
     (`.appxsym`, braucht `mspdbcmf.exe` aus Visual Studio) – Absturzberichte im Partner Center zeigen dann keine
     Funktionsnamen. Bei Bedarf später Build Tools vervollständigen und `AppxSymbolPackageEnabled` im Skript wieder an.
 16. **RuntimeIdentifier aus `Platform`** (`RoG.App.csproj`), damit der Bündel-Build je Plattform ohne `-r` läuft.
+17. **Minecraft ohne Direkt-Verbinden.** Minecraft Java hat kein Link-Schema zum Verbinden; die API liefert für
+    `query_type=minecraft` deshalb kein `connect_url`. Die App kopiert die Adresse und erklärt den Weg im Spiel.
+    Trägt die Verwaltung einen eigenen `minecraft://…`-Link ein (Bedrock: `minecraft://?addExternalServer=Name|host:port`),
+    startet die App ihn wie die anderen. `et://` braucht ET: Legacy (registriert das Schema unter Windows); fehlt es,
+    wird die Adresse kopiert. Geprüft wird vorher mit `Launcher.QueryUriSupportAsync`.
 
 ## Offene Fragen (an Wahke)
 

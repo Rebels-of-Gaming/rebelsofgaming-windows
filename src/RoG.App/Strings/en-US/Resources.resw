@@ -245,4 +245,82 @@
   <data name="Shell_TitleBar.Text" xml:space="preserve">
     <value>REBELS OF GAMING</value>
   </data>
+  <data name="Servers_LaunchedSteam" xml:space="preserve">
+    <value>Steam is starting and connecting you to {0}.</value>
+  </data>
+  <data name="Servers_LaunchedGame" xml:space="preserve">
+    <value>The game is starting and connecting you to {0}.</value>
+  </data>
+  <data name="Servers_LaunchedWeb" xml:space="preserve">
+    <value>The page of {0} is open in your browser.</value>
+  </data>
+  <data name="Servers_NoHandlerSteam" xml:space="preserve">
+    <value>Steam is not installed. The address {0} has been copied – in the game console: connect {0}</value>
+  </data>
+  <data name="Servers_NoHandlerEt" xml:space="preserve">
+    <value>Enemy Territory (ET: Legacy) was not found. The address {0} has been copied – in the game console (~): /connect {0}</value>
+  </data>
+  <data name="Servers_NoHandlerOther" xml:space="preserve">
+    <value>No program found for this link. The address {0} has been copied.</value>
+  </data>
+  <data name="Servers_ManualMinecraft" xml:space="preserve">
+    <value>Address {0} copied. In Minecraft: Multiplayer → Direct Connection → Ctrl+V → Join Server.</value>
+  </data>
+  <data name="Servers_Copied" xml:space="preserve">
+    <value>Address {0} copied.</value>
+  </data>
+  <data name="Servers_CopyFailed" xml:space="preserve">
+    <value>The address could not be copied. Enter it manually: {0}</value>
+  </data>
+  <data name="Servers_Passworded" xml:space="preserve">
+    <value>The server has a password – the game will ask for it.</value>
+  </data>
+  <data name="Servers_Online" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="Servers_Offline" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="Servers_Unknown" xml:space="preserve">
+    <value>Status unknown</value>
+  </data>
+  <data name="Servers_Players" xml:space="preserve">
+    <value>{0}/{1} players</value>
+  </data>
+  <data name="Servers_PlayerListHeader" xml:space="preserve">
+    <value>Players ({0})</value>
+  </data>
+  <data name="Servers_ConnectAutomation" xml:space="preserve">
+    <value>Connect to {0}</value>
+  </data>
+  <data name="Servers_CopyAutomation" xml:space="preserve">
+    <value>Copy address of {0}</value>
+  </data>
+  <data name="ServersPage_Title.Text" xml:space="preserve">
+    <value>SERVERS</value>
+  </data>
+  <data name="ServersPage_Refresh.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="ServersPage_Refresh.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Refresh (F5)</value>
+  </data>
+  <data name="ServersPage_Intro.Text" xml:space="preserve">
+    <value>“Connect” starts the game via Steam or Enemy Territory straight onto the server. For Minecraft the app copies the address for you to paste in the game.</value>
+  </data>
+  <data name="ServersPage_Loading.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Loading servers</value>
+  </data>
+  <data name="ServersPage_Retry.Content" xml:space="preserve">
+    <value>TRY AGAIN</value>
+  </data>
+  <data name="ServersPage_Empty.Text" xml:space="preserve">
+    <value>No servers are listed right now.</value>
+  </data>
+  <data name="ServerCard_Connect.Content" xml:space="preserve">
+    <value>CONNECT</value>
+  </data>
+  <data name="ServerCard_Copy.Content" xml:space="preserve">
+    <value>COPY ADDRESS</value>
+  </data>
 </root>

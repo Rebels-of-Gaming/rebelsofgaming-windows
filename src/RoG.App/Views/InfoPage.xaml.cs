@@ -18,7 +18,14 @@ public sealed partial class InfoPage : Page
     protected override async void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
-        await ViewModel.LoadAsync();
+        if (e.Parameter is string { Length: > 0 } key)
+        {
+            await ViewModel.OpenAsync(key);
+        }
+        else
+        {
+            await ViewModel.LoadAsync();
+        }
     }
 
     private void OnDetailClosed(object? sender, EventArgs e) => ViewModel.Selected = null;

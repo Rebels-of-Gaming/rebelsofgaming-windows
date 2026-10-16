@@ -106,6 +106,10 @@ public static class StringKeys
     public const string MatchesOpen = "Matches_Open";
 
     // Info
+    public const string RulesPromptTitle = "RulesPrompt_Title";
+    public const string RulesPromptText = "RulesPrompt_Text";
+    public const string RulesPromptRead = "RulesPrompt_Read";
+    public const string RulesPromptLater = "RulesPrompt_Later";
     public const string InfoGroupRules = "Info_GroupRules";
     public const string InfoGroupPages = "Info_GroupPages";
     public const string InfoGroupLegal = "Info_GroupLegal";

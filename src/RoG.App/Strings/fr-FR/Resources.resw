@@ -1460,4 +1460,16 @@
   <data name="AccountPage_Delete.Content" xml:space="preserve">
     <value>SUPPRIMER LE COMPTE …</value>
   </data>
+  <data name="RulesPrompt_Title" xml:space="preserve">
+    <value>Merci de confirmer</value>
+  </data>
+  <data name="RulesPrompt_Text" xml:space="preserve">
+    <value>Il y a des règles ou textes légaux nouveaux ou modifiés à lire et accepter :</value>
+  </data>
+  <data name="RulesPrompt_Read" xml:space="preserve">
+    <value>Lire maintenant</value>
+  </data>
+  <data name="RulesPrompt_Later" xml:space="preserve">
+    <value>Plus tard</value>
+  </data>
 </root>

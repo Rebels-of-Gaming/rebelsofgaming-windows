@@ -39,6 +39,13 @@ public sealed partial class InfoViewModel : LoadableViewModel
 
     protected override bool HasData => Items.Count > 0;
 
+    /// <summary>Liste laden und den Eintrag mit dem Schlüssel (Regelwerk-Slug, Seiten-Slug, Rechtstext-Typ) öffnen.</summary>
+    public async Task OpenAsync(string key)
+    {
+        await LoadAsync();
+        Selected = Items.FirstOrDefault(i => i.Entry.Key == key);
+    }
+
     protected override async Task LoadCoreAsync(CancellationToken cancellationToken)
     {
         var entries = await _info.ListAsync(cancellationToken);

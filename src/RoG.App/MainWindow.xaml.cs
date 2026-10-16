@@ -226,6 +226,7 @@ public sealed partial class MainWindow : Window, IDisposable
         {
             _services.CurrentUser = await _services.Account.GetMeAsync();
             _ = _services.Account.RegisterDeviceAsync(AppServices.AppVersion);
+            _ = PromptPendingRulesAsync();
         }
         catch (ApiProblemException)
         {
@@ -234,6 +235,50 @@ public sealed partial class MainWindow : Window, IDisposable
         catch (RoG.Core.Api.Generated.GeneratedApiException)
         {
             // unerwartete Antwort – ohne Profil weiter
+        }
+    }
+
+    private bool _rulesPrompted;
+
+    /// <summary>
+    /// Offene Bestätigungen (Regeln, Rechtstexte mit Pflicht) einmal je Start ansprechen – „Jetzt lesen“ öffnet sie unter
+    /// Info, dort wird bestätigt. Fehler bleiben still (die Info-Seite zeigt den Stand ohnehin).
+    /// </summary>
+    private async Task PromptPendingRulesAsync()
+    {
+        if (_rulesPrompted)
+        {
+            return;
+        }
+
+        _rulesPrompted = true;
+        try
+        {
+            var pending = (await new RoG.Core.Features.Info.InfoService(_services.Api.Client, _services.Environment.WebBaseUrl).ListAsync())
+                .Where(e => e.NeedsAcceptance).ToList();
+            if (pending.Count == 0 || Content?.XamlRoot is not { } root)
+            {
+                return;
+            }
+
+            var l = _services.Localizer;
+            var dialog = new ContentDialog
+            {
+                XamlRoot = root,
+                Title = l.GetString(StringKeys.RulesPromptTitle),
+                Content = l.GetString(StringKeys.RulesPromptText) + "\n\n" + string.Join("\n", pending.Select(p => "• " + p.Title)),
+                PrimaryButtonText = l.GetString(StringKeys.RulesPromptRead),
+                CloseButtonText = l.GetString(StringKeys.RulesPromptLater),
+                DefaultButton = ContentDialogButton.Primary,
+            };
+            if (await dialog.ShowAsync() == ContentDialogResult.Primary)
+            {
+                Navigate(new AppRoute(AppSection.Info, pending[0].Key));
+            }
+        }
+        catch (Exception ex) when (ex is ApiProblemException or RoG.Core.Api.Generated.GeneratedApiException or InvalidOperationException)
+        {
+            // still – z. B. schon ein anderer Dialog offen
         }
     }
 

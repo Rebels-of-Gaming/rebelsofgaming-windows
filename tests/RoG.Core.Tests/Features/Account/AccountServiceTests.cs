@@ -139,13 +139,15 @@ public class AccountServiceTests
     [Fact]
     public async Task Reads_the_live_ticker()
     {
-        var h = Create((_, _) => Json("""{"data":[{"key":"online","label":"Online","icon":"activity","tone":"green","value":12,"hint":null},{"key":"server","label":"Auf Servern","icon":"server","tone":"red","value":3,"hint":"ET #1"}],"meta":{"updated_at":"2026-10-16T12:00:00Z","ttl":30}}"""));
+        var h = Create((_, _) => Json("""{"data":[{"key":"online","label":"Online","icon":"activity","tone":"green","value":12,"hint":null},{"key":"server","label":"Auf Servern","icon":"server","tone":"red","value":3,"hint":"ET #1"},{"key":"next_event","label":"Nächstes Event","icon":"calendar","tone":"gold","value":"Sa., 18.10. 20:00","hint":"Clanwar"},{"label":"ohne Schlüssel","value":1}],"meta":{"updated_at":"2026-10-16T12:00:00Z","ttl":30}}"""));
 
-        var stats = await new LiveTickerService(h.Api.Client).GetAsync();
+        var stats = await new LiveTickerService(h.Api.Http).GetAsync();
 
-        Assert.Equal(["online", "server"], stats.Select(s => s.Key));
-        Assert.Equal(12, stats[0].Value);
+        // Zahl und fertiger Text (Guide 08) – unvollständige Einträge fallen weg
+        Assert.Equal(["online", "server", "next_event"], stats.Select(s => s.Key));
+        Assert.Equal(12.ToString("N0", System.Globalization.CultureInfo.CurrentCulture), stats[0].Value);
         Assert.Null(stats[0].Hint);
         Assert.Equal("ET #1", stats[1].Hint);
+        Assert.Equal("Sa., 18.10. 20:00", stats[2].Value);
     }
 }

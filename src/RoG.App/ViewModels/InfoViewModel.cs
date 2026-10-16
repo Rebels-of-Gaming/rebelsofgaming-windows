@@ -147,7 +147,7 @@ public sealed partial class InfoDetailViewModel(AppServices services, InfoServic
         Intro = doc.Intro;
         Meta = doc.Meta;
         HasWebUrl = doc.WebUrl is not null;
-        CanAccept = doc.CanAccept && await Services.Tokens.GetAsync() is not null;
+        CanAccept = doc.CanAccept && await Services.Tokens.GetAsync(cancellationToken) is not null;
         Sections.Clear();
         foreach (var section in doc.Sections)
         {

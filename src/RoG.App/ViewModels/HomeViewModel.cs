@@ -17,7 +17,7 @@ namespace RoG.App.ViewModels;
 /// <summary>Startseite: Live-Ticker aus <c>/v1/live</c> (still aktualisiert), Hinweis im Gastmodus.</summary>
 public sealed partial class HomeViewModel(AppServices services) : ObservableObject
 {
-    private readonly LiveTickerService _ticker = new(services.Api.Client);
+    private readonly LiveTickerService _ticker = new(services.Api.Http);
     private readonly NewsService _news = new(services.Api.Client, services.Environment.WebBaseUrl);
     private readonly EventService _events = new(services.Api.Client);
 
@@ -78,7 +78,7 @@ public sealed partial class HomeViewModel(AppServices services) : ObservableObje
                 ErrorMessage = services.Localizer.GetError(ex.Problem.Code);
             }
         }
-        catch (RoG.Core.Api.Generated.GeneratedApiException)
+        catch (Exception ex) when (ex is RoG.Core.Api.Generated.GeneratedApiException or System.Text.Json.JsonException or HttpRequestException)
         {
             if (!silent || Stats.Count == 0)
             {
@@ -141,7 +141,7 @@ public sealed class LiveStatItem(LiveStat stat)
 {
     public string Label { get; } = stat.Label;
 
-    public string Value { get; } = stat.Value.ToString("N0", CultureInfo.CurrentCulture);
+    public string Value => stat.Value;
 
     public string? Hint { get; } = stat.Hint;
 
@@ -172,7 +172,7 @@ public sealed class LiveStatItem(LiveStat stat)
         _ => "RoGMutedBrush",
     }];
 
-    public string AutomationName { get; } = $"{stat.Label}: {stat.Value.ToString(CultureInfo.CurrentCulture)}";
+    public string AutomationName { get; } = $"{stat.Label}: {stat.Value}";
 }
 
 /// <summary>Anklickbarer Eintrag auf der Startseite (News, Termin).</summary>

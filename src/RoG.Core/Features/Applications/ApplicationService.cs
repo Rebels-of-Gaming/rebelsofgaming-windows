@@ -123,3 +123,69 @@ public sealed class ApplicationService(IRoGApiClient client, HttpClient http)
             A(e, "messages").Select(m => new ApplicationMessage(S(m, "body") ?? string.Empty, m.TryGetProperty("from_squad", out var f) && f.ValueKind == JsonValueKind.True, S(m, "author"), ApiValues.Time(S(m, "at")))).ToList());
     }
 }
+
+/// <summary>Offener Vote über eine Bewerbung (für stimmberechtigte Squad-Member).</summary>
+public sealed record OpenVote(
+    string ApplicationId,
+    string ApplicantName,
+    string? ApplicantSlug,
+    string SquadName,
+    int Age,
+    IReadOnlyList<(string Question, string Answer)> Answers,
+    IReadOnlyList<(string Title, bool Done)> Tasks,
+    int Participation,
+    int QuorumPercent,
+    DateTimeOffset? EndsAt,
+    string? MyVote);
+
+/// <summary>
+/// Votes (Guide 07 „Abstimmen“). <c>GET /v1/votes</c> wird selbst gelesen, weil <c>answers[].answer</c> Text sein kann,
+/// die Spec aber eine Zahl nennt (Lücke W9).
+/// </summary>
+public sealed class VoteService(IRoGApiClient client, HttpClient http)
+{
+    public async Task<IReadOnlyList<OpenVote>> OpenAsync(CancellationToken cancellationToken = default)
+    {
+        using var response = await http.GetAsync(new Uri("votes", UriKind.Relative), cancellationToken).ConfigureAwait(false);
+        response.EnsureSuccessStatusCode();
+        await using var stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+        using var doc = await JsonDocument.ParseAsync(stream, cancellationToken: cancellationToken).ConfigureAwait(false);
+        return Parse(doc.RootElement);
+    }
+
+    public async Task CastAsync(string applicationId, VoteChoice choice, CancellationToken cancellationToken = default) =>
+        await client.V1_applications_voteAsync(applicationId, new Body9 { Vote = choice }, cancellationToken).ConfigureAwait(false);
+
+    internal static IReadOnlyList<OpenVote> Parse(JsonElement root)
+    {
+        static string? S(JsonElement o, string n) => o.ValueKind == JsonValueKind.Object && o.TryGetProperty(n, out var p) ? p.ValueKind switch
+        {
+            JsonValueKind.String => p.GetString(),
+            JsonValueKind.Number => p.GetRawText(),
+            JsonValueKind.True => "yes",
+            JsonValueKind.False => "no",
+            _ => null,
+        } : null;
+        static int I(JsonElement o, string n) => o.ValueKind == JsonValueKind.Object && o.TryGetProperty(n, out var p) && p.ValueKind == JsonValueKind.Number ? p.GetInt32() : 0;
+        static JsonElement O(JsonElement o, string n) => o.ValueKind == JsonValueKind.Object && o.TryGetProperty(n, out var p) ? p : default;
+        static IEnumerable<JsonElement> A(JsonElement o, string n) => o.ValueKind == JsonValueKind.Object && o.TryGetProperty(n, out var p) && p.ValueKind == JsonValueKind.Array ? p.EnumerateArray() : [];
+
+        if (!root.TryGetProperty("data", out var data) || data.ValueKind != JsonValueKind.Array)
+        {
+            return [];
+        }
+
+        return data.EnumerateArray().Select(v => new OpenVote(
+            S(v, "id") ?? string.Empty,
+            S(O(v, "applicant"), "name") ?? "—",
+            S(O(v, "applicant"), "slug"),
+            S(O(v, "squad"), "name") ?? string.Empty,
+            I(v, "age"),
+            A(v, "answers").Select(a => (S(a, "label") ?? string.Empty, S(a, "answer") ?? "—")).ToList(),
+            A(v, "tasks").Select(t => (S(t, "title") ?? string.Empty, S(t, "done") == "yes")).ToList(),
+            I(O(v, "vote"), "participation"),
+            I(O(v, "vote"), "quorum_percent"),
+            ApiValues.Time(S(v, "vote_ends_at")),
+            S(v, "my_vote"))).Where(v => v.ApplicationId.Length > 0).ToList();
+    }
+}

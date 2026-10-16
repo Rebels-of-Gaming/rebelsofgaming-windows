@@ -1364,4 +1364,43 @@
   <data name="AccountPage_ApplicationWithdraw.Content" xml:space="preserve">
     <value>ZURÜCKZIEHEN</value>
   </data>
+  <data name="Votes_Age" xml:space="preserve">
+    <value>{0} Jahre</value>
+  </data>
+  <data name="Votes_Participation" xml:space="preserve">
+    <value>Beteiligung {0} % (Quorum {1} %)</value>
+  </data>
+  <data name="Votes_Ends" xml:space="preserve">
+    <value>endet {0}</value>
+  </data>
+  <data name="Votes_Cast" xml:space="preserve">
+    <value>Stimme gespeichert.</value>
+  </data>
+  <data name="Votes_MineYes" xml:space="preserve">
+    <value>Deine Stimme: dafür</value>
+  </data>
+  <data name="Votes_MineNo" xml:space="preserve">
+    <value>Deine Stimme: dagegen</value>
+  </data>
+  <data name="Votes_MineAbstain" xml:space="preserve">
+    <value>Deine Stimme: Enthaltung</value>
+  </data>
+  <data name="Home_OpenVotes" xml:space="preserve">
+    <value>OFFENE ABSTIMMUNGEN ({0})</value>
+  </data>
+  <data name="VotesPage_Title.Text" xml:space="preserve">
+    <value>ABSTIMMUNGEN</value>
+  </data>
+  <data name="VotesPage_State.EmptyText" xml:space="preserve">
+    <value>Gerade gibt es keine offenen Abstimmungen für dich.</value>
+  </data>
+  <data name="VotesPage_Yes.Content" xml:space="preserve">
+    <value>DAFÜR</value>
+  </data>
+  <data name="VotesPage_No.Content" xml:space="preserve">
+    <value>DAGEGEN</value>
+  </data>
+  <data name="VotesPage_Abstain.Content" xml:space="preserve">
+    <value>ENTHALTUNG</value>
+  </data>
 </root>

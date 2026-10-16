@@ -37,6 +37,13 @@
                 IsOpen="{x:Bind ViewModel.IsGuest, Mode=OneWay}"
                 Severity="Informational" />
 
+            <Button
+                HorizontalAlignment="Left"
+                Command="{x:Bind ViewModel.OpenVotesCommand}"
+                Content="{x:Bind ViewModel.VotesText, Mode=OneWay}"
+                Style="{StaticResource RoGPrimaryButtonStyle}"
+                Visibility="{x:Bind ViewModel.HasVotes, Mode=OneWay}" />
+
             <TextBlock x:Uid="HomePage_LiveTitle" Style="{StaticResource RoGSectionTextStyle}" />
 
             <ProgressRing

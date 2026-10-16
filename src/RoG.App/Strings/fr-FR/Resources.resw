@@ -1364,4 +1364,43 @@
   <data name="AccountPage_ApplicationWithdraw.Content" xml:space="preserve">
     <value>RETIRER</value>
   </data>
+  <data name="Votes_Age" xml:space="preserve">
+    <value>{0} ans</value>
+  </data>
+  <data name="Votes_Participation" xml:space="preserve">
+    <value>Participation {0} % (quorum {1} %)</value>
+  </data>
+  <data name="Votes_Ends" xml:space="preserve">
+    <value>se termine le {0}</value>
+  </data>
+  <data name="Votes_Cast" xml:space="preserve">
+    <value>Vote enregistré.</value>
+  </data>
+  <data name="Votes_MineYes" xml:space="preserve">
+    <value>Ton vote : pour</value>
+  </data>
+  <data name="Votes_MineNo" xml:space="preserve">
+    <value>Ton vote : contre</value>
+  </data>
+  <data name="Votes_MineAbstain" xml:space="preserve">
+    <value>Ton vote : abstention</value>
+  </data>
+  <data name="Home_OpenVotes" xml:space="preserve">
+    <value>VOTES OUVERTS ({0})</value>
+  </data>
+  <data name="VotesPage_Title.Text" xml:space="preserve">
+    <value>VOTES</value>
+  </data>
+  <data name="VotesPage_State.EmptyText" xml:space="preserve">
+    <value>Aucun vote ouvert pour toi pour le moment.</value>
+  </data>
+  <data name="VotesPage_Yes.Content" xml:space="preserve">
+    <value>POUR</value>
+  </data>
+  <data name="VotesPage_No.Content" xml:space="preserve">
+    <value>CONTRE</value>
+  </data>
+  <data name="VotesPage_Abstain.Content" xml:space="preserve">
+    <value>ABSTENTION</value>
+  </data>
 </root>

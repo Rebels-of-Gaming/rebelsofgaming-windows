@@ -54,3 +54,26 @@ public class ApplicationServiceTests
         Assert.True(app.Messages[0].FromSquad);
     }
 }
+
+public class VoteServiceTests
+{
+    [Fact]
+    public void Text_and_number_answers_are_read()
+    {
+        using var doc = System.Text.Json.JsonDocument.Parse("""
+            {"data":[{"id":"01A","status":"vote","applicant":{"id":"u","slug":"nyx","name":"Nyx"},"squad":{"id":"s","slug":"et","name":"ET"},
+              "age":19,"answers":[{"question_id":"q1","label":"Wie oft?","type":"select","answer":"3-4"},{"question_id":"q2","label":"Alter Clan?","type":"number","answer":2}],
+              "tasks":[{"id":"t","title":"Clanabend","done":true,"done_at":null}],
+              "vote":{"round":1,"eligible":6,"cast":4,"participation":67,"quorum_percent":50,"quorum_met":true},
+              "vote_ends_at":"2026-10-18T18:00:00Z","my_vote":null}]}
+            """);
+
+        var vote = Assert.Single(VoteService.Parse(doc.RootElement));
+
+        Assert.Equal("Nyx", vote.ApplicantName);
+        Assert.Equal([("Wie oft?", "3-4"), ("Alter Clan?", "2")], vote.Answers);
+        Assert.True(vote.Tasks[0].Done);
+        Assert.Equal(67, vote.Participation);
+        Assert.Null(vote.MyVote);
+    }
+}

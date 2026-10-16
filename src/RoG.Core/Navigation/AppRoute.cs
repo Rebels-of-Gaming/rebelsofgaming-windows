@@ -20,6 +20,7 @@ public enum AppSection
     Search,
     Notifications,
     Settings,
+    Votes,
 }
 
 /// <summary>Ziel in der App: Bereich und optional ein Eintrag (Slug/ID) bzw. bei der Suche der Suchbegriff.</summary>
@@ -112,6 +113,7 @@ public sealed record AppRoute(AppSection Section, string? Key = null)
             "notifications" => new AppRoute(AppSection.Notifications),
             "account" => new AppRoute(AppSection.Account),
             "settings" => new AppRoute(AppSection.Settings),
+            "votes" => new AppRoute(AppSection.Votes),
             "search" => query.TryGetValue("q", out var q) && q.Length > 0 ? new AppRoute(AppSection.Search, q) : null,
             "open" => query.TryGetValue("url", out var url) && Uri.TryCreate(url, UriKind.Absolute, out var web) ? FromWebUrl(web, environment) : null,
             _ => null,

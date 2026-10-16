@@ -284,6 +284,13 @@ public sealed partial class MainWindow : Window, IDisposable
             return true;
         }
 
+        if (route.Section == AppSection.Votes)
+        {
+            NavView.SelectedItem = null;
+            ContentFrame.Navigate(typeof(VotesPage));
+            return true;
+        }
+
         if (route.Section == AppSection.Search)
         {
             NavView.SelectedItem = null;

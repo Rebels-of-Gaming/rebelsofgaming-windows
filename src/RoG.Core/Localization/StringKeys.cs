@@ -173,6 +173,16 @@ public static class StringKeys
     public const string ApplyYou = "Apply_You";
     public const string ApplyMessageSent = "Apply_MessageSent";
 
+    // Votes ({0} = Alter, Beteiligung/Quorum, Datum bzw. Anzahl)
+    public const string VotesAge = "Votes_Age";
+    public const string VotesParticipation = "Votes_Participation";
+    public const string VotesEnds = "Votes_Ends";
+    public const string VotesCast = "Votes_Cast";
+    public const string VotesMineYes = "Votes_MineYes";
+    public const string VotesMineNo = "Votes_MineNo";
+    public const string VotesMineAbstain = "Votes_MineAbstain";
+    public const string HomeOpenVotes = "Home_OpenVotes";
+
     // Abwesenheit
     public const string AbsenceReported = "Absence_Reported";
     public const string AbsenceActive = "Absence_Active";

@@ -33,6 +33,13 @@ public sealed partial class HomeViewModel(AppServices services) : ObservableObje
     [ObservableProperty]
     public partial bool HasEvents { get; set; }
 
+    /// <summary>„Offene Abstimmungen (n)“ – nur für Stimmberechtigte mit offenen Votes.</summary>
+    [ObservableProperty]
+    public partial string? VotesText { get; set; }
+
+    [ObservableProperty]
+    public partial bool HasVotes { get; set; }
+
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsEmpty))]
     public partial bool IsLoading { get; set; }
@@ -130,10 +137,27 @@ public sealed partial class HomeViewModel(AppServices services) : ObservableObje
 
         HasNews = LatestNews.Count > 0;
         HasEvents = NextEvents.Count > 0;
+
+        if (await services.Tokens.GetAsync() is not null)
+        {
+            try
+            {
+                var open = await new RoG.Core.Features.Applications.VoteService(services.Api.Client, services.Api.Http).OpenAsync();
+                VotesText = string.Format(CultureInfo.CurrentCulture, services.Localizer.GetString(StringKeys.HomeOpenVotes), open.Count);
+                HasVotes = open.Count > 0;
+            }
+            catch (Exception ex) when (ex is ApiProblemException or HttpRequestException or System.Text.Json.JsonException)
+            {
+                HasVotes = false;
+            }
+        }
     }
 
     [RelayCommand]
     private Task RefreshAsync() => LoadAsync();
+
+    [RelayCommand]
+    private void OpenVotes() => services.Navigate(new AppRoute(AppSection.Votes));
 }
 
 /// <summary>Kachel des Live-Tickers: Wert, Beschriftung (übersetzt von der API), Symbol und Status-Farbe.</summary>

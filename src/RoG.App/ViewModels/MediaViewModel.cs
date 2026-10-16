@@ -37,6 +37,25 @@ public sealed partial class MediaViewModel : LoadableViewModel
     [ObservableProperty]
     public partial bool IsLoadingItems { get; set; }
 
+    /// <summary>Einreichen erlaubt (Album erlaubt Uploads von Mitgliedern bzw. Recht <c>gallery.upload</c>).</summary>
+    [ObservableProperty]
+    public partial bool CanUpload { get; set; }
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanSubmit))]
+    public partial bool IsUploading { get; set; }
+
+    public bool CanSubmit => !IsUploading;
+
+    [ObservableProperty]
+    public partial string? FeedbackMessage { get; set; }
+
+    [ObservableProperty]
+    public partial InfoBarSeverity FeedbackSeverity { get; set; }
+
+    [ObservableProperty]
+    public partial bool IsFeedbackOpen { get; set; }
+
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsViewerOpen))]
     public partial GalleryItemViewModel? Viewed { get; set; }
@@ -71,8 +90,21 @@ public sealed partial class MediaViewModel : LoadableViewModel
     private async Task LoadItemsAsync(string slug)
     {
         IsLoadingItems = true;
+        CanUpload = false;
         try
         {
+            if (Services.CurrentUser is not null)
+            {
+                try
+                {
+                    CanUpload = await _media.CanUploadAsync(slug);
+                }
+                catch (Exception ex) when (ex is ApiProblemException or RoG.Core.Api.Generated.GeneratedApiException)
+                {
+                    CanUpload = false;
+                }
+            }
+
             foreach (var item in await _media.GetItemsAsync(slug))
             {
                 Items.Add(new GalleryItemViewModel(item));
@@ -94,6 +126,57 @@ public sealed partial class MediaViewModel : LoadableViewModel
 
     [RelayCommand]
     private void BackToAlbums() => Album = null;
+
+    /// <summary>Dateien ins geöffnete Album einreichen; die Seite hat Rechte und Bildunterschrift schon abgefragt.</summary>
+    public async Task SubmitAsync(IReadOnlyList<(Func<Task<Stream>> Open, string Name, long Size)> files, string? caption)
+    {
+        if (Album is not { } album || files.Count == 0)
+        {
+            return;
+        }
+
+        IsUploading = true;
+        var uploads = new RoG.Core.Features.Uploads.UploadService(Services.Api.Client, Services.StorageHttp);
+        var pending = 0;
+        var done = 0;
+        try
+        {
+            foreach (var (open, name, size) in files)
+            {
+                await using var stream = await open();
+                var status = await uploads.SubmitToGalleryAsync(album.Slug, stream, name, size, caption, rightsConfirmed: true);
+                done++;
+                if (status != "approved")
+                {
+                    pending++;
+                }
+            }
+
+            Show(string.Format(System.Globalization.CultureInfo.CurrentCulture, Services.Localizer.GetString(pending > 0 ? StringKeys.GallerySubmittedPending : StringKeys.GallerySubmitted), done), InfoBarSeverity.Success);
+            Items.Clear();
+            await LoadItemsAsync(album.Slug);
+        }
+        catch (ApiProblemException ex)
+        {
+            Show(ex.Problem.Code == "validation_failed" && ex.Problem.Detail is { } d ? d : Services.Localizer.GetError(ex.Problem.Code), InfoBarSeverity.Error);
+        }
+        catch (Exception ex) when (ex is RoG.Core.Api.Generated.GeneratedApiException or NotSupportedException or IOException or OverflowException)
+        {
+            Show(Services.Localizer.GetError("upload_failed"), InfoBarSeverity.Error);
+        }
+        finally
+        {
+            IsUploading = false;
+        }
+    }
+
+    private void Show(string text, InfoBarSeverity severity)
+    {
+        IsFeedbackOpen = false;
+        FeedbackMessage = text;
+        FeedbackSeverity = severity;
+        IsFeedbackOpen = true;
+    }
 
     [RelayCommand]
     private void CloseViewer() => Viewed = null;

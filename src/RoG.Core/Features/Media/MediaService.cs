@@ -37,6 +37,10 @@ public sealed class MediaService(IRoGApiClient client, HttpClient storage)
         return response.Data.Select(a => new GalleryAlbum(a.Id, a.Slug, a.Title, ApiValues.Text(a.Description), ApiValues.Text(a.Squad), a.Items_count ?? 0, ApiValues.WebUri(a.Cover))).ToList();
     }
 
+    /// <summary>Darf die Person in dieses Album einreichen (<c>can_upload</c>)?</summary>
+    public async Task<bool> CanUploadAsync(string albumSlug, CancellationToken cancellationToken = default) =>
+        (await client.V1_gallery_albums_showAsync(albumSlug, cancellationToken).ConfigureAwait(false)).Data.Can_upload;
+
     public async Task<IReadOnlyList<GalleryItem>> GetItemsAsync(string albumSlug, CancellationToken cancellationToken = default)
     {
         var response = await client.V1_gallery_items_indexAsync(limit: 200, filteralbum: albumSlug, cancellationToken: cancellationToken).ConfigureAwait(false);

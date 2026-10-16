@@ -2432,4 +2432,25 @@
   <data name="AdminPage_AssignRole.Content" xml:space="preserve">
     <value>VERGEBEN</value>
   </data>
+  <data name="Gallery_Caption" xml:space="preserve">
+    <value>Bildunterschrift (optional)</value>
+  </data>
+  <data name="Gallery_Rights" xml:space="preserve">
+    <value>Ich habe die Rechte an diesen Bildern/Clips und die gezeigten Personen sind einverstanden.</value>
+  </data>
+  <data name="Gallery_SubmitTitle" xml:space="preserve">
+    <value>In die Galerie einreichen</value>
+  </data>
+  <data name="Gallery_SubmitConfirm" xml:space="preserve">
+    <value>Einreichen</value>
+  </data>
+  <data name="Gallery_Submitted" xml:space="preserve">
+    <value>{0} eingereicht und veröffentlicht.</value>
+  </data>
+  <data name="Gallery_SubmittedPending" xml:space="preserve">
+    <value>{0} eingereicht – sichtbar nach der Freigabe.</value>
+  </data>
+  <data name="MediaPage_Submit.Content" xml:space="preserve">
+    <value>EINREICHEN</value>
+  </data>
 </root>

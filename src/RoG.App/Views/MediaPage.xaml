@@ -31,6 +31,9 @@
                         <FontIcon FontSize="14" Glyph="&#xE72B;" />
                     </Button>
                     <TextBlock VerticalAlignment="Center" Style="{StaticResource RoGSectionTextStyle}" Text="{x:Bind ViewModel.Album.Title, Mode=OneWay}" />
+                    <Button x:Uid="MediaPage_Submit" Click="OnSubmitClick" IsEnabled="{x:Bind ViewModel.CanSubmit, Mode=OneWay}" Style="{StaticResource RoGPrimaryButtonStyle}" Visibility="{x:Bind ViewModel.CanUpload, Mode=OneWay}" />
+                    <ProgressRing Width="20" Height="20" IsActive="{x:Bind ViewModel.IsUploading, Mode=OneWay}" />
+                    <InfoBar IsOpen="{x:Bind ViewModel.IsFeedbackOpen, Mode=TwoWay}" Message="{x:Bind ViewModel.FeedbackMessage, Mode=OneWay}" Severity="{x:Bind ViewModel.FeedbackSeverity, Mode=OneWay}" />
                 </StackPanel>
                 <controls:StateView
                     x:Uid="MediaPage_GalleryState"

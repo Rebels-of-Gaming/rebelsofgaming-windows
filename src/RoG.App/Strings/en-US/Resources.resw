@@ -2432,4 +2432,25 @@
   <data name="AdminPage_AssignRole.Content" xml:space="preserve">
     <value>ASSIGN</value>
   </data>
+  <data name="Gallery_Caption" xml:space="preserve">
+    <value>Caption (optional)</value>
+  </data>
+  <data name="Gallery_Rights" xml:space="preserve">
+    <value>I hold the rights to these images/clips and the people shown agree.</value>
+  </data>
+  <data name="Gallery_SubmitTitle" xml:space="preserve">
+    <value>Submit to the gallery</value>
+  </data>
+  <data name="Gallery_SubmitConfirm" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="Gallery_Submitted" xml:space="preserve">
+    <value>{0} submitted and published.</value>
+  </data>
+  <data name="Gallery_SubmittedPending" xml:space="preserve">
+    <value>{0} submitted – visible after approval.</value>
+  </data>
+  <data name="MediaPage_Submit.Content" xml:space="preserve">
+    <value>SUBMIT</value>
+  </data>
 </root>

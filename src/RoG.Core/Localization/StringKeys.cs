@@ -390,6 +390,14 @@ public static class StringKeys
     public const string MemberAdminStatusSuspended = "MemberAdmin_Status_suspended";
     public const string MemberAdminStatusFormer = "MemberAdmin_Status_former";
 
+    // Galerie einreichen ({0} = Anzahl)
+    public const string GalleryCaption = "Gallery_Caption";
+    public const string GalleryRights = "Gallery_Rights";
+    public const string GallerySubmitTitle = "Gallery_SubmitTitle";
+    public const string GallerySubmitConfirm = "Gallery_SubmitConfirm";
+    public const string GallerySubmitted = "Gallery_Submitted";
+    public const string GallerySubmittedPending = "Gallery_SubmittedPending";
+
     // App-Sperre
     public const string LockPrompt = "Lock_Prompt";
 

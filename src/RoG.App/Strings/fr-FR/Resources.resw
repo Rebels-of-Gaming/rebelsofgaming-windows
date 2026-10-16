@@ -2432,4 +2432,25 @@
   <data name="AdminPage_AssignRole.Content" xml:space="preserve">
     <value>ATTRIBUER</value>
   </data>
+  <data name="Gallery_Caption" xml:space="preserve">
+    <value>Légende (facultatif)</value>
+  </data>
+  <data name="Gallery_Rights" xml:space="preserve">
+    <value>Je détiens les droits sur ces images/clips et les personnes montrées sont d’accord.</value>
+  </data>
+  <data name="Gallery_SubmitTitle" xml:space="preserve">
+    <value>Proposer à la galerie</value>
+  </data>
+  <data name="Gallery_SubmitConfirm" xml:space="preserve">
+    <value>Proposer</value>
+  </data>
+  <data name="Gallery_Submitted" xml:space="preserve">
+    <value>{0} proposé(s) et publié(s).</value>
+  </data>
+  <data name="Gallery_SubmittedPending" xml:space="preserve">
+    <value>{0} proposé(s) – visible(s) après validation.</value>
+  </data>
+  <data name="MediaPage_Submit.Content" xml:space="preserve">
+    <value>PROPOSER</value>
+  </data>
 </root>

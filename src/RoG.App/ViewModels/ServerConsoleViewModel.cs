@@ -45,6 +45,9 @@ public sealed partial class ServerConsoleViewModel : ObservableObject, IAsyncDis
 
     public ObservableCollection<string> Lines { get; } = [];
 
+    /// <summary>Befehls-Historie für ↑/↓ in der Eingabe.</summary>
+    public CommandHistory History { get; } = new();
+
     [ObservableProperty]
     public partial string StateText { get; set; } = string.Empty;
 
@@ -147,6 +150,7 @@ public sealed partial class ServerConsoleViewModel : ObservableObject, IAsyncDis
         }
 
         Command = string.Empty;
+        History.Add(command);
         AddLine("> " + command);
         try
         {

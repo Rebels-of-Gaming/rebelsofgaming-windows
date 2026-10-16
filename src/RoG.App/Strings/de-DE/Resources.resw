@@ -1538,4 +1538,28 @@
   <data name="Console_Clear.Content" xml:space="preserve">
     <value>Leeren</value>
   </data>
+  <data name="Lock_Prompt" xml:space="preserve">
+    <value>Rebels of Gaming entsperren</value>
+  </data>
+  <data name="Lock_Title.Text" xml:space="preserve">
+    <value>GESPERRT</value>
+  </data>
+  <data name="Lock_Text.Text" xml:space="preserve">
+    <value>Die App ist mit Windows Hello gesperrt.</value>
+  </data>
+  <data name="Lock_Unlock.Content" xml:space="preserve">
+    <value>MIT WINDOWS HELLO ENTSPERREN</value>
+  </data>
+  <data name="Lock_Failed.Text" xml:space="preserve">
+    <value>Nicht bestätigt – bitte erneut versuchen.</value>
+  </data>
+  <data name="Lock_SignOut.Content" xml:space="preserve">
+    <value>Stattdessen abmelden</value>
+  </data>
+  <data name="SettingsPage_AppLock.Header" xml:space="preserve">
+    <value>App-Sperre mit Windows Hello (beim Start und nach 5 Minuten Abwesenheit)</value>
+  </data>
+  <data name="SettingsPage_AppLockHint.Text" xml:space="preserve">
+    <value>Windows Hello ist auf diesem PC nicht eingerichtet (Windows-Einstellungen → Konten → Anmeldeoptionen).</value>
+  </data>
 </root>

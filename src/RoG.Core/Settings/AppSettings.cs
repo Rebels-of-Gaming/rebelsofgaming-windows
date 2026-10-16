@@ -42,6 +42,12 @@ public sealed record AppSettings
     /// <summary>Sichtbarkeit neuer Uploads: <c>public</c>, <c>members</c> oder <c>private</c>.</summary>
     public string UploadVisibility { get; init; } = "public";
 
+    /// <summary>App-Sperre mit Windows Hello beim Start und nach Leerlauf.</summary>
+    public bool AppLock { get; init; }
+
+    /// <summary>Minuten außerhalb des Vordergrunds, nach denen die App-Sperre greift.</summary>
+    public int AppLockMinutes { get; init; } = 5;
+
     /// <summary>Zuletzt geöffneter Bereich (Navigations-Schlüssel wie <c>Nav_Servers</c>).</summary>
     public string? LastSection { get; init; }
 }

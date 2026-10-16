@@ -1538,4 +1538,28 @@
   <data name="Console_Clear.Content" xml:space="preserve">
     <value>Vider</value>
   </data>
+  <data name="Lock_Prompt" xml:space="preserve">
+    <value>Déverrouiller Rebels of Gaming</value>
+  </data>
+  <data name="Lock_Title.Text" xml:space="preserve">
+    <value>VERROUILLÉ</value>
+  </data>
+  <data name="Lock_Text.Text" xml:space="preserve">
+    <value>L’app est verrouillée avec Windows Hello.</value>
+  </data>
+  <data name="Lock_Unlock.Content" xml:space="preserve">
+    <value>DÉVERROUILLER AVEC WINDOWS HELLO</value>
+  </data>
+  <data name="Lock_Failed.Text" xml:space="preserve">
+    <value>Non vérifié – réessaie.</value>
+  </data>
+  <data name="Lock_SignOut.Content" xml:space="preserve">
+    <value>Se déconnecter à la place</value>
+  </data>
+  <data name="SettingsPage_AppLock.Header" xml:space="preserve">
+    <value>Verrouillage avec Windows Hello (au démarrage et après 5 minutes d’absence)</value>
+  </data>
+  <data name="SettingsPage_AppLockHint.Text" xml:space="preserve">
+    <value>Windows Hello n’est pas configuré sur ce PC (Paramètres Windows → Comptes → Options de connexion).</value>
+  </data>
 </root>

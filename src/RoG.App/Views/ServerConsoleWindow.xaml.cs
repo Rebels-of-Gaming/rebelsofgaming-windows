@@ -64,6 +64,16 @@ public sealed partial class ServerConsoleWindow : Window
             e.Handled = true;
             ViewModel.SendCommand.Execute(null);
         }
+        else if (e.Key is VirtualKey.Up or VirtualKey.Down && sender is TextBox box)
+        {
+            var text = e.Key == VirtualKey.Up ? ViewModel.History.Previous() : ViewModel.History.Next();
+            if (text is not null)
+            {
+                e.Handled = true;
+                ViewModel.Command = text;
+                box.SelectionStart = text.Length;
+            }
+        }
     }
 
     private async void OnKillClick(object sender, RoutedEventArgs e)

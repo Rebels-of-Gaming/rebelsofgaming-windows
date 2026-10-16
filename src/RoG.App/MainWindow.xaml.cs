@@ -53,6 +53,7 @@ public sealed partial class MainWindow : Window, IDisposable
         AppWindow.SetIcon("Assets/AppIcon.ico");
         RestorePlacement(services.Settings.Window);
         AppWindow.Closing += OnClosing;
+        Activated += OnWindowActivated;
 
         services.Api.Handler.Unauthorized += OnUnauthorized;
         services.SignInRequested += (_, _) => ShowLogin();
@@ -108,9 +109,82 @@ public sealed partial class MainWindow : Window, IDisposable
         NativeMethods.SetForegroundWindow(Win32Interop.GetWindowFromWindowId(AppWindow.Id));
     }
 
+    private readonly RoG.Core.Security.AppLock _lock = new();
+
+    private void SyncLockSettings()
+    {
+        _lock.Enabled = _services.Settings.AppLock;
+        _lock.IdleTimeout = TimeSpan.FromMinutes(Math.Max(1, _services.Settings.AppLockMinutes));
+    }
+
+    /// <summary>Vordergrund verloren/zurück: App-Sperre nach Leerlauf (nur angemeldet – Gäste haben nichts zu schützen).</summary>
+    private async void OnWindowActivated(object sender, WindowActivatedEventArgs args)
+    {
+        if (args.WindowActivationState == WindowActivationState.Deactivated)
+        {
+            _lock.OnLeft();
+            return;
+        }
+
+        SyncLockSettings();
+        if (LockOverlay.Visibility != Visibility.Visible && _lock.OnReturned() && await _services.Tokens.GetAsync() is not null)
+        {
+            ShowLock();
+        }
+    }
+
+    private void ShowLock()
+    {
+        LockError.Visibility = Visibility.Collapsed;
+        LockOverlay.Visibility = Visibility.Visible;
+        NavView.IsEnabled = false;
+        LoginFrame.IsEnabled = false;
+        UnlockButton.Focus(FocusState.Programmatic);
+    }
+
+    private async void OnUnlockClick(object sender, RoutedEventArgs e)
+    {
+        UnlockButton.IsEnabled = false;
+        try
+        {
+            if (await HelloService.VerifyAsync(_services.Localizer.GetString(StringKeys.LockPrompt)))
+            {
+                _lock.Unlock();
+                LockOverlay.Visibility = Visibility.Collapsed;
+                NavView.IsEnabled = true;
+                LoginFrame.IsEnabled = true;
+            }
+            else
+            {
+                LockError.Visibility = Visibility.Visible;
+            }
+        }
+        finally
+        {
+            UnlockButton.IsEnabled = true;
+        }
+    }
+
+    /// <summary>Ausweg, wenn Hello nicht mehr geht: abmelden (Token weg) statt entsperren.</summary>
+    private async void OnLockSignOutClick(object sender, RoutedEventArgs e)
+    {
+        await _services.Account.LogoutAsync();
+        _lock.Unlock();
+        LockOverlay.Visibility = Visibility.Collapsed;
+        NavView.IsEnabled = true;
+        LoginFrame.IsEnabled = true;
+        ShowLogin();
+    }
+
     private async Task InitializeAsync()
     {
+        SyncLockSettings();
         var token = await _services.Tokens.GetAsync();
+        if (token is not null && _lock.OnStart())
+        {
+            ShowLock();
+        }
+
         if (token is not null || _services.Settings.GuestMode)
         {
             ShowShell();

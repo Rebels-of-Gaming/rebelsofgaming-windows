@@ -1538,4 +1538,28 @@
   <data name="Console_Clear.Content" xml:space="preserve">
     <value>Clear</value>
   </data>
+  <data name="Lock_Prompt" xml:space="preserve">
+    <value>Unlock Rebels of Gaming</value>
+  </data>
+  <data name="Lock_Title.Text" xml:space="preserve">
+    <value>LOCKED</value>
+  </data>
+  <data name="Lock_Text.Text" xml:space="preserve">
+    <value>The app is locked with Windows Hello.</value>
+  </data>
+  <data name="Lock_Unlock.Content" xml:space="preserve">
+    <value>UNLOCK WITH WINDOWS HELLO</value>
+  </data>
+  <data name="Lock_Failed.Text" xml:space="preserve">
+    <value>Not verified – please try again.</value>
+  </data>
+  <data name="Lock_SignOut.Content" xml:space="preserve">
+    <value>Sign out instead</value>
+  </data>
+  <data name="SettingsPage_AppLock.Header" xml:space="preserve">
+    <value>App lock with Windows Hello (at start and after 5 minutes away)</value>
+  </data>
+  <data name="SettingsPage_AppLockHint.Text" xml:space="preserve">
+    <value>Windows Hello is not set up on this PC (Windows Settings → Accounts → Sign-in options).</value>
+  </data>
 </root>

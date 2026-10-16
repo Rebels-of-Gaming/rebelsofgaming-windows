@@ -45,6 +45,15 @@
                         Style="{StaticResource RoGMutedTextStyle}"
                         Text="{x:Bind ViewModel.AutostartHint, Mode=OneWay}"
                         Visibility="{x:Bind ViewModel.HasAutostartHint, Mode=OneWay}" />
+                    <ToggleSwitch
+                        x:Uid="SettingsPage_AppLock"
+                        IsEnabled="{x:Bind ViewModel.CanUseAppLock, Mode=OneWay}"
+                        IsOn="{x:Bind ViewModel.AppLock, Mode=TwoWay}" />
+                    <TextBlock
+                        x:Uid="SettingsPage_AppLockHint"
+                        Style="{StaticResource RoGMutedTextStyle}"
+                        TextWrapping="Wrap"
+                        Visibility="{x:Bind ViewModel.ShowAppLockHint, Mode=OneWay}" />
                 </StackPanel>
             </Border>
 

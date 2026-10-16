@@ -208,6 +208,9 @@ public static class StringKeys
     public const string ConsoleKillText = "Console_KillText";
     public const string ConsoleKillConfirm = "Console_KillConfirm";
 
+    // App-Sperre
+    public const string LockPrompt = "Lock_Prompt";
+
     // Abwesenheit
     public const string AbsenceReported = "Absence_Reported";
     public const string AbsenceActive = "Absence_Active";

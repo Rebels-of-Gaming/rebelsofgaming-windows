@@ -81,5 +81,17 @@
 
         <!-- Login liegt über der Shell, solange weder Token noch Gastmodus da sind. -->
         <Frame x:Name="LoginFrame" Grid.Row="1" Visibility="Collapsed" />
+
+        <!-- App-Sperre (Windows Hello): verdeckt alles, bis die Prüfung gelingt. -->
+        <Grid x:Name="LockOverlay" Grid.Row="1" Background="{StaticResource RoGBgBrush}" Visibility="Collapsed">
+            <StackPanel MaxWidth="420" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="16">
+                <FontIcon HorizontalAlignment="Center" FontSize="48" Foreground="{StaticResource RoGRedBrush}" Glyph="&#xE72E;" />
+                <TextBlock x:Uid="Lock_Title" HorizontalAlignment="Center" Style="{StaticResource RoGDisplayTextStyle}" />
+                <TextBlock x:Uid="Lock_Text" HorizontalAlignment="Center" Style="{StaticResource RoGMutedTextStyle}" TextAlignment="Center" TextWrapping="Wrap" />
+                <Button x:Name="UnlockButton" x:Uid="Lock_Unlock" HorizontalAlignment="Center" Click="OnUnlockClick" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                <TextBlock x:Name="LockError" x:Uid="Lock_Failed" HorizontalAlignment="Center" Foreground="{StaticResource RoGRedBrush}" Style="{StaticResource RoGBodyTextStyle}" Visibility="Collapsed" />
+                <HyperlinkButton x:Uid="Lock_SignOut" HorizontalAlignment="Center" Click="OnLockSignOutClick" />
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

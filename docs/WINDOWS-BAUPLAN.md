@@ -105,7 +105,9 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 - **Server-Steuerung:** „Steuern“ auf Server-Karten nur bei `control` aus der API; eigenes Fenster je Server mit
   Start/Neustart/Stopp/Kill (Kill mit Rückfrage), CPU/RAM/Speicher/Laufzeit, Live-Konsole über den Wings-WebSocket
   (kurzlebiges Token aus `console-token`, `Origin` aus der Antwort, Erneuerung bei `token expiring`), Befehle über die
-  API (Audit-Log). Vier-Augen-Pflicht (`can_command: false`) sperrt die Befehlszeile.
+  API (Audit-Log). Vier-Augen-Pflicht (`can_command: false`) sperrt die Befehlszeile. Befehls-Historie mit ↑/↓.
+- **App-Sperre mit Windows Hello** (Einstellungen, nur wenn Hello eingerichtet; Einschalten erst nach erfolgreicher
+  Prüfung): beim Start und nach 5 Minuten außerhalb des Vordergrunds; Ausweg „Stattdessen abmelden“.
 
 ### Stufe 2 – Community lesen (16.10.2026)
 
@@ -159,7 +161,8 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   (Tresor-Eintrag bleibt bei Deinstallation ggf. bestehen → in Stufe 1 beim ersten Start ohne `account.json` aufräumen).
 - An die Website geht beim Login der Gerätename mit dem **Windows-Benutzernamen** (sichtbar unter Konto → Apps & Geräte).
 - Ab 2.1.1: Datenexport (ZIP) speichert die App nur auf Wunsch im Ordner „Downloads“ des Benutzers. Die Server-Konsole
-  verbindet direkt mit dem Pterodactyl-Node der Plattform (eigener Server, kurzlebiges Token aus der API).
+  verbindet direkt mit dem Pterodactyl-Node der Plattform (eigener Server, kurzlebiges Token aus der API). Die App-Sperre speichert nur Ein/Aus in `settings.json`;
+  die Hello-Prüfung macht Windows, die App sieht keine biometrischen Daten.
 - Keine Übermittlung an Dritte, keine Telemetrie (`DOTNET_CLI_TELEMETRY_OPTOUT` auch in den Skripten). Schriften eingebettet.
 
 ## Verzeichnisstruktur

@@ -59,6 +59,18 @@ public sealed partial class SettingsViewModel : ObservableObject
     [ObservableProperty]
     public partial bool Autostart { get; set; }
 
+    /// <summary>App-Sperre mit Windows Hello (nur wählbar, wenn Hello eingerichtet ist).</summary>
+    [ObservableProperty]
+    public partial bool AppLock { get; set; }
+
+    [ObservableProperty]
+    public partial bool CanUseAppLock { get; set; }
+
+    [ObservableProperty]
+    public partial bool ShowAppLockHint { get; set; }
+
+    private bool _appLockLoaded;
+
     [ObservableProperty]
     public partial bool CanChangeAutostart { get; set; }
 
@@ -78,6 +90,10 @@ public sealed partial class SettingsViewModel : ObservableObject
     public async Task LoadAsync()
     {
         await LoadAutostartAsync();
+        CanUseAppLock = await HelloService.IsAvailableAsync();
+        ShowAppLockHint = !CanUseAppLock;
+        AppLock = _services.Settings.AppLock && CanUseAppLock;
+        _appLockLoaded = true;
         try
         {
             var platform = await _services.Account.GetPlatformAsync();
@@ -101,6 +117,30 @@ public sealed partial class SettingsViewModel : ObservableObject
         {
             _ = _services.UpdateSettingsAsync(s => s with { ToastNotifications = value });
         }
+    }
+
+    /// <summary>Einschalten nur nach erfolgreicher Hello-Prüfung – sonst sperrt man sich womöglich aus.</summary>
+    partial void OnAppLockChanged(bool value)
+    {
+        if (!_appLockLoaded || _services.Settings.AppLock == value)
+        {
+            return;
+        }
+
+        _ = ApplyAppLockAsync(value);
+    }
+
+    private async Task ApplyAppLockAsync(bool value)
+    {
+        if (value && !await HelloService.VerifyAsync(_services.Localizer.GetString(StringKeys.LockPrompt)))
+        {
+            _appLockLoaded = false;
+            AppLock = false;
+            _appLockLoaded = true;
+            return;
+        }
+
+        await _services.UpdateSettingsAsync(s => s with { AppLock = value });
     }
 
     partial void OnCloseToTrayChanged(bool value)

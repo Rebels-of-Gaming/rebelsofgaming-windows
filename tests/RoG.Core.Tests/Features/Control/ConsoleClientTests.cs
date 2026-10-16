@@ -99,3 +99,34 @@ public class WingsStatsTests
         Assert.Null(ServerResources.FromWingsStats("kaputt"));
     }
 }
+
+public class CommandHistoryTests
+{
+    [Fact]
+    public void Up_and_down_walk_the_history()
+    {
+        var history = new CommandHistory();
+        history.Add("status");
+        history.Add("say hi");
+        history.Add("say hi");
+
+        Assert.Equal(["status", "say hi"], history.Items);
+        Assert.Equal("say hi", history.Previous());
+        Assert.Equal("status", history.Previous());
+        Assert.Equal("status", history.Previous());
+        Assert.Equal("say hi", history.Next());
+        Assert.Equal(string.Empty, history.Next());
+    }
+
+    [Fact]
+    public void Capacity_drops_oldest()
+    {
+        var history = new CommandHistory(capacity: 2);
+        history.Add("a");
+        history.Add("b");
+        history.Add("c");
+
+        Assert.Equal(["b", "c"], history.Items);
+        Assert.Null(new CommandHistory().Previous());
+    }
+}

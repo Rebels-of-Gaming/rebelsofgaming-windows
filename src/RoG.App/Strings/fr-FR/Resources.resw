@@ -2171,4 +2171,34 @@
   <data name="AdminPage_WordAdd.Content" xml:space="preserve">
     <value>AJOUTER</value>
   </data>
+  <data name="Report_Title" xml:space="preserve">
+    <value>Signaler un contenu</value>
+  </data>
+  <data name="Report_Hint" xml:space="preserve">
+    <value>Le signalement va à la modération – la personne signalée ne sait pas qui l’a signalée.</value>
+  </data>
+  <data name="Report_ReasonHeader" xml:space="preserve">
+    <value>Motif</value>
+  </data>
+  <data name="Report_Comment" xml:space="preserve">
+    <value>Commentaire (facultatif)</value>
+  </data>
+  <data name="Report_Send" xml:space="preserve">
+    <value>Signaler</value>
+  </data>
+  <data name="Report_ReasonMissing" xml:space="preserve">
+    <value>Choisis un motif.</value>
+  </data>
+  <data name="Report_Thanks" xml:space="preserve">
+    <value>Merci – la modération va regarder.</value>
+  </data>
+  <data name="Common_Report.Content" xml:space="preserve">
+    <value>Signaler</value>
+  </data>
+  <data name="Common_ReportLink.Content" xml:space="preserve">
+    <value>Signaler</value>
+  </data>
+  <data name="ChatView_Report.Text" xml:space="preserve">
+    <value>Signaler</value>
+  </data>
 </root>

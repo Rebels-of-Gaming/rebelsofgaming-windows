@@ -231,6 +231,10 @@
                             x:Uid="AccountPage_OpenProfile"
                             Command="{x:Bind ViewModel.Detail.OpenProfileCommand}"
                             Style="{StaticResource RoGSecondaryButtonStyle}" />
+                        <Button
+                            x:Uid="Common_Report"
+                            Command="{x:Bind ViewModel.Detail.ReportCommand}"
+                            Visibility="{x:Bind ViewModel.Detail.CanReport, Mode=OneWay}" />
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>

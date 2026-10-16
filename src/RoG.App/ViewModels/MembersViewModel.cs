@@ -205,6 +205,12 @@ public sealed partial class MemberDetailViewModel(AppServices services, MemberSe
     public partial bool CanMessage { get; set; }
 
     [ObservableProperty]
+    public partial bool CanReport { get; set; }
+
+    [RelayCommand]
+    private Task ReportAsync() => _id is { } id ? Controls.ReportDialog.ShowAsync("profile", id) : Task.CompletedTask;
+
+    [ObservableProperty]
     public partial string? Rank { get; set; }
 
     [ObservableProperty]
@@ -264,6 +270,7 @@ public sealed partial class MemberDetailViewModel(AppServices services, MemberSe
         _id = s.Id;
         var me = Services.CurrentUser?.Id ?? (await Services.Tokens.GetAsync(cancellationToken))?.UserId;
         CanMessage = me is not null && me != s.Id;
+        CanReport = CanMessage;
         Avatar = s.Avatar is null ? null : new BitmapImage(s.Avatar);
         Banner = p.Banner is null ? null : new BitmapImage(p.Banner);
         Rank = s.RankLabel;

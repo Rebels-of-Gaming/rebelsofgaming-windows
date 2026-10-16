@@ -60,6 +60,7 @@
                             <MenuFlyout>
                                 <MenuFlyoutItem x:Uid="ChatView_Reply" Command="{x:Bind ReplyCommand}" Icon="Undo" />
                                 <MenuFlyoutItem x:Uid="ChatView_CopyText" Command="{x:Bind CopyCommand}" Icon="Copy" />
+                                <MenuFlyoutItem x:Uid="ChatView_Report" Command="{x:Bind ReportCommand}" Icon="Flag" Visibility="{x:Bind CanReport}" />
                             </MenuFlyout>
                         </Border.ContextFlyout>
                         <StackPanel Spacing="4">

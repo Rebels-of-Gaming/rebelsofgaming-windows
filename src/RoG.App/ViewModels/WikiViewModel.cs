@@ -224,14 +224,18 @@ public sealed partial class WikiViewModel : LoadableViewModel
                 // Offline-Kopie ist Beiwerk
             }
         }
-        catch (ApiProblemException ex) when (ex.Problem.IsNetworkError && offlineId is not null
-            && await Services.WikiOffline.LoadAsync(offlineId, Services.Language) is { } cached)
-        {
-            ShowPage(cached, offline: true);
-        }
         catch (ApiProblemException ex)
         {
-            Show(Services.Localizer.GetError(ex.Problem.Code), InfoBarSeverity.Error);
+            // Ohne Netz: Offline-Kopie zeigen, falls vorhanden
+            if (ex.Problem.IsNetworkError && offlineId is not null
+                && await Services.WikiOffline.LoadAsync(offlineId, Services.Language) is { } cached)
+            {
+                ShowPage(cached, offline: true);
+            }
+            else
+            {
+                Show(Services.Localizer.GetError(ex.Problem.Code), InfoBarSeverity.Error);
+            }
         }
         catch (RoG.Core.Api.Generated.GeneratedApiException)
         {

@@ -21,6 +21,13 @@ public sealed partial class ChatWindow : Window, IDisposable
         SetTitleBar(TitleBar);
         AppWindow.SetIcon("Assets/AppIcon.ico");
         AppWindow.Resize(new Windows.Graphics.SizeInt32(460, 680));
+        Activated += (_, e) =>
+        {
+            if (e.WindowActivationState != WindowActivationState.Deactivated)
+            {
+                App.ActiveXamlRoot = Content?.XamlRoot;
+            }
+        };
         Closed += (_, _) =>
         {
             s_open.Remove(conversationId);

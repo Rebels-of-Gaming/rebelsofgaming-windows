@@ -128,6 +128,8 @@ public sealed partial class MainWindow : Window, IDisposable
             return;
         }
 
+        App.ActiveXamlRoot = Content?.XamlRoot;
+
         SyncLockSettings();
         if (LockOverlay.Visibility != Visibility.Visible && _lock.OnReturned() && await _services.Tokens.GetAsync() is not null)
         {

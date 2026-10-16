@@ -574,6 +574,9 @@ public sealed partial class PostViewModel : ObservableObject
     private void Quote() => _owner.QuotePost(this);
 
     [RelayCommand]
+    private Task ReportAsync() => Controls.ReportDialog.ShowAsync("forum_post", Id);
+
+    [RelayCommand]
     private async Task RevealAsync()
     {
         if (await _owner.RevealAsync(Id) is { } doc)

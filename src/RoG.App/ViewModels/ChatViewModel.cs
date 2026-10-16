@@ -238,6 +238,11 @@ public sealed partial class ChatMessageViewModel(ChatMessage message, bool isOwn
     [RelayCommand]
     private void Reply() => owner.Quote(this);
 
+    public bool CanReport => !isOwn && !message.Deleted;
+
+    [RelayCommand]
+    private Task ReportAsync() => Controls.ReportDialog.ShowAsync("message", message.Id);
+
     [RelayCommand]
     private void Copy()
     {

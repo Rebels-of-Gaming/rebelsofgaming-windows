@@ -273,6 +273,11 @@
                                                 Padding="8,2"
                                                 Command="{x:Bind QuoteCommand}"
                                                 Visibility="{x:Bind CanInteract}" />
+                                            <HyperlinkButton
+                                                x:Uid="Common_ReportLink"
+                                                Padding="8,2"
+                                                Command="{x:Bind ReportCommand}"
+                                                Visibility="{x:Bind CanInteract}" />
                                         </StackPanel>
                                     </StackPanel>
                                 </Border>

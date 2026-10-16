@@ -323,6 +323,15 @@ public static class StringKeys
     public const string ReportReasonCheating = "Report_Reason_cheating";
     public const string ReportReasonOther = "Report_Reason_other";
 
+    // Melden
+    public const string ReportTitle = "Report_Title";
+    public const string ReportHint = "Report_Hint";
+    public const string ReportReason = "Report_ReasonHeader";
+    public const string ReportComment = "Report_Comment";
+    public const string ReportSend = "Report_Send";
+    public const string ReportReasonMissing = "Report_ReasonMissing";
+    public const string ReportThanks = "Report_Thanks";
+
     // App-Sperre
     public const string LockPrompt = "Lock_Prompt";
 

@@ -226,7 +226,7 @@ public sealed partial class NewsDetailViewModel(AppServices services, NewsServic
             {
                 foreach (var c in await news.GetCommentsAsync(_slug, cancellationToken))
                 {
-                    Comments.Add(new CommentViewModel(c.AuthorName, c.CreatedAt?.ToLocalTime().ToString("g", CultureInfo.CurrentCulture) ?? string.Empty, c.Body));
+                    Comments.Add(new CommentViewModel(c.Id, c.AuthorName, c.CreatedAt?.ToLocalTime().ToString("g", CultureInfo.CurrentCulture) ?? string.Empty, c.Body, Services.CurrentUser is not null));
                 }
             }
             catch (Exception ex) when (ex is RoG.Core.Api.ApiProblemException or RoG.Core.Api.Generated.GeneratedApiException)
@@ -294,4 +294,8 @@ public sealed partial class NewsDetailViewModel(AppServices services, NewsServic
     }
 }
 
-public sealed record CommentViewModel(string Author, string Time, string Body);
+public sealed partial record CommentViewModel(string Id, string Author, string Time, string Body, bool CanReport)
+{
+    [RelayCommand]
+    private Task ReportAsync() => Controls.ReportDialog.ShowAsync("news_comment", Id);
+}

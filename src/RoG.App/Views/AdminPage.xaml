@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="RoG.App.Views.AdminPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:RoG.App.ViewModels"
+    Background="{StaticResource RoGBgBrush}">
+
+    <Grid Padding="{StaticResource RoGPagePadding}" RowSpacing="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock x:Uid="AdminPage_Title" Style="{StaticResource RoGDisplayTextStyle}" Text="VERWALTUNG" />
+        <SelectorBar x:Name="Tabs" Grid.Row="1" SelectionChanged="OnTabChanged">
+            <SelectorBarItem x:Name="ReportsTab" x:Uid="AdminPage_TabReports" />
+            <SelectorBarItem x:Name="BansTab" x:Uid="AdminPage_TabBans" />
+            <SelectorBarItem x:Name="LogTab" x:Uid="AdminPage_TabLog" />
+            <SelectorBarItem x:Name="WordsTab" x:Uid="AdminPage_TabWords" />
+        </SelectorBar>
+        <InfoBar
+            Grid.Row="2"
+            IsOpen="{x:Bind Moderation.IsFeedbackOpen, Mode=TwoWay}"
+            Message="{x:Bind Moderation.FeedbackMessage, Mode=OneWay}"
+            Severity="{x:Bind Moderation.FeedbackSeverity, Mode=OneWay}" />
+
+        <TextBlock
+            x:Name="NoAccess"
+            x:Uid="AdminPage_NoAccess"
+            Grid.Row="3"
+            Style="{StaticResource RoGMutedTextStyle}"
+            TextWrapping="Wrap"
+            Visibility="Collapsed" />
+
+        <!-- Meldungen -->
+        <Grid x:Name="ReportsPanel" Grid.Row="3" RowSpacing="8" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <ComboBox MinWidth="160" ItemsSource="{x:Bind Moderation.StatusOptions}" SelectedItem="{x:Bind Moderation.SelectedStatus, Mode=TwoWay}" />
+                <Button x:Uid="Backup_Reload" Command="{x:Bind Moderation.ReloadReportsCommand}" />
+                <ProgressRing Width="20" Height="20" IsActive="{x:Bind Moderation.IsBusy, Mode=OneWay}" />
+            </StackPanel>
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <StackPanel MaxWidth="{StaticResource RoGReadingWidth}" HorizontalAlignment="Left" Spacing="12">
+                    <ItemsControl ItemsSource="{x:Bind Moderation.Reports}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:ReportItemViewModel">
+                                <Border Margin="0,0,0,12" Style="{StaticResource RoGCardStyle}" AutomationProperties.Name="{x:Bind Title}">
+                                    <StackPanel Spacing="6">
+                                        <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Title}" />
+                                        <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" TextWrapping="Wrap" />
+                                        <Border Padding="10" Background="{StaticResource RoGBg3Brush}" CornerRadius="{StaticResource RoGControlRadius}" Visibility="{x:Bind HasExcerpt}">
+                                            <TextBlock IsTextSelectionEnabled="True" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Excerpt}" TextWrapping="Wrap" />
+                                        </Border>
+                                        <TextBlock FontStyle="Italic" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Comment}" TextWrapping="Wrap" Visibility="{x:Bind HasComment}" />
+                                        <StackPanel Spacing="8" Visibility="{x:Bind IsOpen}">
+                                            <TextBox x:Uid="AdminPage_Resolution" Text="{x:Bind Resolution, Mode=TwoWay}" />
+                                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                                <Button x:Uid="AdminPage_Resolve" Command="{x:Bind ResolveCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                                                <Button x:Uid="AdminPage_Dismiss" Command="{x:Bind DismissCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                                                <Button x:Uid="AdminPage_Moderate" Command="{x:Bind ModerateCommand}" Visibility="{x:Bind CanModerateTarget}" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <Button x:Uid="Common_LoadMore" HorizontalAlignment="Left" Command="{x:Bind Moderation.MoreReportsCommand}" Visibility="{x:Bind Moderation.HasMoreReports, Mode=OneWay}" />
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+        <!-- Sperren -->
+        <ScrollViewer x:Name="BansPanel" Grid.Row="3" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+            <ItemsControl MaxWidth="{StaticResource RoGReadingWidth}" HorizontalAlignment="Left" ItemsSource="{x:Bind Moderation.Bans}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="vm:ModBanItemViewModel">
+                        <Grid Padding="0,8" ColumnSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <HyperlinkButton Padding="0" Command="{x:Bind OpenCommand}" Content="{x:Bind Title}" />
+                                <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" TextWrapping="Wrap" />
+                            </StackPanel>
+                            <Button x:Uid="Ban_Lift" Grid.Column="1" Command="{x:Bind LiftCommand}" Visibility="{x:Bind CanLift}" />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <!-- Mod-Log -->
+        <ListView x:Name="LogPanel" x:Uid="AdminPage_LogList" Grid.Row="3" ItemsSource="{x:Bind Moderation.Log}" SelectionMode="None" Visibility="Collapsed">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="x:String">
+                    <TextBlock Padding="0,4" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind}" TextWrapping="Wrap" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- Wortfilter -->
+        <Grid x:Name="WordsPanel" Grid.Row="3" RowSpacing="12" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <TextBox x:Uid="AdminPage_WordPattern" Width="220" Text="{x:Bind Moderation.NewPattern, Mode=TwoWay}" />
+                <ComboBox x:Uid="AdminPage_WordAction" MinWidth="160" ItemsSource="{x:Bind Moderation.WordActions}" SelectedItem="{x:Bind Moderation.NewAction, Mode=TwoWay}" />
+                <TextBox x:Uid="AdminPage_WordReplacement" Width="180" Text="{x:Bind Moderation.NewReplacement, Mode=TwoWay}" />
+                <Button x:Uid="AdminPage_WordAdd" VerticalAlignment="Bottom" Command="{x:Bind Moderation.AddWordCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+            </StackPanel>
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <ItemsControl MaxWidth="{StaticResource RoGReadingWidth}" HorizontalAlignment="Left" ItemsSource="{x:Bind Moderation.Words}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="vm:WordItemViewModel">
+                            <Grid Padding="0,6" ColumnSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock FontFamily="Consolas" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Pattern}" />
+                                    <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" />
+                                </StackPanel>
+                                <Button x:Uid="Backup_Delete" Grid.Column="1" Command="{x:Bind DeleteCommand}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

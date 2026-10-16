@@ -37,6 +37,7 @@ public sealed partial class MainWindow : Window, IDisposable
         [StringKeys.NavUploads] = typeof(UploadsPage),
         [StringKeys.NavMedia] = typeof(MediaPage),
         [StringKeys.NavWiki] = typeof(WikiPage),
+        [StringKeys.NavAdmin] = typeof(AdminPage),
     };
 
     private const string SettingsKey = "Settings";

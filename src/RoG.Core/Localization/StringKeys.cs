@@ -276,6 +276,53 @@ public static class StringKeys
     public const string WikiPending = "Wiki_Pending";
     public const string WikiConflict = "Wiki_Conflict";
 
+    // Moderation (Typ/Grund/Bereich werden als "Mod_Type_" + Wert usw. gebildet)
+    public const string ModStatusOpen = "Mod_StatusOpen";
+    public const string ModStatusResolved = "Mod_StatusResolved";
+    public const string ModStatusDismissed = "Mod_StatusDismissed";
+    public const string ModWordReplace = "Mod_Word_replace";
+    public const string ModWordBlock = "Mod_Word_block";
+    public const string ModWordReview = "Mod_Word_review";
+    public const string ModReportUpdated = "Mod_ReportUpdated";
+    public const string ModLiftTitle = "Mod_LiftTitle";
+    public const string ModLifted = "Mod_Lifted";
+    public const string ModWordDeleteTitle = "Mod_WordDeleteTitle";
+    public const string ModReportedBy = "Mod_ReportedBy";
+    public const string ModAgainst = "Mod_Against";
+    public const string ModActivePoints = "Mod_ActivePoints";
+    public const string ModWarnings = "Mod_Warnings";
+    public const string ModInactive = "Mod_Inactive";
+    public const string ModRevoke = "Mod_Revoke";
+    public const string ModRevoked = "Mod_Revoked";
+    public const string ModBans = "Mod_Bans";
+    public const string BanLiftAction = "Ban_LiftAction";
+    public const string ModReason = "Mod_Reason";
+    public const string ModPoints = "Mod_Points";
+    public const string ModDays = "Mod_Days";
+    public const string ModScope = "Mod_ScopeHeader";
+    public const string ModPublic = "Mod_Public";
+    public const string ModNewAction = "Mod_NewAction";
+    public const string ModWarn = "Mod_Warn";
+    public const string ModBan = "Mod_Ban";
+    public const string ModReasonMissing = "Mod_ReasonMissing";
+    public const string ModBanned = "Mod_Banned";
+    public const string ModWarned = "Mod_Warned";
+    public const string ModScopeSite = "Mod_Scope_site";
+    public const string ModScopeForum = "Mod_Scope_forum";
+    public const string ModScopeGameserver = "Mod_Scope_gameserver";
+    public const string ModTypeMessage = "Mod_Type_message";
+    public const string ModTypeProfile = "Mod_Type_profile";
+    public const string ModTypeGalleryItem = "Mod_Type_gallery_item";
+    public const string ModTypeNewsComment = "Mod_Type_news_comment";
+    public const string ModTypeForumPost = "Mod_Type_forum_post";
+    public const string ModTypeDiscordMessage = "Mod_Type_discord_message";
+    public const string ReportReasonSpam = "Report_Reason_spam";
+    public const string ReportReasonInsult = "Report_Reason_insult";
+    public const string ReportReasonHarassment = "Report_Reason_harassment";
+    public const string ReportReasonIllegal = "Report_Reason_illegal";
+    public const string ReportReasonCheating = "Report_Reason_cheating";
+    public const string ReportReasonOther = "Report_Reason_other";
+
     // App-Sperre
     public const string LockPrompt = "Lock_Prompt";
 
@@ -338,6 +385,7 @@ public static class StringKeys
         "config_changed", "file_operation_forbidden", "pterodactyl_write_blocked",
         "forbidden_cvar", "rcon_write_blocked", "rcon_target_forbidden", "player_identity_conflict", "ban_managed_by_moderation",
         "own_change", "change_not_pending", "members_only", "invalid_signature", "edit_conflict", "not_pending",
+        "report_target_missing", "report_own_content", "too_many_reports", "moderation_muted", "moderation_owner", "no_gameserver_targets",
     ];
 
     /// <summary>Alle Schlüssel aus Code – für den Vollständigkeitstest.</summary>

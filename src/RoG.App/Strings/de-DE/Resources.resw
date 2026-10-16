@@ -1973,4 +1973,202 @@
   <data name="WikiPage_Compare.Content" xml:space="preserve">
     <value>Mit aktueller vergleichen</value>
   </data>
+  <data name="Mod_StatusOpen" xml:space="preserve">
+    <value>Offen</value>
+  </data>
+  <data name="Mod_StatusResolved" xml:space="preserve">
+    <value>Erledigt</value>
+  </data>
+  <data name="Mod_StatusDismissed" xml:space="preserve">
+    <value>Verworfen</value>
+  </data>
+  <data name="Mod_Word_replace" xml:space="preserve">
+    <value>ersetzen</value>
+  </data>
+  <data name="Mod_Word_block" xml:space="preserve">
+    <value>blockieren</value>
+  </data>
+  <data name="Mod_Word_review" xml:space="preserve">
+    <value>prüfen lassen</value>
+  </data>
+  <data name="Mod_ReportUpdated" xml:space="preserve">
+    <value>Meldung aktualisiert.</value>
+  </data>
+  <data name="Mod_LiftTitle" xml:space="preserve">
+    <value>Sperre aufheben?</value>
+  </data>
+  <data name="Mod_Lifted" xml:space="preserve">
+    <value>Sperre aufgehoben.</value>
+  </data>
+  <data name="Mod_WordDeleteTitle" xml:space="preserve">
+    <value>Filter löschen?</value>
+  </data>
+  <data name="Mod_ReportedBy" xml:space="preserve">
+    <value>gemeldet von {0}</value>
+  </data>
+  <data name="Mod_Against" xml:space="preserve">
+    <value>betrifft {0}</value>
+  </data>
+  <data name="Mod_ActivePoints" xml:space="preserve">
+    <value>Aktive Punkte: {0}</value>
+  </data>
+  <data name="Mod_Warnings" xml:space="preserve">
+    <value>Verwarnungen</value>
+  </data>
+  <data name="Mod_Inactive" xml:space="preserve">
+    <value>abgelaufen</value>
+  </data>
+  <data name="Mod_Revoke" xml:space="preserve">
+    <value>Zurücknehmen</value>
+  </data>
+  <data name="Mod_Revoked" xml:space="preserve">
+    <value>Verwarnung zurückgenommen.</value>
+  </data>
+  <data name="Mod_Bans" xml:space="preserve">
+    <value>Sperren</value>
+  </data>
+  <data name="Ban_LiftAction" xml:space="preserve">
+    <value>Aufheben</value>
+  </data>
+  <data name="Mod_Reason" xml:space="preserve">
+    <value>Grund (für die Person sichtbar)</value>
+  </data>
+  <data name="Mod_Points" xml:space="preserve">
+    <value>Punkte</value>
+  </data>
+  <data name="Mod_Days" xml:space="preserve">
+    <value>Tage (0 = Standard bzw. dauerhaft)</value>
+  </data>
+  <data name="Mod_ScopeHeader" xml:space="preserve">
+    <value>Art der Sperre</value>
+  </data>
+  <data name="Mod_Public" xml:space="preserve">
+    <value>Öffentlich anzeigen</value>
+  </data>
+  <data name="Mod_NewAction" xml:space="preserve">
+    <value>Neue Maßnahme</value>
+  </data>
+  <data name="Mod_Warn" xml:space="preserve">
+    <value>Verwarnen</value>
+  </data>
+  <data name="Mod_Ban" xml:space="preserve">
+    <value>Sperren</value>
+  </data>
+  <data name="Mod_ReasonMissing" xml:space="preserve">
+    <value>Bitte einen Grund angeben.</value>
+  </data>
+  <data name="Mod_Banned" xml:space="preserve">
+    <value>Sperre gesetzt.</value>
+  </data>
+  <data name="Mod_Warned" xml:space="preserve">
+    <value>Verwarnung gespeichert.</value>
+  </data>
+  <data name="Mod_Scope_site" xml:space="preserve">
+    <value>Website-Sperre (kein Login)</value>
+  </data>
+  <data name="Mod_Scope_forum" xml:space="preserve">
+    <value>Schreibsperre (Forum, Kommentare)</value>
+  </data>
+  <data name="Mod_Scope_gameserver" xml:space="preserve">
+    <value>Gameserver-Sperre</value>
+  </data>
+  <data name="Mod_Type_message" xml:space="preserve">
+    <value>Direktnachricht</value>
+  </data>
+  <data name="Mod_Type_profile" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="Mod_Type_gallery_item" xml:space="preserve">
+    <value>Galeriebild</value>
+  </data>
+  <data name="Mod_Type_news_comment" xml:space="preserve">
+    <value>News-Kommentar</value>
+  </data>
+  <data name="Mod_Type_forum_post" xml:space="preserve">
+    <value>Forenbeitrag</value>
+  </data>
+  <data name="Mod_Type_discord_message" xml:space="preserve">
+    <value>Discord-Nachricht</value>
+  </data>
+  <data name="Report_Reason_spam" xml:space="preserve">
+    <value>Spam</value>
+  </data>
+  <data name="Report_Reason_insult" xml:space="preserve">
+    <value>Beleidigung</value>
+  </data>
+  <data name="Report_Reason_harassment" xml:space="preserve">
+    <value>Belästigung</value>
+  </data>
+  <data name="Report_Reason_illegal" xml:space="preserve">
+    <value>Rechtswidrig</value>
+  </data>
+  <data name="Report_Reason_cheating" xml:space="preserve">
+    <value>Cheating</value>
+  </data>
+  <data name="Report_Reason_other" xml:space="preserve">
+    <value>Sonstiges</value>
+  </data>
+  <data name="Error_report_target_missing" xml:space="preserve">
+    <value>Der gemeldete Inhalt existiert nicht mehr.</value>
+  </data>
+  <data name="Error_report_own_content" xml:space="preserve">
+    <value>Eigene Inhalte kann man nicht melden.</value>
+  </data>
+  <data name="Error_too_many_reports" xml:space="preserve">
+    <value>Zu viele Meldungen – bitte später erneut.</value>
+  </data>
+  <data name="Error_moderation_muted" xml:space="preserve">
+    <value>Du hast gerade eine Schreibsperre.</value>
+  </data>
+  <data name="Error_moderation_owner" xml:space="preserve">
+    <value>Der Owner kann nicht gesperrt werden.</value>
+  </data>
+  <data name="Error_no_gameserver_targets" xml:space="preserve">
+    <value>Auf keinem Gameserver kann diese Person gesperrt werden.</value>
+  </data>
+  <data name="AdminPage_Title.Text" xml:space="preserve">
+    <value>VERWALTUNG</value>
+  </data>
+  <data name="AdminPage_TabReports.Text" xml:space="preserve">
+    <value>Meldungen</value>
+  </data>
+  <data name="AdminPage_TabBans.Text" xml:space="preserve">
+    <value>Sperren</value>
+  </data>
+  <data name="AdminPage_TabLog.Text" xml:space="preserve">
+    <value>Mod-Log</value>
+  </data>
+  <data name="AdminPage_TabWords.Text" xml:space="preserve">
+    <value>Wortfilter</value>
+  </data>
+  <data name="AdminPage_NoAccess.Text" xml:space="preserve">
+    <value>Für die Verwaltung fehlen dir die Rechte oder der Zugang dieses Geräts (Scopes). Weitere Bereiche folgen.</value>
+  </data>
+  <data name="AdminPage_Resolution.PlaceholderText" xml:space="preserve">
+    <value>Notiz zur Erledigung (optional)</value>
+  </data>
+  <data name="AdminPage_Resolve.Content" xml:space="preserve">
+    <value>ERLEDIGT</value>
+  </data>
+  <data name="AdminPage_Dismiss.Content" xml:space="preserve">
+    <value>VERWERFEN</value>
+  </data>
+  <data name="AdminPage_Moderate.Content" xml:space="preserve">
+    <value>Mitglied moderieren …</value>
+  </data>
+  <data name="AdminPage_LogList.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Mod-Log</value>
+  </data>
+  <data name="AdminPage_WordPattern.Header" xml:space="preserve">
+    <value>Wort oder Muster</value>
+  </data>
+  <data name="AdminPage_WordAction.Header" xml:space="preserve">
+    <value>Aktion</value>
+  </data>
+  <data name="AdminPage_WordReplacement.Header" xml:space="preserve">
+    <value>Ersatz (bei ersetzen)</value>
+  </data>
+  <data name="AdminPage_WordAdd.Content" xml:space="preserve">
+    <value>HINZUFÜGEN</value>
+  </data>
 </root>

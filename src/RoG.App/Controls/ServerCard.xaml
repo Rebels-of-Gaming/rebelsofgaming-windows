@@ -72,6 +72,11 @@
                     AutomationProperties.Name="{x:Bind Item.CopyAutomationName, Mode=OneWay}"
                     Command="{x:Bind Item.CopyCommand, Mode=OneWay}"
                     Style="{StaticResource RoGSecondaryButtonStyle}" />
+                <Button
+                    x:Uid="ServerCard_Control"
+                    Command="{x:Bind Item.ControlCommand, Mode=OneWay}"
+                    Style="{StaticResource RoGSecondaryButtonStyle}"
+                    Visibility="{x:Bind Item.CanControl, Mode=OneWay}" />
             </StackPanel>
         </StackPanel>
     </Border>

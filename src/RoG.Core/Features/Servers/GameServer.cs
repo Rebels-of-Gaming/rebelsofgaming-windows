@@ -36,7 +36,8 @@ public sealed record GameServer(
     int Players,
     int MaxPlayers,
     bool Passworded,
-    IReadOnlyList<ServerPlayer>? PlayerList)
+    IReadOnlyList<ServerPlayer>? PlayerList,
+    ServerAbilities? Control = null)
 {
     public static ServerQueryType ParseQueryType(string? value) => value?.ToUpperInvariant() switch
     {
@@ -45,4 +46,13 @@ public sealed record GameServer(
         "MINECRAFT" => ServerQueryType.Minecraft,
         _ => ServerQueryType.Unknown,
     };
+}
+
+/// <summary>
+/// Wirksame Steuerungsrechte an einem Server (<c>control</c> aus der API, sonst <c>null</c>). Der Token-Scope gilt
+/// zusätzlich – das prüft der Server; die App blendet nur aus, was sicher nicht geht.
+/// </summary>
+public sealed record ServerAbilities(bool Power, bool Console, bool ConsoleCommand, bool CanCommand)
+{
+    public bool Any => Power || Console;
 }

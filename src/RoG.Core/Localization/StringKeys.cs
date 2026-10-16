@@ -196,6 +196,18 @@ public static class StringKeys
     public const string VotesMineAbstain = "Votes_MineAbstain";
     public const string HomeOpenVotes = "Home_OpenVotes";
 
+    // Server-Konsole ({0} CPU, {1} RAM, {2} Disk, {3} Laufzeit)
+    public const string ConsoleResources = "Console_Resources";
+    public const string ConsoleStateRunning = "Console_StateRunning";
+    public const string ConsoleStateStarting = "Console_StateStarting";
+    public const string ConsoleStateStopping = "Console_StateStopping";
+    public const string ConsoleStateOffline = "Console_StateOffline";
+    public const string ConsoleDisconnected = "Console_Disconnected";
+    public const string ConsolePowerSent = "Console_PowerSent";
+    public const string ConsoleKillTitle = "Console_KillTitle";
+    public const string ConsoleKillText = "Console_KillText";
+    public const string ConsoleKillConfirm = "Console_KillConfirm";
+
     // Abwesenheit
     public const string AbsenceReported = "Absence_Reported";
     public const string AbsenceActive = "Absence_Active";
@@ -251,6 +263,7 @@ public static class StringKeys
         "state_mismatch", "browser_failed", "login_timeout", "missing_code",
         "checksum_mismatch", "download_failed", "upload_failed",
         "discord_required", "already_member", "application_blocked",
+        "console_unavailable", "approval_required",
     ];
 
     /// <summary>Alle Schlüssel aus Code – für den Vollständigkeitstest.</summary>

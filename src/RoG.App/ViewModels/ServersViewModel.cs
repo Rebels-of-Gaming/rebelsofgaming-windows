@@ -147,6 +147,7 @@ public sealed partial class ServerItemViewModel : ObservableObject
 
         ConnectCommand = new AsyncRelayCommand(() => connect(this));
         CopyCommand = new RelayCommand(() => copy(this));
+        ControlCommand = new RelayCommand(() => Views.ServerConsoleWindow.Open(Server));
     }
 
     public GameServer Server { get; }
@@ -186,4 +187,9 @@ public sealed partial class ServerItemViewModel : ObservableObject
     public IAsyncRelayCommand ConnectCommand { get; }
 
     public IRelayCommand CopyCommand { get; }
+
+    /// <summary>Steuern (Power/Konsole) – nur mit Rechten an diesem Server (<c>control</c> aus der API).</summary>
+    public bool CanControl => Server.Control?.Any == true;
+
+    public IRelayCommand ControlCommand { get; }
 }

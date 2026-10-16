@@ -48,6 +48,7 @@ public sealed class ServerService(IRoGApiClient client)
             live?.Players ?? 0,
             live?.Max_players ?? 0,
             live?.Passworded ?? false,
-            live?.Player_list?.Select(p => new ServerPlayer(p.Name, p.Score, p.Ping, p.Member?.Name)).ToList());
+            live?.Player_list?.Select(p => new ServerPlayer(p.Name, p.Score, p.Ping, p.Member?.Name)).ToList(),
+            s.Control is { Abilities: { } a } c ? new ServerAbilities(a.Power, a.Console, a.Console_command, c.Can_command) : null);
     }
 }

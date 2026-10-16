@@ -1472,4 +1472,70 @@
   <data name="RulesPrompt_Later" xml:space="preserve">
     <value>Später</value>
   </data>
+  <data name="Console_Resources" xml:space="preserve">
+    <value>CPU {0} % · RAM {1} · Speicher {2} · läuft seit {3}</value>
+  </data>
+  <data name="Console_StateRunning" xml:space="preserve">
+    <value>● Läuft</value>
+  </data>
+  <data name="Console_StateStarting" xml:space="preserve">
+    <value>◐ Startet …</value>
+  </data>
+  <data name="Console_StateStopping" xml:space="preserve">
+    <value>◑ Stoppt …</value>
+  </data>
+  <data name="Console_StateOffline" xml:space="preserve">
+    <value>○ Aus</value>
+  </data>
+  <data name="Console_Disconnected" xml:space="preserve">
+    <value>Konsole getrennt. „Neu verbinden“ versucht es erneut.</value>
+  </data>
+  <data name="Console_PowerSent" xml:space="preserve">
+    <value>Befehl an den Server gesendet.</value>
+  </data>
+  <data name="Console_KillTitle" xml:space="preserve">
+    <value>Server hart beenden?</value>
+  </data>
+  <data name="Console_KillText" xml:space="preserve">
+    <value>Der Prozess wird sofort beendet, ungespeicherte Daten gehen verloren. Normal stoppen ist sicherer.</value>
+  </data>
+  <data name="Console_KillConfirm" xml:space="preserve">
+    <value>Hart beenden</value>
+  </data>
+  <data name="Error_console_unavailable" xml:space="preserve">
+    <value>Die Live-Konsole ist für diesen Server gerade nicht verfügbar.</value>
+  </data>
+  <data name="Error_approval_required" xml:space="preserve">
+    <value>Das braucht eine Freigabe (Vier-Augen-Prinzip) – bitte auf der Website beantragen.</value>
+  </data>
+  <data name="ServerCard_Control.Content" xml:space="preserve">
+    <value>STEUERN</value>
+  </data>
+  <data name="Console_Start.Content" xml:space="preserve">
+    <value>START</value>
+  </data>
+  <data name="Console_Restart.Content" xml:space="preserve">
+    <value>NEUSTART</value>
+  </data>
+  <data name="Console_Stop.Content" xml:space="preserve">
+    <value>STOPP</value>
+  </data>
+  <data name="Console_Kill.Content" xml:space="preserve">
+    <value>KILL</value>
+  </data>
+  <data name="Console_Output.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Konsolenausgabe</value>
+  </data>
+  <data name="Console_Command.PlaceholderText" xml:space="preserve">
+    <value>Befehl (Enter sendet)</value>
+  </data>
+  <data name="Console_Send.Content" xml:space="preserve">
+    <value>SENDEN</value>
+  </data>
+  <data name="Console_Reconnect.Content" xml:space="preserve">
+    <value>Neu verbinden</value>
+  </data>
+  <data name="Console_Clear.Content" xml:space="preserve">
+    <value>Leeren</value>
+  </data>
 </root>

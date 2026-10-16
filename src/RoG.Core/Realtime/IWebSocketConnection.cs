@@ -25,10 +25,15 @@ public sealed class ClientWebSocketConnection : IWebSocketConnection
     private readonly ClientWebSocket _socket = new();
     private readonly SemaphoreSlim _sendLock = new(1, 1);
 
-    public ClientWebSocketConnection(string userAgent)
+    /// <param name="origin">Optionaler <c>Origin</c>-Header (Pterodactyl-Wings prüft ihn gegen <c>allowed_origins</c>).</param>
+    public ClientWebSocketConnection(string userAgent, string? origin = null)
     {
         _socket.Options.KeepAliveInterval = TimeSpan.FromSeconds(30);
         _socket.Options.SetRequestHeader("User-Agent", userAgent);
+        if (!string.IsNullOrEmpty(origin))
+        {
+            _socket.Options.SetRequestHeader("Origin", origin);
+        }
     }
 
     public Task ConnectAsync(Uri uri, CancellationToken cancellationToken) => _socket.ConnectAsync(uri, cancellationToken);

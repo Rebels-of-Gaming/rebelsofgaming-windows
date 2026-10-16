@@ -1472,4 +1472,70 @@
   <data name="RulesPrompt_Later" xml:space="preserve">
     <value>Plus tard</value>
   </data>
+  <data name="Console_Resources" xml:space="preserve">
+    <value>CPU {0} % · RAM {1} · disque {2} · actif depuis {3}</value>
+  </data>
+  <data name="Console_StateRunning" xml:space="preserve">
+    <value>● En marche</value>
+  </data>
+  <data name="Console_StateStarting" xml:space="preserve">
+    <value>◐ Démarrage …</value>
+  </data>
+  <data name="Console_StateStopping" xml:space="preserve">
+    <value>◑ Arrêt …</value>
+  </data>
+  <data name="Console_StateOffline" xml:space="preserve">
+    <value>○ Arrêté</value>
+  </data>
+  <data name="Console_Disconnected" xml:space="preserve">
+    <value>Console déconnectée. « Reconnecter » réessaie.</value>
+  </data>
+  <data name="Console_PowerSent" xml:space="preserve">
+    <value>Commande envoyée au serveur.</value>
+  </data>
+  <data name="Console_KillTitle" xml:space="preserve">
+    <value>Arrêter le serveur de force ?</value>
+  </data>
+  <data name="Console_KillText" xml:space="preserve">
+    <value>Le processus s’arrête immédiatement, les données non sauvegardées sont perdues. Un arrêt normal est plus sûr.</value>
+  </data>
+  <data name="Console_KillConfirm" xml:space="preserve">
+    <value>Forcer l’arrêt</value>
+  </data>
+  <data name="Error_console_unavailable" xml:space="preserve">
+    <value>La console en direct n’est pas disponible pour ce serveur.</value>
+  </data>
+  <data name="Error_approval_required" xml:space="preserve">
+    <value>Cela nécessite une validation (principe des quatre yeux) – demande-la sur le site.</value>
+  </data>
+  <data name="ServerCard_Control.Content" xml:space="preserve">
+    <value>CONTRÔLER</value>
+  </data>
+  <data name="Console_Start.Content" xml:space="preserve">
+    <value>DÉMARRER</value>
+  </data>
+  <data name="Console_Restart.Content" xml:space="preserve">
+    <value>REDÉMARRER</value>
+  </data>
+  <data name="Console_Stop.Content" xml:space="preserve">
+    <value>ARRÊTER</value>
+  </data>
+  <data name="Console_Kill.Content" xml:space="preserve">
+    <value>KILL</value>
+  </data>
+  <data name="Console_Output.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Sortie de la console</value>
+  </data>
+  <data name="Console_Command.PlaceholderText" xml:space="preserve">
+    <value>Commande (Entrée envoie)</value>
+  </data>
+  <data name="Console_Send.Content" xml:space="preserve">
+    <value>ENVOYER</value>
+  </data>
+  <data name="Console_Reconnect.Content" xml:space="preserve">
+    <value>Reconnecter</value>
+  </data>
+  <data name="Console_Clear.Content" xml:space="preserve">
+    <value>Vider</value>
+  </data>
 </root>

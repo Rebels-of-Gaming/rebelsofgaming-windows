@@ -84,3 +84,28 @@ public class ServerServiceTests
         Assert.Contains("cursor=abc", stub.Requests[1].Uri!.Query, StringComparison.Ordinal);
     }
 }
+
+public class ServerControlMappingTests
+{
+    [Fact]
+    public async Task Control_abilities_are_mapped_and_null_without_rights()
+    {
+        const string withControl = """
+            {"id":"01HET","slug":"et-main","name":"RoG ET #1","description":null,"game":null,"squad":null,
+             "address":"et.rogclan.de:27960","query_type":"quake3","connect_url":null,"visibility":"public","last_online_at":null,
+             "live":null,"pterodactyl_linked":true,
+             "control":{"config_approval":true,"can_command":false,
+               "abilities":{"power":true,"console":true,"console_command":true,"files_read":false,"files_write":false,
+                            "files_approve":false,"backups":false,"rcon":false,"bans":false}}}
+            """;
+        var page = "{\"data\":[" + withControl + "],\"links\":{\"first\":null,\"last\":null,\"prev\":null,\"next\":null},"
+            + "\"meta\":{\"path\":\"x\",\"per_page\":50,\"next_cursor\":null,\"prev_cursor\":null}}";
+        var stub = new StubHttpHandler((_, _) => StubHttpHandler.Json(HttpStatusCode.OK, page));
+        var api = new RoGApi(RoGEnvironment.Get(RoGEnvironment.Production), new InMemoryTokenStore(), new ApiContext(), innerHandler: stub);
+
+        var server = Assert.Single(await new ServerService(api.Client).GetAllAsync());
+
+        Assert.Equal(new ServerAbilities(Power: true, Console: true, ConsoleCommand: true, CanCommand: false), server.Control);
+        Assert.True(server.Control!.Any);
+    }
+}

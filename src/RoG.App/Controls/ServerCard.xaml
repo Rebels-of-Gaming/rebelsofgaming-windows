@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Server-Karte (Server-Seite, Squad-Seite): Status, Spiel, Map, Spieler, Adresse, Spielerliste, Verbinden/Kopieren. -->
+<UserControl
+    x:Class="RoG.App.Controls.ServerCard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Border AutomationProperties.Name="{x:Bind Item.Name, Mode=OneWay}" Style="{StaticResource RoGCardStyle}">
+        <StackPanel Spacing="10">
+            <!-- Status + Spiel -->
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <Ellipse Fill="{x:Bind Item.StatusBrush, Mode=OneWay}" Style="{StaticResource RoGStatusDotStyle}" />
+                <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Item.StatusText, Mode=OneWay}" />
+                <TextBlock
+                    Style="{StaticResource RoGMutedTextStyle}"
+                    Text="·"
+                    Visibility="{x:Bind Item.HasGame, Mode=OneWay}" />
+                <TextBlock
+                    Style="{StaticResource RoGMutedTextStyle}"
+                    Text="{x:Bind Item.Game, Mode=OneWay}"
+                    Visibility="{x:Bind Item.HasGame, Mode=OneWay}" />
+            </StackPanel>
+
+            <TextBlock
+                MaxLines="2"
+                Style="{StaticResource RoGTitleTextStyle}"
+                Text="{x:Bind Item.Name, Mode=OneWay}"
+                TextTrimming="CharacterEllipsis" />
+
+            <!-- Map, Spieler, Adresse -->
+            <StackPanel Spacing="2">
+                <TextBlock
+                    Style="{StaticResource RoGBodyTextStyle}"
+                    Text="{x:Bind Item.Map, Mode=OneWay}"
+                    Visibility="{x:Bind Item.HasMap, Mode=OneWay}" />
+                <TextBlock
+                    Style="{StaticResource RoGBodyTextStyle}"
+                    Text="{x:Bind Item.PlayersText, Mode=OneWay}"
+                    Visibility="{x:Bind Item.ShowPlayers, Mode=OneWay}" />
+                <TextBlock
+                    FontFamily="Consolas"
+                    IsTextSelectionEnabled="True"
+                    Style="{StaticResource RoGMutedTextStyle}"
+                    Text="{x:Bind Item.Address, Mode=OneWay}" />
+            </StackPanel>
+
+            <!-- Spielerliste (nur für Mitglieder von der API geliefert) -->
+            <Expander
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Stretch"
+                Header="{x:Bind Item.PlayersHeader, Mode=OneWay}"
+                Visibility="{x:Bind Item.HasPlayerList, Mode=OneWay}">
+                <ItemsControl ItemsSource="{x:Bind Item.Players, Mode=OneWay}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="x:String">
+                            <TextBlock Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Expander>
+
+            <!-- Aktionen -->
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <Button
+                    x:Uid="ServerCard_Connect"
+                    AutomationProperties.Name="{x:Bind Item.ConnectAutomationName, Mode=OneWay}"
+                    Command="{x:Bind Item.ConnectCommand, Mode=OneWay}"
+                    Style="{StaticResource RoGPrimaryButtonStyle}"
+                    Visibility="{x:Bind Item.CanConnect, Mode=OneWay}" />
+                <Button
+                    x:Uid="ServerCard_Copy"
+                    AutomationProperties.Name="{x:Bind Item.CopyAutomationName, Mode=OneWay}"
+                    Command="{x:Bind Item.CopyCommand, Mode=OneWay}"
+                    Style="{StaticResource RoGSecondaryButtonStyle}" />
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</UserControl>

@@ -10,14 +10,16 @@ public sealed class ServerService(IRoGApiClient client)
     /// <summary>Obergrenze gegen Endlosschleifen bei fehlerhaften Cursorn.</summary>
     private const int MaxPages = 10;
 
-    /// <summary>Alle sichtbaren Server in der Reihenfolge der API (Cursor-Pagination wird abgearbeitet).</summary>
-    public async Task<IReadOnlyList<GameServer>> GetAllAsync(CancellationToken cancellationToken = default)
+    /// <summary>Alle sichtbaren Server in der Reihenfolge der API (Cursor-Pagination wird abgearbeitet), optional nur eines Squads.</summary>
+    public async Task<IReadOnlyList<GameServer>> GetAllAsync(CancellationToken cancellationToken = default) => await GetAllAsync(null, cancellationToken).ConfigureAwait(false);
+
+    public async Task<IReadOnlyList<GameServer>> GetAllAsync(string? squadSlug, CancellationToken cancellationToken = default)
     {
         var result = new List<GameServer>();
         string? cursor = null;
         for (var page = 0; page < MaxPages; page++)
         {
-            var response = await client.V1_servers_indexAsync(cursor, PageSize, cancellationToken: cancellationToken).ConfigureAwait(false);
+            var response = await client.V1_servers_indexAsync(cursor, PageSize, filtersquad: squadSlug, cancellationToken: cancellationToken).ConfigureAwait(false);
             result.AddRange(response.Data.Select(Map));
             cursor = response.Meta?.Next_cursor;
             if (string.IsNullOrEmpty(cursor))

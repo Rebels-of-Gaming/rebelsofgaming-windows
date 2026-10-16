@@ -494,4 +494,103 @@
   <data name="Common_CopyLink.Content" xml:space="preserve">
     <value>COPY LINK</value>
   </data>
+  <data name="Squads_Leader" xml:space="preserve">
+    <value>Lead: {0}</value>
+  </data>
+  <data name="Squads_ClanLevel" xml:space="preserve">
+    <value>Level {0}</value>
+  </data>
+  <data name="Squads_Substitute" xml:space="preserve">
+    <value>Substitute {0}</value>
+  </data>
+  <data name="Squads_Members" xml:space="preserve">
+    <value>LINE-UP ({0})</value>
+  </data>
+  <data name="Squads_RecruitingOpen" xml:space="preserve">
+    <value>Recruiting</value>
+  </data>
+  <data name="Squads_RecruitingWaitlist" xml:space="preserve">
+    <value>Waitlist</value>
+  </data>
+  <data name="Squads_RecruitingFull" xml:space="preserve">
+    <value>Full</value>
+  </data>
+  <data name="SquadsPage_Title.Text" xml:space="preserve">
+    <value>SQUADS</value>
+  </data>
+  <data name="SquadsPage_State.EmptyText" xml:space="preserve">
+    <value>No squads yet.</value>
+  </data>
+  <data name="SquadsPage_List.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Squads</value>
+  </data>
+  <data name="SquadsPage_SelectHint.Text" xml:space="preserve">
+    <value>Pick a squad on the left.</value>
+  </data>
+  <data name="SquadsPage_About.Text" xml:space="preserve">
+    <value>ABOUT</value>
+  </data>
+  <data name="SquadsPage_Training.Text" xml:space="preserve">
+    <value>Training times</value>
+  </data>
+  <data name="SquadsPage_Links.Text" xml:space="preserve">
+    <value>LINKS</value>
+  </data>
+  <data name="SquadsPage_Servers.Text" xml:space="preserve">
+    <value>SERVERS</value>
+  </data>
+  <data name="Common_Copy.Content" xml:space="preserve">
+    <value>COPY</value>
+  </data>
+  <data name="Members_LastSeen" xml:space="preserve">
+    <value>Last seen {0}</value>
+  </data>
+  <data name="Presence_Online" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="Presence_Voice" xml:space="preserve">
+    <value>In voice</value>
+  </data>
+  <data name="Presence_Server" xml:space="preserve">
+    <value>On a RoG server</value>
+  </data>
+  <data name="Presence_Ingame" xml:space="preserve">
+    <value>In game</value>
+  </data>
+  <data name="Presence_Offline" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="MembersPage_Title.Text" xml:space="preserve">
+    <value>MEMBERS</value>
+  </data>
+  <data name="MembersPage_ModeAll.Text" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="MembersPage_ModeTeam.Text" xml:space="preserve">
+    <value>Team</value>
+  </data>
+  <data name="MembersPage_Search.PlaceholderText" xml:space="preserve">
+    <value>Search members (Ctrl+F)</value>
+  </data>
+  <data name="MembersPage_Search.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Search members</value>
+  </data>
+  <data name="MembersPage_OnlineOnly.Header" xml:space="preserve">
+    <value>Online only</value>
+  </data>
+  <data name="MembersPage_State.EmptyText" xml:space="preserve">
+    <value>Nobody found.</value>
+  </data>
+  <data name="MembersPage_List.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Members</value>
+  </data>
+  <data name="MembersPage_SelectHint.Text" xml:space="preserve">
+    <value>Pick a person on the left.</value>
+  </data>
+  <data name="MembersPage_Badges.Text" xml:space="preserve">
+    <value>BADGES</value>
+  </data>
+  <data name="MembersPage_Platforms.Text" xml:space="preserve">
+    <value>GAME ACCOUNTS</value>
+  </data>
 </root>

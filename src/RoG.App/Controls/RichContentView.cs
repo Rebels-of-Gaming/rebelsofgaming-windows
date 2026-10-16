@@ -173,12 +173,12 @@ public sealed partial class RichContentView : UserControl
 
         AutomationProperties.SetHeadingLevel(text, heading.Level switch
         {
-            1 => AutomationHeadingLevel.Level1,
-            2 => AutomationHeadingLevel.Level2,
-            3 => AutomationHeadingLevel.Level3,
-            4 => AutomationHeadingLevel.Level4,
-            5 => AutomationHeadingLevel.Level5,
-            _ => AutomationHeadingLevel.Level6,
+            1 => Microsoft.UI.Xaml.Automation.Peers.AutomationHeadingLevel.Level1,
+            2 => Microsoft.UI.Xaml.Automation.Peers.AutomationHeadingLevel.Level2,
+            3 => Microsoft.UI.Xaml.Automation.Peers.AutomationHeadingLevel.Level3,
+            4 => Microsoft.UI.Xaml.Automation.Peers.AutomationHeadingLevel.Level4,
+            5 => Microsoft.UI.Xaml.Automation.Peers.AutomationHeadingLevel.Level5,
+            _ => Microsoft.UI.Xaml.Automation.Peers.AutomationHeadingLevel.Level6,
         });
         return text;
     }

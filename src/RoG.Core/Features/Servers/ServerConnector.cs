@@ -156,3 +156,53 @@ public sealed class ServerConnector(IExternalLauncher launcher, IClipboardServic
         }
     }
 }
+
+/// <summary>Ton einer Rückmeldung (App: InfoBar-Schwere).</summary>
+public enum MessageTone
+{
+    Success,
+    Info,
+    Error,
+}
+
+/// <summary>Hinweis nach „Verbinden“: Text (übersetzt) und Ton.</summary>
+public sealed record ConnectMessage(string Text, MessageTone Tone)
+{
+    /// <summary>Text je Ergebnis: gestartet, Programm fehlt (mit Konsolenbefehl je Spiel), Adresse kopiert, Fehler.</summary>
+    public static ConnectMessage Describe(ConnectOutcome outcome, string serverName, Localization.ILocalizer localizer)
+    {
+        ArgumentNullException.ThrowIfNull(outcome);
+        ArgumentNullException.ThrowIfNull(localizer);
+        var key = outcome.Result switch
+        {
+            ConnectResult.Launched => outcome.Kind switch
+            {
+                ConnectKind.Steam => Localization.StringKeys.ServersLaunchedSteam,
+                ConnectKind.Web => Localization.StringKeys.ServersLaunchedWeb,
+                _ => Localization.StringKeys.ServersLaunchedGame,
+            },
+            ConnectResult.CopiedNoHandler => outcome.Kind switch
+            {
+                ConnectKind.Steam => Localization.StringKeys.ServersNoHandlerSteam,
+                ConnectKind.EnemyTerritory => Localization.StringKeys.ServersNoHandlerEt,
+                _ => Localization.StringKeys.ServersNoHandlerOther,
+            },
+            ConnectResult.CopiedManual => outcome.Kind == ConnectKind.Minecraft ? Localization.StringKeys.ServersManualMinecraft : Localization.StringKeys.ServersCopied,
+            _ => Localization.StringKeys.ServersCopyFailed,
+        };
+
+        var text = string.Format(System.Globalization.CultureInfo.CurrentCulture, localizer.GetString(key),
+            outcome.Result == ConnectResult.Launched ? serverName : outcome.Address);
+        if (outcome.Passworded && outcome.Result != ConnectResult.Failed)
+        {
+            text += " " + localizer.GetString(Localization.StringKeys.ServersPassworded);
+        }
+
+        return new ConnectMessage(text, outcome.Result switch
+        {
+            ConnectResult.Launched => MessageTone.Success,
+            ConnectResult.Failed => MessageTone.Error,
+            _ => MessageTone.Info,
+        });
+    }
+}

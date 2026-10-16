@@ -149,3 +149,32 @@ public class ServerConnectorTests
         Assert.Equal(ConnectResult.Failed, outcome.Result);
     }
 }
+
+public class ConnectMessageTests
+{
+    private sealed class KeyLocalizer : RoG.Core.Localization.ILocalizer
+    {
+        public string GetString(string key) => key + "|{0}";
+    }
+
+    [Theory]
+    [InlineData(ConnectResult.Launched, ConnectKind.Steam, "Servers_LaunchedSteam|RoG CS", MessageTone.Success)]
+    [InlineData(ConnectResult.Launched, ConnectKind.EnemyTerritory, "Servers_LaunchedGame|RoG CS", MessageTone.Success)]
+    [InlineData(ConnectResult.CopiedNoHandler, ConnectKind.EnemyTerritory, "Servers_NoHandlerEt|1.2.3.4:27960", MessageTone.Info)]
+    [InlineData(ConnectResult.CopiedNoHandler, ConnectKind.Steam, "Servers_NoHandlerSteam|1.2.3.4:27960", MessageTone.Info)]
+    [InlineData(ConnectResult.CopiedManual, ConnectKind.Minecraft, "Servers_ManualMinecraft|1.2.3.4:27960", MessageTone.Info)]
+    [InlineData(ConnectResult.Failed, ConnectKind.None, "Servers_CopyFailed|1.2.3.4:27960", MessageTone.Error)]
+    public void Describes_each_outcome(ConnectResult result, ConnectKind kind, string text, MessageTone tone)
+    {
+        var message = ConnectMessage.Describe(new ConnectOutcome(result, kind, "1.2.3.4:27960", false), "RoG CS", new KeyLocalizer());
+        Assert.Equal(text, message.Text);
+        Assert.Equal(tone, message.Tone);
+    }
+
+    [Fact]
+    public void Adds_the_password_hint()
+    {
+        var message = ConnectMessage.Describe(new ConnectOutcome(ConnectResult.Launched, ConnectKind.Steam, "a:1", true), "X", new KeyLocalizer());
+        Assert.EndsWith("Servers_Passworded|{0}", message.Text, StringComparison.Ordinal);
+    }
+}

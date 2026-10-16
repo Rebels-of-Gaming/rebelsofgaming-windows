@@ -37,6 +37,23 @@ public static class StringKeys
     public const string CommonLinkCopied = "Common_LinkCopied";
     public const string CommonCopyFailed = "Common_CopyFailed";
 
+    // Mitglieder, Online-Stand
+    public const string MembersLastSeen = "Members_LastSeen";
+    public const string PresenceOnline = "Presence_Online";
+    public const string PresenceVoice = "Presence_Voice";
+    public const string PresenceServer = "Presence_Server";
+    public const string PresenceIngame = "Presence_Ingame";
+    public const string PresenceOffline = "Presence_Offline";
+
+    // Squads
+    public const string SquadsLeader = "Squads_Leader";
+    public const string SquadsClanLevel = "Squads_ClanLevel";
+    public const string SquadsSubstitute = "Squads_Substitute";
+    public const string SquadsMembers = "Squads_Members";
+    public const string SquadsRecruitingOpen = "Squads_RecruitingOpen";
+    public const string SquadsRecruitingWaitlist = "Squads_RecruitingWaitlist";
+    public const string SquadsRecruitingFull = "Squads_RecruitingFull";
+
     // News ({0} = Anzahl bzw. Minuten)
     public const string NewsComments = "News_Comments";
     public const string NewsReadingMinutes = "News_ReadingMinutes";

@@ -93,39 +93,16 @@ public sealed partial class ServersViewModel(AppServices services) : ObservableO
 
     private async Task ConnectAsync(ServerItemViewModel item)
     {
-        var outcome = await services.ServerConnector.ConnectAsync(item.Server);
-        var address = outcome.Address;
-        var key = outcome.Result switch
-        {
-            ConnectResult.Launched => outcome.Kind switch
-            {
-                ConnectKind.Steam => StringKeys.ServersLaunchedSteam,
-                ConnectKind.Web => StringKeys.ServersLaunchedWeb,
-                _ => StringKeys.ServersLaunchedGame,
-            },
-            ConnectResult.CopiedNoHandler => outcome.Kind switch
-            {
-                ConnectKind.Steam => StringKeys.ServersNoHandlerSteam,
-                ConnectKind.EnemyTerritory => StringKeys.ServersNoHandlerEt,
-                _ => StringKeys.ServersNoHandlerOther,
-            },
-            ConnectResult.CopiedManual => outcome.Kind == ConnectKind.Minecraft ? StringKeys.ServersManualMinecraft : StringKeys.ServersCopied,
-            _ => StringKeys.ServersCopyFailed,
-        };
-
-        var text = Format(key, outcome.Result == ConnectResult.Launched ? item.Name : address);
-        if (outcome.Passworded && outcome.Result != ConnectResult.Failed)
-        {
-            text += " " + services.Localizer.GetString(StringKeys.ServersPassworded);
-        }
-
-        ShowFeedback(text, outcome.Result switch
-        {
-            ConnectResult.Launched => InfoBarSeverity.Success,
-            ConnectResult.Failed => InfoBarSeverity.Error,
-            _ => InfoBarSeverity.Informational,
-        });
+        var message = ConnectMessage.Describe(await services.ServerConnector.ConnectAsync(item.Server), item.Name, services.Localizer);
+        ShowFeedback(message.Text, ToSeverity(message.Tone));
     }
+
+    internal static InfoBarSeverity ToSeverity(MessageTone tone) => tone switch
+    {
+        MessageTone.Success => InfoBarSeverity.Success,
+        MessageTone.Error => InfoBarSeverity.Error,
+        _ => InfoBarSeverity.Informational,
+    };
 
     private void Copy(ServerItemViewModel item)
     {

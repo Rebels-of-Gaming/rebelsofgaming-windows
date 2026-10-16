@@ -2,6 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using RoG.App.Services;
 using RoG.Core.Api;
+using RoG.Core.Localization;
 
 namespace RoG.App.ViewModels;
 

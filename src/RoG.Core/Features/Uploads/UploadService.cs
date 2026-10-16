@@ -67,6 +67,46 @@ public sealed class UploadService(IRoGApiClient client, HttpClient storage)
         IProgress<double>? progress = null,
         CancellationToken cancellationToken = default)
     {
+        var uploadId = await PutAsync(content, fileName, size, visibility, progress, cancellationToken).ConfigureAwait(false);
+        var completed = await client.V1_uploads_completeAsync(uploadId, cancellationToken).ConfigureAwait(false);
+        return Map(JsonSerializer.SerializeToElement(completed.Data));
+    }
+
+    /// <summary>
+    /// In ein Galerie-Album einreichen (Guide 24 „Große Dateien“): presign + Datei hochladen, dann ohne <c>complete</c>
+    /// <c>POST /v1/gallery/albums/{slug}/items</c> mit <c>upload_id</c>. Rückgabe: <c>pending</c> (Freigabe nötig) oder <c>approved</c>.
+    /// </summary>
+    public async Task<string> SubmitToGalleryAsync(
+        string albumSlug,
+        Stream content,
+        string fileName,
+        long size,
+        string? caption,
+        bool rightsConfirmed,
+        IProgress<double>? progress = null,
+        CancellationToken cancellationToken = default)
+    {
+        if (!rightsConfirmed)
+        {
+            throw new ArgumentException("Rechte müssen bestätigt sein", nameof(rightsConfirmed));
+        }
+
+        var uploadId = await PutAsync(content, fileName, size, UploadVisibility.Private, progress, cancellationToken).ConfigureAwait(false);
+        var response = await client.V1_gallery_items_storeAsync(albumSlug, new Body44
+        {
+            Upload_id = uploadId,
+            Rights_confirmed = true,
+            Caption = ApiValues.Text(caption),
+        }, cancellationToken).ConfigureAwait(false);
+        var status = JsonSerializer.SerializeToElement(response.Data);
+        return status.ValueKind == JsonValueKind.Object && status.TryGetProperty("status", out var st) && st.ValueKind == JsonValueKind.String
+            ? st.GetString() ?? "pending"
+            : "pending";
+    }
+
+    /// <summary>presign + Datei direkt in den Speicher (ohne Token); Rückgabe = Upload-ID.</summary>
+    private async Task<string> PutAsync(Stream content, string fileName, long size, UploadVisibility visibility, IProgress<double>? progress, CancellationToken cancellationToken)
+    {
         ArgumentNullException.ThrowIfNull(content);
         var mime = MimeFor(fileName) ?? throw new NotSupportedException(fileName);
         var presign = (await client.V1_uploads_presignAsync(new Body15
@@ -77,32 +117,29 @@ public sealed class UploadService(IRoGApiClient client, HttpClient storage)
             Visibility = VisibilityValue(visibility),
         }, cancellationToken).ConfigureAwait(false)).Data;
 
-        using (var request = new HttpRequestMessage(new HttpMethod(string.IsNullOrEmpty(presign.Method) ? "PUT" : presign.Method.ToUpperInvariant()), presign.Upload_url))
+        using var request = new HttpRequestMessage(new HttpMethod(string.IsNullOrEmpty(presign.Method) ? "PUT" : presign.Method.ToUpperInvariant()), presign.Upload_url);
+        request.Content = new ProgressContent(content, size, progress);
+        foreach (var (name, value) in presign.Headers ?? new Dictionary<string, object>())
         {
-            request.Content = new ProgressContent(content, size, progress);
-            foreach (var (name, value) in presign.Headers ?? new Dictionary<string, object>())
+            var text = value is JsonElement e ? (e.ValueKind == JsonValueKind.Array ? e[0].ToString() : e.ToString()) : value?.ToString();
+            if (text is null)
             {
-                var text = value is JsonElement e ? (e.ValueKind == JsonValueKind.Array ? e[0].ToString() : e.ToString()) : value?.ToString();
-                if (text is null)
-                {
-                    continue;
-                }
-
-                if (!request.Headers.TryAddWithoutValidation(name, text))
-                {
-                    request.Content.Headers.TryAddWithoutValidation(name, text);
-                }
+                continue;
             }
 
-            using var response = await storage.SendAsync(request, cancellationToken).ConfigureAwait(false);
-            if (!response.IsSuccessStatusCode)
+            if (!request.Headers.TryAddWithoutValidation(name, text))
             {
-                throw new ApiProblemException(new ApiProblem { Code = "upload_failed", Status = (int)response.StatusCode });
+                request.Content.Headers.TryAddWithoutValidation(name, text);
             }
         }
 
-        var completed = await client.V1_uploads_completeAsync(presign.Upload.Id, cancellationToken).ConfigureAwait(false);
-        return Map(JsonSerializer.SerializeToElement(completed.Data));
+        using var response = await storage.SendAsync(request, cancellationToken).ConfigureAwait(false);
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new ApiProblemException(new ApiProblem { Code = "upload_failed", Status = (int)response.StatusCode });
+        }
+
+        return presign.Upload.Id;
     }
 
     public async Task<Page<UploadItem>> ListAsync(string? cursor = null, CancellationToken cancellationToken = default)

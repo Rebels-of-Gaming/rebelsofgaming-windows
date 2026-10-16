@@ -6,3 +6,4 @@ export PATH="$HOME/.dotnet:$HOME/.dotnet/tools:$PATH" DOTNET_CLI_TELEMETRY_OPTOU
 out=artifacts/tools/AppSyntaxCheck
 dotnet build tools/AppSyntaxCheck/AppSyntaxCheck.csproj -c Release -o "$out" -v q -nologo >/dev/null
 dotnet "$out/AppSyntaxCheck.dll" src/RoG.App
+python3 -I "$(dirname "$0")/check-xaml-bindings.py"

@@ -294,8 +294,19 @@ public sealed partial class NewsDetailViewModel(AppServices services, NewsServic
     }
 }
 
-public sealed partial record CommentViewModel(string Id, string Author, string Time, string Body, bool CanReport)
+/// <summary>Klasse statt record: der Command-Generator des Toolkits erzeugt in records nichts (XAML fände ReportCommand nicht).</summary>
+public sealed partial class CommentViewModel(string id, string author, string time, string body, bool canReport)
 {
+    public string Id => id;
+
+    public string Author => author;
+
+    public string Time => time;
+
+    public string Body => body;
+
+    public bool CanReport => canReport;
+
     [RelayCommand]
-    private Task ReportAsync() => Controls.ReportDialog.ShowAsync("news_comment", Id);
+    private Task ReportAsync() => Controls.ReportDialog.ShowAsync("news_comment", id);
 }

@@ -5,7 +5,6 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 using RoG.App.Services;
 using RoG.Core.Api;
-using RoG.Core.Api.Generated;
 using RoG.Core.Features.Account;
 using RoG.Core.Localization;
 
@@ -88,7 +87,7 @@ public sealed partial class AccountViewModel(AppServices services) : ObservableO
             {
                 ErrorMessage = services.Localizer.GetError(ex.Problem.Code);
             }
-            catch (GeneratedApiException)
+            catch (RoG.Core.Api.Generated.GeneratedApiException)
             {
                 ErrorMessage = services.Localizer.GetError(ApiProblem.Codes.Unknown);
             }

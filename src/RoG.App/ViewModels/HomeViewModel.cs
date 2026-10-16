@@ -6,7 +6,6 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
 using RoG.App.Services;
 using RoG.Core.Api;
-using RoG.Core.Api.Generated;
 using RoG.Core.Features.Home;
 using RoG.Core.Localization;
 
@@ -64,7 +63,7 @@ public sealed partial class HomeViewModel(AppServices services) : ObservableObje
                 ErrorMessage = services.Localizer.GetError(ex.Problem.Code);
             }
         }
-        catch (GeneratedApiException)
+        catch (RoG.Core.Api.Generated.GeneratedApiException)
         {
             if (!silent || Stats.Count == 0)
             {

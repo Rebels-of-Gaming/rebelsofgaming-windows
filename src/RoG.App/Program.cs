@@ -21,13 +21,16 @@ public static class Program
             return 0;
         }
 
-        Microsoft.UI.Xaml.Application.Start(_ =>
+        Microsoft.UI.Xaml.Application.Start(static _ =>
         {
             SynchronizationContext.SetSynchronizationContext(new DispatcherQueueSynchronizationContext(DispatcherQueue.GetForCurrentThread()));
-            _ = new App();
+            StartApp();
         });
         return 0;
     }
+
+    /// <summary>Die App-Instanz hält sich selbst (Application.Current) – der Rückgabewert wird nicht gebraucht.</summary>
+    private static void StartApp() => _ = new App();
 
     private static bool IsMainInstance()
     {

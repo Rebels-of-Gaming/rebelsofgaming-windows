@@ -3,7 +3,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using RoG.App.Services;
 using RoG.Core.Api;
-using RoG.Core.Api.Generated;
 using RoG.Core.Localization;
 using RoG.Core.Settings;
 
@@ -65,7 +64,7 @@ public sealed partial class SettingsViewModel : ObservableObject
         {
             PlatformText = _services.Localizer.GetString(StringKeys.SettingsPlatformUnavailable);
         }
-        catch (GeneratedApiException)
+        catch (RoG.Core.Api.Generated.GeneratedApiException)
         {
             PlatformText = _services.Localizer.GetString(StringKeys.SettingsPlatformUnavailable);
         }

@@ -5,7 +5,6 @@ using Microsoft.UI.Xaml.Controls;
 using RoG.App.Services;
 using RoG.App.Views;
 using RoG.Core.Api;
-using RoG.Core.Api.Generated;
 using RoG.Core.Localization;
 using RoG.Core.Settings;
 using Windows.Graphics;
@@ -20,6 +19,7 @@ public sealed partial class MainWindow : Window
     {
         [StringKeys.NavHome] = typeof(HomePage),
         [StringKeys.NavServers] = typeof(ServersPage),
+        [StringKeys.NavNews] = typeof(NewsPage),
         [StringKeys.NavAccount] = typeof(AccountPage),
     };
 
@@ -114,7 +114,7 @@ public sealed partial class MainWindow : Window
         {
             // offline/Serverfehler: Seiten zeigen ihren eigenen Fehlerzustand; 401 läuft über OnUnauthorized
         }
-        catch (GeneratedApiException)
+        catch (RoG.Core.Api.Generated.GeneratedApiException)
         {
             // unerwartete Antwort – ohne Profil weiter
         }

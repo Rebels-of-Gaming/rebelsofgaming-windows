@@ -18,11 +18,16 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <TextBlock
-                    x:Uid="SquadsPage_Title"
-                    Margin="24,24,24,12"
-                    Style="{StaticResource RoGDisplayTextStyle}"
-                    Text="SQUADS" />
+                <StackPanel Margin="24,24,24,12" Spacing="8">
+                    <TextBlock
+                        x:Uid="SquadsPage_Title"
+                        Style="{StaticResource RoGDisplayTextStyle}"
+                        Text="SQUADS" />
+                    <SelectorBar SelectionChanged="OnModeChanged">
+                        <SelectorBarItem x:Uid="SquadsPage_ModeSquads" IsSelected="True" />
+                        <SelectorBarItem x:Uid="SquadsPage_ModeGames" />
+                    </SelectorBar>
+                </StackPanel>
                 <controls:StateView
                     x:Uid="SquadsPage_State"
                     Grid.Row="1"
@@ -36,7 +41,7 @@
                     Padding="12,0,12,12"
                     ItemsSource="{x:Bind ViewModel.Items}"
                     SelectedItem="{x:Bind ViewModel.Selected, Mode=TwoWay}"
-                    Visibility="{x:Bind ViewModel.ShowContent, Mode=OneWay}">
+                    Visibility="{x:Bind ViewModel.ShowSquads, Mode=OneWay}">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="vm:SquadItemViewModel">
                             <Grid Padding="0,8" ColumnSpacing="12" AutomationProperties.Name="{x:Bind Name}">
@@ -72,6 +77,37 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+
+                <!-- Spiele -->
+                <Grid Grid.Row="1" Visibility="{x:Bind ViewModel.GamesMode, Mode=OneWay}">
+                    <controls:StateView
+                        x:Uid="SquadsPage_GamesState"
+                        ErrorMessage="{x:Bind ViewModel.Games.ErrorMessage, Mode=OneWay}"
+                        IsEmpty="{x:Bind ViewModel.Games.IsEmpty, Mode=OneWay}"
+                        IsLoading="{x:Bind ViewModel.Games.IsLoading, Mode=OneWay}"
+                        RetryCommand="{x:Bind ViewModel.Games.RefreshCommand}" />
+                    <ScrollViewer Padding="12,0,12,12" VerticalScrollBarVisibility="Auto" Visibility="{x:Bind ViewModel.Games.ShowContent, Mode=OneWay}">
+                        <ItemsControl ItemsSource="{x:Bind ViewModel.Games.Items}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="vm:GameItemViewModel">
+                                    <Border Margin="0,0,0,8" Style="{StaticResource RoGCardStyle}" AutomationProperties.Name="{x:Bind Title}">
+                                        <StackPanel Spacing="6">
+                                            <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Title}" />
+                                            <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" />
+                                            <ItemsControl ItemsSource="{x:Bind Links}" Visibility="{x:Bind HasLinks}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate x:DataType="vm:GameLinkViewModel">
+                                                        <HyperlinkButton Padding="0,2" Command="{x:Bind OpenCommand}" Content="{x:Bind Label}" />
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
             </Grid>
         </controls:ListDetailPanel.List>
 

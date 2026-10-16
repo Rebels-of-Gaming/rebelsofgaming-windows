@@ -23,9 +23,34 @@ public sealed partial class SquadsViewModel : LoadableViewModel
     {
         _squads = new SquadService(services.Api.Client);
         Detail = new SquadDetailViewModel(services, _squads);
+        Games = new GamesViewModel(services);
+        PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(ShowContent))
+            {
+                OnPropertyChanged(nameof(ShowSquads));
+            }
+        };
     }
 
     public ObservableCollection<SquadItemViewModel> Items { get; } = [];
+
+    /// <summary>Umschalter „Spiele“ statt der Squad-Liste.</summary>
+    public GamesViewModel Games { get; }
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(ShowSquads))]
+    public partial bool GamesMode { get; set; }
+
+    public bool ShowSquads => ShowContent && !GamesMode;
+
+    partial void OnGamesModeChanged(bool value)
+    {
+        if (value && Games.Items.Count == 0)
+        {
+            _ = Games.LoadAsync();
+        }
+    }
 
     public SquadDetailViewModel Detail { get; }
 

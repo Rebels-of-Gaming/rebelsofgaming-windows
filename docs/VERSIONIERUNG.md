@@ -46,4 +46,6 @@ und meldet `X.Y.Z` als `app_version` an `/v1/devices`.
 - `2.2.0` (16.10.2026): Stufe 7 weitgehend (Configs, Backups, RCON, Sperren, Freigaben, Windows Hello).
 - `2.2.1`/`2.2.2` (16.10.2026): Statistiken, Onboarding, Mitgliederkarte.
 - `2.3.0` (16.10.2026): Stufe 8 Wiki.
+- `2.3.1`–`2.3.4` (16.10.2026): Moderation, Melden, Offline-Warteschlange, DPAPI, Verwaltung, Teilen-Ziel.
+- `2.4.0` (17.10.2026): Stufe 2 komplett (Spiele, Auslastung, Monatsansicht), Offline-Cache, Termine verwalten.
 - `2.0.1` (16.10.2026): Stufe 1 Konto + Start (Konto, Einstellungen, Live-Ticker, Einzelinstanz). Version setzen mit `scripts/bump-version.sh patch|minor`.

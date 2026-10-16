@@ -28,6 +28,9 @@ public sealed partial class SquadsPage : Page
         }
     }
 
+    private void OnModeChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args) =>
+        ViewModel.GamesMode = sender.SelectedItem is not null && sender.Items.IndexOf(sender.SelectedItem) == 1;
+
     private void OnDetailClosed(object? sender, EventArgs e)
     {
         ViewModel.Selected = null;

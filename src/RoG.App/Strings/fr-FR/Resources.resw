@@ -2573,4 +2573,13 @@
   <data name="EventsPage_NextMonth.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Mois suivant</value>
   </data>
+  <data name="SquadsPage_ModeSquads.Text" xml:space="preserve">
+    <value>Squads</value>
+  </data>
+  <data name="SquadsPage_ModeGames.Text" xml:space="preserve">
+    <value>Jeux</value>
+  </data>
+  <data name="SquadsPage_GamesState.EmptyText" xml:space="preserve">
+    <value>Aucun jeu enregistré.</value>
+  </data>
 </root>

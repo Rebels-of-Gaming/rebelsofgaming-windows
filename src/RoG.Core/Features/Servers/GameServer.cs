@@ -61,7 +61,9 @@ public sealed record ServerAbilities(
     bool FilesWrite = false,
     bool FilesApprove = false,
     bool Backups = false,
-    bool ConfigApproval = false)
+    bool ConfigApproval = false,
+    bool Rcon = false,
+    bool Bans = false)
 {
-    public bool Any => Power || Console || FilesRead || FilesWrite || Backups;
+    public bool Any => Power || Console || FilesRead || FilesWrite || FilesApprove || Backups || Rcon || Bans;
 }

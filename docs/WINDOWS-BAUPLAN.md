@@ -14,7 +14,7 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 | 4 | Kommunikation | fast fertig (2.1.0): DMs mit Pop-out, Forum lesen+schreiben, Zusagen, Tastenkürzel; offen: Offline-Warteschlange | siehe `git log` |
 | 5 | Medien | fast fertig (2.1.0): Uploads (Drag & Drop, Strg+V), Galerie, Downloads, Kurzlinks, Profil bearbeiten; offen: Teilen-Ziel, Galerie-Upload | siehe `git log` |
 | 6 | Clan-Prozesse | in Arbeit (2.1.1): Bewerben, eigene Bewerbungen, Votes, Abwesenheiten, Geräte/Datenexport/Konto löschen, Regel-Hinweis; offen: Trial-Ansicht für Squad-Leitung, Onboarding, Mitgliederkarte, Statistiken | siehe `git log` |
-| 7 | Server-Steuerung | in Arbeit (2.1.1): Steuer-Fenster mit Power, Ressourcen, Live-Konsole, Befehlen; offen: Configs, Backups, RCON/Bans, Windows Hello | siehe `git log` |
+| 7 | Server-Steuerung | fast fertig (2.2.0): Steuer-Fenster mit Power, Ressourcen, Live-Konsole (Historie), Configs (Diff, Versionen, Rollback, Anträge), Backups, RCON, Sperren, Vier-Augen-Freigaben, App-Sperre mit Windows Hello; offen: Dateioperationen, Formular-Vorlagen/Map-Rotation, Whitelist | siehe `git log` |
 | 8 | Wiki | offen | |
 | 9 | Verwaltung + Moderation | offen | |
 | 10 | Feinschliff + Store | offen | |
@@ -93,7 +93,7 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   „Im Ordner zeigen“, Profil bearbeiten (Texte, Ort, Einwilligungen, Avatar, Banner).
 - **Client-Korrekturen:** generierte Anfragen senden keine `null`-Felder mehr (ein PATCH hätte sonst Daten gelöscht).
 
-### Stufen 6–7 begonnen (2.1.1, 16.10.2026)
+### Stufen 6–7 (2.1.1–2.2.0, 16.10.2026)
 
 - **Bewerbung:** Dialog aus dem Formular der API (Fragen je Typ, Geburtsdatum, Regelwerke, Trial-Zustimmung, Werber),
   Fehler wie `discord_required` im Dialog; „Meine Bewerbungen“ auf der Konto-Seite (Fortschritt, Ablauf, Aufgaben,
@@ -106,6 +106,10 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   Start/Neustart/Stopp/Kill (Kill mit Rückfrage), CPU/RAM/Speicher/Laufzeit, Live-Konsole über den Wings-WebSocket
   (kurzlebiges Token aus `console-token`, `Origin` aus der Antwort, Erneuerung bei `token expiring`), Befehle über die
   API (Audit-Log). Vier-Augen-Pflicht (`can_command: false`) sperrt die Befehlszeile. Befehls-Historie mit ↑/↓.
+- **Configs, Backups, RCON, Sperren, Freigaben** als Reiter im Steuer-Fenster – jeder Reiter nur mit dem passenden
+  Recht aus `control.abilities`. Speichern erkennt `202` (Antrag bei Vier-Augen-Pflicht); Rollback, Wiederherstellen,
+  Löschen, Sperre aufheben und Freigeben/Ablehnen mit Rückfrage. Gäste sperren per Spieler-ID/Name (Lücke W10:
+  Body fehlt in der Spec), Mitglieder weiter über die Website (Rangprüfung). RCON-Ausgabe wird nicht gespeichert.
 - **App-Sperre mit Windows Hello** (Einstellungen, nur wenn Hello eingerichtet; Einschalten erst nach erfolgreicher
   Prüfung): beim Start und nach 5 Minuten außerhalb des Vordergrunds; Ausweg „Stattdessen abmelden“.
 

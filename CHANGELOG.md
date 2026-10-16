@@ -19,6 +19,7 @@ Stufe 0 – Fundament (Version 0.1.0, noch nicht im Store).
 - Server-Seite: Gameserver mit Live-Stand, „Verbinden“ über Steam (`steam://connect`) und Enemy Territory (`et://`), sonst Adresse kopieren (Minecraft) mit Hinweis im Spiel
 - Store-Identität der bestehenden App „Rebels of Gaming“ (`wahke.RebelsofGaming`); Version 2.0.0, weil im Store schon 1.0.4.0 liegt
 - 2.1.0: Benachrichtigungen mit Windows-Toasts, Tray-Symbol, Sprungliste, Autostart, Direktnachrichten mit eigenem Chat-Fenster, Forum, Uploads mit Drag & Drop und Strg+V, Galerie, Downloads, Kurzlinks, Profil bearbeiten, News, Squads, Mitglieder, Termine mit Zusage, TeamSpeak/Discord, Matches, Info, Suche
+- 2.2.0: Bewerben bei Squads mit „Meine Bewerbungen“, Abstimmungen über Bewerbungen, Abwesenheiten, Geräte & Datenexport, Konto löschen, Hinweis auf neue Regeln; Server-Steuerung im eigenen Fenster (Start/Stopp/Neustart/Kill, Ressourcen, Live-Konsole mit Verlauf, Configs mit Prüfung und Versionen, Backups, RCON, Sperren, Vier-Augen-Freigaben); App-Sperre mit Windows Hello
 - Konto-Seite mit Abmelden, Einstellungen (Sprache, Versionen, Lizenzen), Startseite mit Live-Ticker, nur eine App-Instanz, Fensterposition wird gemerkt
 - Korrigiert: API-Client sendet Auswahlwerte jetzt wie erwartet (`windows`), wertet `201 Created` als Erfolg und verträgt `[]` statt `{}`
 - Testpakete (Sideload) signiert der Windows-Runner mit einem selbst angelegten Testzertifikat (`RoG-Test.cer` im Artefakt)

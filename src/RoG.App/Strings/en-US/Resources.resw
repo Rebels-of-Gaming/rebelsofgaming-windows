@@ -1691,4 +1691,109 @@
   <data name="Backup_Delete.Content" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="Ban_PlayerMissing" xml:space="preserve">
+    <value>Please enter a player ID or in-game name.</value>
+  </data>
+  <data name="Ban_Done" xml:space="preserve">
+    <value>Ban applied.</value>
+  </data>
+  <data name="Ban_LiftTitle" xml:space="preserve">
+    <value>Lift ban?</value>
+  </data>
+  <data name="Ban_Until" xml:space="preserve">
+    <value>until {0}</value>
+  </data>
+  <data name="Ban_Permanent" xml:space="preserve">
+    <value>permanent</value>
+  </data>
+  <data name="Approval_ApproveTitle" xml:space="preserve">
+    <value>Approve change?</value>
+  </data>
+  <data name="Approval_RejectTitle" xml:space="preserve">
+    <value>Reject change?</value>
+  </data>
+  <data name="Approval_Approved" xml:space="preserve">
+    <value>Approved – the change has been written.</value>
+  </data>
+  <data name="Approval_Rejected" xml:space="preserve">
+    <value>Rejected.</value>
+  </data>
+  <data name="Approval_Outdated" xml:space="preserve">
+    <value>file has changed since</value>
+  </data>
+  <data name="Error_forbidden_cvar" xml:space="preserve">
+    <value>This value is not allowed (e.g. sv_cheats 1).</value>
+  </data>
+  <data name="Error_rcon_write_blocked" xml:space="preserve">
+    <value>RCON is disabled on this instance.</value>
+  </data>
+  <data name="Error_rcon_target_forbidden" xml:space="preserve">
+    <value>RCON only works with public addresses.</value>
+  </data>
+  <data name="Error_player_identity_conflict" xml:space="preserve">
+    <value>This identifier belongs to several people – not banned.</value>
+  </data>
+  <data name="Error_ban_managed_by_moderation" xml:space="preserve">
+    <value>This ban is managed by moderation.</value>
+  </data>
+  <data name="Error_own_change" xml:space="preserve">
+    <value>You cannot approve your own change.</value>
+  </data>
+  <data name="Error_change_not_pending" xml:space="preserve">
+    <value>The request has already been decided.</value>
+  </data>
+  <data name="Console_TabRcon.Text" xml:space="preserve">
+    <value>RCON</value>
+  </data>
+  <data name="Console_TabBans.Text" xml:space="preserve">
+    <value>Bans</value>
+  </data>
+  <data name="Console_TabApprovals.Text" xml:space="preserve">
+    <value>Approvals</value>
+  </data>
+  <data name="Rcon_Output.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>RCON output</value>
+  </data>
+  <data name="Rcon_Command.PlaceholderText" xml:space="preserve">
+    <value>RCON command (Enter sends, ↑/↓ history)</value>
+  </data>
+  <data name="Ban_NewTitle.Text" xml:space="preserve">
+    <value>BAN A GUEST</value>
+  </data>
+  <data name="Ban_PlayerId.Header" xml:space="preserve">
+    <value>Player ID (SteamID, GUID, UUID)</value>
+  </data>
+  <data name="Ban_PlayerName.Header" xml:space="preserve">
+    <value>In-game name</value>
+  </data>
+  <data name="Ban_Minutes.Header" xml:space="preserve">
+    <value>Minutes (0 = permanent)</value>
+  </data>
+  <data name="Ban_Reason.Header" xml:space="preserve">
+    <value>Reason</value>
+  </data>
+  <data name="Ban_Submit.Content" xml:space="preserve">
+    <value>BAN</value>
+  </data>
+  <data name="Ban_Hint.Text" xml:space="preserve">
+    <value>Ban members on the website via their profile (rank check).</value>
+  </data>
+  <data name="Ban_Empty.Text" xml:space="preserve">
+    <value>No active bans.</value>
+  </data>
+  <data name="Ban_Lift.Content" xml:space="preserve">
+    <value>Lift</value>
+  </data>
+  <data name="Approval_Empty.Text" xml:space="preserve">
+    <value>No pending requests.</value>
+  </data>
+  <data name="Approval_Note.PlaceholderText" xml:space="preserve">
+    <value>Reason (optional)</value>
+  </data>
+  <data name="Approval_Approve.Content" xml:space="preserve">
+    <value>APPROVE</value>
+  </data>
+  <data name="Approval_Reject.Content" xml:space="preserve">
+    <value>REJECT</value>
+  </data>
 </root>

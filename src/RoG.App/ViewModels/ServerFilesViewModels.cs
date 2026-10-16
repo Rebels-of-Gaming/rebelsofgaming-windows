@@ -341,3 +341,208 @@ public sealed partial class BackupItemViewModel(ServerBackup backup, ServerBacku
     [RelayCommand]
     private Task DeleteAsync() => owner.DeleteAsync(this);
 }
+
+/// <summary>RCON: freier Befehl, Ausgabe anzeigen (wird nicht gespeichert – kann Spieler-IPs enthalten).</summary>
+public sealed partial class ServerRconViewModel(AppServices services, string slug, Action<string, InfoBarSeverity> show)
+    : ServerTabViewModel(services, slug, show)
+{
+    private readonly ServerModerationService _moderation = new(services.Api.Client, services.Api.Http);
+
+    public CommandHistory History { get; } = new();
+
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(SendCommand))]
+    public partial string Command { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial string Output { get; set; } = string.Empty;
+
+    private bool CanSend() => !string.IsNullOrWhiteSpace(Command) && Command.Trim().Length <= 500;
+
+    [RelayCommand(CanExecute = nameof(CanSend))]
+    private async Task SendAsync()
+    {
+        var command = Command.Trim();
+        History.Add(command);
+        Command = string.Empty;
+        await RunAsync(async () =>
+        {
+            var output = await _moderation.RconAsync(Slug, command);
+            Output = $"> {command}\n{output}\n\n{Output}".TrimEnd();
+        });
+    }
+}
+
+/// <summary>Aktive Sperren der Website, Gast sperren (ID oder Name), Sperre aufheben.</summary>
+public sealed partial class ServerBansViewModel(AppServices services, string slug, Action<string, InfoBarSeverity> show)
+    : ServerTabViewModel(services, slug, show)
+{
+    private readonly ServerModerationService _moderation = new(services.Api.Client, services.Api.Http);
+    private bool _loaded;
+
+    public ObservableCollection<BanItemViewModel> Items { get; } = [];
+
+    [ObservableProperty]
+    public partial string PlayerId { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial string PlayerName { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial double Minutes { get; set; } = 60;
+
+    [ObservableProperty]
+    public partial string Reason { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial bool IsEmpty { get; set; }
+
+    public async Task EnsureLoadedAsync()
+    {
+        if (!_loaded)
+        {
+            _loaded = true;
+            await ReloadAsync();
+        }
+    }
+
+    [RelayCommand]
+    private Task ReloadAsync() => RunAsync(async () =>
+    {
+        var bans = await _moderation.BansAsync(Slug);
+        Items.Clear();
+        foreach (var b in bans)
+        {
+            Items.Add(new BanItemViewModel(b, this, Services.Localizer));
+        }
+
+        IsEmpty = Items.Count == 0;
+    });
+
+    [RelayCommand]
+    private async Task BanAsync()
+    {
+        if (string.IsNullOrWhiteSpace(PlayerId) && string.IsNullOrWhiteSpace(PlayerName))
+        {
+            Show(L(StringKeys.BanPlayerMissing), InfoBarSeverity.Warning);
+            return;
+        }
+
+        var minutes = double.IsNaN(Minutes) ? 0 : (int)Math.Max(0, Minutes);
+        if (await RunAsync(() => _moderation.BanAsync(Slug, PlayerId, PlayerName, minutes, Reason)))
+        {
+            PlayerId = PlayerName = Reason = string.Empty;
+            Show(L(StringKeys.BanDone), InfoBarSeverity.Success);
+            await ReloadAsync();
+        }
+    }
+
+    internal async Task LiftAsync(BanItemViewModel item)
+    {
+        if (await Confirm(L(StringKeys.BanLiftTitle), item.Player) && await RunAsync(() => _moderation.LiftAsync(Slug, item.Id)))
+        {
+            Items.Remove(item);
+            IsEmpty = Items.Count == 0;
+        }
+    }
+}
+
+public sealed partial class BanItemViewModel(ServerBan ban, ServerBansViewModel owner, ILocalizer localizer)
+{
+    public string Id => ban.Id;
+
+    public string Player => ban.Player;
+
+    public string Meta { get; } = string.Join(" · ", new[]
+    {
+        ban.Reason,
+        ban.EndsAt is { } e
+            ? string.Format(CultureInfo.CurrentCulture, localizer.GetString(StringKeys.BanUntil), e.ToLocalTime().ToString("g", CultureInfo.CurrentCulture))
+            : localizer.GetString(StringKeys.BanPermanent),
+        ban.IssuedBy,
+    }.Where(s => !string.IsNullOrEmpty(s)));
+
+    [RelayCommand]
+    private Task LiftAsync() => owner.LiftAsync(this);
+}
+
+/// <summary>Offene Config-Anträge (Vier-Augen-Prinzip) mit Diff freigeben oder ablehnen.</summary>
+public sealed partial class ServerApprovalsViewModel(AppServices services, string slug, Action<string, InfoBarSeverity> show)
+    : ServerTabViewModel(services, slug, show)
+{
+    private readonly ServerModerationService _moderation = new(services.Api.Client, services.Api.Http);
+    private bool _loaded;
+
+    public ObservableCollection<ChangeItemViewModel> Items { get; } = [];
+
+    [ObservableProperty]
+    public partial bool IsEmpty { get; set; }
+
+    public async Task EnsureLoadedAsync()
+    {
+        if (!_loaded)
+        {
+            _loaded = true;
+            await ReloadAsync();
+        }
+    }
+
+    [RelayCommand]
+    private Task ReloadAsync() => RunAsync(async () =>
+    {
+        var changes = await _moderation.PendingChangesAsync(Slug);
+        Items.Clear();
+        foreach (var c in changes)
+        {
+            Items.Add(new ChangeItemViewModel(c, this, Services.Localizer));
+        }
+
+        IsEmpty = Items.Count == 0;
+    });
+
+    internal async Task DecideAsync(ChangeItemViewModel item, bool approve)
+    {
+        if (!await Confirm(L(approve ? StringKeys.ApprovalApproveTitle : StringKeys.ApprovalRejectTitle), item.Title))
+        {
+            return;
+        }
+
+        var ok = await RunAsync(() => approve
+            ? _moderation.ApproveAsync(Slug, item.Id, item.Note)
+            : _moderation.RejectAsync(Slug, item.Id, item.Note));
+        if (ok)
+        {
+            Items.Remove(item);
+            IsEmpty = Items.Count == 0;
+            Show(L(approve ? StringKeys.ApprovalApproved : StringKeys.ApprovalRejected), InfoBarSeverity.Success);
+        }
+    }
+}
+
+public sealed partial class ChangeItemViewModel(ConfigChange change, ServerApprovalsViewModel owner, ILocalizer localizer) : ObservableObject
+{
+    public string Id => change.Id;
+
+    public string Title { get; } = change.Path;
+
+    public string Meta { get; } = string.Join(" · ", new[]
+    {
+        change.Author,
+        change.CreatedAt?.ToLocalTime().ToString("g", CultureInfo.CurrentCulture),
+        change.Note,
+        change.After,
+        change.Outdated ? localizer.GetString(StringKeys.ApprovalOutdated) : null,
+    }.Where(s => !string.IsNullOrEmpty(s)));
+
+    public string Diff => change.Diff;
+
+    /// <summary>Begründung zur Entscheidung (optional).</summary>
+    [ObservableProperty]
+    public partial string Note { get; set; } = string.Empty;
+
+    [RelayCommand]
+    private Task ApproveAsync() => owner.DecideAsync(this, approve: true);
+
+    [RelayCommand]
+    private Task RejectAsync() => owner.DecideAsync(this, approve: false);
+}

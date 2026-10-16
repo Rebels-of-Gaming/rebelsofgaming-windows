@@ -1691,4 +1691,109 @@
   <data name="Backup_Delete.Content" xml:space="preserve">
     <value>Löschen</value>
   </data>
+  <data name="Ban_PlayerMissing" xml:space="preserve">
+    <value>Bitte Spieler-ID oder Ingame-Namen angeben.</value>
+  </data>
+  <data name="Ban_Done" xml:space="preserve">
+    <value>Sperre gesetzt.</value>
+  </data>
+  <data name="Ban_LiftTitle" xml:space="preserve">
+    <value>Sperre aufheben?</value>
+  </data>
+  <data name="Ban_Until" xml:space="preserve">
+    <value>bis {0}</value>
+  </data>
+  <data name="Ban_Permanent" xml:space="preserve">
+    <value>dauerhaft</value>
+  </data>
+  <data name="Approval_ApproveTitle" xml:space="preserve">
+    <value>Änderung freigeben?</value>
+  </data>
+  <data name="Approval_RejectTitle" xml:space="preserve">
+    <value>Änderung ablehnen?</value>
+  </data>
+  <data name="Approval_Approved" xml:space="preserve">
+    <value>Freigegeben – die Änderung ist geschrieben.</value>
+  </data>
+  <data name="Approval_Rejected" xml:space="preserve">
+    <value>Abgelehnt.</value>
+  </data>
+  <data name="Approval_Outdated" xml:space="preserve">
+    <value>Datei hat sich inzwischen geändert</value>
+  </data>
+  <data name="Error_forbidden_cvar" xml:space="preserve">
+    <value>Dieser Wert ist nicht erlaubt (z. B. sv_cheats 1).</value>
+  </data>
+  <data name="Error_rcon_write_blocked" xml:space="preserve">
+    <value>RCON ist auf dieser Instanz gesperrt.</value>
+  </data>
+  <data name="Error_rcon_target_forbidden" xml:space="preserve">
+    <value>RCON geht nur an öffentliche Adressen.</value>
+  </data>
+  <data name="Error_player_identity_conflict" xml:space="preserve">
+    <value>Diese Kennung gehört mehreren Personen – nicht gesperrt.</value>
+  </data>
+  <data name="Error_ban_managed_by_moderation" xml:space="preserve">
+    <value>Diese Sperre verwaltet die Moderation.</value>
+  </data>
+  <data name="Error_own_change" xml:space="preserve">
+    <value>Die eigene Änderung kann man nicht selbst freigeben.</value>
+  </data>
+  <data name="Error_change_not_pending" xml:space="preserve">
+    <value>Der Antrag ist schon entschieden.</value>
+  </data>
+  <data name="Console_TabRcon.Text" xml:space="preserve">
+    <value>RCON</value>
+  </data>
+  <data name="Console_TabBans.Text" xml:space="preserve">
+    <value>Sperren</value>
+  </data>
+  <data name="Console_TabApprovals.Text" xml:space="preserve">
+    <value>Freigaben</value>
+  </data>
+  <data name="Rcon_Output.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>RCON-Ausgabe</value>
+  </data>
+  <data name="Rcon_Command.PlaceholderText" xml:space="preserve">
+    <value>RCON-Befehl (Enter sendet, ↑/↓ Verlauf)</value>
+  </data>
+  <data name="Ban_NewTitle.Text" xml:space="preserve">
+    <value>GAST SPERREN</value>
+  </data>
+  <data name="Ban_PlayerId.Header" xml:space="preserve">
+    <value>Spieler-ID (SteamID, GUID, UUID)</value>
+  </data>
+  <data name="Ban_PlayerName.Header" xml:space="preserve">
+    <value>Ingame-Name</value>
+  </data>
+  <data name="Ban_Minutes.Header" xml:space="preserve">
+    <value>Minuten (0 = dauerhaft)</value>
+  </data>
+  <data name="Ban_Reason.Header" xml:space="preserve">
+    <value>Grund</value>
+  </data>
+  <data name="Ban_Submit.Content" xml:space="preserve">
+    <value>SPERREN</value>
+  </data>
+  <data name="Ban_Hint.Text" xml:space="preserve">
+    <value>Mitglieder sperrst du auf der Website über ihr Profil (Rangprüfung).</value>
+  </data>
+  <data name="Ban_Empty.Text" xml:space="preserve">
+    <value>Keine aktiven Sperren.</value>
+  </data>
+  <data name="Ban_Lift.Content" xml:space="preserve">
+    <value>Aufheben</value>
+  </data>
+  <data name="Approval_Empty.Text" xml:space="preserve">
+    <value>Keine offenen Anträge.</value>
+  </data>
+  <data name="Approval_Note.PlaceholderText" xml:space="preserve">
+    <value>Begründung (optional)</value>
+  </data>
+  <data name="Approval_Approve.Content" xml:space="preserve">
+    <value>FREIGEBEN</value>
+  </data>
+  <data name="Approval_Reject.Content" xml:space="preserve">
+    <value>ABLEHNEN</value>
+  </data>
 </root>

@@ -228,6 +228,18 @@ public static class StringKeys
     public const string BackupLock = "Backup_Lock";
     public const string BackupUnlock = "Backup_Unlock";
 
+    // Sperren und Freigaben ({0} = Datum)
+    public const string BanPlayerMissing = "Ban_PlayerMissing";
+    public const string BanDone = "Ban_Done";
+    public const string BanLiftTitle = "Ban_LiftTitle";
+    public const string BanUntil = "Ban_Until";
+    public const string BanPermanent = "Ban_Permanent";
+    public const string ApprovalApproveTitle = "Approval_ApproveTitle";
+    public const string ApprovalRejectTitle = "Approval_RejectTitle";
+    public const string ApprovalApproved = "Approval_Approved";
+    public const string ApprovalRejected = "Approval_Rejected";
+    public const string ApprovalOutdated = "Approval_Outdated";
+
     // App-Sperre
     public const string LockPrompt = "Lock_Prompt";
 
@@ -288,6 +300,8 @@ public static class StringKeys
         "discord_required", "already_member", "application_blocked",
         "console_unavailable", "approval_required", "backup_locked", "backup_busy", "backup_not_found",
         "config_changed", "file_operation_forbidden", "pterodactyl_write_blocked",
+        "forbidden_cvar", "rcon_write_blocked", "rcon_target_forbidden", "player_identity_conflict", "ban_managed_by_moderation",
+        "own_change", "change_not_pending",
     ];
 
     /// <summary>Alle Schlüssel aus Code – für den Vollständigkeitstest.</summary>

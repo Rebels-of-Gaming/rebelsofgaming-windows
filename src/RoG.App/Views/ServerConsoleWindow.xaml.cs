@@ -18,11 +18,17 @@ public sealed partial class ServerConsoleWindow : Window
         ViewModel = new ServerConsoleViewModel(App.Services, slug, name, abilities);
         Configs = new ServerConfigsViewModel(App.Services, slug, abilities, ViewModel.Show) { Confirm = ConfirmAsync };
         Backups = new ServerBackupsViewModel(App.Services, slug, ViewModel.Show) { Confirm = ConfirmAsync };
+        Rcon = new ServerRconViewModel(App.Services, slug, ViewModel.Show);
+        Bans = new ServerBansViewModel(App.Services, slug, ViewModel.Show) { Confirm = ConfirmAsync };
+        Approvals = new ServerApprovalsViewModel(App.Services, slug, ViewModel.Show) { Confirm = ConfirmAsync };
         InitializeComponent();
         ConsoleTab.Visibility = abilities.Console ? Visibility.Visible : Visibility.Collapsed;
         ConfigsTab.Visibility = abilities.FilesRead || abilities.FilesWrite ? Visibility.Visible : Visibility.Collapsed;
         BackupsTab.Visibility = abilities.Backups ? Visibility.Visible : Visibility.Collapsed;
-        Tabs.SelectedItem = new[] { ConsoleTab, ConfigsTab, BackupsTab }.FirstOrDefault(t => t.Visibility == Visibility.Visible);
+        RconTab.Visibility = abilities.Rcon ? Visibility.Visible : Visibility.Collapsed;
+        BansTab.Visibility = abilities.Bans ? Visibility.Visible : Visibility.Collapsed;
+        ApprovalsTab.Visibility = abilities.FilesApprove ? Visibility.Visible : Visibility.Collapsed;
+        Tabs.SelectedItem = Tabs.Items.FirstOrDefault(t => t.Visibility == Visibility.Visible);
         Tabs.Visibility = Tabs.Items.Count(t => t.Visibility == Visibility.Visible) > 1 ? Visibility.Visible : Visibility.Collapsed;
         TitleText.Text = name.ToUpper(System.Globalization.CultureInfo.CurrentCulture);
         Title = name;
@@ -51,10 +57,16 @@ public sealed partial class ServerConsoleWindow : Window
 
     public ServerBackupsViewModel Backups { get; }
 
+    public ServerRconViewModel Rcon { get; }
+
+    public ServerBansViewModel Bans { get; }
+
+    public ServerApprovalsViewModel Approvals { get; }
+
     /// <summary>Reiter wechseln; Configs und Backups laden beim ersten Öffnen.</summary>
     private void OnTabChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args)
     {
-        if (ConsolePanel is null || ConfigsPanel is null || BackupsPanel is null)
+        if (ConsolePanel is null || ConfigsPanel is null || BackupsPanel is null || RconPanel is null || BansPanel is null || ApprovalsPanel is null)
         {
             return; // feuert schon in InitializeComponent
         }
@@ -63,6 +75,9 @@ public sealed partial class ServerConsoleWindow : Window
         ConsolePanel.Visibility = selected == ConsoleTab ? Visibility.Visible : Visibility.Collapsed;
         ConfigsPanel.Visibility = selected == ConfigsTab ? Visibility.Visible : Visibility.Collapsed;
         BackupsPanel.Visibility = selected == BackupsTab ? Visibility.Visible : Visibility.Collapsed;
+        RconPanel.Visibility = selected == RconTab ? Visibility.Visible : Visibility.Collapsed;
+        BansPanel.Visibility = selected == BansTab ? Visibility.Visible : Visibility.Collapsed;
+        ApprovalsPanel.Visibility = selected == ApprovalsTab ? Visibility.Visible : Visibility.Collapsed;
         if (selected == ConfigsTab)
         {
             _ = Configs.EnsureLoadedAsync();
@@ -70,6 +85,14 @@ public sealed partial class ServerConsoleWindow : Window
         else if (selected == BackupsTab)
         {
             _ = Backups.EnsureLoadedAsync();
+        }
+        else if (selected == BansTab)
+        {
+            _ = Bans.EnsureLoadedAsync();
+        }
+        else if (selected == ApprovalsTab)
+        {
+            _ = Approvals.EnsureLoadedAsync();
         }
     }
 
@@ -119,6 +142,25 @@ public sealed partial class ServerConsoleWindow : Window
             {
                 e.Handled = true;
                 ViewModel.Command = text;
+                box.SelectionStart = text.Length;
+            }
+        }
+    }
+
+    private void OnRconKeyDown(object sender, KeyRoutedEventArgs e)
+    {
+        if (e.Key == VirtualKey.Enter && Rcon.SendCommand.CanExecute(null))
+        {
+            e.Handled = true;
+            Rcon.SendCommand.Execute(null);
+        }
+        else if (e.Key is VirtualKey.Up or VirtualKey.Down && sender is TextBox box)
+        {
+            var text = e.Key == VirtualKey.Up ? Rcon.History.Previous() : Rcon.History.Next();
+            if (text is not null)
+            {
+                e.Handled = true;
+                Rcon.Command = text;
                 box.SelectionStart = text.Length;
             }
         }

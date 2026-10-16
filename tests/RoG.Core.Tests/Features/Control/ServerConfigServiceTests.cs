@@ -70,3 +70,41 @@ public class ServerConfigServiceTests
         }
     }
 }
+
+public class ServerModerationServiceTests
+{
+    [Fact]
+    public async Task Ban_sends_body_the_spec_is_missing()
+    {
+        var stub = new StubHttpHandler((_, _) => StubHttpHandler.Json(HttpStatusCode.Created, """{"data":{}}"""));
+        using var api = new RoGApi(RoGEnvironment.Get(RoGEnvironment.Production), new InMemoryTokenStore(), new ApiContext(), innerHandler: stub);
+
+        await new ServerModerationService(api.Client, api.Http).BanAsync("mc", null, " Griefer_1 ", 60, "Griefing");
+
+        var body = Assert.Single(stub.Requests).Body!;
+        Assert.Contains("\"player_name\":\"Griefer_1\"", body, StringComparison.Ordinal);
+        Assert.Contains("\"minutes\":60", body, StringComparison.Ordinal);
+        Assert.DoesNotContain("player_id", body, StringComparison.Ordinal);
+        await Assert.ThrowsAsync<ArgumentException>(() => new ServerModerationService(api.Client, api.Http).BanAsync("mc", " ", null, 0, null));
+    }
+
+    [Fact]
+    public void Changes_are_parsed_with_diff_list_or_text()
+    {
+        using var doc = System.Text.Json.JsonDocument.Parse("""
+            {"data":[
+              {"id":"c1","file":{"id":"f","path":"etmain/server.cfg"},"status":"pending","via":"editor","after":"save","note":"Name",
+               "author":{"id":"u","name":"Kolibri","slug":"kolibri"},"created_at":"2026-10-13T18:02:11Z",
+               "diff":[{"type":"remove","text":"a"},{"type":"add","text":"b"}],"outdated":false},
+              {"id":"c2","file":{"id":"f","path":"x.cfg"},"status":"pending","via":"editor","after":"restart","note":null,
+               "author":null,"created_at":null,"diff":"--- a\n+++ b","outdated":true}]}
+            """);
+
+        var changes = ServerModerationService.ParseChanges(doc.RootElement);
+
+        Assert.Equal("− a\n+ b", changes[0].Diff);
+        Assert.Equal("Kolibri", changes[0].Author);
+        Assert.True(changes[1].Outdated);
+        Assert.Equal("--- a\n+++ b", changes[1].Diff);
+    }
+}

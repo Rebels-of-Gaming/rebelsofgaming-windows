@@ -129,9 +129,12 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 - **Verwaltung:** Übersicht (Kennzahlen, Systemstatus mit Ampel, Audit-Log mit Suche), Bewerbungen für die
   Squad-Leitung (Liste/Detail, Entscheidungen, Aufgaben, Notizen, Erinnern), Moderation.
 - **Werkzeug:** `scripts/check-app-syntax.sh` prüft die Syntax der App unter Linux (Roslyn des SDK) vor dem Push.
-- **XAML-Fallstrick:** `CheckBox.IsChecked` ist `bool?` – TwoWay-`x:Bind` an `bool` führte zu einem internen
-  Fehler des XAML-Compilers ohne Meldungstext (WMC9999). Bei Fehlern sichert die CI jetzt `input.json`/`output.json`
-  des XAML-Compilers im Artefakt.
+- **XAML-Fallstrick:** Findet der XAML-Compiler einen `x:Bind`-Namen nicht, stürzt er teils beim Formulieren der
+  Meldung ab („WMC9999 … ErrorMessages.resources“, ohne Datei/Zeile). Ursache hier: `[RelayCommand]` in einem
+  `record` – die Toolkit-Generatoren erzeugen in records nichts. Abhilfe: ViewModels mit Commands/Observable immer als
+  `partial class`; `scripts/check-xaml-bindings.py` prüft alle `x:Bind`-Pfade gegen die Quellen (läuft mit
+  `check-app-syntax.sh`). Bei Fehlern sichert die CI `input.json`/`output.json` des XAML-Compilers (dort steht die
+  Seite und ein Stacktrace). `CheckBox.IsChecked` (TwoWay) bindet vorsichtshalber an `bool?`.
 
 ### Stufe 8 – Wiki (2.3.0, 16.10.2026)
 

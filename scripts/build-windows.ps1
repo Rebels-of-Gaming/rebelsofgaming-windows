@@ -136,7 +136,8 @@ try {
     if (-not $SkipTests) {
         Invoke-Checked 'Tests' {
             dotnet test (Join-Path $Root 'tests\RoG.Core.Tests\RoG.Core.Tests.csproj') -c $Configuration --no-build `
-                --logger "trx;LogFileName=RoG.Core.Tests.trx" --results-directory $TestResults
+                --logger "trx;LogFileName=RoG.Core.Tests.trx" --results-directory $TestResults `
+                --blame-hang-timeout 5m --blame-hang-dump-type none
         }
     }
 

@@ -32,3 +32,32 @@ public class AppRouteTests
     [InlineData("ftp://rebelsofgaming.com/news/x")]
     public void Unknown_urls_stay_in_the_browser(string url) => Assert.Null(AppRoute.FromWebUrl(new Uri(url), s_env));
 }
+
+public class AppUriTests
+{
+    private static readonly RoG.Core.Config.RoGEnvironment s_env = RoG.Core.Config.RoGEnvironment.Get(RoG.Core.Config.RoGEnvironment.Production);
+
+    [Theory]
+    [InlineData("rog://news/patch-notes", AppSection.News, "patch-notes")]
+    [InlineData("rog://u/wahke", AppSection.Members, "wahke")]
+    [InlineData("rog://events/01JABC", AppSection.Calendar, "01JABC")]
+    [InlineData("rog://servers", AppSection.Servers, null)]
+    [InlineData("rog://notifications", AppSection.Notifications, null)]
+    [InlineData("rog://search?q=enemy%20territory", AppSection.Search, "enemy territory")]
+    [InlineData("rog://open?url=https%3A%2F%2Frebelsofgaming.com%2Fde%2Fnews%2Fx", AppSection.News, "x")]
+    [InlineData("ROG://Messages", AppSection.Messages, null)]
+    public void Maps_app_links(string uri, AppSection section, string? key)
+    {
+        var route = AppRoute.FromAppUri(new Uri(uri), s_env);
+        Assert.NotNull(route);
+        Assert.Equal(section, route.Section);
+        Assert.Equal(key, route.Key);
+    }
+
+    [Theory]
+    [InlineData("rog://auth/callback?code=x&state=y")]
+    [InlineData("rog://search")]
+    [InlineData("rog://open?url=https%3A%2F%2Fevil.example%2Fx")]
+    [InlineData("https://rebelsofgaming.com/news/x")]
+    public void Ignores_foreign_or_incomplete_links(string uri) => Assert.Null(AppRoute.FromAppUri(new Uri(uri), s_env));
+}

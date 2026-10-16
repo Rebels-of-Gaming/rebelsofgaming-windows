@@ -84,6 +84,9 @@ public sealed class AppServices : IDisposable
 
     public bool Navigate(RoG.Core.Navigation.AppRoute route) => Navigator?.Invoke(route) ?? false;
 
+    /// <summary>Echtzeit (Reverb), Zähler für Glocke/Nachrichten, Toasts und Taskleisten-Badge.</summary>
+    public RealtimeService Realtime => field ??= new RealtimeService(this);
+
     public IClipboardService Clipboard { get; } = new WindowsClipboard();
 
     public IExternalLauncher Launcher { get; } = new WindowsExternalLauncher();

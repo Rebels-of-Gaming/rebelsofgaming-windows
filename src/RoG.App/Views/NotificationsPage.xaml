@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="RoG.App.Views.NotificationsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:RoG.App.Controls"
+    xmlns:vm="using:RoG.App.ViewModels"
+    Background="{StaticResource RoGBgBrush}">
+
+    <Page.KeyboardAccelerators>
+        <KeyboardAccelerator Key="F5" Invoked="OnRefreshInvoked" />
+    </Page.KeyboardAccelerators>
+
+    <Grid Padding="{StaticResource RoGPagePadding}" RowSpacing="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock x:Uid="NotificationsPage_Title" Style="{StaticResource RoGDisplayTextStyle}" Text="BENACHRICHTIGUNGEN" />
+
+        <StackPanel
+            Grid.Row="1"
+            Orientation="Horizontal"
+            Spacing="16"
+            Visibility="{x:Bind ViewModel.ShowContent, Mode=OneWay}">
+            <ToggleSwitch x:Uid="NotificationsPage_UnreadOnly" IsOn="{x:Bind ViewModel.UnreadOnly, Mode=TwoWay}" />
+            <Button
+                x:Uid="NotificationsPage_MarkAll"
+                VerticalAlignment="Bottom"
+                Command="{x:Bind ViewModel.MarkAllReadCommand}"
+                Style="{StaticResource RoGSecondaryButtonStyle}" />
+        </StackPanel>
+
+        <!-- Gast -->
+        <StackPanel
+            Grid.Row="2"
+            MaxWidth="420"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Spacing="12"
+            Visibility="{x:Bind ViewModel.IsGuest, Mode=OneWay}">
+            <TextBlock x:Uid="NotificationsPage_Guest" HorizontalTextAlignment="Center" Style="{StaticResource RoGMutedTextStyle}" />
+            <Button
+                x:Uid="AccountPage_SignIn"
+                HorizontalAlignment="Center"
+                Command="{x:Bind ViewModel.SignInCommand}"
+                Style="{StaticResource RoGPrimaryButtonStyle}" />
+        </StackPanel>
+
+        <controls:StateView
+            x:Uid="NotificationsPage_State"
+            Grid.Row="2"
+            ErrorMessage="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}"
+            IsEmpty="{x:Bind ViewModel.IsEmpty, Mode=OneWay}"
+            IsLoading="{x:Bind ViewModel.IsLoading, Mode=OneWay}"
+            RetryCommand="{x:Bind ViewModel.RefreshCommand}" />
+
+        <ListView
+            x:Uid="NotificationsPage_List"
+            Grid.Row="2"
+            MaxWidth="{StaticResource RoGReadingWidth}"
+            HorizontalAlignment="Left"
+            ItemsSource="{x:Bind ViewModel.Items}"
+            SelectionMode="None"
+            Visibility="{x:Bind ViewModel.ShowContent, Mode=OneWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="vm:NotificationRowViewModel">
+                    <Button
+                        Padding="12,10"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Stretch"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Command="{x:Bind OpenCommand}"
+                        AutomationProperties.Name="{x:Bind Title}">
+                        <Grid ColumnSpacing="12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Ellipse
+                                Margin="0,6,0,0"
+                                VerticalAlignment="Top"
+                                Fill="{x:Bind DotBrush, Mode=OneWay}"
+                                Style="{StaticResource RoGStatusDotStyle}" />
+                            <StackPanel Grid.Column="1" Spacing="2">
+                                <TextBlock
+                                    FontWeight="{x:Bind TitleWeight, Mode=OneWay}"
+                                    Style="{StaticResource RoGBodyTextStyle}"
+                                    Text="{x:Bind Title}" />
+                                <TextBlock
+                                    MaxLines="3"
+                                    Style="{StaticResource RoGMutedTextStyle}"
+                                    Text="{x:Bind Body}"
+                                    TextTrimming="CharacterEllipsis"
+                                    Visibility="{x:Bind HasBody}" />
+                                <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Time}" />
+                            </StackPanel>
+                        </Grid>
+                    </Button>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.Footer>
+                <Button
+                    x:Uid="Common_LoadMore"
+                    Margin="0,8,0,0"
+                    HorizontalAlignment="Stretch"
+                    Command="{x:Bind ViewModel.LoadMoreCommand}"
+                    Style="{StaticResource RoGSecondaryButtonStyle}"
+                    Visibility="{x:Bind ViewModel.HasMore, Mode=OneWay}" />
+            </ListView.Footer>
+        </ListView>
+    </Grid>
+</Page>

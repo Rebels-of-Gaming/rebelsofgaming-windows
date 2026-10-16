@@ -25,6 +25,7 @@ public static class StringKeys
     public const string NavMatches = "Nav_Matches";
     public const string NavAdmin = "Nav_Admin";
     public const string NavAccount = "Nav_Account";
+    public const string NavNotifications = "Nav_Notifications";
 
     public const string LoopbackTitle = "Loopback_Title";
     public const string LoopbackSuccess = "Loopback_Success";
@@ -116,6 +117,15 @@ public static class StringKeys
     public const string SettingsAppVersion = "Settings_AppVersion";
     public const string SettingsPlatformVersion = "Settings_PlatformVersion";
     public const string SettingsPlatformUnavailable = "Settings_PlatformUnavailable";
+    public const string SettingsAutostartDisabledByUser = "Settings_AutostartDisabledByUser";
+    public const string SettingsAutostartPolicy = "Settings_AutostartPolicy";
+
+    // Taskleiste/Tray ({0} = Zahl ungelesen)
+    public const string JumpListGroup = "JumpList_Group";
+    public const string TrayOpen = "Tray_Open";
+    public const string TrayExit = "Tray_Exit";
+    public const string TrayTooltipUnread = "Tray_TooltipUnread";
+    public const string TrayStillRunning = "Tray_StillRunning";
 
     // Server: Hinweise zu „Verbinden“ ({0} = Servername bzw. Adresse host:port)
     public const string ServersLaunchedSteam = "Servers_LaunchedSteam";

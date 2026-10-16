@@ -18,6 +18,8 @@ public enum AppSection
     Messages,
     Account,
     Search,
+    Notifications,
+    Settings,
 }
 
 /// <summary>Ziel in der App: Bereich und optional ein Eintrag (Slug/ID) bzw. bei der Suche der Suchbegriff.</summary>
@@ -72,6 +74,62 @@ public sealed record AppRoute(AppSection Section, string? Key = null)
             "settings" or "account" => new AppRoute(AppSection.Account),
             _ => null,
         };
+    }
+
+    /// <summary>Eigenes Schema der App.</summary>
+    public const string Scheme = "rog";
+
+    /// <summary>
+    /// <c>rog://bereich/eintrag</c> (Sprungliste, Toasts, Links): <c>rog://news/slug</c>, <c>rog://u/slug</c>,
+    /// <c>rog://squads/slug</c>, <c>rog://events/id</c>, <c>rog://servers</c>, <c>rog://messages</c>,
+    /// <c>rog://notifications</c>, <c>rog://search?q=…</c>, <c>rog://settings</c>, <c>rog://open?url=https://…</c>.
+    /// <c>rog://auth/*</c> gehört dem Login der Mobile-App → <c>null</c>.
+    /// </summary>
+    public static AppRoute? FromAppUri(Uri? uri, RoGEnvironment environment)
+    {
+        ArgumentNullException.ThrowIfNull(environment);
+        if (uri is null || !uri.IsAbsoluteUri || !uri.Scheme.Equals(Scheme, StringComparison.OrdinalIgnoreCase))
+        {
+            return null;
+        }
+
+        var section = uri.Host.ToLowerInvariant();
+        var key = uri.AbsolutePath.Trim('/') is { Length: > 0 } path ? Uri.UnescapeDataString(path) : null;
+        var query = ParseQuery(uri.Query);
+        return section switch
+        {
+            "" or "home" => new AppRoute(AppSection.Home),
+            "news" => new AppRoute(AppSection.News, key),
+            "u" or "members" => new AppRoute(AppSection.Members, key),
+            "squads" => new AppRoute(AppSection.Squads, key),
+            "events" or "calendar" => new AppRoute(AppSection.Calendar, key),
+            "servers" => new AppRoute(AppSection.Servers, key),
+            "matches" => new AppRoute(AppSection.Matches, key),
+            "info" => new AppRoute(AppSection.Info, key),
+            "forum" => new AppRoute(AppSection.Forum, key),
+            "wiki" => new AppRoute(AppSection.Wiki, key),
+            "messages" => new AppRoute(AppSection.Messages, key),
+            "notifications" => new AppRoute(AppSection.Notifications),
+            "account" => new AppRoute(AppSection.Account),
+            "settings" => new AppRoute(AppSection.Settings),
+            "search" => query.TryGetValue("q", out var q) && q.Length > 0 ? new AppRoute(AppSection.Search, q) : null,
+            "open" => query.TryGetValue("url", out var url) && Uri.TryCreate(url, UriKind.Absolute, out var web) ? FromWebUrl(web, environment) : null,
+            _ => null,
+        };
+    }
+
+    private static Dictionary<string, string> ParseQuery(string query)
+    {
+        var result = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var pair in query.TrimStart('?').Split('&', StringSplitOptions.RemoveEmptyEntries))
+        {
+            var i = pair.IndexOf('=', StringComparison.Ordinal);
+            var name = Uri.UnescapeDataString(i < 0 ? pair : pair[..i]);
+            var value = i < 0 ? string.Empty : Uri.UnescapeDataString(pair[(i + 1)..].Replace('+', ' '));
+            result[name] = value;
+        }
+
+        return result;
     }
 
     private static bool SameHost(Uri url, Uri baseUrl) =>

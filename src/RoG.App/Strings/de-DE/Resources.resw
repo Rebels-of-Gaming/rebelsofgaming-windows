@@ -788,4 +788,61 @@
   <data name="HomePage_EventsTitle.Text" xml:space="preserve">
     <value>NÄCHSTE TERMINE</value>
   </data>
+  <data name="Nav_Notifications" xml:space="preserve">
+    <value>Benachrichtigungen</value>
+  </data>
+  <data name="Shell_NavNotifications.Content" xml:space="preserve">
+    <value>Benachrichtigungen</value>
+  </data>
+  <data name="NotificationsPage_Title.Text" xml:space="preserve">
+    <value>BENACHRICHTIGUNGEN</value>
+  </data>
+  <data name="NotificationsPage_UnreadOnly.Header" xml:space="preserve">
+    <value>Nur ungelesene</value>
+  </data>
+  <data name="NotificationsPage_MarkAll.Content" xml:space="preserve">
+    <value>ALLE GELESEN</value>
+  </data>
+  <data name="NotificationsPage_Guest.Text" xml:space="preserve">
+    <value>Benachrichtigungen gibt es nach der Anmeldung.</value>
+  </data>
+  <data name="NotificationsPage_State.EmptyText" xml:space="preserve">
+    <value>Keine Benachrichtigungen.</value>
+  </data>
+  <data name="NotificationsPage_List.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Benachrichtigungen</value>
+  </data>
+  <data name="Settings_AutostartDisabledByUser" xml:space="preserve">
+    <value>Autostart ist im Task-Manager (Reiter „Autostart“) ausgeschaltet – dort wieder einschalten.</value>
+  </data>
+  <data name="Settings_AutostartPolicy" xml:space="preserve">
+    <value>Autostart wird von einer Richtlinie deines PCs gesteuert.</value>
+  </data>
+  <data name="SettingsPage_WindowsTitle.Text" xml:space="preserve">
+    <value>WINDOWS</value>
+  </data>
+  <data name="SettingsPage_Toasts.Header" xml:space="preserve">
+    <value>Windows-Benachrichtigungen zeigen</value>
+  </data>
+  <data name="SettingsPage_Autostart.Header" xml:space="preserve">
+    <value>Mit Windows starten</value>
+  </data>
+  <data name="JumpList_Group" xml:space="preserve">
+    <value>Rebels of Gaming</value>
+  </data>
+  <data name="Tray_Open" xml:space="preserve">
+    <value>Öffnen</value>
+  </data>
+  <data name="Tray_Exit" xml:space="preserve">
+    <value>Beenden</value>
+  </data>
+  <data name="Tray_TooltipUnread" xml:space="preserve">
+    <value>{0} ungelesen</value>
+  </data>
+  <data name="Tray_StillRunning" xml:space="preserve">
+    <value>Die App läuft im Infobereich weiter und meldet neue Nachrichten. Beenden über Rechtsklick auf das Symbol.</value>
+  </data>
+  <data name="SettingsPage_CloseToTray.Header" xml:space="preserve">
+    <value>Beim Schließen in den Infobereich</value>
+  </data>
 </root>

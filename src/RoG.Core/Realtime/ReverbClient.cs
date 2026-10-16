@@ -380,7 +380,7 @@ public sealed class ReverbClient : IAsyncDisposable
     {
         using var doc = JsonDocument.Parse(data);
         var socketId = doc.RootElement.GetProperty("socket_id").GetString()!;
-        if (doc.RootElement.TryGetProperty("activity_timeout", out var at) && at.TryGetInt32(out var seconds) && seconds > 0)
+        if (doc.RootElement.TryGetProperty("activity_timeout", out var at) && at.ValueKind == JsonValueKind.Number && at.TryGetInt32(out var seconds) && seconds > 0)
         {
             ActivityTimeoutSeconds = seconds;
         }

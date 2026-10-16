@@ -13,8 +13,12 @@ using Windows.Graphics;
 namespace RoG.App;
 
 /// <summary>Hauptfenster: Titelleiste, Seitenleiste (NavigationView) und Login-Ebene.</summary>
-public sealed partial class MainWindow : Window
+public sealed partial class MainWindow : Window, IDisposable
 {
+    private TrayIcon? _tray;
+    private bool _exiting;
+    private bool _trayHintShown;
+
     /// <summary>Navigations-Schlüssel → Seite. Nicht aufgeführte Bereiche zeigen „Kommt bald“.</summary>
     private static readonly Dictionary<string, Type> s_pages = new(StringComparer.Ordinal)
     {
@@ -27,6 +31,7 @@ public sealed partial class MainWindow : Window
         [StringKeys.NavInfo] = typeof(InfoPage),
         [StringKeys.NavMatches] = typeof(MatchesPage),
         [StringKeys.NavAccount] = typeof(AccountPage),
+        [StringKeys.NavNotifications] = typeof(NotificationsPage),
     };
 
     private const string SettingsKey = "Settings";
@@ -49,10 +54,43 @@ public sealed partial class MainWindow : Window
         services.SignInRequested += (_, _) => ShowLogin();
         services.CurrentUserChanged += (_, _) => UpdateAccountItem();
         services.Navigator = Navigate;
+        services.Realtime.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(RealtimeService.UnreadNotifications))
+            {
+                UpdateNotificationsBadge();
+            }
+        };
+        services.Realtime.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(RealtimeService.Badge))
+            {
+                UpdateTrayTooltip();
+            }
+        };
+        CreateTray();
+        _ = JumpListService.UpdateAsync(services.Localizer);
+        ToastService.Invoked += (_, url) => DispatcherQueue.TryEnqueue(() =>
+        {
+            BringToFront();
+            OpenTarget(url);
+        });
         _ = InitializeAsync();
     }
 
-    /// <summary>Fenster nach vorn holen (zweiter App-Start, später Tray/Toasts).</summary>
+    /// <summary>Start ohne sichtbares Fenster (Autostart): Inhalte laden, Fenster bleibt im Infobereich.</summary>
+    public void StartHidden()
+    {
+        if (_tray is null)
+        {
+            Activate();
+            return;
+        }
+
+        AppWindow.Hide();
+    }
+
+    /// <summary>Fenster nach vorn holen (zweiter App-Start, Tray, Toasts).</summary>
     public void BringToFront()
     {
         if (AppWindow.Presenter is OverlappedPresenter { State: OverlappedPresenterState.Minimized } presenter)
@@ -81,6 +119,9 @@ public sealed partial class MainWindow : Window
     private void ShowLogin()
     {
         _services.CurrentUser = null;
+        _ = _services.Realtime.StopAsync();
+        _services.Realtime.UnreadNotifications = 0;
+        _services.Realtime.UnreadMessages = 0;
         NavView.Visibility = Visibility.Collapsed;
         LoginFrame.Visibility = Visibility.Visible;
         LoginFrame.Navigate(typeof(LoginPage), new EventHandler((_, _) => ShowShell()));
@@ -98,6 +139,67 @@ public sealed partial class MainWindow : Window
             ? NavView.SettingsItem
             : AllItems().FirstOrDefault(i => i.Tag as string == last && i.Visibility == Visibility.Visible) ?? NavView.MenuItems[0];
         _ = LoadUserAsync();
+        if (_pendingRoute is { } route)
+        {
+            _pendingRoute = null;
+            Navigate(route);
+        }
+    }
+
+    private AppRoute? _pendingRoute;
+
+    /// <summary>
+    /// Start oder zweiter Start der App: <c>rog:</c>-Link (Protokoll), Sprungliste (Start-Argument) oder Klick auf einen
+    /// Toast (App war geschlossen). Solange die Login-Seite offen ist, wartet das Ziel bis zur Shell.
+    /// </summary>
+    public void HandleActivation(Microsoft.Windows.AppLifecycle.AppActivationArguments args)
+    {
+        ArgumentNullException.ThrowIfNull(args);
+        AppRoute? route = null;
+        switch (args.Kind)
+        {
+            case Microsoft.Windows.AppLifecycle.ExtendedActivationKind.Protocol when args.Data is Windows.ApplicationModel.Activation.IProtocolActivatedEventArgs protocol:
+                route = AppRoute.FromAppUri(protocol.Uri, _services.Environment);
+                break;
+            case Microsoft.Windows.AppLifecycle.ExtendedActivationKind.Launch when args.Data is Windows.ApplicationModel.Activation.ILaunchActivatedEventArgs launch
+                && Uri.TryCreate(launch.Arguments?.Trim(), UriKind.Absolute, out var launchUri):
+                route = AppRoute.FromAppUri(launchUri, _services.Environment);
+                break;
+            case Microsoft.Windows.AppLifecycle.ExtendedActivationKind.AppNotification when args.Data is Microsoft.Windows.AppNotifications.AppNotificationActivatedEventArgs toast:
+                OpenTarget(ToastService.UrlFrom(toast));
+                return;
+        }
+
+        if (route is not null)
+        {
+            Open(route);
+        }
+    }
+
+    /// <summary>Ziel eines Toasts: Website-Link → Bereich in der App, sonst Glocke.</summary>
+    private void OpenTarget(string? url)
+    {
+        var route = Uri.TryCreate(url, UriKind.Absolute, out var uri) ? AppRoute.FromWebUrl(uri, _services.Environment) : null;
+        Open(route ?? new AppRoute(AppSection.Notifications));
+    }
+
+    private void Open(AppRoute route)
+    {
+        if (NavView.Visibility == Visibility.Visible)
+        {
+            Navigate(route);
+        }
+        else
+        {
+            _pendingRoute = route;
+        }
+    }
+
+    private void UpdateNotificationsBadge()
+    {
+        var count = _services.Realtime.UnreadNotifications;
+        NotificationsBadge.Value = count;
+        NotificationsBadge.Visibility = count > 0 ? Visibility.Visible : Visibility.Collapsed;
     }
 
     private IEnumerable<NavigationViewItem> AllItems() =>
@@ -107,11 +209,14 @@ public sealed partial class MainWindow : Window
     private async Task LoadUserAsync()
     {
         UpdateAccountItem();
-        if (await _services.Tokens.GetAsync() is null)
+        if (await _services.Tokens.GetAsync() is not { } token)
         {
+            await _services.Realtime.StartAsync(null);
             return;
         }
 
+        // Echtzeit sofort mit der Konto-ID aus dem Token-Speicher, nicht erst nach /v1/me
+        _ = _services.Realtime.StartAsync(token.UserId);
         try
         {
             _services.CurrentUser = await _services.Account.GetMeAsync();
@@ -159,6 +264,7 @@ public sealed partial class MainWindow : Window
         AppSection.Wiki => StringKeys.NavWiki,
         AppSection.Messages => StringKeys.NavMessages,
         AppSection.Account => StringKeys.NavAccount,
+        AppSection.Notifications => StringKeys.NavNotifications,
         _ => null,
     };
 
@@ -167,6 +273,12 @@ public sealed partial class MainWindow : Window
     /// <summary>Bereich öffnen, optional mit Eintrag; <c>false</c>, wenn es den Bereich in der App (noch) nicht gibt.</summary>
     public bool Navigate(AppRoute route)
     {
+        if (route.Section == AppSection.Settings)
+        {
+            NavView.SelectedItem = NavView.SettingsItem;
+            return true;
+        }
+
         if (route.Section == AppSection.Search)
         {
             NavView.SelectedItem = null;
@@ -267,6 +379,70 @@ public sealed partial class MainWindow : Window
         AppWindow.Resize(new SizeInt32(fallback.Width, fallback.Height));
     }
 
+    /// <summary>Tray-Symbol: Linksklick öffnet, Menü mit Bereichen und Beenden.</summary>
+    private void CreateTray()
+    {
+        try
+        {
+            var l = _services.Localizer;
+            _tray = new TrayIcon(Path.Combine(AppContext.BaseDirectory, "Assets", "AppIcon.ico"), l.GetString(StringKeys.AppDisplayName))
+            {
+                MenuItems = [l.GetString(StringKeys.TrayOpen), l.GetString(StringKeys.NavNotifications), l.GetString(StringKeys.NavMessages), l.GetString(StringKeys.NavServers), null, l.GetString(StringKeys.TrayExit)],
+            };
+            _tray.Activated += (_, _) => BringToFront();
+            _tray.MenuItemInvoked += (_, index) =>
+            {
+                switch (index)
+                {
+                    case 0:
+                        BringToFront();
+                        break;
+                    case 1:
+                        BringToFront();
+                        Open(new AppRoute(AppSection.Notifications));
+                        break;
+                    case 2:
+                        BringToFront();
+                        Open(new AppRoute(AppSection.Messages));
+                        break;
+                    case 3:
+                        BringToFront();
+                        Open(new AppRoute(AppSection.Servers));
+                        break;
+                    case 5:
+                        ExitApp();
+                        break;
+                }
+            };
+        }
+#pragma warning disable CA1031 // ohne Tray weiter (dann schließt das Fenster die App)
+        catch (Exception)
+#pragma warning restore CA1031
+        {
+            _tray = null;
+        }
+    }
+
+    private void UpdateTrayTooltip()
+    {
+        var count = _services.Realtime.Badge;
+        var name = _services.Localizer.GetString(StringKeys.AppDisplayName);
+        _tray?.SetTooltip(count > 0 ? $"{name} – " + string.Format(System.Globalization.CultureInfo.CurrentCulture, _services.Localizer.GetString(StringKeys.TrayTooltipUnread), count) : name);
+    }
+
+    /// <summary>„Beenden“ im Tray-Menü: wirklich schließen statt in den Infobereich.</summary>
+    private void ExitApp()
+    {
+        _exiting = true;
+        Close();
+    }
+
+    public void Dispose()
+    {
+        _tray?.Dispose();
+        _tray = null;
+    }
+
     private void OnClosing(AppWindow sender, AppWindowClosingEventArgs args)
     {
         var maximized = sender.Presenter is OverlappedPresenter { State: OverlappedPresenterState.Maximized };
@@ -276,6 +452,23 @@ public sealed partial class MainWindow : Window
 
         // Synchron speichern: Nach Closing endet der Prozess, ein offenes await käme nicht mehr an.
         _services.UpdateSettingsNow(s => s with { Window = placement });
+
+        // Schließen → in den Infobereich, solange eingestellt und das Tray-Symbol da ist (Toasts kommen weiter)
+        if (!_exiting && _tray is not null && _services.Settings.CloseToTray)
+        {
+            args.Cancel = true;
+            sender.Hide();
+            if (!_trayHintShown && _services.Settings.ToastNotifications)
+            {
+                _trayHintShown = true;
+                ToastService.ShowInfo(_services.Localizer.GetString(StringKeys.AppDisplayName), _services.Localizer.GetString(StringKeys.TrayStillRunning));
+            }
+
+            return;
+        }
+
+        Dispose();
+        ToastService.Unregister();
     }
 
     /// <summary>401 auf eine Anfrage mit Token: Token ist widerrufen oder abgelaufen → verwerfen, Login zeigen.</summary>

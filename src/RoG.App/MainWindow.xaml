@@ -66,6 +66,11 @@
                 <NavigationViewItem x:Uid="Shell_NavInfo" Content="Info" Icon="Page" Tag="Nav_Info" />
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>
+                <NavigationViewItem x:Name="NotificationsItem" x:Uid="Shell_NavNotifications" Content="Benachrichtigungen" Icon="Mail" Tag="Nav_Notifications">
+                    <NavigationViewItem.InfoBadge>
+                        <InfoBadge x:Name="NotificationsBadge" Visibility="Collapsed" />
+                    </NavigationViewItem.InfoBadge>
+                </NavigationViewItem>
                 <NavigationViewItem x:Name="AdminItem" x:Uid="Shell_NavAdmin" Content="Verwaltung" Icon="Admin" Tag="Nav_Admin" Visibility="Collapsed" />
                 <NavigationViewItem x:Name="AccountItem" x:Uid="Shell_NavAccount" Content="Konto" Icon="Contact" Tag="Nav_Account" />
             </NavigationView.FooterMenuItems>

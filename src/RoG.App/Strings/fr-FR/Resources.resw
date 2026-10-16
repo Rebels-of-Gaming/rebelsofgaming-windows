@@ -788,4 +788,61 @@
   <data name="HomePage_EventsTitle.Text" xml:space="preserve">
     <value>PROCHAINS ÉVÉNEMENTS</value>
   </data>
+  <data name="Nav_Notifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="Shell_NavNotifications.Content" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="NotificationsPage_Title.Text" xml:space="preserve">
+    <value>NOTIFICATIONS</value>
+  </data>
+  <data name="NotificationsPage_UnreadOnly.Header" xml:space="preserve">
+    <value>Non lues uniquement</value>
+  </data>
+  <data name="NotificationsPage_MarkAll.Content" xml:space="preserve">
+    <value>TOUT MARQUER LU</value>
+  </data>
+  <data name="NotificationsPage_Guest.Text" xml:space="preserve">
+    <value>Les notifications sont disponibles après connexion.</value>
+  </data>
+  <data name="NotificationsPage_State.EmptyText" xml:space="preserve">
+    <value>Aucune notification.</value>
+  </data>
+  <data name="NotificationsPage_List.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="Settings_AutostartDisabledByUser" xml:space="preserve">
+    <value>Le démarrage automatique est désactivé dans le Gestionnaire des tâches (« Applications de démarrage ») – réactive-le là.</value>
+  </data>
+  <data name="Settings_AutostartPolicy" xml:space="preserve">
+    <value>Le démarrage automatique est géré par une stratégie de ton PC.</value>
+  </data>
+  <data name="SettingsPage_WindowsTitle.Text" xml:space="preserve">
+    <value>WINDOWS</value>
+  </data>
+  <data name="SettingsPage_Toasts.Header" xml:space="preserve">
+    <value>Afficher les notifications Windows</value>
+  </data>
+  <data name="SettingsPage_Autostart.Header" xml:space="preserve">
+    <value>Démarrer avec Windows</value>
+  </data>
+  <data name="JumpList_Group" xml:space="preserve">
+    <value>Rebels of Gaming</value>
+  </data>
+  <data name="Tray_Open" xml:space="preserve">
+    <value>Ouvrir</value>
+  </data>
+  <data name="Tray_Exit" xml:space="preserve">
+    <value>Quitter</value>
+  </data>
+  <data name="Tray_TooltipUnread" xml:space="preserve">
+    <value>{0} non lus</value>
+  </data>
+  <data name="Tray_StillRunning" xml:space="preserve">
+    <value>L’app continue dans la zone de notification et te signale les nouveaux messages. Quitter via clic droit sur l’icône.</value>
+  </data>
+  <data name="SettingsPage_CloseToTray.Header" xml:space="preserve">
+    <value>Rester dans la zone de notification à la fermeture</value>
+  </data>
 </root>

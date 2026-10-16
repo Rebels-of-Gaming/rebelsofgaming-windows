@@ -24,16 +24,34 @@ public partial class App : Application
 
     protected override async void OnLaunched(LaunchActivatedEventArgs args)
     {
+        // Toasts: Microsoft verlangt die Registrierung vor dem ersten Fenster
+        var activation = AppInstance.GetCurrent().GetActivatedEventArgs();
+        ToastService.Register();
+
         // Sprache muss vor dem ersten Laden von Ressourcen (x:Uid) feststehen.
         Services = await AppServices.CreateAsync();
         s_window = new MainWindow(Services);
-        s_window.Activate();
+        if (activation.Kind == ExtendedActivationKind.StartupTask && Services.Settings.CloseToTray)
+        {
+            // Autostart mit Windows: nur im Infobereich starten, Fenster erst auf Klick
+            s_window.StartHidden();
+        }
+        else
+        {
+            s_window.Activate();
+        }
+
+        s_window.HandleActivation(activation);
     }
 
     /// <summary>Zweiter Start der App (Program.Main): vorhandenes Fenster nach vorn holen.</summary>
     internal static void OnRedirectedActivation(AppActivationArguments args)
     {
         var window = s_window;
-        window?.DispatcherQueue.TryEnqueue(window.BringToFront);
+        window?.DispatcherQueue.TryEnqueue(() =>
+        {
+            window.BringToFront();
+            window.HandleActivation(args);
+        });
     }
 }

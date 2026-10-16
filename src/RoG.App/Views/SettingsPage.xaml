@@ -31,6 +31,23 @@
                 </StackPanel>
             </Border>
 
+            <!-- Windows -->
+            <Border Style="{StaticResource RoGCardStyle}">
+                <StackPanel Spacing="12">
+                    <TextBlock x:Uid="SettingsPage_WindowsTitle" Style="{StaticResource RoGSectionTextStyle}" />
+                    <ToggleSwitch x:Uid="SettingsPage_Toasts" IsOn="{x:Bind ViewModel.Toasts, Mode=TwoWay}" />
+                    <ToggleSwitch x:Uid="SettingsPage_CloseToTray" IsOn="{x:Bind ViewModel.CloseToTray, Mode=TwoWay}" />
+                    <ToggleSwitch
+                        x:Uid="SettingsPage_Autostart"
+                        IsEnabled="{x:Bind ViewModel.CanChangeAutostart, Mode=OneWay}"
+                        IsOn="{x:Bind ViewModel.Autostart, Mode=TwoWay}" />
+                    <TextBlock
+                        Style="{StaticResource RoGMutedTextStyle}"
+                        Text="{x:Bind ViewModel.AutostartHint, Mode=OneWay}"
+                        Visibility="{x:Bind ViewModel.HasAutostartHint, Mode=OneWay}" />
+                </StackPanel>
+            </Border>
+
             <!-- Über -->
             <Border Style="{StaticResource RoGCardStyle}">
                 <StackPanel Spacing="12">

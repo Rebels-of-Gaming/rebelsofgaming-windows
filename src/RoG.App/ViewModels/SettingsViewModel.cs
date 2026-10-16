@@ -36,6 +36,8 @@ public sealed partial class SettingsViewModel : ObservableObject
             new("fr", "Français"),
         ];
         SelectedLanguage = Languages.FirstOrDefault(l => l.Value == _startLanguage) ?? Languages[0];
+        Toasts = services.Settings.ToastNotifications;
+        CloseToTray = services.Settings.CloseToTray;
         AppVersionText = Format(StringKeys.SettingsAppVersion, AppServices.AppVersion);
         PlatformText = Format(StringKeys.SettingsPlatformVersion, "…");
     }
@@ -48,6 +50,26 @@ public sealed partial class SettingsViewModel : ObservableObject
     [ObservableProperty]
     public partial bool RestartRequired { get; set; }
 
+    [ObservableProperty]
+    public partial bool Toasts { get; set; }
+
+    [ObservableProperty]
+    public partial bool CloseToTray { get; set; }
+
+    [ObservableProperty]
+    public partial bool Autostart { get; set; }
+
+    [ObservableProperty]
+    public partial bool CanChangeAutostart { get; set; }
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasAutostartHint))]
+    public partial string? AutostartHint { get; set; }
+
+    public bool HasAutostartHint => !string.IsNullOrEmpty(AutostartHint);
+
+    private bool _autostartLoaded;
+
     public string AppVersionText { get; }
 
     [ObservableProperty]
@@ -55,6 +77,7 @@ public sealed partial class SettingsViewModel : ObservableObject
 
     public async Task LoadAsync()
     {
+        await LoadAutostartAsync();
         try
         {
             var platform = await _services.Account.GetPlatformAsync();
@@ -71,6 +94,87 @@ public sealed partial class SettingsViewModel : ObservableObject
     }
 
     partial void OnSelectedLanguageChanged(SettingsOption value) => _ = SaveAsync();
+
+    partial void OnToastsChanged(bool value)
+    {
+        if (_services.Settings.ToastNotifications != value)
+        {
+            _ = _services.UpdateSettingsAsync(s => s with { ToastNotifications = value });
+        }
+    }
+
+    partial void OnCloseToTrayChanged(bool value)
+    {
+        if (_services.Settings.CloseToTray != value)
+        {
+            _ = _services.UpdateSettingsAsync(s => s with { CloseToTray = value });
+        }
+    }
+
+    /// <summary>Autostart über die StartupTask des Pakets; Windows kann sie per Richtlinie oder Task-Manager sperren.</summary>
+    private async Task LoadAutostartAsync()
+    {
+        try
+        {
+            var task = await Windows.ApplicationModel.StartupTask.GetAsync("RoGStartup");
+            ApplyAutostart(task.State);
+        }
+#pragma warning disable CA1031 // ohne Paketidentität/StartupTask: Schalter aus
+        catch (Exception)
+#pragma warning restore CA1031
+        {
+            CanChangeAutostart = false;
+        }
+
+        _autostartLoaded = true;
+    }
+
+    partial void OnAutostartChanged(bool value)
+    {
+        if (_autostartLoaded)
+        {
+            _ = SetAutostartAsync(value);
+        }
+    }
+
+    private async Task SetAutostartAsync(bool enable)
+    {
+        try
+        {
+            var task = await Windows.ApplicationModel.StartupTask.GetAsync("RoGStartup");
+            if (enable)
+            {
+                ApplyAutostart(await task.RequestEnableAsync());
+            }
+            else
+            {
+                task.Disable();
+                ApplyAutostart(task.State);
+            }
+
+            await _services.UpdateSettingsAsync(s => s with { StartWithWindows = enable });
+        }
+#pragma warning disable CA1031 // Fehler beim Umschalten → Stand neu lesen
+        catch (Exception)
+#pragma warning restore CA1031
+        {
+            await LoadAutostartAsync();
+        }
+    }
+
+    private void ApplyAutostart(Windows.ApplicationModel.StartupTaskState state)
+    {
+        _autostartLoaded = false;
+        Autostart = state is Windows.ApplicationModel.StartupTaskState.Enabled or Windows.ApplicationModel.StartupTaskState.EnabledByPolicy;
+        CanChangeAutostart = state is Windows.ApplicationModel.StartupTaskState.Enabled or Windows.ApplicationModel.StartupTaskState.Disabled;
+        AutostartHint = state switch
+        {
+            Windows.ApplicationModel.StartupTaskState.DisabledByUser => _services.Localizer.GetString(StringKeys.SettingsAutostartDisabledByUser),
+            Windows.ApplicationModel.StartupTaskState.DisabledByPolicy or Windows.ApplicationModel.StartupTaskState.EnabledByPolicy => _services.Localizer.GetString(StringKeys.SettingsAutostartPolicy),
+            _ => null,
+        };
+        _autostartLoaded = true;
+    }
 
     private async Task SaveAsync()
     {

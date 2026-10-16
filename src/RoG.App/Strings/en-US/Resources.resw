@@ -788,4 +788,61 @@
   <data name="HomePage_EventsTitle.Text" xml:space="preserve">
     <value>UPCOMING EVENTS</value>
   </data>
+  <data name="Nav_Notifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="Shell_NavNotifications.Content" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="NotificationsPage_Title.Text" xml:space="preserve">
+    <value>NOTIFICATIONS</value>
+  </data>
+  <data name="NotificationsPage_UnreadOnly.Header" xml:space="preserve">
+    <value>Unread only</value>
+  </data>
+  <data name="NotificationsPage_MarkAll.Content" xml:space="preserve">
+    <value>MARK ALL READ</value>
+  </data>
+  <data name="NotificationsPage_Guest.Text" xml:space="preserve">
+    <value>Notifications are available after signing in.</value>
+  </data>
+  <data name="NotificationsPage_State.EmptyText" xml:space="preserve">
+    <value>No notifications.</value>
+  </data>
+  <data name="NotificationsPage_List.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="Settings_AutostartDisabledByUser" xml:space="preserve">
+    <value>Startup is turned off in Task Manager (“Startup apps”) – turn it back on there.</value>
+  </data>
+  <data name="Settings_AutostartPolicy" xml:space="preserve">
+    <value>Startup is controlled by a policy on your PC.</value>
+  </data>
+  <data name="SettingsPage_WindowsTitle.Text" xml:space="preserve">
+    <value>WINDOWS</value>
+  </data>
+  <data name="SettingsPage_Toasts.Header" xml:space="preserve">
+    <value>Show Windows notifications</value>
+  </data>
+  <data name="SettingsPage_Autostart.Header" xml:space="preserve">
+    <value>Start with Windows</value>
+  </data>
+  <data name="JumpList_Group" xml:space="preserve">
+    <value>Rebels of Gaming</value>
+  </data>
+  <data name="Tray_Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="Tray_Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="Tray_TooltipUnread" xml:space="preserve">
+    <value>{0} unread</value>
+  </data>
+  <data name="Tray_StillRunning" xml:space="preserve">
+    <value>The app keeps running in the notification area and tells you about new messages. Exit via right-click on the icon.</value>
+  </data>
+  <data name="SettingsPage_CloseToTray.Header" xml:space="preserve">
+    <value>Keep running in the notification area when closed</value>
+  </data>
 </root>

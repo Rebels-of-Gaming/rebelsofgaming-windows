@@ -10,7 +10,9 @@
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   xmlns:uap5="http://schemas.microsoft.com/appx/manifest/uap/windows10/5"
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
-  IgnorableNamespaces="uap uap5 rescap">
+  xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10"
+  xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10"
+  IgnorableNamespaces="uap uap5 rescap com desktop">
 
   <Identity
     Name="wahke.RebelsofGaming"
@@ -58,6 +60,25 @@
         <uap5:Extension Category="windows.startupTask">
           <uap5:StartupTask TaskId="RoGStartup" Enabled="false" DisplayName="Rebels of Gaming" />
         </uap5:Extension>
+
+        <!-- Deep Links rog://news/<slug>, rog://u/<slug> … (Sprungliste, Links); rog://auth/* gehört dem Login der Mobile-App und wird ignoriert. -->
+        <uap:Extension Category="windows.protocol">
+          <uap:Protocol Name="rog">
+            <uap:DisplayName>Rebels of Gaming</uap:DisplayName>
+          </uap:Protocol>
+        </uap:Extension>
+
+        <!-- Windows-Benachrichtigungen (AppNotificationManager): Klick auf einen Toast startet bzw. aktiviert die App. -->
+        <desktop:Extension Category="windows.toastNotificationActivation">
+          <desktop:ToastNotificationActivation ToastActivatorCLSID="B3AC5ACA-BC96-44CB-BD43-543E46A63AE9" />
+        </desktop:Extension>
+        <com:Extension Category="windows.comServer">
+          <com:ComServer>
+            <com:ExeServer Executable="RoG.App.exe" Arguments="----AppNotificationActivated:" DisplayName="Rebels of Gaming">
+              <com:Class Id="B3AC5ACA-BC96-44CB-BD43-543E46A63AE9" DisplayName="Rebels of Gaming" />
+            </com:ExeServer>
+          </com:ComServer>
+        </com:Extension>
       </Extensions>
     </Application>
   </Applications>

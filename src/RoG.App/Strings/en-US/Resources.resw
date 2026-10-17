@@ -3461,4 +3461,817 @@
   <data name="ServersPage_TsState.EmptyText" xml:space="preserve">
     <value>Nobody is on TeamSpeak right now. “Show empty channels” lists all channels.</value>
   </data>
+  <data name="AdminForm_New" xml:space="preserve">
+    <value>New entry</value>
+  </data>
+  <data name="AdminForm_CheckFields" xml:space="preserve">
+    <value>Please check the highlighted fields.</value>
+  </data>
+  <data name="AdminForm_NoChanges" xml:space="preserve">
+    <value>Nothing changed.</value>
+  </data>
+  <data name="AdminForm_Saved" xml:space="preserve">
+    <value>Saved.</value>
+  </data>
+  <data name="AdminForm_Deleted" xml:space="preserve">
+    <value>Deleted.</value>
+  </data>
+  <data name="AdminForm_DeleteTitle" xml:space="preserve">
+    <value>Delete entry?</value>
+  </data>
+  <data name="AdminForm_DeleteText" xml:space="preserve">
+    <value>“{0}” will be deleted on the website. This can’t be undone.</value>
+  </data>
+  <data name="AdminForm_DeleteConfirm" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="AdminForm_OnePerLine" xml:space="preserve">
+    <value>One entry per line</value>
+  </data>
+  <data name="AdminForm_PartialLanguage" xml:space="preserve">
+    <value>The API only returns the app language here – other languages stay unchanged and can be edited on the website.</value>
+  </data>
+  <data name="AdminForm_ErrorRequired" xml:space="preserve">
+    <value>Required.</value>
+  </data>
+  <data name="AdminForm_ErrorRequiredGerman" xml:space="preserve">
+    <value>German is required.</value>
+  </data>
+  <data name="AdminForm_ErrorTooLong" xml:space="preserve">
+    <value>Too long.</value>
+  </data>
+  <data name="AdminForm_ErrorNumber" xml:space="preserve">
+    <value>Please enter a number.</value>
+  </data>
+  <data name="AdminForm_ErrorRange" xml:space="preserve">
+    <value>Value out of range.</value>
+  </data>
+  <data name="AdminForm_ErrorColor" xml:space="preserve">
+    <value>Colour as #RRGGBB, e.g. #E0324A.</value>
+  </data>
+  <data name="AdminForm_ErrorUrl" xml:space="preserve">
+    <value>Please enter a full address with https://.</value>
+  </data>
+  <data name="AdminForm_ErrorDate" xml:space="preserve">
+    <value>Date as 2026-10-17 (with time: 2026-10-17 20:30).</value>
+  </data>
+  <data name="AdminForm_ErrorChoice" xml:space="preserve">
+    <value>Invalid choice.</value>
+  </data>
+  <data name="AdminForm_LangDe.Header" xml:space="preserve">
+    <value>German</value>
+  </data>
+  <data name="AdminForm_LangEn.Header" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="AdminForm_LangFr.Header" xml:space="preserve">
+    <value>French</value>
+  </data>
+  <data name="AdminForm_NewButton.Content" xml:space="preserve">
+    <value>NEW</value>
+  </data>
+  <data name="AdminForm_Search.PlaceholderText" xml:space="preserve">
+    <value>Search list</value>
+  </data>
+  <data name="AdminForm_Empty.Text" xml:space="preserve">
+    <value>No entries.</value>
+  </data>
+  <data name="AdminForm_List.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Entries</value>
+  </data>
+  <data name="AdminForm_More.Content" xml:space="preserve">
+    <value>Load more</value>
+  </data>
+  <data name="AdminForm_Save.Content" xml:space="preserve">
+    <value>SAVE</value>
+  </data>
+  <data name="AdminForm_Delete.Content" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="AdminForm_OpenWeb.Content" xml:space="preserve">
+    <value>Open on the website</value>
+  </data>
+  <data name="AdminForm_SelectHint.Text" xml:space="preserve">
+    <value>Pick an entry on the left.</value>
+  </data>
+  <data name="AdminPage_NativeTitle.Text" xml:space="preserve">
+    <value>EDIT IN THE APP</value>
+  </data>
+  <data name="AdminPage_NativeHint.Text" xml:space="preserve">
+    <value>Each area opens in its own window. Anything missing there (ordering, images, nested lists) opens via “Open on the website”.</value>
+  </data>
+  <data name="AdminPage_BrowserTitle.Text" xml:space="preserve">
+    <value>IN THE BROWSER</value>
+  </data>
+  <data name="AdminArea_games" xml:space="preserve">
+    <value>Games</value>
+  </data>
+  <data name="AdminArea_event_types" xml:space="preserve">
+    <value>Event types</value>
+  </data>
+  <data name="AdminArea_badges" xml:space="preserve">
+    <value>Badges</value>
+  </data>
+  <data name="AdminArea_team_groups" xml:space="preserve">
+    <value>Team page</value>
+  </data>
+  <data name="AdminArea_tournaments" xml:space="preserve">
+    <value>Tournaments</value>
+  </data>
+  <data name="AdminArea_trophies" xml:space="preserve">
+    <value>Hall of Fame – trophies</value>
+  </data>
+  <data name="AdminArea_history" xml:space="preserve">
+    <value>Hall of Fame – history</value>
+  </data>
+  <data name="AdminArea_partners" xml:space="preserve">
+    <value>Partners</value>
+  </data>
+  <data name="AdminArea_rules" xml:space="preserve">
+    <value>Rule sets</value>
+  </data>
+  <data name="AdminArea_inactivity_rules" xml:space="preserve">
+    <value>Inactivity – rules</value>
+  </data>
+  <data name="AdminArea_inactivity_exceptions" xml:space="preserve">
+    <value>Inactivity – exceptions</value>
+  </data>
+  <data name="AdminArea_applications_questions" xml:space="preserve">
+    <value>Applications – questions</value>
+  </data>
+  <data name="AdminArea_applications_tasks" xml:space="preserve">
+    <value>Applications – trial tasks</value>
+  </data>
+  <data name="AdminArea_registration_invites" xml:space="preserve">
+    <value>Registration – invites</value>
+  </data>
+  <data name="AdminArea_registration_settings" xml:space="preserve">
+    <value>Registration – settings</value>
+  </data>
+  <data name="AdminArea_settings_clan" xml:space="preserve">
+    <value>Clan settings</value>
+  </data>
+  <data name="AdminArea_pages" xml:space="preserve">
+    <value>Pages</value>
+  </data>
+  <data name="AdminArea_downloads" xml:space="preserve">
+    <value>Downloads</value>
+  </data>
+  <data name="AdminArea_download_categories" xml:space="preserve">
+    <value>Download categories</value>
+  </data>
+  <data name="AdminArea_forum_categories" xml:space="preserve">
+    <value>Forum boards</value>
+  </data>
+  <data name="AdminArea_gallery_albums" xml:space="preserve">
+    <value>Gallery albums</value>
+  </data>
+  <data name="AdminArea_wiki_namespaces" xml:space="preserve">
+    <value>Wiki namespaces</value>
+  </data>
+  <data name="AdminArea_wiki_templates" xml:space="preserve">
+    <value>Wiki templates</value>
+  </data>
+  <data name="AdminArea_mail_templates" xml:space="preserve">
+    <value>Mail templates</value>
+  </data>
+  <data name="AdminArea_upload_limits" xml:space="preserve">
+    <value>Upload limits</value>
+  </data>
+  <data name="AdminArea_roles" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="AdminArea_servers" xml:space="preserve">
+    <value>Game server setup</value>
+  </data>
+  <data name="AdminArea_squads" xml:space="preserve">
+    <value>Squads</value>
+  </data>
+  <data name="AdminArea_members" xml:space="preserve">
+    <value>Members</value>
+  </data>
+  <data name="AdminGroup_clan" xml:space="preserve">
+    <value>Clan</value>
+  </data>
+  <data name="AdminGroup_content" xml:space="preserve">
+    <value>Content</value>
+  </data>
+  <data name="AdminGroup_tech" xml:space="preserve">
+    <value>Technical</value>
+  </data>
+  <data name="AdminField_name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="AdminField_slug" xml:space="preserve">
+    <value>Address (slug)</value>
+  </data>
+  <data name="AdminField_short" xml:space="preserve">
+    <value>Short name</value>
+  </data>
+  <data name="AdminField_platform" xml:space="preserve">
+    <value>Platform</value>
+  </data>
+  <data name="AdminField_genre" xml:space="preserve">
+    <value>Genre</value>
+  </data>
+  <data name="AdminField_color" xml:space="preserve">
+    <value>Colour</value>
+  </data>
+  <data name="AdminField_emoji" xml:space="preserve">
+    <value>Emoji</value>
+  </data>
+  <data name="AdminField_channel_prefix" xml:space="preserve">
+    <value>Discord channel prefix</value>
+  </data>
+  <data name="AdminField_clan_tag" xml:space="preserve">
+    <value>Clan tag</value>
+  </data>
+  <data name="AdminField_clan_name" xml:space="preserve">
+    <value>In-game clan name</value>
+  </data>
+  <data name="AdminField_id_format" xml:space="preserve">
+    <value>Player ID format</value>
+  </data>
+  <data name="AdminField_stats_source" xml:space="preserve">
+    <value>Stats source</value>
+  </data>
+  <data name="AdminField_stats_provider" xml:space="preserve">
+    <value>Stats provider</value>
+  </data>
+  <data name="AdminField_sort" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="AdminField_position" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="AdminField_active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="AdminField_key" xml:space="preserve">
+    <value>Technical key</value>
+  </data>
+  <data name="AdminField_default_visibility" xml:space="preserve">
+    <value>Default visibility</value>
+  </data>
+  <data name="AdminField_squad_id" xml:space="preserve">
+    <value>Squad</value>
+  </data>
+  <data name="AdminField_game_id" xml:space="preserve">
+    <value>Game</value>
+  </data>
+  <data name="AdminField_description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="AdminField_icon" xml:space="preserve">
+    <value>Icon</value>
+  </data>
+  <data name="AdminField_organizer" xml:space="preserve">
+    <value>Organiser</value>
+  </data>
+  <data name="AdminField_organizer_type" xml:space="preserve">
+    <value>Organiser type</value>
+  </data>
+  <data name="AdminField_starts_on" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="AdminField_ends_on" xml:space="preserve">
+    <value>End</value>
+  </data>
+  <data name="AdminField_placement" xml:space="preserve">
+    <value>Placement</value>
+  </data>
+  <data name="AdminField_participants_count" xml:space="preserve">
+    <value>Participating teams</value>
+  </data>
+  <data name="AdminField_url" xml:space="preserve">
+    <value>Address (URL)</value>
+  </data>
+  <data name="AdminField_kind" xml:space="preserve">
+    <value>Kind</value>
+  </data>
+  <data name="AdminField_title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="AdminField_achieved_on" xml:space="preserve">
+    <value>Achieved on</value>
+  </data>
+  <data name="AdminField_tournament_id" xml:space="preserve">
+    <value>Tournament</value>
+  </data>
+  <data name="AdminField_occurred_on" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="AdminField_precision" xml:space="preserve">
+    <value>Date precision</value>
+  </data>
+  <data name="AdminField_body" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="AdminField_highlighted" xml:space="preserve">
+    <value>Highlight</value>
+  </data>
+  <data name="AdminField_tier" xml:space="preserve">
+    <value>Tier</value>
+  </data>
+  <data name="AdminField_scope" xml:space="preserve">
+    <value>Applies to</value>
+  </data>
+  <data name="AdminField_intro" xml:space="preserve">
+    <value>Introduction</value>
+  </data>
+  <data name="AdminField_visibility" xml:space="preserve">
+    <value>Visibility</value>
+  </data>
+  <data name="AdminField_requires_acceptance" xml:space="preserve">
+    <value>Must be accepted</value>
+  </data>
+  <data name="AdminField_enforced" xml:space="preserve">
+    <value>Enforce (blocked until accepted)</value>
+  </data>
+  <data name="AdminField_major" xml:space="preserve">
+    <value>Major change</value>
+  </data>
+  <data name="AdminField_note" xml:space="preserve">
+    <value>Change note</value>
+  </data>
+  <data name="AdminField_role_id" xml:space="preserve">
+    <value>Rank</value>
+  </data>
+  <data name="AdminField_sources" xml:space="preserve">
+    <value>Activity counted from</value>
+  </data>
+  <data name="AdminField_warn_days" xml:space="preserve">
+    <value>Warn after days</value>
+  </data>
+  <data name="AdminField_escalate_days" xml:space="preserve">
+    <value>Notify leaders after days</value>
+  </data>
+  <data name="AdminField_action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="AdminField_action_days" xml:space="preserve">
+    <value>Action after days</value>
+  </data>
+  <data name="AdminField_enabled" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="AdminField_user_id" xml:space="preserve">
+    <value>Member</value>
+  </data>
+  <data name="AdminField_until" xml:space="preserve">
+    <value>Until</value>
+  </data>
+  <data name="AdminField_reason" xml:space="preserve">
+    <value>Reason</value>
+  </data>
+  <data name="AdminField_type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="AdminField_label" xml:space="preserve">
+    <value>Label</value>
+  </data>
+  <data name="AdminField_help" xml:space="preserve">
+    <value>Help text</value>
+  </data>
+  <data name="AdminField_required" xml:space="preserve">
+    <value>Required</value>
+  </data>
+  <data name="AdminField_max_uses" xml:space="preserve">
+    <value>Maximum uses</value>
+  </data>
+  <data name="AdminField_expires_at" xml:space="preserve">
+    <value>Valid until</value>
+  </data>
+  <data name="AdminField_mode" xml:space="preserve">
+    <value>Registration</value>
+  </data>
+  <data name="AdminField_min_age" xml:space="preserve">
+    <value>Minimum age</value>
+  </data>
+  <data name="AdminField_blocked_domains" xml:space="preserve">
+    <value>Blocked e-mail domains</value>
+  </data>
+  <data name="AdminField_founded" xml:space="preserve">
+    <value>Founded</value>
+  </data>
+  <data name="AdminField_discord_invite" xml:space="preserve">
+    <value>Discord invite</value>
+  </data>
+  <data name="AdminField_maintenance_enabled" xml:space="preserve">
+    <value>Maintenance mode</value>
+  </data>
+  <data name="AdminField_maintenance_message" xml:space="preserve">
+    <value>Maintenance message</value>
+  </data>
+  <data name="AdminField_apps_ios_app_id" xml:space="preserve">
+    <value>iOS app ID</value>
+  </data>
+  <data name="AdminField_apps_android_package" xml:space="preserve">
+    <value>Android package name</value>
+  </data>
+  <data name="AdminField_apps_banner" xml:space="preserve">
+    <value>App banner on the website</value>
+  </data>
+  <data name="AdminField_status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="AdminField_show_in_footer" xml:space="preserve">
+    <value>Link in the footer</value>
+  </data>
+  <data name="AdminField_category_id" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="AdminField_parent_id" xml:space="preserve">
+    <value>Parent board</value>
+  </data>
+  <data name="AdminField_is_locked" xml:space="preserve">
+    <value>Locked (no new threads)</value>
+  </data>
+  <data name="AdminField_member_uploads" xml:space="preserve">
+    <value>Members may upload</value>
+  </data>
+  <data name="AdminField_requires_approval" xml:space="preserve">
+    <value>Approval required</value>
+  </data>
+  <data name="AdminField_requires_review" xml:space="preserve">
+    <value>Review changes</value>
+  </data>
+  <data name="AdminField_subject" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="AdminField_max_mb" xml:space="preserve">
+    <value>Max. file size (MB)</value>
+  </data>
+  <data name="AdminField_daily" xml:space="preserve">
+    <value>Uploads per day</value>
+  </data>
+  <data name="AdminField_quota_mb" xml:space="preserve">
+    <value>Total storage (MB)</value>
+  </data>
+  <data name="AdminField_video_max_mb" xml:space="preserve">
+    <value>Max. video size (MB)</value>
+  </data>
+  <data name="AdminField_video_seconds" xml:space="preserve">
+    <value>Max. video length (seconds)</value>
+  </data>
+  <data name="AdminField_attachment_limit_mb" xml:space="preserve">
+    <value>Chat attachments (MB)</value>
+  </data>
+  <data name="AdminField_host" xml:space="preserve">
+    <value>Host</value>
+  </data>
+  <data name="AdminField_port" xml:space="preserve">
+    <value>Port</value>
+  </data>
+  <data name="AdminField_query_port" xml:space="preserve">
+    <value>Query port</value>
+  </data>
+  <data name="AdminField_query_type" xml:space="preserve">
+    <value>Query protocol</value>
+  </data>
+  <data name="AdminField_query_enabled" xml:space="preserve">
+    <value>Query status</value>
+  </data>
+  <data name="AdminField_connect_url" xml:space="preserve">
+    <value>Connect link</value>
+  </data>
+  <data name="AdminField_pterodactyl_id" xml:space="preserve">
+    <value>Pterodactyl server ID</value>
+  </data>
+  <data name="AdminField_production" xml:space="preserve">
+    <value>Production server</value>
+  </data>
+  <data name="AdminField_config_approval" xml:space="preserve">
+    <value>Four-eyes approval for configs</value>
+  </data>
+  <data name="AdminField_announce_restarts" xml:space="preserve">
+    <value>Announce restarts on Discord</value>
+  </data>
+  <data name="AdminField_join_password_visibility" xml:space="preserve">
+    <value>Server password visible to</value>
+  </data>
+  <data name="AdminChoice_pc" xml:space="preserve">
+    <value>PC</value>
+  </data>
+  <data name="AdminChoice_console" xml:space="preserve">
+    <value>Console</value>
+  </data>
+  <data name="AdminChoice_mobile" xml:space="preserve">
+    <value>Mobile</value>
+  </data>
+  <data name="AdminChoice_crossplay" xml:space="preserve">
+    <value>Crossplay</value>
+  </data>
+  <data name="AdminChoice_steam_id" xml:space="preserve">
+    <value>Steam ID</value>
+  </data>
+  <data name="AdminChoice_guid" xml:space="preserve">
+    <value>GUID</value>
+  </data>
+  <data name="AdminChoice_player_tag" xml:space="preserve">
+    <value>Player tag</value>
+  </data>
+  <data name="AdminChoice_riot_id" xml:space="preserve">
+    <value>Riot ID</value>
+  </data>
+  <data name="AdminChoice_battletag" xml:space="preserve">
+    <value>BattleTag</value>
+  </data>
+  <data name="AdminChoice_uid" xml:space="preserve">
+    <value>UID</value>
+  </data>
+  <data name="AdminChoice_server" xml:space="preserve">
+    <value>Game server</value>
+  </data>
+  <data name="AdminChoice_api" xml:space="preserve">
+    <value>API</value>
+  </data>
+  <data name="AdminChoice_manual" xml:space="preserve">
+    <value>Manual</value>
+  </data>
+  <data name="AdminChoice_none" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="AdminChoice_supercell_coc" xml:space="preserve">
+    <value>Clash of Clans</value>
+  </data>
+  <data name="AdminChoice_supercell_bs" xml:space="preserve">
+    <value>Brawl Stars</value>
+  </data>
+  <data name="AdminChoice_supercell_cr" xml:space="preserve">
+    <value>Clash Royale</value>
+  </data>
+  <data name="AdminChoice_faceit" xml:space="preserve">
+    <value>FACEIT</value>
+  </data>
+  <data name="AdminChoice_riot" xml:space="preserve">
+    <value>Riot Games</value>
+  </data>
+  <data name="AdminChoice_public" xml:space="preserve">
+    <value>Public</value>
+  </data>
+  <data name="AdminChoice_members" xml:space="preserve">
+    <value>Members</value>
+  </data>
+  <data name="AdminChoice_squad" xml:space="preserve">
+    <value>Squad</value>
+  </data>
+  <data name="AdminChoice_hidden" xml:space="preserve">
+    <value>Hidden</value>
+  </data>
+  <data name="AdminChoice_managers" xml:space="preserve">
+    <value>Server managers</value>
+  </data>
+  <data name="AdminChoice_internal" xml:space="preserve">
+    <value>Internal</value>
+  </data>
+  <data name="AdminChoice_external" xml:space="preserve">
+    <value>External</value>
+  </data>
+  <data name="AdminChoice_trophy" xml:space="preserve">
+    <value>Trophy</value>
+  </data>
+  <data name="AdminChoice_milestone" xml:space="preserve">
+    <value>Milestone</value>
+  </data>
+  <data name="AdminChoice_award" xml:space="preserve">
+    <value>Award</value>
+  </data>
+  <data name="AdminChoice_day" xml:space="preserve">
+    <value>Day</value>
+  </data>
+  <data name="AdminChoice_month" xml:space="preserve">
+    <value>Month</value>
+  </data>
+  <data name="AdminChoice_year" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="AdminChoice_main" xml:space="preserve">
+    <value>Main partner</value>
+  </data>
+  <data name="AdminChoice_partner" xml:space="preserve">
+    <value>Partner</value>
+  </data>
+  <data name="AdminChoice_supporter" xml:space="preserve">
+    <value>Supporter</value>
+  </data>
+  <data name="AdminChoice_clan" xml:space="preserve">
+    <value>Whole clan</value>
+  </data>
+  <data name="AdminChoice_game" xml:space="preserve">
+    <value>One game</value>
+  </data>
+  <data name="AdminChoice_website" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="AdminChoice_discord" xml:space="preserve">
+    <value>Discord chat</value>
+  </data>
+  <data name="AdminChoice_discord_voice" xml:space="preserve">
+    <value>Discord voice</value>
+  </data>
+  <data name="AdminChoice_teamspeak" xml:space="preserve">
+    <value>TeamSpeak</value>
+  </data>
+  <data name="AdminChoice_gameserver" xml:space="preserve">
+    <value>Game server</value>
+  </data>
+  <data name="AdminChoice_flag" xml:space="preserve">
+    <value>Flag</value>
+  </data>
+  <data name="AdminChoice_former" xml:space="preserve">
+    <value>Move to former members</value>
+  </data>
+  <data name="AdminChoice_text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="AdminChoice_textarea" xml:space="preserve">
+    <value>Long text</value>
+  </data>
+  <data name="AdminChoice_select" xml:space="preserve">
+    <value>Choice</value>
+  </data>
+  <data name="AdminChoice_number" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="AdminChoice_yes_no" xml:space="preserve">
+    <value>Yes/no</value>
+  </data>
+  <data name="AdminChoice_url" xml:space="preserve">
+    <value>Link</value>
+  </data>
+  <data name="AdminChoice_open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="AdminChoice_closed" xml:space="preserve">
+    <value>Closed</value>
+  </data>
+  <data name="AdminChoice_invite" xml:space="preserve">
+    <value>Invite only</value>
+  </data>
+  <data name="AdminChoice_draft" xml:space="preserve">
+    <value>Draft</value>
+  </data>
+  <data name="AdminChoice_published" xml:space="preserve">
+    <value>Published</value>
+  </data>
+  <data name="AdminChoice_rank" xml:space="preserve">
+    <value>Rank</value>
+  </data>
+  <data name="AdminChoice_extra" xml:space="preserve">
+    <value>Extra role</value>
+  </data>
+  <data name="AdminChoice_quake3" xml:space="preserve">
+    <value>Quake 3 (ET, RtCW)</value>
+  </data>
+  <data name="AdminChoice_source" xml:space="preserve">
+    <value>Source (CS2)</value>
+  </data>
+  <data name="AdminChoice_minecraft" xml:space="preserve">
+    <value>Minecraft</value>
+  </data>
+  <data name="AdminIcon_flag" xml:space="preserve">
+    <value>Flag</value>
+  </data>
+  <data name="AdminIcon_fist" xml:space="preserve">
+    <value>Fist</value>
+  </data>
+  <data name="AdminIcon_trophy" xml:space="preserve">
+    <value>Trophy</value>
+  </data>
+  <data name="AdminIcon_users" xml:space="preserve">
+    <value>People</value>
+  </data>
+  <data name="AdminIcon_gamepad" xml:space="preserve">
+    <value>Gamepad</value>
+  </data>
+  <data name="AdminIcon_server" xml:space="preserve">
+    <value>Server</value>
+  </data>
+  <data name="AdminIcon_discord" xml:space="preserve">
+    <value>Discord</value>
+  </data>
+  <data name="AdminIcon_globe" xml:space="preserve">
+    <value>Globe</value>
+  </data>
+  <data name="AdminIcon_sparkles" xml:space="preserve">
+    <value>Sparkles</value>
+  </data>
+  <data name="AdminIcon_crown" xml:space="preserve">
+    <value>Crown</value>
+  </data>
+  <data name="AdminIcon_swords" xml:space="preserve">
+    <value>Swords</value>
+  </data>
+  <data name="AdminIcon_calendar" xml:space="preserve">
+    <value>Calendar</value>
+  </data>
+  <data name="AdminIcon_megaphone" xml:space="preserve">
+    <value>Megaphone</value>
+  </data>
+  <data name="AdminIcon_home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="AdminHelp_slug" xml:space="preserve">
+    <value>Lowercase letters, digits and hyphens; empty = from the name. Changing it changes the address.</value>
+  </data>
+  <data name="AdminHelp_key" xml:space="preserve">
+    <value>Lowercase letters, digits and hyphens; only when creating.</value>
+  </data>
+  <data name="AdminHelp_contrast" xml:space="preserve">
+    <value>Must be readable on a dark background – the website checks the contrast.</value>
+  </data>
+  <data name="AdminHelp_global" xml:space="preserve">
+    <value>Empty = for all squads.</value>
+  </data>
+  <data name="AdminHelp_icon" xml:space="preserve">
+    <value>Name of a website icon, e.g. trophy, crown, gamepad.</value>
+  </data>
+  <data name="AdminHelp_writeOnly" xml:space="preserve">
+    <value>The API doesn’t return this value – leaving it empty means “unchanged”.</value>
+  </data>
+  <data name="AdminHelp_placement" xml:space="preserve">
+    <value>1–3 are shown as gold, silver and bronze.</value>
+  </data>
+  <data name="AdminHelp_major" xml:space="preserve">
+    <value>Bumps the version, everyone has to accept again.</value>
+  </data>
+  <data name="AdminHelp_note" xml:space="preserve">
+    <value>Shown in the version history.</value>
+  </data>
+  <data name="AdminHelp_defaultRule" xml:space="preserve">
+    <value>Empty = default rule for all ranks without their own rule.</value>
+  </data>
+  <data name="AdminHelp_until" xml:space="preserve">
+    <value>Empty = permanent.</value>
+  </data>
+  <data name="AdminHelp_allGames" xml:space="preserve">
+    <value>Empty = for all games.</value>
+  </data>
+  <data name="AdminHelp_unlimited" xml:space="preserve">
+    <value>Empty = unlimited.</value>
+  </data>
+  <data name="AdminHelp_domains" xml:space="preserve">
+    <value>One domain per line, e.g. tempmail.com.</value>
+  </data>
+  <data name="AdminHelp_defaultText" xml:space="preserve">
+    <value>Empty = the website’s default text.</value>
+  </data>
+  <data name="AdminHelp_markdown" xml:space="preserve">
+    <value>Markdown as on the website.</value>
+  </data>
+  <data name="AdminHelp_default" xml:space="preserve">
+    <value>Empty = the website’s default.</value>
+  </data>
+  <data name="AdminHelp_roleSort" xml:space="preserve">
+    <value>Smaller = higher in the hierarchy; only below your own role.</value>
+  </data>
+  <data name="AdminHelp_connect" xml:space="preserve">
+    <value>steam://, et://, minecraft:// or https://; empty = from host and port.</value>
+  </data>
+  <data name="AdminHelp_games" xml:space="preserve">
+    <value>Header image, store links and stats settings are edited on the website.</value>
+  </data>
+  <data name="AdminHelp_event_types" xml:space="preserve">
+    <value>An event type that is in use can’t be deleted – switch off “Active” instead.</value>
+  </data>
+  <data name="AdminHelp_badges" xml:space="preserve">
+    <value>Automatic badges are awarded by the website; they can’t be deleted.</value>
+  </data>
+  <data name="AdminHelp_team_groups" xml:space="preserve">
+    <value>Which roles appear in a group is set on the website.</value>
+  </data>
+  <data name="AdminHelp_images" xml:space="preserve">
+    <value>Logos are uploaded on the website.</value>
+  </data>
+  <data name="AdminHelp_rules" xml:space="preserve">
+    <value>The sections of a rule set are edited on the website.</value>
+  </data>
+  <data name="AdminHelp_questions" xml:space="preserve">
+    <value>Options of choice questions are edited on the website.</value>
+  </data>
+  <data name="AdminHelp_tasks" xml:space="preserve">
+    <value>Trial tasks can only be created and deleted.</value>
+  </data>
+  <data name="AdminHelp_invites" xml:space="preserve">
+    <value>The website generates the invite code; it then appears in the list.</value>
+  </data>
+  <data name="AdminHelp_downloads" xml:space="preserve">
+    <value>Files and versions are uploaded on the website.</value>
+  </data>
+  <data name="AdminHelp_forum" xml:space="preserve">
+    <value>Role permissions per board are edited on the website.</value>
+  </data>
+  <data name="AdminHelp_wikiTemplates" xml:space="preserve">
+    <value>New templates and their fields are created on the website.</value>
+  </data>
+  <data name="AdminHelp_mail" xml:space="preserve">
+    <value>Empty = default text. Allowed placeholders: {name} {title} {clan} {url}.</value>
+  </data>
+  <data name="AdminHelp_roles" xml:space="preserve">
+    <value>A role’s permissions are edited on the website (permission matrix).</value>
+  </data>
+  <data name="AdminHelp_servers" xml:space="preserve">
+    <value>RCON, passwords and the config list are set up on the website.</value>
+  </data>
 </root>

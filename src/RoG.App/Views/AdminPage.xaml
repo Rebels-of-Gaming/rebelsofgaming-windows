@@ -422,7 +422,34 @@
         <!-- Website-Verwaltung -->
         <ScrollViewer x:Name="WebsitePanel" Grid.Row="3" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
             <StackPanel MaxWidth="{StaticResource RoGReadingWidth}" HorizontalAlignment="Left" Spacing="12">
-                <TextBlock x:Uid="AdminPage_WebsiteHint" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                <!-- In der App: allgemeiner Editor je Bereich (eigenes Fenster) -->
+                <StackPanel Spacing="12" Visibility="{x:Bind Media.HasNativeAreas}">
+                    <TextBlock x:Uid="AdminPage_NativeTitle" Style="{StaticResource RoGSectionTextStyle}" />
+                    <TextBlock x:Uid="AdminPage_NativeHint" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                    <ItemsRepeater ItemsSource="{x:Bind Media.NativeAreas}">
+                        <ItemsRepeater.Layout>
+                            <UniformGridLayout ItemsStretch="Fill" MinColumnSpacing="8" MinItemHeight="64" MinItemWidth="220" MinRowSpacing="8" />
+                        </ItemsRepeater.Layout>
+                        <ItemsRepeater.ItemTemplate>
+                            <DataTemplate x:DataType="vm:AdminAreaButtonViewModel">
+                                <Button
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    HorizontalContentAlignment="Left"
+                                    Command="{x:Bind OpenCommand}"
+                                    AutomationProperties.Name="{x:Bind Label}">
+                                    <StackPanel Spacing="2">
+                                        <TextBlock FontWeight="SemiBold" Text="{x:Bind Label}" TextTrimming="CharacterEllipsis" />
+                                        <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Group}" />
+                                    </StackPanel>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsRepeater.ItemTemplate>
+                    </ItemsRepeater>
+                </StackPanel>
+
+                <TextBlock x:Uid="AdminPage_BrowserTitle" Margin="0,12,0,0" Style="{StaticResource RoGSectionTextStyle}" Visibility="{x:Bind Media.HasWebLinks}" />
+                <TextBlock x:Uid="AdminPage_WebsiteHint" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" Visibility="{x:Bind Media.HasWebLinks}" />
                 <ItemsRepeater ItemsSource="{x:Bind Media.WebLinks}">
                     <ItemsRepeater.Layout>
                         <UniformGridLayout ItemsStretch="Fill" MinColumnSpacing="8" MinItemWidth="220" MinRowSpacing="8" />

@@ -191,4 +191,18 @@ public static class AdminWebLinks
     /// <summary>Links, die für die Person in Frage kommen (bekanntes Recht vorhanden oder von der Website geprüft).</summary>
     public static IReadOnlyList<Link> For(UserProfile? me) =>
         me is null ? [] : All.Where(l => l.Permission is null || me.Can(l.Permission)).ToList();
+
+    /// <summary>
+    /// Website-Bereiche, die die App vollständig mit dem eigenen Editor kann (<see cref="AdminAreas"/>) – die übrigen
+    /// bleiben Links (z. B. Rechte-Matrix, Menüs, Startseite, Integrationen). Teile, die der Editor nicht abbildet,
+    /// öffnet er selbst über „Auf der Website öffnen“.
+    /// </summary>
+    public static readonly IReadOnlySet<string> Covered = new HashSet<string>(StringComparer.Ordinal)
+    {
+        "games", "team", "inactivity", "badges", "event_types", "tournaments", "pages", "partners", "forum", "gallery", "uploads",
+        "wiki", "mail_templates", "registration", "settings", "servers",
+    };
+
+    /// <summary>Links ohne Gegenstück in der App.</summary>
+    public static IReadOnlyList<Link> RemainingFor(UserProfile? me) => For(me).Where(l => !Covered.Contains(l.Key)).ToList();
 }

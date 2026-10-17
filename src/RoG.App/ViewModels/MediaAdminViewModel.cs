@@ -25,10 +25,17 @@ public sealed partial class MediaAdminViewModel(AppServices services, Action<str
     public bool CanUploads { get; } = MediaAdminService.CanManageUploads(services.CurrentUser);
 
     public IReadOnlyList<AdminWebLinkViewModel> WebLinks { get; } = services.Environment.AdminBaseUrl is { } admin
-        ? AdminWebLinks.For(services.CurrentUser).Select(l => new AdminWebLinkViewModel(services.Localizer.GetString("AdminWeb_" + l.Key), new Uri(admin, l.Path), services)).ToList()
+        ? AdminWebLinks.RemainingFor(services.CurrentUser).Select(l => new AdminWebLinkViewModel(services.Localizer.GetString("AdminWeb_" + l.Key), new Uri(admin, l.Path), services)).ToList()
         : [];
 
     public bool HasWebLinks => WebLinks.Count > 0;
+
+    /// <summary>Bereiche der Website-Verwaltung, die die App selbst kann – je Gruppe (Clan, Inhalte, Technik).</summary>
+    public IReadOnlyList<AdminAreaButtonViewModel> NativeAreas { get; } = AdminAreas.VisibleTo(services.CurrentUser)
+        .Select(a => new AdminAreaButtonViewModel(a, services.Localizer.GetString(a.TitleKey), services.Localizer.GetString("AdminGroup_" + a.Group)))
+        .ToList();
+
+    public bool HasNativeAreas => NativeAreas.Count > 0;
 
     public ObservableCollection<PendingGalleryItemViewModel> Pending { get; } = [];
 
@@ -213,4 +220,15 @@ public sealed partial class AdminWebLinkViewModel(string label, Uri url, AppServ
 
     [RelayCommand]
     private Task OpenAsync() => services.Browser.OpenAsync(url);
+}
+
+/// <summary>Knopf für einen Verwaltungsbereich – öffnet den Editor im eigenen Fenster.</summary>
+public sealed partial class AdminAreaButtonViewModel(AdminArea area, string label, string group)
+{
+    public string Label => label;
+
+    public string Group => group;
+
+    [RelayCommand]
+    private void Open() => Views.AdminEditorWindow.Open(area);
 }

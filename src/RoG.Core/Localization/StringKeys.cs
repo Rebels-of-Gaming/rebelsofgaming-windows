@@ -686,6 +686,44 @@ public static class StringKeys
 
     public const string ConsoleDemo = "Console_Demo";
 
+    public const string AdminFormNew = "AdminForm_New";
+
+    public const string AdminFormCheckFields = "AdminForm_CheckFields";
+
+    public const string AdminFormNoChanges = "AdminForm_NoChanges";
+
+    public const string AdminFormSaved = "AdminForm_Saved";
+
+    public const string AdminFormDeleted = "AdminForm_Deleted";
+
+    public const string AdminFormDeleteTitle = "AdminForm_DeleteTitle";
+
+    public const string AdminFormDeleteText = "AdminForm_DeleteText";
+
+    public const string AdminFormDeleteConfirm = "AdminForm_DeleteConfirm";
+
+    public const string AdminFormOnePerLine = "AdminForm_OnePerLine";
+
+    public const string AdminFormPartialLanguage = "AdminForm_PartialLanguage";
+
+    public const string AdminFormErrorRequired = "AdminForm_ErrorRequired";
+
+    public const string AdminFormErrorRequiredGerman = "AdminForm_ErrorRequiredGerman";
+
+    public const string AdminFormErrorTooLong = "AdminForm_ErrorTooLong";
+
+    public const string AdminFormErrorNumber = "AdminForm_ErrorNumber";
+
+    public const string AdminFormErrorRange = "AdminForm_ErrorRange";
+
+    public const string AdminFormErrorColor = "AdminForm_ErrorColor";
+
+    public const string AdminFormErrorUrl = "AdminForm_ErrorUrl";
+
+    public const string AdminFormErrorDate = "AdminForm_ErrorDate";
+
+    public const string AdminFormErrorChoice = "AdminForm_ErrorChoice";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

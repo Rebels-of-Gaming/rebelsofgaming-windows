@@ -35,7 +35,7 @@ public sealed partial class AdminPage : Page
         WordsTab.Visibility = Visible(Moderation.CanManage);
         GalleryTab.Visibility = Visible(Media.CanGallery);
         UploadsTab.Visibility = Visible(Media.CanUploads);
-        WebsiteTab.Visibility = Visible(Overview.Any && Media.HasWebLinks);
+        WebsiteTab.Visibility = Visible((Overview.Any && Media.HasWebLinks) || Media.HasNativeAreas);
         var any = Moderation.Any || Applications.CanView || Overview.Any || Members.CanView || Media.CanGallery || Media.CanUploads;
         NoAccess.Visibility = Visible(!any);
         Tabs.Visibility = Visible(any);

@@ -60,8 +60,9 @@ Windows-Anmeldeinformationsverwaltung, nie in Dateien der App.
 
 **Suchbegriffe:** clan · gaming · esport · enemy territory · wolfenstein · cs2 · minecraft
 
-**Neuerungen (für 2.4.x):** Neue Windows-App: Server-Dateien, Whitelist und Formular-Vorlagen, Wiki-Seiten anlegen und
-Bilder einfügen, Squads verwalten, News-Redaktion, Matches eintragen, Aufstellungen für Termine, Galerie-Freigaben.
+**Neuerungen (für 2.5.0):** Die neue Windows-App: Chats im eigenen Fenster, Gameserver mit „Verbinden“, Wiki mit
+Offline-Kopien, Bildvorschau im Chat, Squads und News verwalten, Matches und Aufstellungen eintragen, Server-Steuerung
+mit Live-Konsole und die Website-Verwaltung direkt in der App.
 
 ## English (en-US)
 
@@ -114,8 +115,9 @@ never in the app's files.
 
 **Search terms:** clan · gaming · esports · enemy territory · wolfenstein · cs2 · minecraft
 
-**What's new (2.4.x):** New Windows app: server files, whitelist and form templates, create wiki pages and insert images,
-manage squads, news editor, match results, event line-ups, gallery approvals.
+**What's new (2.5.0):** The new Windows app: chats in their own window, game servers with “Connect”, wiki with offline
+copies, image previews in chats, squad and news management, match results and line-ups, server control with a live
+console and the website admin right in the app.
 
 ## Français (fr-FR)
 
@@ -168,9 +170,9 @@ le Gestionnaire d’identification Windows, jamais dans les fichiers de l’appl
 
 **Termes de recherche :** clan · gaming · esport · enemy territory · wolfenstein · cs2 · minecraft
 
-**Nouveautés (2.4.x) :** Nouvelle application Windows : fichiers des serveurs, liste blanche et modèles de formulaire,
-créer des pages wiki et insérer des images, gérer les escouades, rédaction des actualités, résultats des matchs,
-compositions des événements, validation de la galerie.
+**Nouveautés (2.5.0) :** La nouvelle application Windows : discussions dans leur propre fenêtre, serveurs de jeu avec
+« Se connecter », wiki hors ligne, aperçu des images dans les discussions, gestion des escouades et des actualités,
+résultats et compositions, contrôle des serveurs avec console en direct et l’administration du site dans l’app.
 
 ## Screenshots (Plan)
 

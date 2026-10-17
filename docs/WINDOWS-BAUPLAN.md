@@ -17,7 +17,7 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 | 7 | Server-Steuerung | fertig (2.4.1): Steuer-Fenster mit Power, Ressourcen, Live-Konsole (Historie), Configs (Diff, Versionen, Rollback, Anträge), **Formular-Vorlagen** (Servername, Slots, Passwort, Map-Rotation), **Dateien** (Ordner, Vorschau, Sicherungen kopieren/umbenennen/löschen), Backups, RCON, Sperren, **Whitelist**, Vier-Augen-Freigaben, App-Sperre mit Windows Hello; Vorlagen ohne Dateizugriff nach Lücke W14 | siehe `git log` |
 | 8 | Wiki | fertig (2.4.2): Bereiche, Seitenbaum, Suche, Seite nativ mit Links in der App, Offline-Kopien, Bearbeiten mit Vorschau und Konflikterkennung, Versionen mit Vergleich/Wiederherstellen, Beobachten, **neue Seite anlegen**, **Bild einfügen** (Upload + Wiki-Datei), **Kategorien**, **Inhaltsverzeichnis mit Sprung** | siehe `git log` |
 | 9 | Verwaltung + Moderation | fertig (2.4.7; seltene Einrichtungsseiten als Direktlinks zur Website): Verwaltung mit Übersicht (Kennzahlen, Systemstatus, Audit-Log), Bewerbungen (Squad-Leitung), Moderation (Meldungen, verwarnen/sperren, Sperren, Mod-Log, Wortfilter); Mitglieder mit Rollen vergeben/entziehen; **Squads** (2.4.3: Profil, Logo/Header, Line-up mit Rollen, archivieren); **News-Redaktion** (2.4.4); **Matches eintragen** (2.4.5); **Teilnehmer und Aufstellungen** an Terminen (2.4.6); **Galerie-Freigaben, Upload-Meldungen, Speicher, Website-Verwaltung als Direktlinks** (2.4.7); Wiki-Freigaben … | siehe `git log` |
-| 10 | Feinschliff + Store | in Arbeit (2.4.8): Screenreader-Prüfung in CI (`scripts/check-a11y.py`), Animationen nach Windows-Einstellung, Store-Texte DE/EN/FR (`docs/STORE-TEXTE.md`); offen: Startzeit/ReadyToRun auf der VM messen, Screenshots, WACK, Einreichung nach Wahkes Test | |
+| 10 | Feinschliff + Store | in Arbeit (2.5.0 = Store-Kandidat, Wahke 17.10.): Website-Verwaltung in der App (26 Bereiche); 2.4.8: Screenreader-Prüfung in CI (`scripts/check-a11y.py`), Animationen nach Windows-Einstellung, Store-Texte DE/EN/FR (`docs/STORE-TEXTE.md`); offen: Startzeit/ReadyToRun auf der VM messen, Screenshots, WACK, Einreichung nach Wahkes Test | |
 
 ### Stufe 0 – was steht (15.10.2026)
 
@@ -193,6 +193,22 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   zeigt den Verbindungsstatus, `daemon error`/`jwt error`, erkennt Demo-Server und verbindet bis zu dreimal neu (wie
   `server-console.js`). Chat-Anhänge: Bilder mit Vorschau über `GET /v1/attachments/{id}` (Umleitung auf kurzlebigen
   Link, max. 8 MB), andere Dateien öffnen im Browser. ET-Farbcodes im Clan-Tag werden wie auf der Website entfernt.
+
+- **2.5.0 – Website-Verwaltung in der App (Store-Kandidat):** allgemeiner Editor (`AdminArea`/`AdminForm`/
+  `AdminResourceService` in Core, `AdminEditorWindow` in der App): Liste mit Suche, Formular aus der Felddefinition,
+  Anlegen/Speichern/Löschen, Einstellungen ohne Liste, Verweise als Auswahl, „Auf der Website öffnen“ für den Rest.
+  26 Bereiche (`AdminAreas`): Spiele, Terminarten, Abzeichen, Team-Seite, Turniere, Hall of Fame (Trophäen, Chronik),
+  Partner, Regelwerke, Inaktivität (Regeln, Ausnahmen), Bewerbungen (Fragen, Probeaufgaben), Registrierung (Einladungen,
+  Einstellungen), Clan-Einstellungen, Seiten, Downloads, Download-Kategorien, Forum-Bereiche, Galerie-Alben,
+  Wiki-Bereiche/-Vorlagen, Mail-Vorlagen, Upload-Limits, Rollen, Gameserver einrichten. Verträge aus den API-Controllern
+  der Website gelesen (Stand 17.10.). Übersetzungen: Die Website führt Sprachen zusammen (`App\Support\Translations`),
+  der Editor sendet nur geänderte Sprachen; liefert die API nur die Anfrage-Sprache (W17), zeigt er nur diese.
+  Gesendet wird nur Geändertes (PUT-Bereiche wie Upload-Limits und Mail-Vorlagen: alles).
+  **Weiter im Browser:** Rechte-Matrix, Rechte prüfen, Startseite, Menüs, Integrationen, Discord-Bot, Social Media,
+  System, Bewerbungs-Richtlinien; dazu Webhooks, Übersetzungen, Rechtstexte – deren Scopes fragt die App nach dem
+  Sicherheitsentscheid vom 15.10. bewusst nicht an. **Annahme:** Ohne Gegenfrage bleibt das so.
+  **Annahme:** Verwaltungs-Scopes gibt die Website nur mit Recht **und** aktiver TOTP-2FA; wer sie neu braucht, meldet
+  sich einmal ab und an.
 
 ### Offline, Melden, Verwaltung (2.3.1–2.3.3, 16.10.2026)
 

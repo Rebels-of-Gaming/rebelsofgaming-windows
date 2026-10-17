@@ -2918,13 +2918,13 @@
   <data name="SquadAdmin_SetLogo.Content" xml:space="preserve">
     <value>Choose logo …</value>
   </data>
-  <data name="SquadAdmin_RemoveLogo.Content" xml:space="preserve">
+  <data name="SquadAdmin_RemoveLogoButton.Content" xml:space="preserve">
     <value>Remove logo</value>
   </data>
   <data name="SquadAdmin_SetHeader.Content" xml:space="preserve">
     <value>Choose header …</value>
   </data>
-  <data name="SquadAdmin_RemoveHeader.Content" xml:space="preserve">
+  <data name="SquadAdmin_RemoveHeaderButton.Content" xml:space="preserve">
     <value>Remove header</value>
   </data>
   <data name="SquadAdmin_AddTitle.Text" xml:space="preserve">
@@ -3023,7 +3023,7 @@
   <data name="NewsEdit_WindowTitle.Text" xml:space="preserve">
     <value>NEWS EDITOR</value>
   </data>
-  <data name="NewsEdit_New.Content" xml:space="preserve">
+  <data name="NewsEdit_NewButton.Content" xml:space="preserve">
     <value>New post</value>
   </data>
   <data name="NewsEdit_DraftsTitle.Text" xml:space="preserve">

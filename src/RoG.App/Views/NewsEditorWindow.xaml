@@ -34,7 +34,7 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Button x:Uid="NewsEdit_New" HorizontalAlignment="Stretch" Command="{x:Bind ViewModel.NewDraftCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                <Button x:Uid="NewsEdit_NewButton" HorizontalAlignment="Stretch" Command="{x:Bind ViewModel.NewDraftCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
                 <TextBlock x:Uid="NewsEdit_DraftsTitle" Grid.Row="1" Style="{StaticResource RoGSectionTextStyle}" />
                 <ListView
                     x:Uid="NewsEdit_Drafts"

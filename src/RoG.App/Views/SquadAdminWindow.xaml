@@ -57,9 +57,9 @@
                 <TextBlock x:Uid="SquadAdmin_ImagesHint" FontSize="12" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
                 <StackPanel Orientation="Horizontal" Spacing="8">
                     <Button x:Uid="SquadAdmin_SetLogo" Click="OnSetLogoClick" Style="{StaticResource RoGSecondaryButtonStyle}" />
-                    <Button x:Uid="SquadAdmin_RemoveLogo" Click="OnRemoveLogoClick" />
+                    <Button x:Uid="SquadAdmin_RemoveLogoButton" Click="OnRemoveLogoClick" />
                     <Button x:Uid="SquadAdmin_SetHeader" Click="OnSetHeaderClick" Style="{StaticResource RoGSecondaryButtonStyle}" />
-                    <Button x:Uid="SquadAdmin_RemoveHeader" Click="OnRemoveHeaderClick" />
+                    <Button x:Uid="SquadAdmin_RemoveHeaderButton" Click="OnRemoveHeaderClick" />
                     <ProgressRing Width="20" Height="20" IsActive="{x:Bind ViewModel.IsBusy, Mode=OneWay}" />
                 </StackPanel>
             </StackPanel>

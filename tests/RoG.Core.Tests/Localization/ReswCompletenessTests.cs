@@ -66,6 +66,16 @@ public partial class ReswCompletenessTests
         Assert.All(StringKeys.All(), k => Assert.DoesNotContain('.', k));
     }
 
+    /// <summary>Ein Name darf nicht zugleich Text und x:Uid-Bereich sein (MRT-Fehler PRI278 im Windows-Build).</summary>
+    [Fact]
+    public void No_key_is_both_resource_and_uid_scope()
+    {
+        var keys = Load("de-DE").Keys.ToList();
+        var scopes = keys.Where(k => k.Contains('.', StringComparison.Ordinal)).Select(k => k[..k.IndexOf('.', StringComparison.Ordinal)]).ToHashSet();
+
+        Assert.DoesNotContain(keys, k => !k.Contains('.', StringComparison.Ordinal) && scopes.Contains(k));
+    }
+
     [Fact]
     public void Every_xuid_in_xaml_has_texts()
     {

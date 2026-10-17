@@ -3095,4 +3095,133 @@
   <data name="NewsPage_Edit.Content" xml:space="preserve">
     <value>Bearbeiten</value>
   </data>
+  <data name="MatchEdit_New" xml:space="preserve">
+    <value>Match eintragen</value>
+  </data>
+  <data name="MatchEdit_Edit" xml:space="preserve">
+    <value>Match bearbeiten</value>
+  </data>
+  <data name="MatchEdit_Saved" xml:space="preserve">
+    <value>Match gespeichert.</value>
+  </data>
+  <data name="MatchEdit_DeleteTitle" xml:space="preserve">
+    <value>Match löschen (mit Anhängen)?</value>
+  </data>
+  <data name="MatchEdit_Deleted" xml:space="preserve">
+    <value>Match gelöscht.</value>
+  </data>
+  <data name="MatchEdit_Attached" xml:space="preserve">
+    <value>Dateien angehängt.</value>
+  </data>
+  <data name="MatchEdit_RemoveAttachment" xml:space="preserve">
+    <value>Anhang entfernen?</value>
+  </data>
+  <data name="MatchEdit_Type_clanwar" xml:space="preserve">
+    <value>Clanwar</value>
+  </data>
+  <data name="MatchEdit_Type_scrim" xml:space="preserve">
+    <value>Scrim</value>
+  </data>
+  <data name="MatchEdit_Type_tournament" xml:space="preserve">
+    <value>Turnier</value>
+  </data>
+  <data name="MatchEdit_Status_scheduled" xml:space="preserve">
+    <value>Geplant</value>
+  </data>
+  <data name="MatchEdit_Status_finished" xml:space="preserve">
+    <value>Gespielt</value>
+  </data>
+  <data name="MatchEdit_Status_cancelled" xml:space="preserve">
+    <value>Ausgefallen</value>
+  </data>
+  <data name="MatchEdit_Error_squad" xml:space="preserve">
+    <value>Bitte einen Squad wählen.</value>
+  </data>
+  <data name="MatchEdit_Error_opponent" xml:space="preserve">
+    <value>Gegner fehlt (max. 120 Zeichen).</value>
+  </data>
+  <data name="MatchEdit_Error_maps" xml:space="preserve">
+    <value>Höchstens 15 Maps, Namen bis 60 Zeichen.</value>
+  </data>
+  <data name="MatchEdit_Error_links" xml:space="preserve">
+    <value>Links müssen mit http(s):// beginnen.</value>
+  </data>
+  <data name="MatchEdit_Error_opponent_url" xml:space="preserve">
+    <value>Die Gegner-Adresse ist ungültig.</value>
+  </data>
+  <data name="MatchesPage_Add.Content" xml:space="preserve">
+    <value>Match eintragen</value>
+  </data>
+  <data name="MatchesPage_Edit.Content" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="MatchEdit_Squad.Header" xml:space="preserve">
+    <value>Squad</value>
+  </data>
+  <data name="MatchEdit_Type.Header" xml:space="preserve">
+    <value>Art</value>
+  </data>
+  <data name="MatchEdit_Status.Header" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="MatchEdit_Opponent.Header" xml:space="preserve">
+    <value>Gegner</value>
+  </data>
+  <data name="MatchEdit_OpponentTag.Header" xml:space="preserve">
+    <value>Tag</value>
+  </data>
+  <data name="MatchEdit_OpponentUrl.Header" xml:space="preserve">
+    <value>Website des Gegners (optional)</value>
+  </data>
+  <data name="MatchEdit_Date.Header" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="MatchEdit_Time.Header" xml:space="preserve">
+    <value>Uhrzeit</value>
+  </data>
+  <data name="MatchEdit_Maps.Header" xml:space="preserve">
+    <value>Maps – eine je Zeile, z. B. „supply 2:1“</value>
+  </data>
+  <data name="MatchEdit_ScoreOwn.Header" xml:space="preserve">
+    <value>Gesamt RoG (optional)</value>
+  </data>
+  <data name="MatchEdit_ScoreOpponent.Header" xml:space="preserve">
+    <value>Gesamt Gegner (optional)</value>
+  </data>
+  <data name="MatchEdit_Links.Header" xml:space="preserve">
+    <value>Links – je Zeile „vod|demo|other URL Bezeichnung“</value>
+  </data>
+  <data name="MatchEdit_Report.Header" xml:space="preserve">
+    <value>Bericht (App-Sprache, Markdown)</value>
+  </data>
+  <data name="MatchEdit_Published.Content" xml:space="preserve">
+    <value>Veröffentlichen (gespielte Matches gehen in den Discord des Squads)</value>
+  </data>
+  <data name="MatchEdit_Save.Content" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="MatchEdit_Delete.Content" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="MatchEdit_AttachmentsTitle.Text" xml:space="preserve">
+    <value>Screenshots und Dateien</value>
+  </data>
+  <data name="MatchEdit_AttachmentsHint.Text" xml:space="preserve">
+    <value>Bilder, PDF, ZIP/7z. Erst nach dem ersten Speichern; sichtbar wie das Match.</value>
+  </data>
+  <data name="MatchEdit_Attach.Content" xml:space="preserve">
+    <value>Dateien anhängen …</value>
+  </data>
+  <data name="MatchEdit_RemoveAttachmentLink.Content" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+  <data name="MatchEdit_LineupTitle.Text" xml:space="preserve">
+    <value>Line-up</value>
+  </data>
+  <data name="MatchEdit_LineupHint.Text" xml:space="preserve">
+    <value>Wer gespielt hat; Ersatz und Position optional.</value>
+  </data>
+  <data name="MatchEdit_Position.PlaceholderText" xml:space="preserve">
+    <value>Position</value>
+  </data>
 </root>

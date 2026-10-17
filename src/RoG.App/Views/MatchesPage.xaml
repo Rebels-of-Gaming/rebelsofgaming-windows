@@ -14,7 +14,20 @@
         </Grid.RowDefinitions>
 
         <StackPanel Margin="24,24,24,8" Spacing="12">
-            <TextBlock x:Uid="MatchesPage_Title" Style="{StaticResource RoGDisplayTextStyle}" Text="MATCHES" />
+            <Grid ColumnSpacing="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Uid="MatchesPage_Title" Style="{StaticResource RoGDisplayTextStyle}" Text="MATCHES" />
+                <Button
+                    x:Uid="MatchesPage_Add"
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    Click="OnAddMatchClick"
+                    Style="{StaticResource RoGSecondaryButtonStyle}"
+                    Visibility="{x:Bind ViewModel.CanManage}" />
+            </Grid>
             <SelectorBar x:Name="TabBar" SelectionChanged="OnTabChanged">
                 <SelectorBarItem x:Uid="MatchesPage_TabMatches" IsSelected="True" />
                 <SelectorBarItem x:Uid="MatchesPage_TabHall" />
@@ -108,6 +121,12 @@
                                 Text="{x:Bind ViewModel.Selected.Title, Mode=OneWay}"
                                 AutomationProperties.HeadingLevel="Level1" />
                             <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind ViewModel.Selected.Subtitle, Mode=OneWay}" />
+                            <Button
+                                x:Uid="MatchesPage_Edit"
+                                Margin="0,8,0,0"
+                                Click="OnEditMatchClick"
+                                Style="{StaticResource RoGSecondaryButtonStyle}"
+                                Visibility="{x:Bind ViewModel.CanManage}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Spacing="16">
                             <TextBlock

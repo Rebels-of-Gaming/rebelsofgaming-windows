@@ -41,6 +41,9 @@ public sealed partial class MatchesViewModel : LoadableViewModel
 
     public bool HasSelection => Selected is not null;
 
+    /// <summary>Matches eintragen: <c>matches.manage</c> in irgendeinem Squad und Scope <c>matches:write</c> (der Server prüft je Squad).</summary>
+    public bool CanManage => RoG.Core.Features.Matches.MatchAdminService.CanManageAny(Services.CurrentUser);
+
     protected override bool HasData => Items.Count > 0;
 
     protected override async Task LoadCoreAsync(CancellationToken cancellationToken)
@@ -85,6 +88,8 @@ public sealed partial class MatchesViewModel : LoadableViewModel
 /// <summary>Ein Match: Liste zeigt Datum, Gegner und Ergebnis; das Detail nutzt dieselbe Instanz.</summary>
 public sealed partial class MatchRowViewModel(MatchItem match, AppServices services)
 {
+    public string Id => match.Id;
+
     public string Title { get; } = $"{match.SquadName ?? "RoG"} vs. {match.Opponent}";
 
     public string Subtitle { get; } = string.Join(" · ", new[]

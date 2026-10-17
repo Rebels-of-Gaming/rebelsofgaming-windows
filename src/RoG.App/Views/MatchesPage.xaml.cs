@@ -30,6 +30,25 @@ public sealed partial class MatchesPage : Page
 
     private void OnDetailClosed(object? sender, EventArgs e) => ViewModel.Selected = null;
 
+    private void OnAddMatchClick(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) => MatchEditorWindow.Open(null, Reload);
+
+    private void OnEditMatchClick(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        if (ViewModel.Selected is { } match)
+        {
+            MatchEditorWindow.Open(match.Id, Reload);
+        }
+    }
+
+    private void Reload(bool changed)
+    {
+        if (changed)
+        {
+            ViewModel.Selected = null;
+            _ = ViewModel.LoadAsync();
+        }
+    }
+
     private async void OnTabChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args)
     {
         if (MatchesPanel is null || HallPanel is null || StatsPanel is null || TournamentsPanel is null)

@@ -606,6 +606,20 @@ public static class StringKeys
 
     public const string NewsEditWindow = "NewsEdit_Window";
 
+    public const string MatchEditNew = "MatchEdit_New";
+
+    public const string MatchEditEdit = "MatchEdit_Edit";
+
+    public const string MatchEditSaved = "MatchEdit_Saved";
+
+    public const string MatchEditDeleteTitle = "MatchEdit_DeleteTitle";
+
+    public const string MatchEditDeleted = "MatchEdit_Deleted";
+
+    public const string MatchEditAttached = "MatchEdit_Attached";
+
+    public const string MatchEditRemoveAttachment = "MatchEdit_RemoveAttachment";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

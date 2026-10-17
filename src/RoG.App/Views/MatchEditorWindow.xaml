@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Match eintragen/bearbeiten im eigenen Fenster (Stufe 9). -->
+<Window
+    x:Class="RoG.App.Views.MatchEditorWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:RoG.App.ViewModels">
+
+    <Grid Background="{StaticResource RoGBgBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid x:Name="TitleBar" Padding="16,0,140,0" Background="{StaticResource RoGBg2Brush}">
+            <TextBlock
+                VerticalAlignment="Center"
+                FontFamily="{StaticResource RoGDisplaySemiBoldFont}"
+                FontSize="14"
+                CharacterSpacing="60"
+                Foreground="{StaticResource RoGMutedBrush}"
+                Text="{x:Bind ViewModel.Heading, Mode=OneWay}" />
+        </Grid>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <Grid Padding="24,16,24,24" ColumnSpacing="32">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" MaxWidth="640" />
+                    <ColumnDefinition Width="320" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Spacing="12">
+                    <InfoBar
+                        IsOpen="{x:Bind ViewModel.IsFeedbackOpen, Mode=TwoWay}"
+                        Message="{x:Bind ViewModel.FeedbackMessage, Mode=OneWay}"
+                        Severity="{x:Bind ViewModel.FeedbackSeverity, Mode=OneWay}" />
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <ComboBox x:Uid="MatchEdit_Squad" MinWidth="220" ItemsSource="{x:Bind ViewModel.SquadOptions}" SelectedItem="{x:Bind ViewModel.SelectedSquad, Mode=TwoWay}" />
+                        <ComboBox x:Uid="MatchEdit_Type" MinWidth="160" ItemsSource="{x:Bind ViewModel.TypeOptions}" SelectedItem="{x:Bind ViewModel.SelectedType, Mode=TwoWay}" />
+                        <ComboBox x:Uid="MatchEdit_Status" MinWidth="160" ItemsSource="{x:Bind ViewModel.StatusOptions}" SelectedItem="{x:Bind ViewModel.SelectedStatus, Mode=TwoWay}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <TextBox x:Uid="MatchEdit_Opponent" Width="260" MaxLength="120" Text="{x:Bind ViewModel.Opponent, Mode=TwoWay}" />
+                        <TextBox x:Uid="MatchEdit_OpponentTag" Width="120" MaxLength="20" Text="{x:Bind ViewModel.OpponentTag, Mode=TwoWay}" />
+                    </StackPanel>
+                    <TextBox x:Uid="MatchEdit_OpponentUrl" MaxLength="500" Text="{x:Bind ViewModel.OpponentUrl, Mode=TwoWay}" />
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <CalendarDatePicker x:Uid="MatchEdit_Date" Date="{x:Bind ViewModel.PlayedDate, Mode=TwoWay}" />
+                        <TimePicker x:Uid="MatchEdit_Time" ClockIdentifier="24HourClock" Time="{x:Bind ViewModel.PlayedTime, Mode=TwoWay}" />
+                    </StackPanel>
+                    <TextBox
+                        x:Uid="MatchEdit_Maps"
+                        MinHeight="100"
+                        AcceptsReturn="True"
+                        FontFamily="Consolas"
+                        IsSpellCheckEnabled="False"
+                        Text="{x:Bind ViewModel.MapsText, Mode=TwoWay}" />
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <NumberBox x:Uid="MatchEdit_ScoreOwn" Width="150" Minimum="0" SpinButtonPlacementMode="Compact" Value="{x:Bind ViewModel.ScoreOwn, Mode=TwoWay}" />
+                        <NumberBox x:Uid="MatchEdit_ScoreOpponent" Width="150" Minimum="0" SpinButtonPlacementMode="Compact" Value="{x:Bind ViewModel.ScoreOpponent, Mode=TwoWay}" />
+                    </StackPanel>
+                    <TextBox
+                        x:Uid="MatchEdit_Links"
+                        MinHeight="72"
+                        AcceptsReturn="True"
+                        IsSpellCheckEnabled="False"
+                        Text="{x:Bind ViewModel.LinksText, Mode=TwoWay}" />
+                    <TextBox x:Uid="MatchEdit_Report" MinHeight="140" AcceptsReturn="True" Text="{x:Bind ViewModel.Report, Mode=TwoWay}" TextWrapping="Wrap" />
+                    <CheckBox x:Uid="MatchEdit_Published" IsChecked="{x:Bind ViewModel.Published, Mode=TwoWay}" />
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Button x:Uid="MatchEdit_Save" Command="{x:Bind ViewModel.SaveCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                        <Button x:Uid="MatchEdit_Delete" Command="{x:Bind ViewModel.DeleteCommand}" Visibility="{x:Bind ViewModel.IsSaved, Mode=OneWay}" />
+                        <ProgressRing Width="20" Height="20" IsActive="{x:Bind ViewModel.IsBusy, Mode=OneWay}" />
+                    </StackPanel>
+
+                    <TextBlock x:Uid="MatchEdit_AttachmentsTitle" Margin="0,12,0,0" Style="{StaticResource RoGSectionTextStyle}" />
+                    <TextBlock x:Uid="MatchEdit_AttachmentsHint" FontSize="12" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                    <Button x:Uid="MatchEdit_Attach" Click="OnAttachClick" IsEnabled="{x:Bind ViewModel.IsSaved, Mode=OneWay}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                    <ItemsControl ItemsSource="{x:Bind ViewModel.Attachments}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:MatchAttachmentItem">
+                                <StackPanel Padding="0,4" Orientation="Horizontal" Spacing="12">
+                                    <TextBlock VerticalAlignment="Center" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Name}" />
+                                    <HyperlinkButton x:Uid="MatchEdit_RemoveAttachmentLink" Padding="0" Command="{x:Bind RemoveCommand}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+
+                <!-- Line-up -->
+                <StackPanel Grid.Column="1" Spacing="8">
+                    <TextBlock x:Uid="MatchEdit_LineupTitle" Style="{StaticResource RoGSectionTextStyle}" />
+                    <TextBlock x:Uid="MatchEdit_LineupHint" FontSize="12" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                    <ItemsControl ItemsSource="{x:Bind ViewModel.Players}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:MatchPlayerItem">
+                                <StackPanel Padding="0,4" Spacing="4" AutomationProperties.Name="{x:Bind Name}">
+                                    <CheckBox Content="{x:Bind Name}" IsChecked="{x:Bind Selected, Mode=TwoWay}" />
+                                    <StackPanel Margin="28,0,0,0" Orientation="Horizontal" Spacing="8">
+                                        <CheckBox x:Uid="SquadAdmin_Substitute" IsChecked="{x:Bind Substitute, Mode=TwoWay}" />
+                                        <TextBox x:Uid="MatchEdit_Position" Width="140" MaxLength="40" Text="{x:Bind Position, Mode=TwoWay}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Window>

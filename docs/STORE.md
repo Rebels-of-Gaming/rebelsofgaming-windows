@@ -71,7 +71,7 @@ Partner Center → App → **Einreichung starten**:
 | Eigenschaften | Kategorie **Soziale Netzwerke** (Alternative: Unterhaltung); Datenschutz-URL `https://rebelsofgaming.com/de/privacy` (EN/FR je Sprache); Website `https://rebelsofgaming.com`; Support-Kontakt `https://rebelsofgaming.com/de/contact`; Systemanforderungen: Internet |
 | Altersfreigaben | IARC-Fragebogen: Nutzerinteraktion (Chat, Forum, DMs), Nutzer teilen Inhalte, keine Käufe, keine Standortfreigabe (Mitgliederkarte nur Stadt, Opt-in) → voraussichtlich USK 12 / PEGI 12 wegen ungefilterter Kommunikation |
 | Pakete | `.msixupload` hochladen; Gerätefamilie Desktop |
-| Store-Einträge (DE, EN, FR) | Beschreibung, Neuerungen, Funktionen, Screenshots (mind. 1, empfohlen 4–6, 1920 × 1080 oder 1366 × 768, dunkles Design), Logos (aus dem Paket), Suchbegriffe; Texte an den Store-Texten der Mobile-App ausrichten (`/home/wahke/projects/rog-app/store.config.json`), Du-Form |
+| Store-Einträge (DE, EN, FR) | Beschreibung, Neuerungen, Funktionen, Screenshots (mind. 1, empfohlen 4–6, 1920 × 1080 oder 1366 × 768, dunkles Design), Logos (aus dem Paket), Suchbegriffe; fertige Texte DE/EN/FR in `docs/STORE-TEXTE.md` (angelehnt an die Mobile-App), Du-Form |
 | Hinweise für die Zertifizierung | Anmeldung über „Im Browser anmelden“ (Website: Discord **oder E-Mail und Passwort**, 2FA); **Demo-Konto mit E-Mail/Passwort** ohne Discord (wie Mobile-App, Zugangsdaten nur im Partner Center, nie im Repo); Gastmodus „Ohne Anmeldung umsehen“; Konto löschen unter Konto; `runFullTrust` = WinUI-3-Desktop-App; Autostart nur nach Einschalten in den Einstellungen |
 
 **Datenschutz-Angaben:** Die App verarbeitet Konto- und Community-Daten nur über die eigene Plattform (keine Drittanbieter,

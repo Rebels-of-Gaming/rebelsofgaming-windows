@@ -3224,4 +3224,76 @@
   <data name="MatchEdit_Position.PlaceholderText" xml:space="preserve">
     <value>Position</value>
   </data>
+  <data name="Events_Absent" xml:space="preserve">
+    <value>abwesend</value>
+  </data>
+  <data name="Events_ParticipantsYes" xml:space="preserve">
+    <value>Zusagen ({0}): {1}</value>
+  </data>
+  <data name="Events_ParticipantsMaybe" xml:space="preserve">
+    <value>Vielleicht ({0}): {1}</value>
+  </data>
+  <data name="Events_ParticipantsNo" xml:space="preserve">
+    <value>Absagen ({0}): {1}</value>
+  </data>
+  <data name="Events_ParticipantsOpen" xml:space="preserve">
+    <value>Ohne Antwort ({0}): {1}</value>
+  </data>
+  <data name="Events_LineupDraft" xml:space="preserve">
+    <value>Entwurf – noch nicht veröffentlicht.</value>
+  </data>
+  <data name="Events_LineupStarters" xml:space="preserve">
+    <value>Stammspieler: {0}</value>
+  </data>
+  <data name="Events_LineupSubstitutes" xml:space="preserve">
+    <value>Ersatz: {0}</value>
+  </data>
+  <data name="Events_LineupPublished" xml:space="preserve">
+    <value>Aufstellung veröffentlicht – der Squad wird benachrichtigt.</value>
+  </data>
+  <data name="Events_LineupSaved" xml:space="preserve">
+    <value>Aufstellung als Entwurf gespeichert.</value>
+  </data>
+  <data name="Events_LineupSubstitute" xml:space="preserve">
+    <value>Ersatz</value>
+  </data>
+  <data name="Events_LineupPosition" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="Events_RsvpYesShort" xml:space="preserve">
+    <value>Zusage</value>
+  </data>
+  <data name="Events_RsvpMaybeShort" xml:space="preserve">
+    <value>vielleicht</value>
+  </data>
+  <data name="Events_RsvpOpenShort" xml:space="preserve">
+    <value>ohne Antwort</value>
+  </data>
+  <data name="Events_LineupSuggest" xml:space="preserve">
+    <value>Vorschlag aus den Antworten übernehmen</value>
+  </data>
+  <data name="Events_LineupNote" xml:space="preserve">
+    <value>Notiz (optional)</value>
+  </data>
+  <data name="Events_LineupTitle" xml:space="preserve">
+    <value>Aufstellung</value>
+  </data>
+  <data name="Events_LineupPublish" xml:space="preserve">
+    <value>Veröffentlichen</value>
+  </data>
+  <data name="Events_LineupSaveDraft" xml:space="preserve">
+    <value>Als Entwurf speichern</value>
+  </data>
+  <data name="EventsPage_Participants.Text" xml:space="preserve">
+    <value>Teilnehmer</value>
+  </data>
+  <data name="EventsPage_Lineup.Text" xml:space="preserve">
+    <value>Aufstellung</value>
+  </data>
+  <data name="EventsPage_EditLineup.Content" xml:space="preserve">
+    <value>Aufstellung bearbeiten</value>
+  </data>
+  <data name="EventsPage_UnpublishLineup.Content" xml:space="preserve">
+    <value>Zurückziehen</value>
+  </data>
 </root>

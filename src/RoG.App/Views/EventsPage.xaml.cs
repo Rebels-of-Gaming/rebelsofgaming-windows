@@ -149,6 +149,105 @@ public sealed partial class EventsPage : Page
 
     private void OnDetailClosed(object? sender, EventArgs e) => ViewModel.Selected = null;
 
+    /// <summary>Aufstellung bauen: Kandidaten aus bisheriger Aufstellung und Antworten, Ersatz/Position, Notiz.</summary>
+    private async void OnEditLineupClick(object sender, RoutedEventArgs e)
+    {
+        var detail = ViewModel.Detail;
+        var rows = new List<(string Id, string Name, CheckBox Include, CheckBox Substitute, TextBox Position)>();
+        var list = new StackPanel { Spacing = 6 };
+
+        void AddRow(string id, string name, bool include, bool substitute, string? position, string? hint)
+        {
+            if (rows.Exists(r => r.Id == id))
+            {
+                return;
+            }
+
+            var includeBox = new CheckBox { Content = hint is null ? name : $"{name} · {hint}", IsChecked = include, MinWidth = 220 };
+            var subBox = new CheckBox { Content = L(StringKeys.EventsLineupSubstitute), IsChecked = substitute };
+            var posBox = new TextBox { PlaceholderText = L(StringKeys.EventsLineupPosition), Text = position ?? string.Empty, Width = 140, MaxLength = 40 };
+            Microsoft.UI.Xaml.Automation.AutomationProperties.SetName(posBox, name);
+            var row = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
+            row.Children.Add(includeBox);
+            row.Children.Add(subBox);
+            row.Children.Add(posBox);
+            list.Children.Add(row);
+            rows.Add((id, name, includeBox, subBox, posBox));
+        }
+
+        foreach (var p in detail.Lineup?.Players ?? [])
+        {
+            AddRow(p.UserId, p.Name, true, p.IsSubstitute, p.Position, null);
+        }
+
+        if (detail.Participants is { } parts)
+        {
+            foreach (var p in parts.Yes)
+            {
+                AddRow(p.Id, p.Name, false, false, null, L(StringKeys.EventsRsvpYesShort));
+            }
+
+            foreach (var p in parts.Maybe)
+            {
+                AddRow(p.Id, p.Name, false, true, null, L(StringKeys.EventsRsvpMaybeShort));
+            }
+
+            foreach (var p in parts.Open)
+            {
+                AddRow(p.Id, p.Name, false, false, null, L(StringKeys.EventsRsvpOpenShort));
+            }
+        }
+
+        var suggest = new HyperlinkButton { Content = L(StringKeys.EventsLineupSuggest), Padding = new Thickness(0) };
+        suggest.Click += async (_, _) =>
+        {
+            foreach (var s in await detail.SuggestLineupAsync())
+            {
+                AddRow(s.UserId, s.Name, true, s.IsSubstitute, s.Position, null);
+                var row = rows.Find(r => r.Id == s.UserId);
+                row.Include.IsChecked = true;
+                row.Substitute.IsChecked = s.IsSubstitute;
+            }
+        };
+        var note = new TextBox { Header = L(StringKeys.EventsLineupNote), Text = detail.Lineup?.Note ?? string.Empty, AcceptsReturn = true, TextWrapping = TextWrapping.Wrap };
+        var error = new InfoBar { Severity = InfoBarSeverity.Error, IsClosable = false };
+        var dialog = new ContentDialog
+        {
+            XamlRoot = XamlRoot,
+            Title = L(StringKeys.EventsLineupTitle),
+            Content = new ScrollViewer { MaxHeight = 560, Content = new StackPanel { Spacing = 12, MinWidth = 480, Children = { suggest, list, note, error } } },
+            PrimaryButtonText = L(StringKeys.EventsLineupPublish),
+            SecondaryButtonText = L(StringKeys.EventsLineupSaveDraft),
+            CloseButtonText = L(StringKeys.CommonCancel),
+            DefaultButton = ContentDialogButton.Primary,
+        };
+
+        async Task Submit(ContentDialogButtonClickEventArgs args, bool publish)
+        {
+            var deferral = args.GetDeferral();
+            try
+            {
+                var players = rows.Where(r => r.Include.IsChecked == true)
+                    .Select(r => new RoG.Core.Features.Events.LineupPlayer(r.Id, r.Name, r.Substitute.IsChecked == true ? "substitute" : "starter", r.Position.Text))
+                    .ToList();
+                if (await detail.SaveLineupAsync(players, note.Text, publish) is { } message)
+                {
+                    args.Cancel = true;
+                    error.Message = message;
+                    error.IsOpen = true;
+                }
+            }
+            finally
+            {
+                deferral.Complete();
+            }
+        }
+
+        dialog.PrimaryButtonClick += async (_, args) => await Submit(args, publish: true);
+        dialog.SecondaryButtonClick += async (_, args) => await Submit(args, publish: false);
+        await dialog.ShowAsync();
+    }
+
     private void OnViewModeChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args) =>
         ViewModel.MonthMode = sender.SelectedItem is not null && sender.Items.IndexOf(sender.SelectedItem) == 1;
 

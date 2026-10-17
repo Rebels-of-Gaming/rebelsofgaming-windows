@@ -345,6 +345,29 @@ public sealed partial class EventDetailViewModel(AppServices services, EventServ
     [ObservableProperty]
     public partial bool IsFeedbackOpen { get; set; }
 
+    /// <summary>Teilnehmer (Namen je Antwort, Abwesende markiert) – nur für Mitglieder, sonst leer.</summary>
+    [ObservableProperty]
+    public partial string? ParticipantsText { get; set; }
+
+    [ObservableProperty]
+    public partial bool HasParticipants { get; set; }
+
+    /// <summary>Aufstellung (Stammspieler/Ersatz, Notiz; Entwurf nur für die Leitung).</summary>
+    [ObservableProperty]
+    public partial string? LineupText { get; set; }
+
+    [ObservableProperty]
+    public partial bool HasLineup { get; set; }
+
+    [ObservableProperty]
+    public partial bool CanEditLineup { get; set; }
+
+    public EventParticipants? Participants { get; private set; }
+
+    public EventLineup? Lineup { get; private set; }
+
+    public string? EventId => _item?.Id;
+
     public bool IsYes => MyRsvp == Rsvp.Yes;
 
     public bool IsMaybe => MyRsvp == Rsvp.Maybe;
@@ -357,6 +380,140 @@ public sealed partial class EventDetailViewModel(AppServices services, EventServ
     {
         Apply(item);
         _ = RefreshFromServerAsync(item.Id);
+        _ = LoadLineupAsync(item.Id);
+    }
+
+    /// <summary>Teilnehmer und Aufstellung still nachladen; Fehler blenden die Bereiche nur aus.</summary>
+    public async Task LoadLineupAsync(string id)
+    {
+        ParticipantsText = LineupText = null;
+        HasParticipants = HasLineup = CanEditLineup = false;
+        Participants = null;
+        Lineup = null;
+        if (Services.CurrentUser is null)
+        {
+            return;
+        }
+
+        var service = new EventLineupService(Services.Api.Http);
+        try
+        {
+            var participants = await service.ParticipantsAsync(id);
+            if (_item?.Id != id)
+            {
+                return;
+            }
+
+            Participants = participants;
+            string Names(IEnumerable<EventParticipant> list) => string.Join(", ", list.Select(p => p.Absent ? p.Name + " (" + Services.Localizer.GetString(StringKeys.EventsAbsent) + ")" : p.Name));
+            ParticipantsText = string.Join("\n", new[]
+            {
+                participants.Yes.Count > 0 ? Format(StringKeys.EventsParticipantsYes, participants.Yes.Count, Names(participants.Yes)) : null,
+                participants.Maybe.Count > 0 ? Format(StringKeys.EventsParticipantsMaybe, participants.Maybe.Count, Names(participants.Maybe)) : null,
+                participants.No.Count > 0 ? Format(StringKeys.EventsParticipantsNo, participants.No.Count, Names(participants.No)) : null,
+                participants.Open.Count > 0 ? Format(StringKeys.EventsParticipantsOpen, participants.Open.Count, Names(participants.Open)) : null,
+            }.Where(x => x is not null));
+            HasParticipants = ParticipantsText.Length > 0;
+        }
+        catch (Exception ex) when (ex is ApiProblemException or HttpRequestException)
+        {
+            // nur für Mitglieder/Verwalter – sonst ohne Teilnehmerliste
+        }
+
+        try
+        {
+            var lineup = await service.GetLineupAsync(id);
+            if (_item?.Id != id || lineup is null)
+            {
+                return;
+            }
+
+            Lineup = lineup;
+            CanEditLineup = lineup.CanEdit;
+            string Players(IEnumerable<LineupPlayer> list) => string.Join(", ", list.Select(p => p.Position is { } pos ? $"{p.Name} ({pos})" : p.Name));
+            LineupText = string.Join("\n", new[]
+            {
+                lineup.IsPublished ? null : Services.Localizer.GetString(StringKeys.EventsLineupDraft),
+                lineup.Starters.Any() ? Format(StringKeys.EventsLineupStarters, Players(lineup.Starters)) : null,
+                lineup.Substitutes.Any() ? Format(StringKeys.EventsLineupSubstitutes, Players(lineup.Substitutes)) : null,
+                lineup.Note,
+            }.Where(x => !string.IsNullOrEmpty(x)));
+            HasLineup = lineup.Players.Count > 0 || lineup.CanEdit;
+        }
+        catch (Exception ex) when (ex is ApiProblemException or HttpRequestException)
+        {
+            // keine Aufstellung
+        }
+    }
+
+    /// <summary>Aufstellung speichern bzw. veröffentlichen; <c>null</c> = ok, sonst Fehlermeldung.</summary>
+    public async Task<string?> SaveLineupAsync(IReadOnlyList<LineupPlayer> players, string? note, bool publish)
+    {
+        if (_item is not { } item)
+        {
+            return null;
+        }
+
+        try
+        {
+            var service = new EventLineupService(Services.Api.Http);
+            if (publish)
+            {
+                await service.PublishAsync(item.Id, players, note);
+            }
+            else
+            {
+                await service.SaveAsync(item.Id, players, note);
+            }
+
+            Show(Services.Localizer.GetString(publish ? StringKeys.EventsLineupPublished : StringKeys.EventsLineupSaved), InfoBarSeverity.Success);
+            await LoadLineupAsync(item.Id);
+            return null;
+        }
+        catch (ApiProblemException ex)
+        {
+            return Services.Localizer.GetError(ex.Problem.Code);
+        }
+        catch (HttpRequestException)
+        {
+            return Services.Localizer.GetError(ApiProblem.Codes.Unknown);
+        }
+    }
+
+    public async Task<IReadOnlyList<LineupPlayer>> SuggestLineupAsync()
+    {
+        if (_item is not { } item || Participants is not { } participants)
+        {
+            return [];
+        }
+
+        try
+        {
+            return await new EventLineupService(Services.Api.Http).SuggestionAsync(item.Id, participants);
+        }
+        catch (Exception ex) when (ex is ApiProblemException or HttpRequestException)
+        {
+            return [];
+        }
+    }
+
+    [RelayCommand]
+    private async Task UnpublishLineupAsync()
+    {
+        if (_item is not { } item)
+        {
+            return;
+        }
+
+        try
+        {
+            await new EventLineupService(Services.Api.Http).UnpublishAsync(item.Id);
+            await LoadLineupAsync(item.Id);
+        }
+        catch (ApiProblemException ex)
+        {
+            Show(Services.Localizer.GetError(ex.Problem.Code), InfoBarSeverity.Error);
+        }
     }
 
     protected override async Task LoadCoreAsync(CancellationToken cancellationToken)

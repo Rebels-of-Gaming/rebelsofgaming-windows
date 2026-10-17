@@ -620,6 +620,46 @@ public static class StringKeys
 
     public const string MatchEditRemoveAttachment = "MatchEdit_RemoveAttachment";
 
+    public const string EventsAbsent = "Events_Absent";
+
+    public const string EventsParticipantsYes = "Events_ParticipantsYes";
+
+    public const string EventsParticipantsMaybe = "Events_ParticipantsMaybe";
+
+    public const string EventsParticipantsNo = "Events_ParticipantsNo";
+
+    public const string EventsParticipantsOpen = "Events_ParticipantsOpen";
+
+    public const string EventsLineupDraft = "Events_LineupDraft";
+
+    public const string EventsLineupStarters = "Events_LineupStarters";
+
+    public const string EventsLineupSubstitutes = "Events_LineupSubstitutes";
+
+    public const string EventsLineupPublished = "Events_LineupPublished";
+
+    public const string EventsLineupSaved = "Events_LineupSaved";
+
+    public const string EventsLineupSubstitute = "Events_LineupSubstitute";
+
+    public const string EventsLineupPosition = "Events_LineupPosition";
+
+    public const string EventsRsvpYesShort = "Events_RsvpYesShort";
+
+    public const string EventsRsvpMaybeShort = "Events_RsvpMaybeShort";
+
+    public const string EventsRsvpOpenShort = "Events_RsvpOpenShort";
+
+    public const string EventsLineupSuggest = "Events_LineupSuggest";
+
+    public const string EventsLineupNote = "Events_LineupNote";
+
+    public const string EventsLineupTitle = "Events_LineupTitle";
+
+    public const string EventsLineupPublish = "Events_LineupPublish";
+
+    public const string EventsLineupSaveDraft = "Events_LineupSaveDraft";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

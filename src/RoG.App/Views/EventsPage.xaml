@@ -237,6 +237,22 @@
 
                     <TextBlock IsTextSelectionEnabled="True" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind ViewModel.Detail.Description, Mode=OneWay}" />
 
+                    <!-- Teilnehmer -->
+                    <StackPanel Spacing="4" Visibility="{x:Bind ViewModel.Detail.HasParticipants, Mode=OneWay}">
+                        <TextBlock x:Uid="EventsPage_Participants" Style="{StaticResource RoGSectionTextStyle}" />
+                        <TextBlock IsTextSelectionEnabled="True" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind ViewModel.Detail.ParticipantsText, Mode=OneWay}" TextWrapping="Wrap" />
+                    </StackPanel>
+
+                    <!-- Aufstellung -->
+                    <StackPanel Spacing="8" Visibility="{x:Bind ViewModel.Detail.HasLineup, Mode=OneWay}">
+                        <TextBlock x:Uid="EventsPage_Lineup" Style="{StaticResource RoGSectionTextStyle}" />
+                        <TextBlock IsTextSelectionEnabled="True" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind ViewModel.Detail.LineupText, Mode=OneWay}" TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="8" Visibility="{x:Bind ViewModel.Detail.CanEditLineup, Mode=OneWay}">
+                            <Button x:Uid="EventsPage_EditLineup" Click="OnEditLineupClick" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                            <Button x:Uid="EventsPage_UnpublishLineup" Command="{x:Bind ViewModel.Detail.UnpublishLineupCommand}" />
+                        </StackPanel>
+                    </StackPanel>
+
                     <controls:ServerCard Item="{x:Bind ViewModel.Detail.Server, Mode=OneWay}" Visibility="{x:Bind ViewModel.Detail.HasServer, Mode=OneWay}" />
                 </StackPanel>
             </ScrollViewer>

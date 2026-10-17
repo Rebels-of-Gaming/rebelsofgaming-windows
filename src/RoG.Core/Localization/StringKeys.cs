@@ -660,6 +660,20 @@ public static class StringKeys
 
     public const string EventsLineupSaveDraft = "Events_LineupSaveDraft";
 
+    public const string MediaAdminRejectTitle = "MediaAdmin_RejectTitle";
+
+    public const string MediaAdminApproved = "MediaAdmin_Approved";
+
+    public const string MediaAdminRejected = "MediaAdmin_Rejected";
+
+    public const string MediaAdminStorage = "MediaAdmin_Storage";
+
+    public const string MediaAdminDeleteUploadTitle = "MediaAdmin_DeleteUploadTitle";
+
+    public const string MediaAdminUploadDeleted = "MediaAdmin_UploadDeleted";
+
+    public const string MediaAdminUploadKept = "MediaAdmin_UploadKept";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

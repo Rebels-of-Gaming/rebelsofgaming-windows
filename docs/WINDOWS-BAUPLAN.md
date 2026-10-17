@@ -16,7 +16,7 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 | 6 | Clan-Prozesse | fertig (2.2.2): Bewerben, eigene Bewerbungen, Votes, Abwesenheiten, Geräte/Datenexport/Konto löschen, Regel-Hinweis, Onboarding-Kachel, Statistiken (Ranglisten, Wochen-Awards), Mitgliederkarte im eigenen Fenster; Trial-Verwaltung über „Bewerbungen“ in der Verwaltung (Status Trial, Aufgaben, verlängern, aufnehmen) | siehe `git log` |
 | 7 | Server-Steuerung | fertig (2.4.1): Steuer-Fenster mit Power, Ressourcen, Live-Konsole (Historie), Configs (Diff, Versionen, Rollback, Anträge), **Formular-Vorlagen** (Servername, Slots, Passwort, Map-Rotation), **Dateien** (Ordner, Vorschau, Sicherungen kopieren/umbenennen/löschen), Backups, RCON, Sperren, **Whitelist**, Vier-Augen-Freigaben, App-Sperre mit Windows Hello; Vorlagen ohne Dateizugriff nach Lücke W14 | siehe `git log` |
 | 8 | Wiki | fertig (2.4.2): Bereiche, Seitenbaum, Suche, Seite nativ mit Links in der App, Offline-Kopien, Bearbeiten mit Vorschau und Konflikterkennung, Versionen mit Vergleich/Wiederherstellen, Beobachten, **neue Seite anlegen**, **Bild einfügen** (Upload + Wiki-Datei), **Kategorien**, **Inhaltsverzeichnis mit Sprung** | siehe `git log` |
-| 9 | Verwaltung + Moderation | in Arbeit (2.3.x): Verwaltung mit Übersicht (Kennzahlen, Systemstatus, Audit-Log), Bewerbungen (Squad-Leitung), Moderation (Meldungen, verwarnen/sperren, Sperren, Mod-Log, Wortfilter); Mitglieder mit Rollen vergeben/entziehen; **Squads** (2.4.3: Profil, Logo/Header, Line-up mit Rollen, archivieren); **News-Redaktion** (2.4.4); **Matches eintragen** (2.4.5); **Teilnehmer und Aufstellungen** an Terminen (2.4.6); offen: weitere Inhalte (Seiten, Kategorien, Downloads), Termine/Matches, Server-Verwaltung, Wiki-Freigaben … | siehe `git log` |
+| 9 | Verwaltung + Moderation | in Arbeit (2.3.x): Verwaltung mit Übersicht (Kennzahlen, Systemstatus, Audit-Log), Bewerbungen (Squad-Leitung), Moderation (Meldungen, verwarnen/sperren, Sperren, Mod-Log, Wortfilter); Mitglieder mit Rollen vergeben/entziehen; **Squads** (2.4.3: Profil, Logo/Header, Line-up mit Rollen, archivieren); **News-Redaktion** (2.4.4); **Matches eintragen** (2.4.5); **Teilnehmer und Aufstellungen** an Terminen (2.4.6); **Galerie-Freigaben, Upload-Meldungen, Speicher, Website-Verwaltung als Direktlinks** (2.4.7); Wiki-Freigaben … | siehe `git log` |
 | 10 | Feinschliff + Store | offen | |
 
 ### Stufe 0 – was steht (15.10.2026)
@@ -164,6 +164,18 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   Leitung). Mit `meta.can_edit` (Recht `squad.lineup`/`events.manage`): „Aufstellung bearbeiten“ – Kandidaten aus
   bisheriger Aufstellung und Antworten, „Vorschlag übernehmen“ (`…/lineup/suggestion`), Ersatz/Position, als Entwurf
   speichern oder veröffentlichen (Squad wird benachrichtigt), zurückziehen.
+
+- **2.4.7 – Galerie, Uploads, Website-Verwaltung:** Reiter „Galerie“ (`gallery.manage` + Scope `gallery:manage`/
+  `gallery:write`): offene Einträge aus allen Alben mit Freigabe (Lücke W16: keine Warteschlange in der API), Vorschau,
+  freigeben/ablehnen (löscht). Reiter „Uploads“ (`uploads.manage`, Scope `uploads:manage`): offene Meldungen mit Vorschau,
+  behalten/löschen, Speicher gesamt und Top 10. Reiter „Website“: alle Verwaltungsbereiche, die die App nicht nativ hat
+  (Rollen/Rechte, Spiele, Team, Abzeichen, Bewerbungs-Einstellungen, Terminarten, Turniere, Hall of Fame, CMS, Regeln,
+  Recht, Forum-Kategorien, Downloads, Galerie-Alben, Upload-Limits, Wiki-Bereiche, Gameserver einrichten,
+  Integrationen/Bot/Webhooks, Social, Mail-Vorlagen, Übersetzungen, Registrierung, Einstellungen, System) als Direktlinks
+  auf die Admin-Domain (neu in `environments.json`: `admin`). Gefiltert nach den Rechten, die die Website-Routen
+  festlegen; ohne festes Recht prüft die Website selbst.
+  **Annahme:** Diese selten genutzten Einrichtungsseiten bleiben vorerst Website-Seiten (Livewire mit 2FA-Step-up);
+  nativ nachziehen, sobald jemand sie in der App braucht. **Annahme:** Staging-Admin-Domain `admin.rebelsofgaming.dev`.
 
 ### Offline, Melden, Verwaltung (2.3.1–2.3.3, 16.10.2026)
 

@@ -5,18 +5,21 @@
       "api": "https://api.rebelsofgaming.com/v1/",
       "web": "https://rebelsofgaming.com/",
       "wiki": "https://wiki.rebelsofgaming.com/",
+      "admin": "https://admin.rebelsofgaming.com/",
       "status": "https://status.rogclan.de/"
     },
     "staging": {
       "api": "https://api.rebelsofgaming.dev/v1/",
       "web": "https://rebelsofgaming.dev/",
       "wiki": "https://wiki.rebelsofgaming.dev/",
+      "admin": "https://admin.rebelsofgaming.dev/",
       "status": "https://status.rogclan.de/"
     },
     "local": {
       "api": "http://api.rog.test/v1/",
       "web": "http://rog.test/",
       "wiki": "http://wiki.rog.test/",
+      "admin": "http://admin.rog.test/",
       "status": "https://status.rogclan.de/"
     }
   },

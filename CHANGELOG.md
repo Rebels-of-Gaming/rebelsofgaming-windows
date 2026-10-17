@@ -21,6 +21,7 @@ Stufe 0 – Fundament (Version 0.1.0, noch nicht im Store).
 - 2.1.0: Benachrichtigungen mit Windows-Toasts, Tray-Symbol, Sprungliste, Autostart, Direktnachrichten mit eigenem Chat-Fenster, Forum, Uploads mit Drag & Drop und Strg+V, Galerie, Downloads, Kurzlinks, Profil bearbeiten, News, Squads, Mitglieder, Termine mit Zusage, TeamSpeak/Discord, Matches, Info, Suche
 - 2.2.0: Bewerben bei Squads mit „Meine Bewerbungen“, Abstimmungen über Bewerbungen, Abwesenheiten, Geräte & Datenexport, Konto löschen, Hinweis auf neue Regeln; Server-Steuerung im eigenen Fenster (Start/Stopp/Neustart/Kill, Ressourcen, Live-Konsole mit Verlauf, Configs mit Prüfung und Versionen, Backups, RCON, Sperren, Vier-Augen-Freigaben); App-Sperre mit Windows Hello
 - 2.4.0: Offline-Betrieb (verschlüsselter Cache mit letztem Stand, Warteschlange für Nachrichten/Beiträge/Zusagen, Offline-Hinweis), Inhalte melden, Verwaltung (Übersicht, Mitglieder und Rollen, Bewerbungen, Moderation, Termine anlegen/absagen), Wiki-Freigaben, Galerie einreichen, Teilen-Ziel „An RoG hochladen“, Spiele-Liste, Server-Auslastung (24 h), Monatsansicht im Kalender
+- 2.4.7: Verwaltung – Galerie-Freigaben, Upload-Meldungen und Speicher, Direktlinks zur Website-Verwaltung
 - 2.4.6: Termine – Teilnehmerliste und Aufstellungen bauen/veröffentlichen
 - 2.4.5: Matches eintragen und bearbeiten – Maps, Line-up, Links, Bericht, Screenshots
 - 2.4.4: News-Redaktion – Entwürfe, Übersetzungen, planen und veröffentlichen, Titelbild

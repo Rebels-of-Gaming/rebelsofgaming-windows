@@ -23,6 +23,9 @@
             <SelectorBarItem x:Name="BansTab" x:Uid="AdminPage_TabBans" />
             <SelectorBarItem x:Name="LogTab" x:Uid="AdminPage_TabLog" />
             <SelectorBarItem x:Name="WordsTab" x:Uid="AdminPage_TabWords" />
+            <SelectorBarItem x:Name="GalleryTab" x:Uid="AdminPage_TabGallery" />
+            <SelectorBarItem x:Name="UploadsTab" x:Uid="AdminPage_TabUploads" />
+            <SelectorBarItem x:Name="WebsiteTab" x:Uid="AdminPage_TabWebsite" />
         </SelectorBar>
         <InfoBar
             Grid.Row="2"
@@ -329,5 +332,112 @@
                 </ItemsControl>
             </ScrollViewer>
         </Grid>
+        <!-- Galerie-Freigaben -->
+        <Grid x:Name="GalleryPanel" Grid.Row="3" RowSpacing="8" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <Button x:Uid="Backup_Reload" Command="{x:Bind Media.LoadGalleryCommand}" />
+                <ProgressRing Width="20" Height="20" IsActive="{x:Bind Media.IsBusy, Mode=OneWay}" />
+            </StackPanel>
+            <TextBlock x:Uid="AdminPage_GalleryEmpty" Grid.Row="1" Style="{StaticResource RoGMutedTextStyle}" Visibility="{x:Bind Media.NoPending, Mode=OneWay}" />
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <ItemsRepeater ItemsSource="{x:Bind Media.Pending}">
+                    <ItemsRepeater.Layout>
+                        <UniformGridLayout ItemsStretch="Fill" MinColumnSpacing="12" MinItemWidth="260" MinRowSpacing="12" />
+                    </ItemsRepeater.Layout>
+                    <ItemsRepeater.ItemTemplate>
+                        <DataTemplate x:DataType="vm:PendingGalleryItemViewModel">
+                            <Border Style="{StaticResource RoGCardStyle}" AutomationProperties.Name="{x:Bind Title}">
+                                <StackPanel Spacing="8">
+                                    <Button Padding="0" Command="{x:Bind OpenCommand}" Background="Transparent" BorderThickness="0" AutomationProperties.Name="{x:Bind Title}">
+                                        <Image Height="150" Source="{x:Bind Thumb}" Stretch="UniformToFill" />
+                                    </Button>
+                                    <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Title}" TextTrimming="CharacterEllipsis" />
+                                    <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" TextWrapping="Wrap" />
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <Button x:Uid="Approval_Approve" Command="{x:Bind ApproveCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                                        <Button x:Uid="Approval_Reject" Command="{x:Bind RejectCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+            </ScrollViewer>
+        </Grid>
+
+        <!-- Uploads: Meldungen und Speicher -->
+        <Grid x:Name="UploadsPanel" Grid.Row="3" ColumnSpacing="24" RowSpacing="8" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="280" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <Button x:Uid="Backup_Reload" Command="{x:Bind Media.LoadUploadsCommand}" />
+                <ProgressRing Width="20" Height="20" IsActive="{x:Bind Media.IsBusy, Mode=OneWay}" />
+            </StackPanel>
+            <TextBlock x:Uid="AdminPage_UploadsEmpty" Grid.Row="1" Style="{StaticResource RoGMutedTextStyle}" Visibility="{x:Bind Media.NoReports, Mode=OneWay}" />
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{x:Bind Media.Reports}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="vm:UploadReportItemViewModel">
+                            <Border Margin="0,0,0,12" Style="{StaticResource RoGCardStyle}" AutomationProperties.Name="{x:Bind Title}">
+                                <Grid ColumnSpacing="12">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button Padding="0" VerticalAlignment="Top" Command="{x:Bind OpenCommand}" Background="Transparent" BorderThickness="0" AutomationProperties.Name="{x:Bind Title}">
+                                        <Image Width="120" Height="80" Source="{x:Bind Thumb}" Stretch="UniformToFill" />
+                                    </Button>
+                                    <StackPanel Grid.Column="1" Spacing="6">
+                                        <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Title}" TextTrimming="CharacterEllipsis" />
+                                        <TextBlock Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Reason}" TextWrapping="Wrap" />
+                                        <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" TextWrapping="Wrap" />
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
+                                            <Button x:Uid="AdminPage_UploadKeep" Command="{x:Bind KeepCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                                            <Button x:Uid="AdminPage_UploadDelete" Command="{x:Bind DeleteCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+            <StackPanel Grid.RowSpan="2" Grid.Column="1" Spacing="8">
+                <TextBlock x:Uid="AdminPage_StorageTitle" Style="{StaticResource RoGSectionTextStyle}" />
+                <TextBlock IsTextSelectionEnabled="True" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Media.StorageText, Mode=OneWay}" TextWrapping="Wrap" />
+            </StackPanel>
+        </Grid>
+
+        <!-- Website-Verwaltung -->
+        <ScrollViewer x:Name="WebsitePanel" Grid.Row="3" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+            <StackPanel MaxWidth="{StaticResource RoGReadingWidth}" HorizontalAlignment="Left" Spacing="12">
+                <TextBlock x:Uid="AdminPage_WebsiteHint" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                <ItemsRepeater ItemsSource="{x:Bind Media.WebLinks}">
+                    <ItemsRepeater.Layout>
+                        <UniformGridLayout ItemsStretch="Fill" MinColumnSpacing="8" MinItemWidth="220" MinRowSpacing="8" />
+                    </ItemsRepeater.Layout>
+                    <ItemsRepeater.ItemTemplate>
+                        <DataTemplate x:DataType="vm:AdminWebLinkViewModel">
+                            <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Command="{x:Bind OpenCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" ToolTipService.ToolTip="{x:Bind Address}">
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <FontIcon FontSize="14" Glyph="&#xE8A7;" />
+                                    <TextBlock Text="{x:Bind Label}" />
+                                </StackPanel>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

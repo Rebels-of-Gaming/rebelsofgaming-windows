@@ -20,7 +20,9 @@ public sealed partial class AdminPage : Page
             CanModerate = Moderation.CanWarn || Moderation.CanBan,
             Moderate = user => MemberModerationDialog.ShowAsync(XamlRoot, Moderation, user, null),
         };
+        Media = new MediaAdminViewModel(App.Services, Moderation.Show);
         InitializeComponent();
+        Media.Confirm = ConfirmAsync;
         Moderation.OpenMember = (user, report) => MemberModerationDialog.ShowAsync(XamlRoot, Moderation, user, report);
         Moderation.Confirm = ConfirmAsync;
 
@@ -31,7 +33,10 @@ public sealed partial class AdminPage : Page
         BansTab.Visibility = Visible(Moderation.CanReports);
         LogTab.Visibility = Visible(Moderation.CanLog);
         WordsTab.Visibility = Visible(Moderation.CanManage);
-        var any = Moderation.Any || Applications.CanView || Overview.Any || Members.CanView;
+        GalleryTab.Visibility = Visible(Media.CanGallery);
+        UploadsTab.Visibility = Visible(Media.CanUploads);
+        WebsiteTab.Visibility = Visible(Overview.Any && Media.HasWebLinks);
+        var any = Moderation.Any || Applications.CanView || Overview.Any || Members.CanView || Media.CanGallery || Media.CanUploads;
         NoAccess.Visibility = Visible(!any);
         Tabs.Visibility = Visible(any);
         Tabs.SelectedItem = Tabs.Items.FirstOrDefault(t => t.Visibility == Visibility.Visible);
@@ -44,6 +49,8 @@ public sealed partial class AdminPage : Page
     public AdminOverviewViewModel Overview { get; }
 
     public MembersAdminViewModel Members { get; }
+
+    public MediaAdminViewModel Media { get; }
 
     private void OnMemberSearch(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) => Members.SearchNowCommand.Execute(null);
 
@@ -85,7 +92,8 @@ public sealed partial class AdminPage : Page
 
     private void OnTabChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs? args)
     {
-        if (OverviewPanel is null || MembersPanel is null || ApplicationsPanel is null || ReportsPanel is null || BansPanel is null || LogPanel is null || WordsPanel is null)
+        if (OverviewPanel is null || MembersPanel is null || ApplicationsPanel is null || ReportsPanel is null || BansPanel is null || LogPanel is null || WordsPanel is null
+            || GalleryPanel is null || UploadsPanel is null || WebsitePanel is null)
         {
             return; // feuert schon in InitializeComponent
         }
@@ -98,6 +106,9 @@ public sealed partial class AdminPage : Page
         BansPanel.Visibility = Visible(selected == BansTab);
         LogPanel.Visibility = Visible(selected == LogTab);
         WordsPanel.Visibility = Visible(selected == WordsTab);
+        GalleryPanel.Visibility = Visible(selected == GalleryTab);
+        UploadsPanel.Visibility = Visible(selected == UploadsTab);
+        WebsitePanel.Visibility = Visible(selected == WebsiteTab);
         if (selected == OverviewTab && Overview.Kpis.Count == 0 && Overview.Checks.Count == 0)
         {
             _ = Overview.LoadAsync();
@@ -125,6 +136,14 @@ public sealed partial class AdminPage : Page
         else if (selected == WordsTab)
         {
             _ = Moderation.LoadWordsAsync();
+        }
+        else if (selected == GalleryTab && Media.Pending.Count == 0)
+        {
+            _ = Media.LoadGalleryAsync();
+        }
+        else if (selected == UploadsTab && Media.Reports.Count == 0)
+        {
+            _ = Media.LoadUploadsAsync();
         }
     }
 

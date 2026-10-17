@@ -3296,4 +3296,145 @@
   <data name="EventsPage_UnpublishLineup.Content" xml:space="preserve">
     <value>Retirer</value>
   </data>
+  <data name="MediaAdmin_RejectTitle" xml:space="preserve">
+    <value>Refuser et supprimer cet élément ?</value>
+  </data>
+  <data name="MediaAdmin_Approved" xml:space="preserve">
+    <value>Approuvé.</value>
+  </data>
+  <data name="MediaAdmin_Rejected" xml:space="preserve">
+    <value>Refusé et supprimé.</value>
+  </data>
+  <data name="MediaAdmin_Storage" xml:space="preserve">
+    <value>{0} téléversements · {1} au total</value>
+  </data>
+  <data name="MediaAdmin_DeleteUploadTitle" xml:space="preserve">
+    <value>Supprimer le téléversement ?</value>
+  </data>
+  <data name="MediaAdmin_UploadDeleted" xml:space="preserve">
+    <value>Téléversement supprimé, signalement traité.</value>
+  </data>
+  <data name="MediaAdmin_UploadKept" xml:space="preserve">
+    <value>Téléversement conservé, signalement traité.</value>
+  </data>
+  <data name="AdminWeb_roles" xml:space="preserve">
+    <value>Rôles et droits</value>
+  </data>
+  <data name="AdminWeb_permissions" xml:space="preserve">
+    <value>Vérifier les droits</value>
+  </data>
+  <data name="AdminWeb_games" xml:space="preserve">
+    <value>Jeux</value>
+  </data>
+  <data name="AdminWeb_team" xml:space="preserve">
+    <value>Page équipe</value>
+  </data>
+  <data name="AdminWeb_inactivity" xml:space="preserve">
+    <value>Inactivité</value>
+  </data>
+  <data name="AdminWeb_badges" xml:space="preserve">
+    <value>Badges</value>
+  </data>
+  <data name="AdminWeb_applications_settings" xml:space="preserve">
+    <value>Paramètres des candidatures</value>
+  </data>
+  <data name="AdminWeb_event_types" xml:space="preserve">
+    <value>Types d’événements</value>
+  </data>
+  <data name="AdminWeb_tournaments" xml:space="preserve">
+    <value>Tournois</value>
+  </data>
+  <data name="AdminWeb_hall_of_fame" xml:space="preserve">
+    <value>Hall of Fame</value>
+  </data>
+  <data name="AdminWeb_pages" xml:space="preserve">
+    <value>Pages</value>
+  </data>
+  <data name="AdminWeb_home" xml:space="preserve">
+    <value>Page d’accueil</value>
+  </data>
+  <data name="AdminWeb_partners" xml:space="preserve">
+    <value>Partenaires</value>
+  </data>
+  <data name="AdminWeb_menus" xml:space="preserve">
+    <value>Menus</value>
+  </data>
+  <data name="AdminWeb_rules" xml:space="preserve">
+    <value>Règlements</value>
+  </data>
+  <data name="AdminWeb_legal" xml:space="preserve">
+    <value>Textes juridiques</value>
+  </data>
+  <data name="AdminWeb_forum" xml:space="preserve">
+    <value>Catégories du forum</value>
+  </data>
+  <data name="AdminWeb_downloads" xml:space="preserve">
+    <value>Téléchargements</value>
+  </data>
+  <data name="AdminWeb_gallery" xml:space="preserve">
+    <value>Albums de la galerie</value>
+  </data>
+  <data name="AdminWeb_uploads" xml:space="preserve">
+    <value>Téléversements et limites</value>
+  </data>
+  <data name="AdminWeb_wiki" xml:space="preserve">
+    <value>Espaces et modèles du wiki</value>
+  </data>
+  <data name="AdminWeb_servers" xml:space="preserve">
+    <value>Configurer les serveurs</value>
+  </data>
+  <data name="AdminWeb_integrations" xml:space="preserve">
+    <value>Intégrations</value>
+  </data>
+  <data name="AdminWeb_bot" xml:space="preserve">
+    <value>Bot Discord</value>
+  </data>
+  <data name="AdminWeb_webhooks" xml:space="preserve">
+    <value>Webhooks</value>
+  </data>
+  <data name="AdminWeb_social" xml:space="preserve">
+    <value>Réseaux sociaux</value>
+  </data>
+  <data name="AdminWeb_mail_templates" xml:space="preserve">
+    <value>Modèles d’e-mail</value>
+  </data>
+  <data name="AdminWeb_translations" xml:space="preserve">
+    <value>Traductions</value>
+  </data>
+  <data name="AdminWeb_registration" xml:space="preserve">
+    <value>Inscription</value>
+  </data>
+  <data name="AdminWeb_settings" xml:space="preserve">
+    <value>Paramètres du clan</value>
+  </data>
+  <data name="AdminWeb_system" xml:space="preserve">
+    <value>Système</value>
+  </data>
+  <data name="AdminPage_TabGallery.Text" xml:space="preserve">
+    <value>Galerie</value>
+  </data>
+  <data name="AdminPage_TabUploads.Text" xml:space="preserve">
+    <value>Téléversements</value>
+  </data>
+  <data name="AdminPage_TabWebsite.Text" xml:space="preserve">
+    <value>Site web</value>
+  </data>
+  <data name="AdminPage_GalleryEmpty.Text" xml:space="preserve">
+    <value>Rien n’attend d’approbation.</value>
+  </data>
+  <data name="AdminPage_UploadsEmpty.Text" xml:space="preserve">
+    <value>Aucun signalement ouvert.</value>
+  </data>
+  <data name="AdminPage_UploadKeep.Content" xml:space="preserve">
+    <value>Conserver</value>
+  </data>
+  <data name="AdminPage_UploadDelete.Content" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="AdminPage_StorageTitle.Text" xml:space="preserve">
+    <value>Stockage</value>
+  </data>
+  <data name="AdminPage_WebsiteHint.Text" xml:space="preserve">
+    <value>Ces sections ne sont pas (encore) dans l’application. Elles s’ouvrent dans l’administration du site dans le navigateur, où s’appliquent tes droits et la confirmation à deux facteurs.</value>
+  </data>
 </root>

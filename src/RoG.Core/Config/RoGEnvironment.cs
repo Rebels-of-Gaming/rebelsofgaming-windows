@@ -22,6 +22,9 @@ public sealed record RoGEnvironment(string Name, Uri ApiBaseUrl, Uri WebBaseUrl,
     public static RoGEnvironment Get(string? name) =>
         name is not null && All.TryGetValue(name, out var env) ? env : All[Production];
 
+    /// <summary>Verwaltung der Website (Admin-Domain) für Bereiche, die die App nicht nativ hat; <c>null</c> = unbekannt.</summary>
+    public Uri? AdminBaseUrl { get; init; }
+
     /// <summary>Seite für den App-Login im System-Browser (Website-Domain, nicht api.).</summary>
     public Uri AuthorizeUrl => new(WebBaseUrl, "auth/app/authorize");
 
@@ -36,7 +39,10 @@ public sealed record RoGEnvironment(string Name, Uri ApiBaseUrl, Uri WebBaseUrl,
         foreach (var env in root.GetProperty("environments").EnumerateObject())
         {
             Uri Read(string key) => new(env.Value.GetProperty(key).GetString()!, UriKind.Absolute);
-            result[env.Name] = new RoGEnvironment(env.Name, Read("api"), Read("web"), Read("wiki"), Read("status"), clientId);
+            result[env.Name] = new RoGEnvironment(env.Name, Read("api"), Read("web"), Read("wiki"), Read("status"), clientId)
+            {
+                AdminBaseUrl = env.Value.TryGetProperty("admin", out var admin) && admin.GetString() is { } a ? new Uri(a, UriKind.Absolute) : null,
+            };
         }
 
         return result;

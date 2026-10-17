@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- News-Redaktion im eigenen Fenster (Stufe 9): Entwürfe links, Editor rechts. -->
+<Window
+    x:Class="RoG.App.Views.NewsEditorWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:RoG.App.ViewModels">
+
+    <Grid Background="{StaticResource RoGBgBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid x:Name="TitleBar" Padding="16,0,140,0" Background="{StaticResource RoGBg2Brush}">
+            <TextBlock
+                x:Uid="NewsEdit_WindowTitle"
+                VerticalAlignment="Center"
+                FontFamily="{StaticResource RoGDisplaySemiBoldFont}"
+                FontSize="14"
+                CharacterSpacing="60"
+                Foreground="{StaticResource RoGMutedBrush}" />
+        </Grid>
+
+        <Grid Grid.Row="1" ColumnSpacing="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="280" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Entwürfe -->
+            <Grid Padding="12" Background="{StaticResource RoGBg2Brush}" RowSpacing="8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Button x:Uid="NewsEdit_New" HorizontalAlignment="Stretch" Command="{x:Bind ViewModel.NewDraftCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                <TextBlock x:Uid="NewsEdit_DraftsTitle" Grid.Row="1" Style="{StaticResource RoGSectionTextStyle}" />
+                <ListView
+                    x:Uid="NewsEdit_Drafts"
+                    Grid.Row="2"
+                    ItemsSource="{x:Bind ViewModel.Drafts}"
+                    SelectedItem="{x:Bind ViewModel.SelectedDraft, Mode=TwoWay}"
+                    SelectionMode="Single">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="vm:NewsDraftItem">
+                            <StackPanel Padding="0,6" AutomationProperties.Name="{x:Bind Title}">
+                                <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Title}" TextTrimming="CharacterEllipsis" />
+                                <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+
+            <!-- Editor -->
+            <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+                <StackPanel MaxWidth="{StaticResource RoGReadingWidth}" Padding="24,16,24,24" HorizontalAlignment="Left" Spacing="12">
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <TextBlock VerticalAlignment="Center" Style="{StaticResource RoGTitleTextStyle}" Text="{x:Bind ViewModel.Heading, Mode=OneWay}" />
+                        <ProgressRing Width="20" Height="20" IsActive="{x:Bind ViewModel.IsBusy, Mode=OneWay}" />
+                    </StackPanel>
+                    <InfoBar
+                        IsOpen="{x:Bind ViewModel.IsFeedbackOpen, Mode=TwoWay}"
+                        Message="{x:Bind ViewModel.FeedbackMessage, Mode=OneWay}"
+                        Severity="{x:Bind ViewModel.FeedbackSeverity, Mode=OneWay}" />
+                    <ComboBox x:Uid="NewsEdit_Language" MinWidth="200" ItemsSource="{x:Bind ViewModel.LanguageOptions}" SelectedItem="{x:Bind ViewModel.SelectedLanguage, Mode=TwoWay}" />
+                    <TextBox x:Uid="NewsEdit_TitleBox" MaxLength="160" Text="{x:Bind ViewModel.Title, Mode=TwoWay}" />
+                    <TextBox x:Uid="NewsEdit_Teaser" AcceptsReturn="True" MaxLength="400" Text="{x:Bind ViewModel.Teaser, Mode=TwoWay}" TextWrapping="Wrap" />
+                    <TextBox
+                        x:Uid="NewsEdit_Body"
+                        MinHeight="280"
+                        AcceptsReturn="True"
+                        FontFamily="Consolas"
+                        IsSpellCheckEnabled="True"
+                        Text="{x:Bind ViewModel.Body, Mode=TwoWay}"
+                        TextWrapping="Wrap" />
+                    <TextBlock x:Uid="NewsEdit_MarkdownHint" FontSize="12" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <ComboBox x:Uid="NewsEdit_Category" MinWidth="200" ItemsSource="{x:Bind ViewModel.CategoryOptions}" SelectedItem="{x:Bind ViewModel.SelectedCategory, Mode=TwoWay}" />
+                        <ComboBox x:Uid="NewsEdit_Visibility" MinWidth="180" ItemsSource="{x:Bind ViewModel.VisibilityOptions}" SelectedItem="{x:Bind ViewModel.SelectedVisibility, Mode=TwoWay}" />
+                        <ComboBox x:Uid="NewsEdit_Status" MinWidth="180" ItemsSource="{x:Bind ViewModel.StatusOptions}" SelectedItem="{x:Bind ViewModel.SelectedStatus, Mode=TwoWay}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Spacing="12" Visibility="{x:Bind ViewModel.IsScheduled, Mode=OneWay}">
+                        <CalendarDatePicker x:Uid="NewsEdit_Date" Date="{x:Bind ViewModel.PublishDate, Mode=TwoWay}" />
+                        <TimePicker x:Uid="NewsEdit_Time" ClockIdentifier="24HourClock" Time="{x:Bind ViewModel.PublishTime, Mode=TwoWay}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Spacing="16">
+                        <CheckBox x:Uid="NewsEdit_Pinned" IsChecked="{x:Bind ViewModel.Pinned, Mode=TwoWay}" />
+                        <CheckBox x:Uid="NewsEdit_Comments" IsChecked="{x:Bind ViewModel.CommentsEnabled, Mode=TwoWay}" />
+                        <CheckBox x:Uid="NewsEdit_Discord" IsChecked="{x:Bind ViewModel.PostToDiscord, Mode=TwoWay}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Button x:Uid="NewsEdit_Save" Command="{x:Bind ViewModel.SaveCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                        <Button x:Uid="NewsEdit_Delete" Command="{x:Bind ViewModel.DeleteCommand}" Visibility="{x:Bind ViewModel.CanDelete, Mode=OneWay}" />
+                    </StackPanel>
+
+                    <TextBlock x:Uid="NewsEdit_CoverTitle" Margin="0,12,0,0" Style="{StaticResource RoGSectionTextStyle}" />
+                    <TextBlock x:Uid="NewsEdit_CoverHint" FontSize="12" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Button x:Uid="NewsEdit_SetCover" Click="OnSetCoverClick" IsEnabled="{x:Bind ViewModel.IsSaved, Mode=OneWay}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                        <Button x:Uid="NewsEdit_RemoveCover" Command="{x:Bind ViewModel.RemoveCoverCommand}" IsEnabled="{x:Bind ViewModel.IsSaved, Mode=OneWay}" />
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Window>

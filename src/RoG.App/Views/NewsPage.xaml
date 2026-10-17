@@ -18,11 +18,20 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <TextBlock
-                    x:Uid="NewsPage_Title"
-                    Margin="24,24,24,12"
-                    Style="{StaticResource RoGDisplayTextStyle}"
-                    Text="NEWS" />
+                <Grid Margin="24,24,24,12" ColumnSpacing="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Uid="NewsPage_Title" Style="{StaticResource RoGDisplayTextStyle}" Text="NEWS" />
+                    <Button
+                        x:Uid="NewsPage_Write"
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        Click="OnWriteClick"
+                        Style="{StaticResource RoGSecondaryButtonStyle}"
+                        Visibility="{x:Bind ViewModel.CanWrite}" />
+                </Grid>
                 <controls:StateView
                     Grid.Row="1"
                     x:Uid="NewsPage_State"
@@ -144,6 +153,11 @@
                             x:Uid="Common_CopyLink"
                             Command="{x:Bind ViewModel.Detail.CopyLinkCommand}"
                             Style="{StaticResource RoGSecondaryButtonStyle}" />
+                        <Button
+                            x:Uid="NewsPage_Edit"
+                            Click="OnEditClick"
+                            Style="{StaticResource RoGSecondaryButtonStyle}"
+                            Visibility="{x:Bind ViewModel.CanEditAll}" />
                     </StackPanel>
                     <InfoBar
                         IsOpen="{x:Bind ViewModel.Detail.IsFeedbackOpen, Mode=TwoWay}"

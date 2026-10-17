@@ -16,7 +16,7 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 | 6 | Clan-Prozesse | fertig (2.2.2): Bewerben, eigene Bewerbungen, Votes, Abwesenheiten, Geräte/Datenexport/Konto löschen, Regel-Hinweis, Onboarding-Kachel, Statistiken (Ranglisten, Wochen-Awards), Mitgliederkarte im eigenen Fenster; Trial-Verwaltung über „Bewerbungen“ in der Verwaltung (Status Trial, Aufgaben, verlängern, aufnehmen) | siehe `git log` |
 | 7 | Server-Steuerung | fertig (2.4.1): Steuer-Fenster mit Power, Ressourcen, Live-Konsole (Historie), Configs (Diff, Versionen, Rollback, Anträge), **Formular-Vorlagen** (Servername, Slots, Passwort, Map-Rotation), **Dateien** (Ordner, Vorschau, Sicherungen kopieren/umbenennen/löschen), Backups, RCON, Sperren, **Whitelist**, Vier-Augen-Freigaben, App-Sperre mit Windows Hello; Vorlagen ohne Dateizugriff nach Lücke W14 | siehe `git log` |
 | 8 | Wiki | fertig (2.4.2): Bereiche, Seitenbaum, Suche, Seite nativ mit Links in der App, Offline-Kopien, Bearbeiten mit Vorschau und Konflikterkennung, Versionen mit Vergleich/Wiederherstellen, Beobachten, **neue Seite anlegen**, **Bild einfügen** (Upload + Wiki-Datei), **Kategorien**, **Inhaltsverzeichnis mit Sprung** | siehe `git log` |
-| 9 | Verwaltung + Moderation | in Arbeit (2.3.x): Verwaltung mit Übersicht (Kennzahlen, Systemstatus, Audit-Log), Bewerbungen (Squad-Leitung), Moderation (Meldungen, verwarnen/sperren, Sperren, Mod-Log, Wortfilter); Mitglieder mit Rollen vergeben/entziehen; **Squads** (2.4.3: Profil, Logo/Header, Line-up mit Rollen, archivieren); offen: Inhalte, Termine/Matches, Server-Verwaltung, Wiki-Freigaben … | siehe `git log` |
+| 9 | Verwaltung + Moderation | in Arbeit (2.3.x): Verwaltung mit Übersicht (Kennzahlen, Systemstatus, Audit-Log), Bewerbungen (Squad-Leitung), Moderation (Meldungen, verwarnen/sperren, Sperren, Mod-Log, Wortfilter); Mitglieder mit Rollen vergeben/entziehen; **Squads** (2.4.3: Profil, Logo/Header, Line-up mit Rollen, archivieren); **News-Redaktion** (2.4.4); offen: weitere Inhalte (Seiten, Kategorien, Downloads), Termine/Matches, Server-Verwaltung, Wiki-Freigaben … | siehe `git log` |
 | 10 | Feinschliff + Store | offen | |
 
 ### Stufe 0 – was steht (15.10.2026)
@@ -142,6 +142,14 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   `GET …/roles`, Ersatz, speichern/entfernen; Mitglied über die Suche hinzufügen), Archiv (nur global `squads.manage`).
   PATCH sendet nur geänderte Felder. Die Squad-Seite lädt nach dem Schließen neu, wenn sich etwas geändert hat.
   **Annahme:** Logo/Header-Uploads sind öffentlich (Pflicht laut Changelog „öffentliches Bild aus der Bibliothek“).
+
+- **2.4.4 – News-Redaktion:** „Schreiben“ auf der News-Seite (Recht `news.write`/`news.publish`, Scope `news:write`),
+  „Bearbeiten“ am Artikel nur mit `news.publish`. Eigenes Fenster: Entwürfe und geplante News links, Editor rechts mit
+  Sprache DE (Pflicht)/EN/FR, Titel, Teaser, Markdown-Text, Kategorie, Sichtbarkeit, Status (Entwurf; veröffentlichen
+  und planen nur mit `news.publish`, Zeitpunkt in der Zukunft), Anpinnen, Kommentare, Discord-Post, löschen (`news.manage`
+  oder eigener Entwurf), Titelbild über öffentlichen Upload (`upload_id`). Hinweise der Website (`meta.warnings`) werden
+  angezeigt. Spec-Fehler bei `SaveNews` → Lücke W15, die App sendet selbst. **Annahme:** keine Vorschau im Editor (die
+  API hat für News keinen Render-Endpunkt) – Entwurf speichern und auf der Website ansehen.
 
 ### Offline, Melden, Verwaltung (2.3.1–2.3.3, 16.10.2026)
 

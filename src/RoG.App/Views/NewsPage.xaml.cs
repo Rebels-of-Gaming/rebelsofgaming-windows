@@ -34,6 +34,18 @@ public sealed partial class NewsPage : Page
         ViewModel.DetailForced = false;
     }
 
+    private void OnWriteClick(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) => OpenEditor(null);
+
+    private void OnEditClick(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) => OpenEditor(ViewModel.Detail.Slug);
+
+    private void OpenEditor(string? slug) => NewsEditorWindow.Open(ViewModel.Rights, slug, changed =>
+    {
+        if (changed)
+        {
+            _ = ViewModel.LoadAsync();
+        }
+    });
+
     private async void OnRefreshInvoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
     {
         args.Handled = true;

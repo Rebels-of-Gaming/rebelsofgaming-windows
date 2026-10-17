@@ -2960,4 +2960,139 @@
   <data name="SquadAdmin_ArchiveHint.Text" xml:space="preserve">
     <value>Archived squads disappear from all lists; memberships are kept. You can restore them at any time.</value>
   </data>
+  <data name="NewsEdit_Public" xml:space="preserve">
+    <value>Public</value>
+  </data>
+  <data name="NewsEdit_Members" xml:space="preserve">
+    <value>Members only</value>
+  </data>
+  <data name="NewsEdit_Draft" xml:space="preserve">
+    <value>Draft</value>
+  </data>
+  <data name="NewsEdit_Published" xml:space="preserve">
+    <value>Publish now</value>
+  </data>
+  <data name="NewsEdit_Scheduled" xml:space="preserve">
+    <value>Scheduled</value>
+  </data>
+  <data name="NewsEdit_New" xml:space="preserve">
+    <value>New post</value>
+  </data>
+  <data name="NewsEdit_Edit" xml:space="preserve">
+    <value>Edit post</value>
+  </data>
+  <data name="NewsEdit_NoCategory" xml:space="preserve">
+    <value>(no category)</value>
+  </data>
+  <data name="NewsEdit_Saved" xml:space="preserve">
+    <value>Draft saved.</value>
+  </data>
+  <data name="NewsEdit_PublishedDone" xml:space="preserve">
+    <value>Published.</value>
+  </data>
+  <data name="NewsEdit_ScheduledDone" xml:space="preserve">
+    <value>Scheduled – the post will appear at the chosen time.</value>
+  </data>
+  <data name="NewsEdit_DeleteTitle" xml:space="preserve">
+    <value>Delete post?</value>
+  </data>
+  <data name="NewsEdit_Deleted" xml:space="preserve">
+    <value>Post deleted.</value>
+  </data>
+  <data name="NewsEdit_Window" xml:space="preserve">
+    <value>News editor</value>
+  </data>
+  <data name="NewsEdit_Error_title" xml:space="preserve">
+    <value>The German title is missing.</value>
+  </data>
+  <data name="NewsEdit_Error_length" xml:space="preserve">
+    <value>Title max. 160, teaser max. 400 characters.</value>
+  </data>
+  <data name="NewsEdit_Error_published_at" xml:space="preserve">
+    <value>Choose a time in the future for “Scheduled”.</value>
+  </data>
+  <data name="NewsEdit_Lang_de" xml:space="preserve">
+    <value>German (required)</value>
+  </data>
+  <data name="NewsEdit_Lang_en" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="NewsEdit_Lang_fr" xml:space="preserve">
+    <value>French</value>
+  </data>
+  <data name="NewsEdit_WindowTitle.Text" xml:space="preserve">
+    <value>NEWS EDITOR</value>
+  </data>
+  <data name="NewsEdit_New.Content" xml:space="preserve">
+    <value>New post</value>
+  </data>
+  <data name="NewsEdit_DraftsTitle.Text" xml:space="preserve">
+    <value>Drafts and scheduled</value>
+  </data>
+  <data name="NewsEdit_Drafts.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Drafts</value>
+  </data>
+  <data name="NewsEdit_Language.Header" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="NewsEdit_TitleBox.Header" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="NewsEdit_Teaser.Header" xml:space="preserve">
+    <value>Teaser</value>
+  </data>
+  <data name="NewsEdit_Body.Header" xml:space="preserve">
+    <value>Text (Markdown)</value>
+  </data>
+  <data name="NewsEdit_MarkdownHint.Text" xml:space="preserve">
+    <value>Markdown: **bold**, *italic*, [link](https://…). A YouTube or Twitch link alone on a line is embedded.</value>
+  </data>
+  <data name="NewsEdit_Category.Header" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="NewsEdit_Visibility.Header" xml:space="preserve">
+    <value>Visibility</value>
+  </data>
+  <data name="NewsEdit_Status.Header" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="NewsEdit_Date.Header" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="NewsEdit_Time.Header" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="NewsEdit_Pinned.Content" xml:space="preserve">
+    <value>Pin</value>
+  </data>
+  <data name="NewsEdit_Comments.Content" xml:space="preserve">
+    <value>Allow comments</value>
+  </data>
+  <data name="NewsEdit_Discord.Content" xml:space="preserve">
+    <value>Post to Discord</value>
+  </data>
+  <data name="NewsEdit_Save.Content" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="NewsEdit_Delete.Content" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="NewsEdit_CoverTitle.Text" xml:space="preserve">
+    <value>Cover image</value>
+  </data>
+  <data name="NewsEdit_CoverHint.Text" xml:space="preserve">
+    <value>At least 1200 × 400 px. Available after the first save; the image is stored publicly in your library.</value>
+  </data>
+  <data name="NewsEdit_SetCover.Content" xml:space="preserve">
+    <value>Choose cover …</value>
+  </data>
+  <data name="NewsEdit_RemoveCover.Content" xml:space="preserve">
+    <value>Remove cover</value>
+  </data>
+  <data name="NewsPage_Write.Content" xml:space="preserve">
+    <value>Write</value>
+  </data>
+  <data name="NewsPage_Edit.Content" xml:space="preserve">
+    <value>Edit</value>
+  </data>
 </root>

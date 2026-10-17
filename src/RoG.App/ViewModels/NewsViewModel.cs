@@ -28,6 +28,14 @@ public sealed partial class NewsViewModel : LoadableViewModel
 
     public NewsDetailViewModel Detail { get; }
 
+    /// <summary>Redaktion: Rechte aus <c>/v1/me</c> und Token-Scope <c>news:write</c>.</summary>
+    public NewsRights Rights => NewsRights.For(Services.CurrentUser);
+
+    public bool CanWrite => Rights.Write;
+
+    /// <summary>Veröffentlichte News bearbeiten darf nur, wer veröffentlichen darf (<c>news.publish</c>).</summary>
+    public bool CanEditAll => Rights.Publish;
+
     [ObservableProperty]
     public partial bool HasMore { get; set; }
 
@@ -149,6 +157,8 @@ public sealed class NewsItemViewModel(NewsSummary news)
 public sealed partial class NewsDetailViewModel(AppServices services, NewsService news) : LoadableViewModel(services)
 {
     private string? _slug;
+
+    public string? Slug => _slug;
 
     [ObservableProperty]
     public partial string? Title { get; set; }

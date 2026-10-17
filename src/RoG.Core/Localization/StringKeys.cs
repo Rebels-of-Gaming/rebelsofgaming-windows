@@ -578,6 +578,34 @@ public static class StringKeys
 
     public const string SquadAdminRestored = "SquadAdmin_Restored";
 
+    public const string NewsEditPublic = "NewsEdit_Public";
+
+    public const string NewsEditMembers = "NewsEdit_Members";
+
+    public const string NewsEditDraft = "NewsEdit_Draft";
+
+    public const string NewsEditPublished = "NewsEdit_Published";
+
+    public const string NewsEditScheduled = "NewsEdit_Scheduled";
+
+    public const string NewsEditNew = "NewsEdit_New";
+
+    public const string NewsEditEdit = "NewsEdit_Edit";
+
+    public const string NewsEditNoCategory = "NewsEdit_NoCategory";
+
+    public const string NewsEditSaved = "NewsEdit_Saved";
+
+    public const string NewsEditPublishedDone = "NewsEdit_PublishedDone";
+
+    public const string NewsEditScheduledDone = "NewsEdit_ScheduledDone";
+
+    public const string NewsEditDeleteTitle = "NewsEdit_DeleteTitle";
+
+    public const string NewsEditDeleted = "NewsEdit_Deleted";
+
+    public const string NewsEditWindow = "NewsEdit_Window";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

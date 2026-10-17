@@ -2813,4 +2813,151 @@
   <data name="WikiPage_InsertImage.Content" xml:space="preserve">
     <value>Bild einfügen</value>
   </data>
+  <data name="SquadAdmin_Saved" xml:space="preserve">
+    <value>Gespeichert.</value>
+  </data>
+  <data name="SquadAdmin_Nothing" xml:space="preserve">
+    <value>Keine Änderungen.</value>
+  </data>
+  <data name="SquadAdmin_ImageQueued" xml:space="preserve">
+    <value>Bild hochgeladen – es wird gerade verarbeitet und erscheint gleich.</value>
+  </data>
+  <data name="SquadAdmin_RemoveLogo" xml:space="preserve">
+    <value>Logo entfernen?</value>
+  </data>
+  <data name="SquadAdmin_RemoveHeader" xml:space="preserve">
+    <value>Header entfernen?</value>
+  </data>
+  <data name="SquadAdmin_PickMember" xml:space="preserve">
+    <value>Bitte ein Mitglied und eine Rolle wählen.</value>
+  </data>
+  <data name="SquadAdmin_MemberAdded" xml:space="preserve">
+    <value>{0} ist jetzt im Squad.</value>
+  </data>
+  <data name="SquadAdmin_MemberSaved" xml:space="preserve">
+    <value>{0} gespeichert.</value>
+  </data>
+  <data name="SquadAdmin_RemoveMemberTitle" xml:space="preserve">
+    <value>Aus dem Squad entfernen?</value>
+  </data>
+  <data name="SquadAdmin_Archive" xml:space="preserve">
+    <value>Squad archivieren</value>
+  </data>
+  <data name="SquadAdmin_Restore" xml:space="preserve">
+    <value>Squad wiederherstellen</value>
+  </data>
+  <data name="SquadAdmin_ArchiveText" xml:space="preserve">
+    <value>Der Squad verschwindet aus allen Listen. Mitgliedschaften bleiben erhalten.</value>
+  </data>
+  <data name="SquadAdmin_RestoreText" xml:space="preserve">
+    <value>Der Squad erscheint wieder in den Listen.</value>
+  </data>
+  <data name="SquadAdmin_Archived" xml:space="preserve">
+    <value>Squad archiviert.</value>
+  </data>
+  <data name="SquadAdmin_Restored" xml:space="preserve">
+    <value>Squad wiederhergestellt.</value>
+  </data>
+  <data name="SquadAdmin_Recruiting_open" xml:space="preserve">
+    <value>Rekrutiert</value>
+  </data>
+  <data name="SquadAdmin_Recruiting_waitlist" xml:space="preserve">
+    <value>Warteliste</value>
+  </data>
+  <data name="SquadAdmin_Recruiting_full" xml:space="preserve">
+    <value>Voll</value>
+  </data>
+  <data name="SquadsPage_Manage.Content" xml:space="preserve">
+    <value>Verwalten</value>
+  </data>
+  <data name="SquadAdmin_TabProfile.Text" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="SquadAdmin_TabMembers.Text" xml:space="preserve">
+    <value>Line-up</value>
+  </data>
+  <data name="SquadAdmin_TabArchive.Text" xml:space="preserve">
+    <value>Archiv</value>
+  </data>
+  <data name="SquadAdmin_LanguageHint.Text" xml:space="preserve">
+    <value>Texte werden in der App-Sprache gespeichert; andere Sprachen bleiben unverändert.</value>
+  </data>
+  <data name="SquadAdmin_Tagline.Header" xml:space="preserve">
+    <value>Kurzbeschreibung</value>
+  </data>
+  <data name="SquadAdmin_Description.Header" xml:space="preserve">
+    <value>Vorstellung</value>
+  </data>
+  <data name="SquadAdmin_Training.Header" xml:space="preserve">
+    <value>Trainingszeiten</value>
+  </data>
+  <data name="SquadAdmin_Recruiting.Header" xml:space="preserve">
+    <value>Rekrutierung</value>
+  </data>
+  <data name="SquadAdmin_ClanTag.Header" xml:space="preserve">
+    <value>Clan-Tag</value>
+  </data>
+  <data name="SquadAdmin_ClanName.Header" xml:space="preserve">
+    <value>Clan-Name im Spiel</value>
+  </data>
+  <data name="SquadAdmin_ClanLevel.Header" xml:space="preserve">
+    <value>Clan-Level</value>
+  </data>
+  <data name="SquadAdmin_ClanRequirements.Header" xml:space="preserve">
+    <value>Anforderungen</value>
+  </data>
+  <data name="SquadAdmin_Save.Content" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="SquadAdmin_ImagesTitle.Text" xml:space="preserve">
+    <value>Logo und Header</value>
+  </data>
+  <data name="SquadAdmin_ImagesHint.Text" xml:space="preserve">
+    <value>Header mindestens 1200 × 400 px, Logo mindestens 128 × 128 px. Das Bild wird öffentlich in deiner Bibliothek gespeichert.</value>
+  </data>
+  <data name="SquadAdmin_SetLogo.Content" xml:space="preserve">
+    <value>Logo wählen …</value>
+  </data>
+  <data name="SquadAdmin_RemoveLogo.Content" xml:space="preserve">
+    <value>Logo entfernen</value>
+  </data>
+  <data name="SquadAdmin_SetHeader.Content" xml:space="preserve">
+    <value>Header wählen …</value>
+  </data>
+  <data name="SquadAdmin_RemoveHeader.Content" xml:space="preserve">
+    <value>Header entfernen</value>
+  </data>
+  <data name="SquadAdmin_AddTitle.Text" xml:space="preserve">
+    <value>Mitglied hinzufügen</value>
+  </data>
+  <data name="SquadAdmin_MemberSearch.Header" xml:space="preserve">
+    <value>Mitglied</value>
+  </data>
+  <data name="SquadAdmin_MemberSearch.PlaceholderText" xml:space="preserve">
+    <value>Name eingeben …</value>
+  </data>
+  <data name="SquadAdmin_Role.Header" xml:space="preserve">
+    <value>Rolle</value>
+  </data>
+  <data name="SquadAdmin_MemberRole.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Squad-Rolle</value>
+  </data>
+  <data name="SquadAdmin_Substitute.Content" xml:space="preserve">
+    <value>Ersatz</value>
+  </data>
+  <data name="SquadAdmin_Add.Content" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
+  <data name="SquadAdmin_RolesHint.Text" xml:space="preserve">
+    <value>Du kannst nur Rollen unter deiner eigenen vergeben; die Website prüft jede Änderung.</value>
+  </data>
+  <data name="SquadAdmin_SaveMember.Content" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="SquadAdmin_RemoveMember.Content" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+  <data name="SquadAdmin_ArchiveHint.Text" xml:space="preserve">
+    <value>Archivierte Squads verschwinden aus allen Listen, Mitgliedschaften bleiben erhalten. Wiederherstellen ist jederzeit möglich.</value>
+  </data>
 </root>

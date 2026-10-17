@@ -13,10 +13,10 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 | 3 | Echtzeit + Desktop-Integration | fertig (2.4.0): Reverb, Glocke, Toasts, Tray, Badge, Sprungliste, `rog:`, Autostart, **Benachrichtigungs-Einstellungen** (Glocke/E-Mail/Discord je Ereignis, Sammel-Mail, Ruhezeit); WNS nach Lücke W1 | siehe `git log` |
 | 4 | Kommunikation | fertig (2.3.x): DMs mit Pop-out, Forum lesen+schreiben, Zusagen, Tastenkürzel, Offline-Warteschlange (DMs nur im Speicher), Melden | siehe `git log` |
 | 5 | Medien | fertig (2.3.4): Uploads (Drag & Drop, Strg+V, **Teilen-Ziel**), Galerie mit **Einreichen**, Downloads, Kurzlinks, Profil bearbeiten | siehe `git log` |
-| 6 | Clan-Prozesse | fast fertig (2.2.2): Bewerben, eigene Bewerbungen, Votes, Abwesenheiten, Geräte/Datenexport/Konto löschen, Regel-Hinweis, Onboarding-Kachel, Statistiken (Ranglisten, Wochen-Awards), Mitgliederkarte im eigenen Fenster; offen: Trial-Verwaltung für Squad-Leitung (kommt mit Stufe 9) | siehe `git log` |
+| 6 | Clan-Prozesse | fertig (2.2.2): Bewerben, eigene Bewerbungen, Votes, Abwesenheiten, Geräte/Datenexport/Konto löschen, Regel-Hinweis, Onboarding-Kachel, Statistiken (Ranglisten, Wochen-Awards), Mitgliederkarte im eigenen Fenster; Trial-Verwaltung über „Bewerbungen“ in der Verwaltung (Status Trial, Aufgaben, verlängern, aufnehmen) | siehe `git log` |
 | 7 | Server-Steuerung | fertig (2.4.1): Steuer-Fenster mit Power, Ressourcen, Live-Konsole (Historie), Configs (Diff, Versionen, Rollback, Anträge), **Formular-Vorlagen** (Servername, Slots, Passwort, Map-Rotation), **Dateien** (Ordner, Vorschau, Sicherungen kopieren/umbenennen/löschen), Backups, RCON, Sperren, **Whitelist**, Vier-Augen-Freigaben, App-Sperre mit Windows Hello; Vorlagen ohne Dateizugriff nach Lücke W14 | siehe `git log` |
 | 8 | Wiki | fertig (2.4.2): Bereiche, Seitenbaum, Suche, Seite nativ mit Links in der App, Offline-Kopien, Bearbeiten mit Vorschau und Konflikterkennung, Versionen mit Vergleich/Wiederherstellen, Beobachten, **neue Seite anlegen**, **Bild einfügen** (Upload + Wiki-Datei), **Kategorien**, **Inhaltsverzeichnis mit Sprung** | siehe `git log` |
-| 9 | Verwaltung + Moderation | in Arbeit (2.3.x): Verwaltung mit Übersicht (Kennzahlen, Systemstatus, Audit-Log), Bewerbungen (Squad-Leitung), Moderation (Meldungen, verwarnen/sperren, Sperren, Mod-Log, Wortfilter); Mitglieder mit Rollen vergeben/entziehen; offen: Squads, Inhalte, Termine/Matches, Server-Verwaltung, Wiki-Freigaben … | siehe `git log` |
+| 9 | Verwaltung + Moderation | in Arbeit (2.3.x): Verwaltung mit Übersicht (Kennzahlen, Systemstatus, Audit-Log), Bewerbungen (Squad-Leitung), Moderation (Meldungen, verwarnen/sperren, Sperren, Mod-Log, Wortfilter); Mitglieder mit Rollen vergeben/entziehen; **Squads** (2.4.3: Profil, Logo/Header, Line-up mit Rollen, archivieren); offen: Inhalte, Termine/Matches, Server-Verwaltung, Wiki-Freigaben … | siehe `git log` |
 | 10 | Feinschliff + Store | offen | |
 
 ### Stufe 0 – was steht (15.10.2026)
@@ -134,6 +134,14 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   Inhaltsverzeichnis aus `toc` mit Sprung zur Überschrift, „Bild einfügen“ im Editor: Upload mit der Sichtbarkeit des
   Bereichs (`upload_visibility`), Registrierung über `POST /v1/wiki/files` (Body fehlt in der Spec → W13), Einbinden als
   `[[Datei:…|mini]]` bzw. Markdown-Bild.
+
+- **2.4.3 – Squads verwalten:** Knopf „Verwalten“ auf der Squad-Seite (Rechte `squads.manage`/`squad.members` im
+  Scope `squad:{id}` plus Token-Scope `squads:write`) öffnet ein eigenes Fenster: Profil (Kurzbeschreibung, Vorstellung,
+  Trainingszeiten, Rekrutierung, Clan-Tag/-Name/-Level, Anforderungen – Texte nur in der App-Sprache, andere Sprachen
+  bleiben), Logo/Header (Bild öffentlich hochladen, dann `upload_id`; entfernen), Line-up (Rolle aus
+  `GET …/roles`, Ersatz, speichern/entfernen; Mitglied über die Suche hinzufügen), Archiv (nur global `squads.manage`).
+  PATCH sendet nur geänderte Felder. Die Squad-Seite lädt nach dem Schließen neu, wenn sich etwas geändert hat.
+  **Annahme:** Logo/Header-Uploads sind öffentlich (Pflicht laut Changelog „öffentliches Bild aus der Bibliothek“).
 
 ### Offline, Melden, Verwaltung (2.3.1–2.3.3, 16.10.2026)
 

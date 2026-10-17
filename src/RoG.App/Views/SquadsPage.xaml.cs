@@ -41,6 +41,21 @@ public sealed partial class SquadsPage : Page
         ViewModel.DetailForced = false;
     }
 
+    private void OnManageClick(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        if (ViewModel.Detail.Current is { } squad)
+        {
+            var detail = ViewModel.Detail;
+            SquadAdminWindow.Open(squad, detail.AdminRights, changed =>
+            {
+                if (changed)
+                {
+                    _ = detail.ReloadAsync();
+                }
+            });
+        }
+    }
+
     private async void OnApplyClick(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         if (ViewModel.Detail.Slug is { } slug && await RoG.App.Controls.ApplicationDialog.ShowAsync(XamlRoot, slug))

@@ -2813,4 +2813,151 @@
   <data name="WikiPage_InsertImage.Content" xml:space="preserve">
     <value>Insérer une image</value>
   </data>
+  <data name="SquadAdmin_Saved" xml:space="preserve">
+    <value>Enregistré.</value>
+  </data>
+  <data name="SquadAdmin_Nothing" xml:space="preserve">
+    <value>Aucune modification.</value>
+  </data>
+  <data name="SquadAdmin_ImageQueued" xml:space="preserve">
+    <value>Image téléversée – elle est en cours de traitement et apparaîtra sous peu.</value>
+  </data>
+  <data name="SquadAdmin_RemoveLogo" xml:space="preserve">
+    <value>Supprimer le logo ?</value>
+  </data>
+  <data name="SquadAdmin_RemoveHeader" xml:space="preserve">
+    <value>Supprimer la bannière ?</value>
+  </data>
+  <data name="SquadAdmin_PickMember" xml:space="preserve">
+    <value>Veuillez choisir un membre et un rôle.</value>
+  </data>
+  <data name="SquadAdmin_MemberAdded" xml:space="preserve">
+    <value>{0} fait maintenant partie de l’escouade.</value>
+  </data>
+  <data name="SquadAdmin_MemberSaved" xml:space="preserve">
+    <value>{0} enregistré.</value>
+  </data>
+  <data name="SquadAdmin_RemoveMemberTitle" xml:space="preserve">
+    <value>Retirer de l’escouade ?</value>
+  </data>
+  <data name="SquadAdmin_Archive" xml:space="preserve">
+    <value>Archiver l’escouade</value>
+  </data>
+  <data name="SquadAdmin_Restore" xml:space="preserve">
+    <value>Restaurer l’escouade</value>
+  </data>
+  <data name="SquadAdmin_ArchiveText" xml:space="preserve">
+    <value>L’escouade disparaît de toutes les listes. Les adhésions sont conservées.</value>
+  </data>
+  <data name="SquadAdmin_RestoreText" xml:space="preserve">
+    <value>L’escouade réapparaîtra dans les listes.</value>
+  </data>
+  <data name="SquadAdmin_Archived" xml:space="preserve">
+    <value>Escouade archivée.</value>
+  </data>
+  <data name="SquadAdmin_Restored" xml:space="preserve">
+    <value>Escouade restaurée.</value>
+  </data>
+  <data name="SquadAdmin_Recruiting_open" xml:space="preserve">
+    <value>Recrute</value>
+  </data>
+  <data name="SquadAdmin_Recruiting_waitlist" xml:space="preserve">
+    <value>Liste d’attente</value>
+  </data>
+  <data name="SquadAdmin_Recruiting_full" xml:space="preserve">
+    <value>Complet</value>
+  </data>
+  <data name="SquadsPage_Manage.Content" xml:space="preserve">
+    <value>Gérer</value>
+  </data>
+  <data name="SquadAdmin_TabProfile.Text" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="SquadAdmin_TabMembers.Text" xml:space="preserve">
+    <value>Effectif</value>
+  </data>
+  <data name="SquadAdmin_TabArchive.Text" xml:space="preserve">
+    <value>Archive</value>
+  </data>
+  <data name="SquadAdmin_LanguageHint.Text" xml:space="preserve">
+    <value>Les textes sont enregistrés dans la langue de l’application ; les autres langues restent inchangées.</value>
+  </data>
+  <data name="SquadAdmin_Tagline.Header" xml:space="preserve">
+    <value>Accroche</value>
+  </data>
+  <data name="SquadAdmin_Description.Header" xml:space="preserve">
+    <value>Présentation</value>
+  </data>
+  <data name="SquadAdmin_Training.Header" xml:space="preserve">
+    <value>Horaires d’entraînement</value>
+  </data>
+  <data name="SquadAdmin_Recruiting.Header" xml:space="preserve">
+    <value>Recrutement</value>
+  </data>
+  <data name="SquadAdmin_ClanTag.Header" xml:space="preserve">
+    <value>Tag du clan</value>
+  </data>
+  <data name="SquadAdmin_ClanName.Header" xml:space="preserve">
+    <value>Nom du clan en jeu</value>
+  </data>
+  <data name="SquadAdmin_ClanLevel.Header" xml:space="preserve">
+    <value>Niveau du clan</value>
+  </data>
+  <data name="SquadAdmin_ClanRequirements.Header" xml:space="preserve">
+    <value>Exigences</value>
+  </data>
+  <data name="SquadAdmin_Save.Content" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="SquadAdmin_ImagesTitle.Text" xml:space="preserve">
+    <value>Logo et bannière</value>
+  </data>
+  <data name="SquadAdmin_ImagesHint.Text" xml:space="preserve">
+    <value>Bannière d’au moins 1200 × 400 px, logo d’au moins 128 × 128 px. L’image est enregistrée publiquement dans ta bibliothèque.</value>
+  </data>
+  <data name="SquadAdmin_SetLogo.Content" xml:space="preserve">
+    <value>Choisir un logo …</value>
+  </data>
+  <data name="SquadAdmin_RemoveLogo.Content" xml:space="preserve">
+    <value>Supprimer le logo</value>
+  </data>
+  <data name="SquadAdmin_SetHeader.Content" xml:space="preserve">
+    <value>Choisir une bannière …</value>
+  </data>
+  <data name="SquadAdmin_RemoveHeader.Content" xml:space="preserve">
+    <value>Supprimer la bannière</value>
+  </data>
+  <data name="SquadAdmin_AddTitle.Text" xml:space="preserve">
+    <value>Ajouter un membre</value>
+  </data>
+  <data name="SquadAdmin_MemberSearch.Header" xml:space="preserve">
+    <value>Membre</value>
+  </data>
+  <data name="SquadAdmin_MemberSearch.PlaceholderText" xml:space="preserve">
+    <value>Saisir un nom …</value>
+  </data>
+  <data name="SquadAdmin_Role.Header" xml:space="preserve">
+    <value>Rôle</value>
+  </data>
+  <data name="SquadAdmin_MemberRole.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Rôle dans l’escouade</value>
+  </data>
+  <data name="SquadAdmin_Substitute.Content" xml:space="preserve">
+    <value>Remplaçant</value>
+  </data>
+  <data name="SquadAdmin_Add.Content" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="SquadAdmin_RolesHint.Text" xml:space="preserve">
+    <value>Tu ne peux attribuer que des rôles inférieurs au tien ; le site vérifie chaque modification.</value>
+  </data>
+  <data name="SquadAdmin_SaveMember.Content" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="SquadAdmin_RemoveMember.Content" xml:space="preserve">
+    <value>Retirer</value>
+  </data>
+  <data name="SquadAdmin_ArchiveHint.Text" xml:space="preserve">
+    <value>Les escouades archivées disparaissent de toutes les listes ; les adhésions sont conservées. La restauration est possible à tout moment.</value>
+  </data>
 </root>

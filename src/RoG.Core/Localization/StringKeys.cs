@@ -548,6 +548,36 @@ public static class StringKeys
 
     public const string WikiNewTitleMissing = "Wiki_NewTitleMissing";
 
+    public const string SquadAdminSaved = "SquadAdmin_Saved";
+
+    public const string SquadAdminNothing = "SquadAdmin_Nothing";
+
+    public const string SquadAdminImageQueued = "SquadAdmin_ImageQueued";
+
+    public const string SquadAdminRemoveLogo = "SquadAdmin_RemoveLogo";
+
+    public const string SquadAdminRemoveHeader = "SquadAdmin_RemoveHeader";
+
+    public const string SquadAdminPickMember = "SquadAdmin_PickMember";
+
+    public const string SquadAdminMemberAdded = "SquadAdmin_MemberAdded";
+
+    public const string SquadAdminMemberSaved = "SquadAdmin_MemberSaved";
+
+    public const string SquadAdminRemoveMemberTitle = "SquadAdmin_RemoveMemberTitle";
+
+    public const string SquadAdminArchive = "SquadAdmin_Archive";
+
+    public const string SquadAdminRestore = "SquadAdmin_Restore";
+
+    public const string SquadAdminArchiveText = "SquadAdmin_ArchiveText";
+
+    public const string SquadAdminRestoreText = "SquadAdmin_RestoreText";
+
+    public const string SquadAdminArchived = "SquadAdmin_Archived";
+
+    public const string SquadAdminRestored = "SquadAdmin_Restored";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

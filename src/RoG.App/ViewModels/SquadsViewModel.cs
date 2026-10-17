@@ -194,7 +194,23 @@ public sealed partial class SquadDetailViewModel(AppServices services, SquadServ
 
     public string? Slug => _slug;
 
+    /// <summary>Stand für die Verwaltung (Texte in der App-Sprache).</summary>
+    public SquadDetail? Current { get; private set; }
+
+    public SquadAdminRights AdminRights { get; private set; } = new(false, false, false);
+
+    /// <summary>„Verwalten“ zeigen: Rechte im Squad (<c>squads.manage</c>/<c>squad.members</c>) und Scope <c>squads:write</c>.</summary>
+    [ObservableProperty]
+    public partial bool CanManage { get; set; }
+
     protected override bool HasData => Name is not null;
+
+    /// <summary>Nach Änderungen im Verwaltungsfenster neu laden.</summary>
+    public Task ReloadAsync()
+    {
+        Name = null;
+        return LoadAsync();
+    }
 
     public Task ShowAsync(string slug)
     {
@@ -294,6 +310,9 @@ public sealed partial class SquadDetailViewModel(AppServices services, SquadServ
         var serversTask = _servers.GetAllAsync(_slug, cancellationToken);
         var detail = await detailTask;
         var s = detail.Summary;
+        Current = detail;
+        AdminRights = SquadAdminRights.For(Services.CurrentUser, s.Id);
+        CanManage = AdminRights.Any;
 
         Subtitle = string.Join(" · ", new[] { s.GameName, s.LeaderName is null ? null : Format(StringKeys.SquadsLeader, s.LeaderName) }.Where(x => !string.IsNullOrEmpty(x)));
         Header = s.Header is null ? null : new BitmapImage(s.Header);

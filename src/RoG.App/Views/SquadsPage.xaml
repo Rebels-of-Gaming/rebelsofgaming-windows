@@ -158,6 +158,12 @@
                                 Click="OnApplyClick"
                                 Style="{StaticResource RoGPrimaryButtonStyle}"
                                 Visibility="{x:Bind ViewModel.Detail.CanApply, Mode=OneWay}" />
+                            <Button
+                                x:Uid="SquadsPage_Manage"
+                                Margin="0,6,0,0"
+                                Click="OnManageClick"
+                                Style="{StaticResource RoGSecondaryButtonStyle}"
+                                Visibility="{x:Bind ViewModel.Detail.CanManage, Mode=OneWay}" />
                         </StackPanel>
                     </Grid>
 

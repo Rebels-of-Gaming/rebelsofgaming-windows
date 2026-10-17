@@ -26,6 +26,14 @@
                         QueryIcon="Find"
                         QuerySubmitted="OnSearchSubmitted"
                         Text="{x:Bind ViewModel.SearchText, Mode=TwoWay}" />
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <ToggleButton x:Name="CategoriesToggle" x:Uid="WikiPage_Categories" Click="OnCategoriesClick" />
+                        <Button x:Uid="WikiPage_NewPage" Click="OnNewPageClick" Style="{StaticResource RoGPrimaryButtonStyle}" Visibility="{x:Bind ViewModel.CanCreate}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Spacing="8" Visibility="{x:Bind ViewModel.HasCategory, Mode=OneWay}">
+                        <HyperlinkButton x:Uid="WikiPage_BackToCategories" Padding="0" Command="{x:Bind ViewModel.LeaveCategoryCommand}" />
+                        <TextBlock VerticalAlignment="Center" FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind ViewModel.CategoryTitle, Mode=OneWay}" />
+                    </StackPanel>
                 </StackPanel>
                 <controls:StateView
                     x:Uid="WikiPage_State"
@@ -91,8 +99,19 @@
                         Message="{x:Bind ViewModel.FeedbackMessage, Mode=OneWay}"
                         Severity="{x:Bind ViewModel.FeedbackSeverity, Mode=OneWay}" />
 
+                    <!-- Inhaltsverzeichnis -->
+                    <Expander x:Uid="WikiPage_Toc" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Visibility="{x:Bind ViewModel.HasToc, Mode=OneWay}">
+                        <ItemsControl ItemsSource="{x:Bind ViewModel.Toc}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="vm:WikiTocItem">
+                                    <HyperlinkButton Margin="{x:Bind Indent}" Padding="0,2" Click="OnTocClick" Content="{x:Bind Text}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Expander>
+
                     <!-- Lesen -->
-                    <controls:RichContentView Document="{x:Bind ViewModel.Document, Mode=OneWay}" Visibility="{x:Bind ViewModel.ShowReader, Mode=OneWay}" />
+                    <controls:RichContentView x:Name="Reader" Document="{x:Bind ViewModel.Document, Mode=OneWay}" Visibility="{x:Bind ViewModel.ShowReader, Mode=OneWay}" />
 
                     <!-- Bearbeiten -->
                     <StackPanel Spacing="8" Visibility="{x:Bind ViewModel.IsEditing, Mode=OneWay}">
@@ -108,6 +127,8 @@
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <Button x:Uid="WikiPage_Save" Command="{x:Bind ViewModel.SaveCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
                             <Button x:Uid="WikiPage_Preview" Command="{x:Bind ViewModel.PreviewCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                            <Button x:Uid="WikiPage_InsertImage" Click="OnInsertImageClick" IsEnabled="{x:Bind ViewModel.CanInsertImage, Mode=OneWay}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                            <ProgressRing Width="20" Height="20" IsActive="{x:Bind ViewModel.IsUploadingImage, Mode=OneWay}" />
                             <Button x:Uid="Common_CancelButton" Command="{x:Bind ViewModel.CancelEditCommand}" />
                         </StackPanel>
                         <TextBlock x:Uid="WikiPage_PreviewTitle" Style="{StaticResource RoGSectionTextStyle}" Visibility="{x:Bind ViewModel.HasPreview, Mode=OneWay}" />

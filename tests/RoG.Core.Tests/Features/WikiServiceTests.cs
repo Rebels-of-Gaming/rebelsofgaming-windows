@@ -114,6 +114,50 @@ public class WikiServiceTests
             }
         }
     }
+
+    [Fact]
+    public async Task Create_page_returns_page_and_status()
+    {
+        var (service, stub) = Create((_, _) => StubHttpHandler.Json(HttpStatusCode.Created, """{"data":{"id":"r1","page_id":"p1","locale":"de","format":"wikitext","status":"pending"}}"""));
+
+        var created = await service.CreatePageAsync("clan", "de", " Goldrush ", "Text", "wikitext", null, "p0");
+
+        Assert.Equal(new WikiCreated("p1", "pending"), created);
+        var request = Assert.Single(stub.Requests);
+        Assert.EndsWith("/v1/wiki/namespaces/clan/pages", request.Uri!.AbsolutePath, StringComparison.Ordinal);
+        Assert.Contains("\"title\":\"Goldrush\"", request.Body, StringComparison.Ordinal);
+        Assert.Contains("\"parent_id\":\"p0\"", request.Body, StringComparison.Ordinal);
+        await Assert.ThrowsAsync<ArgumentException>(() => service.CreatePageAsync("clan", "de", " ", "x", "wikitext", null, null));
+    }
+
+    [Fact]
+    public async Task Register_file_sends_body_and_parses_result()
+    {
+        var (service, stub) = Create((_, _) => StubHttpHandler.Json(HttpStatusCode.Created, """
+            {"data":{"slug":"goldrush-karte.png","name":"Goldrush Karte.png","namespace":"clan","src":"https://cdn.example/x.png","url":"https://wiki.example/file/goldrush-karte.png"}}
+            """));
+
+        var file = await service.RegisterFileAsync("01U", "clan", "Goldrush Karte.png", "Übersicht");
+
+        Assert.Equal("Goldrush Karte.png", file.Name);
+        Assert.Equal("https://cdn.example/x.png", file.Source!.ToString());
+        Assert.Contains("\"upload_id\":\"01U\"", Assert.Single(stub.Requests).Body, StringComparison.Ordinal);
+    }
+
+    [Theory]
+    [InlineData("public", RoG.Core.Features.Uploads.UploadVisibility.Public)]
+    [InlineData("members", RoG.Core.Features.Uploads.UploadVisibility.Members)]
+    [InlineData("private", RoG.Core.Features.Uploads.UploadVisibility.Private)]
+    [InlineData(null, RoG.Core.Features.Uploads.UploadVisibility.Members)]
+    public void Upload_visibility_follows_namespace(string? value, RoG.Core.Features.Uploads.UploadVisibility expected) =>
+        Assert.Equal(expected, WikiService.UploadVisibilityFor(value));
+
+    [Fact]
+    public void File_embed_depends_on_format()
+    {
+        Assert.Equal("[[Datei:Karte.png|mini]]", WikiService.FileEmbed("wikitext", "Karte.png", null));
+        Assert.Equal("![Karte.png](https://cdn.example/k.png)", WikiService.FileEmbed("markdown", "Karte.png", new Uri("https://cdn.example/k.png")));
+    }
 }
 
 /// <summary>Einfache umkehrbare „Verschlüsselung“ für Tests: prüft, dass wirklich der Protector benutzt wird.</summary>

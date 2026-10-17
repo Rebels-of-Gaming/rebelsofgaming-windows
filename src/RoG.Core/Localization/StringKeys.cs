@@ -524,6 +524,30 @@ public static class StringKeys
 
     public const string Errorwhitelistnotsupported = "Error_whitelist_not_supported";
 
+    public const string WikiCreated = "Wiki_Created";
+
+    public const string WikiNoParent = "Wiki_NoParent";
+
+    public const string WikiImageOnly = "Wiki_ImageOnly";
+
+    public const string WikiImageInserted = "Wiki_ImageInserted";
+
+    public const string WikiNewTitle = "Wiki_NewTitle";
+
+    public const string WikiNewFormat = "Wiki_NewFormat";
+
+    public const string WikiNewParent = "Wiki_NewParent";
+
+    public const string WikiNewContent = "Wiki_NewContent";
+
+    public const string WikiNewSummary = "Wiki_NewSummary";
+
+    public const string WikiNewPageTitle = "Wiki_NewPageTitle";
+
+    public const string WikiNewCreate = "Wiki_NewCreate";
+
+    public const string WikiNewTitleMissing = "Wiki_NewTitleMissing";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

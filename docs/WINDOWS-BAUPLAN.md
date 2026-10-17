@@ -15,7 +15,7 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 | 5 | Medien | fertig (2.3.4): Uploads (Drag & Drop, Strg+V, **Teilen-Ziel**), Galerie mit **Einreichen**, Downloads, Kurzlinks, Profil bearbeiten | siehe `git log` |
 | 6 | Clan-Prozesse | fast fertig (2.2.2): Bewerben, eigene Bewerbungen, Votes, Abwesenheiten, Geräte/Datenexport/Konto löschen, Regel-Hinweis, Onboarding-Kachel, Statistiken (Ranglisten, Wochen-Awards), Mitgliederkarte im eigenen Fenster; offen: Trial-Verwaltung für Squad-Leitung (kommt mit Stufe 9) | siehe `git log` |
 | 7 | Server-Steuerung | fertig (2.4.1): Steuer-Fenster mit Power, Ressourcen, Live-Konsole (Historie), Configs (Diff, Versionen, Rollback, Anträge), **Formular-Vorlagen** (Servername, Slots, Passwort, Map-Rotation), **Dateien** (Ordner, Vorschau, Sicherungen kopieren/umbenennen/löschen), Backups, RCON, Sperren, **Whitelist**, Vier-Augen-Freigaben, App-Sperre mit Windows Hello; Vorlagen ohne Dateizugriff nach Lücke W14 | siehe `git log` |
-| 8 | Wiki | fast fertig (2.3.0): Bereiche, Seitenbaum, Suche, Seite nativ mit Links in der App, Offline-Kopien, Bearbeiten mit Vorschau und Konflikterkennung, Versionen mit Vergleich/Wiederherstellen, Beobachten; offen: neue Seite anlegen, Dateien/Bilder hochladen, Kategorien-Ansicht, Inhaltsverzeichnis mit Sprung | siehe `git log` |
+| 8 | Wiki | fertig (2.4.2): Bereiche, Seitenbaum, Suche, Seite nativ mit Links in der App, Offline-Kopien, Bearbeiten mit Vorschau und Konflikterkennung, Versionen mit Vergleich/Wiederherstellen, Beobachten, **neue Seite anlegen**, **Bild einfügen** (Upload + Wiki-Datei), **Kategorien**, **Inhaltsverzeichnis mit Sprung** | siehe `git log` |
 | 9 | Verwaltung + Moderation | in Arbeit (2.3.x): Verwaltung mit Übersicht (Kennzahlen, Systemstatus, Audit-Log), Bewerbungen (Squad-Leitung), Moderation (Meldungen, verwarnen/sperren, Sperren, Mod-Log, Wortfilter); Mitglieder mit Rollen vergeben/entziehen; offen: Squads, Inhalte, Termine/Matches, Server-Verwaltung, Wiki-Freigaben … | siehe `git log` |
 | 10 | Feinschliff + Store | offen | |
 
@@ -128,6 +128,12 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   Website (Bereich, Auswahl, keine `" ; \`, Map-Namen), leere Passwörter bleiben unverändert, „Passwort entfernen“
   sendet `""`; Anwenden wie Speichern (`after`, Notiz, `202` = Antrag). Lücken W13 (Body der Dateioperationen fehlt in
   der Spec) und W14 (`abilities.templates` fehlt).
+
+- **2.4.2 – Wiki komplett:** „Neue Seite“ (Titel, Format Wikitext/Markdown, Elternseite aus dem Baum, Inhalt,
+  Zusammenfassung; Prüfpflicht → Vorschlag), Umschalter „Kategorien“ (Kategorien mit Anzahl → Seiten der Kategorie),
+  Inhaltsverzeichnis aus `toc` mit Sprung zur Überschrift, „Bild einfügen“ im Editor: Upload mit der Sichtbarkeit des
+  Bereichs (`upload_visibility`), Registrierung über `POST /v1/wiki/files` (Body fehlt in der Spec → W13), Einbinden als
+  `[[Datei:…|mini]]` bzw. Markdown-Bild.
 
 ### Offline, Melden, Verwaltung (2.3.1–2.3.3, 16.10.2026)
 

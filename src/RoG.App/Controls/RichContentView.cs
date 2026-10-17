@@ -36,6 +36,21 @@ public sealed partial class RichContentView : UserControl
         set => SetValue(DocumentProperty, value);
     }
 
+    /// <summary>Zur Überschrift mit diesem Text scrollen (Inhaltsverzeichnis); <c>false</c>, wenn es keine gibt.</summary>
+    public bool BringHeadingIntoView(string text)
+    {
+        var wanted = text.Trim();
+        var heading = _root.Children.OfType<TextBlock>().FirstOrDefault(t => t.Tag is string tag && string.Equals(tag, wanted, StringComparison.OrdinalIgnoreCase))
+            ?? _root.Children.OfType<TextBlock>().FirstOrDefault(t => t.Tag is string tag && tag.Contains(wanted, StringComparison.OrdinalIgnoreCase));
+        if (heading is null)
+        {
+            return false;
+        }
+
+        heading.StartBringIntoView(new BringIntoViewOptions { VerticalAlignmentRatio = 0, AnimationDesired = true });
+        return true;
+    }
+
     private static T Res<T>(string key) => (T)Application.Current.Resources[key];
 
     private void Render()
@@ -161,9 +176,11 @@ public sealed partial class RichContentView : UserControl
 
     private static TextBlock BuildHeading(HeadingBlock heading)
     {
+        var plain = string.Concat(heading.Inlines.Select(PlainOf));
         var text = new TextBlock
         {
-            Text = string.Concat(heading.Inlines.Select(PlainOf)).ToUpper(System.Globalization.CultureInfo.CurrentCulture),
+            Text = plain.ToUpper(System.Globalization.CultureInfo.CurrentCulture),
+            Tag = plain.Trim(),
             Style = Res<Style>(heading.Level <= 2 ? "RoGTitleTextStyle" : "RoGSectionTextStyle"),
             Margin = new Thickness(0, 8, 0, 0),
             IsTextSelectionEnabled = true,

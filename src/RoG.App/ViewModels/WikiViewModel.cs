@@ -19,6 +19,8 @@ namespace RoG.App.ViewModels;
 public sealed partial class WikiViewModel : LoadableViewModel
 {
     private readonly WikiService _wiki;
+    private readonly RoG.Core.Features.Uploads.UploadService _uploads;
+    private readonly Dictionary<string, WikiNamespace> _namespaceInfo = new(StringComparer.Ordinal);
     private bool _namespacesLoaded;
     private string? _baseRevisionId;
 
@@ -26,6 +28,7 @@ public sealed partial class WikiViewModel : LoadableViewModel
         : base(services)
     {
         _wiki = new WikiService(services.Api.Client, services.Api.Http, services.Environment.WikiBaseUrl);
+        _uploads = new RoG.Core.Features.Uploads.UploadService(services.Api.Client, services.StorageHttp);
     }
 
     public ObservableCollection<SettingsOption> Namespaces { get; } = [];
@@ -33,6 +36,30 @@ public sealed partial class WikiViewModel : LoadableViewModel
     public ObservableCollection<WikiListItem> Items { get; } = [];
 
     public ObservableCollection<WikiRevisionItemViewModel> Revisions { get; } = [];
+
+    public ObservableCollection<WikiTocItem> Toc { get; } = [];
+
+    /// <summary>Liste zeigt Kategorien statt Seitenbaum.</summary>
+    [ObservableProperty]
+    public partial bool ShowCategories { get; set; }
+
+    /// <summary>Gewählte Kategorie (Liste zeigt ihre Seiten), sonst <c>null</c>.</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasCategory))]
+    public partial string? CategoryTitle { get; set; }
+
+    public bool HasCategory => CategoryTitle is not null;
+
+    public bool HasToc => Toc.Count > 1;
+
+    /// <summary>Neue Seite anlegen (gleiche Rechte wie Bearbeiten).</summary>
+    public bool CanCreate => CanEdit;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(CanInsertImage))]
+    public partial bool IsUploadingImage { get; set; }
+
+    public bool CanInsertImage => !IsUploadingImage;
 
     [ObservableProperty]
     public partial SettingsOption? SelectedNamespace { get; set; }
@@ -123,6 +150,7 @@ public sealed partial class WikiViewModel : LoadableViewModel
                 foreach (var n in namespaces)
                 {
                     Namespaces.Add(new SettingsOption(n.Slug, n.Name));
+                    _namespaceInfo[n.Slug] = n;
                 }
 
                 _namespacesLoaded = true;
@@ -132,7 +160,21 @@ public sealed partial class WikiViewModel : LoadableViewModel
             }
 
             Items.Clear();
-            if (!string.IsNullOrWhiteSpace(SearchText))
+            if (_categorySlug is { } category)
+            {
+                foreach (var page in await _wiki.CategoryPagesAsync(category, cancellationToken))
+                {
+                    Items.Add(new WikiListItem(page.Id, page.Title, null, 0));
+                }
+            }
+            else if (ShowCategories)
+            {
+                foreach (var (slug, name, count) in await _wiki.CategoriesAsync(cancellationToken))
+                {
+                    Items.Add(new WikiListItem(slug, name, count.ToString(CultureInfo.CurrentCulture), 0, IsCategory: true));
+                }
+            }
+            else if (!string.IsNullOrWhiteSpace(SearchText))
             {
                 foreach (var hit in await _wiki.SearchAsync(SearchText, cancellationToken))
                 {
@@ -166,6 +208,25 @@ public sealed partial class WikiViewModel : LoadableViewModel
     }
 
     private bool _suppressNamespace;
+    private string? _categorySlug;
+
+    partial void OnShowCategoriesChanged(bool value)
+    {
+        _categorySlug = null;
+        CategoryTitle = null;
+        if (_namespacesLoaded)
+        {
+            _ = LoadAsync();
+        }
+    }
+
+    [RelayCommand]
+    private Task LeaveCategoryAsync()
+    {
+        _categorySlug = null;
+        CategoryTitle = null;
+        return LoadAsync();
+    }
 
     partial void OnSelectedNamespaceChanged(SettingsOption? value)
     {
@@ -178,7 +239,14 @@ public sealed partial class WikiViewModel : LoadableViewModel
 
     partial void OnSelectedChanged(WikiListItem? value)
     {
-        if (value is not null)
+        if (value is { IsCategory: true })
+        {
+            _categorySlug = value.Id;
+            CategoryTitle = value.Title;
+            Selected = null;
+            _ = LoadAsync();
+        }
+        else if (value is not null)
         {
             _ = OpenPageAsync(value.Id);
         }
@@ -262,6 +330,73 @@ public sealed partial class WikiViewModel : LoadableViewModel
             page.Categories.Count > 0 ? string.Join(", ", page.Categories) : null,
         }.Where(s => !string.IsNullOrEmpty(s)));
         WatchLabel = Services.Localizer.GetString(page.Watching == true ? StringKeys.WikiUnwatch : StringKeys.WikiWatch);
+        Toc.Clear();
+        foreach (var entry in page.Toc)
+        {
+            Toc.Add(new WikiTocItem(entry.Text, new Thickness(Math.Max(0, entry.Level - 2) * 16, 0, 0, 0)));
+        }
+
+        OnPropertyChanged(nameof(HasToc));
+    }
+
+    /// <summary>Neue Seite im gewählten Bereich anlegen und öffnen; <c>false</c> bei Fehler (Meldung in der InfoBar).</summary>
+    public async Task<bool> CreatePageAsync(string title, string format, string? parentId, string content, string? summary)
+    {
+        if (SelectedNamespace is not { } ns)
+        {
+            return false;
+        }
+
+        WikiCreated? created = null;
+        if (!await RunAsync(async () => created = await _wiki.CreatePageAsync(ns.Value, Services.Language, title, content, format, summary, parentId)))
+        {
+            return false;
+        }
+
+        Show(Services.Localizer.GetString(created!.Status == "pending" ? StringKeys.WikiPending : StringKeys.WikiCreated), InfoBarSeverity.Success);
+        await LoadAsync();
+        await OpenPageAsync(created.PageId);
+        return true;
+    }
+
+    /// <summary>Seiten des aktuellen Baums als mögliche Elternseiten (Titel eingerückt).</summary>
+    public IReadOnlyList<SettingsOption> ParentOptions() =>
+        [new(string.Empty, Services.Localizer.GetString(StringKeys.WikiNoParent)),
+         .. Items.Where(i => !i.IsCategory).Select(i => new SettingsOption(i.Id, new string(' ', i.Depth * 2) + i.Title))];
+
+    /// <summary>
+    /// Bild hochladen (Sichtbarkeit passend zum Bereich), im Wiki registrieren und am Ende des Editors einbinden.
+    /// </summary>
+    public async Task InsertImageAsync(Stream content, string fileName, long size)
+    {
+        if (Article is not { } page || IsUploadingImage)
+        {
+            return;
+        }
+
+        if (RoG.Core.Features.Uploads.UploadService.MimeFor(fileName) is not { } mime || !mime.StartsWith("image/", StringComparison.Ordinal))
+        {
+            Show(Services.Localizer.GetString(StringKeys.WikiImageOnly), InfoBarSeverity.Warning);
+            return;
+        }
+
+        IsUploadingImage = true;
+        try
+        {
+            var visibility = WikiService.UploadVisibilityFor(_namespaceInfo.TryGetValue(page.NamespaceSlug, out var ns) ? ns.UploadVisibility : null);
+            await RunAsync(async () =>
+            {
+                var upload = await _uploads.UploadAsync(content, fileName, size, visibility);
+                var file = await _wiki.RegisterFileAsync(upload.Id, page.NamespaceSlug, fileName, null);
+                var embed = WikiService.FileEmbed(page.Format, file.Name.Length > 0 ? file.Name : fileName, upload.Links.Direct ?? file.Source);
+                EditContent = EditContent.TrimEnd() + "\n\n" + embed + "\n";
+                Show(Services.Localizer.GetString(StringKeys.WikiImageInserted), InfoBarSeverity.Success);
+            });
+        }
+        finally
+        {
+            IsUploadingImage = false;
+        }
     }
 
     [RelayCommand]
@@ -444,7 +579,9 @@ public sealed partial class WikiViewModel : LoadableViewModel
         System.Net.WebUtility.HtmlDecode(System.Text.RegularExpressions.Regex.Replace(snippet, "<[^>]+>", string.Empty));
 }
 
-public sealed record WikiListItem(string Id, string Title, string? Subtitle, int Depth)
+public sealed record WikiTocItem(string Text, Thickness Indent);
+
+public sealed record WikiListItem(string Id, string Title, string? Subtitle, int Depth, bool IsCategory = false)
 {
     public Thickness Indent => new(Depth * 16, 0, 0, 0);
 

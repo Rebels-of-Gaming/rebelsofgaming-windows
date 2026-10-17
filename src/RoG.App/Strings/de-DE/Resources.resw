@@ -2756,4 +2756,61 @@
   <data name="Whitelist_Empty.Text" xml:space="preserve">
     <value>Die Whitelist ist leer.</value>
   </data>
+  <data name="Wiki_Created" xml:space="preserve">
+    <value>Seite angelegt.</value>
+  </data>
+  <data name="Wiki_NoParent" xml:space="preserve">
+    <value>(oberste Ebene)</value>
+  </data>
+  <data name="Wiki_ImageOnly" xml:space="preserve">
+    <value>Nur Bilder (PNG, JPG, GIF, WebP) lassen sich ins Wiki einfügen.</value>
+  </data>
+  <data name="Wiki_ImageInserted" xml:space="preserve">
+    <value>Bild hochgeladen und am Ende eingefügt.</value>
+  </data>
+  <data name="Wiki_NewTitle" xml:space="preserve">
+    <value>Titel</value>
+  </data>
+  <data name="Wiki_NewFormat" xml:space="preserve">
+    <value>Format</value>
+  </data>
+  <data name="Wiki_NewParent" xml:space="preserve">
+    <value>Elternseite</value>
+  </data>
+  <data name="Wiki_NewContent" xml:space="preserve">
+    <value>Inhalt</value>
+  </data>
+  <data name="Wiki_NewSummary" xml:space="preserve">
+    <value>Zusammenfassung (optional)</value>
+  </data>
+  <data name="Wiki_NewPageTitle" xml:space="preserve">
+    <value>Neue Wiki-Seite</value>
+  </data>
+  <data name="Wiki_NewCreate" xml:space="preserve">
+    <value>Anlegen</value>
+  </data>
+  <data name="Wiki_NewTitleMissing" xml:space="preserve">
+    <value>Bitte einen Titel eingeben.</value>
+  </data>
+  <data name="Wiki_Format_wikitext" xml:space="preserve">
+    <value>Wikitext</value>
+  </data>
+  <data name="Wiki_Format_markdown" xml:space="preserve">
+    <value>Markdown</value>
+  </data>
+  <data name="WikiPage_Categories.Content" xml:space="preserve">
+    <value>Kategorien</value>
+  </data>
+  <data name="WikiPage_NewPage.Content" xml:space="preserve">
+    <value>Neue Seite</value>
+  </data>
+  <data name="WikiPage_BackToCategories.Content" xml:space="preserve">
+    <value>← Kategorien</value>
+  </data>
+  <data name="WikiPage_Toc.Header" xml:space="preserve">
+    <value>Inhalt</value>
+  </data>
+  <data name="WikiPage_InsertImage.Content" xml:space="preserve">
+    <value>Bild einfügen</value>
+  </data>
 </root>

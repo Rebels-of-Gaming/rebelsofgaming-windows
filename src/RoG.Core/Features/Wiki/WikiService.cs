@@ -6,7 +6,13 @@ using File = System.IO.File;
 
 namespace RoG.Core.Features.Wiki;
 
-public sealed record WikiNamespace(string Id, string Slug, string Name, string? Description, string Visibility, bool RequiresReview, int Pages);
+public sealed record WikiNamespace(string Id, string Slug, string Name, string? Description, string Visibility, bool RequiresReview, int Pages, string UploadVisibility = "members");
+
+/// <summary>Ergebnis „Seite anlegen“: Seite und Status der ersten Version (<c>pending</c> bei Prüfpflicht).</summary>
+public sealed record WikiCreated(string PageId, string Status);
+
+/// <summary>Im Wiki registriertes Bild (Guide 26 „Kategorien und Dateien“).</summary>
+public sealed record WikiFile(string Slug, string Name, string Namespace, Uri? Source, Uri? WebUrl);
 
 /// <summary>Seite im Baum, flach mit Einrückung (<see cref="Depth"/>) für eine Liste.</summary>
 public sealed record WikiTreeEntry(string Id, string Slug, string Title, int Depth, DateTimeOffset? UpdatedAt);
@@ -60,7 +66,7 @@ public sealed class WikiService(IRoGApiClient client, HttpClient http, Uri? wiki
 {
     public async Task<IReadOnlyList<WikiNamespace>> NamespacesAsync(CancellationToken cancellationToken = default) =>
         (await client.V1_wiki_namespaces_indexAsync(cancellationToken).ConfigureAwait(false)).Data
-            .Select(n => new WikiNamespace(n.Id, n.Slug, n.Name, ApiValues.Text(n.Description), n.Visibility, n.Requires_review, n.Pages))
+            .Select(n => new WikiNamespace(n.Id, n.Slug, n.Name, ApiValues.Text(n.Description), n.Visibility, n.Requires_review, n.Pages, ApiValues.Text(n.Upload_visibility) ?? "members"))
             .ToList();
 
     public async Task<IReadOnlyList<WikiTreeEntry>> TreeAsync(string namespaceSlug, CancellationToken cancellationToken = default)
@@ -151,6 +157,72 @@ public sealed class WikiService(IRoGApiClient client, HttpClient http, Uri? wiki
                 ex.Problem);
         }
     }
+
+    /// <summary>Neue Seite im Bereich (Guide 26): Titel, Inhalt, Format, optional Elternseite. Prüfpflicht → <c>pending</c>.</summary>
+    public async Task<WikiCreated> CreatePageAsync(
+        string namespaceSlug, string locale, string title, string content, string format, string? summary, string? parentId, CancellationToken cancellationToken = default)
+    {
+        if (string.IsNullOrWhiteSpace(title))
+        {
+            throw new ArgumentException("Titel fehlt", nameof(title));
+        }
+
+        var d = (await client.V1_wiki_pages_storeAsync(namespaceSlug, new Body141
+        {
+            Locale = locale,
+            Title = title.Trim(),
+            Content = content,
+            Format = format,
+            Summary = ApiValues.Text(summary),
+            Parent_id = ApiValues.Text(parentId),
+        }, cancellationToken).ConfigureAwait(false)).Data;
+        return new WikiCreated(d.Page_id, d.Status);
+    }
+
+    /// <summary>
+    /// Hochgeladenes Bild im Wiki registrieren (<c>POST /v1/wiki/files</c> – Body fehlt in der Spec, Lücke W13).
+    /// Die Sichtbarkeit des Uploads muss zum Bereich passen (<see cref="UploadVisibilityFor"/>).
+    /// </summary>
+    public async Task<WikiFile> RegisterFileAsync(string uploadId, string namespaceSlug, string name, string? description, CancellationToken cancellationToken = default)
+    {
+        var body = new Dictionary<string, object?> { ["upload_id"] = uploadId, ["namespace"] = namespaceSlug, ["name"] = name.Trim() };
+        if (ApiValues.Text(description) is { } d)
+        {
+            body["description"] = d;
+        }
+
+        using var response = await http.PostAsync(new Uri("wiki/files", UriKind.Relative), JsonContent(body), cancellationToken).ConfigureAwait(false);
+        response.EnsureSuccessStatusCode();
+        await using var stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+        using var doc = await JsonDocument.ParseAsync(stream, cancellationToken: cancellationToken).ConfigureAwait(false);
+        return ParseFile(doc.RootElement);
+    }
+
+    internal static WikiFile ParseFile(JsonElement root)
+    {
+        var d = root.TryGetProperty("data", out var data) ? data : root;
+        static string? S(JsonElement o, string n) => o.TryGetProperty(n, out var p) && p.ValueKind == JsonValueKind.String ? p.GetString() : null;
+        return new WikiFile(
+            S(d, "slug") ?? string.Empty,
+            S(d, "name") ?? string.Empty,
+            S(d, "namespace") ?? string.Empty,
+            ApiValues.WebUri(S(d, "src")),
+            ApiValues.WebUri(S(d, "url")));
+    }
+
+    /// <summary>Sichtbarkeit für Bild-Uploads je Bereich (<c>upload_visibility</c>): <c>squad</c> → privat mit geheimem Link.</summary>
+    public static Uploads.UploadVisibility UploadVisibilityFor(string? uploadVisibility) => uploadVisibility switch
+    {
+        "public" => Uploads.UploadVisibility.Public,
+        "private" or "squad" => Uploads.UploadVisibility.Private,
+        _ => Uploads.UploadVisibility.Members,
+    };
+
+    /// <summary>Einbinden im Editor: Wikitext <c>[[Datei:Name|mini]]</c>, Markdown als Bild mit direktem Link.</summary>
+    public static string FileEmbed(string format, string name, Uri? direct) =>
+        format == "markdown"
+            ? $"![{name.Replace("]", string.Empty, StringComparison.Ordinal)}]({direct})"
+            : $"[[Datei:{name}|mini]]";
 
     public async Task<bool> ToggleWatchAsync(string pageId, CancellationToken cancellationToken = default) =>
         (await client.V1_wiki_pages_watchAsync(pageId, cancellationToken).ConfigureAwait(false)).Data.Watching;

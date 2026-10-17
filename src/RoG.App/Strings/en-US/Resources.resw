@@ -2756,4 +2756,61 @@
   <data name="Whitelist_Empty.Text" xml:space="preserve">
     <value>The whitelist is empty.</value>
   </data>
+  <data name="Wiki_Created" xml:space="preserve">
+    <value>Page created.</value>
+  </data>
+  <data name="Wiki_NoParent" xml:space="preserve">
+    <value>(top level)</value>
+  </data>
+  <data name="Wiki_ImageOnly" xml:space="preserve">
+    <value>Only images (PNG, JPG, GIF, WebP) can be inserted into the wiki.</value>
+  </data>
+  <data name="Wiki_ImageInserted" xml:space="preserve">
+    <value>Image uploaded and inserted at the end.</value>
+  </data>
+  <data name="Wiki_NewTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="Wiki_NewFormat" xml:space="preserve">
+    <value>Format</value>
+  </data>
+  <data name="Wiki_NewParent" xml:space="preserve">
+    <value>Parent page</value>
+  </data>
+  <data name="Wiki_NewContent" xml:space="preserve">
+    <value>Content</value>
+  </data>
+  <data name="Wiki_NewSummary" xml:space="preserve">
+    <value>Summary (optional)</value>
+  </data>
+  <data name="Wiki_NewPageTitle" xml:space="preserve">
+    <value>New wiki page</value>
+  </data>
+  <data name="Wiki_NewCreate" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="Wiki_NewTitleMissing" xml:space="preserve">
+    <value>Please enter a title.</value>
+  </data>
+  <data name="Wiki_Format_wikitext" xml:space="preserve">
+    <value>Wikitext</value>
+  </data>
+  <data name="Wiki_Format_markdown" xml:space="preserve">
+    <value>Markdown</value>
+  </data>
+  <data name="WikiPage_Categories.Content" xml:space="preserve">
+    <value>Categories</value>
+  </data>
+  <data name="WikiPage_NewPage.Content" xml:space="preserve">
+    <value>New page</value>
+  </data>
+  <data name="WikiPage_BackToCategories.Content" xml:space="preserve">
+    <value>← Categories</value>
+  </data>
+  <data name="WikiPage_Toc.Header" xml:space="preserve">
+    <value>Contents</value>
+  </data>
+  <data name="WikiPage_InsertImage.Content" xml:space="preserve">
+    <value>Insert image</value>
+  </data>
 </root>

@@ -176,8 +176,10 @@
                     <StackPanel MaxWidth="{StaticResource RoGReadingWidth}" HorizontalAlignment="Left" Spacing="12">
                         <TextBlock x:Uid="SquadsPage_About" Style="{StaticResource RoGSectionTextStyle}" />
                         <TextBlock IsTextSelectionEnabled="True" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind ViewModel.Detail.Description, Mode=OneWay}" />
-                        <TextBlock x:Uid="SquadsPage_Training" Style="{StaticResource RoGMutedTextStyle}" />
-                        <TextBlock IsTextSelectionEnabled="True" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind ViewModel.Detail.TrainingTimes, Mode=OneWay}" />
+                        <StackPanel Spacing="4" Visibility="{x:Bind ViewModel.Detail.HasTrainingTimes, Mode=OneWay}">
+                            <TextBlock x:Uid="SquadsPage_Training" Style="{StaticResource RoGMutedTextStyle}" />
+                            <TextBlock IsTextSelectionEnabled="True" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind ViewModel.Detail.TrainingTimes, Mode=OneWay}" />
+                        </StackPanel>
                         <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind ViewModel.Detail.ClanInfo, Mode=OneWay}" />
                     </StackPanel>
 

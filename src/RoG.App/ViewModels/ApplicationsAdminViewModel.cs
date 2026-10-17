@@ -15,6 +15,7 @@ public sealed partial class ApplicationsAdminViewModel(AppServices services, Act
 {
     private readonly ApplicationAdminService _admin = new(services.Api.Client, services.Api.Http);
     private string? _cursor;
+    private int _loadGeneration;
 
     public bool CanView => services.CurrentUser is { } me && (me.CanAnywhere("applications.view") || me.CanAnywhere("applications.review")) && me.HasScope("applications:read");
 
@@ -102,7 +103,13 @@ public sealed partial class ApplicationsAdminViewModel(AppServices services, Act
             return;
         }
 
-        SelectedStatus ??= StatusOptions[0];
+        if (SelectedStatus is null)
+        {
+            SelectedStatus = StatusOptions[0]; // lädt über OnSelectedStatusChanged – sonst liefe das Laden doppelt
+            return;
+        }
+
+        var generation = reset ? ++_loadGeneration : _loadGeneration;
         if (reset)
         {
             _cursor = null;
@@ -112,6 +119,11 @@ public sealed partial class ApplicationsAdminViewModel(AppServices services, Act
         await RunAsync(async () =>
         {
             var page = await _admin.ListAsync(SelectedStatus.Value, Search, _cursor);
+            if (generation != _loadGeneration)
+            {
+                return; // inzwischen neu gefiltert
+            }
+
             foreach (var a in page.Items)
             {
                 Items.Add(new ApplicationRowViewModel(a, services.Localizer));

@@ -84,11 +84,45 @@
                                     TextTrimming="CharacterEllipsis" />
                             </Border>
                             <controls:LinkTextBlock Opacity="{x:Bind BodyOpacity}" Text="{x:Bind Body}" Visibility="{x:Bind HasBody}" />
-                            <TextBlock
-                                FontSize="12"
-                                Style="{StaticResource RoGMutedTextStyle}"
-                                Text="{x:Bind Attachments}"
-                                Visibility="{x:Bind HasAttachments}" />
+                            <ItemsControl ItemsSource="{x:Bind Attachments}" Visibility="{x:Bind HasAttachments}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate x:DataType="vm:ChatAttachmentViewModel">
+                                        <StackPanel Spacing="4">
+                                            <!-- Bild: Vorschau, Klick öffnet es groß im Browser -->
+                                            <Button
+                                                Padding="0"
+                                                Background="Transparent"
+                                                BorderThickness="0"
+                                                Command="{x:Bind OpenCommand}"
+                                                ToolTipService.ToolTip="{x:Bind Name}"
+                                                Visibility="{x:Bind CanPreview}"
+                                                AutomationProperties.Name="{x:Bind AutomationName}">
+                                                <Grid MinWidth="120" MinHeight="80" CornerRadius="{StaticResource RoGControlRadius}" Background="{StaticResource RoGBgBrush}">
+                                                    <Image
+                                                        MaxWidth="320"
+                                                        MaxHeight="240"
+                                                        Loaded="OnAttachmentImageLoaded"
+                                                        Source="{x:Bind Preview, Mode=OneWay}"
+                                                        Stretch="Uniform"
+                                                        AutomationProperties.AccessibilityView="Raw" />
+                                                </Grid>
+                                            </Button>
+                                            <!-- andere Dateien -->
+                                            <HyperlinkButton
+                                                Padding="0"
+                                                Command="{x:Bind OpenCommand}"
+                                                Visibility="{x:Bind IsFile}"
+                                                AutomationProperties.Name="{x:Bind AutomationName}">
+                                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                                    <FontIcon FontSize="14" Glyph="&#xE723;" AutomationProperties.AccessibilityView="Raw" />
+                                                    <TextBlock FontSize="13" Text="{x:Bind Name}" TextTrimming="CharacterEllipsis" />
+                                                    <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind SizeText}" />
+                                                </StackPanel>
+                                            </HyperlinkButton>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                             <TextBlock
                                 HorizontalAlignment="Right"
                                 FontSize="11"

@@ -149,6 +149,14 @@ public sealed partial class EventsPage : Page
 
     private void OnDetailClosed(object? sender, EventArgs e) => ViewModel.Selected = null;
 
+    private void OnDayEventClick(object sender, ItemClickEventArgs e)
+    {
+        if (e.ClickedItem is EventRowViewModel row)
+        {
+            ViewModel.Selected = row;
+        }
+    }
+
     /// <summary>Aufstellung bauen: Kandidaten aus bisheriger Aufstellung und Antworten, Ersatz/Position, Notiz.</summary>
     private async void OnEditLineupClick(object sender, RoutedEventArgs e)
     {

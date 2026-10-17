@@ -741,23 +741,8 @@ public sealed partial class EventDetailViewModel(AppServices services, EventServ
     public event EventHandler<string>? Deleted;
 
     /// <summary>„Fr., 17. Oktober 2026 · 20:00–22:00“.</summary>
-    internal static string WhenOf(EventItem item)
-    {
-        if (item.StartsAt is not { } start)
-        {
-            return string.Empty;
-        }
-
-        var s = start.ToLocalTime();
-        var text = s.ToString("ddd, d. MMMM yyyy · t", CultureInfo.CurrentCulture);
-        if (item.EndsAt is { } end)
-        {
-            var e = end.ToLocalTime();
-            text += "–" + (e.Date == s.Date ? e.ToString("t", CultureInfo.CurrentCulture) : e.ToString("g", CultureInfo.CurrentCulture));
-        }
-
-        return text;
-    }
+    internal static string WhenOf(EventItem item) =>
+        item.StartsAt is { } start ? EventTimes.Range(start, item.EndsAt, CultureInfo.CurrentCulture) : string.Empty;
 
     internal static Brush BrushOf(string? hex) =>
         AccountViewModel.ColorFromHex(hex) is { } c ? new SolidColorBrush(c) : (Brush)Application.Current.Resources["RoGRedBrush"];

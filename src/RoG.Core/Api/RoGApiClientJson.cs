@@ -9,6 +9,7 @@ public partial class RoGApiClient
     static partial void UpdateJsonSerializerSettings(JsonSerializerOptions settings)
     {
         settings.Converters.Add(new EmptyArrayAsDictionaryConverterFactory());
+        settings.Converters.Add(new EmptyArrayAsOpenObjectConverterFactory());
 
         // Nicht gesetzte Felder nicht mitsenden: Ein PATCH mit `"birthday": null` würde sonst Daten löschen, die die App
         // gar nicht ändern wollte. Zum Leeren eines Textfelds einen leeren String senden.
@@ -78,6 +79,83 @@ internal sealed class EmptyArrayAsDictionaryConverterFactory : JsonConverterFact
             {
                 writer.WritePropertyName(key);
                 JsonSerializer.Serialize(writer, item, options);
+            }
+
+            writer.WriteEndObject();
+        }
+    }
+}
+
+/// <summary>
+/// Dasselbe für offene Objekte der Spec (Klassen nur mit <c>AdditionalProperties</c>, z. B. <c>profile.accounts</c>):
+/// <c>[]</c> wird ein leeres Objekt. Ohne das scheitert z. B. jedes Profil ohne verknüpfte Konten.
+/// </summary>
+internal sealed class EmptyArrayAsOpenObjectConverterFactory : JsonConverterFactory
+{
+    private static readonly System.Collections.Concurrent.ConcurrentDictionary<Type, System.Reflection.PropertyInfo?> s_extension = new();
+
+    internal static System.Reflection.PropertyInfo? ExtensionProperty(Type type) => s_extension.GetOrAdd(type, static t =>
+    {
+        if (!t.IsClass || t.Namespace != typeof(RoGApiClient).Namespace || t.GetConstructor(Type.EmptyTypes) is null)
+        {
+            return null;
+        }
+
+        var props = t.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+        return props.Length == 1
+            && props[0].PropertyType == typeof(IDictionary<string, object>)
+            && props[0].IsDefined(typeof(JsonExtensionDataAttribute), inherit: false)
+            ? props[0]
+            : null;
+    });
+
+    public override bool CanConvert(Type typeToConvert) => ExtensionProperty(typeToConvert) is not null;
+
+    public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options) =>
+        (JsonConverter)Activator.CreateInstance(typeof(Converter<>).MakeGenericType(typeToConvert))!;
+
+    private sealed class Converter<T> : JsonConverter<T>
+        where T : class, new()
+    {
+        private static readonly System.Reflection.PropertyInfo s_property = ExtensionProperty(typeof(T))!;
+
+        public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            switch (reader.TokenType)
+            {
+                case JsonTokenType.Null:
+                    return null;
+                case JsonTokenType.StartArray:
+                    reader.Skip();
+                    return new T();
+                case JsonTokenType.StartObject:
+                    var values = new Dictionary<string, object>();
+                    using (var doc = JsonDocument.ParseValue(ref reader))
+                    {
+                        foreach (var p in doc.RootElement.EnumerateObject())
+                        {
+                            values[p.Name] = p.Value.Clone();
+                        }
+                    }
+
+                    var result = new T();
+                    s_property.SetValue(result, values);
+                    return result;
+                default:
+                    throw new JsonException($"Objekt erwartet, {reader.TokenType} gefunden.");
+            }
+        }
+
+        public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+        {
+            writer.WriteStartObject();
+            if (s_property.GetValue(value) is IDictionary<string, object> values)
+            {
+                foreach (var (key, item) in values)
+                {
+                    writer.WritePropertyName(key);
+                    JsonSerializer.Serialize(writer, item, options);
+                }
             }
 
             writer.WriteEndObject();

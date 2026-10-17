@@ -35,7 +35,8 @@
                 <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind ViewModel.ResourcesText, Mode=OneWay}" />
             </StackPanel>
             <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" Visibility="{x:Bind ViewModel.CanPower}">
-                <Button x:Uid="Console_Start" Command="{x:Bind ViewModel.StartServerCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                <Button x:Uid="Console_Start" Command="{x:Bind ViewModel.StartServerCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" Visibility="{x:Bind ViewModel.IsStopped, Mode=OneWay}" />
+                <Button x:Uid="Console_StartSecondary" Command="{x:Bind ViewModel.StartServerCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" Visibility="{x:Bind ViewModel.IsRunning, Mode=OneWay}" />
                 <Button x:Uid="Console_Restart" Command="{x:Bind ViewModel.RestartServerCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
                 <Button x:Uid="Console_Stop" Command="{x:Bind ViewModel.StopServerCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
                 <Button x:Uid="Console_Kill" Click="OnKillClick" Style="{StaticResource RoGSecondaryButtonStyle}" />
@@ -49,7 +50,14 @@
             Message="{x:Bind ViewModel.FeedbackMessage, Mode=OneWay}"
             Severity="{x:Bind ViewModel.FeedbackSeverity, Mode=OneWay}" />
 
-        <SelectorBar x:Name="Tabs" Grid.Row="3" Margin="12,0" SelectionChanged="OnTabChanged">
+        <!-- Reiter waagrecht scrollbar: im schmalen Fenster sonst abgeschnitten -->
+        <ScrollViewer
+            Grid.Row="3"
+            HorizontalScrollBarVisibility="Auto"
+            HorizontalScrollMode="Enabled"
+            VerticalScrollBarVisibility="Disabled"
+            VerticalScrollMode="Disabled">
+        <SelectorBar x:Name="Tabs" Margin="12,0" SelectionChanged="OnTabChanged">
             <SelectorBarItem x:Name="ConsoleTab" x:Uid="Console_TabConsole" />
             <SelectorBarItem x:Name="ConfigsTab" x:Uid="Console_TabConfigs" />
             <SelectorBarItem x:Name="FilesTab" x:Uid="Console_TabFiles" />
@@ -59,15 +67,25 @@
             <SelectorBarItem x:Name="WhitelistTab" x:Uid="Console_TabWhitelist" />
             <SelectorBarItem x:Name="ApprovalsTab" x:Uid="Console_TabApprovals" />
         </SelectorBar>
+        </ScrollViewer>
 
         <Grid x:Name="ConsolePanel" Grid.Row="4">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
+            <TextBlock
+                Margin="16,8,16,0"
+                AutomationProperties.LiveSetting="Polite"
+                FontSize="12"
+                Style="{StaticResource RoGMutedTextStyle}"
+                Text="{x:Bind ViewModel.ConnectionText, Mode=OneWay}"
+                TextWrapping="Wrap" />
             <ListView
                 x:Name="Output"
                 x:Uid="Console_Output"
+                Grid.Row="1"
                 Margin="16,8"
                 Padding="8"
                 Background="{StaticResource RoGBg2Brush}"
@@ -88,7 +106,7 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Grid Grid.Row="1" Padding="16,0,16,16" ColumnSpacing="8">
+            <Grid Grid.Row="2" Padding="16,0,16,16" ColumnSpacing="8">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />

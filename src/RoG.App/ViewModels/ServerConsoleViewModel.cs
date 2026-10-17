@@ -54,6 +54,20 @@ public sealed partial class ServerConsoleViewModel : ObservableObject, IAsyncDis
     [ObservableProperty]
     public partial string ResourcesText { get; set; } = string.Empty;
 
+    /// <summary>Verbindung der Live-Konsole: „Verbinde …“, „Verbunden“, „Getrennt“, „Demo-Server“, „Kein Zugriff“.</summary>
+    [ObservableProperty]
+    public partial string ConnectionText { get; set; } = string.Empty;
+
+    /// <summary>Server läuft – dann ist „Start“ nicht die Hauptaktion.</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsStopped))]
+    public partial bool IsRunning { get; set; }
+
+    public bool IsStopped => !IsRunning;
+
+    private int _retries;
+    private bool _closing;
+
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanCommand))]
     public partial bool IsConnected { get; set; }
@@ -88,21 +102,41 @@ public sealed partial class ServerConsoleViewModel : ObservableObject, IAsyncDis
         {
             await ConnectAsync();
         }
+        else
+        {
+            ConnectionText = _services.Localizer.GetString(StringKeys.ConsoleNoAccess);
+        }
     }
 
     [RelayCommand]
     private async Task ConnectAsync()
     {
+        _retries = 0;
+        await OpenAsync();
+    }
+
+    private async Task OpenAsync()
+    {
         if (_console is not null)
         {
-            await _console.DisposeAsync();
+            var old = _console;
             _console = null;
+            await old.DisposeAsync();
         }
+
+        var l = _services.Localizer;
+        ConnectionText = l.GetString(StringKeys.ConsoleConnecting);
 
         var userAgent = $"RoG-Windows/{AppServices.AppVersion}";
         var console = new ConsoleClient(ct => _control.GetConsoleTicketAsync(_slug, ct), origin => new ClientWebSocketConnection(userAgent, origin));
         console.Output += (_, line) => OnUi(() => AddLine(line));
-        console.StatusChanged += (_, state) => OnUi(() => StateText = StateLabel(state));
+        console.StatusChanged += (_, state) => OnUi(() => SetState(state));
+        console.Authenticated += (_, _) => OnUi(() =>
+        {
+            _retries = 0;
+            ConnectionText = l.GetString(StringKeys.ConsoleConnected);
+        });
+        console.Error += (_, text) => OnUi(() => AddLine("[Wings] " + text));
         console.Stats += (_, json) =>
         {
             if (ServerResources.FromWingsStats(json) is { } r)
@@ -112,10 +146,24 @@ public sealed partial class ServerConsoleViewModel : ObservableObject, IAsyncDis
         };
         console.Disconnected += (_, error) => OnUi(() =>
         {
+            if (!ReferenceEquals(_console, console) || _closing)
+            {
+                return; // altes Socket nach „Neu verbinden“ oder Fenster zu
+            }
+
             IsConnected = false;
+            ConnectionText = l.GetString(StringKeys.ConsoleLost);
             if (error is not null)
             {
-                Show(_services.Localizer.GetString(StringKeys.ConsoleDisconnected), InfoBarSeverity.Warning);
+                AddLine("[RoG] " + error.Message);
+            }
+
+            // wie die Website: bis zu dreimal mit wachsendem Abstand neu verbinden
+            if (_retries < 3)
+            {
+                _retries++;
+                ConnectionText = l.GetString(StringKeys.ConsoleReconnecting);
+                _ = ReconnectLaterAsync(TimeSpan.FromSeconds(1.5 * _retries));
             }
         });
 
@@ -124,18 +172,43 @@ public sealed partial class ServerConsoleViewModel : ObservableObject, IAsyncDis
             await console.ConnectAsync();
             _console = console;
             Level = console.Level;
+            if (console.IsDemo)
+            {
+                ConnectionText = l.GetString(StringKeys.ConsoleDemo);
+                return;
+            }
+
             IsConnected = true;
         }
         catch (ApiProblemException ex)
         {
             await console.DisposeAsync();
-            Show(_services.Localizer.GetError(ex.Problem.Code), InfoBarSeverity.Error);
+            ConnectionText = l.GetError(ex.Problem.Code);
+            AddLine("[RoG] " + ConnectionText);
         }
-        catch (Exception ex) when (ex is RoG.Core.Api.Generated.GeneratedApiException or System.Net.WebSockets.WebSocketException or HttpRequestException)
+#pragma warning disable CA1031 // jeder Verbindungsfehler wird angezeigt, statt die Konsole leer zu lassen
+        catch (Exception ex)
+#pragma warning restore CA1031
         {
             await console.DisposeAsync();
-            Show(_services.Localizer.GetString(StringKeys.ConsoleDisconnected), InfoBarSeverity.Error);
+            ConnectionText = l.GetString(StringKeys.ConsoleLost);
+            AddLine("[RoG] " + ex.Message);
         }
+    }
+
+    private async Task ReconnectLaterAsync(TimeSpan delay)
+    {
+        await Task.Delay(delay);
+        if (!_closing)
+        {
+            OnUi(() => _ = OpenAsync());
+        }
+    }
+
+    private void SetState(string state)
+    {
+        StateText = StateLabel(state);
+        IsRunning = state is "running" or "starting";
     }
 
     private bool CanSend() => !string.IsNullOrWhiteSpace(Command);
@@ -219,7 +292,7 @@ public sealed partial class ServerConsoleViewModel : ObservableObject, IAsyncDis
 
     private void ShowResources(ServerResources r)
     {
-        StateText = StateLabel(r.State);
+        SetState(r.State);
         var memory = r.MemoryLimit is { } limit ? $"{Mb(r.Memory)} / {Mb(limit)}" : Mb(r.Memory);
         ResourcesText = string.Format(CultureInfo.CurrentCulture, _services.Localizer.GetString(StringKeys.ConsoleResources),
             r.CpuPercent.ToString("0.0", CultureInfo.CurrentCulture), memory, Mb(r.Disk), Uptime(r.Uptime));
@@ -266,6 +339,7 @@ public sealed partial class ServerConsoleViewModel : ObservableObject, IAsyncDis
 
     public async ValueTask DisposeAsync()
     {
+        _closing = true;
         if (_console is { } console)
         {
             _console = null;

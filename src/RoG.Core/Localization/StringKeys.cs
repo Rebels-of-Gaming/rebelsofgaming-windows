@@ -674,6 +674,18 @@ public static class StringKeys
 
     public const string MediaAdminUploadKept = "MediaAdmin_UploadKept";
 
+    public const string ConsoleNoAccess = "Console_NoAccess";
+
+    public const string ConsoleConnecting = "Console_Connecting";
+
+    public const string ConsoleConnected = "Console_Connected";
+
+    public const string ConsoleReconnecting = "Console_Reconnecting";
+
+    public const string ConsoleLost = "Console_Lost";
+
+    public const string ConsoleDemo = "Console_Demo";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

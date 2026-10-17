@@ -1,9 +1,11 @@
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Runtime.InteropServices.WindowsRuntime;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Imaging;
 using RoG.App.Services;
 using RoG.Core.Api;
 using RoG.Core.Features.Messages;
@@ -228,7 +230,8 @@ public sealed partial class ChatMessageViewModel(ChatMessage message, bool isOwn
     /// <summary>„Antwort an …“-Leiste über der Eingabe.</summary>
     public string ReplyPreview => $"↩ {Author}: {Body}";
 
-    public string Attachments { get; } = string.Join(", ", message.Attachments.Select(a => a.Name));
+    /// <summary>Anhänge: Bilder mit Vorschau, andere Dateien als Knopf (öffnet den kurzlebigen Link im Browser).</summary>
+    public IReadOnlyList<ChatAttachmentViewModel> Attachments { get; } = message.Attachments.Select(a => new ChatAttachmentViewModel(a)).ToList();
 
     public bool HasAttachments => message.Attachments.Count > 0;
 
@@ -258,6 +261,71 @@ public sealed partial class ChatMessageViewModel(ChatMessage message, bool isOwn
             App.Services.Clipboard.SetText(message.Body ?? string.Empty);
         }
 #pragma warning disable CA1031 // Zwischenablage kann gesperrt sein
+        catch (Exception)
+#pragma warning restore CA1031
+        {
+        }
+    }
+}
+
+/// <summary>Anhang einer Nachricht; die Bildvorschau lädt beim ersten Anzeigen.</summary>
+public sealed partial class ChatAttachmentViewModel(ChatAttachment attachment) : ObservableObject
+{
+    private bool _loading;
+
+    public string Name => attachment.Name;
+
+    public string SizeText { get; } = attachment.Size >= 1024 * 1024
+        ? $"{attachment.Size / 1048576.0:0.0} MB"
+        : $"{Math.Max(1, attachment.Size / 1024)} KB";
+
+    public bool CanPreview { get; } = AttachmentService.CanPreview(attachment);
+
+    public bool IsFile => !CanPreview;
+
+    public string AutomationName => $"{attachment.Name}, {SizeText}";
+
+    [ObservableProperty]
+    public partial ImageSource? Preview { get; set; }
+
+    /// <summary>Vom Bild-Element beim Laden aufgerufen – lädt die Vorschau nur einmal.</summary>
+    public async Task LoadPreviewAsync()
+    {
+        if (!CanPreview || _loading || Preview is not null)
+        {
+            return;
+        }
+
+        _loading = true;
+        try
+        {
+            var content = await new AttachmentService(App.Services.Api.Http).LoadAsync(attachment.Id);
+            using var stream = new Windows.Storage.Streams.InMemoryRandomAccessStream();
+            await stream.WriteAsync(content.Bytes.AsBuffer());
+            stream.Seek(0);
+            var image = new BitmapImage { DecodePixelWidth = 480 };
+            await image.SetSourceAsync(stream);
+            Preview = image;
+        }
+#pragma warning disable CA1031 // Vorschau ist Beiwerk – der Knopf zum Öffnen bleibt
+        catch (Exception)
+#pragma warning restore CA1031
+        {
+            _loading = false;
+        }
+    }
+
+    [RelayCommand]
+    private async Task OpenAsync()
+    {
+        try
+        {
+            if (await new AttachmentService(App.Services.Api.Http).LinkAsync(attachment.Id) is { } url)
+            {
+                await App.Services.Browser.OpenAsync(url);
+            }
+        }
+#pragma warning disable CA1031 // gelöscht, kein Recht oder offline – nichts öffnen
         catch (Exception)
 #pragma warning restore CA1031
         {

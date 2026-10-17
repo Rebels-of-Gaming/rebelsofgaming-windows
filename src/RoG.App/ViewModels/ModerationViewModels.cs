@@ -18,6 +18,7 @@ public sealed partial class ModerationViewModel(AppServices services) : Observab
 {
     private readonly ModerationService _moderation = new(services.Api.Client);
     private string? _reportsCursor;
+    private int _loadGeneration;
 
     public AppServices Services => services;
 
@@ -99,7 +100,13 @@ public sealed partial class ModerationViewModel(AppServices services) : Observab
             return;
         }
 
-        SelectedStatus ??= StatusOptions[0];
+        if (SelectedStatus is null)
+        {
+            SelectedStatus = StatusOptions[0]; // lädt über OnSelectedStatusChanged – sonst liefe das Laden doppelt
+            return;
+        }
+
+        var generation = reset ? ++_loadGeneration : _loadGeneration;
         if (reset)
         {
             _reportsCursor = null;
@@ -109,6 +116,11 @@ public sealed partial class ModerationViewModel(AppServices services) : Observab
         await RunAsync(async () =>
         {
             var page = await _moderation.ReportsAsync(SelectedStatus.Value, _reportsCursor);
+            if (generation != _loadGeneration)
+            {
+                return; // inzwischen neu gefiltert
+            }
+
             foreach (var r in page.Items)
             {
                 Reports.Add(new ReportItemViewModel(r, this, services.Localizer));

@@ -144,7 +144,8 @@
                             </ItemsRepeater.ItemTemplate>
                         </ItemsRepeater>
                         <TextBlock Margin="0,8,0,0" Style="{StaticResource RoGSectionTextStyle}" Text="{x:Bind ViewModel.DayTitle, Mode=OneWay}" />
-                        <ListView ItemsSource="{x:Bind ViewModel.DayEvents}" SelectedItem="{x:Bind ViewModel.Selected, Mode=TwoWay}" SelectionMode="Single">
+                        <!-- Klick statt SelectedItem-Bindung: die Liste enthält den gewählten Termin oft nicht und würde die Auswahl sonst leeren -->
+                        <ListView IsItemClickEnabled="True" ItemClick="OnDayEventClick" ItemsSource="{x:Bind ViewModel.DayEvents}" SelectionMode="None">
                             <ListView.ItemTemplate>
                                 <DataTemplate x:DataType="vm:EventRowViewModel">
                                     <StackPanel Padding="0,4" AutomationProperties.Name="{x:Bind Title}">

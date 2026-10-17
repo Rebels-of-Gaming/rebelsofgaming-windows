@@ -65,4 +65,12 @@ public sealed partial class ChatView : UserControl
             }
         }
     }
+
+    private void OnAttachmentImageLoaded(object sender, RoutedEventArgs e)
+    {
+        if (sender is FrameworkElement { DataContext: ChatAttachmentViewModel attachment })
+        {
+            _ = attachment.LoadPreviewAsync();
+        }
+    }
 }

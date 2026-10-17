@@ -118,7 +118,7 @@ public sealed class SquadItemViewModel(SquadSummary squad, ILocalizer localizer)
 
     public string Name => squad.Name;
 
-    public string Subtitle { get; } = string.Join(" · ", new[] { squad.GameName, squad.ClanTag, squad.Tagline }.Where(s => !string.IsNullOrEmpty(s)));
+    public string Subtitle { get; } = string.Join(" · ", new[] { squad.GameName, squad.ClanTagText, squad.Tagline }.Where(s => !string.IsNullOrEmpty(s)));
 
     public ImageSource? Logo { get; } = squad.Logo is null ? null : new BitmapImage(squad.Logo) { DecodePixelWidth = 96 };
 
@@ -157,6 +157,9 @@ public sealed partial class SquadDetailViewModel(AppServices services, SquadServ
 
     [ObservableProperty]
     public partial string? TrainingTimes { get; set; }
+
+    [ObservableProperty]
+    public partial bool HasTrainingTimes { get; set; }
 
     [ObservableProperty]
     public partial string? ClanInfo { get; set; }
@@ -321,10 +324,11 @@ public sealed partial class SquadDetailViewModel(AppServices services, SquadServ
         RecruitingBrush = BrushForRecruiting(s.Recruiting);
         CanApply = s.Recruiting is Recruiting.Open or Recruiting.Waitlist && await Services.Tokens.GetAsync(cancellationToken) is not null;
         Description = detail.Description;
-        TrainingTimes = detail.TrainingTimes;
-        ClanInfo = detail.ClanName is null && s.ClanTag is null
+        TrainingTimes = string.IsNullOrWhiteSpace(detail.TrainingTimes) ? null : detail.TrainingTimes;
+        HasTrainingTimes = TrainingTimes is not null;
+        ClanInfo = detail.ClanName is null && s.ClanTagText is null
             ? null
-            : string.Join(" · ", new[] { s.ClanTag, detail.ClanName, detail.ClanLevel is { } level ? Format(StringKeys.SquadsClanLevel, level) : null, detail.ClanRequirements }.Where(x => !string.IsNullOrEmpty(x)));
+            : string.Join(" · ", new[] { s.ClanTagText, detail.ClanName, detail.ClanLevel is { } level ? Format(StringKeys.SquadsClanLevel, level) : null, detail.ClanRequirements }.Where(x => !string.IsNullOrEmpty(x)));
 
         Links.Clear();
         foreach (var link in detail.Links)
@@ -345,6 +349,12 @@ public sealed partial class SquadDetailViewModel(AppServices services, SquadServ
         catch (Exception ex) when (ex is RoG.Core.Api.ApiProblemException or RoG.Core.Api.Generated.GeneratedApiException)
         {
             // Line-up ist Beiwerk – die Squad-Seite bleibt sichtbar
+        }
+
+        // Wer schon im Squad ist (auch als Leitung), bewirbt sich nicht noch einmal
+        if (Services.CurrentUser is { } me && Members.Any(m => m.Slug == me.Slug))
+        {
+            CanApply = false;
         }
 
         HasMembers = Members.Count > 0;

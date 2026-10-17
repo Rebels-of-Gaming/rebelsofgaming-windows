@@ -16,6 +16,7 @@ public sealed partial class MembersAdminViewModel(AppServices services, Action<s
 {
     private readonly MemberAdminService _admin = new(services.Api.Client);
     private string? _cursor;
+    private int _loadGeneration;
     private bool _rolesLoaded;
 
     public bool CanView => services.CurrentUser is { } me && me.CanAnywhere("members.view") && me.HasScope("members:read");
@@ -84,7 +85,13 @@ public sealed partial class MembersAdminViewModel(AppServices services, Action<s
             return;
         }
 
-        SelectedStatus ??= StatusOptions[0];
+        if (SelectedStatus is null)
+        {
+            SelectedStatus = StatusOptions[0]; // lädt über OnSelectedStatusChanged – sonst liefe das Laden doppelt
+            return;
+        }
+
+        var generation = reset ? ++_loadGeneration : _loadGeneration;
         if (reset)
         {
             _cursor = null;
@@ -94,6 +101,11 @@ public sealed partial class MembersAdminViewModel(AppServices services, Action<s
         await RunAsync(async () =>
         {
             var page = await _admin.ListAsync(Search, SelectedStatus.Value, _cursor);
+            if (generation != _loadGeneration)
+            {
+                return; // inzwischen neu gefiltert
+            }
+
             foreach (var m in page.Items)
             {
                 Items.Add(new MemberAdminRowViewModel(m));

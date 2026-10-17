@@ -37,6 +37,20 @@ public sealed partial class VoiceViewModel(AppServices services) : LoadableViewM
     /// <summary>Geladen, aber niemand im Discord-Voice.</summary>
     public bool ShowDiscordEmpty => !IsLoading && !HasError && !HasDiscord;
 
+    /// <summary>TeamSpeak geladen, aber (ohne leere Kanäle) nichts zu zeigen – niemand online.</summary>
+    public bool ShowTeamSpeakEmpty => !IsLoading && !HasError && _ts is not null && TeamSpeakRows.Count == 0;
+
+    // Leerzustände hängen am Laden/Fehler der Basisklasse
+    protected override void OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        base.OnPropertyChanged(e);
+        if (e.PropertyName is nameof(IsLoading) or nameof(ErrorMessage))
+        {
+            base.OnPropertyChanged(new System.ComponentModel.PropertyChangedEventArgs(nameof(ShowTeamSpeakEmpty)));
+            base.OnPropertyChanged(new System.ComponentModel.PropertyChangedEventArgs(nameof(ShowDiscordEmpty)));
+        }
+    }
+
     [ObservableProperty]
     public partial bool ShowEmptyChannels { get; set; }
 
@@ -112,6 +126,7 @@ public sealed partial class VoiceViewModel(AppServices services) : LoadableViewM
         }
 
         DataChanged();
+        OnPropertyChanged(nameof(ShowTeamSpeakEmpty));
     }
 
     private void Add(TsChannel channel, int depth)

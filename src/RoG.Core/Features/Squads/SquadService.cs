@@ -24,7 +24,11 @@ public sealed record SquadSummary(
     Uri? Logo,
     Uri? Header,
     string? LeaderName,
-    string? ClanTag);
+    string? ClanTag)
+{
+    /// <summary>Clan-Tag zum Anzeigen – ohne ET-Farbcodes (<see cref="ClanTag"/> bleibt roh fürs Bearbeiten).</summary>
+    public string? ClanTagText => Content.GameText.StripColors(ClanTag);
+}
 
 /// <summary>Einladungs-, Ref- oder Store-Link eines Squads.</summary>
 public sealed record SquadLink(string Label, Uri Url, string? Code);

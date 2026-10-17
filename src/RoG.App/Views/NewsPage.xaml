@@ -66,7 +66,17 @@
                                     VerticalAlignment="Top"
                                     Background="{StaticResource RoGBg3Brush}"
                                     CornerRadius="{StaticResource RoGControlRadius}">
-                                    <Image Source="{x:Bind Cover}" Stretch="UniformToFill" AutomationProperties.AccessibilityView="Raw" />
+                                    <Grid>
+                                        <!-- ohne Titelbild: RoG-Abzeichen statt leerer Fläche -->
+                                        <Image
+                                            Width="36"
+                                            Height="36"
+                                            Opacity="0.35"
+                                            Source="ms-appx:///Assets/rog-badge-512.png"
+                                            Visibility="{x:Bind HasNoCover}"
+                                            AutomationProperties.AccessibilityView="Raw" />
+                                        <Image Source="{x:Bind Cover}" Stretch="UniformToFill" AutomationProperties.AccessibilityView="Raw" />
+                                    </Grid>
                                 </Border>
                                 <StackPanel Grid.Column="1" Spacing="2">
                                     <TextBlock

@@ -46,14 +46,15 @@
             <StackPanel Spacing="16">
                 <ItemsRepeater ItemsSource="{x:Bind Overview.Kpis}">
                     <ItemsRepeater.Layout>
-                        <UniformGridLayout MinColumnSpacing="12" MinItemHeight="88" MinItemWidth="180" MinRowSpacing="12" />
+                        <!-- UniformGridLayout misst nur das erste Element: Höhe für zwei Zeilen Beschriftung reservieren -->
+                        <UniformGridLayout ItemsStretch="Fill" MinColumnSpacing="12" MinItemHeight="124" MinItemWidth="200" MinRowSpacing="12" />
                     </ItemsRepeater.Layout>
                     <ItemsRepeater.ItemTemplate>
                         <DataTemplate x:DataType="admin:Kpi">
                             <Border Style="{StaticResource RoGCardStyle}" AutomationProperties.Name="{x:Bind Label}">
                                 <StackPanel Spacing="4">
+                                    <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Label}" TextWrapping="Wrap" MaxLines="2" />
                                     <TextBlock FontFamily="{StaticResource RoGDisplaySemiBoldFont}" FontSize="32" Foreground="{StaticResource RoGInkBrush}" Text="{x:Bind Value}" />
-                                    <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Label}" TextTrimming="CharacterEllipsis" />
                                 </StackPanel>
                             </Border>
                         </DataTemplate>

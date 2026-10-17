@@ -151,6 +151,8 @@ public sealed class NewsItemViewModel(NewsSummary news)
     public ImageSource? Cover { get; } = news.Cover is null ? null : new BitmapImage(news.Cover) { DecodePixelWidth = 640 };
 
     public bool HasCover => news.Cover is not null;
+
+    public bool HasNoCover => news.Cover is null;
 }
 
 /// <summary>Ein geöffneter Artikel.</summary>

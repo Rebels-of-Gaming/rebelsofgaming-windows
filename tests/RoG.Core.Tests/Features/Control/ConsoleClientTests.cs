@@ -75,6 +75,60 @@ public class ConsoleClientTests
         Assert.Null(await closed.Task.WaitAsync(TimeSpan.FromSeconds(5)));
     }
 
+    [Fact]
+    public async Task Auth_success_requests_logs_and_stats_and_reports_it()
+    {
+        var socket = new FakeWebSocket();
+        await using var client = new ConsoleClient(_ => Task.FromResult(Ticket("t")), _ => socket);
+        var authenticated = new TaskCompletionSource();
+        client.Authenticated += (_, _) => authenticated.TrySetResult();
+
+        await client.ConnectAsync();
+        await socket.NextSentAsync("auth");
+        socket.ServerSends("""{"event":"auth success"}""");
+        var logs = await socket.NextSentAsync("send logs");
+        await socket.NextSentAsync("send stats");
+        await authenticated.Task.WaitAsync(TimeSpan.FromSeconds(5));
+
+        Assert.Equal(System.Text.Json.JsonValueKind.Null, logs.GetProperty("args")[0].ValueKind);
+    }
+
+    [Fact]
+    public async Task Daemon_error_and_repeated_jwt_error_are_reported()
+    {
+        var socket = new FakeWebSocket();
+        await using var client = new ConsoleClient(_ => Task.FromResult(Ticket("t")), _ => socket);
+        var errors = new List<string>();
+        var third = new TaskCompletionSource();
+        client.Error += (_, e) => { errors.Add(e); if (errors.Count == 2) { third.TrySetResult(); } };
+
+        await client.ConnectAsync();
+        await socket.NextSentAsync("auth");
+        socket.ServerSends("""{"event":"daemon error","args":["Server is offline"]}""");
+        socket.ServerSends("""{"event":"jwt error","args":["bad"]}""");
+        await socket.NextSentAsync("auth"); // erster jwt error: neues Token
+        socket.ServerSends("""{"event":"jwt error","args":["bad"]}""");
+        await socket.NextSentAsync("auth");
+        socket.ServerSends("""{"event":"jwt error","args":["bad"]}""");
+        await third.Task.WaitAsync(TimeSpan.FromSeconds(5));
+
+        Assert.Equal(["Server is offline", "bad"], errors);
+    }
+
+    [Fact]
+    public async Task Demo_ticket_does_not_open_a_socket()
+    {
+        var opened = false;
+        await using var client = new ConsoleClient(
+            _ => Task.FromResult(new ConsoleTicket("t", new Uri("wss://demo.invalid/ws"), null, ConsoleLevel.Read, Demo: true)),
+            _ => { opened = true; return new FakeWebSocket(); });
+
+        await client.ConnectAsync();
+
+        Assert.True(client.IsDemo);
+        Assert.False(opened);
+    }
+
     [Theory]
     [InlineData("\u001b[1;31mFehler\u001b[0m", "Fehler")]
     [InlineData("plain", "plain")]

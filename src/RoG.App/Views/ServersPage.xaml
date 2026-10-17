@@ -164,8 +164,10 @@
                     Style="{StaticResource RoGPrimaryButtonStyle}" />
             </Grid>
             <controls:StateView
+                x:Uid="ServersPage_TsState"
                 Grid.Row="1"
                 ErrorMessage="{x:Bind Voice.ErrorMessage, Mode=OneWay}"
+                IsEmpty="{x:Bind Voice.ShowTeamSpeakEmpty, Mode=OneWay}"
                 IsLoading="{x:Bind Voice.IsLoading, Mode=OneWay}"
                 RetryCommand="{x:Bind Voice.RefreshCommand}" />
             <ListView

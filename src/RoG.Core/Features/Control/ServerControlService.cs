@@ -125,12 +125,29 @@ public sealed partial class ConsoleClient(Func<CancellationToken, Task<ConsoleTi
 
     public event EventHandler<Exception?>? Disconnected;
 
+    /// <summary>Wings hat das Token angenommen – ab jetzt kommen Log, Status und Statistik.</summary>
+    public event EventHandler? Authenticated;
+
+    /// <summary>Fehler von Wings (<c>daemon error</c>) oder Token dauerhaft abgelehnt (<c>jwt error</c>) – Text für die Anzeige.</summary>
+    public event EventHandler<string>? Error;
+
     public ConsoleLevel Level { get; private set; }
+
+    /// <summary>Demo-Server: es gibt keinen echten Node, also keine Verbindung (die Website zeigt dann Beispielzeilen).</summary>
+    public bool IsDemo { get; private set; }
+
+    private int _jwtErrors;
 
     public async Task ConnectAsync(CancellationToken cancellationToken = default)
     {
         var ticket = await _renew(cancellationToken).ConfigureAwait(false);
         Level = ticket.Level;
+        IsDemo = ticket.Demo;
+        if (ticket.Demo)
+        {
+            return;
+        }
+
         _socket = socketFactory(ticket.Origin);
         await _socket.ConnectAsync(ticket.Socket, cancellationToken).ConfigureAwait(false);
         await SendEventAsync("auth", ticket.Token, cancellationToken).ConfigureAwait(false);
@@ -144,10 +161,11 @@ public sealed partial class ConsoleClient(Func<CancellationToken, Task<ConsoleTi
     /// <summary>Verlauf beim Verbinden anfordern (Wings schickt die letzten Zeilen als <c>console output</c>).</summary>
     public Task RequestLogsAsync(CancellationToken cancellationToken = default) => SendEventAsync("send logs", null, cancellationToken);
 
+    // Wie die Website: Ereignisse ohne Argument mit `[null]` (Wings erwartet ein Feld)
     private async Task SendEventAsync(string name, string? arg, CancellationToken cancellationToken)
     {
         var socket = _socket ?? throw new InvalidOperationException("Nicht verbunden.");
-        var payload = JsonSerializer.Serialize(new { @event = name, args = arg is null ? Array.Empty<string>() : new[] { arg } });
+        var payload = JsonSerializer.Serialize(new { @event = name, args = new[] { arg } });
         await socket.SendAsync(payload, cancellationToken).ConfigureAwait(false);
     }
 
@@ -203,6 +221,9 @@ public sealed partial class ConsoleClient(Func<CancellationToken, Task<ConsoleTi
             case "console output" or "install output" or "daemon message" when arg is not null:
                 Output?.Invoke(this, StripAnsi(arg));
                 break;
+            case "daemon error":
+                Error?.Invoke(this, StripAnsi(arg ?? name));
+                break;
             case "status" when arg is not null:
                 StatusChanged?.Invoke(this, arg);
                 break;
@@ -210,9 +231,16 @@ public sealed partial class ConsoleClient(Func<CancellationToken, Task<ConsoleTi
                 Stats?.Invoke(this, arg);
                 break;
             case "auth success":
+                _jwtErrors = 0;
+                Authenticated?.Invoke(this, EventArgs.Empty);
                 await RequestLogsAsync(cancellationToken).ConfigureAwait(false);
+                await SendEventAsync("send stats", null, cancellationToken).ConfigureAwait(false);
                 break;
-            case "token expiring" or "token expired":
+            case "jwt error" when ++_jwtErrors > 2:
+                // Token wird immer wieder abgelehnt (z. B. Uhrzeit oder Origin falsch) – nicht endlos neu versuchen
+                Error?.Invoke(this, arg ?? name);
+                break;
+            case "token expiring" or "token expired" or "jwt error":
                 var ticket = await _renew(cancellationToken).ConfigureAwait(false);
                 Level = ticket.Level;
                 await SendEventAsync("auth", ticket.Token, cancellationToken).ConfigureAwait(false);

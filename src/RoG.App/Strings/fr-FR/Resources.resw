@@ -119,12 +119,6 @@
   <data name="Error_validation_failed" xml:space="preserve">
     <value>Merci de vérifier ta saisie.</value>
   </data>
-  <data name="HomePage_ComingSoonText.Text" xml:space="preserve">
-    <value>L’app Windows grandit : actus, squads, membres, événements, serveurs avec « Se connecter » et matchs sont là – messages, forum et wiki arrivent.</value>
-  </data>
-  <data name="HomePage_ComingSoonTitle.Text" xml:space="preserve">
-    <value>EN CONSTRUCTION</value>
-  </data>
   <data name="HomePage_GuestHint.Message" xml:space="preserve">
     <value>Tu vois le contenu public. Connecte-toi dans « Compte » pour tout utiliser.</value>
   </data>
@@ -594,10 +588,10 @@
     <value>COMPTES DE JEU</value>
   </data>
   <data name="Events_Counts" xml:space="preserve">
-    <value>{0} participants · {1} peut-être</value>
+    <value>Participants : {0} · peut-être : {1}</value>
   </data>
   <data name="Events_CountsMax" xml:space="preserve">
-    <value>{0} participants · {1} peut-être · {2} places</value>
+    <value>Participants : {0} · peut-être : {1} · places : {2}</value>
   </data>
   <data name="Events_Cancelled" xml:space="preserve">
     <value>Annulé</value>
@@ -2538,7 +2532,7 @@
     <value>NOUVEL ÉVÉNEMENT</value>
   </data>
   <data name="EventsPage_Cancel.Content" xml:space="preserve">
-    <value>Annuler</value>
+    <value>Annuler l’événement</value>
   </data>
   <data name="EventsPage_Delete.Content" xml:space="preserve">
     <value>Supprimer</value>
@@ -2703,7 +2697,7 @@
     <value>Liste blanche</value>
   </data>
   <data name="Config_Template.Content" xml:space="preserve">
-    <value>Formulaire</value>
+    <value>FORMULAIRE</value>
   </data>
   <data name="Files_Up.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Dossier parent</value>
@@ -2745,7 +2739,7 @@
     <value>Nom du joueur</value>
   </data>
   <data name="Whitelist_Add.Content" xml:space="preserve">
-    <value>Ajouter</value>
+    <value>AJOUTER</value>
   </data>
   <data name="Whitelist_Remove.Content" xml:space="preserve">
     <value>Retirer</value>
@@ -2802,7 +2796,7 @@
     <value>Catégories</value>
   </data>
   <data name="WikiPage_NewPage.Content" xml:space="preserve">
-    <value>Nouvelle page</value>
+    <value>NOUVELLE PAGE</value>
   </data>
   <data name="WikiPage_BackToCategories.Content" xml:space="preserve">
     <value>← Catégories</value>
@@ -2811,7 +2805,7 @@
     <value>Sommaire</value>
   </data>
   <data name="WikiPage_InsertImage.Content" xml:space="preserve">
-    <value>Insérer une image</value>
+    <value>INSÉRER UNE IMAGE</value>
   </data>
   <data name="SquadAdmin_Saved" xml:space="preserve">
     <value>Enregistré.</value>
@@ -2868,7 +2862,7 @@
     <value>Complet</value>
   </data>
   <data name="SquadsPage_Manage.Content" xml:space="preserve">
-    <value>Gérer</value>
+    <value>GÉRER</value>
   </data>
   <data name="SquadAdmin_TabProfile.Text" xml:space="preserve">
     <value>Profil</value>
@@ -2907,28 +2901,28 @@
     <value>Exigences</value>
   </data>
   <data name="SquadAdmin_Save.Content" xml:space="preserve">
-    <value>Enregistrer</value>
+    <value>ENREGISTRER</value>
   </data>
   <data name="SquadAdmin_ImagesTitle.Text" xml:space="preserve">
-    <value>Logo et bannière</value>
+    <value>LOGO ET BANNIÈRE</value>
   </data>
   <data name="SquadAdmin_ImagesHint.Text" xml:space="preserve">
     <value>Bannière d’au moins 1200 × 400 px, logo d’au moins 128 × 128 px. L’image est enregistrée publiquement dans ta bibliothèque.</value>
   </data>
   <data name="SquadAdmin_SetLogo.Content" xml:space="preserve">
-    <value>Choisir un logo …</value>
+    <value>CHOISIR UN LOGO …</value>
   </data>
   <data name="SquadAdmin_RemoveLogoButton.Content" xml:space="preserve">
     <value>Supprimer le logo</value>
   </data>
   <data name="SquadAdmin_SetHeader.Content" xml:space="preserve">
-    <value>Choisir une bannière …</value>
+    <value>CHOISIR UNE BANNIÈRE …</value>
   </data>
   <data name="SquadAdmin_RemoveHeaderButton.Content" xml:space="preserve">
     <value>Supprimer la bannière</value>
   </data>
   <data name="SquadAdmin_AddTitle.Text" xml:space="preserve">
-    <value>Ajouter un membre</value>
+    <value>AJOUTER UN MEMBRE</value>
   </data>
   <data name="SquadAdmin_MemberSearch.Header" xml:space="preserve">
     <value>Membre</value>
@@ -2946,7 +2940,7 @@
     <value>Remplaçant</value>
   </data>
   <data name="SquadAdmin_Add.Content" xml:space="preserve">
-    <value>Ajouter</value>
+    <value>AJOUTER</value>
   </data>
   <data name="SquadAdmin_RolesHint.Text" xml:space="preserve">
     <value>Tu ne peux attribuer que des rôles inférieurs au tien ; le site vérifie chaque modification.</value>
@@ -3024,10 +3018,10 @@
     <value>RÉDACTION</value>
   </data>
   <data name="NewsEdit_NewButton.Content" xml:space="preserve">
-    <value>Nouvelle actualité</value>
+    <value>NOUVELLE ACTUALITÉ</value>
   </data>
   <data name="NewsEdit_DraftsTitle.Text" xml:space="preserve">
-    <value>Brouillons et planifiées</value>
+    <value>BROUILLONS ET PLANIFIÉES</value>
   </data>
   <data name="NewsEdit_Drafts.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Brouillons</value>
@@ -3072,28 +3066,28 @@
     <value>Publier sur Discord</value>
   </data>
   <data name="NewsEdit_Save.Content" xml:space="preserve">
-    <value>Enregistrer</value>
+    <value>ENREGISTRER</value>
   </data>
   <data name="NewsEdit_Delete.Content" xml:space="preserve">
     <value>Supprimer</value>
   </data>
   <data name="NewsEdit_CoverTitle.Text" xml:space="preserve">
-    <value>Image de couverture</value>
+    <value>IMAGE DE COUVERTURE</value>
   </data>
   <data name="NewsEdit_CoverHint.Text" xml:space="preserve">
     <value>Au moins 1200 × 400 px. Disponible après le premier enregistrement ; l’image est enregistrée publiquement dans ta bibliothèque.</value>
   </data>
   <data name="NewsEdit_SetCover.Content" xml:space="preserve">
-    <value>Choisir une couverture …</value>
+    <value>CHOISIR UNE COUVERTURE …</value>
   </data>
   <data name="NewsEdit_RemoveCover.Content" xml:space="preserve">
     <value>Supprimer la couverture</value>
   </data>
   <data name="NewsPage_Write.Content" xml:space="preserve">
-    <value>Rédiger</value>
+    <value>RÉDIGER</value>
   </data>
   <data name="NewsPage_Edit.Content" xml:space="preserve">
-    <value>Modifier</value>
+    <value>MODIFIER</value>
   </data>
   <data name="MatchEdit_New" xml:space="preserve">
     <value>Ajouter un match</value>
@@ -3150,10 +3144,10 @@
     <value>L’adresse de l’adversaire n’est pas valide.</value>
   </data>
   <data name="MatchesPage_Add.Content" xml:space="preserve">
-    <value>Ajouter un match</value>
+    <value>AJOUTER UN MATCH</value>
   </data>
   <data name="MatchesPage_Edit.Content" xml:space="preserve">
-    <value>Modifier</value>
+    <value>MODIFIER</value>
   </data>
   <data name="MatchEdit_Squad.Header" xml:space="preserve">
     <value>Escouade</value>
@@ -3198,25 +3192,25 @@
     <value>Publier (les matchs joués sont publiés sur le Discord de l’escouade)</value>
   </data>
   <data name="MatchEdit_Save.Content" xml:space="preserve">
-    <value>Enregistrer</value>
+    <value>ENREGISTRER</value>
   </data>
   <data name="MatchEdit_Delete.Content" xml:space="preserve">
     <value>Supprimer</value>
   </data>
   <data name="MatchEdit_AttachmentsTitle.Text" xml:space="preserve">
-    <value>Captures et fichiers</value>
+    <value>CAPTURES ET FICHIERS</value>
   </data>
   <data name="MatchEdit_AttachmentsHint.Text" xml:space="preserve">
     <value>Images, PDF, ZIP/7z. Disponible après le premier enregistrement ; visible comme le match.</value>
   </data>
   <data name="MatchEdit_Attach.Content" xml:space="preserve">
-    <value>Joindre des fichiers …</value>
+    <value>JOINDRE DES FICHIERS …</value>
   </data>
   <data name="MatchEdit_RemoveAttachmentLink.Content" xml:space="preserve">
     <value>Retirer</value>
   </data>
   <data name="MatchEdit_LineupTitle.Text" xml:space="preserve">
-    <value>Composition</value>
+    <value>COMPOSITION</value>
   </data>
   <data name="MatchEdit_LineupHint.Text" xml:space="preserve">
     <value>Qui a joué ; remplaçant et poste facultatifs.</value>
@@ -3285,13 +3279,13 @@
     <value>Enregistrer comme brouillon</value>
   </data>
   <data name="EventsPage_Participants.Text" xml:space="preserve">
-    <value>Participants</value>
+    <value>PARTICIPANTS</value>
   </data>
   <data name="EventsPage_Lineup.Text" xml:space="preserve">
-    <value>Composition</value>
+    <value>COMPOSITION</value>
   </data>
   <data name="EventsPage_EditLineup.Content" xml:space="preserve">
-    <value>Modifier la composition</value>
+    <value>MODIFIER LA COMPOSITION</value>
   </data>
   <data name="EventsPage_UnpublishLineup.Content" xml:space="preserve">
     <value>Retirer</value>
@@ -3426,13 +3420,13 @@
     <value>Aucun signalement ouvert.</value>
   </data>
   <data name="AdminPage_UploadKeep.Content" xml:space="preserve">
-    <value>Conserver</value>
+    <value>CONSERVER</value>
   </data>
   <data name="AdminPage_UploadDelete.Content" xml:space="preserve">
-    <value>Supprimer</value>
+    <value>SUPPRIMER</value>
   </data>
   <data name="AdminPage_StorageTitle.Text" xml:space="preserve">
-    <value>Stockage</value>
+    <value>STOCKAGE</value>
   </data>
   <data name="AdminPage_WebsiteHint.Text" xml:space="preserve">
     <value>Ces sections ne sont pas (encore) dans l’application. Elles s’ouvrent dans l’administration du site dans le navigateur, où s’appliquent tes droits et la confirmation à deux facteurs.</value>
@@ -3442,5 +3436,29 @@
   </data>
   <data name="AdminPage_StatusFilter.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Filtrer par statut</value>
+  </data>
+  <data name="Console_NoAccess" xml:space="preserve">
+    <value>Tu n’as pas accès à la console en direct de ce serveur.</value>
+  </data>
+  <data name="Console_Connecting" xml:space="preserve">
+    <value>Console : connexion …</value>
+  </data>
+  <data name="Console_Connected" xml:space="preserve">
+    <value>Console : connectée</value>
+  </data>
+  <data name="Console_Reconnecting" xml:space="preserve">
+    <value>Console : déconnectée – reconnexion …</value>
+  </data>
+  <data name="Console_Lost" xml:space="preserve">
+    <value>Console : déconnectée – « Reconnecter » réessaie</value>
+  </data>
+  <data name="Console_Demo" xml:space="preserve">
+    <value>Serveur de démo : pas de console en direct, commandes et alimentation sont seulement simulées.</value>
+  </data>
+  <data name="Console_StartSecondary.Content" xml:space="preserve">
+    <value>DÉMARRER</value>
+  </data>
+  <data name="ServersPage_TsState.EmptyText" xml:space="preserve">
+    <value>Personne n’est sur TeamSpeak en ce moment. « Afficher les canaux vides » affiche tous les canaux.</value>
   </data>
 </root>

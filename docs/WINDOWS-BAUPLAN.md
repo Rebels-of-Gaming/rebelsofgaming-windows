@@ -185,6 +185,15 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   **Offen (braucht Windows):** Kaltstart messen und ggf. ReadyToRun fürs MSIX (heute nur im Publish-Profil, das
   Paket entsteht per `dotnet build`), Screenshots, Windows App Certification Kit.
 
+- **2.4.9 – Korrekturen aus Wahkes Test (17.10.):** Profile ohne verknüpfte Konten scheiterten komplett, weil PHP ein
+  leeres Objekt als `[]` liefert (`profile.accounts`) – der Client liest `[]` jetzt für alle offenen Objekte der Spec
+  als leeres Objekt (`EmptyArrayAsOpenObjectConverterFactory`); öffentliche Profile, Squads, News, Termine, Server und
+  Forum gegen die Live-API geprüft. Terminzeit über `EventTimes.Range` (ein „t“ im eigenen Muster ist das AM/PM-Kürzel →
+  „P–21:00“). Verwaltungslisten luden beim ersten Öffnen doppelt (Status-Filter löste ein zweites Laden aus). Live-Konsole
+  zeigt den Verbindungsstatus, `daemon error`/`jwt error`, erkennt Demo-Server und verbindet bis zu dreimal neu (wie
+  `server-console.js`). Chat-Anhänge: Bilder mit Vorschau über `GET /v1/attachments/{id}` (Umleitung auf kurzlebigen
+  Link, max. 8 MB), andere Dateien öffnen im Browser. ET-Farbcodes im Clan-Tag werden wie auf der Website entfernt.
+
 ### Offline, Melden, Verwaltung (2.3.1–2.3.3, 16.10.2026)
 
 - **Offline-Warteschlange** (`Outbox`, Core): DMs, Forenantworten und Zusagen ohne Netz werden mit festem

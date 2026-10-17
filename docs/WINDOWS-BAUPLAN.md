@@ -14,7 +14,7 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 | 4 | Kommunikation | fertig (2.3.x): DMs mit Pop-out, Forum lesen+schreiben, Zusagen, Tastenkürzel, Offline-Warteschlange (DMs nur im Speicher), Melden | siehe `git log` |
 | 5 | Medien | fertig (2.3.4): Uploads (Drag & Drop, Strg+V, **Teilen-Ziel**), Galerie mit **Einreichen**, Downloads, Kurzlinks, Profil bearbeiten | siehe `git log` |
 | 6 | Clan-Prozesse | fast fertig (2.2.2): Bewerben, eigene Bewerbungen, Votes, Abwesenheiten, Geräte/Datenexport/Konto löschen, Regel-Hinweis, Onboarding-Kachel, Statistiken (Ranglisten, Wochen-Awards), Mitgliederkarte im eigenen Fenster; offen: Trial-Verwaltung für Squad-Leitung (kommt mit Stufe 9) | siehe `git log` |
-| 7 | Server-Steuerung | fast fertig (2.2.0): Steuer-Fenster mit Power, Ressourcen, Live-Konsole (Historie), Configs (Diff, Versionen, Rollback, Anträge), Backups, RCON, Sperren, Vier-Augen-Freigaben, App-Sperre mit Windows Hello; offen: Dateioperationen, Formular-Vorlagen/Map-Rotation, Whitelist | siehe `git log` |
+| 7 | Server-Steuerung | fertig (2.4.1): Steuer-Fenster mit Power, Ressourcen, Live-Konsole (Historie), Configs (Diff, Versionen, Rollback, Anträge), **Formular-Vorlagen** (Servername, Slots, Passwort, Map-Rotation), **Dateien** (Ordner, Vorschau, Sicherungen kopieren/umbenennen/löschen), Backups, RCON, Sperren, **Whitelist**, Vier-Augen-Freigaben, App-Sperre mit Windows Hello; Vorlagen ohne Dateizugriff nach Lücke W14 | siehe `git log` |
 | 8 | Wiki | fast fertig (2.3.0): Bereiche, Seitenbaum, Suche, Seite nativ mit Links in der App, Offline-Kopien, Bearbeiten mit Vorschau und Konflikterkennung, Versionen mit Vergleich/Wiederherstellen, Beobachten; offen: neue Seite anlegen, Dateien/Bilder hochladen, Kategorien-Ansicht, Inhaltsverzeichnis mit Sprung | siehe `git log` |
 | 9 | Verwaltung + Moderation | in Arbeit (2.3.x): Verwaltung mit Übersicht (Kennzahlen, Systemstatus, Audit-Log), Bewerbungen (Squad-Leitung), Moderation (Meldungen, verwarnen/sperren, Sperren, Mod-Log, Wortfilter); Mitglieder mit Rollen vergeben/entziehen; offen: Squads, Inhalte, Termine/Matches, Server-Verwaltung, Wiki-Freigaben … | siehe `git log` |
 | 10 | Feinschliff + Store | offen | |
@@ -117,6 +117,17 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   Ziehen, Mausrad, +/−, Pfeiltasten, Pins je Stadt mit Mitgliederliste, Namensnennung © OpenStreetMap mit Link.
 - **App-Sperre mit Windows Hello** (Einstellungen, nur wenn Hello eingerichtet; Einschalten erst nach erfolgreicher
   Prüfung): beim Start und nach 5 Minuten außerhalb des Vordergrunds; Ausweg „Stattdessen abmelden“.
+
+### Nach 2.4.0 (17.10.2026)
+
+- **2.4.1 – Server-Steuerung komplett:** Reiter „Dateien“ (nur mit `files_read`): Ordner mit Brotkrumen, Vorschau von
+  Textdateien bis 512 KB, Sicherungskopie anlegen (Name endet immer auf `.bak`/`.old`, Vorschlag ohne Kollision),
+  Sicherungen umbenennen/löschen – genau die Regeln aus Guide 18 (`operable`/`backup` aus der API, Server prüft).
+  Reiter „Whitelist“ (mit `bans`): Einträge mit erkanntem Mitglied, Spielername hinzufügen, entfernen.
+  **Formular-Vorlagen** im Config-Editor (Knopf „Formular“, wenn die Datei eine hat): Felder je Typ, Prüfung wie die
+  Website (Bereich, Auswahl, keine `" ; \`, Map-Namen), leere Passwörter bleiben unverändert, „Passwort entfernen“
+  sendet `""`; Anwenden wie Speichern (`after`, Notiz, `202` = Antrag). Lücken W13 (Body der Dateioperationen fehlt in
+  der Spec) und W14 (`abilities.templates` fehlt).
 
 ### Offline, Melden, Verwaltung (2.3.1–2.3.3, 16.10.2026)
 

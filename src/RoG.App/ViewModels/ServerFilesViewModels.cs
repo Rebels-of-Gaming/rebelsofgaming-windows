@@ -50,6 +50,7 @@ public sealed partial class ServerConfigsViewModel(AppServices services, string 
     : ServerTabViewModel(services, slug, show)
 {
     private readonly ServerConfigService _configs = new(services.Api.Client, services.Api.Http);
+    private readonly ConfigTemplateService _templates = new(services.Api.Http);
     private bool _loaded;
 
     public ObservableCollection<ConfigFile> Files { get; } = [];
@@ -97,6 +98,10 @@ public sealed partial class ServerConfigsViewModel(AppServices services, string 
     [ObservableProperty]
     public partial bool IsEmpty { get; set; }
 
+    /// <summary>Die gewählte Datei hat eine Formular-Vorlage (z. B. Servername, Slots, Map-Rotation).</summary>
+    [ObservableProperty]
+    public partial bool HasTemplate { get; set; }
+
     public async Task EnsureLoadedAsync()
     {
         if (_loaded)
@@ -127,6 +132,7 @@ public sealed partial class ServerConfigsViewModel(AppServices services, string 
         Content = string.Empty;
         ClearPreview();
         Versions.Clear();
+        HasTemplate = file?.HasTemplate == true;
         if (file is null)
         {
             return;
@@ -202,6 +208,38 @@ public sealed partial class ServerConfigsViewModel(AppServices services, string 
             Show(L(StringKeys.ConfigSaved), InfoBarSeverity.Success);
             await LoadFileAsync(file);
         }
+    }
+
+    /// <summary>Formular der gewählten Datei laden (<c>null</c> bei Fehler – Meldung zeigt <see cref="ServerTabViewModel.RunAsync"/>).</summary>
+    public async Task<ConfigTemplateForm?> LoadTemplateAsync()
+    {
+        ConfigTemplateForm? form = null;
+        if (SelectedFile is { } file)
+        {
+            await RunAsync(async () => form = await _templates.GetAsync(Slug, file.Id));
+        }
+
+        return form;
+    }
+
+    /// <summary>Formularwerte anwenden; danach Datei neu laden.</summary>
+    public async Task<bool> ApplyTemplateAsync(IReadOnlyDictionary<string, object?> values, string? note)
+    {
+        if (SelectedFile is not { } file)
+        {
+            return false;
+        }
+
+        var after = Enum.Parse<ConfigAfter>(SelectedAfter?.Value ?? "save", ignoreCase: true);
+        var outcome = ConfigSaveOutcome.Saved;
+        if (!await RunAsync(async () => outcome = await _templates.ApplyAsync(Slug, file.Id, values, after, note)))
+        {
+            return false;
+        }
+
+        Show(L(outcome == ConfigSaveOutcome.Pending ? StringKeys.ConfigPending : StringKeys.ConfigSaved), InfoBarSeverity.Success);
+        await LoadFileAsync(file);
+        return true;
     }
 
     private void ClearPreview()
@@ -545,4 +583,263 @@ public sealed partial class ChangeItemViewModel(ConfigChange change, ServerAppro
 
     [RelayCommand]
     private Task RejectAsync() => owner.DecideAsync(this, approve: false);
+}
+
+/// <summary>Dateibrowser: Ordner öffnen, Textdatei ansehen, Sicherung anlegen, Sicherungen umbenennen/löschen.</summary>
+public sealed partial class ServerFileBrowserViewModel(AppServices services, string slug, ServerAbilities abilities, Action<string, InfoBarSeverity> show)
+    : ServerTabViewModel(services, slug, show)
+{
+    private readonly ServerFilesService _files = new(services.Api.Client, services.Api.Http);
+    private bool _loaded;
+
+    public ObservableCollection<FileItemViewModel> Items { get; } = [];
+
+    public ObservableCollection<FileCrumb> Crumbs { get; } = [];
+
+    /// <summary>Fragt einen neuen Namen ab (Titel, Vorgabe) – setzt das Fenster.</summary>
+    public Func<string, string, Task<string?>> AskName { get; set; } = (_, _) => Task.FromResult<string?>(null);
+
+    public bool CanWrite => abilities.FilesWrite;
+
+    [ObservableProperty]
+    public partial string Directory { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial FileItemViewModel? SelectedItem { get; set; }
+
+    [ObservableProperty]
+    public partial string Preview { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial string PreviewTitle { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial bool IsEmpty { get; set; }
+
+    [ObservableProperty]
+    public partial bool IsBusy { get; set; }
+
+    public async Task EnsureLoadedAsync()
+    {
+        if (!_loaded)
+        {
+            _loaded = true;
+            await OpenAsync(string.Empty);
+        }
+    }
+
+    public async Task OpenAsync(string directory)
+    {
+        IsBusy = true;
+        try
+        {
+            await RunAsync(async () =>
+            {
+                var list = await _files.ListAsync(Slug, directory);
+                Directory = ServerPaths.Normalize(directory);
+                Crumbs.Clear();
+                foreach (var (name, path) in ServerPaths.Crumbs(Directory))
+                {
+                    Crumbs.Add(new FileCrumb(name, path));
+                }
+
+                Items.Clear();
+                foreach (var f in list)
+                {
+                    Items.Add(new FileItemViewModel(f, this));
+                }
+
+                IsEmpty = Items.Count == 0;
+                Preview = PreviewTitle = string.Empty;
+            });
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
+
+    [RelayCommand]
+    private Task ReloadAsync() => OpenAsync(Directory);
+
+    [RelayCommand]
+    private Task UpAsync() => OpenAsync(ServerPaths.Parent(Directory));
+
+    /// <summary>Ordner öffnen bzw. Datei in der Vorschau zeigen.</summary>
+    public async Task ActivateAsync(FileItemViewModel item)
+    {
+        if (!item.Entry.IsFile)
+        {
+            await OpenAsync(item.Entry.Path);
+            return;
+        }
+
+        SelectedItem = item;
+        PreviewTitle = item.Entry.Path;
+        Preview = string.Empty;
+        if (item.Entry.Size > 512 * 1024)
+        {
+            Preview = L(StringKeys.FilesTooLarge);
+            return;
+        }
+
+        await RunAsync(async () => Preview = await _files.ReadAsync(Slug, item.Entry.Path));
+    }
+
+    internal async Task CopyAsync(FileItemViewModel item)
+    {
+        var suggestion = ServerPaths.SuggestBackup(item.Entry.Path, Items.Select(i => i.Entry.Path));
+        var target = await AskName(L(StringKeys.FilesCopyTitle), suggestion);
+        if (target is null)
+        {
+            return;
+        }
+
+        if (!ServerPaths.IsBackupName(target))
+        {
+            Show(L(StringKeys.FilesBackupNameHint), InfoBarSeverity.Warning);
+            return;
+        }
+
+        if (await RunAsync(() => _files.CopyAsync(Slug, item.Entry.Path, target)))
+        {
+            Show(L(StringKeys.FilesCopied), InfoBarSeverity.Success);
+            await OpenAsync(Directory);
+        }
+    }
+
+    internal async Task RenameAsync(FileItemViewModel item)
+    {
+        var target = await AskName(L(StringKeys.FilesRenameTitle), item.Entry.Path);
+        if (target is null || ServerPaths.Normalize(target) == item.Entry.Path)
+        {
+            return;
+        }
+
+        if (!ServerPaths.IsBackupName(target))
+        {
+            Show(L(StringKeys.FilesBackupNameHint), InfoBarSeverity.Warning);
+            return;
+        }
+
+        if (await RunAsync(() => _files.RenameAsync(Slug, item.Entry.Path, target)))
+        {
+            await OpenAsync(Directory);
+        }
+    }
+
+    internal async Task DeleteAsync(FileItemViewModel item)
+    {
+        if (await Confirm(L(StringKeys.FilesDeleteTitle), item.Entry.Path) && await RunAsync(() => _files.DeleteAsync(Slug, item.Entry.Path)))
+        {
+            Items.Remove(item);
+            IsEmpty = Items.Count == 0;
+            Show(L(StringKeys.FilesDeleted), InfoBarSeverity.Success);
+        }
+    }
+}
+
+public sealed record FileCrumb(string Name, string Target);
+
+public sealed partial class FileItemViewModel(ServerFileEntry entry, ServerFileBrowserViewModel owner)
+{
+    public ServerFileEntry Entry => entry;
+
+    public string Name => entry.Name;
+
+    public string Glyph => entry.IsFile ? "" : "";
+
+    public string Meta { get; } = string.Join(" · ", new[]
+    {
+        entry.SizeText,
+        entry.ModifiedAt?.ToLocalTime().ToString("g", CultureInfo.CurrentCulture),
+    }.Where(s => !string.IsNullOrEmpty(s)));
+
+    public bool CanCopy => owner.CanWrite && entry.IsFile && entry.Operable;
+
+    public bool CanChange => owner.CanWrite && entry.IsFile && entry.IsBackup;
+
+    [RelayCommand]
+    private Task CopyAsync() => owner.CopyAsync(this);
+
+    [RelayCommand]
+    private Task RenameAsync() => owner.RenameAsync(this);
+
+    [RelayCommand]
+    private Task DeleteAsync() => owner.DeleteAsync(this);
+}
+
+/// <summary>Whitelist des Servers: Einträge mit erkanntem Mitglied, Spielername hinzufügen, Eintrag entfernen.</summary>
+public sealed partial class ServerWhitelistViewModel(AppServices services, string slug, Action<string, InfoBarSeverity> show)
+    : ServerTabViewModel(services, slug, show)
+{
+    private readonly ServerWhitelistService _whitelist = new(services.Api.Client, services.Api.Http);
+    private bool _loaded;
+
+    public ObservableCollection<WhitelistItemViewModel> Items { get; } = [];
+
+    [ObservableProperty]
+    public partial string PlayerName { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial bool IsEmpty { get; set; }
+
+    public async Task EnsureLoadedAsync()
+    {
+        if (!_loaded)
+        {
+            _loaded = true;
+            await ReloadAsync();
+        }
+    }
+
+    [RelayCommand]
+    private Task ReloadAsync() => RunAsync(async () =>
+    {
+        var list = await _whitelist.ListAsync(Slug);
+        Items.Clear();
+        foreach (var e in list)
+        {
+            Items.Add(new WhitelistItemViewModel(e, this));
+        }
+
+        IsEmpty = Items.Count == 0;
+    });
+
+    [RelayCommand]
+    private async Task AddAsync()
+    {
+        if (string.IsNullOrWhiteSpace(PlayerName))
+        {
+            Show(L(StringKeys.BanPlayerMissing), InfoBarSeverity.Warning);
+            return;
+        }
+
+        if (await RunAsync(() => _whitelist.AddAsync(Slug, null, PlayerName)))
+        {
+            PlayerName = string.Empty;
+            Show(L(StringKeys.WhitelistAdded), InfoBarSeverity.Success);
+            await ReloadAsync();
+        }
+    }
+
+    internal async Task RemoveAsync(WhitelistItemViewModel item)
+    {
+        if (await Confirm(L(StringKeys.WhitelistRemoveTitle), item.Display)
+            && await RunAsync(() => _whitelist.RemoveAsync(Slug, item.Entry.MemberId, item.Entry.Line)))
+        {
+            Items.Remove(item);
+            IsEmpty = Items.Count == 0;
+        }
+    }
+}
+
+public sealed partial class WhitelistItemViewModel(WhitelistEntry entry, ServerWhitelistViewModel owner)
+{
+    public WhitelistEntry Entry => entry;
+
+    public string Display => entry.Display;
+
+    [RelayCommand]
+    private Task RemoveAsync() => owner.RemoveAsync(this);
 }

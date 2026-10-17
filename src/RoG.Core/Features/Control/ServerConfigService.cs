@@ -7,8 +7,10 @@ using RoG.Core.Api.Generated;
 namespace RoG.Core.Features.Control;
 
 /// <summary>Datei auf der Config-Whitelist eines Servers.</summary>
-public sealed record ConfigFile(string Id, string Path, string? Label, string Syntax, string? ReloadCommand, bool RequiresApproval)
+public sealed record ConfigFile(string Id, string Path, string? Label, string Syntax, string? ReloadCommand, bool RequiresApproval, string? Template = null)
 {
+    public bool HasTemplate => !string.IsNullOrEmpty(Template);
+
     public string DisplayName => string.IsNullOrWhiteSpace(Label) ? Path : $"{Label} ({Path})";
 }
 
@@ -48,7 +50,7 @@ public sealed class ServerConfigService(IRoGApiClient client, HttpClient http)
     {
         var response = await client.V1_servers_configs_indexAsync(server, cancellationToken).ConfigureAwait(false);
         return response.Data
-            .Select(f => new ConfigFile(f.Id, f.Path, ApiValues.Text(f.Label), f.Syntax, ApiValues.Text(f.Reload_command), f.Requires_approval))
+            .Select(f => new ConfigFile(f.Id, f.Path, ApiValues.Text(f.Label), f.Syntax, ApiValues.Text(f.Reload_command), f.Requires_approval, ApiValues.Text(f.Template)))
             .OrderBy(f => f.Path, StringComparer.OrdinalIgnoreCase)
             .ToList();
     }

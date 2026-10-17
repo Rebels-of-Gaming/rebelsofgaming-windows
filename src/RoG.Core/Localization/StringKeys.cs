@@ -488,6 +488,42 @@ public static class StringKeys
     public const string ServersCopyAutomation = "Servers_CopyAutomation";
 
     /// <summary>Präfix für Fehlermeldungen: <c>Error_&lt;code&gt;</c>.</summary>
+    public const string FilesTooLarge = "Files_TooLarge";
+
+    public const string FilesCopyTitle = "Files_CopyTitle";
+
+    public const string FilesRenameTitle = "Files_RenameTitle";
+
+    public const string FilesDeleteTitle = "Files_DeleteTitle";
+
+    public const string FilesBackupNameHint = "Files_BackupNameHint";
+
+    public const string FilesCopied = "Files_Copied";
+
+    public const string FilesDeleted = "Files_Deleted";
+
+    public const string WhitelistAdded = "Whitelist_Added";
+
+    public const string WhitelistRemoveTitle = "Whitelist_RemoveTitle";
+
+    public const string TemplateListHint = "Template_ListHint";
+
+    public const string TemplatePasswordKeep = "Template_PasswordKeep";
+
+    public const string TemplatePasswordNone = "Template_PasswordNone";
+
+    public const string TemplatePasswordClear = "Template_PasswordClear";
+
+    public const string TemplateNote = "Template_Note";
+
+    public const string TemplateApply = "Template_Apply";
+
+    public const string TemplateInvalid = "Template_Invalid";
+
+    public const string Errornotemplate = "Error_no_template";
+
+    public const string Errorwhitelistnotsupported = "Error_whitelist_not_supported";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

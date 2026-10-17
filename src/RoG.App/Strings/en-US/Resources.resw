@@ -2642,4 +2642,118 @@
   <data name="SquadsPage_GalleryEmpty.Text" xml:space="preserve">
     <value>No images in this squad’s albums yet.</value>
   </data>
+  <data name="Files_TooLarge" xml:space="preserve">
+    <value>The file is too large to preview (max. 512 KB).</value>
+  </data>
+  <data name="Files_CopyTitle" xml:space="preserve">
+    <value>Create backup copy</value>
+  </data>
+  <data name="Files_RenameTitle" xml:space="preserve">
+    <value>Rename backup</value>
+  </data>
+  <data name="Files_DeleteTitle" xml:space="preserve">
+    <value>Delete backup?</value>
+  </data>
+  <data name="Files_BackupNameHint" xml:space="preserve">
+    <value>The name must end in .bak or .old.</value>
+  </data>
+  <data name="Files_Copied" xml:space="preserve">
+    <value>Backup copy created.</value>
+  </data>
+  <data name="Files_Deleted" xml:space="preserve">
+    <value>Backup deleted.</value>
+  </data>
+  <data name="Whitelist_Added" xml:space="preserve">
+    <value>Added to the whitelist.</value>
+  </data>
+  <data name="Whitelist_RemoveTitle" xml:space="preserve">
+    <value>Remove from the whitelist?</value>
+  </data>
+  <data name="Template_ListHint" xml:space="preserve">
+    <value>One map per line</value>
+  </data>
+  <data name="Template_PasswordKeep" xml:space="preserve">
+    <value>Leave empty = unchanged</value>
+  </data>
+  <data name="Template_PasswordNone" xml:space="preserve">
+    <value>No password set</value>
+  </data>
+  <data name="Template_PasswordClear" xml:space="preserve">
+    <value>Remove password</value>
+  </data>
+  <data name="Template_Note" xml:space="preserve">
+    <value>Version note (optional)</value>
+  </data>
+  <data name="Template_Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="Template_Invalid" xml:space="preserve">
+    <value>Please check: {0}</value>
+  </data>
+  <data name="Error_no_template" xml:space="preserve">
+    <value>This file has no form template.</value>
+  </data>
+  <data name="Error_whitelist_not_supported" xml:space="preserve">
+    <value>This server does not support a whitelist.</value>
+  </data>
+  <data name="Console_TabFiles.Text" xml:space="preserve">
+    <value>Files</value>
+  </data>
+  <data name="Console_TabWhitelist.Text" xml:space="preserve">
+    <value>Whitelist</value>
+  </data>
+  <data name="Config_Template.Content" xml:space="preserve">
+    <value>Form</value>
+  </data>
+  <data name="Files_Up.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Up one folder</value>
+  </data>
+  <data name="Files_Up.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Up one folder</value>
+  </data>
+  <data name="Files_Empty.Text" xml:space="preserve">
+    <value>This folder is empty.</value>
+  </data>
+  <data name="Files_List.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Files</value>
+  </data>
+  <data name="Files_Preview.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>File content</value>
+  </data>
+  <data name="Files_Preview.PlaceholderText" xml:space="preserve">
+    <value>Choose a file to view it</value>
+  </data>
+  <data name="Files_Copy.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Create backup copy</value>
+  </data>
+  <data name="Files_Copy.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Create backup copy</value>
+  </data>
+  <data name="Files_Rename.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+  <data name="Files_Rename.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+  <data name="Files_Delete.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Files_Delete.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Whitelist_Player.Header" xml:space="preserve">
+    <value>Player name</value>
+  </data>
+  <data name="Whitelist_Add.Content" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Whitelist_Remove.Content" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Whitelist_Hint.Text" xml:space="preserve">
+    <value>The server checks names strictly (Minecraft: 3–16 characters, A–Z, 0–9, _). You can't change members ranked above you.</value>
+  </data>
+  <data name="Whitelist_Empty.Text" xml:space="preserve">
+    <value>The whitelist is empty.</value>
+  </data>
 </root>

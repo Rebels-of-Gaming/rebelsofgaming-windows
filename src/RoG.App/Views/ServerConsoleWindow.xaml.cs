@@ -21,12 +21,16 @@ public sealed partial class ServerConsoleWindow : Window
         Rcon = new ServerRconViewModel(App.Services, slug, ViewModel.Show);
         Bans = new ServerBansViewModel(App.Services, slug, ViewModel.Show) { Confirm = ConfirmAsync };
         Approvals = new ServerApprovalsViewModel(App.Services, slug, ViewModel.Show) { Confirm = ConfirmAsync };
+        Files = new ServerFileBrowserViewModel(App.Services, slug, abilities, ViewModel.Show) { Confirm = ConfirmAsync, AskName = AskNameAsync };
+        Whitelist = new ServerWhitelistViewModel(App.Services, slug, ViewModel.Show) { Confirm = ConfirmAsync };
         InitializeComponent();
         ConsoleTab.Visibility = abilities.Console ? Visibility.Visible : Visibility.Collapsed;
         ConfigsTab.Visibility = abilities.FilesRead || abilities.FilesWrite ? Visibility.Visible : Visibility.Collapsed;
         BackupsTab.Visibility = abilities.Backups ? Visibility.Visible : Visibility.Collapsed;
         RconTab.Visibility = abilities.Rcon ? Visibility.Visible : Visibility.Collapsed;
         BansTab.Visibility = abilities.Bans ? Visibility.Visible : Visibility.Collapsed;
+        FilesTab.Visibility = abilities.FilesRead ? Visibility.Visible : Visibility.Collapsed;
+        WhitelistTab.Visibility = abilities.Bans ? Visibility.Visible : Visibility.Collapsed;
         ApprovalsTab.Visibility = abilities.FilesApprove ? Visibility.Visible : Visibility.Collapsed;
         Tabs.SelectedItem = Tabs.Items.FirstOrDefault(t => t.Visibility == Visibility.Visible);
         Tabs.Visibility = Tabs.Items.Count(t => t.Visibility == Visibility.Visible) > 1 ? Visibility.Visible : Visibility.Collapsed;
@@ -63,10 +67,15 @@ public sealed partial class ServerConsoleWindow : Window
 
     public ServerApprovalsViewModel Approvals { get; }
 
+    public ServerFileBrowserViewModel Files { get; }
+
+    public ServerWhitelistViewModel Whitelist { get; }
+
     /// <summary>Reiter wechseln; Configs und Backups laden beim ersten Öffnen.</summary>
     private void OnTabChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args)
     {
-        if (ConsolePanel is null || ConfigsPanel is null || BackupsPanel is null || RconPanel is null || BansPanel is null || ApprovalsPanel is null)
+        if (ConsolePanel is null || ConfigsPanel is null || BackupsPanel is null || RconPanel is null || BansPanel is null || ApprovalsPanel is null
+            || FilesPanel is null || WhitelistPanel is null)
         {
             return; // feuert schon in InitializeComponent
         }
@@ -78,6 +87,8 @@ public sealed partial class ServerConsoleWindow : Window
         RconPanel.Visibility = selected == RconTab ? Visibility.Visible : Visibility.Collapsed;
         BansPanel.Visibility = selected == BansTab ? Visibility.Visible : Visibility.Collapsed;
         ApprovalsPanel.Visibility = selected == ApprovalsTab ? Visibility.Visible : Visibility.Collapsed;
+        FilesPanel.Visibility = selected == FilesTab ? Visibility.Visible : Visibility.Collapsed;
+        WhitelistPanel.Visibility = selected == WhitelistTab ? Visibility.Visible : Visibility.Collapsed;
         if (selected == ConfigsTab)
         {
             _ = Configs.EnsureLoadedAsync();
@@ -94,6 +105,14 @@ public sealed partial class ServerConsoleWindow : Window
         {
             _ = Approvals.EnsureLoadedAsync();
         }
+        else if (selected == FilesTab)
+        {
+            _ = Files.EnsureLoadedAsync();
+        }
+        else if (selected == WhitelistTab)
+        {
+            _ = Whitelist.EnsureLoadedAsync();
+        }
     }
 
     private async Task<bool> ConfirmAsync(string title, string text)
@@ -109,6 +128,56 @@ public sealed partial class ServerConsoleWindow : Window
             DefaultButton = ContentDialogButton.Close,
         };
         return await dialog.ShowAsync() == ContentDialogResult.Primary;
+    }
+
+    private async Task<string?> AskNameAsync(string title, string suggestion)
+    {
+        var l = App.Services.Localizer;
+        var box = new TextBox { Text = suggestion, MinWidth = 420, IsSpellCheckEnabled = false };
+        box.Loaded += (_, _) => box.Select(0, suggestion.Length);
+        var dialog = new ContentDialog
+        {
+            XamlRoot = Content.XamlRoot,
+            Title = title,
+            Content = new StackPanel
+            {
+                Spacing = 8,
+                Children =
+                {
+                    box,
+                    new TextBlock { Text = l.GetString(StringKeys.FilesBackupNameHint), TextWrapping = TextWrapping.Wrap, Style = (Style)Application.Current.Resources["RoGMutedTextStyle"] },
+                },
+            },
+            PrimaryButtonText = l.GetString(StringKeys.CommonConfirm),
+            CloseButtonText = l.GetString(StringKeys.CommonCancel),
+            DefaultButton = ContentDialogButton.Primary,
+        };
+        return await dialog.ShowAsync() == ContentDialogResult.Primary && !string.IsNullOrWhiteSpace(box.Text) ? box.Text.Trim() : null;
+    }
+
+    private void OnFileClick(object sender, ItemClickEventArgs e)
+    {
+        if (e.ClickedItem is FileItemViewModel item)
+        {
+            _ = Files.ActivateAsync(item);
+        }
+    }
+
+    private void OnCrumbClick(object sender, RoutedEventArgs e)
+    {
+        if (sender is FrameworkElement { Tag: string path })
+        {
+            _ = Files.OpenAsync(path);
+        }
+    }
+
+    private async void OnTemplateClick(object sender, RoutedEventArgs e)
+    {
+        if (await Configs.LoadTemplateAsync() is { } form)
+        {
+            await Controls.ConfigTemplateDialog.ShowAsync(
+                Content.XamlRoot, form, App.Services.Localizer, Configs.ApplyTemplateAsync, () => ViewModel.FeedbackMessage ?? string.Empty);
+        }
     }
 
     public static void Open(GameServer server)

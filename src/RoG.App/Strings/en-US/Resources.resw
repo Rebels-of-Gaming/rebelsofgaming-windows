@@ -3437,4 +3437,10 @@
   <data name="AdminPage_WebsiteHint.Text" xml:space="preserve">
     <value>These areas aren't in the app (yet). They open in the website's admin area in your browser, where your permissions and two-factor confirmation apply.</value>
   </data>
+  <data name="Config_After.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>After saving</value>
+  </data>
+  <data name="AdminPage_StatusFilter.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Filter by status</value>
+  </data>
 </root>

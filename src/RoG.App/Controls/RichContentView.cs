@@ -47,7 +47,8 @@ public sealed partial class RichContentView : UserControl
             return false;
         }
 
-        heading.StartBringIntoView(new BringIntoViewOptions { VerticalAlignmentRatio = 0, AnimationDesired = true });
+        // „Animationseffekte“ von Windows respektieren
+        heading.StartBringIntoView(new BringIntoViewOptions { VerticalAlignmentRatio = 0, AnimationDesired = new Windows.UI.ViewManagement.UISettings().AnimationsEnabled });
         return true;
     }
 

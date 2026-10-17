@@ -111,7 +111,7 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <ComboBox HorizontalAlignment="Stretch" ItemsSource="{x:Bind Members.StatusOptions}" SelectedItem="{x:Bind Members.SelectedStatus, Mode=TwoWay}" />
+                <ComboBox x:Uid="AdminPage_StatusFilter" HorizontalAlignment="Stretch" ItemsSource="{x:Bind Members.StatusOptions}" SelectedItem="{x:Bind Members.SelectedStatus, Mode=TwoWay}" />
                 <AutoSuggestBox x:Uid="AdminPage_MemberSearch" Grid.Row="1" QueryIcon="Find" QuerySubmitted="OnMemberSearch" Text="{x:Bind Members.Search, Mode=TwoWay}" />
                 <ListView Grid.Row="2" ItemsSource="{x:Bind Members.Items}" SelectedItem="{x:Bind Members.Selected, Mode=TwoWay}" SelectionMode="Single">
                     <ListView.ItemTemplate>
@@ -167,7 +167,7 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <ComboBox HorizontalAlignment="Stretch" ItemsSource="{x:Bind Applications.StatusOptions}" SelectedItem="{x:Bind Applications.SelectedStatus, Mode=TwoWay}" />
+                <ComboBox x:Uid="AdminPage_StatusFilter" HorizontalAlignment="Stretch" ItemsSource="{x:Bind Applications.StatusOptions}" SelectedItem="{x:Bind Applications.SelectedStatus, Mode=TwoWay}" />
                 <AutoSuggestBox x:Uid="AdminPage_AppSearch" Grid.Row="1" QueryIcon="Find" QuerySubmitted="OnAppSearch" Text="{x:Bind Applications.Search, Mode=TwoWay}" />
                 <ListView Grid.Row="2" ItemsSource="{x:Bind Applications.Items}" SelectedItem="{x:Bind Applications.Selected, Mode=TwoWay}" SelectionMode="Single">
                     <ListView.ItemTemplate>
@@ -235,7 +235,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" Spacing="8">
-                <ComboBox MinWidth="160" ItemsSource="{x:Bind Moderation.StatusOptions}" SelectedItem="{x:Bind Moderation.SelectedStatus, Mode=TwoWay}" />
+                <ComboBox x:Uid="AdminPage_StatusFilter" MinWidth="160" ItemsSource="{x:Bind Moderation.StatusOptions}" SelectedItem="{x:Bind Moderation.SelectedStatus, Mode=TwoWay}" />
                 <Button x:Uid="Backup_Reload" Command="{x:Bind Moderation.ReloadReportsCommand}" />
                 <ProgressRing Width="20" Height="20" IsActive="{x:Bind Moderation.IsBusy, Mode=OneWay}" />
             </StackPanel>

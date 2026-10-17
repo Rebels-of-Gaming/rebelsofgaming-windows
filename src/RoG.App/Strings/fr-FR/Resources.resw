@@ -3437,4 +3437,10 @@
   <data name="AdminPage_WebsiteHint.Text" xml:space="preserve">
     <value>Ces sections ne sont pas (encore) dans l’application. Elles s’ouvrent dans l’administration du site dans le navigateur, où s’appliquent tes droits et la confirmation à deux facteurs.</value>
   </data>
+  <data name="Config_After.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Après l’enregistrement</value>
+  </data>
+  <data name="AdminPage_StatusFilter.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Filtrer par statut</value>
+  </data>
 </root>

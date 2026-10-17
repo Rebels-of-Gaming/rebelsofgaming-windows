@@ -161,7 +161,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBox x:Uid="Config_Note" Text="{x:Bind Configs.Note, Mode=TwoWay}" />
-                <ComboBox Grid.Column="1" ItemsSource="{x:Bind Configs.AfterOptions}" SelectedItem="{x:Bind Configs.SelectedAfter, Mode=TwoWay}" />
+                <ComboBox x:Uid="Config_After" Grid.Column="1" ItemsSource="{x:Bind Configs.AfterOptions}" SelectedItem="{x:Bind Configs.SelectedAfter, Mode=TwoWay}" />
                 <Button x:Uid="Config_Preview" Grid.Column="2" Command="{x:Bind Configs.PreviewCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
                 <Button x:Uid="Config_Save" Grid.Column="3" Command="{x:Bind Configs.SaveCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
             </Grid>

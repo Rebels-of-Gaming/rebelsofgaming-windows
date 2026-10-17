@@ -3437,4 +3437,10 @@
   <data name="AdminPage_WebsiteHint.Text" xml:space="preserve">
     <value>Diese Bereiche gibt es (noch) nicht in der App. Sie öffnen sich in der Verwaltung der Website im Browser; dort gelten deine Rechte und die Zwei-Faktor-Bestätigung.</value>
   </data>
+  <data name="Config_After.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Nach dem Speichern</value>
+  </data>
+  <data name="AdminPage_StatusFilter.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Nach Status filtern</value>
+  </data>
 </root>

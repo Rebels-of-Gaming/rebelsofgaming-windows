@@ -13,7 +13,7 @@
         <!-- Eigene Titelleiste (ExtendsContentIntoTitleBar) -->
         <Grid x:Name="AppTitleBar" Grid.Row="0" Background="{StaticResource RoGBg2Brush}">
             <StackPanel Margin="16,0,0,0" VerticalAlignment="Center" Orientation="Horizontal" Spacing="10">
-                <Image Width="18" Height="18" Source="ms-appx:///Assets/Square44x44Logo.targetsize-24_altform-unplated.png" />
+                <Image Width="18" Height="18" Source="ms-appx:///Assets/Square44x44Logo.targetsize-24_altform-unplated.png" AutomationProperties.AccessibilityView="Raw" />
                 <TextBlock
                     x:Uid="Shell_TitleBar"
                     VerticalAlignment="Center"

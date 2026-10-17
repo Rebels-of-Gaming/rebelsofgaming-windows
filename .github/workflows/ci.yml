@@ -27,10 +27,11 @@ jobs:
       - run: dotnet build RoG.sln -c Release
       - run: dotnet test RoG.sln -c Release --no-build --blame-hang-timeout 5m --blame-hang-dump-type none
       # App-C# und x:Bind-Pfade schon hier prüfen (Fehler nach ~1 min statt nach dem Windows-Build)
-      - name: App prüfen (C# + x:Bind)
+      - name: App prüfen (C# + x:Bind + Barrierefreiheit)
         run: |
           dotnet build tools/AppCompileCheck/AppCompileCheck.csproj -c Release -nologo
           python3 -I scripts/check-xaml-bindings.py
+          python3 -I scripts/check-a11y.py
 
   windows:
     name: WinUI-App (Windows)

@@ -296,7 +296,9 @@ docs/
 1. ~~Store-Name und Publisher~~ – geklärt 16.10.2026: bestehende App „Rebels of Gaming“ wird weiterverwendet
    (`docs/STORE.md` Abschnitt 2). Herausgeber bleibt „wahke“ (Wahke, 17.10.2026).
 2. ~~Build-VM~~ – geklärt: eigener Windows-Runner `rog-win-1` (GitHub Actions, self-hosted).
-3. **Push für Windows:** WNS auf der Website ergänzen (Lücke W1) oder vorerst nur Toasts bei laufender App?
-4. **Eigene Client-ID** `rog-windows` (Lücke W6) – gewünscht?
-5. **Crash-Reporting** (wie Mobile-App offen): keines, selbst gehostet (z. B. GlitchTip/Sentry) oder nur lokale Logs?
-6. **Mindest-Windows-Version:** Windows 10 1809 (Standard der Windows App SDK) oder nur Windows 11?
+3. ~~Push für Windows~~ – entschieden 17.10.2026: vorerst nur Toasts bei laufender App (auch im Tray); WNS (W1) später.
+4. ~~Eigene Client-ID~~ – entschieden 17.10.2026: ja, `rog-windows` (Lücke W6 an die Website). Bis sie dort
+   eingetragen ist, meldet sich die App weiter als `rog-app` an; danach nur `clientId` in `Config/environments.json` ändern.
+5. **Crash-Reporting:** Wahke prüft die Optionen (keines / selbst gehostet, z. B. GlitchTip / nur lokale Logs). Bis dahin keines.
+6. ~~Mindest-Windows-Version~~ – entschieden 17.10.2026: Windows 10 1809 bleibt.
+7. ~~Store-Einreichung~~ – entschieden 17.10.2026: nach Wahkes Test des Pakets 2.4.0 (vorher Fast-Forward `main`).

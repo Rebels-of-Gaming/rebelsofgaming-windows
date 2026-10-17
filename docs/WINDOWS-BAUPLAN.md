@@ -294,8 +294,8 @@ docs/
 ## Offene Fragen (an Wahke)
 
 1. ~~Store-Name und Publisher~~ – geklärt 16.10.2026: bestehende App „Rebels of Gaming“ wird weiterverwendet
-   (`docs/STORE.md` Abschnitt 2). Offen nur: Anzeigename des Herausgebers ist „wahke“ – soll im Store „Rebels of Gaming“ stehen?
-2. **Build-VM:** Wo läuft sie (eigener PC mit Hyper-V, Azure, AWS …)? Siehe `docs/BUILD-VM.md` Abschnitt 1.
+   (`docs/STORE.md` Abschnitt 2). Herausgeber bleibt „wahke“ (Wahke, 17.10.2026).
+2. ~~Build-VM~~ – geklärt: eigener Windows-Runner `rog-win-1` (GitHub Actions, self-hosted).
 3. **Push für Windows:** WNS auf der Website ergänzen (Lücke W1) oder vorerst nur Toasts bei laufender App?
 4. **Eigene Client-ID** `rog-windows` (Lücke W6) – gewünscht?
 5. **Crash-Reporting** (wie Mobile-App offen): keines, selbst gehostet (z. B. GlitchTip/Sentry) oder nur lokale Logs?

@@ -60,9 +60,11 @@ Windows-Anmeldeinformationsverwaltung, nie in Dateien der App.
 
 **Suchbegriffe:** clan · gaming · esport · enemy territory · wolfenstein · cs2 · minecraft
 
-**Neuerungen (für 2.5.0):** Die neue Windows-App: Chats im eigenen Fenster, Gameserver mit „Verbinden“, Wiki mit
-Offline-Kopien, Bildvorschau im Chat, Squads und News verwalten, Matches und Aufstellungen eintragen, Server-Steuerung
-mit Live-Konsole und die Website-Verwaltung direkt in der App.
+**Neuerungen (für 2.5.1):** Die komplett neue Windows-App für Rebels of Gaming: Chats im eigenen Fenster mit
+Bildvorschau, Windows-Benachrichtigungen und Symbol im Infobereich, Gameserver mit Auslastung und „Verbinden“,
+Termine mit Zu- und Absagen, Wiki mit Offline-Kopien, Squads, Matches und Aufstellungen, News und Forum.
+Für das Team: Server-Steuerung mit Live-Konsole, Mitglieder- und Bewerbungsverwaltung und die Website-Verwaltung
+direkt in der App. Deutsch, Englisch und Französisch.
 
 ## English (en-US)
 
@@ -115,9 +117,10 @@ never in the app's files.
 
 **Search terms:** clan · gaming · esports · enemy territory · wolfenstein · cs2 · minecraft
 
-**What's new (2.5.0):** The new Windows app: chats in their own window, game servers with “Connect”, wiki with offline
-copies, image previews in chats, squad and news management, match results and line-ups, server control with a live
-console and the website admin right in the app.
+**What's new (2.5.1):** The completely new Windows app for Rebels of Gaming: chats in their own window with image
+previews, Windows notifications and a tray icon, game servers with player counts and “Connect”, events with RSVPs,
+wiki with offline copies, squads, matches and line-ups, news and forum. For the team: server control with a live
+console, member and application management and the website admin right in the app. German, English and French.
 
 ## Français (fr-FR)
 
@@ -170,9 +173,11 @@ le Gestionnaire d’identification Windows, jamais dans les fichiers de l’appl
 
 **Termes de recherche :** clan · gaming · esport · enemy territory · wolfenstein · cs2 · minecraft
 
-**Nouveautés (2.5.0) :** La nouvelle application Windows : discussions dans leur propre fenêtre, serveurs de jeu avec
-« Se connecter », wiki hors ligne, aperçu des images dans les discussions, gestion des escouades et des actualités,
-résultats et compositions, contrôle des serveurs avec console en direct et l’administration du site dans l’app.
+**Nouveautés (2.5.1) :** La toute nouvelle application Windows de Rebels of Gaming : discussions dans leur propre
+fenêtre avec aperçu des images, notifications Windows et icône dans la zone de notification, serveurs de jeu avec
+joueurs en ligne et « Se connecter », événements avec inscriptions, wiki hors ligne, escouades, matchs et compositions,
+actualités et forum. Pour l’équipe : contrôle des serveurs avec console en direct, gestion des membres et des
+candidatures et l’administration du site directement dans l’app. En allemand, anglais et français.
 
 ## Screenshots (Plan)
 

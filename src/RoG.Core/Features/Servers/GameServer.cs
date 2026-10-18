@@ -37,7 +37,8 @@ public sealed record GameServer(
     int MaxPlayers,
     bool Passworded,
     IReadOnlyList<ServerPlayer>? PlayerList,
-    ServerAbilities? Control = null)
+    ServerAbilities? Control = null,
+    ServerProvisioning? Provisioning = null)
 {
     public static ServerQueryType ParseQueryType(string? value) => value?.ToUpperInvariant() switch
     {

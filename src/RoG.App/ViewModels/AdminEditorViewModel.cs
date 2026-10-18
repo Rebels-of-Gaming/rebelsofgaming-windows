@@ -315,8 +315,8 @@ public sealed partial class AdminFieldViewModel : ObservableObject
     {
         Field = field;
         IsEnabled = enabled;
-        Label = localizer.GetString(field.LabelKey) + (field.Required ? " *" : string.Empty);
-        Help = field.HelpKey is null ? null : localizer.GetString(field.HelpKey);
+        Label = (field.LabelText ?? localizer.GetString(field.LabelKey)) + (field.Required ? " *" : string.Empty);
+        Help = field.HelpText ?? (field.HelpKey is null ? null : localizer.GetString(field.HelpKey));
         Placeholder = field.Type switch
         {
             AdminFieldType.Color => "#E0324A",
@@ -358,7 +358,7 @@ public sealed partial class AdminFieldViewModel : ObservableObject
 
             foreach (var c in choices)
             {
-                var label = localizer.GetString(c.LabelKey);
+                var label = c.LabelText ?? localizer.GetString(c.LabelKey);
                 Choices.Add(new SettingsOption(c.Value, label));
             }
 

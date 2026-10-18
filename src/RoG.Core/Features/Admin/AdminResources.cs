@@ -52,7 +52,8 @@ public enum AdminFieldType
 }
 
 /// <summary>Auswahlwert: <see cref="Value"/> geht an die API, <see cref="LabelKey"/> ist ein Ressourcenschlüssel (oder Text, wenn er nicht existiert).</summary>
-public sealed record AdminChoice(string Value, string LabelKey);
+/// <param name="LabelText">Fester Text statt Ressource (z. B. Werte aus dem Panel).</param>
+public sealed record AdminChoice(string Value, string LabelKey, string? LabelText = null);
 
 /// <summary>Formularfeld eines Bereichs.</summary>
 /// <param name="Key">Schlüssel beim Schreiben (Body).</param>
@@ -75,7 +76,9 @@ public sealed record AdminField(
     double? Min = null,
     double? Max = null,
     string? HelpKey = null,
-    bool AlwaysSend = false)
+    bool AlwaysSend = false,
+    string? LabelText = null,
+    string? HelpText = null)
 {
     public bool IsTranslated => Type is AdminFieldType.Translated or AdminFieldType.TranslatedMultiline;
 }

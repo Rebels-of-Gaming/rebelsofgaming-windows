@@ -269,14 +269,18 @@ sich einmal neu an (2FA).
    - Moderation: `url` der Meldung als „Inhalt öffnen“ (App-Route, sonst Browser).
    - Nutzungsbedingungen `/{locale}/terms` neben Datenschutz/Impressum in Einstellungen und Konto verlinken.
 
-### Geplant – wartet auf Website v0.30.1 (angekündigt 18.10.2026)
+### Geplant – wartet auf Website v0.30.1 (angekündigt 18.10.2026, Vertrag bestätigt)
 
 - **Clan verlassen vor der Kontolöschung** (Pflicht für die Store-Regeln „Konto in der App löschen“): `DELETE /v1/me`
-  liefert bei aktiven Mitgliedern 409 `leave_clan_first`. Dann im selben Dialog „Clan verlassen“ anbieten
-  (`POST /v1/me/leave-clan`, Body `{confirmation}` – dasselbe Passwort-/Namensfeld, Scope `profile:write`;
-  409 `owner_cannot_leave`/`not_a_member`, 422 falsche Bestätigung, 403 Re-Auth wie beim Löschen), nach Erfolg das
-  Löschen freigeben. 404/405 (ältere Website) → bisheriger Hinweis „an die Clanleitung wenden“. Ablauf wie in der
-  Mobile-App; Logik (Zustände des Dialogs) in `AccountService`/Core mit Tests.
+  liefert bei aktiven Mitgliedern 409 `leave_clan_first` (neutrale Meldung der API). Dann im selben Dialog „Clan
+  verlassen“ anbieten: `POST /v1/me/leave-clan`, Body `{confirmation}` (dasselbe Passwort-/Namensfeld), Scope
+  `profile:write`. 200 `{data: {is_member, status, rank}}` → Löschen freigeben; 409 `owner_cannot_leave` → Hinweis;
+  409 `not_a_member` → wie „schon ausgetreten“, Löschen erlauben; 422 Feld `confirmation`; 429 `too_many_attempts`
+  mit `Retry-After`; 403 Re-Auth wie beim Löschen; 404/405 (ältere Website) → bisheriger Hinweis „an die Clanleitung
+  wenden“. Ablauf wie in der Mobile-App, Dialog-Zustände in Core mit Tests.
+- **Eigene Wiki-Inhalte nicht melden:** Wiki-Seiten haben `last_editor: {id, name} | null` (kein `last_editor_is_me`).
+  `last_editor.id` = eigene User-ID → kein „Melden“; `null` oder jemand anderes → „Melden“; Feld fehlt (ältere
+  Website) → aus der Revisionsliste ableiten (neueste freigegebene Version von mir → kein „Melden“).
 
 ### Offline, Melden, Verwaltung (2.3.1–2.3.3, 16.10.2026)
 

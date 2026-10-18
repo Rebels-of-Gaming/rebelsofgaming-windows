@@ -194,6 +194,10 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   `server-console.js`). Chat-Anhänge: Bilder mit Vorschau über `GET /v1/attachments/{id}` (Umleitung auf kurzlebigen
   Link, max. 8 MB), andere Dateien öffnen im Browser. ET-Farbcodes im Clan-Tag werden wie auf der Website entfernt.
 
+- **2.5.1 – Konsole, Gerätefamilie:** Konsolen-Token: `level` ist im generierten Client ein Enum mit String-Konverter nur an der
+  Eigenschaft – `SerializeToElement(enum).GetString()` warf, die Konsole verband nie. Jetzt direkte Abbildung, Test
+  `ServerControlServiceTests`. Manifest nur `Windows.Desktop` (Hinweis Wahke zur Store-Einreichung).
+
 - **2.5.0 – Website-Verwaltung in der App (Store-Kandidat):** allgemeiner Editor (`AdminArea`/`AdminForm`/
   `AdminResourceService` in Core, `AdminEditorWindow` in der App): Liste mit Suche, Formular aus der Felddefinition,
   Anlegen/Speichern/Löschen, Einstellungen ohne Liste, Verweise als Auswahl, „Auf der Website öffnen“ für den Rest.

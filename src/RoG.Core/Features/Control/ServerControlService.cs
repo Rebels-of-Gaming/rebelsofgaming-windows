@@ -89,10 +89,11 @@ public sealed class ServerControlService(IRoGApiClient client)
     public async Task<ConsoleTicket> GetConsoleTicketAsync(string server, CancellationToken cancellationToken = default)
     {
         var d = (await client.V1_servers_consoleTokenAsync(server, cancellationToken).ConfigureAwait(false)).Data;
-        var level = JsonSerializer.SerializeToElement(d.Level).GetString() switch
+        // Der String-Konverter hängt nur an der Eigenschaft, nicht am Enum – also direkt abbilden
+        var level = d.Level switch
         {
-            "power" => ConsoleLevel.Power,
-            "command" => ConsoleLevel.Command,
+            Data180Level.Power => ConsoleLevel.Power,
+            Data180Level.Command => ConsoleLevel.Command,
             _ => ConsoleLevel.Read,
         };
         if (!Uri.TryCreate(d.Socket, UriKind.Absolute, out var socket) || (socket.Scheme != "wss" && socket.Scheme != "ws"))

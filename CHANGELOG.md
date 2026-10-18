@@ -5,8 +5,6 @@ Versionen nach [SemVer](https://semver.org/lang/de/), Regeln in `docs/VERSIONIER
 
 ## [Unveröffentlicht]
 
-- Manifest: nur noch Gerätefamilie `Windows.Desktop` (`Windows.Universal` entfernt), damit der Store keine anderen Gerätefamilien mehr anbietet
-
 Stufe 0 – Fundament (Version 0.1.0, noch nicht im Store).
 
 - Lösung `RoG.sln`: plattformunabhängiger Kern `RoG.Core` (baut und testet unter Linux), Tests `RoG.Core.Tests`, WinUI-3-App `RoG.App` (MSIX, baut auf der Windows-VM)
@@ -23,6 +21,7 @@ Stufe 0 – Fundament (Version 0.1.0, noch nicht im Store).
 - 2.1.0: Benachrichtigungen mit Windows-Toasts, Tray-Symbol, Sprungliste, Autostart, Direktnachrichten mit eigenem Chat-Fenster, Forum, Uploads mit Drag & Drop und Strg+V, Galerie, Downloads, Kurzlinks, Profil bearbeiten, News, Squads, Mitglieder, Termine mit Zusage, TeamSpeak/Discord, Matches, Info, Suche
 - 2.2.0: Bewerben bei Squads mit „Meine Bewerbungen“, Abstimmungen über Bewerbungen, Abwesenheiten, Geräte & Datenexport, Konto löschen, Hinweis auf neue Regeln; Server-Steuerung im eigenen Fenster (Start/Stopp/Neustart/Kill, Ressourcen, Live-Konsole mit Verlauf, Configs mit Prüfung und Versionen, Backups, RCON, Sperren, Vier-Augen-Freigaben); App-Sperre mit Windows Hello
 - 2.4.0: Offline-Betrieb (verschlüsselter Cache mit letztem Stand, Warteschlange für Nachrichten/Beiträge/Zusagen, Offline-Hinweis), Inhalte melden, Verwaltung (Übersicht, Mitglieder und Rollen, Bewerbungen, Moderation, Termine anlegen/absagen), Wiki-Freigaben, Galerie einreichen, Teilen-Ziel „An RoG hochladen“, Spiele-Liste, Server-Auslastung (24 h), Monatsansicht im Kalender
+- 2.5.1: Live-Konsole brach mit „requires an element of type 'String'“ ab (Berechtigungsstufe des Konsolen-Tokens falsch gelesen); Manifest nur noch für `Windows.Desktop`
 - 2.5.0: Website-Verwaltung in der App – 26 Bereiche (u. a. Spiele, Terminarten, Abzeichen, Turniere, Hall of Fame, Partner, Regelwerke, Inaktivität, Registrierung, Clan-Einstellungen, Seiten, Downloads, Forum-Bereiche, Galerie-Alben, Wiki, Mail-Vorlagen, Upload-Limits, Rollen, Gameserver) im eigenen Editor-Fenster; API-Client mit Social Media, Riot und Steam-Bibliothek
 - 2.4.9: Korrekturen aus Wahkes Test – Profile ohne verknüpfte Konten ließen sich nicht öffnen (PHP `[]` statt `{}`), Terminzeit „P–21:00“, doppelte Listen in der Verwaltung, Beschriftung der Übersichtskacheln, Termin-Detail mit Auswahlhinweis, ET-Farbcodes im Clan-Tag; Live-Konsole mit Verbindungsstatus, Wings-Fehlern, Demo-Erkennung und automatischem Neuverbinden; Bildvorschau für Chat-Anhänge, „Bewerben“ nicht mehr im eigenen Squad, Startseite ohne veralteten Hinweis, TeamSpeak-Leerzustand, einheitliche Knöpfe und Überschriften
 - 2.4.8: Barrierefreiheit (Prüfung der Screenreader-Namen, Animationen nach Windows-Einstellung), Store-Texte

@@ -4301,4 +4301,154 @@
   <data name="SettingsPage_Imprint.Content" xml:space="preserve">
     <value>Legal notice</value>
   </data>
+  <data name="Social_NoChannels" xml:space="preserve">
+    <value>No social media channel set up yet.</value>
+  </data>
+  <data name="Social_NotEligible" xml:space="preserve">
+    <value>Can't be posted (not public, not published or already over).</value>
+  </data>
+  <data name="Social_ScheduledAt" xml:space="preserve">
+    <value>Scheduled for {0}</value>
+  </data>
+  <data name="Social_RetryStarted" xml:space="preserve">
+    <value>Resending to {0} channels.</value>
+  </data>
+  <data name="Social_Unusable" xml:space="preserve">
+    <value>Not usable: {0}</value>
+  </data>
+  <data name="Social_RetryOne" xml:space="preserve">
+    <value>Resending.</value>
+  </data>
+  <data name="Social_RepostTitle" xml:space="preserve">
+    <value>Post again?</value>
+  </data>
+  <data name="Social_RepostText" xml:space="preserve">
+    <value>This is already on every channel. A new draft will be posted as an additional post once it's approved.</value>
+  </data>
+  <data name="Social_RepostConfirm" xml:space="preserve">
+    <value>Create new draft</value>
+  </data>
+  <data name="Social_Redrafted" xml:space="preserve">
+    <value>Draft created – approve it in social admin.</value>
+  </data>
+  <data name="SocialCard_Title.Text" xml:space="preserve">
+    <value>SOCIAL MEDIA</value>
+  </data>
+  <data name="SocialCard_Refresh.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Refresh social media status</value>
+  </data>
+  <data name="SocialCard_OpenPost.Content" xml:space="preserve">
+    <value>Open post</value>
+  </data>
+  <data name="SocialCard_RetryOne.Content" xml:space="preserve">
+    <value>Resend</value>
+  </data>
+  <data name="SocialCard_RetryFailed.Content" xml:space="preserve">
+    <value>RESEND FAILED</value>
+  </data>
+  <data name="SocialCard_Redraft.Content" xml:space="preserve">
+    <value>PREPARE AGAIN</value>
+  </data>
+  <data name="SocialCard_Admin.Content" xml:space="preserve">
+    <value>Open social admin</value>
+  </data>
+  <data name="Social_State_none" xml:space="preserve">
+    <value>Not posted yet</value>
+  </data>
+  <data name="Social_State_draft" xml:space="preserve">
+    <value>Draft – waiting for approval</value>
+  </data>
+  <data name="Social_State_scheduled" xml:space="preserve">
+    <value>Scheduled</value>
+  </data>
+  <data name="Social_State_publishing" xml:space="preserve">
+    <value>Posting …</value>
+  </data>
+  <data name="Social_State_published" xml:space="preserve">
+    <value>Posted on all channels</value>
+  </data>
+  <data name="Social_State_partial" xml:space="preserve">
+    <value>Partly posted</value>
+  </data>
+  <data name="Social_State_failed" xml:space="preserve">
+    <value>Failed</value>
+  </data>
+  <data name="Social_State_retracted" xml:space="preserve">
+    <value>Retracted</value>
+  </data>
+  <data name="Social_State_cancelled" xml:space="preserve">
+    <value>Discarded</value>
+  </data>
+  <data name="Social_Target_pending" xml:space="preserve">
+    <value>Waiting</value>
+  </data>
+  <data name="Social_Target_processing" xml:space="preserve">
+    <value>Sending</value>
+  </data>
+  <data name="Social_Target_published" xml:space="preserve">
+    <value>Posted</value>
+  </data>
+  <data name="Social_Target_failed" xml:space="preserve">
+    <value>Failed</value>
+  </data>
+  <data name="Social_Target_skipped" xml:space="preserve">
+    <value>Skipped</value>
+  </data>
+  <data name="Social_Target_retracted" xml:space="preserve">
+    <value>Retracted</value>
+  </data>
+  <data name="Social_Target_cancelled" xml:space="preserve">
+    <value>Discarded</value>
+  </data>
+  <data name="Social_Skip_dry_run" xml:space="preserve">
+    <value>Test mode</value>
+  </data>
+  <data name="Social_Skip_channel_inactive" xml:space="preserve">
+    <value>Channel paused</value>
+  </data>
+  <data name="Social_Skip_unavailable" xml:space="preserve">
+    <value>Platform unavailable</value>
+  </data>
+  <data name="Social_Unusable_reauth" xml:space="preserve">
+    <value>reconnect</value>
+  </data>
+  <data name="Social_Unusable_inactive" xml:space="preserve">
+    <value>paused</value>
+  </data>
+  <data name="Social_Unusable_deleted" xml:space="preserve">
+    <value>deleted</value>
+  </data>
+  <data name="Social_Unusable_unavailable" xml:space="preserve">
+    <value>unavailable</value>
+  </data>
+  <data name="Error_social_already_posted" xml:space="preserve">
+    <value>Already posted on all matching channels.</value>
+  </data>
+  <data name="Error_social_source_unavailable" xml:space="preserve">
+    <value>The content is no longer public or published.</value>
+  </data>
+  <data name="Error_social_no_channels" xml:space="preserve">
+    <value>No channel is set up for this kind of content.</value>
+  </data>
+  <data name="Error_social_channel_unusable" xml:space="preserve">
+    <value>The channel can't be used right now (paused, deleted or needs reconnecting).</value>
+  </data>
+  <data name="Error_social_nothing_to_retry" xml:space="preserve">
+    <value>There's nothing to resend.</value>
+  </data>
+  <data name="Error_social_busy" xml:space="preserve">
+    <value>Something is already running – try again in a moment.</value>
+  </data>
+  <data name="Error_social_target_not_failed" xml:space="preserve">
+    <value>This channel can't be resent.</value>
+  </data>
+  <data name="Error_social_source_not_eligible" xml:space="preserve">
+    <value>Can't be posted (not public, event over or no consent).</value>
+  </data>
+  <data name="Error_social_post_open" xml:space="preserve">
+    <value>An approved post is being published or is due shortly.</value>
+  </data>
+  <data name="Error_integrations_write_blocked" xml:space="preserve">
+    <value>Writing to integrations is blocked right now.</value>
+  </data>
 </root>

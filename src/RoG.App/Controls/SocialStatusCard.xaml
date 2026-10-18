@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Karte „Social Media“ an einer Quelle (News, Termin, Clanwar, Galerie): Zustand, Kanäle, erneut senden, neu vorbereiten. -->
+<UserControl
+    x:Class="RoG.App.Controls.SocialStatusCard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:RoG.App.ViewModels">
+
+    <Border Style="{StaticResource RoGCardStyle}" Visibility="{x:Bind Status.IsShown, Mode=OneWay}">
+        <StackPanel Spacing="10">
+            <Grid ColumnSpacing="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Uid="SocialCard_Title" VerticalAlignment="Center" Style="{StaticResource RoGSectionTextStyle}" />
+                <Button x:Uid="SocialCard_Refresh" Grid.Column="1" Command="{x:Bind Status.RefreshCommand, Mode=OneWay}" Style="{StaticResource RoGSecondaryButtonStyle}">
+                    <FontIcon FontSize="14" Glyph="&#xE72C;" />
+                </Button>
+            </Grid>
+            <ProgressBar IsIndeterminate="True" Visibility="{x:Bind Status.IsBusy, Mode=OneWay}" />
+            <TextBlock
+                AutomationProperties.LiveSetting="Polite"
+                FontWeight="SemiBold"
+                Style="{StaticResource RoGBodyTextStyle}"
+                Text="{x:Bind Status.StateText, Mode=OneWay}" />
+            <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Status.DetailText, Mode=OneWay}" TextWrapping="Wrap" />
+
+            <ItemsControl ItemsSource="{x:Bind Status.Targets, Mode=OneWay}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="vm:SocialTargetViewModel">
+                        <Grid Margin="0,0,0,8" AutomationProperties.Name="{x:Bind AutomationName}" ColumnSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Spacing="2">
+                                <TextBlock Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Name}" TextWrapping="Wrap" />
+                                <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind StatusText}" TextWrapping="Wrap" />
+                                <TextBlock
+                                    FontSize="12"
+                                    Foreground="{StaticResource RoGRedBrush}"
+                                    IsTextSelectionEnabled="True"
+                                    Text="{x:Bind Error}"
+                                    TextWrapping="Wrap"
+                                    Visibility="{x:Bind HasError}" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Orientation="Horizontal" Spacing="4">
+                                <HyperlinkButton x:Uid="SocialCard_OpenPost" Command="{x:Bind OpenCommand}" Visibility="{x:Bind HasLink}" />
+                                <HyperlinkButton x:Uid="SocialCard_RetryOne" Command="{x:Bind RetryCommand}" Visibility="{x:Bind CanRetry}" />
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <InfoBar
+                IsOpen="{x:Bind Status.IsFeedbackOpen, Mode=TwoWay}"
+                Message="{x:Bind Status.Feedback, Mode=OneWay}"
+                Severity="{x:Bind Status.FeedbackSeverity, Mode=OneWay}" />
+
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <Button x:Uid="SocialCard_RetryFailed" Command="{x:Bind Status.RetryFailedCommand, Mode=OneWay}" Style="{StaticResource RoGPrimaryButtonStyle}" Visibility="{x:Bind Status.ShowRetryFailed, Mode=OneWay}" />
+                <Button x:Uid="SocialCard_Redraft" Command="{x:Bind Status.RedraftCommand, Mode=OneWay}" Style="{StaticResource RoGSecondaryButtonStyle}" Visibility="{x:Bind Status.ShowRedraft, Mode=OneWay}" />
+                <HyperlinkButton x:Uid="SocialCard_Admin" Command="{x:Bind Status.OpenInAdminCommand, Mode=OneWay}" Visibility="{x:Bind Status.HasAdminLink, Mode=OneWay}" />
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</UserControl>

@@ -4301,4 +4301,154 @@
   <data name="SettingsPage_Imprint.Content" xml:space="preserve">
     <value>Impressum</value>
   </data>
+  <data name="Social_NoChannels" xml:space="preserve">
+    <value>Noch kein Social-Media-Kanal eingerichtet.</value>
+  </data>
+  <data name="Social_NotEligible" xml:space="preserve">
+    <value>Lässt sich nicht posten (nicht öffentlich, nicht veröffentlicht oder vorbei).</value>
+  </data>
+  <data name="Social_ScheduledAt" xml:space="preserve">
+    <value>Geplant für {0}</value>
+  </data>
+  <data name="Social_RetryStarted" xml:space="preserve">
+    <value>{0} Kanäle werden erneut gesendet.</value>
+  </data>
+  <data name="Social_Unusable" xml:space="preserve">
+    <value>Nicht nutzbar: {0}</value>
+  </data>
+  <data name="Social_RetryOne" xml:space="preserve">
+    <value>Wird erneut gesendet.</value>
+  </data>
+  <data name="Social_RepostTitle" xml:space="preserve">
+    <value>Erneut posten?</value>
+  </data>
+  <data name="Social_RepostText" xml:space="preserve">
+    <value>Der Beitrag steht schon auf allen Kanälen. Ein neuer Entwurf wird als zusätzlicher Beitrag gepostet, sobald er freigegeben ist.</value>
+  </data>
+  <data name="Social_RepostConfirm" xml:space="preserve">
+    <value>Neuen Entwurf anlegen</value>
+  </data>
+  <data name="Social_Redrafted" xml:space="preserve">
+    <value>Entwurf angelegt – freigeben in der Social-Verwaltung.</value>
+  </data>
+  <data name="SocialCard_Title.Text" xml:space="preserve">
+    <value>SOCIAL MEDIA</value>
+  </data>
+  <data name="SocialCard_Refresh.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Social-Media-Status aktualisieren</value>
+  </data>
+  <data name="SocialCard_OpenPost.Content" xml:space="preserve">
+    <value>Post öffnen</value>
+  </data>
+  <data name="SocialCard_RetryOne.Content" xml:space="preserve">
+    <value>Erneut senden</value>
+  </data>
+  <data name="SocialCard_RetryFailed.Content" xml:space="preserve">
+    <value>FEHLGESCHLAGENE ERNEUT SENDEN</value>
+  </data>
+  <data name="SocialCard_Redraft.Content" xml:space="preserve">
+    <value>NEU VORBEREITEN</value>
+  </data>
+  <data name="SocialCard_Admin.Content" xml:space="preserve">
+    <value>Social-Verwaltung öffnen</value>
+  </data>
+  <data name="Social_State_none" xml:space="preserve">
+    <value>Noch nicht gepostet</value>
+  </data>
+  <data name="Social_State_draft" xml:space="preserve">
+    <value>Entwurf – wartet auf Freigabe</value>
+  </data>
+  <data name="Social_State_scheduled" xml:space="preserve">
+    <value>Eingeplant</value>
+  </data>
+  <data name="Social_State_publishing" xml:space="preserve">
+    <value>Wird gepostet …</value>
+  </data>
+  <data name="Social_State_published" xml:space="preserve">
+    <value>Auf allen Kanälen gepostet</value>
+  </data>
+  <data name="Social_State_partial" xml:space="preserve">
+    <value>Teilweise gepostet</value>
+  </data>
+  <data name="Social_State_failed" xml:space="preserve">
+    <value>Fehlgeschlagen</value>
+  </data>
+  <data name="Social_State_retracted" xml:space="preserve">
+    <value>Zurückgezogen</value>
+  </data>
+  <data name="Social_State_cancelled" xml:space="preserve">
+    <value>Verworfen</value>
+  </data>
+  <data name="Social_Target_pending" xml:space="preserve">
+    <value>Wartet</value>
+  </data>
+  <data name="Social_Target_processing" xml:space="preserve">
+    <value>Wird gesendet</value>
+  </data>
+  <data name="Social_Target_published" xml:space="preserve">
+    <value>Gepostet</value>
+  </data>
+  <data name="Social_Target_failed" xml:space="preserve">
+    <value>Fehlgeschlagen</value>
+  </data>
+  <data name="Social_Target_skipped" xml:space="preserve">
+    <value>Übersprungen</value>
+  </data>
+  <data name="Social_Target_retracted" xml:space="preserve">
+    <value>Zurückgezogen</value>
+  </data>
+  <data name="Social_Target_cancelled" xml:space="preserve">
+    <value>Verworfen</value>
+  </data>
+  <data name="Social_Skip_dry_run" xml:space="preserve">
+    <value>Testmodus</value>
+  </data>
+  <data name="Social_Skip_channel_inactive" xml:space="preserve">
+    <value>Kanal pausiert</value>
+  </data>
+  <data name="Social_Skip_unavailable" xml:space="preserve">
+    <value>Plattform nicht verfügbar</value>
+  </data>
+  <data name="Social_Unusable_reauth" xml:space="preserve">
+    <value>neu verbinden</value>
+  </data>
+  <data name="Social_Unusable_inactive" xml:space="preserve">
+    <value>pausiert</value>
+  </data>
+  <data name="Social_Unusable_deleted" xml:space="preserve">
+    <value>gelöscht</value>
+  </data>
+  <data name="Social_Unusable_unavailable" xml:space="preserve">
+    <value>nicht verfügbar</value>
+  </data>
+  <data name="Error_social_already_posted" xml:space="preserve">
+    <value>Steht schon auf allen passenden Kanälen.</value>
+  </data>
+  <data name="Error_social_source_unavailable" xml:space="preserve">
+    <value>Der Inhalt ist nicht mehr öffentlich oder veröffentlicht.</value>
+  </data>
+  <data name="Error_social_no_channels" xml:space="preserve">
+    <value>Kein Kanal ist für diese Art Inhalt eingestellt.</value>
+  </data>
+  <data name="Error_social_channel_unusable" xml:space="preserve">
+    <value>Der Kanal ist gerade nicht nutzbar (pausiert, gelöscht oder neu zu verbinden).</value>
+  </data>
+  <data name="Error_social_nothing_to_retry" xml:space="preserve">
+    <value>Es gibt nichts erneut zu senden.</value>
+  </data>
+  <data name="Error_social_busy" xml:space="preserve">
+    <value>Gerade läuft schon eine Aktion – gleich noch einmal versuchen.</value>
+  </data>
+  <data name="Error_social_target_not_failed" xml:space="preserve">
+    <value>Dieser Kanal lässt sich nicht erneut senden.</value>
+  </data>
+  <data name="Error_social_source_not_eligible" xml:space="preserve">
+    <value>Lässt sich nicht posten (nicht öffentlich, Termin vorbei oder ohne Einwilligung).</value>
+  </data>
+  <data name="Error_social_post_open" xml:space="preserve">
+    <value>Ein freigegebener Post wird gerade oder demnächst veröffentlicht.</value>
+  </data>
+  <data name="Error_integrations_write_blocked" xml:space="preserve">
+    <value>Schreiben an Integrationen ist gerade gesperrt.</value>
+  </data>
 </root>

@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Media.Imaging;
 using RoG.App.Services;
 using RoG.Core.Content;
 using RoG.Core.Features.News;
+using RoG.Core.Features.Social;
 using RoG.Core.Localization;
 
 namespace RoG.App.ViewModels;
@@ -85,6 +86,45 @@ public sealed partial class NewsViewModel : LoadableViewModel
         {
             Selected = Items.FirstOrDefault(i => i.Slug == selectedSlug);
         }
+
+        _ = LoadSocialStatesAsync();
+    }
+
+    /// <summary>Social-Media-Symbole für die Redaktion – eine Abfrage für die ganze Liste, Fehler blenden sie nur aus.</summary>
+    private async Task LoadSocialStatesAsync()
+    {
+        if (Services.CurrentUser is not { } me || !me.Can(SocialSourceService.Permission) || !me.HasScope(SocialSourceService.ReadScope))
+        {
+            return;
+        }
+
+        try
+        {
+            _socialStates = await new SocialSourceService(Services.Api.Http).ListStatesAsync(SocialSources.News);
+            ApplySocial(Items);
+        }
+        catch (RoG.Core.Api.ApiProblemException)
+        {
+            // Symbole sind Beiwerk
+        }
+    }
+
+    private IReadOnlyDictionary<string, string>? _socialStates;
+
+    private void ApplySocial(IEnumerable<NewsItemViewModel> items)
+    {
+        if (_socialStates is null)
+        {
+            return;
+        }
+
+        foreach (var item in items)
+        {
+            if (_socialStates.TryGetValue(item.Id, out var state))
+            {
+                item.SetSocial(state, Services.Localizer);
+            }
+        }
     }
 
     [RelayCommand]
@@ -99,10 +139,13 @@ public sealed partial class NewsViewModel : LoadableViewModel
         try
         {
             var page = await _news.ListAsync(_cursor);
-            foreach (var item in page.Items)
+            var added = page.Items.Select(i => new NewsItemViewModel(i)).ToList();
+            foreach (var item in added)
             {
-                Items.Add(new NewsItemViewModel(item));
+                Items.Add(item);
             }
+
+            ApplySocial(added);
 
             _cursor = page.NextCursor;
             HasMore = page.HasMore;
@@ -132,9 +175,40 @@ public sealed partial class NewsViewModel : LoadableViewModel
 }
 
 /// <summary>Eine News in der Liste.</summary>
-public sealed class NewsItemViewModel(NewsSummary news)
+public sealed partial class NewsItemViewModel(NewsSummary news) : ObservableObject
 {
+    public string Id => news.Id;
+
     public string Slug => news.Slug;
+
+    /// <summary>Social-Media-Symbol (nur für <c>social.publish</c>, nachgeladen).</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasSocial))]
+    public partial string SocialGlyph { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial Microsoft.UI.Xaml.Media.Brush? SocialBrush { get; set; }
+
+    [ObservableProperty]
+    public partial string SocialText { get; set; } = string.Empty;
+
+    public bool HasSocial => SocialGlyph.Length > 0;
+
+    internal void SetSocial(string state, ILocalizer localizer)
+    {
+        var badge = SocialStates.Badge(state);
+        (SocialGlyph, var brush) = badge switch
+        {
+            SocialBadge.Posted => ("\uE73E", "RoGGreenBrush"),
+            SocialBadge.Partial => ("\uE7BA", "RoGGoldBrush"),
+            SocialBadge.Failed => ("\uE783", "RoGRedBrush"),
+            SocialBadge.Pending => ("\uE823", "RoGMutedBrush"),
+            SocialBadge.Draft => ("\uE70F", "RoGMutedBrush"),
+            _ => (string.Empty, "RoGMutedBrush"),
+        };
+        SocialBrush = (Microsoft.UI.Xaml.Media.Brush)Microsoft.UI.Xaml.Application.Current.Resources[brush];
+        SocialText = badge == SocialBadge.None ? string.Empty : localizer.GetString("Social_State_" + state);
+    }
 
     public string Title => news.Title;
 

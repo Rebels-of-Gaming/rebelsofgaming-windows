@@ -26,6 +26,7 @@ public sealed partial class MatchEditorViewModel : ObservableObject
         _services = services;
         _admin = new MatchAdminService(services.Api.Http);
         _squads = new SquadService(services.Api.Client);
+        Social = new SocialStatusViewModel(services);
         TypeOptions = MatchAdminService.Types.Select(t => new SettingsOption(t, L("MatchEdit_Type_" + t))).ToList();
         StatusOptions = MatchAdminService.Statuses.Select(t => new SettingsOption(t, L("MatchEdit_Status_" + t))).ToList();
         SelectedType = TypeOptions[0];
@@ -49,6 +50,11 @@ public sealed partial class MatchEditorViewModel : ObservableObject
     public partial string? Id { get; set; }
 
     public bool IsSaved => Id is not null;
+
+    /// <summary>Karte „Social Media“ (nur mit Recht <c>social.publish</c>).</summary>
+    public SocialStatusViewModel Social { get; }
+
+    partial void OnIdChanged(string? value) => _ = Social.ShowAsync(RoG.Core.Features.Social.SocialSources.Match, value);
 
     public string Heading => L(Id is null ? StringKeys.MatchEditNew : StringKeys.MatchEditEdit);
 
@@ -236,7 +242,14 @@ public sealed partial class MatchEditorViewModel : ObservableObject
         if (await RunAsync(async () => id = await _admin.SaveAsync(draft, _services.Language)))
         {
             Changed = true;
+            var before = Id;
             Id = string.IsNullOrEmpty(id) ? Id : id;
+            if (Id == before)
+            {
+                // Ergebnis veröffentlicht → Website legt ggf. einen Entwurf an
+                _ = Social.ShowAsync(RoG.Core.Features.Social.SocialSources.Match, Id);
+            }
+
             Show(L(StringKeys.MatchEditSaved), InfoBarSeverity.Success);
         }
     }

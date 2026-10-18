@@ -730,6 +730,26 @@ public static class StringKeys
 
     public const string ModTypewikirevision = "Mod_Type_wiki_revision";
 
+    public const string SocialNoChannels = "Social_NoChannels";
+
+    public const string SocialNotEligible = "Social_NotEligible";
+
+    public const string SocialScheduledAt = "Social_ScheduledAt";
+
+    public const string SocialRetryStarted = "Social_RetryStarted";
+
+    public const string SocialUnusable = "Social_Unusable";
+
+    public const string SocialRetryOne = "Social_RetryOne";
+
+    public const string SocialRepostTitle = "Social_RepostTitle";
+
+    public const string SocialRepostText = "Social_RepostText";
+
+    public const string SocialRepostConfirm = "Social_RepostConfirm";
+
+    public const string SocialRedrafted = "Social_Redrafted";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

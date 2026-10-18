@@ -74,6 +74,8 @@
                 </ScrollViewer>
                 <ProgressRing Grid.Row="1" IsActive="{x:Bind ViewModel.IsLoadingItems, Mode=OneWay}" />
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Visibility="{x:Bind ViewModel.ShowItems, Mode=OneWay}">
+                    <StackPanel Spacing="16">
+                    <controls:SocialStatusCard Status="{x:Bind ViewModel.Social}" />
                     <ItemsRepeater ItemsSource="{x:Bind ViewModel.Items}">
                         <ItemsRepeater.Layout>
                             <UniformGridLayout ItemsStretch="Fill" MinColumnSpacing="8" MinItemWidth="180" MinRowSpacing="8" />
@@ -102,6 +104,7 @@
                             </DataTemplate>
                         </ItemsRepeater.ItemTemplate>
                     </ItemsRepeater>
+                    </StackPanel>
                 </ScrollViewer>
             </Grid>
 

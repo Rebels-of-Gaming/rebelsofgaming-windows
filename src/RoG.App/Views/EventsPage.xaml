@@ -255,6 +255,8 @@
                     </StackPanel>
 
                     <controls:ServerCard Item="{x:Bind ViewModel.Detail.Server, Mode=OneWay}" Visibility="{x:Bind ViewModel.Detail.HasServer, Mode=OneWay}" />
+
+                    <controls:SocialStatusCard Status="{x:Bind ViewModel.Detail.Social}" />
                 </StackPanel>
             </ScrollViewer>
         </Grid>

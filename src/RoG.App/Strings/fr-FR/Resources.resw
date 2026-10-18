@@ -4301,4 +4301,154 @@
   <data name="SettingsPage_Imprint.Content" xml:space="preserve">
     <value>Mentions légales</value>
   </data>
+  <data name="Social_NoChannels" xml:space="preserve">
+    <value>Aucun canal de réseaux sociaux configuré.</value>
+  </data>
+  <data name="Social_NotEligible" xml:space="preserve">
+    <value>Impossible à publier (non public, non publié ou déjà passé).</value>
+  </data>
+  <data name="Social_ScheduledAt" xml:space="preserve">
+    <value>Prévu pour le {0}</value>
+  </data>
+  <data name="Social_RetryStarted" xml:space="preserve">
+    <value>Renvoi vers {0} canaux.</value>
+  </data>
+  <data name="Social_Unusable" xml:space="preserve">
+    <value>Inutilisables : {0}</value>
+  </data>
+  <data name="Social_RetryOne" xml:space="preserve">
+    <value>Renvoi en cours.</value>
+  </data>
+  <data name="Social_RepostTitle" xml:space="preserve">
+    <value>Publier à nouveau ?</value>
+  </data>
+  <data name="Social_RepostText" xml:space="preserve">
+    <value>La publication est déjà sur tous les canaux. Un nouveau brouillon sera publié en plus une fois validé.</value>
+  </data>
+  <data name="Social_RepostConfirm" xml:space="preserve">
+    <value>Créer un brouillon</value>
+  </data>
+  <data name="Social_Redrafted" xml:space="preserve">
+    <value>Brouillon créé – à valider dans l’administration des réseaux sociaux.</value>
+  </data>
+  <data name="SocialCard_Title.Text" xml:space="preserve">
+    <value>RÉSEAUX SOCIAUX</value>
+  </data>
+  <data name="SocialCard_Refresh.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Actualiser le statut des réseaux sociaux</value>
+  </data>
+  <data name="SocialCard_OpenPost.Content" xml:space="preserve">
+    <value>Ouvrir la publication</value>
+  </data>
+  <data name="SocialCard_RetryOne.Content" xml:space="preserve">
+    <value>Renvoyer</value>
+  </data>
+  <data name="SocialCard_RetryFailed.Content" xml:space="preserve">
+    <value>RENVOYER LES ÉCHECS</value>
+  </data>
+  <data name="SocialCard_Redraft.Content" xml:space="preserve">
+    <value>PRÉPARER À NOUVEAU</value>
+  </data>
+  <data name="SocialCard_Admin.Content" xml:space="preserve">
+    <value>Ouvrir l’administration</value>
+  </data>
+  <data name="Social_State_none" xml:space="preserve">
+    <value>Pas encore publié</value>
+  </data>
+  <data name="Social_State_draft" xml:space="preserve">
+    <value>Brouillon – en attente de validation</value>
+  </data>
+  <data name="Social_State_scheduled" xml:space="preserve">
+    <value>Programmé</value>
+  </data>
+  <data name="Social_State_publishing" xml:space="preserve">
+    <value>Publication en cours …</value>
+  </data>
+  <data name="Social_State_published" xml:space="preserve">
+    <value>Publié sur tous les canaux</value>
+  </data>
+  <data name="Social_State_partial" xml:space="preserve">
+    <value>Partiellement publié</value>
+  </data>
+  <data name="Social_State_failed" xml:space="preserve">
+    <value>Échec</value>
+  </data>
+  <data name="Social_State_retracted" xml:space="preserve">
+    <value>Retiré</value>
+  </data>
+  <data name="Social_State_cancelled" xml:space="preserve">
+    <value>Abandonné</value>
+  </data>
+  <data name="Social_Target_pending" xml:space="preserve">
+    <value>En attente</value>
+  </data>
+  <data name="Social_Target_processing" xml:space="preserve">
+    <value>Envoi en cours</value>
+  </data>
+  <data name="Social_Target_published" xml:space="preserve">
+    <value>Publié</value>
+  </data>
+  <data name="Social_Target_failed" xml:space="preserve">
+    <value>Échec</value>
+  </data>
+  <data name="Social_Target_skipped" xml:space="preserve">
+    <value>Ignoré</value>
+  </data>
+  <data name="Social_Target_retracted" xml:space="preserve">
+    <value>Retiré</value>
+  </data>
+  <data name="Social_Target_cancelled" xml:space="preserve">
+    <value>Abandonné</value>
+  </data>
+  <data name="Social_Skip_dry_run" xml:space="preserve">
+    <value>Mode test</value>
+  </data>
+  <data name="Social_Skip_channel_inactive" xml:space="preserve">
+    <value>Canal en pause</value>
+  </data>
+  <data name="Social_Skip_unavailable" xml:space="preserve">
+    <value>Plateforme indisponible</value>
+  </data>
+  <data name="Social_Unusable_reauth" xml:space="preserve">
+    <value>à reconnecter</value>
+  </data>
+  <data name="Social_Unusable_inactive" xml:space="preserve">
+    <value>en pause</value>
+  </data>
+  <data name="Social_Unusable_deleted" xml:space="preserve">
+    <value>supprimé</value>
+  </data>
+  <data name="Social_Unusable_unavailable" xml:space="preserve">
+    <value>indisponible</value>
+  </data>
+  <data name="Error_social_already_posted" xml:space="preserve">
+    <value>Déjà publié sur tous les canaux concernés.</value>
+  </data>
+  <data name="Error_social_source_unavailable" xml:space="preserve">
+    <value>Le contenu n’est plus public ou publié.</value>
+  </data>
+  <data name="Error_social_no_channels" xml:space="preserve">
+    <value>Aucun canal n’est configuré pour ce type de contenu.</value>
+  </data>
+  <data name="Error_social_channel_unusable" xml:space="preserve">
+    <value>Le canal est inutilisable pour le moment (en pause, supprimé ou à reconnecter).</value>
+  </data>
+  <data name="Error_social_nothing_to_retry" xml:space="preserve">
+    <value>Rien à renvoyer.</value>
+  </data>
+  <data name="Error_social_busy" xml:space="preserve">
+    <value>Une action est déjà en cours – réessaie dans un instant.</value>
+  </data>
+  <data name="Error_social_target_not_failed" xml:space="preserve">
+    <value>Ce canal ne peut pas être renvoyé.</value>
+  </data>
+  <data name="Error_social_source_not_eligible" xml:space="preserve">
+    <value>Impossible à publier (non public, événement passé ou sans consentement).</value>
+  </data>
+  <data name="Error_social_post_open" xml:space="preserve">
+    <value>Une publication validée est en cours ou imminente.</value>
+  </data>
+  <data name="Error_integrations_write_blocked" xml:space="preserve">
+    <value>L’écriture vers les intégrations est bloquée pour le moment.</value>
+  </data>
 </root>

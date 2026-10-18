@@ -33,6 +33,7 @@ public sealed partial class NewsEditorViewModel : ObservableObject
         Rights = rights;
         _admin = new NewsAdminService(services.Api.Http);
         _uploads = new UploadService(services.Api.Client, services.StorageHttp);
+        Social = new SocialStatusViewModel(services);
         LanguageOptions = NewsAdminService.Languages.Select(l => new SettingsOption(l, L("NewsEdit_Lang_" + l))).ToList();
         VisibilityOptions = [new("public", L(StringKeys.NewsEditPublic)), new("members", L(StringKeys.NewsEditMembers))];
         StatusOptions = rights.Publish
@@ -65,6 +66,11 @@ public sealed partial class NewsEditorViewModel : ObservableObject
     public partial string? Id { get; set; }
 
     public bool IsSaved => Id is not null;
+
+    /// <summary>Karte „Social Media“ (nur mit Recht <c>social.publish</c>).</summary>
+    public SocialStatusViewModel Social { get; }
+
+    partial void OnIdChanged(string? value) => _ = Social.ShowAsync(RoG.Core.Features.Social.SocialSources.News, value);
 
     public bool CanDelete => Id is not null && (Rights.Manage || SelectedStatus?.Value == "draft");
 
@@ -277,7 +283,14 @@ public sealed partial class NewsEditorViewModel : ObservableObject
         if (await RunAsync(async () => saved = await _admin.SaveAsync(draft)))
         {
             Changed = true;
+            var before = Id;
             Id = saved!.Id.Length > 0 ? saved.Id : Id;
+            if (Id == before)
+            {
+                // Veröffentlichen legt ggf. einen Entwurf an – Status neu holen
+                _ = Social.ShowAsync(RoG.Core.Features.Social.SocialSources.News, Id);
+            }
+
             var text = L(draft.Status switch { "published" => StringKeys.NewsEditPublishedDone, "scheduled" => StringKeys.NewsEditScheduledDone, _ => StringKeys.NewsEditSaved });
             Show(saved.Warnings.Count > 0 ? text + " " + string.Join(" ", saved.Warnings) : text, saved.Warnings.Count > 0 ? InfoBarSeverity.Warning : InfoBarSeverity.Success);
             await LoadDraftsAsync();

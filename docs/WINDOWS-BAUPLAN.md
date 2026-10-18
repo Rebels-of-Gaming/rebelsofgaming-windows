@@ -194,6 +194,12 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   `server-console.js`). Chat-Anhänge: Bilder mit Vorschau über `GET /v1/attachments/{id}` (Umleitung auf kurzlebigen
   Link, max. 8 MB), andere Dateien öffnen im Browser. ET-Farbcodes im Clan-Tag werden wie auf der Website entfernt.
 
+- **2.5.3 – Social-Media-Status an der Quelle:** `SocialSourceService` (Core, Tests): Status, Kanal erneut senden,
+  alle fehlgeschlagenen erneut senden (meldet nicht nutzbare Kanäle), neu vorbereiten (`repost` nur nach Rückfrage, wenn
+  schon überall gepostet). `SocialStatusCard` in News-Editor, Clanwar-Editor, Termin-Detail, Galerie-Album; News-Liste
+  mit Symbol aus einer Abfrage der Posts (W22). Sichtbar nur mit `social.publish` + `social:read`, Aktionen mit
+  `social:write`. Freigabe der Entwürfe bleibt in der Social-Verwaltung der Website (Link in der Karte).
+
 - **2.5.2 – Website v0.30.0 (Melden, Blockieren, Rechtstexte):** Client aus `https://api.rebelsofgaming.com/openapi.json`
   (Typ-Umbenennungen per Abgleich von Methoden und Eigenschaften). Meldetypen `wiki_page` (+ `locale`), `wiki_revision`,
   Melden-Knopf in Galerie-Großansicht und Wiki; News-Kommentare mit `author_blocked` → Platzhalter + `show_blocked`;
@@ -228,7 +234,7 @@ der geplante Stand und können sich noch ändern. Neue Scopes (`social:read`/`so
 App-Änderung, weil der Login `meta.app_scopes` von `/v1/auth/scopes` übernimmt (`AppScopes`); wer sie braucht, meldet
 sich einmal neu an (2FA).
 
-1. **Social-Media-Status an der Quelle** (News, Termine, Clanwars, Galerie-Einträge)
+1. **Social-Media-Status an der Quelle** (News, Termine, Clanwars, Galerie-Einträge) – **erledigt in 2.5.3**
    - Core: `SocialSourceService` – `GET /v1/social/sources/{source}/{id}` (Gesamtstatus none · draft · scheduled ·
      publishing · published · partial · failed · cancelled; je Kanal Status, Zeit, Link, Fehlergrund),
      `POST …/targets/{target}/retry` (failed/skipped/cancelled), `POST /v1/social/posts/{post}/retry-failed`,

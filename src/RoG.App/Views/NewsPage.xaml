@@ -92,12 +92,21 @@
                                         Style="{StaticResource RoGBodyTextStyle}"
                                         Text="{x:Bind Title}"
                                         TextTrimming="CharacterEllipsis" />
-                                    <TextBlock
-                                        FontSize="12"
-                                        MaxLines="1"
-                                        Style="{StaticResource RoGMutedTextStyle}"
-                                        Text="{x:Bind Meta}"
-                                        TextTrimming="CharacterEllipsis" />
+                                    <StackPanel Orientation="Horizontal" Spacing="6">
+                                        <FontIcon
+                                            FontSize="12"
+                                            Foreground="{x:Bind SocialBrush, Mode=OneWay}"
+                                            Glyph="{x:Bind SocialGlyph, Mode=OneWay}"
+                                            ToolTipService.ToolTip="{x:Bind SocialText, Mode=OneWay}"
+                                            Visibility="{x:Bind HasSocial, Mode=OneWay}"
+                                            AutomationProperties.Name="{x:Bind SocialText, Mode=OneWay}" />
+                                        <TextBlock
+                                            FontSize="12"
+                                            MaxLines="1"
+                                            Style="{StaticResource RoGMutedTextStyle}"
+                                            Text="{x:Bind Meta}"
+                                            TextTrimming="CharacterEllipsis" />
+                                    </StackPanel>
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>

@@ -376,11 +376,15 @@ public sealed partial class EventDetailViewModel(AppServices services, EventServ
 
     protected override bool HasData => _item is not null;
 
+    /// <summary>Karte „Social Media“ (nur mit Recht <c>social.publish</c>).</summary>
+    public SocialStatusViewModel Social { get; } = new(services);
+
     public void Show(EventItem item)
     {
         Apply(item);
         _ = RefreshFromServerAsync(item.Id);
         _ = LoadLineupAsync(item.Id);
+        _ = Social.ShowAsync(RoG.Core.Features.Social.SocialSources.Event, item.Id);
     }
 
     /// <summary>Teilnehmer und Aufstellung still nachladen; Fehler blenden die Bereiche nur aus.</summary>

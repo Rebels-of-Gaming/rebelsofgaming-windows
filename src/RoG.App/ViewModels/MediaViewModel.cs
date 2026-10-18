@@ -22,7 +22,11 @@ public sealed partial class MediaViewModel : LoadableViewModel
     {
         _media = new MediaService(services.Api.Client, services.StorageHttp);
         Downloads = new DownloadsViewModel(services, _media);
+        Social = new SocialStatusViewModel(services);
     }
+
+    /// <summary>Karte „Social Media“ am geöffneten Album (Galerie-Posts entstehen je Album, nur mit <c>social.publish</c>).</summary>
+    public SocialStatusViewModel Social { get; }
 
     public ObservableCollection<AlbumItemViewModel> Albums { get; } = [];
 
@@ -84,6 +88,7 @@ public sealed partial class MediaViewModel : LoadableViewModel
     partial void OnAlbumChanged(AlbumItemViewModel? value)
     {
         Items.Clear();
+        _ = Social.ShowAsync(RoG.Core.Features.Social.SocialSources.Gallery, value?.Id);
         if (value is not null)
         {
             _ = LoadItemsAsync(value.Slug);
@@ -199,6 +204,8 @@ public sealed partial class MediaViewModel : LoadableViewModel
 
 public sealed class AlbumItemViewModel(GalleryAlbum album, ILocalizer localizer)
 {
+    public string Id => album.Id;
+
     public string Slug => album.Slug;
 
     public string Title => album.Title;

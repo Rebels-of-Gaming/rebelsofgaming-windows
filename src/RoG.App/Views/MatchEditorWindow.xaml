@@ -4,6 +4,7 @@
     x:Class="RoG.App.Views.MatchEditorWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:RoG.App.Controls"
     xmlns:vm="using:RoG.App.ViewModels">
 
     <Grid Background="{StaticResource RoGBgBrush}">
@@ -103,6 +104,8 @@
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
+
+                    <controls:SocialStatusCard Margin="0,16,0,0" Status="{x:Bind ViewModel.Social}" />
                 </StackPanel>
             </Grid>
         </ScrollViewer>

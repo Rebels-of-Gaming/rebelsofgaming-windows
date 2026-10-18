@@ -4697,4 +4697,34 @@
   <data name="Error_expiry_missing" xml:space="preserve">
     <value>Bitte einen Zeitraum wählen.</value>
   </data>
+  <data name="Account_DeleteLeaveText" xml:space="preserve">
+    <value>Aktive Clan-Mitglieder treten zuerst aus dem Clan aus. Mit derselben Bestätigung kannst du hier austreten – Rang und Squads verlierst du dabei. Danach kannst du dein Konto löschen.</value>
+  </data>
+  <data name="Account_DeleteLeaveUnavailable" xml:space="preserve">
+    <value>Aktive Clan-Mitglieder treten zuerst aus dem Clan aus. Wende dich dafür an die Clanleitung.</value>
+  </data>
+  <data name="Account_DeleteLeft" xml:space="preserve">
+    <value>Du bist aus dem Clan ausgetreten. Jetzt kannst du dein Konto löschen.</value>
+  </data>
+  <data name="Account_DeleteLeaveButton" xml:space="preserve">
+    <value>Clan verlassen</value>
+  </data>
+  <data name="Account_DeleteLeaveConfirm" xml:space="preserve">
+    <value>Wirklich austreten – erneut klicken</value>
+  </data>
+  <data name="Account_DeleteRetryAfter" xml:space="preserve">
+    <value>Erneut möglich in {0} s.</value>
+  </data>
+  <data name="Error_leave_clan_first" xml:space="preserve">
+    <value>Aktive Clan-Mitglieder treten zuerst aus dem Clan aus.</value>
+  </data>
+  <data name="Error_owner_cannot_delete" xml:space="preserve">
+    <value>Das Owner-Konto kann nicht gelöscht werden.</value>
+  </data>
+  <data name="Error_owner_cannot_leave" xml:space="preserve">
+    <value>Der Owner kann den Clan nicht verlassen.</value>
+  </data>
+  <data name="Error_not_a_member" xml:space="preserve">
+    <value>Du bist kein aktives Clan-Mitglied (mehr).</value>
+  </data>
 </root>

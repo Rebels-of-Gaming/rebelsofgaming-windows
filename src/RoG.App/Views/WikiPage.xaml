@@ -93,7 +93,7 @@
                         <Button x:Uid="WikiPage_Edit" Command="{x:Bind ViewModel.EditCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" Visibility="{x:Bind ViewModel.CanEdit}" />
                         <Button Command="{x:Bind ViewModel.ToggleWatchCommand}" Content="{x:Bind ViewModel.WatchLabel, Mode=OneWay}" Style="{StaticResource RoGSecondaryButtonStyle}" Visibility="{x:Bind ViewModel.CanWatch}" />
                         <Button x:Uid="Common_OpenInBrowser" Command="{x:Bind ViewModel.OpenInBrowserCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
-                        <Button x:Uid="WikiPage_Report" Command="{x:Bind ViewModel.ReportCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" Visibility="{x:Bind ViewModel.CanWatch}" />
+                        <Button x:Uid="WikiPage_Report" Command="{x:Bind ViewModel.ReportCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" Visibility="{x:Bind ViewModel.CanReportPage, Mode=OneWay}" />
                     </StackPanel>
                     <InfoBar
                         IsOpen="{x:Bind ViewModel.IsFeedbackOpen, Mode=TwoWay}"

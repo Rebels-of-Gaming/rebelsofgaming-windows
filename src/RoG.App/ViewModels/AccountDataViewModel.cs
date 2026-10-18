@@ -85,9 +85,14 @@ public sealed partial class AccountDataViewModel(AppServices services) : Loadabl
         Show(Format(StringKeys.MediaDownloaded, Path.GetFileName(path)), InfoBarSeverity.Success);
     });
 
-    /// <summary>Konto löschen – die Seite fragt vorher mit Bestätigungsfeld; danach zurück zum Login.</summary>
-    public async Task<string?> DeleteAccountAsync(string confirmation)
+    /// <summary>
+    /// Konto löschen – die Seite fragt vorher mit Bestätigungsfeld; danach zurück zum Login. Aktive Mitglieder bekommen
+    /// <c>leave_clan_first</c> → der Dialog bietet „Clan verlassen“ an (<see cref="LeaveClanAsync"/>).
+    /// Rückgabe = neuer Dialogzustand, <c>null</c> = gelöscht.
+    /// </summary>
+    public async Task<AccountDeletionFlow?> DeleteAccountAsync(AccountDeletionFlow flow, string confirmation)
     {
+        ArgumentNullException.ThrowIfNull(flow);
         try
         {
             await _data.DeleteAccountAsync(confirmation);
@@ -97,12 +102,57 @@ public sealed partial class AccountDataViewModel(AppServices services) : Loadabl
         }
         catch (ApiProblemException ex)
         {
-            return ex.Problem.Code == "validation_failed" && ex.Problem.Detail is { } d ? d : Services.Localizer.GetError(ex.Problem.Code);
+            return flow.AfterDeleteFailed(ex.Problem);
         }
         catch (Exception ex) when (ex is RoG.Core.Api.Generated.GeneratedApiException or ArgumentException)
         {
-            return Services.Localizer.GetError(ApiProblem.Codes.Unknown);
+            return flow with { ErrorCode = ApiProblem.Codes.Unknown, FieldError = null, RetryAfter = null };
         }
+    }
+
+    /// <summary>Aus dem Clan austreten (gleiche Bestätigung wie das Löschen) – danach ist das Löschen frei.</summary>
+    public async Task<AccountDeletionFlow> LeaveClanAsync(AccountDeletionFlow flow, string confirmation)
+    {
+        ArgumentNullException.ThrowIfNull(flow);
+        try
+        {
+            await _data.LeaveClanAsync(confirmation);
+            return AccountDeletionFlow.AfterLeft();
+        }
+        catch (ApiProblemException ex)
+        {
+            return flow.AfterLeaveFailed(ex.Problem);
+        }
+        catch (Exception ex) when (ex is RoG.Core.Api.Generated.GeneratedApiException or ArgumentException)
+        {
+            return flow with { ErrorCode = ApiProblem.Codes.Unknown, FieldError = null, RetryAfter = null };
+        }
+    }
+
+    /// <summary>Hinweis im Dialog: Fehler zuerst, sonst der Text zum Zustand (Austritt nötig, ausgetreten …).</summary>
+    public (string? Message, InfoBarSeverity Severity) DeletionHint(AccountDeletionFlow flow)
+    {
+        ArgumentNullException.ThrowIfNull(flow);
+        var l = Services.Localizer;
+        if (flow.HasError && flow.Stage != AccountDeletionStage.Blocked)
+        {
+            var message = flow.FieldError ?? l.GetError(flow.ErrorCode!);
+            if (flow.RetryAfter is { } wait)
+            {
+                message += " " + Format(StringKeys.AccountDeleteRetryAfter, Math.Max(1, (int)Math.Ceiling(wait.TotalSeconds)));
+            }
+
+            return (message, InfoBarSeverity.Error);
+        }
+
+        return flow.Stage switch
+        {
+            AccountDeletionStage.LeaveRequired => (l.GetString(StringKeys.AccountDeleteLeaveText), InfoBarSeverity.Warning),
+            AccountDeletionStage.LeaveUnavailable => (l.GetString(StringKeys.AccountDeleteLeaveUnavailable), InfoBarSeverity.Warning),
+            AccountDeletionStage.Left => (l.GetString(StringKeys.AccountDeleteLeft), InfoBarSeverity.Success),
+            AccountDeletionStage.Blocked => (l.GetError(flow.ErrorCode ?? "owner_cannot_delete"), InfoBarSeverity.Error),
+            _ => (null, InfoBarSeverity.Informational),
+        };
     }
 
     private async Task RunAsync(Func<Task> action)

@@ -44,7 +44,7 @@ public sealed class ProfileService(IRoGApiClient client)
     public async Task SaveAsync(ProfileData data, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(data);
-        await client.V1_me_profile_updateAsync(new Body87
+        await client.V1_me_profile_updateAsync(new Body88
         {
             Motto = data.Motto.Trim(),
             Bio = data.Bio.Trim(),

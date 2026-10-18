@@ -72,7 +72,7 @@ public sealed partial class WikiViewModel : LoadableViewModel
     public partial WikiListItem? Selected { get; set; }
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(IsDetailOpen), nameof(ShowSelectHint), nameof(HasPage))]
+    [NotifyPropertyChangedFor(nameof(IsDetailOpen), nameof(ShowSelectHint), nameof(HasPage), nameof(CanReportPage))]
     public partial WikiArticle? Article { get; set; }
 
     public bool IsDetailOpen => Selected is not null || Article is not null;
@@ -80,6 +80,11 @@ public sealed partial class WikiViewModel : LoadableViewModel
     public bool ShowSelectHint => !IsDetailOpen;
 
     public bool HasPage => Article is not null;
+
+    /// <summary>Melden nur fremder Fassungen (<c>last_editor</c> der API, v0.30.1).</summary>
+    public bool CanReportPage => CanWatch && Article is { } page && !page.IsLastEditedBy(Services.CurrentUser?.Id);
+
+    internal string? MyId => Services.CurrentUser?.Id;
 
     [ObservableProperty]
     public partial RichDocument? Document { get; set; }
@@ -608,7 +613,7 @@ public sealed partial class WikiRevisionItemViewModel(WikiRevision revision, Wik
 
     public bool CanDecide => owner.CanApprove && revision.Status == "pending";
 
-    public bool CanReport => owner.CanWatch;
+    public bool CanReport => owner.CanWatch && !revision.IsBy(owner.MyId);
 
     [RelayCommand]
     private Task ReportAsync() => Controls.ReportDialog.ShowAsync("wiki_revision", revision.Id);

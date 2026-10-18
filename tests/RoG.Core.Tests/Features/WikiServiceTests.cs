@@ -158,6 +158,35 @@ public class WikiServiceTests
         Assert.Equal("[[Datei:Karte.png|mini]]", WikiService.FileEmbed("wikitext", "Karte.png", null));
         Assert.Equal("![Karte.png](https://cdn.example/k.png)", WikiService.FileEmbed("markdown", "Karte.png", new Uri("https://cdn.example/k.png")));
     }
+
+    [Theory]
+    [InlineData(""","last_editor":{"id":"01U","name":"Wahke"}""", "01U")]
+    [InlineData(""","last_editor":null""", null)]
+    [InlineData("", null)]
+    public async Task Page_maps_last_editor(string editor, string? expected)
+    {
+        var (service, _) = Create((_, _) => StubHttpHandler.Json(HttpStatusCode.OK, $$$"""
+            {"data":{"id":"p1","slug":"regeln","namespace":{"id":"n","slug":"clan","name":"Clan"},"locale":"de","title":"Regeln",
+             "format":"markdown","content":"x","html":"<p>x</p>","toc":[],"categories":[],"revision_id":"r1",
+             "updated_at":"2026-10-18T10:00:00Z","watching":false,"url":"https://wiki.rebelsofgaming.com/clan/regeln"{{{editor}}}}}
+            """));
+
+        var page = await service.PageAsync("p1");
+
+        Assert.Equal(expected, page.LastEditorId);
+        Assert.Equal(expected is not null, page.IsLastEditedBy("01U"));
+        Assert.False(page.IsLastEditedBy(null));
+    }
+
+    [Fact]
+    public void Own_revision_is_recognised()
+    {
+        var revision = new WikiRevision("r1", "Regeln", null, "approved", "Wahke", null, "de", "01U");
+
+        Assert.True(revision.IsBy("01U"));
+        Assert.False(revision.IsBy("01X"));
+        Assert.False((revision with { AuthorId = null }).IsBy("01U"));
+    }
 }
 
 /// <summary>Einfache umkehrbare „Verschlüsselung“ für Tests: prüft, dass wirklich der Protector benutzt wird.</summary>

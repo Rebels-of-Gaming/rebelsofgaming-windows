@@ -34,9 +34,18 @@ public sealed record WikiArticle(
     string? RevisionId,
     DateTimeOffset? UpdatedAt,
     bool? Watching,
-    Uri? WebUrl);
+    Uri? WebUrl,
+    string? LastEditorId = null)
+{
+    /// <summary>Hat <paramref name="userId"/> die ausgelieferte Fassung zuletzt geändert? Dann kein „Melden“ (eigener Inhalt).</summary>
+    public bool IsLastEditedBy(string? userId) => !string.IsNullOrEmpty(userId) && LastEditorId == userId;
+}
 
-public sealed record WikiRevision(string Id, string Title, string? Summary, string Status, string? Author, DateTimeOffset? CreatedAt, string Locale);
+public sealed record WikiRevision(string Id, string Title, string? Summary, string Status, string? Author, DateTimeOffset? CreatedAt, string Locale, string? AuthorId = null)
+{
+    /// <summary>Eigene Version – nicht melden.</summary>
+    public bool IsBy(string? userId) => !string.IsNullOrEmpty(userId) && AuthorId == userId;
+}
 
 public sealed record WikiSearchHit(string Id, string NamespaceSlug, string Slug, string Title, string Snippet);
 
@@ -96,12 +105,12 @@ public sealed class WikiService(IRoGApiClient client, HttpClient http, Uri? wiki
     public async Task<WikiArticle> PageBySlugAsync(string namespaceSlug, string slug, string? locale = null, CancellationToken cancellationToken = default)
     {
         var d = (await client.V1_wiki_pages_bySlugAsync(namespaceSlug, slug, locale, cancellationToken: cancellationToken).ConfigureAwait(false)).Data;
-        return Map(JsonSerializer.Deserialize<Data436>(JsonSerializer.Serialize(d))!);
+        return Map(JsonSerializer.Deserialize<Data437>(JsonSerializer.Serialize(d))!);
     }
 
     public async Task<IReadOnlyList<WikiRevision>> RevisionsAsync(string pageId, CancellationToken cancellationToken = default) =>
         (await client.V1_wiki_pages_revisionsAsync(pageId, cancellationToken: cancellationToken).ConfigureAwait(false)).Data
-            .Select(r => new WikiRevision(r.Id, r.Title, ApiValues.Text(r.Summary), r.Status, r.Author?.Name, ApiValues.Time(r.Created_at), r.Locale))
+            .Select(r => new WikiRevision(r.Id, r.Title, ApiValues.Text(r.Summary), r.Status, r.Author?.Name, ApiValues.Time(r.Created_at), r.Locale, ApiValues.Text(r.Author?.Id)))
             .ToList();
 
     public async Task<string> RevisionContentAsync(string revisionId, CancellationToken cancellationToken = default) =>
@@ -136,7 +145,7 @@ public sealed class WikiService(IRoGApiClient client, HttpClient http, Uri? wiki
     {
         try
         {
-            var result = await client.V1_wiki_pages_updateAsync(pageId, new Body151
+            var result = await client.V1_wiki_pages_updateAsync(pageId, new Body152
             {
                 Locale = locale,
                 Title = title,
@@ -167,7 +176,7 @@ public sealed class WikiService(IRoGApiClient client, HttpClient http, Uri? wiki
             throw new ArgumentException("Titel fehlt", nameof(title));
         }
 
-        var d = (await client.V1_wiki_pages_storeAsync(namespaceSlug, new Body150
+        var d = (await client.V1_wiki_pages_storeAsync(namespaceSlug, new Body151
         {
             Locale = locale,
             Title = title.Trim(),
@@ -275,7 +284,7 @@ public sealed class WikiService(IRoGApiClient client, HttpClient http, Uri? wiki
             : [];
     }
 
-    internal static WikiArticle Map(Data436 d) => new(
+    internal static WikiArticle Map(Data437 d) => new(
         d.Id,
         d.Slug,
         d.Namespace.Slug,
@@ -290,7 +299,8 @@ public sealed class WikiService(IRoGApiClient client, HttpClient http, Uri? wiki
         ApiValues.Text(d.Revision_id),
         ApiValues.Time(d.Updated_at),
         d.Watching,
-        Uri.TryCreate(d.Url, UriKind.Absolute, out var u) ? u : null);
+        Uri.TryCreate(d.Url, UriKind.Absolute, out var u) ? u : null,
+        ApiValues.Text(d.Last_editor?.Id));
 
     private static StringContent JsonContent(object body) => new(JsonSerializer.Serialize(body), System.Text.Encoding.UTF8, "application/json");
 }

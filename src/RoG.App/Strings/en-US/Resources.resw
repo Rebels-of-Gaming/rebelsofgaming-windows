@@ -4697,4 +4697,34 @@
   <data name="Error_expiry_missing" xml:space="preserve">
     <value>Please choose a period.</value>
   </data>
+  <data name="Account_DeleteLeaveText" xml:space="preserve">
+    <value>Active clan members leave the clan first. You can leave here with the same confirmation – you will lose your rank and squads. After that you can delete your account.</value>
+  </data>
+  <data name="Account_DeleteLeaveUnavailable" xml:space="preserve">
+    <value>Active clan members leave the clan first. Please contact the clan leadership.</value>
+  </data>
+  <data name="Account_DeleteLeft" xml:space="preserve">
+    <value>You have left the clan. You can now delete your account.</value>
+  </data>
+  <data name="Account_DeleteLeaveButton" xml:space="preserve">
+    <value>Leave clan</value>
+  </data>
+  <data name="Account_DeleteLeaveConfirm" xml:space="preserve">
+    <value>Really leave – click again</value>
+  </data>
+  <data name="Account_DeleteRetryAfter" xml:space="preserve">
+    <value>Try again in {0} s.</value>
+  </data>
+  <data name="Error_leave_clan_first" xml:space="preserve">
+    <value>Active clan members must leave the clan first.</value>
+  </data>
+  <data name="Error_owner_cannot_delete" xml:space="preserve">
+    <value>The owner account cannot be deleted.</value>
+  </data>
+  <data name="Error_owner_cannot_leave" xml:space="preserve">
+    <value>The owner cannot leave the clan.</value>
+  </data>
+  <data name="Error_not_a_member" xml:space="preserve">
+    <value>You are not an active clan member (anymore).</value>
+  </data>
 </root>

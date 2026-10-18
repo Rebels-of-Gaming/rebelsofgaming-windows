@@ -194,6 +194,15 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   `server-console.js`). Chat-Anhänge: Bilder mit Vorschau über `GET /v1/attachments/{id}` (Umleitung auf kurzlebigen
   Link, max. 8 MB), andere Dateien öffnen im Browser. ET-Farbcodes im Clan-Tag werden wie auf der Website entfernt.
 
+- **2.5.5 – Website v0.30.1:** `AccountDeletionFlow` (Core, Tests) mit den Zuständen Bestätigen → Austritt nötig
+  (`leave_clan_first`) → ausgetreten/`not_a_member` → Löschen; `owner_cannot_leave`/`owner_cannot_delete` sperren,
+  404/405 (ältere Website) → Hinweis „an die Clanleitung wenden“, 422 `confirmation` und 429 mit Wartezeit im Dialog.
+  `AccountDataService.LeaveClanAsync` (`POST /v1/me/leave-clan`). Im Dialog „Clan verlassen“ mit zweitem Klick als
+  Rückfrage (kein verschachtelter Dialog möglich). Wiki: `WikiArticle.LastEditorId` aus `last_editor`, „Melden“ nur bei
+  fremder Fassung; Versionen über `author.id`. **Annahme:** Ein fehlendes `last_editor` (ältere Website) ist im
+  generierten Client nicht von `null` zu unterscheiden → „Melden“ bleibt sichtbar; der Rückfall über die Revisionsliste
+  entfällt, weil v0.30.1 live ist und die Versionsliste eigene Versionen ohnehin ausnimmt.
+
 - **2.5.4 – Gameserver anlegen und löschen:** `ServerProvisioningService` + `ProvisionForm` + `EggRules` (Core, Tests):
   Katalog, Formular je Node/Egg aus dem allgemeinen Editor (`AdminFieldsView`, Felder mit festen Texten für
   Panel-Werte), Egg-Regeln wie Laravel (Whitelist der Website), Body mit `node_id`/`nest_id`/`egg_id`, Ablauf,
@@ -269,7 +278,7 @@ sich einmal neu an (2FA).
    - Moderation: `url` der Meldung als „Inhalt öffnen“ (App-Route, sonst Browser).
    - Nutzungsbedingungen `/{locale}/terms` neben Datenschutz/Impressum in Einstellungen und Konto verlinken.
 
-### Geplant – wartet auf Website v0.30.1 (angekündigt 18.10.2026, Vertrag bestätigt)
+### Website v0.30.1 (live 18.10.2026) – erledigt in 2.5.5
 
 - **Clan verlassen vor der Kontolöschung** (Pflicht für die Store-Regeln „Konto in der App löschen“): `DELETE /v1/me`
   liefert bei aktiven Mitgliedern 409 `leave_clan_first` (neutrale Meldung der API). Dann im selben Dialog „Clan

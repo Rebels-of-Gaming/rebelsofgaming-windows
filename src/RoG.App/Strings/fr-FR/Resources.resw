@@ -4697,4 +4697,34 @@
   <data name="Error_expiry_missing" xml:space="preserve">
     <value>Choisis une durée.</value>
   </data>
+  <data name="Account_DeleteLeaveText" xml:space="preserve">
+    <value>Les membres actifs quittent d’abord le clan. Tu peux le quitter ici avec la même confirmation – tu perds alors ton rang et tes squads. Ensuite, tu peux supprimer ton compte.</value>
+  </data>
+  <data name="Account_DeleteLeaveUnavailable" xml:space="preserve">
+    <value>Les membres actifs quittent d’abord le clan. Adresse-toi pour cela à la direction du clan.</value>
+  </data>
+  <data name="Account_DeleteLeft" xml:space="preserve">
+    <value>Tu as quitté le clan. Tu peux maintenant supprimer ton compte.</value>
+  </data>
+  <data name="Account_DeleteLeaveButton" xml:space="preserve">
+    <value>Quitter le clan</value>
+  </data>
+  <data name="Account_DeleteLeaveConfirm" xml:space="preserve">
+    <value>Vraiment quitter – clique à nouveau</value>
+  </data>
+  <data name="Account_DeleteRetryAfter" xml:space="preserve">
+    <value>Nouvel essai possible dans {0} s.</value>
+  </data>
+  <data name="Error_leave_clan_first" xml:space="preserve">
+    <value>Les membres actifs du clan doivent d’abord quitter le clan.</value>
+  </data>
+  <data name="Error_owner_cannot_delete" xml:space="preserve">
+    <value>Le compte du propriétaire ne peut pas être supprimé.</value>
+  </data>
+  <data name="Error_owner_cannot_leave" xml:space="preserve">
+    <value>Le propriétaire ne peut pas quitter le clan.</value>
+  </data>
+  <data name="Error_not_a_member" xml:space="preserve">
+    <value>Tu n’es (plus) membre actif du clan.</value>
+  </data>
 </root>

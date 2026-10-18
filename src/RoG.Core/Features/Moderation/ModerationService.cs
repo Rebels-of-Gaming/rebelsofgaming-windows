@@ -53,7 +53,7 @@ public sealed class ModerationService(IRoGApiClient client)
     }
 
     public async Task UpdateReportAsync(string reportId, string status, string? resolution, CancellationToken cancellationToken = default) =>
-        await client.V1_moderation_reports_updateAsync(reportId, new Body110
+        await client.V1_moderation_reports_updateAsync(reportId, new Body111
         {
             Status = status switch { "resolved" => ReportStatus.Resolved, "dismissed" => ReportStatus.Dismissed, _ => ReportStatus.Open },
             Resolution = ApiValues.Text(resolution),
@@ -76,7 +76,7 @@ public sealed class ModerationService(IRoGApiClient client)
     public async Task WarnAsync(string userId, string reason, int points, int? days, string? reportId, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(reason);
-        await client.V1_moderation_warnings_storeAsync(userId, new Body111
+        await client.V1_moderation_warnings_storeAsync(userId, new Body112
         {
             Reason = reason.Trim(),
             Points = Math.Clamp(points, 0, 100),
@@ -92,7 +92,7 @@ public sealed class ModerationService(IRoGApiClient client)
     public async Task BanAsync(string userId, string scope, string reason, int? days, bool isPublic, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(reason);
-        await client.V1_moderation_bans_storeAsync(userId, new Body112
+        await client.V1_moderation_bans_storeAsync(userId, new Body113
         {
             Scope = scope switch { "site" => BanScope.Site, "gameserver" => BanScope.Gameserver, _ => BanScope.Forum },
             Reason = reason.Trim(),
@@ -129,7 +129,7 @@ public sealed class ModerationService(IRoGApiClient client)
     public async Task AddWordAsync(string pattern, string action, string? replacement, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(pattern);
-        await client.V1_moderation_words_storeAsync(new Body113
+        await client.V1_moderation_words_storeAsync(new Body114
         {
             Pattern = pattern.Trim(),
             Action = action switch { "block" => WordAction.Block, "review" => WordAction.Review, _ => WordAction.Replace },
@@ -143,17 +143,17 @@ public sealed class ModerationService(IRoGApiClient client)
     /// <summary>Inhalt melden (alle Angemeldeten, Scope <c>reports:write</c>; 10 je Stunde).</summary>
     /// <param name="locale">Bei <c>wiki_page</c>: Sprache der angezeigten Fassung (de/en/fr), sonst ignoriert.</param>
     public async Task ReportAsync(string type, string id, string reason, string? comment, string? locale = null, CancellationToken cancellationToken = default) =>
-        await client.V1_reports_storeAsync(new Body109
+        await client.V1_reports_storeAsync(new Body110
         {
             Type = type switch
             {
-                "message" => Body109Type.Message,
-                "profile" => Body109Type.Profile,
-                "gallery_item" => Body109Type.Gallery_item,
-                "news_comment" => Body109Type.News_comment,
-                "forum_post" => Body109Type.Forum_post,
-                "wiki_page" => Body109Type.Wiki_page,
-                "wiki_revision" => Body109Type.Wiki_revision,
+                "message" => Body110Type.Message,
+                "profile" => Body110Type.Profile,
+                "gallery_item" => Body110Type.Gallery_item,
+                "news_comment" => Body110Type.News_comment,
+                "forum_post" => Body110Type.Forum_post,
+                "wiki_page" => Body110Type.Wiki_page,
+                "wiki_revision" => Body110Type.Wiki_revision,
                 _ => throw new ArgumentOutOfRangeException(nameof(type)),
             },
             Locale = type == "wiki_page" ? ReportLocale(locale) : null,
@@ -170,11 +170,11 @@ public sealed class ModerationService(IRoGApiClient client)
             Comment = ApiValues.Text(comment),
         }, cancellationToken).ConfigureAwait(false);
 
-    private static Body109Locale? ReportLocale(string? locale) => locale?.ToLowerInvariant() switch
+    private static Body110Locale? ReportLocale(string? locale) => locale?.ToLowerInvariant() switch
     {
-        "de" => Body109Locale.De,
-        "en" => Body109Locale.En,
-        "fr" => Body109Locale.Fr,
+        "de" => Body110Locale.De,
+        "en" => Body110Locale.En,
+        "fr" => Body110Locale.Fr,
         _ => null,
     };
 }

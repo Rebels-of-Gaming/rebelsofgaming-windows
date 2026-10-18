@@ -780,6 +780,18 @@ public static class StringKeys
 
     public const string ProvisionDeleted = "Provision_Deleted";
 
+    public const string AccountDeleteLeaveText = "Account_DeleteLeaveText";
+
+    public const string AccountDeleteLeaveUnavailable = "Account_DeleteLeaveUnavailable";
+
+    public const string AccountDeleteLeft = "Account_DeleteLeft";
+
+    public const string AccountDeleteLeaveButton = "Account_DeleteLeaveButton";
+
+    public const string AccountDeleteLeaveConfirm = "Account_DeleteLeaveConfirm";
+
+    public const string AccountDeleteRetryAfter = "Account_DeleteRetryAfter";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

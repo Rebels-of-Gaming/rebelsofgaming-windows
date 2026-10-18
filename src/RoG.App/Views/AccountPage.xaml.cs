@@ -1,7 +1,9 @@
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Automation;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using RoG.App.ViewModels;
+using RoG.Core.Features.Account;
 using RoG.Core.Localization;
 
 namespace RoG.App.Views;
@@ -30,16 +32,23 @@ public sealed partial class AccountPage : Page
 
     private void OnDataExpanding(Expander sender, ExpanderExpandingEventArgs args) => _ = Data.LoadAsync(silent: true);
 
-    /// <summary>Konto löschen: zweistufig, mit Passwort bzw. Anzeigename als Bestätigung (Store-Pflicht: Löschen in der App).</summary>
+    /// <summary>
+    /// Konto löschen: zweistufig, mit Passwort bzw. Anzeigename als Bestätigung (Store-Pflicht: Löschen in der App).
+    /// Aktive Mitglieder treten im selben Dialog zuerst aus dem Clan aus (Zustände: <see cref="AccountDeletionFlow"/>).
+    /// </summary>
     private async void OnDeleteAccountClick(object sender, RoutedEventArgs e)
     {
         var l = App.Services.Localizer;
+        var flow = AccountDeletionFlow.Start;
         var confirmation = new TextBox { Header = l.GetString(StringKeys.AccountDeleteConfirmHeader) };
-        var error = new InfoBar { Severity = InfoBarSeverity.Error, IsClosable = false };
+        var hint = new InfoBar { IsClosable = false };
+        var leave = new Button { Content = l.GetString(StringKeys.AccountDeleteLeaveButton), Visibility = Visibility.Collapsed, Style = (Style)Application.Current.Resources["RoGSecondaryButtonStyle"] };
+        AutomationProperties.SetName(leave, l.GetString(StringKeys.AccountDeleteLeaveButton));
         var panel = new StackPanel { Spacing = 12, MaxWidth = 440 };
         panel.Children.Add(new TextBlock { Text = l.GetString(StringKeys.AccountDeleteWarning), TextWrapping = TextWrapping.Wrap });
         panel.Children.Add(confirmation);
-        panel.Children.Add(error);
+        panel.Children.Add(hint);
+        panel.Children.Add(leave);
         var dialog = new ContentDialog
         {
             XamlRoot = XamlRoot,
@@ -49,6 +58,48 @@ public sealed partial class AccountPage : Page
             CloseButtonText = l.GetString(StringKeys.CommonCancel),
             DefaultButton = ContentDialogButton.Close,
         };
+        var leaveArmed = false;
+
+        void Render()
+        {
+            var (message, severity) = Data.DeletionHint(flow);
+            hint.Message = message;
+            hint.Severity = severity;
+            hint.IsOpen = message is not null;
+            leave.Visibility = flow.CanLeave ? Visibility.Visible : Visibility.Collapsed;
+            leave.Content = l.GetString(leaveArmed ? StringKeys.AccountDeleteLeaveConfirm : StringKeys.AccountDeleteLeaveButton);
+            dialog.IsPrimaryButtonEnabled = flow.CanDelete;
+        }
+
+        // Austritt ist endgültig wie das Löschen: erster Klick fragt nach, zweiter tritt aus
+        leave.Click += async (_, _) =>
+        {
+            if (string.IsNullOrWhiteSpace(confirmation.Text))
+            {
+                confirmation.Focus(FocusState.Programmatic);
+                return;
+            }
+
+            if (!leaveArmed)
+            {
+                leaveArmed = true;
+                Render();
+                return;
+            }
+
+            leave.IsEnabled = false;
+            try
+            {
+                flow = await Data.LeaveClanAsync(flow, confirmation.Text);
+                leaveArmed = false;
+                Render();
+            }
+            finally
+            {
+                leave.IsEnabled = true;
+            }
+        };
+
         dialog.PrimaryButtonClick += async (d, args) =>
         {
             var deferral = args.GetDeferral();
@@ -60,11 +111,12 @@ public sealed partial class AccountPage : Page
                     return;
                 }
 
-                if (await Data.DeleteAccountAsync(confirmation.Text) is { } message)
+                if (await Data.DeleteAccountAsync(flow, confirmation.Text) is { } next)
                 {
                     args.Cancel = true;
-                    error.Message = message;
-                    error.IsOpen = true;
+                    flow = next;
+                    leaveArmed = false;
+                    Render();
                 }
             }
             finally
@@ -72,6 +124,7 @@ public sealed partial class AccountPage : Page
                 deferral.Complete();
             }
         };
+        Render();
         await dialog.ShowAsync();
     }
 

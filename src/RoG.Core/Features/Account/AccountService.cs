@@ -158,4 +158,84 @@ public sealed class AccountDataService(IRoGApiClient client, ITokenStore tokens)
         await client.V1_me_destroyAsync(new Body80 { Confirmation = confirmation }, cancellationToken).ConfigureAwait(false);
         await tokens.ClearAsync(cancellationToken).ConfigureAwait(false);
     }
+
+    /// <summary>
+    /// Aus dem Clan austreten (<c>POST /v1/me/leave-clan</c>, v0.30.1) – Voraussetzung, damit aktive Mitglieder ihr Konto
+    /// löschen können. Bestätigung wie beim Löschen. Fehler kommen als <see cref="Api.ApiProblemException"/>;
+    /// <see cref="AccountDeletionFlow"/> wertet sie aus.
+    /// </summary>
+    public async Task<bool> LeaveClanAsync(string confirmation, CancellationToken cancellationToken = default)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(confirmation);
+        var response = await client.V1_me_leaveClanAsync(new Body87 { Confirmation = confirmation }, cancellationToken).ConfigureAwait(false);
+        return response.Data.Is_member;
+    }
+}
+
+public enum AccountDeletionStage
+{
+    /// <summary>Bestätigung eingeben und löschen.</summary>
+    Confirm,
+
+    /// <summary>409 <c>leave_clan_first</c>: erst austreten (gleiche Bestätigung), dann löschen.</summary>
+    LeaveRequired,
+
+    /// <summary>Austritt geht in der App nicht (ältere Website: 404/405) – an die Clanleitung wenden.</summary>
+    LeaveUnavailable,
+
+    /// <summary>Ausgetreten (oder war schon kein Mitglied) – Löschen ist frei.</summary>
+    Left,
+
+    /// <summary>Owner: kann weder austreten noch löschen.</summary>
+    Blocked,
+}
+
+/// <summary>
+/// Zustände des Dialogs „Konto löschen“ (wie Mobile-App): Löschen → bei <c>leave_clan_first</c> Austritt anbieten →
+/// danach löschen. <see cref="ErrorCode"/>/<see cref="FieldError"/> beschreiben den letzten Fehler (422 Feld
+/// <c>confirmation</c>, 429 mit <see cref="RetryAfter"/>), ohne den Zustand zu wechseln.
+/// </summary>
+public sealed record AccountDeletionFlow(AccountDeletionStage Stage, string? ErrorCode = null, string? FieldError = null, TimeSpan? RetryAfter = null)
+{
+    public static AccountDeletionFlow Start { get; } = new(AccountDeletionStage.Confirm);
+
+    public bool CanDelete => Stage is AccountDeletionStage.Confirm or AccountDeletionStage.Left;
+
+    public bool CanLeave => Stage == AccountDeletionStage.LeaveRequired;
+
+    public bool HasError => ErrorCode is not null;
+
+    public AccountDeletionFlow AfterDeleteFailed(Api.ApiProblem problem)
+    {
+        ArgumentNullException.ThrowIfNull(problem);
+        return problem.Code switch
+        {
+            "leave_clan_first" when Stage != AccountDeletionStage.LeaveUnavailable => new(AccountDeletionStage.LeaveRequired),
+            "owner_cannot_delete" => new(AccountDeletionStage.Blocked, problem.Code),
+            _ => Failed(problem),
+        };
+    }
+
+    public static AccountDeletionFlow AfterLeft() => new(AccountDeletionStage.Left);
+
+    public AccountDeletionFlow AfterLeaveFailed(Api.ApiProblem problem)
+    {
+        ArgumentNullException.ThrowIfNull(problem);
+        return problem switch
+        {
+            // schon kein Mitglied (z. B. parallel ausgetragen) → wie ausgetreten
+            { Code: "not_a_member" } => new(AccountDeletionStage.Left),
+            { Code: "owner_cannot_leave" } => new(AccountDeletionStage.Blocked, problem.Code),
+            { Status: 404 or 405 } => new(AccountDeletionStage.LeaveUnavailable),
+            _ => Failed(problem),
+        };
+    }
+
+    private AccountDeletionFlow Failed(Api.ApiProblem problem) =>
+        this with
+        {
+            ErrorCode = problem.Code,
+            FieldError = problem.IsValidation && problem.Errors.TryGetValue("confirmation", out var errors) && errors.Count > 0 ? errors[0] : null,
+            RetryAfter = problem.IsRateLimited ? problem.RetryAfter : null,
+        };
 }

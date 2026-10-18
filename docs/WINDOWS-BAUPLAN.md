@@ -194,6 +194,13 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   `server-console.js`). Chat-Anhänge: Bilder mit Vorschau über `GET /v1/attachments/{id}` (Umleitung auf kurzlebigen
   Link, max. 8 MB), andere Dateien öffnen im Browser. ET-Farbcodes im Clan-Tag werden wie auf der Website entfernt.
 
+- **2.5.4 – Gameserver anlegen und löschen:** `ServerProvisioningService` + `ProvisionForm` + `EggRules` (Core, Tests):
+  Katalog, Formular je Node/Egg aus dem allgemeinen Editor (`AdminFieldsView`, Felder mit festen Texten für
+  Panel-Werte), Egg-Regeln wie Laravel (Whitelist der Website), Body mit `node_id`/`nest_id`/`egg_id`, Ablauf,
+  Status prüfen, Löschen nur bei `deletable` und exakt eingetipptem Namen. Recht `servers.create` + Scope
+  `servers:manage` (Website vergibt beides nur mit 2FA). **Annahme:** Vorgaben 4 GB RAM, 20 GB Speicher, 200 % CPU,
+  2 Backups, 1 weiterer Port, Sichtbarkeit „versteckt“ – alles im Formular änderbar.
+
 - **2.5.3 – Social-Media-Status an der Quelle:** `SocialSourceService` (Core, Tests): Status, Kanal erneut senden,
   alle fehlgeschlagenen erneut senden (meldet nicht nutzbare Kanäle), neu vorbereiten (`repost` nur nach Rückfrage, wenn
   schon überall gepostet). `SocialStatusCard` in News-Editor, Clanwar-Editor, Termin-Detail, Galerie-Album; News-Liste
@@ -242,7 +249,7 @@ sich einmal neu an (2FA).
      bereits gepostete Kanäle nie erneut senden, nur über „neu vorbereiten“ (neuer Entwurf, Freigabe wie bisher).
    - App: Karte „Social Media“ in `NewsEditorWindow`, Termin-Detail, `MatchEditorWindow` und Galerie (Media-Seite);
      Status-Symbol in der News-Liste. Sichtbar nur mit Scope `social:read`, Aktionen nur mit `social:write`.
-2. **Gameserver anlegen und löschen** (Pterodactyl Application API über die Website)
+2. **Gameserver anlegen und löschen** (Pterodactyl Application API über die Website) – **erledigt in 2.5.4**
    - Core: `ServerProvisioningService` – `GET /v1/servers/provisioning/catalog` (Locations/Nodes, freie Allocations,
      Nests/Eggs mit Docker-Images, Startbefehl, Variablen), `POST /v1/servers/provision` (Idempotency-Key über
      `RoGHttpHandler`), `PATCH /v1/servers/{server}/expiry`, `DELETE /v1/servers/{server}/provision`;

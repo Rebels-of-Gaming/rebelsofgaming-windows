@@ -21,11 +21,19 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <TextBlock x:Uid="ServersPage_Title" Style="{StaticResource RoGDisplayTextStyle}" Text="SERVER" />
             <Button
-                x:Uid="ServersPage_Refresh"
+                x:Uid="ServersPage_Provision"
                 Grid.Column="1"
+                VerticalAlignment="Center"
+                Command="{x:Bind ViewModel.ProvisionCommand}"
+                Style="{StaticResource RoGPrimaryButtonStyle}"
+                Visibility="{x:Bind ViewModel.CanProvision}" />
+            <Button
+                x:Uid="ServersPage_Refresh"
+                Grid.Column="2"
                 VerticalAlignment="Center"
                 Click="OnRefreshClick"
                 Style="{StaticResource RoGSecondaryButtonStyle}">

@@ -4451,4 +4451,250 @@
   <data name="Error_integrations_write_blocked" xml:space="preserve">
     <value>L’écriture vers les intégrations est bloquée pour le moment.</value>
   </data>
+  <data name="Provision_Title" xml:space="preserve">
+    <value>Nouveau serveur de jeu</value>
+  </data>
+  <data name="Provision_ManageTitle" xml:space="preserve">
+    <value>Gérer le serveur de jeu</value>
+  </data>
+  <data name="Provision_NodeInfo" xml:space="preserve">
+    <value>{0} · {1} Go RAM · {2} Go disque · {3} ports libres</value>
+  </data>
+  <data name="Provision_ChooseNodeEgg" xml:space="preserve">
+    <value>Choisis un nœud et un modèle de jeu.</value>
+  </data>
+  <data name="Provision_ConfirmTitle" xml:space="preserve">
+    <value>Créer le serveur de jeu ?</value>
+  </data>
+  <data name="Provision_ConfirmText" xml:space="preserve">
+    <value>« {0} » sera créé et installé sur {1} avec « {2} ». Cela utilise des ressources du panneau.</value>
+  </data>
+  <data name="Provision_ConfirmYes" xml:space="preserve">
+    <value>Confirmer</value>
+  </data>
+  <data name="Provision_Created" xml:space="preserve">
+    <value>Serveur créé – installation en cours. Tu recevras une notification quand il sera prêt.</value>
+  </data>
+  <data name="Provision_StatusUnknown" xml:space="preserve">
+    <value>État inconnu – « Vérifier l’état » interroge le panneau.</value>
+  </data>
+  <data name="Provision_ExpiresAt" xml:space="preserve">
+    <value>Supprimé automatiquement le {0}</value>
+  </data>
+  <data name="Provision_NoExpiry" xml:space="preserve">
+    <value>Pas de date d’expiration</value>
+  </data>
+  <data name="Provision_ExpirySaved" xml:space="preserve">
+    <value>Expiration enregistrée.</value>
+  </data>
+  <data name="Provision_DeleteTitle" xml:space="preserve">
+    <value>Supprimer définitivement le serveur ?</value>
+  </data>
+  <data name="Provision_DeleteText" xml:space="preserve">
+    <value>« {0} » sera supprimé du panneau avec tous ses fichiers et retiré du site. C’est irréversible.</value>
+  </data>
+  <data name="Provision_Deleted" xml:space="preserve">
+    <value>Serveur supprimé.</value>
+  </data>
+  <data name="Provision_Status_installing" xml:space="preserve">
+    <value>Installation en cours …</value>
+  </data>
+  <data name="Provision_Status_ready" xml:space="preserve">
+    <value>Prêt</value>
+  </data>
+  <data name="Provision_Status_failed" xml:space="preserve">
+    <value>Échec de l’installation</value>
+  </data>
+  <data name="Provision_Days_1" xml:space="preserve">
+    <value>1 jour</value>
+  </data>
+  <data name="Provision_Days_3" xml:space="preserve">
+    <value>3 jours</value>
+  </data>
+  <data name="Provision_Days_7" xml:space="preserve">
+    <value>7 jours</value>
+  </data>
+  <data name="Provision_Days_14" xml:space="preserve">
+    <value>14 jours</value>
+  </data>
+  <data name="Provision_Days_30" xml:space="preserve">
+    <value>30 jours</value>
+  </data>
+  <data name="Provision_Rule_required" xml:space="preserve">
+    <value>Obligatoire.</value>
+  </data>
+  <data name="Provision_Rule_numeric" xml:space="preserve">
+    <value>Saisis un nombre.</value>
+  </data>
+  <data name="Provision_Rule_integer" xml:space="preserve">
+    <value>Saisis un nombre entier.</value>
+  </data>
+  <data name="Provision_Rule_boolean" xml:space="preserve">
+    <value>Valeurs autorisées : 0 ou 1.</value>
+  </data>
+  <data name="Provision_Rule_min" xml:space="preserve">
+    <value>Au moins {0}.</value>
+  </data>
+  <data name="Provision_Rule_max" xml:space="preserve">
+    <value>Au plus {0}.</value>
+  </data>
+  <data name="Provision_Rule_min_length" xml:space="preserve">
+    <value>Au moins {0} caractères.</value>
+  </data>
+  <data name="Provision_Rule_max_length" xml:space="preserve">
+    <value>Au plus {0} caractères.</value>
+  </data>
+  <data name="Provision_Rule_in" xml:space="preserve">
+    <value>Autorisé : {0}</value>
+  </data>
+  <data name="Provision_Rule_format" xml:space="preserve">
+    <value>Format invalide.</value>
+  </data>
+  <data name="Provision_Rule_digits" xml:space="preserve">
+    <value>Exactement {0} chiffres.</value>
+  </data>
+  <data name="Provision_Rule_url" xml:space="preserve">
+    <value>Saisis une adresse commençant par https://.</value>
+  </data>
+  <data name="Provision_allocation" xml:space="preserve">
+    <value>IP et port</value>
+  </data>
+  <data name="Provision_docker_image" xml:space="preserve">
+    <value>Image Docker</value>
+  </data>
+  <data name="Provision_startup" xml:space="preserve">
+    <value>Commande de démarrage</value>
+  </data>
+  <data name="Provision_memory" xml:space="preserve">
+    <value>Mémoire (Mo)</value>
+  </data>
+  <data name="Provision_swap" xml:space="preserve">
+    <value>Swap (Mo)</value>
+  </data>
+  <data name="Provision_disk" xml:space="preserve">
+    <value>Disque (Mo)</value>
+  </data>
+  <data name="Provision_cpu" xml:space="preserve">
+    <value>CPU (%)</value>
+  </data>
+  <data name="Provision_io" xml:space="preserve">
+    <value>Poids E/S</value>
+  </data>
+  <data name="Provision_threads" xml:space="preserve">
+    <value>Threads CPU</value>
+  </data>
+  <data name="Provision_databases" xml:space="preserve">
+    <value>Bases de données</value>
+  </data>
+  <data name="Provision_backups" xml:space="preserve">
+    <value>Sauvegardes</value>
+  </data>
+  <data name="Provision_allocations" xml:space="preserve">
+    <value>Ports supplémentaires</value>
+  </data>
+  <data name="Provision_start" xml:space="preserve">
+    <value>Démarrer après l’installation</value>
+  </data>
+  <data name="Provision_expiry" xml:space="preserve">
+    <value>Supprimer automatiquement après</value>
+  </data>
+  <data name="Provision_join_password" xml:space="preserve">
+    <value>Mot de passe d’accès</value>
+  </data>
+  <data name="Provision_Help_description" xml:space="preserve">
+    <value>Utilisée aussi comme description allemande sur le site.</value>
+  </data>
+  <data name="Provision_Help_allocation" xml:space="preserve">
+    <value>Vide = premier port libre du nœud.</value>
+  </data>
+  <data name="Provision_Help_mb" xml:space="preserve">
+    <value>En mégaoctets (1 Go = 1024 Mo).</value>
+  </data>
+  <data name="Provision_Help_swap" xml:space="preserve">
+    <value>0 = pas de swap, −1 = illimité.</value>
+  </data>
+  <data name="Provision_Help_cpu" xml:space="preserve">
+    <value>100 = un cœur, 0 = illimité.</value>
+  </data>
+  <data name="Provision_Help_threads" xml:space="preserve">
+    <value>Facultatif, p. ex. 0-1,3.</value>
+  </data>
+  <data name="Provision_Help_allocations" xml:space="preserve">
+    <value>Ports supplémentaires que le serveur pourra prendre plus tard.</value>
+  </data>
+  <data name="Provision_Help_expiry" xml:space="preserve">
+    <value>Vide = reste. Une notification arrive 24 heures avant.</value>
+  </data>
+  <data name="Provision_Intro.Text" xml:space="preserve">
+    <value>Crée le serveur dans le panneau Pterodactyl et en même temps sur le site. Les champs du modèle viennent du panneau.</value>
+  </data>
+  <data name="Provision_Node.Header" xml:space="preserve">
+    <value>Nœud</value>
+  </data>
+  <data name="Provision_Egg.Header" xml:space="preserve">
+    <value>Modèle de jeu (egg)</value>
+  </data>
+  <data name="Provision_Create.Content" xml:space="preserve">
+    <value>CRÉER LE SERVEUR</value>
+  </data>
+  <data name="Provision_StatusTitle.Text" xml:space="preserve">
+    <value>INSTALLATION</value>
+  </data>
+  <data name="Provision_Refresh.Content" xml:space="preserve">
+    <value>VÉRIFIER L’ÉTAT</value>
+  </data>
+  <data name="Provision_ExpiryTitle.Text" xml:space="preserve">
+    <value>EXPIRATION</value>
+  </data>
+  <data name="Provision_ExpiryChoice.Header" xml:space="preserve">
+    <value>Durée</value>
+  </data>
+  <data name="Provision_SetExpiry.Content" xml:space="preserve">
+    <value>DÉFINIR À PARTIR DE MAINTENANT</value>
+  </data>
+  <data name="Provision_ExtendExpiry.Content" xml:space="preserve">
+    <value>PROLONGER</value>
+  </data>
+  <data name="Provision_RemoveExpiry.Content" xml:space="preserve">
+    <value>Supprimer l’expiration</value>
+  </data>
+  <data name="Provision_DangerTitle.Text" xml:space="preserve">
+    <value>ZONE DANGEREUSE</value>
+  </data>
+  <data name="Provision_DangerText.Text" xml:space="preserve">
+    <value>Supprime le serveur du panneau avec tous ses fichiers et du site. Saisis exactement le nom du serveur pour confirmer.</value>
+  </data>
+  <data name="Provision_ConfirmName.Header" xml:space="preserve">
+    <value>Nom du serveur</value>
+  </data>
+  <data name="Provision_Delete.Content" xml:space="preserve">
+    <value>SUPPRIMER LE SERVEUR</value>
+  </data>
+  <data name="ServerCard_Provisioning.Content" xml:space="preserve">
+    <value>GÉRER</value>
+  </data>
+  <data name="ServersPage_Provision.Content" xml:space="preserve">
+    <value>NOUVEAU SERVEUR</value>
+  </data>
+  <data name="Error_two_factor_required" xml:space="preserve">
+    <value>Il faut activer la 2FA avec une application d’authentification.</value>
+  </data>
+  <data name="Error_provisioning_not_configured" xml:space="preserve">
+    <value>La création de serveurs n’est pas encore configurée sur le site.</value>
+  </data>
+  <data name="Error_pterodactyl_unavailable" xml:space="preserve">
+    <value>Le panneau des serveurs est injoignable pour le moment.</value>
+  </data>
+  <data name="Error_provisioning_rejected" xml:space="preserve">
+    <value>Le panneau a refusé le serveur.</value>
+  </data>
+  <data name="Error_server_not_provisioned" xml:space="preserve">
+    <value>Ce serveur a été créé dans le panneau – le site ne le modifie ni ne le supprime.</value>
+  </data>
+  <data name="Error_server_provisioned" xml:space="preserve">
+    <value>Créé via le site – supprime-le sous Serveurs → Gérer (zone dangereuse).</value>
+  </data>
+  <data name="Error_expiry_missing" xml:space="preserve">
+    <value>Choisis une durée.</value>
+  </data>
 </root>

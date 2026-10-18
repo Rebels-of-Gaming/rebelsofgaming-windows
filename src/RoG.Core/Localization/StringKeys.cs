@@ -750,6 +750,36 @@ public static class StringKeys
 
     public const string SocialRedrafted = "Social_Redrafted";
 
+    public const string ProvisionTitle = "Provision_Title";
+
+    public const string ProvisionManageTitle = "Provision_ManageTitle";
+
+    public const string ProvisionNodeInfo = "Provision_NodeInfo";
+
+    public const string ProvisionChooseNodeEgg = "Provision_ChooseNodeEgg";
+
+    public const string ProvisionConfirmTitle = "Provision_ConfirmTitle";
+
+    public const string ProvisionConfirmText = "Provision_ConfirmText";
+
+    public const string ProvisionConfirmYes = "Provision_ConfirmYes";
+
+    public const string ProvisionCreated = "Provision_Created";
+
+    public const string ProvisionStatusUnknown = "Provision_StatusUnknown";
+
+    public const string ProvisionExpiresAt = "Provision_ExpiresAt";
+
+    public const string ProvisionNoExpiry = "Provision_NoExpiry";
+
+    public const string ProvisionExpirySaved = "Provision_ExpirySaved";
+
+    public const string ProvisionDeleteTitle = "Provision_DeleteTitle";
+
+    public const string ProvisionDeleteText = "Provision_DeleteText";
+
+    public const string ProvisionDeleted = "Provision_Deleted";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

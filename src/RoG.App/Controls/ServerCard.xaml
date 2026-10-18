@@ -27,6 +27,14 @@
                 Text="{x:Bind Item.Name, Mode=OneWay}"
                 TextTrimming="CharacterEllipsis" />
 
+            <!-- über die Website angelegt: Installation, Ablauf -->
+            <TextBlock
+                FontSize="12"
+                Foreground="{x:Bind Item.ProvisioningBrush, Mode=OneWay}"
+                Text="{x:Bind Item.ProvisioningText, Mode=OneWay}"
+                TextWrapping="Wrap"
+                Visibility="{x:Bind Item.HasProvisioning, Mode=OneWay}" />
+
             <!-- Map, Spieler, Adresse -->
             <StackPanel Spacing="2">
                 <TextBlock
@@ -87,6 +95,11 @@
                     Command="{x:Bind Item.ControlCommand, Mode=OneWay}"
                     Style="{StaticResource RoGSecondaryButtonStyle}"
                     Visibility="{x:Bind Item.CanControl, Mode=OneWay}" />
+                <Button
+                    x:Uid="ServerCard_Provisioning"
+                    Command="{x:Bind Item.ManageCommand, Mode=OneWay}"
+                    Style="{StaticResource RoGSecondaryButtonStyle}"
+                    Visibility="{x:Bind Item.CanManageProvisioning, Mode=OneWay}" />
             </StackPanel>
         </StackPanel>
     </Border>

@@ -8,87 +8,6 @@
     xmlns:vm="using:RoG.App.ViewModels">
 
     <Grid Background="{StaticResource RoGBgBrush}">
-        <Grid.Resources>
-            <controls:AdminFieldTemplateSelector x:Key="FieldTemplates">
-                <controls:AdminFieldTemplateSelector.Text>
-                    <DataTemplate x:DataType="vm:AdminFieldViewModel">
-                        <StackPanel Spacing="4">
-                            <TextBox
-                                MinHeight="{x:Bind MinTextHeight}"
-                                AcceptsReturn="{x:Bind AcceptsReturn}"
-                                Header="{x:Bind Label}"
-                                IsEnabled="{x:Bind IsEnabled}"
-                                MaxLength="{x:Bind MaxLength}"
-                                PlaceholderText="{x:Bind Placeholder}"
-                                Text="{x:Bind Text, Mode=TwoWay}"
-                                TextWrapping="Wrap" />
-                            <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Help}" TextWrapping="Wrap" Visibility="{x:Bind HasHelp}" />
-                            <TextBlock FontSize="12" Foreground="{StaticResource RoGRedBrush}" Text="{x:Bind Error, Mode=OneWay}" TextWrapping="Wrap" Visibility="{x:Bind HasError, Mode=OneWay}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </controls:AdminFieldTemplateSelector.Text>
-                <controls:AdminFieldTemplateSelector.Toggle>
-                    <DataTemplate x:DataType="vm:AdminFieldViewModel">
-                        <StackPanel Spacing="4">
-                            <ToggleSwitch Header="{x:Bind Label}" IsEnabled="{x:Bind IsEnabled}" IsOn="{x:Bind IsOn, Mode=TwoWay}" />
-                            <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Help}" TextWrapping="Wrap" Visibility="{x:Bind HasHelp}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </controls:AdminFieldTemplateSelector.Toggle>
-                <controls:AdminFieldTemplateSelector.Choice>
-                    <DataTemplate x:DataType="vm:AdminFieldViewModel">
-                        <StackPanel Spacing="4">
-                            <ComboBox
-                                MinWidth="260"
-                                DisplayMemberPath="Label"
-                                Header="{x:Bind Label}"
-                                IsEnabled="{x:Bind IsEnabled}"
-                                ItemsSource="{x:Bind Choices}"
-                                SelectedItem="{x:Bind SelectedChoice, Mode=TwoWay}" />
-                            <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Help}" TextWrapping="Wrap" Visibility="{x:Bind HasHelp}" />
-                            <TextBlock FontSize="12" Foreground="{StaticResource RoGRedBrush}" Text="{x:Bind Error, Mode=OneWay}" TextWrapping="Wrap" Visibility="{x:Bind HasError, Mode=OneWay}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </controls:AdminFieldTemplateSelector.Choice>
-                <controls:AdminFieldTemplateSelector.Translated>
-                    <DataTemplate x:DataType="vm:AdminFieldViewModel">
-                        <StackPanel Spacing="4">
-                            <TextBlock Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Label}" />
-                            <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind PartialHint}" TextWrapping="Wrap" Visibility="{x:Bind HasPartialHint}" />
-                            <TextBox
-                                x:Uid="AdminForm_LangDe"
-                                Visibility="{x:Bind ShowDe}"
-                                MinHeight="{x:Bind MinTextHeight}"
-                                AcceptsReturn="{x:Bind AcceptsReturn}"
-                                IsEnabled="{x:Bind IsEnabled}"
-                                MaxLength="{x:Bind MaxLength}"
-                                Text="{x:Bind De, Mode=TwoWay}"
-                                TextWrapping="Wrap" />
-                            <TextBox
-                                x:Uid="AdminForm_LangEn"
-                                Visibility="{x:Bind ShowEn}"
-                                MinHeight="{x:Bind MinTextHeight}"
-                                AcceptsReturn="{x:Bind AcceptsReturn}"
-                                IsEnabled="{x:Bind IsEnabled}"
-                                MaxLength="{x:Bind MaxLength}"
-                                Text="{x:Bind En, Mode=TwoWay}"
-                                TextWrapping="Wrap" />
-                            <TextBox
-                                x:Uid="AdminForm_LangFr"
-                                Visibility="{x:Bind ShowFr}"
-                                MinHeight="{x:Bind MinTextHeight}"
-                                AcceptsReturn="{x:Bind AcceptsReturn}"
-                                IsEnabled="{x:Bind IsEnabled}"
-                                MaxLength="{x:Bind MaxLength}"
-                                Text="{x:Bind Fr, Mode=TwoWay}"
-                                TextWrapping="Wrap" />
-                            <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Help}" TextWrapping="Wrap" Visibility="{x:Bind HasHelp}" />
-                            <TextBlock FontSize="12" Foreground="{StaticResource RoGRedBrush}" Text="{x:Bind Error, Mode=OneWay}" TextWrapping="Wrap" Visibility="{x:Bind HasError, Mode=OneWay}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </controls:AdminFieldTemplateSelector.Translated>
-            </controls:AdminFieldTemplateSelector>
-        </Grid.Resources>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
@@ -168,13 +87,7 @@
                 <StackPanel MaxWidth="{StaticResource RoGReadingWidth}" Padding="0,0,16,24" HorizontalAlignment="Left" Spacing="14">
                     <TextBlock Style="{StaticResource RoGTitleTextStyle}" Text="{x:Bind ViewModel.FormTitle, Mode=OneWay}" TextWrapping="Wrap" />
                     <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind ViewModel.Help}" TextWrapping="Wrap" Visibility="{x:Bind ViewModel.HasHelp}" />
-                    <ItemsControl IsTabStop="False" ItemTemplateSelector="{StaticResource FieldTemplates}" ItemsSource="{x:Bind ViewModel.Fields}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Spacing="14" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
+                    <controls:AdminFieldsView Fields="{x:Bind ViewModel.Fields}" />
                     <StackPanel Orientation="Horizontal" Spacing="8">
                         <Button x:Uid="AdminForm_Save" Command="{x:Bind ViewModel.SaveCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" Visibility="{x:Bind ViewModel.CanSave, Mode=OneWay}" />
                         <Button x:Uid="AdminForm_Delete" Command="{x:Bind ViewModel.DeleteCommand}" Visibility="{x:Bind ViewModel.CanDelete, Mode=OneWay}" />

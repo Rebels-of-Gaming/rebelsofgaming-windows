@@ -4451,4 +4451,250 @@
   <data name="Error_integrations_write_blocked" xml:space="preserve">
     <value>Schreiben an Integrationen ist gerade gesperrt.</value>
   </data>
+  <data name="Provision_Title" xml:space="preserve">
+    <value>Neuer Gameserver</value>
+  </data>
+  <data name="Provision_ManageTitle" xml:space="preserve">
+    <value>Gameserver verwalten</value>
+  </data>
+  <data name="Provision_NodeInfo" xml:space="preserve">
+    <value>{0} · {1} GB RAM · {2} GB Speicher · {3} freie Ports</value>
+  </data>
+  <data name="Provision_ChooseNodeEgg" xml:space="preserve">
+    <value>Bitte Node und Spiel-Vorlage wählen.</value>
+  </data>
+  <data name="Provision_ConfirmTitle" xml:space="preserve">
+    <value>Gameserver anlegen?</value>
+  </data>
+  <data name="Provision_ConfirmText" xml:space="preserve">
+    <value>„{0}“ wird auf {1} mit „{2}“ angelegt und installiert. Das belegt Ressourcen im Panel.</value>
+  </data>
+  <data name="Provision_ConfirmYes" xml:space="preserve">
+    <value>Bestätigen</value>
+  </data>
+  <data name="Provision_Created" xml:space="preserve">
+    <value>Server angelegt – die Installation läuft. Du bekommst eine Benachrichtigung, wenn er bereit ist.</value>
+  </data>
+  <data name="Provision_StatusUnknown" xml:space="preserve">
+    <value>Stand unbekannt – „Status prüfen“ fragt das Panel.</value>
+  </data>
+  <data name="Provision_ExpiresAt" xml:space="preserve">
+    <value>Wird am {0} automatisch gelöscht</value>
+  </data>
+  <data name="Provision_NoExpiry" xml:space="preserve">
+    <value>Kein Ablaufdatum</value>
+  </data>
+  <data name="Provision_ExpirySaved" xml:space="preserve">
+    <value>Ablauf gespeichert.</value>
+  </data>
+  <data name="Provision_DeleteTitle" xml:space="preserve">
+    <value>Server endgültig löschen?</value>
+  </data>
+  <data name="Provision_DeleteText" xml:space="preserve">
+    <value>„{0}“ wird im Panel mit allen Dateien gelöscht und von der Website entfernt. Das lässt sich nicht rückgängig machen.</value>
+  </data>
+  <data name="Provision_Deleted" xml:space="preserve">
+    <value>Server gelöscht.</value>
+  </data>
+  <data name="Provision_Status_installing" xml:space="preserve">
+    <value>Wird installiert …</value>
+  </data>
+  <data name="Provision_Status_ready" xml:space="preserve">
+    <value>Bereit</value>
+  </data>
+  <data name="Provision_Status_failed" xml:space="preserve">
+    <value>Installation fehlgeschlagen</value>
+  </data>
+  <data name="Provision_Days_1" xml:space="preserve">
+    <value>1 Tag</value>
+  </data>
+  <data name="Provision_Days_3" xml:space="preserve">
+    <value>3 Tage</value>
+  </data>
+  <data name="Provision_Days_7" xml:space="preserve">
+    <value>7 Tage</value>
+  </data>
+  <data name="Provision_Days_14" xml:space="preserve">
+    <value>14 Tage</value>
+  </data>
+  <data name="Provision_Days_30" xml:space="preserve">
+    <value>30 Tage</value>
+  </data>
+  <data name="Provision_Rule_required" xml:space="preserve">
+    <value>Pflichtfeld.</value>
+  </data>
+  <data name="Provision_Rule_numeric" xml:space="preserve">
+    <value>Bitte eine Zahl eingeben.</value>
+  </data>
+  <data name="Provision_Rule_integer" xml:space="preserve">
+    <value>Bitte eine ganze Zahl eingeben.</value>
+  </data>
+  <data name="Provision_Rule_boolean" xml:space="preserve">
+    <value>Erlaubt sind 0 oder 1.</value>
+  </data>
+  <data name="Provision_Rule_min" xml:space="preserve">
+    <value>Mindestens {0}.</value>
+  </data>
+  <data name="Provision_Rule_max" xml:space="preserve">
+    <value>Höchstens {0}.</value>
+  </data>
+  <data name="Provision_Rule_min_length" xml:space="preserve">
+    <value>Mindestens {0} Zeichen.</value>
+  </data>
+  <data name="Provision_Rule_max_length" xml:space="preserve">
+    <value>Höchstens {0} Zeichen.</value>
+  </data>
+  <data name="Provision_Rule_in" xml:space="preserve">
+    <value>Erlaubt: {0}</value>
+  </data>
+  <data name="Provision_Rule_format" xml:space="preserve">
+    <value>Ungültiges Format.</value>
+  </data>
+  <data name="Provision_Rule_digits" xml:space="preserve">
+    <value>Genau {0} Ziffern.</value>
+  </data>
+  <data name="Provision_Rule_url" xml:space="preserve">
+    <value>Bitte eine Adresse mit https:// eingeben.</value>
+  </data>
+  <data name="Provision_allocation" xml:space="preserve">
+    <value>IP und Port</value>
+  </data>
+  <data name="Provision_docker_image" xml:space="preserve">
+    <value>Docker-Image</value>
+  </data>
+  <data name="Provision_startup" xml:space="preserve">
+    <value>Startbefehl</value>
+  </data>
+  <data name="Provision_memory" xml:space="preserve">
+    <value>Arbeitsspeicher (MB)</value>
+  </data>
+  <data name="Provision_swap" xml:space="preserve">
+    <value>Swap (MB)</value>
+  </data>
+  <data name="Provision_disk" xml:space="preserve">
+    <value>Speicherplatz (MB)</value>
+  </data>
+  <data name="Provision_cpu" xml:space="preserve">
+    <value>CPU (%)</value>
+  </data>
+  <data name="Provision_io" xml:space="preserve">
+    <value>IO-Gewichtung</value>
+  </data>
+  <data name="Provision_threads" xml:space="preserve">
+    <value>CPU-Threads</value>
+  </data>
+  <data name="Provision_databases" xml:space="preserve">
+    <value>Datenbanken</value>
+  </data>
+  <data name="Provision_backups" xml:space="preserve">
+    <value>Backups</value>
+  </data>
+  <data name="Provision_allocations" xml:space="preserve">
+    <value>Weitere Ports</value>
+  </data>
+  <data name="Provision_start" xml:space="preserve">
+    <value>Nach der Installation starten</value>
+  </data>
+  <data name="Provision_expiry" xml:space="preserve">
+    <value>Automatisch löschen nach</value>
+  </data>
+  <data name="Provision_join_password" xml:space="preserve">
+    <value>Beitritts-Passwort</value>
+  </data>
+  <data name="Provision_Help_description" xml:space="preserve">
+    <value>Auch als deutsche Beschreibung auf der Website.</value>
+  </data>
+  <data name="Provision_Help_allocation" xml:space="preserve">
+    <value>Leer = erster freier Port des Nodes.</value>
+  </data>
+  <data name="Provision_Help_mb" xml:space="preserve">
+    <value>In Megabyte (1 GB = 1024 MB).</value>
+  </data>
+  <data name="Provision_Help_swap" xml:space="preserve">
+    <value>0 = kein Swap, −1 = unbegrenzt.</value>
+  </data>
+  <data name="Provision_Help_cpu" xml:space="preserve">
+    <value>100 = ein Kern, 0 = unbegrenzt.</value>
+  </data>
+  <data name="Provision_Help_threads" xml:space="preserve">
+    <value>Optional, z. B. 0-1,3.</value>
+  </data>
+  <data name="Provision_Help_allocations" xml:space="preserve">
+    <value>Zusätzliche Ports, die der Server sich später nehmen darf.</value>
+  </data>
+  <data name="Provision_Help_expiry" xml:space="preserve">
+    <value>Leer = bleibt. 24 Stunden vorher kommt eine Benachrichtigung.</value>
+  </data>
+  <data name="Provision_Intro.Text" xml:space="preserve">
+    <value>Legt den Server im Pterodactyl-Panel an und gleich als Website-Server. Felder der Spiel-Vorlage kommen aus dem Panel.</value>
+  </data>
+  <data name="Provision_Node.Header" xml:space="preserve">
+    <value>Node</value>
+  </data>
+  <data name="Provision_Egg.Header" xml:space="preserve">
+    <value>Spiel-Vorlage (Egg)</value>
+  </data>
+  <data name="Provision_Create.Content" xml:space="preserve">
+    <value>SERVER ANLEGEN</value>
+  </data>
+  <data name="Provision_StatusTitle.Text" xml:space="preserve">
+    <value>INSTALLATION</value>
+  </data>
+  <data name="Provision_Refresh.Content" xml:space="preserve">
+    <value>STATUS PRÜFEN</value>
+  </data>
+  <data name="Provision_ExpiryTitle.Text" xml:space="preserve">
+    <value>ABLAUF</value>
+  </data>
+  <data name="Provision_ExpiryChoice.Header" xml:space="preserve">
+    <value>Zeitraum</value>
+  </data>
+  <data name="Provision_SetExpiry.Content" xml:space="preserve">
+    <value>AB JETZT SETZEN</value>
+  </data>
+  <data name="Provision_ExtendExpiry.Content" xml:space="preserve">
+    <value>VERLÄNGERN</value>
+  </data>
+  <data name="Provision_RemoveExpiry.Content" xml:space="preserve">
+    <value>Ablauf entfernen</value>
+  </data>
+  <data name="Provision_DangerTitle.Text" xml:space="preserve">
+    <value>GEFAHRENZONE</value>
+  </data>
+  <data name="Provision_DangerText.Text" xml:space="preserve">
+    <value>Löscht den Server im Panel mit allen Dateien und auf der Website. Zur Bestätigung den Servernamen genau eintippen.</value>
+  </data>
+  <data name="Provision_ConfirmName.Header" xml:space="preserve">
+    <value>Servername</value>
+  </data>
+  <data name="Provision_Delete.Content" xml:space="preserve">
+    <value>SERVER LÖSCHEN</value>
+  </data>
+  <data name="ServerCard_Provisioning.Content" xml:space="preserve">
+    <value>VERWALTEN</value>
+  </data>
+  <data name="ServersPage_Provision.Content" xml:space="preserve">
+    <value>NEUER GAMESERVER</value>
+  </data>
+  <data name="Error_two_factor_required" xml:space="preserve">
+    <value>Dafür muss 2FA mit einer Authenticator-App eingerichtet sein.</value>
+  </data>
+  <data name="Error_provisioning_not_configured" xml:space="preserve">
+    <value>Das Anlegen von Servern ist auf der Website noch nicht eingerichtet.</value>
+  </data>
+  <data name="Error_pterodactyl_unavailable" xml:space="preserve">
+    <value>Das Server-Panel ist gerade nicht erreichbar.</value>
+  </data>
+  <data name="Error_provisioning_rejected" xml:space="preserve">
+    <value>Das Panel hat den Server abgelehnt.</value>
+  </data>
+  <data name="Error_server_not_provisioned" xml:space="preserve">
+    <value>Dieser Server wurde im Panel angelegt – die Website ändert oder löscht ihn dort nicht.</value>
+  </data>
+  <data name="Error_server_provisioned" xml:space="preserve">
+    <value>Über die Website angelegt – löschen unter Server → Verwalten (Gefahrenzone).</value>
+  </data>
+  <data name="Error_expiry_missing" xml:space="preserve">
+    <value>Bitte einen Zeitraum wählen.</value>
+  </data>
 </root>

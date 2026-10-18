@@ -44,6 +44,12 @@ public sealed partial class ServersViewModel(AppServices services) : ObservableO
 
     public bool IsEmpty => !IsLoading && !HasError && Servers.Count == 0;
 
+    /// <summary>„Neuer Gameserver“: Recht <c>servers.create</c> (nur mit 2FA vergeben) und Scope <c>servers:manage</c>.</summary>
+    public bool CanProvision => services.CurrentUser is { } me && me.Can(ServerProvisioningService.Permission) && me.HasScope(ServerProvisioningService.Scope);
+
+    [RelayCommand]
+    private void Provision() => Views.ServerProvisionWindow.Open(null, () => _ = LoadAsync(silent: true));
+
     /// <summary>Neu laden; <paramref name="silent"/> = ohne Ladeanzeige (Hintergrund-Aktualisierung, Liste bleibt stehen).</summary>
     public async Task LoadAsync(bool silent = false)
     {
@@ -61,7 +67,11 @@ public sealed partial class ServersViewModel(AppServices services) : ObservableO
             Servers.Clear();
             foreach (var server in servers)
             {
-                Servers.Add(new ServerItemViewModel(server, services.Localizer, ConnectAsync, Copy));
+                Servers.Add(new ServerItemViewModel(server, services.Localizer, ConnectAsync, Copy)
+                {
+                    CanManageProvisioning = server.Provisioning is not null && CanProvision,
+                    ManageProvisioning = () => Views.ServerProvisionWindow.Open(server, () => _ = LoadAsync(silent: true)),
+                });
             }
         }
         catch (ApiProblemException ex)
@@ -235,6 +245,27 @@ public sealed partial class ServerItemViewModel : ObservableObject
 
     /// <summary>Steuern (Power/Konsole) – nur mit Rechten an diesem Server (<c>control</c> aus der API).</summary>
     public bool CanControl => Server.Control?.Any == true;
+
+    /// <summary>Über die Website angelegt: Installationsstand und Ablauf als Hinweis auf der Karte.</summary>
+    public bool HasProvisioning => Server.Provisioning is not null;
+
+    public string ProvisioningText => Server.Provisioning is not { } p ? string.Empty : string.Join(" · ", new[]
+    {
+        App.Services.Localizer.GetString("Provision_Status_" + p.Status),
+        p.ExpiresAt is { } at
+            ? string.Format(CultureInfo.CurrentCulture, App.Services.Localizer.GetString(StringKeys.ProvisionExpiresAt), at.ToLocalTime().ToString("g", CultureInfo.CurrentCulture))
+            : null,
+    }.Where(s => !string.IsNullOrEmpty(s)));
+
+    public Brush ProvisioningBrush => (Brush)Application.Current.Resources[
+        Server.Provisioning is { } p && (p.IsFailed || p.ExpiresSoon(DateTimeOffset.Now)) ? "RoGRedBrush" : Server.Provisioning?.IsInstalling == true ? "RoGGoldBrush" : "RoGMutedBrush"];
+
+    public bool CanManageProvisioning { get; init; }
+
+    public Action? ManageProvisioning { get; init; }
+
+    [RelayCommand]
+    private void Manage() => ManageProvisioning?.Invoke();
 
     public IRelayCommand ControlCommand { get; }
 }

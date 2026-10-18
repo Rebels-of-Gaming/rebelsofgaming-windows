@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- „Neuer Gameserver“ (Pterodactyl über die Website) und Verwaltung eines so angelegten Servers: Status, Ablauf, Löschen. -->
+<Window
+    x:Class="RoG.App.Views.ServerProvisionWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:RoG.App.Controls">
+
+    <Grid Background="{StaticResource RoGBgBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid x:Name="TitleBar" Padding="16,0,140,0" Background="{StaticResource RoGBg2Brush}">
+            <TextBlock
+                x:Name="TitleText"
+                VerticalAlignment="Center"
+                FontFamily="{StaticResource RoGDisplaySemiBoldFont}"
+                FontSize="14"
+                CharacterSpacing="60"
+                Foreground="{StaticResource RoGMutedBrush}"
+                TextTrimming="CharacterEllipsis" />
+        </Grid>
+
+        <StackPanel Grid.Row="1" Margin="24,8,24,0" Spacing="8">
+            <ProgressBar IsIndeterminate="True" Visibility="{x:Bind ViewModel.IsBusy, Mode=OneWay}" />
+            <InfoBar
+                IsOpen="{x:Bind ViewModel.IsFeedbackOpen, Mode=TwoWay}"
+                Message="{x:Bind ViewModel.Feedback, Mode=OneWay}"
+                Severity="{x:Bind ViewModel.FeedbackSeverity, Mode=OneWay}" />
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <StackPanel MaxWidth="{StaticResource RoGReadingWidth}" Padding="24,8,24,24" HorizontalAlignment="Left" Spacing="16">
+
+                <!-- Anlegen -->
+                <StackPanel Spacing="16" Visibility="{x:Bind ViewModel.ShowCreate, Mode=OneWay}">
+                    <TextBlock x:Uid="Provision_Intro" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                    <StackPanel Spacing="4">
+                        <ComboBox
+                            x:Uid="Provision_Node"
+                            MinWidth="320"
+                            DisplayMemberPath="Label"
+                            ItemsSource="{x:Bind ViewModel.Nodes}"
+                            SelectedItem="{x:Bind ViewModel.SelectedNode, Mode=TwoWay}" />
+                        <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind ViewModel.NodeInfo, Mode=OneWay}" TextWrapping="Wrap" />
+                    </StackPanel>
+                    <StackPanel Spacing="4">
+                        <ComboBox
+                            x:Uid="Provision_Egg"
+                            MinWidth="320"
+                            DisplayMemberPath="Label"
+                            ItemsSource="{x:Bind ViewModel.Eggs}"
+                            SelectedItem="{x:Bind ViewModel.SelectedEgg, Mode=TwoWay}" />
+                        <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind ViewModel.EggInfo, Mode=OneWay}" TextWrapping="Wrap" />
+                    </StackPanel>
+
+                    <controls:AdminFieldsView Fields="{x:Bind ViewModel.Fields}" />
+
+                    <Button x:Uid="Provision_Create" Command="{x:Bind ViewModel.CreateCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                </StackPanel>
+
+                <!-- Verwalten -->
+                <StackPanel Spacing="16" Visibility="{x:Bind ViewModel.ShowManagePanel, Mode=OneWay}">
+                    <TextBlock Style="{StaticResource RoGTitleTextStyle}" Text="{x:Bind ViewModel.ServerName, Mode=OneWay}" TextWrapping="Wrap" />
+
+                    <Border Style="{StaticResource RoGCardStyle}">
+                        <StackPanel Spacing="8">
+                            <TextBlock x:Uid="Provision_StatusTitle" Style="{StaticResource RoGSectionTextStyle}" />
+                            <TextBlock
+                                AutomationProperties.LiveSetting="Polite"
+                                Style="{StaticResource RoGBodyTextStyle}"
+                                Text="{x:Bind ViewModel.StatusText, Mode=OneWay}"
+                                TextWrapping="Wrap" />
+                            <Button x:Uid="Provision_Refresh" Command="{x:Bind ViewModel.RefreshStatusCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                        </StackPanel>
+                    </Border>
+
+                    <Border Style="{StaticResource RoGCardStyle}">
+                        <StackPanel Spacing="8">
+                            <TextBlock x:Uid="Provision_ExpiryTitle" Style="{StaticResource RoGSectionTextStyle}" />
+                            <TextBlock Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind ViewModel.ExpiryText, Mode=OneWay}" TextWrapping="Wrap" />
+                            <ComboBox
+                                x:Uid="Provision_ExpiryChoice"
+                                MinWidth="200"
+                                DisplayMemberPath="Label"
+                                ItemsSource="{x:Bind ViewModel.ExpiryOptions}"
+                                SelectedItem="{x:Bind ViewModel.SelectedExpiry, Mode=TwoWay}" />
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <Button x:Uid="Provision_SetExpiry" Command="{x:Bind ViewModel.SetExpiryCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                                <Button x:Uid="Provision_ExtendExpiry" Command="{x:Bind ViewModel.ExtendExpiryCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" Visibility="{x:Bind ViewModel.HasExpiry, Mode=OneWay}" />
+                                <Button x:Uid="Provision_RemoveExpiry" Command="{x:Bind ViewModel.RemoveExpiryCommand}" Visibility="{x:Bind ViewModel.HasExpiry, Mode=OneWay}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Gefahrenzone -->
+                    <Border BorderBrush="{StaticResource RoGRedBrush}" BorderThickness="1" Style="{StaticResource RoGCardStyle}" Visibility="{x:Bind ViewModel.Deletable, Mode=OneWay}">
+                        <StackPanel Spacing="8">
+                            <TextBlock x:Uid="Provision_DangerTitle" Foreground="{StaticResource RoGRedBrush}" Style="{StaticResource RoGSectionTextStyle}" />
+                            <TextBlock x:Uid="Provision_DangerText" Style="{StaticResource RoGBodyTextStyle}" TextWrapping="Wrap" />
+                            <TextBox x:Uid="Provision_ConfirmName" Text="{x:Bind ViewModel.ConfirmName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <Button x:Uid="Provision_Delete" Command="{x:Bind ViewModel.DeleteCommand}" IsEnabled="{x:Bind ViewModel.CanDelete, Mode=OneWay}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

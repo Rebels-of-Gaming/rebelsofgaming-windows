@@ -133,6 +133,21 @@
         <Setter Property="Padding" Value="{StaticResource RoGCardPadding}" />
     </Style>
 
+    <!-- Kennzeichen mit höchster Priorität (z. B. Kinderschutz-Meldung) -->
+    <Style x:Key="RoGAlertBadgeStyle" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource RoGRedBrush}" />
+        <Setter Property="CornerRadius" Value="4" />
+        <Setter Property="Padding" Value="8,2" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+
+    <Style x:Key="RoGAlertBadgeTextStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource RoGDisplayFont}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="CharacterSpacing" Value="40" />
+        <Setter Property="Foreground" Value="{StaticResource RoGInkBrush}" />
+    </Style>
+
     <!-- Knöpfe -->
     <Style x:Key="RoGPrimaryButtonStyle" TargetType="Button" BasedOn="{StaticResource AccentButtonStyle}">
         <Setter Property="FontFamily" Value="{StaticResource RoGDisplaySemiBoldFont}" />

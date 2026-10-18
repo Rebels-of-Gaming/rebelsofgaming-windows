@@ -59,8 +59,11 @@ public static class ReportDialog
             }
             catch (ApiProblemException ex)
             {
+                // 429 too_many_attempts (z. B. viele Kinderschutz-Meldungen, v0.30.4) mit Wartezeit aus Retry-After
                 args.Cancel = true;
-                error.Message = l.GetError(ex.Problem.Code);
+                error.Message = ex.Problem.RetryAfter is { } wait && ex.Problem.IsRateLimited
+                    ? l.GetError(ex.Problem.Code) + " " + string.Format(System.Globalization.CultureInfo.CurrentCulture, l.GetString(StringKeys.CommonRetryAfter), Math.Max(1, (int)Math.Ceiling(wait.TotalSeconds)))
+                    : l.GetError(ex.Problem.Code);
                 error.IsOpen = true;
             }
             catch (RoG.Core.Api.Generated.GeneratedApiException)

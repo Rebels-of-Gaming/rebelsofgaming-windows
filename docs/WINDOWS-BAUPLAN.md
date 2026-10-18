@@ -194,6 +194,17 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   `server-console.js`). Chat-Anhänge: Bilder mit Vorschau über `GET /v1/attachments/{id}` (Umleitung auf kurzlebigen
   Link, max. 8 MB), andere Dateien öffnen im Browser. ET-Farbcodes im Clan-Tag werden wie auf der Website entfernt.
 
+- **2.5.6 – Kinderschutz (Website v0.30.3, Auftrag Wahke über die Website-Sitzung 18.10.):** `child_safety` als erster
+  Grund in `ModerationService.ReportReasons` (alle Melden-Dialoge); Moderation: `ModReport.Priority`/`IsChildSafety`,
+  Filter `filter[reason]` (Auswahl „Alle Gründe“/„Kinderschutz“), rotes Kennzeichen (`RoGAlertBadgeStyle`), offene
+  Kinderschutz-Fälle stabil nach oben (falls der Server nicht sortiert). Upload-Meldungen der Verwaltung lesen
+  `category` und zeigen dasselbe Kennzeichen. Link `/{locale}/child-safety` in den Einstellungen. Vorbereitet für
+  v0.30.4: 429 `too_many_attempts` zeigt die Wartezeit aus `Retry-After`, eine wieder geöffnete Meldung (200 statt 201)
+  gilt als Erfolg. **Achtung beim Neu-Generieren:** `V1_moderation_reports_indexAsync` bekam `filterreason` vor
+  `cursor` – positionelle Argumente verschoben sich unbemerkt; Aufruf jetzt mit benannten Argumenten.
+  **Nicht umgesetzt:** Uploads melden (`POST /v1/uploads/{id}/report`, Checkbox Kinderschutz) – die App hat keinen
+  Melde-Dialog für einzelne Uploads; Galerie-Einträge laufen über `/v1/reports` (`gallery_item`) und haben den Grund.
+
 - **2.5.5 – Website v0.30.1:** `AccountDeletionFlow` (Core, Tests) mit den Zuständen Bestätigen → Austritt nötig
   (`leave_clan_first`) → ausgetreten/`not_a_member` → Löschen; `owner_cannot_leave`/`owner_cannot_delete` sperren,
   404/405 (ältere Website) → Hinweis „an die Clanleitung wenden“, 422 `confirmation` und 429 mit Wartezeit im Dialog.

@@ -4712,7 +4712,7 @@
   <data name="Account_DeleteLeaveConfirm" xml:space="preserve">
     <value>Vraiment quitter – clique à nouveau</value>
   </data>
-  <data name="Account_DeleteRetryAfter" xml:space="preserve">
+  <data name="Common_RetryAfter" xml:space="preserve">
     <value>Nouvel essai possible dans {0} s.</value>
   </data>
   <data name="Error_leave_clan_first" xml:space="preserve">
@@ -4726,5 +4726,23 @@
   </data>
   <data name="Error_not_a_member" xml:space="preserve">
     <value>Tu n’es (plus) membre actif du clan.</value>
+  </data>
+  <data name="Mod_ReasonAll" xml:space="preserve">
+    <value>Tous les motifs</value>
+  </data>
+  <data name="Report_Reason_child_safety" xml:space="preserve">
+    <value>Protection de l’enfance / mise en danger de mineurs</value>
+  </data>
+  <data name="AdminPage_ChildSafetyBadge.Text" xml:space="preserve">
+    <value>PROTECTION DE L’ENFANCE</value>
+  </data>
+  <data name="AdminPage_ReasonFilter.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Filtrer par motif</value>
+  </data>
+  <data name="SettingsPage_ChildSafety.Content" xml:space="preserve">
+    <value>Protection de l’enfance</value>
+  </data>
+  <data name="Error_already_reported" xml:space="preserve">
+    <value>Tu l’as déjà signalé.</value>
   </data>
 </root>

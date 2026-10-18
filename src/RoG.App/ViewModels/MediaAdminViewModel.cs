@@ -193,6 +193,8 @@ public sealed partial class UploadReportItemViewModel(UploadReport report, Media
 
     public string Reason => report.Reason;
 
+    public bool IsChildSafety => report.IsChildSafety;
+
     public string Meta { get; } = string.Join(" · ", new[]
     {
         report.Owner,

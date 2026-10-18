@@ -870,13 +870,15 @@ namespace RoG.Core.Api.Generated
         /// Upload melden
         /// </summary>
         /// <remarks>
-        /// `reason` (5–500 Zeichen), z. B. fremde Bildrechte. Je Person und Upload eine offene Meldung (`already_reported`, 409).
-        /// <br/>Nur für Uploads, die der Meldende sehen darf.
+        /// `reason` (5–500 Zeichen), z. B. fremde Bildrechte. Optional `category: "child_safety"` (Kinderschutz / Gefährdung
+        /// <br/>Minderjähriger) – dann ist `reason` optional (max. 500), die Meldung steht oben in der Warteschlange und
+        /// <br/>`uploads.manage` sowie der Owner werden sofort benachrichtigt (ohne Inhalt). Je Person und Upload eine offene
+        /// <br/>Meldung (`already_reported`, 409). Nur für Uploads, die der Meldende sehen darf.
         /// <br/>
         /// <br/>Benötigt Token-Scope `uploads:read`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response53> V1_uploads_reportAsync(string upload, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response53> V1_uploads_reportAsync(string upload, Body15? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -892,7 +894,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `uploads.create` und Token-Scope `uploads:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response54> V1_uploads_presignAsync(Body15 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response54> V1_uploads_presignAsync(Body16 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -940,7 +942,8 @@ namespace RoG.Core.Api.Generated
         /// Meldungen
         /// </summary>
         /// <remarks>
-        /// Offene Meldungen (Standard) bzw. mit `filter[handled]=1` erledigte, neueste zuerst, mit dem gemeldeten Upload.
+        /// Offene Meldungen (Standard) bzw. mit `filter[handled]=1` erledigte; Kinderschutz-Meldungen (`category:
+        /// <br/>child_safety`) zuerst, sonst neueste zuerst, mit dem gemeldeten Upload.
         /// <br/>
         /// <br/>Benötigt Recht `uploads.manage` und Token-Scope `uploads:manage`.
         /// </remarks>
@@ -996,7 +999,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `uploads.manage` und Token-Scope `uploads:manage`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response61> V1_admin_uploads_limits_updateAsync(string role, Body16? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response61> V1_admin_uploads_limits_updateAsync(string role, Body17? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -1232,7 +1235,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>No content</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task V1_home_orderAsync(Body17? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task V1_home_orderAsync(Body18? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -1246,7 +1249,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `cms.home` und Token-Scope `cms:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response78> V1_home_blocks_updateAsync(string block, Body18? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response78> V1_home_blocks_updateAsync(string block, Body19? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -1312,7 +1315,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `integrations.bot` und Token-Scope `bot`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response82> V1_bot_commands_applicationsAsync(Body19 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response82> V1_bot_commands_applicationsAsync(Body20 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -1339,7 +1342,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `integrations.bot` und Token-Scope `bot`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response84> V1_bot_heartbeatAsync(Body20? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response84> V1_bot_heartbeatAsync(Body21? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -1354,7 +1357,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `integrations.bot` und Token-Scope `bot`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response85> V1_bot_presenceAsync(Body21 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response85> V1_bot_presenceAsync(Body22 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -1372,7 +1375,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `integrations.bot` und Token-Scope `bot`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response86> V1_bot_eventsAsync(Body22 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response86> V1_bot_eventsAsync(Body23 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -1443,7 +1446,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>**Admin-Endpunkt:** benötigt Recht `integrations.manage` und Token-Scope `integrations:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response91> V1_discord_structure_updateAsync(Body23 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response91> V1_discord_structure_updateAsync(Body24 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -1458,7 +1461,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>**Admin-Endpunkt:** benötigt Recht `integrations.manage` und Token-Scope `integrations:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response92> V1_discord_structure_applyAsync(Body24 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response92> V1_discord_structure_applyAsync(Body25 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -1472,7 +1475,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>**Admin-Endpunkt:** benötigt Recht `integrations.manage` und Token-Scope `integrations:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response93> V1_discord_structure_fixPermissionsAsync(Body25 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response93> V1_discord_structure_fixPermissionsAsync(Body26 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -1540,7 +1543,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `integrations.bot` und Token-Scope `bot`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response97> V1_bot_commands_eventsAsync(Body26? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response97> V1_bot_commands_eventsAsync(Body27? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -1560,7 +1563,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `integrations.bot` und Token-Scope `bot`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response98> V1_bot_commands_membersAsync(Body27 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response98> V1_bot_commands_membersAsync(Body28 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -1575,7 +1578,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `integrations.bot` und Token-Scope `bot`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response99> V1_bot_commands_members_autocompleteAsync(Body28? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response99> V1_bot_commands_members_autocompleteAsync(Body29? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -1592,7 +1595,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `integrations.bot` und Token-Scope `bot`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response100> V1_bot_commands_rulesAsync(Body29? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response100> V1_bot_commands_rulesAsync(Body30? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -1610,7 +1613,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `integrations.bot` und Token-Scope `bot`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response101> V1_bot_commands_serversAsync(Body30? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response101> V1_bot_commands_serversAsync(Body31? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -1840,7 +1843,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>**Admin-Endpunkt:** benötigt Recht `settings.manage` und Token-Scope `settings:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response119> V1_settings_clan_updateAsync(Body31? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response119> V1_settings_clan_updateAsync(Body32? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -1916,7 +1919,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `forum:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response124> V1_forum_threads_storeAsync(string slug, Body32 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response124> V1_forum_threads_storeAsync(string slug, Body33 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -1944,7 +1947,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `forum:moderate`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response126> V1_forum_threads_updateAsync(string thread, Body33? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response126> V1_forum_threads_updateAsync(string thread, Body34? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -1976,7 +1979,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `forum:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response128> V1_forum_posts_storeAsync(string thread, Body34 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response128> V1_forum_posts_storeAsync(string thread, Body35 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -2004,7 +2007,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `forum:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response130> V1_forum_posts_updateAsync(string post, Body35 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response130> V1_forum_posts_updateAsync(string post, Body36 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -2076,7 +2079,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `forum:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response135> V1_forum_posts_reactAsync(string post, Body36 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response135> V1_forum_posts_reactAsync(string post, Body37 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -2088,7 +2091,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `forum:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task V1_forum_posts_reportAsync(string post, Body37 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task V1_forum_posts_reportAsync(string post, Body38 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -2100,7 +2103,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `forum:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response136> V1_forum_polls_voteAsync(string poll, Body38 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response136> V1_forum_polls_voteAsync(string poll, Body39 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -2145,7 +2148,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `forum:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response137> V1_forum_previewAsync(Body39 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response137> V1_forum_previewAsync(Body40 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -2170,7 +2173,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>No content</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task V1_forum_moderation_reports_updateAsync(string report, Body40 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task V1_forum_moderation_reports_updateAsync(string report, Body41 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -2204,7 +2207,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `forum:moderate`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response141> V1_forum_posts_hideAsync(string post, Body41? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response141> V1_forum_posts_hideAsync(string post, Body42? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -2226,7 +2229,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `forum:moderate`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response143> V1_forum_threads_mergeAsync(string thread, Body42 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response143> V1_forum_threads_mergeAsync(string thread, Body43 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -2263,7 +2266,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `forum:moderate`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response145> V1_forum_reactions_orderAsync(Body43? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response145> V1_forum_reactions_orderAsync(Body44? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -2462,7 +2465,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `gallery.upload` und Token-Scope `gallery:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response158> V1_gallery_items_storeAsync(string album, Body44 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response158> V1_gallery_items_storeAsync(string album, Body45 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -2771,7 +2774,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <param name="server">The server slug</param>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response172> V1_servers_backups_storeAsync(string server, Body45? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response172> V1_servers_backups_storeAsync(string server, Body46? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -2799,7 +2802,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="server">The server slug</param>
         /// <returns>No content</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task V1_servers_backups_restoreAsync(string server, string uuid, Body46? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task V1_servers_backups_restoreAsync(string server, string uuid, Body47? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -2835,7 +2838,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <param name="server">The server slug</param>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response174> V1_servers_backups_lockAsync(string server, string uuid, Body47 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response174> V1_servers_backups_lockAsync(string server, string uuid, Body48 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -2851,7 +2854,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <param name="server">The server slug</param>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response175> V1_servers_configs_storeAsync(string server, Body48? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response175> V1_servers_configs_storeAsync(string server, Body49? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -2904,7 +2907,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="server">The server slug</param>
         /// <param name="file">The file ID</param>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response177> V1_servers_configs_updateAsync(string server, string file, Body49 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response177> V1_servers_configs_updateAsync(string server, string file, Body50 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -2996,7 +2999,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="server">The server slug</param>
         /// <param name="file">The file ID</param>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response183> V1_servers_configs_previewAsync(string server, string file, Body50 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response183> V1_servers_configs_previewAsync(string server, string file, Body51 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -3044,7 +3047,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="server">The server slug</param>
         /// <param name="file">The file ID</param>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response186> V1_servers_configs_template_applyAsync(string server, string file, Body51 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response186> V1_servers_configs_template_applyAsync(string server, string file, Body52 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -3059,7 +3062,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="server">The server slug</param>
         /// <param name="version">The version ID</param>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response188> V1_servers_configs_rollbackAsync(string server, string version, Body52? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response188> V1_servers_configs_rollbackAsync(string server, string version, Body53? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -3094,7 +3097,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="server">The server slug</param>
         /// <param name="change">The change ID</param>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response191> V1_servers_configChanges_approveAsync(string server, string change, Body53? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response191> V1_servers_configChanges_approveAsync(string server, string change, Body54? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -3108,7 +3111,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="server">The server slug</param>
         /// <param name="change">The change ID</param>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response192> V1_servers_configChanges_rejectAsync(string server, string change, Body54? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response192> V1_servers_configChanges_rejectAsync(string server, string change, Body55? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -3141,7 +3144,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <param name="server">The server slug</param>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response193> V1_servers_rconAsync(string server, Body55 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response193> V1_servers_rconAsync(string server, Body56 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -3204,7 +3207,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="server">The server slug</param>
         /// <returns>No content</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task V1_servers_bans_unbanAsync(string server, Body56? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task V1_servers_bans_unbanAsync(string server, Body57? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -3246,7 +3249,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="server">The server slug</param>
         /// <returns>No content</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task V1_servers_whitelist_updateAsync(string server, Body57? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task V1_servers_whitelist_updateAsync(string server, Body58? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -3263,7 +3266,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="server">The server slug</param>
         /// <returns>No content</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task V1_servers_powerAsync(string server, Body58 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task V1_servers_powerAsync(string server, Body59 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -3295,7 +3298,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="server">The server slug</param>
         /// <returns>No content</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task V1_servers_commandsAsync(string server, Body59 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task V1_servers_commandsAsync(string server, Body60 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -3340,7 +3343,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`GamingPlatformResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response202> V1_gamingPlatforms_storeAsync(Body60? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response202> V1_gamingPlatforms_storeAsync(Body61? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -3368,7 +3371,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`GamingPlatformResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response204> V1_gamingPlatforms_updateAsync(string gamingPlatform, Body61? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response204> V1_gamingPlatforms_updateAsync(string gamingPlatform, Body62? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -3489,7 +3492,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `halloffame.manage` und Token-Scope `halloffame:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response211> V1_history_storeAsync(Body62? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response211> V1_history_storeAsync(Body63? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -3517,7 +3520,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `halloffame.manage` und Token-Scope `halloffame:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response213> V1_trophies_storeAsync(Body63? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response213> V1_trophies_storeAsync(Body64? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -3543,7 +3546,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `halloffame.manage` und Token-Scope `halloffame:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response215> V1_trophies_updateAsync(string trophy, Body64? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response215> V1_trophies_updateAsync(string trophy, Body65? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -3566,7 +3569,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `halloffame.manage` und Token-Scope `halloffame:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response216> V1_history_updateAsync(string entry, Body65? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response216> V1_history_updateAsync(string entry, Body66? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -3590,7 +3593,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `halloffame.manage` und Token-Scope `halloffame:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response217> V1_members_tribute_saveAsync(string member, Body66? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response217> V1_members_tribute_saveAsync(string member, Body67? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -3643,7 +3646,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `inactivity.manage` und Token-Scope `inactivity:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response220> V1_inactivity_rules_saveAsync(Body67 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response220> V1_inactivity_rules_saveAsync(Body68 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -3733,7 +3736,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `integrations.manage` und Token-Scope `integrations:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response226> V1_integrations_groups_storeAsync(string platform, Body68? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response226> V1_integrations_groups_storeAsync(string platform, Body69? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -3773,7 +3776,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `integrations.manage` und Token-Scope `integrations:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response229> V1_groupMappings_updateAsync(Body69? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response229> V1_groupMappings_updateAsync(Body70? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -3838,7 +3841,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `integrations.manage` und Token-Scope `integrations:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response234> V1_integrations_syncAsync(string platform, Body70? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response234> V1_integrations_syncAsync(string platform, Body71? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -3851,7 +3854,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `integrations.manage` und Token-Scope `integrations:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response235> V1_squads_platforms_setupAsync(string squad, string platform, Body71? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response235> V1_squads_platforms_setupAsync(string squad, string platform, Body72? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -3965,7 +3968,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`EventTypeResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response241> V1_events_types_storeAsync(Body72? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response241> V1_events_types_storeAsync(Body73? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -4017,7 +4020,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`EventResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response243> V1_events_storeAsync(Body73? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response243> V1_events_storeAsync(Body74? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -4057,7 +4060,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`EventResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response245> V1_events_updateAsync(string @event, Body74? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response245> V1_events_updateAsync(string @event, Body75? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -4110,7 +4113,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `events:read`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response246> V1_events_recurrence_previewAsync(Body75? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response246> V1_events_recurrence_previewAsync(Body76? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -4149,7 +4152,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `squad.lineup` im Squad (oder `events.manage`) und Token-Scope `events:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response249> V1_events_lineup_updateAsync(string @event, Body76? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response249> V1_events_lineup_updateAsync(string @event, Body77? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -4191,7 +4194,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`EventTypeResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response252> V1_events_types_updateAsync(string eventType, Body77? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response252> V1_events_types_updateAsync(string eventType, Body78? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -4219,7 +4222,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `events.manage` und Token-Scope `events:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response253> V1_events_cancelAsync(string @event, Body78? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response253> V1_events_cancelAsync(string @event, Body79? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -4232,7 +4235,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `events:write` (Clan-Mitglied; bei Squad-Terminen Member des Squads).
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response254> V1_events_rsvpAsync(string @event, Body79? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response254> V1_events_rsvpAsync(string @event, Body80? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -4342,7 +4345,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>No content</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task V1_me_destroyAsync(Body80 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task V1_me_destroyAsync(Body81 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -4457,7 +4460,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `account:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response264> V1_me_email_requestAsync(Body81 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response264> V1_me_email_requestAsync(Body82 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -4475,7 +4478,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `account:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response265> V1_me_email_confirmAsync(Body82 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response265> V1_me_email_confirmAsync(Body83 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -4504,7 +4507,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `account:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response266> V1_me_password_updateAsync(Body83 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response266> V1_me_password_updateAsync(Body84 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -4561,7 +4564,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `account:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response268> V1_me_twoFactor_confirmAsync(Body84 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response268> V1_me_twoFactor_confirmAsync(Body85 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -4629,7 +4632,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `tokens:manage`. Unterstützt `Idempotency-Key`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response271> V1_me_tokens_storeAsync(Body85 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response271> V1_me_tokens_storeAsync(Body86 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -4695,7 +4698,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `account:write` (bisher `tokens:manage`, gilt weiter).
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response274> V1_me_sessions_othersAsync(Body86? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response274> V1_me_sessions_othersAsync(Body87? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -4730,7 +4733,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `profile:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response275> V1_me_leaveClanAsync(Body87 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response275> V1_me_leaveClanAsync(Body88 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -4763,7 +4766,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `profile:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response277> V1_me_profile_updateAsync(Body88? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response277> V1_me_profile_updateAsync(Body89? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -4802,7 +4805,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `profile:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response279> V1_me_gameAccounts_syncAsync(Body89? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response279> V1_me_gameAccounts_syncAsync(Body90? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -4833,7 +4836,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `profile:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response281> V1_me_platforms_syncAsync(Body90? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response281> V1_me_platforms_syncAsync(Body91? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -4948,7 +4951,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `links.create` (eigenes Kürzel: `links.custom`) und Token-Scope `links:write`. Unterstützt `Idempotency-Key`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response287> V1_links_storeAsync(Body91 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response287> V1_links_storeAsync(Body92 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -4972,7 +4975,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `links:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response289> V1_links_updateAsync(string link, Body92? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response289> V1_links_updateAsync(string link, Body93? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -5023,7 +5026,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `links.manage` und Token-Scope `links:manage`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response291> V1_links_blockAsync(string link, Body93? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response291> V1_links_blockAsync(string link, Body94? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -5061,7 +5064,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `matches.manage` (global oder im Squad) und Token-Scope `matches:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response293> V1_matches_storeAsync(Body94? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response293> V1_matches_storeAsync(Body95? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -5089,7 +5092,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `matches.manage` (im Squad) und Token-Scope `matches:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response295> V1_matches_updateAsync(string match, Body95? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response295> V1_matches_updateAsync(string match, Body96? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -5147,7 +5150,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `matches.manage` (im Squad des Termins) und Token-Scope `matches:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response298> V1_events_matchAsync(string @event, Body96? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response298> V1_events_matchAsync(string @event, Body97? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -5201,7 +5204,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `matches.manage` (global; Squad-Turniere auch im Squad) und Token-Scope `matches:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response301> V1_tournaments_storeAsync(Body97? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response301> V1_tournaments_storeAsync(Body98? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -5227,7 +5230,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `matches.manage` und Token-Scope `matches:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response303> V1_tournaments_updateAsync(string tournament, Body98? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response303> V1_tournaments_updateAsync(string tournament, Body99? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -5351,7 +5354,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `members:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response309> V1_members_recoveryUnlockAsync(string member, Body99? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response309> V1_members_recoveryUnlockAsync(string member, Body100? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -5374,7 +5377,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>No content</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task V1_members_accountDeletionAsync(string member, Body100 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task V1_members_accountDeletionAsync(string member, Body101 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -5608,7 +5611,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`MemberResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response321> V1_members_statusAsync(string member, Body101 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response321> V1_members_statusAsync(string member, Body102 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -5621,7 +5624,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>No content</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task V1_members_responsibilityAsync(string member, Body102? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task V1_members_responsibilityAsync(string member, Body103? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -5634,7 +5637,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `team.manage` und Token-Scope `members:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response322> V1_teamGroups_storeAsync(Body103 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response322> V1_teamGroups_storeAsync(Body104 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -5645,7 +5648,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <param name="group">The group ID</param>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response323> V1_teamGroups_updateAsync(string group, Body104? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response323> V1_teamGroups_updateAsync(string group, Body105? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -5684,7 +5687,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `member-notes:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response325> V1_members_notes_storeAsync(string member, Body105 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response325> V1_members_notes_storeAsync(string member, Body106 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -5698,7 +5701,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `member-notes:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response326> V1_members_notes_updateAsync(string member, string note, Body106? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response326> V1_members_notes_updateAsync(string member, string note, Body107? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -5756,7 +5759,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`BadgeResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response328> V1_badges_storeAsync(Body107? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response328> V1_badges_storeAsync(Body108? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -5783,7 +5786,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="badge">The badge ID</param>
         /// <returns>`BadgeResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response330> V1_badges_updateAsync(string badge, Body108? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response330> V1_badges_updateAsync(string badge, Body109? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -5809,7 +5812,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `badges.award` und Token-Scope `members:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task V1_members_badges_storeAsync(string member, Body109 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task V1_members_badges_storeAsync(string member, Body110 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -5834,13 +5837,15 @@ namespace RoG.Core.Api.Generated
         /// <br/>eine einzelne Wiki-Bearbeitung (`wiki_revision`, ID = Versions-ID aus `GET /v1/wiki/pages/{id}/revisions`). Nur was man sehen
         /// <br/>kann, nicht den eigenen Inhalt; dieselbe Meldung zweimal ist idempotent, höchstens 10 je Stunde. Bilder melden Apps
         /// <br/>über den Bild-Uploader; Forenbeiträge alternativ mit Freitext über `POST /v1/forum/posts/{id}/reports`. Fehler: `report_target_missing` (404), `report_own_content` (422),
-        /// <br/>`too_many_reports` (429). Optional `locale` (`de`, `en`, `fr`; Standard: Sprache der Anfrage) – nur bei `wiki_page`
+        /// <br/>`too_many_reports` (429). Grund `child_safety` (Kinderschutz / Gefährdung Minderjähriger) für alle Typen: steht
+        /// <br/>oben in der Warteschlange und benachrichtigt Moderation und Owner sofort (ohne Ausschnitt); eine eigene offene
+        /// <br/>Meldung desselben Inhalts wird darauf hochgestuft. Optional `locale` (`de`, `en`, `fr`; Standard: Sprache der Anfrage) – nur bei `wiki_page`
         /// <br/>wirksam: die gemeldete Sprachfassung (wie `?lang=` auf der Website); sie bestimmt Autor*in und Ausschnitt.
         /// <br/>
         /// <br/>Benötigt Token-Scope `reports:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response331> V1_reports_storeAsync(Body110 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response331> V1_reports_storeAsync(Body111 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -5895,7 +5900,9 @@ namespace RoG.Core.Api.Generated
         /// Meldungen
         /// </summary>
         /// <remarks>
-        /// Neueste zuerst, Filter `filter[status]` (`open`, `resolved`, `dismissed`) und `filter[type]`; Cursor-Pagination.
+        /// Offene Kinderschutz-Meldungen (`reason: child_safety`, `priority: 1`) zuerst, sonst neueste zuerst. Filter
+        /// <br/>`filter[status]` (`open`, `resolved`, `dismissed`), `filter[type]` und `filter[reason]` (z. B. `child_safety`);
+        /// <br/>Cursor-Pagination.
         /// <br/>Enthält den beim Melden gesicherten Ausschnitt und `url` – Link zum gemeldeten Inhalt (z. B. Wiki-Seite oder
         /// <br/>Versionsvergleich), `null` wenn der Inhalt gelöscht ist oder keinen Link hat (Direktnachrichten).
         /// <br/>
@@ -5904,7 +5911,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="cursor">Cursor der nächsten bzw. vorherigen Seite – aus `links.next`/`meta.next_cursor` übernehmen, nicht selbst bauen</param>
         /// <param name="per_page">Einträge je Seite (Standard 25)</param>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response335> V1_moderation_reports_indexAsync(string? filterstatus = null, string? filtertype = null, string? cursor = null, int? per_page = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response335> V1_moderation_reports_indexAsync(string? filterstatus = null, string? filtertype = null, string? filterreason = null, string? cursor = null, int? per_page = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -5929,7 +5936,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `moderation.reports` und Token-Scope `moderation:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response337> V1_moderation_reports_updateAsync(string report, Body111 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response337> V1_moderation_reports_updateAsync(string report, Body112 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -5997,7 +6004,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `moderation.warn` (nur gegenüber gleich- oder niedriger Gestellten) und Token-Scope `moderation:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response342> V1_moderation_warnings_storeAsync(string user, Body112 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response342> V1_moderation_warnings_storeAsync(string user, Body113 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -6024,7 +6031,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `moderation.ban` (nur gegenüber Niedrigeren) und Token-Scope `moderation:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response344> V1_moderation_bans_storeAsync(string user, Body113 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response344> V1_moderation_bans_storeAsync(string user, Body114 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -6058,7 +6065,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `moderation.manage` und Token-Scope `moderation:manage`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response347> V1_moderation_words_storeAsync(Body114 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response347> V1_moderation_words_storeAsync(Body115 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -6091,7 +6098,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `moderation.manage` und Token-Scope `moderation:manage`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response349> V1_moderation_levels_updateAsync(Body115 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response349> V1_moderation_levels_updateAsync(Body116 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -6127,7 +6134,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `messages:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response351> V1_conversations_storeAsync(Body116? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response351> V1_conversations_storeAsync(Body117? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -6201,7 +6208,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `messages:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response355> V1_conversations_sendAsync(string conversation, Body117 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response355> V1_conversations_sendAsync(string conversation, Body118 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -6428,7 +6435,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `news.write` (eigener Entwurf) bzw. `news.publish` und Token-Scope `news:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response366> V1_news_updateAsync(string news, Body118? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response366> V1_news_updateAsync(string news, Body119? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -6597,7 +6604,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `legal.manage` und Token-Scope `legal:manage`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response376> V1_legal_publishAsync(string type, Body119 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response376> V1_legal_publishAsync(string type, Body120 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -6686,7 +6693,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>**Admin-Endpunkt:** benötigt Recht `legal.manage` und Token-Scope `legal:manage`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response382> V1_legal_previewAsync(Body120 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response382> V1_legal_previewAsync(Body121 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -6704,7 +6711,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>**Admin-Endpunkt:** benötigt Recht `legal.manage` und Token-Scope `legal:manage`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response383> V1_legal_importAsync(Body121? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response383> V1_legal_importAsync(Body122? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -6734,7 +6741,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `rules.manage` (global; Squad-Regeln auch im Squad) und Token-Scope `rules:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response385> V1_rules_storeAsync(Body122? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response385> V1_rules_storeAsync(Body123? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -6761,7 +6768,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `rules.manage` und Token-Scope `rules:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response387> V1_rules_updateAsync(string set, Body123? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response387> V1_rules_updateAsync(string set, Body124? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -6881,7 +6888,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Kein Token-Scope nötig (öffentlicher Endpunkt, ohne Anmeldung).
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response394> V1_auth_registerAsync(Body124 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response394> V1_auth_registerAsync(Body125 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -6902,7 +6909,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Kein Token-Scope nötig (öffentlicher Endpunkt, ohne Anmeldung).
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response395> V1_auth_loginAsync(Body125 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response395> V1_auth_loginAsync(Body126 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -6915,7 +6922,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Kein Token-Scope nötig (öffentlicher Endpunkt, ohne Anmeldung).
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task V1_auth_forgotPasswordAsync(Body126 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task V1_auth_forgotPasswordAsync(Body127 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -6942,7 +6949,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Kein Token-Scope nötig (öffentlicher Endpunkt, ohne Anmeldung).
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response396> V1_auth_app_tokenAsync(Body127 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response396> V1_auth_app_tokenAsync(Body128 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -7066,7 +7073,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `profile:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response404> V1_me_riot_updateAsync(Body128? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response404> V1_me_riot_updateAsync(Body129? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -7373,7 +7380,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="template">The template ID</param>
         /// <returns>`RoleResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response421> V1_permissionTemplates_applyAsync(string template, Body129 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response421> V1_permissionTemplates_applyAsync(string template, Body130 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -7424,7 +7431,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`SocialChannelResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response424> V1_social_channels_storeAsync(Body130 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response424> V1_social_channels_storeAsync(Body131 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -7454,7 +7461,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="channel">The channel ID</param>
         /// <returns>`SocialChannelResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response426> V1_social_channels_updateAsync(string channel, Body131? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response426> V1_social_channels_updateAsync(string channel, Body132? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -7536,7 +7543,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`SocialPostResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response430> V1_social_posts_storeAsync(Body132 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response430> V1_social_posts_storeAsync(Body133 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -7567,7 +7574,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="post">The post ID</param>
         /// <returns>`SocialPostResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response432> V1_social_posts_updateAsync(string post, Body133? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response432> V1_social_posts_updateAsync(string post, Body134? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -7616,7 +7623,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="post">The post ID</param>
         /// <returns>`SocialPostResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response434> V1_social_posts_approveAsync(string post, Body134? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response434> V1_social_posts_approveAsync(string post, Body135? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -7662,7 +7669,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <param name="post">The post ID</param>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response437> V1_social_posts_retractAsync(string post, Body135? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response437> V1_social_posts_retractAsync(string post, Body136? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -7743,7 +7750,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`SocialPostResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response441> V1_social_sources_redraftAsync(string source, string id, Body136? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response441> V1_social_sources_redraftAsync(string source, string id, Body137? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -7772,7 +7779,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`GameResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response444> V1_games_storeAsync(Body137? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response444> V1_games_storeAsync(Body138? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -7801,7 +7808,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="game">The game slug</param>
         /// <returns>`GameResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response446> V1_games_updateAsync(string game, Body138? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response446> V1_games_updateAsync(string game, Body139? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -7861,7 +7868,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="game">The game slug</param>
         /// <returns>`GameResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response449> V1_games_header_updateAsync(string game, Body139? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response449> V1_games_header_updateAsync(string game, Body140? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -7890,7 +7897,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="game">The game slug</param>
         /// <returns>`GameLinkResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response451> V1_games_links_storeAsync(string game, Body140? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response451> V1_games_links_storeAsync(string game, Body141? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -7903,7 +7910,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="link">The link ID</param>
         /// <returns>`GameLinkResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response452> V1_games_links_updateAsync(string game, string link, Body141? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response452> V1_games_links_updateAsync(string game, string link, Body142? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -7953,7 +7960,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`SquadResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response454> V1_squads_storeAsync(Body142? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response454> V1_squads_storeAsync(Body143? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -7983,7 +7990,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="squad">The squad slug</param>
         /// <returns>`SquadResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response456> V1_squads_updateAsync(string squad, Body143? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response456> V1_squads_updateAsync(string squad, Body144? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -8055,7 +8062,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="squad">The squad slug</param>
         /// <returns>`SquadResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response460> V1_squads_archiveAsync(string squad, Body144? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response460> V1_squads_archiveAsync(string squad, Body145? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -8091,7 +8098,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="squad">The squad slug</param>
         /// <returns>`SquadResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response462> V1_squads_header_updateAsync(string squad, Body145? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response462> V1_squads_header_updateAsync(string squad, Body146? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -8150,7 +8157,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="squad">The squad slug</param>
         /// <returns>No content</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task V1_squads_members_updateAsync(string squad, string member, Body146 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task V1_squads_members_updateAsync(string squad, string member, Body147 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -8453,7 +8460,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `profile:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response483> V1_me_steam_library_updateAsync(Body147? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response483> V1_me_steam_library_updateAsync(Body148? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -8662,7 +8669,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>**Admin-Endpunkt:** benötigt Recht `system.tools` und Token-Scope `system:manage`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response495> V1_system_failedJobs_retryAllAsync(Body148 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response495> V1_system_failedJobs_retryAllAsync(Body149 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -8775,7 +8782,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `profile:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task V1_me_teamspeak_verification_startAsync(Body149 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task V1_me_teamspeak_verification_startAsync(Body150 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -8788,7 +8795,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `profile:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response502> V1_me_teamspeak_verification_confirmAsync(Body150 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response502> V1_me_teamspeak_verification_confirmAsync(Body151 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -9046,7 +9053,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `wiki.edit` und Token-Scope `wiki:write`. Unterstützt `Idempotency-Key`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response519> V1_wiki_pages_storeAsync(string @namespace, Body151 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response519> V1_wiki_pages_storeAsync(string @namespace, Body152 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -9253,7 +9260,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `wiki.edit` und Token-Scope `wiki:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response532> V1_wiki_pages_updateAsync(string page, Body152 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response532> V1_wiki_pages_updateAsync(string page, Body153 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -9356,7 +9363,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `wiki:read`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response537> V1_wiki_renderAsync(Body153 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response537> V1_wiki_renderAsync(Body154 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -9403,7 +9410,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `wiki.approve` und Token-Scope `wiki:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response540> V1_wiki_files_description_approveAsync(string file, Body154 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response540> V1_wiki_files_description_approveAsync(string file, Body155 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -9417,7 +9424,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `wiki.approve` und Token-Scope `wiki:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response541> V1_wiki_files_description_rejectAsync(string file, Body155 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response541> V1_wiki_files_description_rejectAsync(string file, Body156 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -9532,7 +9539,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`TranslationResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Response551> V1_translations_updateAsync(string locale, string key, Body156 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Response551> V1_translations_updateAsync(string locale, string key, Body157 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -9633,7 +9640,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -9727,7 +9734,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response2>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -9826,7 +9833,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response3>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -9923,7 +9930,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response4>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -10026,7 +10033,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response5>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -10127,7 +10134,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response6>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -10224,7 +10231,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response7>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -10347,7 +10354,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response8>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -10589,7 +10596,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response9>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -10690,7 +10697,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response10>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -10795,7 +10802,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response11>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -10883,7 +10890,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response12>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -10974,7 +10981,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response13>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -11064,7 +11071,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response14>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -11159,7 +11166,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response15>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -11246,7 +11253,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response16>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -11338,7 +11345,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response17>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -11428,7 +11435,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -11518,7 +11525,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response18>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -11612,7 +11619,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -11697,7 +11704,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response19>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -11802,7 +11809,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response20>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -11894,7 +11901,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response21>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -11987,7 +11994,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response22>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -12082,7 +12089,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -12171,7 +12178,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response23>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -12260,7 +12267,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response24>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -12350,7 +12357,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response25>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -12455,7 +12462,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response26>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -12555,7 +12562,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response27>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -12649,7 +12656,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response28>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -12738,7 +12745,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response29>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -12831,7 +12838,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response30>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -12919,7 +12926,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response31>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -13015,7 +13022,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response32>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -13103,7 +13110,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response33>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -13198,7 +13205,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response34>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -13295,7 +13302,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response35>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -13395,7 +13402,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -13490,7 +13497,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -13587,7 +13594,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response36>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -13707,7 +13714,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response37>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -13801,7 +13808,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response38>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -13897,7 +13904,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response39>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -13999,7 +14006,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response40>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -14116,7 +14123,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response41>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -14232,7 +14239,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response42>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -14332,7 +14339,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response43>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -14442,7 +14449,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response44>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -14546,7 +14553,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response45>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -14651,7 +14658,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -14775,7 +14782,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response46>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -14879,7 +14886,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response47>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -14968,7 +14975,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response48>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -15054,7 +15061,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response49>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -15143,7 +15150,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response50>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -15237,7 +15244,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response51>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -15337,7 +15344,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response52>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -15440,7 +15447,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -15489,13 +15496,15 @@ namespace RoG.Core.Api.Generated
         /// Upload melden
         /// </summary>
         /// <remarks>
-        /// `reason` (5–500 Zeichen), z. B. fremde Bildrechte. Je Person und Upload eine offene Meldung (`already_reported`, 409).
-        /// <br/>Nur für Uploads, die der Meldende sehen darf.
+        /// `reason` (5–500 Zeichen), z. B. fremde Bildrechte. Optional `category: "child_safety"` (Kinderschutz / Gefährdung
+        /// <br/>Minderjähriger) – dann ist `reason` optional (max. 500), die Meldung steht oben in der Warteschlange und
+        /// <br/>`uploads.manage` sowie der Owner werden sofort benachrichtigt (ohne Inhalt). Je Person und Upload eine offene
+        /// <br/>Meldung (`already_reported`, 409). Nur für Uploads, die der Meldende sehen darf.
         /// <br/>
         /// <br/>Benötigt Token-Scope `uploads:read`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response53> V1_uploads_reportAsync(string upload, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response53> V1_uploads_reportAsync(string upload, Body15? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (upload == null)
                 throw new System.ArgumentNullException("upload");
@@ -15506,7 +15515,10 @@ namespace RoG.Core.Api.Generated
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
+                    var json_ = System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.ByteArrayContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
@@ -15540,7 +15552,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response53>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -15603,7 +15615,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `uploads.create` und Token-Scope `uploads:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response54> V1_uploads_presignAsync(Body15 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response54> V1_uploads_presignAsync(Body16 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -15649,7 +15661,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response54>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -15749,7 +15761,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response55>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -15840,7 +15852,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response56>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -15932,7 +15944,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -15971,7 +15983,8 @@ namespace RoG.Core.Api.Generated
         /// Meldungen
         /// </summary>
         /// <remarks>
-        /// Offene Meldungen (Standard) bzw. mit `filter[handled]=1` erledigte, neueste zuerst, mit dem gemeldeten Upload.
+        /// Offene Meldungen (Standard) bzw. mit `filter[handled]=1` erledigte; Kinderschutz-Meldungen (`category:
+        /// <br/>child_safety`) zuerst, sonst neueste zuerst, mit dem gemeldeten Upload.
         /// <br/>
         /// <br/>Benötigt Recht `uploads.manage` und Token-Scope `uploads:manage`.
         /// </remarks>
@@ -16021,7 +16034,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response57>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -16116,7 +16129,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response58>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -16214,7 +16227,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response59>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -16303,7 +16316,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response60>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -16353,7 +16366,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `uploads.manage` und Token-Scope `uploads:manage`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response61> V1_admin_uploads_limits_updateAsync(string role, Body16? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response61> V1_admin_uploads_limits_updateAsync(string role, Body17? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (role == null)
                 throw new System.ArgumentNullException("role");
@@ -16400,7 +16413,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response61>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -16490,7 +16503,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response62>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -16575,7 +16588,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response63>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -16669,7 +16682,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response64>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -16760,7 +16773,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response65>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -16846,7 +16859,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response66>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -16926,7 +16939,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response67>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -17039,7 +17052,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response69>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -17145,7 +17158,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response70>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -17262,7 +17275,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response71>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -17354,7 +17367,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response72>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -17447,7 +17460,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response73>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -17547,7 +17560,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -17646,7 +17659,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response74>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -17748,7 +17761,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response75>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -17842,7 +17855,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response76>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -17937,7 +17950,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response77>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -17987,7 +18000,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>No content</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task V1_home_orderAsync(Body17? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task V1_home_orderAsync(Body18? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -18029,7 +18042,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -18075,7 +18088,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `cms.home` und Token-Scope `cms:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response78> V1_home_blocks_updateAsync(string block, Body18? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response78> V1_home_blocks_updateAsync(string block, Body19? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (block == null)
                 throw new System.ArgumentNullException("block");
@@ -18122,7 +18135,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response78>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -18222,7 +18235,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -18318,7 +18331,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response79>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -18428,7 +18441,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -18531,7 +18544,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 202)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response81>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -18593,7 +18606,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `integrations.bot` und Token-Scope `bot`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response82> V1_bot_commands_applicationsAsync(Body19 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response82> V1_bot_commands_applicationsAsync(Body20 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -18639,7 +18652,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response82>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -18749,7 +18762,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response83>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -18809,7 +18822,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `integrations.bot` und Token-Scope `bot`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response84> V1_bot_heartbeatAsync(Body20? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response84> V1_bot_heartbeatAsync(Body21? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -18852,7 +18865,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response84>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -18924,7 +18937,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `integrations.bot` und Token-Scope `bot`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response85> V1_bot_presenceAsync(Body21 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response85> V1_bot_presenceAsync(Body22 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -18970,7 +18983,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 202)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response85>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -19045,7 +19058,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `integrations.bot` und Token-Scope `bot`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response86> V1_bot_eventsAsync(Body22 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response86> V1_bot_eventsAsync(Body23 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -19091,7 +19104,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 202)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response86>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -19201,7 +19214,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response87>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -19302,7 +19315,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response88>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -19408,7 +19421,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response89>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -19505,7 +19518,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response90>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -19565,7 +19578,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>**Admin-Endpunkt:** benötigt Recht `integrations.manage` und Token-Scope `integrations:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response91> V1_discord_structure_updateAsync(Body23 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response91> V1_discord_structure_updateAsync(Body24 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -19611,7 +19624,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response91>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -19673,7 +19686,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>**Admin-Endpunkt:** benötigt Recht `integrations.manage` und Token-Scope `integrations:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response92> V1_discord_structure_applyAsync(Body24 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response92> V1_discord_structure_applyAsync(Body25 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -19719,7 +19732,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response92>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -19780,7 +19793,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>**Admin-Endpunkt:** benötigt Recht `integrations.manage` und Token-Scope `integrations:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response93> V1_discord_structure_fixPermissionsAsync(Body25 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response93> V1_discord_structure_fixPermissionsAsync(Body26 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -19826,7 +19839,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response93>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -19925,7 +19938,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response94>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -20031,7 +20044,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response95>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -20131,7 +20144,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response96>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -20232,7 +20245,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -20291,7 +20304,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `integrations.bot` und Token-Scope `bot`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response97> V1_bot_commands_eventsAsync(Body26? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response97> V1_bot_commands_eventsAsync(Body27? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -20334,7 +20347,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response97>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -20411,7 +20424,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `integrations.bot` und Token-Scope `bot`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response98> V1_bot_commands_membersAsync(Body27 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response98> V1_bot_commands_membersAsync(Body28 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -20457,7 +20470,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response98>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -20529,7 +20542,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `integrations.bot` und Token-Scope `bot`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response99> V1_bot_commands_members_autocompleteAsync(Body28? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response99> V1_bot_commands_members_autocompleteAsync(Body29? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -20572,7 +20585,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response99>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -20646,7 +20659,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `integrations.bot` und Token-Scope `bot`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response100> V1_bot_commands_rulesAsync(Body29? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response100> V1_bot_commands_rulesAsync(Body30? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -20689,7 +20702,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response100>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -20764,7 +20777,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `integrations.bot` und Token-Scope `bot`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response101> V1_bot_commands_serversAsync(Body30? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response101> V1_bot_commands_serversAsync(Body31? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -20807,7 +20820,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response101>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -20930,7 +20943,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response102>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -21011,7 +21024,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response103>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -21119,7 +21132,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response105>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -21198,7 +21211,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response106>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -21313,7 +21326,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response108>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -21405,7 +21418,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response109>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -21517,7 +21530,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -21627,7 +21640,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response111>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -21722,7 +21735,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response112>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -21827,7 +21840,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response113>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -21931,7 +21944,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response114>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -22021,7 +22034,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -22106,7 +22119,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response115>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -22218,7 +22231,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response117>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -22297,7 +22310,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response118>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -22364,7 +22377,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>**Admin-Endpunkt:** benötigt Recht `settings.manage` und Token-Scope `settings:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response119> V1_settings_clan_updateAsync(Body31? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response119> V1_settings_clan_updateAsync(Body32? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -22407,7 +22420,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response119>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -22502,7 +22515,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response120>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -22594,7 +22607,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response121>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -22675,7 +22688,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response122>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -22784,7 +22797,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response123>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -22825,7 +22838,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `forum:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response124> V1_forum_threads_storeAsync(string slug, Body32 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response124> V1_forum_threads_storeAsync(string slug, Body33 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (slug == null)
                 throw new System.ArgumentNullException("slug");
@@ -22876,7 +22889,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response124>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -22972,7 +22985,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response125>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -23011,7 +23024,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `forum:moderate`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response126> V1_forum_threads_updateAsync(string thread, Body33? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response126> V1_forum_threads_updateAsync(string thread, Body34? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (thread == null)
                 throw new System.ArgumentNullException("thread");
@@ -23058,7 +23071,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response126>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -23179,7 +23192,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response127>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -23218,7 +23231,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `forum:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response128> V1_forum_posts_storeAsync(string thread, Body34 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response128> V1_forum_posts_storeAsync(string thread, Body35 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (thread == null)
                 throw new System.ArgumentNullException("thread");
@@ -23269,7 +23282,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response128>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -23364,7 +23377,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response129>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -23404,7 +23417,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `forum:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response130> V1_forum_posts_updateAsync(string post, Body35 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response130> V1_forum_posts_updateAsync(string post, Body36 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (post == null)
                 throw new System.ArgumentNullException("post");
@@ -23454,7 +23467,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response130>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -23545,7 +23558,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response131>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -23653,7 +23666,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response132>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -23739,7 +23752,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response133>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -23835,7 +23848,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response134>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -23886,7 +23899,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `forum:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response135> V1_forum_posts_reactAsync(string post, Body36 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response135> V1_forum_posts_reactAsync(string post, Body37 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (post == null)
                 throw new System.ArgumentNullException("post");
@@ -23937,7 +23950,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response135>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -23986,7 +23999,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `forum:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task V1_forum_posts_reportAsync(string post, Body37 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task V1_forum_posts_reportAsync(string post, Body38 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (post == null)
                 throw new System.ArgumentNullException("post");
@@ -24036,7 +24049,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 202)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -24080,7 +24093,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `forum:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response136> V1_forum_polls_voteAsync(string poll, Body38 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response136> V1_forum_polls_voteAsync(string poll, Body39 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (poll == null)
                 throw new System.ArgumentNullException("poll");
@@ -24131,7 +24144,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response136>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -24233,7 +24246,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -24319,7 +24332,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -24406,7 +24419,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -24450,7 +24463,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `forum:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response137> V1_forum_previewAsync(Body39 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response137> V1_forum_previewAsync(Body40 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -24496,7 +24509,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response137>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -24584,7 +24597,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response138>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -24634,7 +24647,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>No content</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task V1_forum_moderation_reports_updateAsync(string report, Body40 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task V1_forum_moderation_reports_updateAsync(string report, Body41 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (report == null)
                 throw new System.ArgumentNullException("report");
@@ -24683,7 +24696,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -24776,7 +24789,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response139>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -24868,7 +24881,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response140>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -24917,7 +24930,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `forum:moderate`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response141> V1_forum_posts_hideAsync(string post, Body41? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response141> V1_forum_posts_hideAsync(string post, Body42? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (post == null)
                 throw new System.ArgumentNullException("post");
@@ -24965,7 +24978,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response141>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -25057,7 +25070,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response142>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -25106,7 +25119,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `forum:moderate`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response143> V1_forum_threads_mergeAsync(string thread, Body42 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response143> V1_forum_threads_mergeAsync(string thread, Body43 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (thread == null)
                 throw new System.ArgumentNullException("thread");
@@ -25157,7 +25170,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response143>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -25260,7 +25273,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response144>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -25362,7 +25375,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -25416,7 +25429,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `forum:moderate`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response145> V1_forum_reactions_orderAsync(Body43? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response145> V1_forum_reactions_orderAsync(Body44? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -25459,7 +25472,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response145>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -25569,7 +25582,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response146>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -25671,7 +25684,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -25764,7 +25777,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response147>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -25863,7 +25876,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response148>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -25953,7 +25966,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -26046,7 +26059,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response149>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -26143,7 +26156,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response150>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -26240,7 +26253,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response151>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -26321,7 +26334,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response152>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -26450,7 +26463,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response154>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -26548,7 +26561,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response155>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -26640,7 +26653,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response156>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -26752,7 +26765,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -26817,7 +26830,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `gallery.upload` und Token-Scope `gallery:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response158> V1_gallery_items_storeAsync(string album, Body44 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response158> V1_gallery_items_storeAsync(string album, Body45 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (album == null)
                 throw new System.ArgumentNullException("album");
@@ -26868,7 +26881,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response158>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -26961,7 +26974,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response159>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -27061,7 +27074,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -27161,7 +27174,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response160>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -27263,7 +27276,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response161>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -27367,7 +27380,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -27489,7 +27502,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response162>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -27577,7 +27590,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response163>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -27674,7 +27687,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response164>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -27769,7 +27782,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response165>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -27874,7 +27887,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -27976,7 +27989,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response166>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -28075,7 +28088,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response167>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -28186,7 +28199,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response168>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -28289,7 +28302,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response169>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -28400,7 +28413,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -28505,7 +28518,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response170>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -28610,7 +28623,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response171>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -28673,7 +28686,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <param name="server">The server slug</param>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response172> V1_servers_backups_storeAsync(string server, Body45? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response172> V1_servers_backups_storeAsync(string server, Body46? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (server == null)
                 throw new System.ArgumentNullException("server");
@@ -28721,7 +28734,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 202)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response172>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -28830,7 +28843,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response173>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -28892,7 +28905,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="server">The server slug</param>
         /// <returns>No content</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task V1_servers_backups_restoreAsync(string server, string uuid, Body46? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task V1_servers_backups_restoreAsync(string server, string uuid, Body47? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (server == null)
                 throw new System.ArgumentNullException("server");
@@ -28944,7 +28957,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -29051,7 +29064,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -29111,7 +29124,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <param name="server">The server slug</param>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response174> V1_servers_backups_lockAsync(string server, string uuid, Body47 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response174> V1_servers_backups_lockAsync(string server, string uuid, Body48 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (server == null)
                 throw new System.ArgumentNullException("server");
@@ -29167,7 +29180,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response174>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -29240,7 +29253,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <param name="server">The server slug</param>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response175> V1_servers_configs_storeAsync(string server, Body48? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response175> V1_servers_configs_storeAsync(string server, Body49? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (server == null)
                 throw new System.ArgumentNullException("server");
@@ -29288,7 +29301,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response175>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -29394,7 +29407,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response176>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -29503,7 +29516,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -29568,7 +29581,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="server">The server slug</param>
         /// <param name="file">The file ID</param>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response177> V1_servers_configs_updateAsync(string server, string file, Body49 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response177> V1_servers_configs_updateAsync(string server, string file, Body50 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (server == null)
                 throw new System.ArgumentNullException("server");
@@ -29623,7 +29636,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response177>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -29746,7 +29759,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response179>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -29858,7 +29871,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response180>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -29967,7 +29980,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response181>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -30073,7 +30086,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response182>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -30178,7 +30191,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -30236,7 +30249,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="server">The server slug</param>
         /// <param name="file">The file ID</param>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response183> V1_servers_configs_previewAsync(string server, string file, Body50 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response183> V1_servers_configs_previewAsync(string server, string file, Body51 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (server == null)
                 throw new System.ArgumentNullException("server");
@@ -30292,7 +30305,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response183>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -30409,7 +30422,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response184>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -30521,7 +30534,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response185>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -30585,7 +30598,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="server">The server slug</param>
         /// <param name="file">The file ID</param>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response186> V1_servers_configs_template_applyAsync(string server, string file, Body51 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response186> V1_servers_configs_template_applyAsync(string server, string file, Body52 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (server == null)
                 throw new System.ArgumentNullException("server");
@@ -30641,7 +30654,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response186>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -30713,7 +30726,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="server">The server slug</param>
         /// <param name="version">The version ID</param>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response188> V1_servers_configs_rollbackAsync(string server, string version, Body52? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response188> V1_servers_configs_rollbackAsync(string server, string version, Body53? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (server == null)
                 throw new System.ArgumentNullException("server");
@@ -30766,7 +30779,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response188>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -30895,7 +30908,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response190>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -30959,7 +30972,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="server">The server slug</param>
         /// <param name="change">The change ID</param>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response191> V1_servers_configChanges_approveAsync(string server, string change, Body53? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response191> V1_servers_configChanges_approveAsync(string server, string change, Body54? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (server == null)
                 throw new System.ArgumentNullException("server");
@@ -31012,7 +31025,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response191>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -31073,7 +31086,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="server">The server slug</param>
         /// <param name="change">The change ID</param>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response192> V1_servers_configChanges_rejectAsync(string server, string change, Body54? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response192> V1_servers_configChanges_rejectAsync(string server, string change, Body55? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (server == null)
                 throw new System.ArgumentNullException("server");
@@ -31126,7 +31139,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response192>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -31235,7 +31248,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -31295,7 +31308,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <param name="server">The server slug</param>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response193> V1_servers_rconAsync(string server, Body55 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response193> V1_servers_rconAsync(string server, Body56 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (server == null)
                 throw new System.ArgumentNullException("server");
@@ -31346,7 +31359,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response193>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -31469,7 +31482,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response194>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -31588,7 +31601,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response195>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -31694,7 +31707,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response196>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -31756,7 +31769,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="server">The server slug</param>
         /// <returns>No content</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task V1_servers_bans_unbanAsync(string server, Body56? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task V1_servers_bans_unbanAsync(string server, Body57? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (server == null)
                 throw new System.ArgumentNullException("server");
@@ -31803,7 +31816,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -31917,7 +31930,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response197>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -32021,7 +32034,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response198>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -32083,7 +32096,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="server">The server slug</param>
         /// <returns>No content</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task V1_servers_whitelist_updateAsync(string server, Body57? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task V1_servers_whitelist_updateAsync(string server, Body58? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (server == null)
                 throw new System.ArgumentNullException("server");
@@ -32130,7 +32143,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -32199,7 +32212,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="server">The server slug</param>
         /// <returns>No content</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task V1_servers_powerAsync(string server, Body58 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task V1_servers_powerAsync(string server, Body59 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (server == null)
                 throw new System.ArgumentNullException("server");
@@ -32249,7 +32262,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -32353,7 +32366,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response199>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -32415,7 +32428,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="server">The server slug</param>
         /// <returns>No content</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task V1_servers_commandsAsync(string server, Body59 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task V1_servers_commandsAsync(string server, Body60 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (server == null)
                 throw new System.ArgumentNullException("server");
@@ -32465,7 +32478,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -32565,7 +32578,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response200>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -32666,7 +32679,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response201>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -32709,7 +32722,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`GamingPlatformResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response202> V1_gamingPlatforms_storeAsync(Body60? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response202> V1_gamingPlatforms_storeAsync(Body61? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -32752,7 +32765,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response202>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -32851,7 +32864,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response203>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -32913,7 +32926,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`GamingPlatformResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response204> V1_gamingPlatforms_updateAsync(string gamingPlatform, Body61? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response204> V1_gamingPlatforms_updateAsync(string gamingPlatform, Body62? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (gamingPlatform == null)
                 throw new System.ArgumentNullException("gamingPlatform");
@@ -32960,7 +32973,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response204>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -33068,7 +33081,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -33153,7 +33166,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response205>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -33255,7 +33268,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response206>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -33368,7 +33381,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response208>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -33462,7 +33475,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -33549,7 +33562,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response209>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -33630,7 +33643,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response210>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -33670,7 +33683,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `halloffame.manage` und Token-Scope `halloffame:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response211> V1_history_storeAsync(Body62? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response211> V1_history_storeAsync(Body63? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -33713,7 +33726,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response211>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -33823,7 +33836,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response212>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -33864,7 +33877,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `halloffame.manage` und Token-Scope `halloffame:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response213> V1_trophies_storeAsync(Body63? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response213> V1_trophies_storeAsync(Body64? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -33907,7 +33920,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response213>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -34011,7 +34024,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response214>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -34050,7 +34063,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `halloffame.manage` und Token-Scope `halloffame:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response215> V1_trophies_updateAsync(string trophy, Body64? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response215> V1_trophies_updateAsync(string trophy, Body65? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (trophy == null)
                 throw new System.ArgumentNullException("trophy");
@@ -34097,7 +34110,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response215>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -34207,7 +34220,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -34261,7 +34274,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `halloffame.manage` und Token-Scope `halloffame:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response216> V1_history_updateAsync(string entry, Body65? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response216> V1_history_updateAsync(string entry, Body66? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (entry == null)
                 throw new System.ArgumentNullException("entry");
@@ -34308,7 +34321,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response216>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -34418,7 +34431,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -34473,7 +34486,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `halloffame.manage` und Token-Scope `halloffame:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response217> V1_members_tribute_saveAsync(string member, Body66? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response217> V1_members_tribute_saveAsync(string member, Body67? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (member == null)
                 throw new System.ArgumentNullException("member");
@@ -34521,7 +34534,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response217>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -34624,7 +34637,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -34709,7 +34722,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response218>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -34798,7 +34811,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response219>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -34848,7 +34861,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `inactivity.manage` und Token-Scope `inactivity:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response220> V1_inactivity_rules_saveAsync(Body67 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response220> V1_inactivity_rules_saveAsync(Body68 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -34894,7 +34907,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response220>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -34992,7 +35005,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response221>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -35081,7 +35094,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response222>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -35171,7 +35184,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -35271,7 +35284,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response223>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -35395,7 +35408,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response224>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -35499,7 +35512,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response225>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -35559,7 +35572,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `integrations.manage` und Token-Scope `integrations:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response226> V1_integrations_groups_storeAsync(string platform, Body68? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response226> V1_integrations_groups_storeAsync(string platform, Body69? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (platform == null)
                 throw new System.ArgumentNullException("platform");
@@ -35607,7 +35620,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response226>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -35712,7 +35725,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response227>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -35827,7 +35840,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response228>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -35887,7 +35900,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `integrations.manage` und Token-Scope `integrations:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response229> V1_groupMappings_updateAsync(Body69? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response229> V1_groupMappings_updateAsync(Body70? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -35930,7 +35943,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response229>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -36036,7 +36049,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response230>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -36140,7 +36153,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response231>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -36243,7 +36256,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response232>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -36353,7 +36366,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response233>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -36413,7 +36426,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `integrations.manage` und Token-Scope `integrations:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response234> V1_integrations_syncAsync(string platform, Body70? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response234> V1_integrations_syncAsync(string platform, Body71? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (platform == null)
                 throw new System.ArgumentNullException("platform");
@@ -36461,7 +36474,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 202)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response234>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -36531,7 +36544,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `integrations.manage` und Token-Scope `integrations:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response235> V1_squads_platforms_setupAsync(string squad, string platform, Body71? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response235> V1_squads_platforms_setupAsync(string squad, string platform, Body72? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (squad == null)
                 throw new System.ArgumentNullException("squad");
@@ -36584,7 +36597,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 202)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response235>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -36707,7 +36720,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response236>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -36805,7 +36818,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -36889,7 +36902,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response237>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -36983,7 +36996,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response238>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -37075,7 +37088,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -37165,7 +37178,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response239>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -37270,7 +37283,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response240>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -37314,7 +37327,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`EventTypeResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response241> V1_events_types_storeAsync(Body72? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response241> V1_events_types_storeAsync(Body73? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -37357,7 +37370,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response241>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -37505,7 +37518,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response242>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -37560,7 +37573,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`EventResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response243> V1_events_storeAsync(Body73? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response243> V1_events_storeAsync(Body74? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -37603,7 +37616,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response243>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -37711,7 +37724,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response244>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -37760,7 +37773,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`EventResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response245> V1_events_updateAsync(string @event, Body74? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response245> V1_events_updateAsync(string @event, Body75? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (@event == null)
                 throw new System.ArgumentNullException("@event");
@@ -37807,7 +37820,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response245>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -37927,7 +37940,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -38096,7 +38109,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `events:read`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response246> V1_events_recurrence_previewAsync(Body75? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response246> V1_events_recurrence_previewAsync(Body76? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -38139,7 +38152,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response246>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -38243,7 +38256,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response247>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -38337,7 +38350,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response248>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -38397,7 +38410,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `squad.lineup` im Squad (oder `events.manage`) und Token-Scope `events:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response249> V1_events_lineup_updateAsync(string @event, Body76? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response249> V1_events_lineup_updateAsync(string @event, Body77? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (@event == null)
                 throw new System.ArgumentNullException("@event");
@@ -38445,7 +38458,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response249>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -38549,7 +38562,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response250>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -38649,7 +38662,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response251>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -38701,7 +38714,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`EventTypeResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response252> V1_events_types_updateAsync(string eventType, Body77? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response252> V1_events_types_updateAsync(string eventType, Body78? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (eventType == null)
                 throw new System.ArgumentNullException("eventType");
@@ -38748,7 +38761,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response252>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -38857,7 +38870,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -38903,7 +38916,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `events.manage` und Token-Scope `events:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response253> V1_events_cancelAsync(string @event, Body78? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response253> V1_events_cancelAsync(string @event, Body79? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (@event == null)
                 throw new System.ArgumentNullException("@event");
@@ -38951,7 +38964,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response253>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -39021,7 +39034,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `events:write` (Clan-Mitglied; bei Squad-Terminen Member des Squads).
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response254> V1_events_rsvpAsync(string @event, Body79? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response254> V1_events_rsvpAsync(string @event, Body80? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (@event == null)
                 throw new System.ArgumentNullException("@event");
@@ -39069,7 +39082,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response254>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -39172,7 +39185,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -39268,7 +39281,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response255>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -39361,7 +39374,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -39445,7 +39458,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response256>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -39538,7 +39551,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 202)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -39622,7 +39635,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response257>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -39715,7 +39728,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response258>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -39778,7 +39791,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>No content</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task V1_me_destroyAsync(Body80 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task V1_me_destroyAsync(Body81 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -39823,7 +39836,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -39927,7 +39940,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response259>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -40016,7 +40029,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response260>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -40110,7 +40123,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 202)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response261>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -40202,7 +40215,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response262>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -40382,7 +40395,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 202)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -40466,7 +40479,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response263>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -40525,7 +40538,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `account:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response264> V1_me_email_requestAsync(Body81 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response264> V1_me_email_requestAsync(Body82 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -40571,7 +40584,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 202)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response264>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -40636,7 +40649,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `account:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response265> V1_me_email_confirmAsync(Body82 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response265> V1_me_email_confirmAsync(Body83 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -40682,7 +40695,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response265>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -40780,7 +40793,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -40828,7 +40841,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `account:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response266> V1_me_password_updateAsync(Body83 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response266> V1_me_password_updateAsync(Body84 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -40874,7 +40887,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response266>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -40983,7 +40996,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response267>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -41087,7 +41100,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -41145,7 +41158,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `account:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response268> V1_me_twoFactor_confirmAsync(Body84 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response268> V1_me_twoFactor_confirmAsync(Body85 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -41191,7 +41204,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response268>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -41292,7 +41305,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response269>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -41402,7 +41415,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -41495,7 +41508,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response270>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -41553,7 +41566,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `tokens:manage`. Unterstützt `Idempotency-Key`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response271> V1_me_tokens_storeAsync(Body85 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response271> V1_me_tokens_storeAsync(Body86 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -41599,7 +41612,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response271>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -41699,7 +41712,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -41783,7 +41796,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response272>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -41872,7 +41885,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response273>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -41977,7 +41990,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -42032,7 +42045,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `account:write` (bisher `tokens:manage`, gilt weiter).
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response274> V1_me_sessions_othersAsync(Body86? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response274> V1_me_sessions_othersAsync(Body87? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -42075,7 +42088,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response274>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -42177,7 +42190,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -42231,7 +42244,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `profile:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response275> V1_me_leaveClanAsync(Body87 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response275> V1_me_leaveClanAsync(Body88 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -42277,7 +42290,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response275>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -42398,7 +42411,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response276>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -42453,7 +42466,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `profile:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response277> V1_me_profile_updateAsync(Body88? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response277> V1_me_profile_updateAsync(Body89? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -42496,7 +42509,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response277>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -42599,7 +42612,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response278>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -42658,7 +42671,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `profile:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response279> V1_me_gameAccounts_syncAsync(Body89? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response279> V1_me_gameAccounts_syncAsync(Body90? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -42701,7 +42714,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response279>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -42801,7 +42814,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response280>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -42855,7 +42868,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `profile:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response281> V1_me_platforms_syncAsync(Body90? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response281> V1_me_platforms_syncAsync(Body91? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -42898,7 +42911,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response281>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -43000,7 +43013,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -43107,7 +43120,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 202)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response282>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -43207,7 +43220,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response283>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -43319,7 +43332,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 202)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response284>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -43419,7 +43432,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response285>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -43537,7 +43550,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response286>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -43590,7 +43603,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `links.create` (eigenes Kürzel: `links.custom`) und Token-Scope `links:write`. Unterstützt `Idempotency-Key`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response287> V1_links_storeAsync(Body91 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response287> V1_links_storeAsync(Body92 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -43636,7 +43649,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response287>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -43726,7 +43739,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response288>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -43777,7 +43790,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `links:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response289> V1_links_updateAsync(string link, Body92? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response289> V1_links_updateAsync(string link, Body93? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (link == null)
                 throw new System.ArgumentNullException("link");
@@ -43824,7 +43837,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response289>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -43916,7 +43929,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -44012,7 +44025,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response290>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -44156,7 +44169,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `links.manage` und Token-Scope `links:manage`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response291> V1_links_blockAsync(string link, Body93? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response291> V1_links_blockAsync(string link, Body94? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (link == null)
                 throw new System.ArgumentNullException("link");
@@ -44204,7 +44217,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response291>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -44349,7 +44362,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response292>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -44393,7 +44406,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `matches.manage` (global oder im Squad) und Token-Scope `matches:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response293> V1_matches_storeAsync(Body94? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response293> V1_matches_storeAsync(Body95? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -44436,7 +44449,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response293>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -44541,7 +44554,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response294>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -44581,7 +44594,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `matches.manage` (im Squad) und Token-Scope `matches:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response295> V1_matches_updateAsync(string match, Body95? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response295> V1_matches_updateAsync(string match, Body96? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (match == null)
                 throw new System.ArgumentNullException("match");
@@ -44628,7 +44641,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response295>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -44730,7 +44743,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -44821,7 +44834,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response296>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -44917,7 +44930,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response297>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -44969,7 +44982,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `matches.manage` (im Squad des Termins) und Token-Scope `matches:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response298> V1_events_matchAsync(string @event, Body96? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response298> V1_events_matchAsync(string @event, Body97? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (@event == null)
                 throw new System.ArgumentNullException("@event");
@@ -45017,7 +45030,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response298>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -45149,7 +45162,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response299>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -45256,7 +45269,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -45351,7 +45364,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response300>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -45392,7 +45405,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `matches.manage` (global; Squad-Turniere auch im Squad) und Token-Scope `matches:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response301> V1_tournaments_storeAsync(Body97? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response301> V1_tournaments_storeAsync(Body98? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -45435,7 +45448,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response301>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -45539,7 +45552,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response302>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -45578,7 +45591,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `matches.manage` und Token-Scope `matches:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response303> V1_tournaments_updateAsync(string tournament, Body98? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response303> V1_tournaments_updateAsync(string tournament, Body99? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (tournament == null)
                 throw new System.ArgumentNullException("tournament");
@@ -45625,7 +45638,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response303>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -45733,7 +45746,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -45877,7 +45890,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response304>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -45965,7 +45978,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response305>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -46059,7 +46072,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response306>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -46158,7 +46171,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response307>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -46256,7 +46269,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response308>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -46312,7 +46325,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `members:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response309> V1_members_recoveryUnlockAsync(string member, Body99? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response309> V1_members_recoveryUnlockAsync(string member, Body100? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (member == null)
                 throw new System.ArgumentNullException("member");
@@ -46360,7 +46373,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response309>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -46430,7 +46443,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>No content</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task V1_members_accountDeletionAsync(string member, Body100 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task V1_members_accountDeletionAsync(string member, Body101 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (member == null)
                 throw new System.ArgumentNullException("member");
@@ -46480,7 +46493,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -46583,7 +46596,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response310>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -46695,7 +46708,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -46802,7 +46815,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response311>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -46939,7 +46952,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response312>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -47028,7 +47041,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response313>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -47119,7 +47132,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response314>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -47254,7 +47267,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response315>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -47348,7 +47361,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response316>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -47441,7 +47454,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response317>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -47542,7 +47555,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response318>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -47643,7 +47656,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response319>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -47735,7 +47748,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response320>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -47786,7 +47799,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`MemberResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response321> V1_members_statusAsync(string member, Body101 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response321> V1_members_statusAsync(string member, Body102 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (member == null)
                 throw new System.ArgumentNullException("member");
@@ -47837,7 +47850,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response321>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -47897,7 +47910,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>No content</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task V1_members_responsibilityAsync(string member, Body102? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task V1_members_responsibilityAsync(string member, Body103? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (member == null)
                 throw new System.ArgumentNullException("member");
@@ -47944,7 +47957,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -47999,7 +48012,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `team.manage` und Token-Scope `members:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response322> V1_teamGroups_storeAsync(Body103 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response322> V1_teamGroups_storeAsync(Body104 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -48045,7 +48058,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response322>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -48103,7 +48116,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <param name="group">The group ID</param>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response323> V1_teamGroups_updateAsync(string group, Body104? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response323> V1_teamGroups_updateAsync(string group, Body105? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (group == null)
                 throw new System.ArgumentNullException("group");
@@ -48150,7 +48163,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response323>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -48261,7 +48274,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -48361,7 +48374,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response324>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -48411,7 +48424,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `member-notes:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response325> V1_members_notes_storeAsync(string member, Body105 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response325> V1_members_notes_storeAsync(string member, Body106 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (member == null)
                 throw new System.ArgumentNullException("member");
@@ -48462,7 +48475,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response325>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -48533,7 +48546,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `member-notes:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response326> V1_members_notes_updateAsync(string member, string note, Body106? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response326> V1_members_notes_updateAsync(string member, string note, Body107? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (member == null)
                 throw new System.ArgumentNullException("member");
@@ -48585,7 +48598,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response326>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -48703,7 +48716,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -48896,7 +48909,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response327>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -48944,7 +48957,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`BadgeResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response328> V1_badges_storeAsync(Body107? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response328> V1_badges_storeAsync(Body108? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -48987,7 +49000,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response328>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -49088,7 +49101,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response329>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -49137,7 +49150,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="badge">The badge ID</param>
         /// <returns>`BadgeResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response330> V1_badges_updateAsync(string badge, Body108? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response330> V1_badges_updateAsync(string badge, Body109? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (badge == null)
                 throw new System.ArgumentNullException("badge");
@@ -49184,7 +49197,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response330>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -49297,7 +49310,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -49351,7 +49364,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `badges.award` und Token-Scope `members:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task V1_members_badges_storeAsync(string member, Body109 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task V1_members_badges_storeAsync(string member, Body110 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (member == null)
                 throw new System.ArgumentNullException("member");
@@ -49401,7 +49414,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -49512,7 +49525,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -49567,13 +49580,15 @@ namespace RoG.Core.Api.Generated
         /// <br/>eine einzelne Wiki-Bearbeitung (`wiki_revision`, ID = Versions-ID aus `GET /v1/wiki/pages/{id}/revisions`). Nur was man sehen
         /// <br/>kann, nicht den eigenen Inhalt; dieselbe Meldung zweimal ist idempotent, höchstens 10 je Stunde. Bilder melden Apps
         /// <br/>über den Bild-Uploader; Forenbeiträge alternativ mit Freitext über `POST /v1/forum/posts/{id}/reports`. Fehler: `report_target_missing` (404), `report_own_content` (422),
-        /// <br/>`too_many_reports` (429). Optional `locale` (`de`, `en`, `fr`; Standard: Sprache der Anfrage) – nur bei `wiki_page`
+        /// <br/>`too_many_reports` (429). Grund `child_safety` (Kinderschutz / Gefährdung Minderjähriger) für alle Typen: steht
+        /// <br/>oben in der Warteschlange und benachrichtigt Moderation und Owner sofort (ohne Ausschnitt); eine eigene offene
+        /// <br/>Meldung desselben Inhalts wird darauf hochgestuft. Optional `locale` (`de`, `en`, `fr`; Standard: Sprache der Anfrage) – nur bei `wiki_page`
         /// <br/>wirksam: die gemeldete Sprachfassung (wie `?lang=` auf der Website); sie bestimmt Autor*in und Ausschnitt.
         /// <br/>
         /// <br/>Benötigt Token-Scope `reports:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response331> V1_reports_storeAsync(Body110 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response331> V1_reports_storeAsync(Body111 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -49619,7 +49634,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response331>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -49717,7 +49732,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response332>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -49822,7 +49837,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response333>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -49947,7 +49962,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response334>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -50011,7 +50026,9 @@ namespace RoG.Core.Api.Generated
         /// Meldungen
         /// </summary>
         /// <remarks>
-        /// Neueste zuerst, Filter `filter[status]` (`open`, `resolved`, `dismissed`) und `filter[type]`; Cursor-Pagination.
+        /// Offene Kinderschutz-Meldungen (`reason: child_safety`, `priority: 1`) zuerst, sonst neueste zuerst. Filter
+        /// <br/>`filter[status]` (`open`, `resolved`, `dismissed`), `filter[type]` und `filter[reason]` (z. B. `child_safety`);
+        /// <br/>Cursor-Pagination.
         /// <br/>Enthält den beim Melden gesicherten Ausschnitt und `url` – Link zum gemeldeten Inhalt (z. B. Wiki-Seite oder
         /// <br/>Versionsvergleich), `null` wenn der Inhalt gelöscht ist oder keinen Link hat (Direktnachrichten).
         /// <br/>
@@ -50020,7 +50037,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="cursor">Cursor der nächsten bzw. vorherigen Seite – aus `links.next`/`meta.next_cursor` übernehmen, nicht selbst bauen</param>
         /// <param name="per_page">Einträge je Seite (Standard 25)</param>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response335> V1_moderation_reports_indexAsync(string? filterstatus = null, string? filtertype = null, string? cursor = null, int? per_page = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response335> V1_moderation_reports_indexAsync(string? filterstatus = null, string? filtertype = null, string? filterreason = null, string? cursor = null, int? per_page = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -50043,6 +50060,10 @@ namespace RoG.Core.Api.Generated
                     if (filtertype != null)
                     {
                         urlBuilder_.Append(System.Uri.EscapeDataString("filter[type]")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(filtertype, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (filterreason != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("filter[reason]")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(filterreason, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
                     }
                     if (cursor != null)
                     {
@@ -50077,7 +50098,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response335>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -50179,7 +50200,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response336>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -50239,7 +50260,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `moderation.reports` und Token-Scope `moderation:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response337> V1_moderation_reports_updateAsync(string report, Body111 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response337> V1_moderation_reports_updateAsync(string report, Body112 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (report == null)
                 throw new System.ArgumentNullException("report");
@@ -50289,7 +50310,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response337>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -50409,7 +50430,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response338>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -50512,7 +50533,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response339>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -50616,7 +50637,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response340>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -50730,7 +50751,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response341>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -50791,7 +50812,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `moderation.warn` (nur gegenüber gleich- oder niedriger Gestellten) und Token-Scope `moderation:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response342> V1_moderation_warnings_storeAsync(string user, Body112 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response342> V1_moderation_warnings_storeAsync(string user, Body113 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (user == null)
                 throw new System.ArgumentNullException("user");
@@ -50842,7 +50863,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response342>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -50934,7 +50955,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response343>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -50998,7 +51019,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `moderation.ban` (nur gegenüber Niedrigeren) und Token-Scope `moderation:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response344> V1_moderation_bans_storeAsync(string user, Body113 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response344> V1_moderation_bans_storeAsync(string user, Body114 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (user == null)
                 throw new System.ArgumentNullException("user");
@@ -51049,7 +51070,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response344>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -51151,7 +51172,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response345>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -51249,7 +51270,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response346>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -51308,7 +51329,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `moderation.manage` und Token-Scope `moderation:manage`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response347> V1_moderation_words_storeAsync(Body114 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response347> V1_moderation_words_storeAsync(Body115 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -51354,7 +51375,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response347>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -51454,7 +51475,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -51545,7 +51566,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response348>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -51604,7 +51625,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `moderation.manage` und Token-Scope `moderation:manage`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response349> V1_moderation_levels_updateAsync(Body115 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response349> V1_moderation_levels_updateAsync(Body116 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -51650,7 +51671,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response349>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -51770,7 +51791,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response350>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -51821,7 +51842,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `messages:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response351> V1_conversations_storeAsync(Body116? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response351> V1_conversations_storeAsync(Body117? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -51864,7 +51885,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response351>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -51966,7 +51987,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response352>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -52059,7 +52080,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response353>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -52154,7 +52175,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -52258,7 +52279,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response354>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -52311,7 +52332,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `messages:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response355> V1_conversations_sendAsync(string conversation, Body117 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response355> V1_conversations_sendAsync(string conversation, Body118 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (conversation == null)
                 throw new System.ArgumentNullException("conversation");
@@ -52362,7 +52383,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response355>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -52450,7 +52471,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response356>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -52538,7 +52559,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response357>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -52624,7 +52645,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response358>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -52729,7 +52750,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -52826,7 +52847,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response359>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -52920,7 +52941,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -53006,7 +53027,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -53095,7 +53116,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -53187,7 +53208,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -53285,7 +53306,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -53370,7 +53391,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -53483,7 +53504,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response360>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -53576,7 +53597,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response361>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -53666,7 +53687,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response362>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -53745,7 +53766,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response363>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -53860,7 +53881,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response365>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -53910,7 +53931,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `news.write` (eigener Entwurf) bzw. `news.publish` und Token-Scope `news:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response366> V1_news_updateAsync(string news, Body118? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response366> V1_news_updateAsync(string news, Body119? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (news == null)
                 throw new System.ArgumentNullException("news");
@@ -53957,7 +53978,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response366>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -54057,7 +54078,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -54167,7 +54188,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response367>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -54261,7 +54282,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response368>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -54353,7 +54374,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -54457,7 +54478,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 202)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response369>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -54558,7 +54579,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -54655,7 +54676,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response370>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -54755,7 +54776,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response371>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -54867,7 +54888,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -54961,7 +54982,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response373>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -55045,7 +55066,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response374>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -55138,7 +55159,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response375>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -55178,7 +55199,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `legal.manage` und Token-Scope `legal:manage`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response376> V1_legal_publishAsync(string type, Body119 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response376> V1_legal_publishAsync(string type, Body120 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (type == null)
                 throw new System.ArgumentNullException("type");
@@ -55229,7 +55250,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response376>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -55328,7 +55349,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response377>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -55423,7 +55444,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response378>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -55518,7 +55539,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response379>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -55617,7 +55638,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response380>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -55739,7 +55760,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response381>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -55821,7 +55842,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>**Admin-Endpunkt:** benötigt Recht `legal.manage` und Token-Scope `legal:manage`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response382> V1_legal_previewAsync(Body120 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response382> V1_legal_previewAsync(Body121 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -55867,7 +55888,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response382>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -55942,7 +55963,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>**Admin-Endpunkt:** benötigt Recht `legal.manage` und Token-Scope `legal:manage`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response383> V1_legal_importAsync(Body121? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response383> V1_legal_importAsync(Body122? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -55985,7 +56006,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response383>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -56096,7 +56117,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response384>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -56138,7 +56159,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `rules.manage` (global; Squad-Regeln auch im Squad) und Token-Scope `rules:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response385> V1_rules_storeAsync(Body122? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response385> V1_rules_storeAsync(Body123? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -56181,7 +56202,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response385>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -56285,7 +56306,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response386>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -56335,7 +56356,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `rules.manage` und Token-Scope `rules:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response387> V1_rules_updateAsync(string set, Body123? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response387> V1_rules_updateAsync(string set, Body124? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (set == null)
                 throw new System.ArgumentNullException("set");
@@ -56382,7 +56403,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response387>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -56488,7 +56509,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -56575,7 +56596,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response388>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -56668,7 +56689,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response389>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -56764,7 +56785,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response390>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -56853,7 +56874,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response391>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -56952,7 +56973,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response392>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -57041,7 +57062,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response393>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -57086,7 +57107,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Kein Token-Scope nötig (öffentlicher Endpunkt, ohne Anmeldung).
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response394> V1_auth_registerAsync(Body124 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response394> V1_auth_registerAsync(Body125 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -57132,7 +57153,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response394>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -57180,7 +57201,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Kein Token-Scope nötig (öffentlicher Endpunkt, ohne Anmeldung).
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response395> V1_auth_loginAsync(Body125 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response395> V1_auth_loginAsync(Body126 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -57226,7 +57247,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response395>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -57276,7 +57297,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Kein Token-Scope nötig (öffentlicher Endpunkt, ohne Anmeldung).
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task V1_auth_forgotPasswordAsync(Body126 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task V1_auth_forgotPasswordAsync(Body127 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -57321,7 +57342,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 202)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -57380,7 +57401,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Kein Token-Scope nötig (öffentlicher Endpunkt, ohne Anmeldung).
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response396> V1_auth_app_tokenAsync(Body127 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response396> V1_auth_app_tokenAsync(Body128 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -57426,7 +57447,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response396>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -57516,7 +57537,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -57599,7 +57620,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response397>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -57698,7 +57719,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response398>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -57786,7 +57807,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response399>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -57885,7 +57906,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response400>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -57975,7 +57996,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response401>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -58087,7 +58108,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response402>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -58179,7 +58200,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response403>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -58231,7 +58252,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `profile:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response404> V1_me_riot_updateAsync(Body128? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response404> V1_me_riot_updateAsync(Body129? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -58274,7 +58295,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response404>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -58399,7 +58420,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response405>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -58496,7 +58517,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response406>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -58600,7 +58621,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response407>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -58709,7 +58730,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response408>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -58822,7 +58843,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -58916,7 +58937,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response409>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -59023,7 +59044,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response410>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -59143,7 +59164,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response411>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -59248,7 +59269,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response412>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -59356,7 +59377,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response413>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -59465,7 +59486,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response415>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -59574,7 +59595,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response416>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -59676,7 +59697,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response417>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -59798,7 +59819,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response418>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -59912,7 +59933,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -60020,7 +60041,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response419>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -60141,7 +60162,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response420>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -60258,7 +60279,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -60352,7 +60373,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -60404,7 +60425,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="template">The template ID</param>
         /// <returns>`RoleResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response421> V1_permissionTemplates_applyAsync(string template, Body129 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response421> V1_permissionTemplates_applyAsync(string template, Body130 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (template == null)
                 throw new System.ArgumentNullException("template");
@@ -60455,7 +60476,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response421>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -60569,7 +60590,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response422>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -60660,7 +60681,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response423>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -60715,7 +60736,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`SocialChannelResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response424> V1_social_channels_storeAsync(Body130 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response424> V1_social_channels_storeAsync(Body131 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -60761,7 +60782,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response424>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -60875,7 +60896,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response425>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -60938,7 +60959,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="channel">The channel ID</param>
         /// <returns>`SocialChannelResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response426> V1_social_channels_updateAsync(string channel, Body131? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response426> V1_social_channels_updateAsync(string channel, Body132? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (channel == null)
                 throw new System.ArgumentNullException("channel");
@@ -60985,7 +61006,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response426>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -61089,7 +61110,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -61193,7 +61214,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response427>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -61300,7 +61321,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response428>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -61426,7 +61447,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response429>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -61490,7 +61511,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`SocialPostResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response430> V1_social_posts_storeAsync(Body132 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response430> V1_social_posts_storeAsync(Body133 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -61536,7 +61557,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response430>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -61631,7 +61652,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response431>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -61694,7 +61715,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="post">The post ID</param>
         /// <returns>`SocialPostResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response432> V1_social_posts_updateAsync(string post, Body133? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response432> V1_social_posts_updateAsync(string post, Body134? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (post == null)
                 throw new System.ArgumentNullException("post");
@@ -61741,7 +61762,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response432>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -61845,7 +61866,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -61948,7 +61969,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response433>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -62012,7 +62033,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="post">The post ID</param>
         /// <returns>`SocialPostResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response434> V1_social_posts_approveAsync(string post, Body134? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response434> V1_social_posts_approveAsync(string post, Body135? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (post == null)
                 throw new System.ArgumentNullException("post");
@@ -62060,7 +62081,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response434>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -62177,7 +62198,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response435>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -62284,7 +62305,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response436>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -62347,7 +62368,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <param name="post">The post ID</param>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response437> V1_social_posts_retractAsync(string post, Body135? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response437> V1_social_posts_retractAsync(string post, Body136? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (post == null)
                 throw new System.ArgumentNullException("post");
@@ -62395,7 +62416,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 202)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response437>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -62514,7 +62535,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 202)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response438>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -62633,7 +62654,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 202)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response439>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -62748,7 +62769,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response440>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -62807,7 +62828,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`SocialPostResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response441> V1_social_sources_redraftAsync(string source, string id, Body136? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response441> V1_social_sources_redraftAsync(string source, string id, Body137? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (source == null)
                 throw new System.ArgumentNullException("source");
@@ -62860,7 +62881,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response441>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -62982,7 +63003,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response443>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -63032,7 +63053,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`GameResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response444> V1_games_storeAsync(Body137? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response444> V1_games_storeAsync(Body138? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -63075,7 +63096,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response444>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -63182,7 +63203,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response445>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -63231,7 +63252,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="game">The game slug</param>
         /// <returns>`GameResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response446> V1_games_updateAsync(string game, Body138? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response446> V1_games_updateAsync(string game, Body139? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (game == null)
                 throw new System.ArgumentNullException("game");
@@ -63278,7 +63299,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response446>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -63391,7 +63412,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -63504,7 +63525,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response447>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -63654,7 +63675,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 202)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response448>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -63725,7 +63746,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="game">The game slug</param>
         /// <returns>`GameResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response449> V1_games_header_updateAsync(string game, Body139? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response449> V1_games_header_updateAsync(string game, Body140? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (game == null)
                 throw new System.ArgumentNullException("game");
@@ -63773,7 +63794,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response449>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -63888,7 +63909,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response450>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -63950,7 +63971,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="game">The game slug</param>
         /// <returns>`GameLinkResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response451> V1_games_links_storeAsync(string game, Body140? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response451> V1_games_links_storeAsync(string game, Body141? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (game == null)
                 throw new System.ArgumentNullException("game");
@@ -63998,7 +64019,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response451>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -64068,7 +64089,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="link">The link ID</param>
         /// <returns>`GameLinkResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response452> V1_games_links_updateAsync(string game, string link, Body141? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response452> V1_games_links_updateAsync(string game, string link, Body142? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (game == null)
                 throw new System.ArgumentNullException("game");
@@ -64120,7 +64141,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response452>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -64237,7 +64258,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -64370,7 +64391,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response453>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -64422,7 +64443,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`SquadResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response454> V1_squads_storeAsync(Body142? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response454> V1_squads_storeAsync(Body143? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -64465,7 +64486,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response454>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -64571,7 +64592,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response455>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -64622,7 +64643,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="squad">The squad slug</param>
         /// <returns>`SquadResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response456> V1_squads_updateAsync(string squad, Body143? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response456> V1_squads_updateAsync(string squad, Body144? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (squad == null)
                 throw new System.ArgumentNullException("squad");
@@ -64669,7 +64690,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response456>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -64789,7 +64810,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response457>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -64892,7 +64913,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response458>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -65010,7 +65031,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response459>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -65081,7 +65102,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="squad">The squad slug</param>
         /// <returns>`SquadResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response460> V1_squads_archiveAsync(string squad, Body144? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response460> V1_squads_archiveAsync(string squad, Body145? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (squad == null)
                 throw new System.ArgumentNullException("squad");
@@ -65129,7 +65150,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response460>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -65252,7 +65273,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 202)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response461>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -65314,7 +65335,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="squad">The squad slug</param>
         /// <returns>`SquadResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response462> V1_squads_header_updateAsync(string squad, Body145? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response462> V1_squads_header_updateAsync(string squad, Body146? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (squad == null)
                 throw new System.ArgumentNullException("squad");
@@ -65362,7 +65383,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response462>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -65477,7 +65498,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response463>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -65588,7 +65609,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 202)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response464>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -65691,7 +65712,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response465>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -65752,7 +65773,7 @@ namespace RoG.Core.Api.Generated
         /// <param name="squad">The squad slug</param>
         /// <returns>No content</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task V1_squads_members_updateAsync(string squad, string member, Body146 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task V1_squads_members_updateAsync(string squad, string member, Body147 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (squad == null)
                 throw new System.ArgumentNullException("squad");
@@ -65806,7 +65827,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -65919,7 +65940,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -66012,7 +66033,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response466>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -66123,7 +66144,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response467>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -66217,7 +66238,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response468>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -66330,7 +66351,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response469>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -66442,7 +66463,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response470>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -66554,7 +66575,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response471>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -66651,7 +66672,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response472>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -66753,7 +66774,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response473>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -66842,7 +66863,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response474>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -66938,7 +66959,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response475>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -67044,7 +67065,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response476>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -67149,7 +67170,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response477>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -67241,7 +67262,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response478>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -67325,7 +67346,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response479>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -67443,7 +67464,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response480>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -67552,7 +67573,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response481>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -67642,7 +67663,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response482>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -67695,7 +67716,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `profile:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response483> V1_me_steam_library_updateAsync(Body147? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response483> V1_me_steam_library_updateAsync(Body148? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -67738,7 +67759,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response483>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -67855,7 +67876,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response484>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -67949,7 +67970,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response485>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -68043,7 +68064,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response486>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -68134,7 +68155,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response487>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -68238,7 +68259,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response488>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -68340,7 +68361,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response489>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -68451,7 +68472,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response490>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -68540,7 +68561,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response491>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -68673,7 +68694,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response492>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -68888,7 +68909,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response493>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -69005,7 +69026,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response494>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -69077,7 +69098,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>**Admin-Endpunkt:** benötigt Recht `system.tools` und Token-Scope `system:manage`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response495> V1_system_failedJobs_retryAllAsync(Body148 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response495> V1_system_failedJobs_retryAllAsync(Body149 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -69123,7 +69144,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response495>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -69240,7 +69261,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response496>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -69344,7 +69365,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response497>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -69441,7 +69462,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response498>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -69534,7 +69555,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response499>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -69612,7 +69633,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response500>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -69698,7 +69719,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -69782,7 +69803,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response501>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -69833,7 +69854,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `profile:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task V1_me_teamspeak_verification_startAsync(Body149 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task V1_me_teamspeak_verification_startAsync(Body150 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -69878,7 +69899,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 202)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -69933,7 +69954,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `profile:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response502> V1_me_teamspeak_verification_confirmAsync(Body150 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response502> V1_me_teamspeak_verification_confirmAsync(Body151 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -69979,7 +70000,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response502>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -70082,7 +70103,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response503>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -70174,7 +70195,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response504>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -70263,7 +70284,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response505>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -70363,7 +70384,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response506>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -70465,7 +70486,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response507>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -70558,7 +70579,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response508>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -70674,7 +70695,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response509>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -70777,7 +70798,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -70879,7 +70900,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response510>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -70987,7 +71008,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 202)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response511>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -71114,7 +71135,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response512>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -71244,7 +71265,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response513>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -71367,7 +71388,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 202)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response514>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -71467,7 +71488,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response515>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -71546,7 +71567,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response516>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -71661,7 +71682,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response518>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -71704,7 +71725,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `wiki.edit` und Token-Scope `wiki:write`. Unterstützt `Idempotency-Key`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response519> V1_wiki_pages_storeAsync(string @namespace, Body151 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response519> V1_wiki_pages_storeAsync(string @namespace, Body152 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (@namespace == null)
                 throw new System.ArgumentNullException("@namespace");
@@ -71755,7 +71776,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response519>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -71845,7 +71866,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response520>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -71925,7 +71946,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response521>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -72005,7 +72026,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response522>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -72084,7 +72105,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response523>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -72193,7 +72214,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response525>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -72277,7 +72298,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response526>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -72370,7 +72391,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response527>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -72456,7 +72477,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response528>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -72552,7 +72573,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response529>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -72637,7 +72658,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response530>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -72730,7 +72751,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -72834,7 +72855,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response531>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -72884,7 +72905,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `wiki.edit` und Token-Scope `wiki:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response532> V1_wiki_pages_updateAsync(string page, Body152 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response532> V1_wiki_pages_updateAsync(string page, Body153 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (page == null)
                 throw new System.ArgumentNullException("page");
@@ -72934,7 +72955,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response532>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -73038,7 +73059,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response533>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -73130,7 +73151,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             return;
                         }
@@ -73243,7 +73264,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response534>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -73354,7 +73375,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response535>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -73444,7 +73465,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response536>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -73499,7 +73520,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Token-Scope `wiki:read`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response537> V1_wiki_renderAsync(Body153 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response537> V1_wiki_renderAsync(Body154 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -73545,7 +73566,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response537>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -73667,7 +73688,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response538>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -73761,7 +73782,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response539>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -73813,7 +73834,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `wiki.approve` und Token-Scope `wiki:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response540> V1_wiki_files_description_approveAsync(string file, Body154 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response540> V1_wiki_files_description_approveAsync(string file, Body155 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (file == null)
                 throw new System.ArgumentNullException("file");
@@ -73864,7 +73885,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response540>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -73925,7 +73946,7 @@ namespace RoG.Core.Api.Generated
         /// <br/>Benötigt Recht `wiki.approve` und Token-Scope `wiki:write`.
         /// </remarks>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response541> V1_wiki_files_description_rejectAsync(string file, Body155 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response541> V1_wiki_files_description_rejectAsync(string file, Body156 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (file == null)
                 throw new System.ArgumentNullException("file");
@@ -73976,7 +73997,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response541>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -74080,7 +74101,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response542>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -74182,7 +74203,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response543>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -74286,7 +74307,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response544>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -74386,7 +74407,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response545>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -74496,7 +74517,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response547>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -74645,7 +74666,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response549>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -74766,7 +74787,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response550>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -74842,7 +74863,7 @@ namespace RoG.Core.Api.Generated
         /// </remarks>
         /// <returns>`TranslationResource`</returns>
         /// <exception cref="GeneratedApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Response551> V1_translations_updateAsync(string locale, string key, Body156 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Response551> V1_translations_updateAsync(string locale, string key, Body157 body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (locale == null)
                 throw new System.ArgumentNullException("locale");
@@ -74897,7 +74918,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response551>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -75007,7 +75028,7 @@ namespace RoG.Core.Api.Generated
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ < 300)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Response552>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
@@ -77108,29 +77129,33 @@ namespace RoG.Core.Api.Generated
     public enum ReportReason
     {
 
+        [System.Runtime.Serialization.EnumMember(Value = @"child_safety")]
+        [System.Text.Json.Serialization.JsonStringEnumMemberName(@"child_safety")]
+        Child_safety = 0,
+
         [System.Runtime.Serialization.EnumMember(Value = @"spam")]
         [System.Text.Json.Serialization.JsonStringEnumMemberName(@"spam")]
-        Spam = 0,
+        Spam = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"insult")]
         [System.Text.Json.Serialization.JsonStringEnumMemberName(@"insult")]
-        Insult = 1,
+        Insult = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"harassment")]
         [System.Text.Json.Serialization.JsonStringEnumMemberName(@"harassment")]
-        Harassment = 2,
+        Harassment = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"illegal")]
         [System.Text.Json.Serialization.JsonStringEnumMemberName(@"illegal")]
-        Illegal = 3,
+        Illegal = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"cheating")]
         [System.Text.Json.Serialization.JsonStringEnumMemberName(@"cheating")]
-        Cheating = 4,
+        Cheating = 5,
 
         [System.Runtime.Serialization.EnumMember(Value = @"other")]
         [System.Text.Json.Serialization.JsonStringEnumMemberName(@"other")]
-        Other = 5,
+        Other = 6,
 
     }
 
@@ -80223,6 +80248,33 @@ namespace RoG.Core.Api.Generated
     {
 
         /// <summary>
+        /// Begründung (5–500 Zeichen; bei `category: child_safety` optional)
+        /// </summary>
+        [System.Text.Json.Serialization.JsonPropertyName("reason")]
+        public string? Reason { get; set; } = default!;
+
+        /// <summary>
+        /// Optional `child_safety` (Kinderschutz / Gefährdung Minderjähriger) – höchste Priorität
+        /// </summary>
+        [System.Text.Json.Serialization.JsonPropertyName("category")]
+        public string? Category { get; set; } = default!;
+
+        private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
+
+        [System.Text.Json.Serialization.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class Body16
+    {
+
+        /// <summary>
         /// Dateiname (bis 191 Zeichen)
         /// </summary>
         [System.Text.Json.Serialization.JsonPropertyName("filename")]
@@ -80288,7 +80340,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body16
+    public partial class Body17
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("max_mb")]
@@ -80318,7 +80370,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body17
+    public partial class Body18
     {
 
         /// <summary>
@@ -80339,7 +80391,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body18
+    public partial class Body19
     {
 
         /// <summary>
@@ -80384,7 +80436,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body19
+    public partial class Body20
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("discord_user_id")]
@@ -80408,7 +80460,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body20
+    public partial class Body21
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("version")]
@@ -80432,7 +80484,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body21
+    public partial class Body22
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("replace")]
@@ -80453,7 +80505,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body22
+    public partial class Body23
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("type")]
@@ -80466,8 +80518,8 @@ namespace RoG.Core.Api.Generated
         public bool? Dry_run { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("rule")]
-        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body22Rule>))]
-        public Body22Rule? Rule { get; set; } = default!;
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body23Rule>))]
+        public Body23Rule? Rule { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("channel_id")]
         public string? Channel_id { get; set; } = default!;
@@ -80493,7 +80545,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body23
+    public partial class Body24
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("structure")]
@@ -80511,7 +80563,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body24
+    public partial class Body25
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("plan")]
@@ -80529,7 +80581,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body25
+    public partial class Body26
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("role")]
@@ -80547,7 +80599,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body26
+    public partial class Body27
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("locale")]
@@ -80571,7 +80623,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body27
+    public partial class Body28
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("locale")]
@@ -80592,29 +80644,8 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body28
-    {
-
-        [System.Text.Json.Serialization.JsonPropertyName("query")]
-        public string? Query { get; set; } = default!;
-
-        private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
-
-        [System.Text.Json.Serialization.JsonExtensionData]
-        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
-        {
-            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
-            set { _additionalProperties = value; }
-        }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class Body29
     {
-
-        [System.Text.Json.Serialization.JsonPropertyName("locale")]
-        public string? Locale { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("query")]
         public string? Query { get; set; } = default!;
@@ -80653,6 +80684,27 @@ namespace RoG.Core.Api.Generated
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class Body31
+    {
+
+        [System.Text.Json.Serialization.JsonPropertyName("locale")]
+        public string? Locale { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("query")]
+        public string? Query { get; set; } = default!;
+
+        private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
+
+        [System.Text.Json.Serialization.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class Body32
     {
 
         /// <summary>
@@ -80709,7 +80761,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body32
+    public partial class Body33
     {
 
         /// <summary>
@@ -80748,7 +80800,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body33
+    public partial class Body34
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("is_pinned")]
@@ -80772,7 +80824,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body34
+    public partial class Body35
     {
 
         /// <summary>
@@ -80799,7 +80851,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body35
+    public partial class Body36
     {
 
         /// <summary>
@@ -80826,7 +80878,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body36
+    public partial class Body37
     {
 
         /// <summary>
@@ -80847,7 +80899,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body37
+    public partial class Body38
     {
 
         /// <summary>
@@ -80868,7 +80920,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body38
+    public partial class Body39
     {
 
         /// <summary>
@@ -80889,7 +80941,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body39
+    public partial class Body40
     {
 
         /// <summary>
@@ -80910,12 +80962,12 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body40
+    public partial class Body41
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("status")]
-        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body40Status>))]
-        public Body40Status Status { get; set; } = default!;
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body41Status>))]
+        public Body41Status Status { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -80929,7 +80981,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body41
+    public partial class Body42
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("reason")]
@@ -80947,7 +80999,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body42
+    public partial class Body43
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("target_id")]
@@ -80965,7 +81017,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body43 : ManageReactions
+    public partial class Body44 : ManageReactions
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("keys")]
@@ -80974,7 +81026,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body44
+    public partial class Body45
     {
 
         /// <summary>
@@ -81019,7 +81071,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body45
+    public partial class Body46
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("name")]
@@ -81037,7 +81089,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body46
+    public partial class Body47
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("truncate")]
@@ -81055,7 +81107,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body47
+    public partial class Body48
     {
 
         /// <summary>
@@ -81076,7 +81128,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body48
+    public partial class Body49
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("label")]
@@ -81103,7 +81155,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body49
+    public partial class Body50
     {
 
         /// <summary>
@@ -81136,7 +81188,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body50
+    public partial class Body51
     {
 
         /// <summary>
@@ -81157,7 +81209,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body51
+    public partial class Body52
     {
 
         /// <summary>
@@ -81190,7 +81242,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body52
+    public partial class Body53
     {
 
         /// <summary>
@@ -81198,24 +81250,6 @@ namespace RoG.Core.Api.Generated
         /// </summary>
         [System.Text.Json.Serialization.JsonPropertyName("after")]
         public string? After { get; set; } = "save";
-
-        private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
-
-        [System.Text.Json.Serialization.JsonExtensionData]
-        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
-        {
-            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
-            set { _additionalProperties = value; }
-        }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body53
-    {
-
-        [System.Text.Json.Serialization.JsonPropertyName("note")]
-        public string? Note { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -81250,6 +81284,24 @@ namespace RoG.Core.Api.Generated
     public partial class Body55
     {
 
+        [System.Text.Json.Serialization.JsonPropertyName("note")]
+        public string? Note { get; set; } = default!;
+
+        private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
+
+        [System.Text.Json.Serialization.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class Body56
+    {
+
         [System.Text.Json.Serialization.JsonPropertyName("command")]
         public string Command { get; set; } = default!;
 
@@ -81265,7 +81317,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body56
+    public partial class Body57
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("player_id")]
@@ -81286,12 +81338,12 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body57
+    public partial class Body58
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("action")]
-        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body57Action>))]
-        public Body57Action? Action { get; set; } = default!;
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body58Action>))]
+        public Body58Action? Action { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("user_id")]
         public string? User_id { get; set; } = default!;
@@ -81311,7 +81363,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body58
+    public partial class Body59
     {
 
         /// <summary>
@@ -81332,7 +81384,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body59
+    public partial class Body60
     {
 
         /// <summary>
@@ -81349,34 +81401,6 @@ namespace RoG.Core.Api.Generated
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
             set { _additionalProperties = value; }
         }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body60 : SaveGamingPlatform
-    {
-
-        [System.Text.Json.Serialization.JsonPropertyName("key")]
-        public string? Key { get; set; } = default!;
-
-        [System.Text.Json.Serialization.JsonPropertyName("name")]
-        public string Name { get; set; } = default!;
-
-        [System.Text.Json.Serialization.JsonPropertyName("icon")]
-        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body60Icon>))]
-        public Body60Icon? Icon { get; set; } = default!;
-
-        [System.Text.Json.Serialization.JsonPropertyName("pattern")]
-        public string? Pattern { get; set; } = default!;
-
-        [System.Text.Json.Serialization.JsonPropertyName("example")]
-        public string? Example { get; set; } = default!;
-
-        [System.Text.Json.Serialization.JsonPropertyName("sort")]
-        public int? Sort { get; set; } = default!;
-
-        [System.Text.Json.Serialization.JsonPropertyName("active")]
-        public bool? Active { get; set; } = default!;
 
     }
 
@@ -81409,7 +81433,35 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body62 : SaveHistoryEntry
+    public partial class Body62 : SaveGamingPlatform
+    {
+
+        [System.Text.Json.Serialization.JsonPropertyName("key")]
+        public string? Key { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string Name { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("icon")]
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body62Icon>))]
+        public Body62Icon? Icon { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("pattern")]
+        public string? Pattern { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("example")]
+        public string? Example { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("sort")]
+        public int? Sort { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("active")]
+        public bool? Active { get; set; } = default!;
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class Body63 : SaveHistoryEntry
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("occurred_on")]
@@ -81426,8 +81478,8 @@ namespace RoG.Core.Api.Generated
         public System.Collections.Generic.ICollection<string?>? Body { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("icon")]
-        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body62Icon>))]
-        public Body62Icon? Icon { get; set; } = default!;
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body63Icon>))]
+        public Body63Icon? Icon { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("squad_id")]
         public string? Squad_id { get; set; } = default!;
@@ -81441,7 +81493,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body63 : SaveTrophy
+    public partial class Body64 : SaveTrophy
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("kind")]
@@ -81475,7 +81527,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body64 : SaveTrophy
+    public partial class Body65 : SaveTrophy
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("kind")]
@@ -81509,7 +81561,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body65 : SaveHistoryEntry
+    public partial class Body66 : SaveHistoryEntry
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("occurred_on")]
@@ -81526,8 +81578,8 @@ namespace RoG.Core.Api.Generated
         public System.Collections.Generic.ICollection<string?>? Body { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("icon")]
-        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body65Icon>))]
-        public Body65Icon? Icon { get; set; } = default!;
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body66Icon>))]
+        public Body66Icon? Icon { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("squad_id")]
         public string? Squad_id { get; set; } = default!;
@@ -81541,7 +81593,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body66 : SaveTribute
+    public partial class Body67 : SaveTribute
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("text")]
@@ -81559,7 +81611,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body67
+    public partial class Body68
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("role_id")]
@@ -81597,7 +81649,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body68 : ManageGroupMappings
+    public partial class Body69 : ManageGroupMappings
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("role_id")]
@@ -81609,7 +81661,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body69 : ManageGroupMappings
+    public partial class Body70 : ManageGroupMappings
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("platform")]
@@ -81631,7 +81683,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body70
+    public partial class Body71
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("member")]
@@ -81649,7 +81701,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body71
+    public partial class Body72
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("force")]
@@ -81667,7 +81719,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body72 : SaveEventType
+    public partial class Body73 : SaveEventType
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("key")]
@@ -81701,7 +81753,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body73 : SaveEvent
+    public partial class Body74 : SaveEvent
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("type")]
@@ -81760,13 +81812,13 @@ namespace RoG.Core.Api.Generated
         /// series = alter Name für following (dieser und alle folgenden)
         /// </summary>
         [System.Text.Json.Serialization.JsonPropertyName("apply_to")]
-        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body73Apply_to>))]
-        public Body73Apply_to? Apply_to { get; set; } = default!;
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body74Apply_to>))]
+        public Body74Apply_to? Apply_to { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body74 : SaveEvent
+    public partial class Body75 : SaveEvent
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("type")]
@@ -81825,13 +81877,13 @@ namespace RoG.Core.Api.Generated
         /// series = alter Name für following (dieser und alle folgenden)
         /// </summary>
         [System.Text.Json.Serialization.JsonPropertyName("apply_to")]
-        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body74Apply_to>))]
-        public Body74Apply_to? Apply_to { get; set; } = default!;
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body75Apply_to>))]
+        public Body75Apply_to? Apply_to { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body75 : PreviewRecurrence
+    public partial class Body76 : PreviewRecurrence
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("starts_at")]
@@ -81852,7 +81904,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body76 : ManageLineup
+    public partial class Body77 : ManageLineup
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("players")]
@@ -81864,7 +81916,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body77 : SaveEventType
+    public partial class Body78 : SaveEventType
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("key")]
@@ -81898,7 +81950,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body78
+    public partial class Body79
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("series")]
@@ -81916,7 +81968,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body79 : RespondToEvent
+    public partial class Body80 : RespondToEvent
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("status")]
@@ -81929,7 +81981,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body80
+    public partial class Body81
     {
 
         /// <summary>
@@ -81950,7 +82002,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body81
+    public partial class Body82
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("email")]
@@ -81977,7 +82029,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body82
+    public partial class Body83
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("token")]
@@ -81995,7 +82047,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body83
+    public partial class Body84
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("password")]
@@ -82031,7 +82083,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body84
+    public partial class Body85
     {
 
         /// <summary>
@@ -82055,7 +82107,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body85
+    public partial class Body86
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("name")]
@@ -82089,7 +82141,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body86
+    public partial class Body87
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("revoke_tokens")]
@@ -82107,7 +82159,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body87
+    public partial class Body88
     {
 
         /// <summary>
@@ -82128,7 +82180,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body88 : UpdateProfile
+    public partial class Body89 : UpdateProfile
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("bio")]
@@ -82174,7 +82226,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body89 : SyncGameAccounts
+    public partial class Body90 : SyncGameAccounts
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("accounts")]
@@ -82183,7 +82235,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body90 : SyncPlatformIds
+    public partial class Body91 : SyncPlatformIds
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("platforms")]
@@ -82214,7 +82266,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body91
+    public partial class Body92
     {
 
         /// <summary>
@@ -82253,7 +82305,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body92
+    public partial class Body93
     {
 
         /// <summary>
@@ -82298,7 +82350,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body93
+    public partial class Body94
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("reason")]
@@ -82330,7 +82382,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body94 : SaveMatch
+    public partial class Body95 : SaveMatch
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("squad_id")]
@@ -82389,7 +82441,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body95 : SaveMatch
+    public partial class Body96 : SaveMatch
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("squad_id")]
@@ -82448,7 +82500,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body96
+    public partial class Body97
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("opponent")]
@@ -82465,49 +82517,6 @@ namespace RoG.Core.Api.Generated
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
             set { _additionalProperties = value; }
         }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body97 : SaveTournament
-    {
-
-        [System.Text.Json.Serialization.JsonPropertyName("name")]
-        public string Name { get; set; } = default!;
-
-        [System.Text.Json.Serialization.JsonPropertyName("slug")]
-        public string? Slug { get; set; } = default!;
-
-        [System.Text.Json.Serialization.JsonPropertyName("organizer")]
-        public string? Organizer { get; set; } = default!;
-
-        [System.Text.Json.Serialization.JsonPropertyName("organizer_type")]
-        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<OrganizerType>))]
-        public OrganizerType? Organizer_type { get; set; } = default!;
-
-        [System.Text.Json.Serialization.JsonPropertyName("game_id")]
-        public string? Game_id { get; set; } = default!;
-
-        [System.Text.Json.Serialization.JsonPropertyName("squad_id")]
-        public string? Squad_id { get; set; } = default!;
-
-        [System.Text.Json.Serialization.JsonPropertyName("starts_on")]
-        public System.DateTimeOffset Starts_on { get; set; } = default!;
-
-        [System.Text.Json.Serialization.JsonPropertyName("ends_on")]
-        public System.DateTimeOffset? Ends_on { get; set; } = default!;
-
-        [System.Text.Json.Serialization.JsonPropertyName("placement")]
-        public int? Placement { get; set; } = default!;
-
-        [System.Text.Json.Serialization.JsonPropertyName("participants_count")]
-        public int? Participants_count { get; set; } = default!;
-
-        [System.Text.Json.Serialization.JsonPropertyName("url")]
-        public System.Uri? Url { get; set; } = default!;
-
-        [System.Text.Json.Serialization.JsonPropertyName("description")]
-        public System.Collections.Generic.ICollection<string?>? Description { get; set; } = default!;
 
     }
 
@@ -82555,7 +82564,50 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body99
+    public partial class Body99 : SaveTournament
+    {
+
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string Name { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("slug")]
+        public string? Slug { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("organizer")]
+        public string? Organizer { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("organizer_type")]
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<OrganizerType>))]
+        public OrganizerType? Organizer_type { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("game_id")]
+        public string? Game_id { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("squad_id")]
+        public string? Squad_id { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("starts_on")]
+        public System.DateTimeOffset Starts_on { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("ends_on")]
+        public System.DateTimeOffset? Ends_on { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("placement")]
+        public int? Placement { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("participants_count")]
+        public int? Participants_count { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("url")]
+        public System.Uri? Url { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("description")]
+        public System.Collections.Generic.ICollection<string?>? Description { get; set; } = default!;
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class Body100
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("email")]
@@ -82579,7 +82631,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body100
+    public partial class Body101
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("reason")]
@@ -82666,7 +82718,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body101
+    public partial class Body102
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("status")]
@@ -82687,7 +82739,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body102
+    public partial class Body103
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("text")]
@@ -82705,7 +82757,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body103
+    public partial class Body104
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("name")]
@@ -82732,7 +82784,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body104
+    public partial class Body105
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("name")]
@@ -82759,7 +82811,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body105
+    public partial class Body106
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("body")]
@@ -82780,7 +82832,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body106
+    public partial class Body107
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("body")]
@@ -82801,31 +82853,6 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body107 : SaveBadge
-    {
-
-        [System.Text.Json.Serialization.JsonPropertyName("key")]
-        public string? Key { get; set; } = default!;
-
-        [System.Text.Json.Serialization.JsonPropertyName("name")]
-        public Name7 Name { get; set; } = new Name7();
-
-        [System.Text.Json.Serialization.JsonPropertyName("description")]
-        public System.Collections.Generic.ICollection<string?>? Description { get; set; } = default!;
-
-        [System.Text.Json.Serialization.JsonPropertyName("icon")]
-        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body107Icon>))]
-        public Body107Icon? Icon { get; set; } = default!;
-
-        [System.Text.Json.Serialization.JsonPropertyName("color")]
-        public string? Color { get; set; } = default!;
-
-        [System.Text.Json.Serialization.JsonPropertyName("sort")]
-        public int? Sort { get; set; } = default!;
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class Body108 : SaveBadge
     {
 
@@ -82833,7 +82860,7 @@ namespace RoG.Core.Api.Generated
         public string? Key { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("name")]
-        public Name8? Name { get; set; } = default!;
+        public Name7 Name { get; set; } = new Name7();
 
         [System.Text.Json.Serialization.JsonPropertyName("description")]
         public System.Collections.Generic.ICollection<string?>? Description { get; set; } = default!;
@@ -82851,7 +82878,32 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body109
+    public partial class Body109 : SaveBadge
+    {
+
+        [System.Text.Json.Serialization.JsonPropertyName("key")]
+        public string? Key { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public Name8? Name { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("description")]
+        public System.Collections.Generic.ICollection<string?>? Description { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("icon")]
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body109Icon>))]
+        public Body109Icon? Icon { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("color")]
+        public string? Color { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("sort")]
+        public int? Sort { get; set; } = default!;
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class Body110
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("badge_id")]
@@ -82872,12 +82924,12 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body110
+    public partial class Body111
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("type")]
-        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body110Type>))]
-        public Body110Type Type { get; set; } = default!;
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body111Type>))]
+        public Body111Type Type { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("id")]
         public string Id { get; set; } = default!;
@@ -82890,8 +82942,8 @@ namespace RoG.Core.Api.Generated
         public string? Comment { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("locale")]
-        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body110Locale>))]
-        public Body110Locale? Locale { get; set; } = default!;
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body111Locale>))]
+        public Body111Locale? Locale { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -82905,7 +82957,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body111
+    public partial class Body112
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("status")]
@@ -82927,7 +82979,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body112
+    public partial class Body113
     {
 
         /// <summary>
@@ -82978,7 +83030,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body113
+    public partial class Body114
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("scope")]
@@ -83009,7 +83061,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body114
+    public partial class Body115
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("pattern")]
@@ -83034,7 +83086,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body115
+    public partial class Body116
     {
 
         /// <summary>
@@ -83055,7 +83107,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body116
+    public partial class Body117
     {
 
         /// <summary>
@@ -83088,7 +83140,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body117
+    public partial class Body118
     {
 
         /// <summary>
@@ -83135,7 +83187,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body118
+    public partial class Body119
     {
 
         /// <summary>
@@ -83222,7 +83274,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body119
+    public partial class Body120
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("content")]
@@ -83264,7 +83316,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body120
+    public partial class Body121
     {
 
         /// <summary>
@@ -83285,7 +83337,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body121
+    public partial class Body122
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("type")]
@@ -83303,7 +83355,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body122 : SaveRuleSet
+    public partial class Body123 : SaveRuleSet
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("scope")]
@@ -83359,7 +83411,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body123 : SaveRuleSet
+    public partial class Body124 : SaveRuleSet
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("scope")]
@@ -83415,7 +83467,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body124
+    public partial class Body125
     {
 
         /// <summary>
@@ -83490,7 +83542,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body125
+    public partial class Body126
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("email")]
@@ -83530,7 +83582,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body126
+    public partial class Body127
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("email")]
@@ -83548,12 +83600,12 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body127
+    public partial class Body128
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("grant_type")]
-        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body127Grant_type>))]
-        public Body127Grant_type Grant_type { get; set; } = default!;
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body128Grant_type>))]
+        public Body128Grant_type Grant_type { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("code")]
         public string Code { get; set; } = default!;
@@ -83582,7 +83634,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body128 : UpdateRiotSettings
+    public partial class Body129 : UpdateRiotSettings
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("enabled")]
@@ -83619,7 +83671,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body129
+    public partial class Body130
     {
 
         /// <summary>
@@ -83640,7 +83692,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body130
+    public partial class Body131
     {
 
         /// <summary>
@@ -83667,7 +83719,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body131
+    public partial class Body132
     {
 
         /// <summary>
@@ -83768,7 +83820,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body132
+    public partial class Body133
     {
 
         /// <summary>
@@ -83831,7 +83883,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body133
+    public partial class Body134
     {
 
         /// <summary>
@@ -83894,7 +83946,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body134
+    public partial class Body135
     {
 
         /// <summary>
@@ -83915,7 +83967,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body135
+    public partial class Body136
     {
 
         /// <summary>
@@ -83936,7 +83988,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body136
+    public partial class Body137
     {
 
         /// <summary>
@@ -83957,7 +84009,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body137 : SaveGame
+    public partial class Body138 : SaveGame
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("name")]
@@ -83998,12 +84050,12 @@ namespace RoG.Core.Api.Generated
         public string? Clan_name { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("id_format")]
-        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body137Id_format>))]
-        public Body137Id_format? Id_format { get; set; } = default!;
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body138Id_format>))]
+        public Body138Id_format? Id_format { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("stats_source")]
-        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body137Stats_source>))]
-        public Body137Stats_source? Stats_source { get; set; } = default!;
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body138Stats_source>))]
+        public Body138Stats_source? Stats_source { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("stats_provider")]
         public Stats_provider2? Stats_provider { get; set; } = default!;
@@ -84020,7 +84072,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body138 : SaveGame
+    public partial class Body139 : SaveGame
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("name")]
@@ -84061,12 +84113,12 @@ namespace RoG.Core.Api.Generated
         public string? Clan_name { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("id_format")]
-        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body138Id_format>))]
-        public Body138Id_format? Id_format { get; set; } = default!;
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body139Id_format>))]
+        public Body139Id_format? Id_format { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("stats_source")]
-        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body138Stats_source>))]
-        public Body138Stats_source? Stats_source { get; set; } = default!;
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body139Stats_source>))]
+        public Body139Stats_source? Stats_source { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("stats_provider")]
         public Stats_provider3? Stats_provider { get; set; } = default!;
@@ -84083,7 +84135,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body139
+    public partial class Body140
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("focus_x")]
@@ -84107,7 +84159,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body140 : SaveGame
+    public partial class Body141 : SaveGame
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("type")]
@@ -84134,8 +84186,8 @@ namespace RoG.Core.Api.Generated
         public string? Owner_user_id { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("visibility")]
-        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body140Visibility>))]
-        public Body140Visibility? Visibility { get; set; } = default!;
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body141Visibility>))]
+        public Body141Visibility? Visibility { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("expires_at")]
         public System.DateTimeOffset? Expires_at { get; set; } = default!;
@@ -84146,7 +84198,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body141 : SaveGame
+    public partial class Body142 : SaveGame
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("type")]
@@ -84173,8 +84225,8 @@ namespace RoG.Core.Api.Generated
         public string? Owner_user_id { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("visibility")]
-        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body141Visibility>))]
-        public Body141Visibility? Visibility { get; set; } = default!;
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body142Visibility>))]
+        public Body142Visibility? Visibility { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("expires_at")]
         public System.DateTimeOffset? Expires_at { get; set; } = default!;
@@ -84207,7 +84259,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body142 : SaveSquad
+    public partial class Body143 : SaveSquad
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("game_id")]
@@ -84259,7 +84311,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body143 : SaveSquad
+    public partial class Body144 : SaveSquad
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("game_id")]
@@ -84311,7 +84363,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body144
+    public partial class Body145
     {
 
         /// <summary>
@@ -84332,7 +84384,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body145
+    public partial class Body146
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("focus_x")]
@@ -84356,7 +84408,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body146
+    public partial class Body147
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("role_id")]
@@ -84377,7 +84429,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body147 : UpdateSteamLibrarySettings
+    public partial class Body148 : UpdateSteamLibrarySettings
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("enabled")]
@@ -84474,12 +84526,12 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body148
+    public partial class Body149
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("confirm")]
-        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body148Confirm>))]
-        public Body148Confirm Confirm { get; set; } = default!;
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body149Confirm>))]
+        public Body149Confirm Confirm { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -84493,7 +84545,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body149
+    public partial class Body150
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("clid")]
@@ -84511,7 +84563,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body150
+    public partial class Body151
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("code")]
@@ -84605,7 +84657,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body151
+    public partial class Body152
     {
 
         /// <summary>
@@ -84668,7 +84720,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body152
+    public partial class Body153
     {
 
         /// <summary>
@@ -84725,15 +84777,15 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body153
+    public partial class Body154
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("content")]
         public string? Content { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("format")]
-        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body153Format>))]
-        public Body153Format? Format { get; set; } = default!;
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body154Format>))]
+        public Body154Format? Format { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("namespace")]
         public string? Namespace { get; set; } = default!;
@@ -84742,8 +84794,8 @@ namespace RoG.Core.Api.Generated
         public string? Page_id { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("locale")]
-        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body153Locale>))]
-        public Body153Locale? Locale { get; set; } = default!;
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<Body154Locale>))]
+        public Body154Locale? Locale { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("title")]
         public string? Title { get; set; } = default!;
@@ -84760,7 +84812,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body154
+    public partial class Body155
     {
 
         /// <summary>
@@ -84781,7 +84833,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body155
+    public partial class Body156
     {
 
         /// <summary>
@@ -85062,7 +85114,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Body156
+    public partial class Body157
     {
 
         [System.Text.Json.Serialization.JsonPropertyName("value")]
@@ -102341,7 +102393,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Body22Rule
+    public enum Body23Rule
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"spam")]
@@ -102438,7 +102490,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Body40Status
+    public enum Body41Status
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"resolved")]
@@ -102467,7 +102519,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Body57Action
+    public enum Body58Action
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"add")]
@@ -102481,7 +102533,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Body60Icon
+    public enum Body61Icon
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"menu")]
@@ -102935,7 +102987,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Body61Icon
+    public enum Body62Icon
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"menu")]
@@ -103407,7 +103459,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Body62Icon
+    public enum Body63Icon
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"flag")]
@@ -103523,7 +103575,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Body65Icon
+    public enum Body66Icon
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"flag")]
@@ -103728,7 +103780,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Body73Apply_to
+    public enum Body74Apply_to
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"single")]
@@ -103849,7 +103901,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Body74Apply_to
+    public enum Body75Apply_to
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"single")]
@@ -104724,7 +104776,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Body107Icon
+    public enum Body108Icon
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"menu")]
@@ -105202,7 +105254,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Body108Icon
+    public enum Body109Icon
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"menu")]
@@ -105656,7 +105708,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Body110Type
+    public enum Body111Type
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"discord_message")]
@@ -105694,7 +105746,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Body110Locale
+    public enum Body111Locale
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"de")]
@@ -106221,7 +106273,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Body127Grant_type
+    public enum Body128Grant_type
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"authorization_code")]
@@ -106420,7 +106472,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Body137Id_format
+    public enum Body138Id_format
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"steam_id")]
@@ -106450,7 +106502,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Body137Stats_source
+    public enum Body138Stats_source
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"server")]
@@ -106547,7 +106599,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Body138Id_format
+    public enum Body139Id_format
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"steam_id")]
@@ -106577,7 +106629,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Body138Stats_source
+    public enum Body139Stats_source
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"server")]
@@ -106668,7 +106720,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Body140Visibility
+    public enum Body141Visibility
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"public")]
@@ -106706,7 +106758,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Body141Visibility
+    public enum Body142Visibility
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"public")]
@@ -106981,7 +107033,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Body148Confirm
+    public enum Body149Confirm
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"all")]
@@ -106991,7 +107043,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Body153Format
+    public enum Body154Format
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"markdown")]
@@ -107005,7 +107057,7 @@ namespace RoG.Core.Api.Generated
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum Body153Locale
+    public enum Body154Locale
     {
 
         [System.Runtime.Serialization.EnumMember(Value = @"de")]
@@ -108732,6 +108784,12 @@ namespace RoG.Core.Api.Generated
 
         [System.Text.Json.Serialization.JsonPropertyName("reason")]
         public string Reason { get; set; } = default!;
+
+        /// <summary>
+        /// `child_safety` (Kinderschutz, höchste Priorität) oder `null`
+        /// </summary>
+        [System.Text.Json.Serialization.JsonPropertyName("category")]
+        public string? Category { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("reporter")]
         public Reporter? Reporter { get; set; } = default!;
@@ -118238,6 +118296,12 @@ namespace RoG.Core.Api.Generated
         [System.Text.Json.Serialization.JsonPropertyName("reason")]
         public string Reason { get; set; } = default!;
 
+        /// <summary>
+        /// 1 = offene Kinderschutz-Meldung (höchste Priorität, steht oben), sonst 0
+        /// </summary>
+        [System.Text.Json.Serialization.JsonPropertyName("priority")]
+        public int Priority { get; set; } = default!;
+
         [System.Text.Json.Serialization.JsonPropertyName("comment")]
         public string? Comment { get; set; } = default!;
 
@@ -118322,6 +118386,12 @@ namespace RoG.Core.Api.Generated
         [System.Text.Json.Serialization.JsonPropertyName("reason")]
         public string Reason { get; set; } = default!;
 
+        /// <summary>
+        /// 1 = offene Kinderschutz-Meldung (höchste Priorität, steht oben), sonst 0
+        /// </summary>
+        [System.Text.Json.Serialization.JsonPropertyName("priority")]
+        public int Priority { get; set; } = default!;
+
         [System.Text.Json.Serialization.JsonPropertyName("comment")]
         public string? Comment { get; set; } = default!;
 
@@ -118384,6 +118454,12 @@ namespace RoG.Core.Api.Generated
 
         [System.Text.Json.Serialization.JsonPropertyName("reason")]
         public string Reason { get; set; } = default!;
+
+        /// <summary>
+        /// 1 = offene Kinderschutz-Meldung (höchste Priorität, steht oben), sonst 0
+        /// </summary>
+        [System.Text.Json.Serialization.JsonPropertyName("priority")]
+        public int Priority { get; set; } = default!;
 
         [System.Text.Json.Serialization.JsonPropertyName("comment")]
         public string? Comment { get; set; } = default!;

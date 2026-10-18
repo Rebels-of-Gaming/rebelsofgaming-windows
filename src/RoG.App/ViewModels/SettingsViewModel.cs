@@ -243,6 +243,10 @@ public sealed partial class SettingsViewModel : ObservableObject
     [RelayCommand]
     private Task OpenImprintAsync() => OpenLegalAsync("imprint");
 
+    /// <summary>Kinderschutz-Standards der Plattform (Website v0.30.3).</summary>
+    [RelayCommand]
+    private Task OpenChildSafetyAsync() => OpenLegalAsync("child-safety");
+
     private Task OpenLegalAsync(string page) => _services.Browser.OpenAsync(new Uri(_services.Environment.WebBaseUrl, $"{_services.Language}/{page}"));
 
     private string Format(string key, params object[] args) =>

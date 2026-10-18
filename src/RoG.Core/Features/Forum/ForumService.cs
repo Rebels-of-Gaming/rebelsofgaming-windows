@@ -97,14 +97,14 @@ public sealed class ForumService(IRoGApiClient client, Uri webBaseUrl)
     /// <summary>Antworten (BBCode); Rückgabe = neuer Beitrag (kann <c>pending</c> sein: Spamschutz).</summary>
     public async Task ReplyAsync(string threadId, string bbcode, CancellationToken cancellationToken = default)
     {
-        await client.V1_forum_posts_storeAsync(threadId, new Body34 { Body = CheckBody(bbcode) }, cancellationToken).ConfigureAwait(false);
+        await client.V1_forum_posts_storeAsync(threadId, new Body35 { Body = CheckBody(bbcode) }, cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>Neues Thema (optional mit Umfrage); Rückgabe = Themen-ID.</summary>
     public async Task<string> CreateThreadAsync(string categorySlug, string title, string bbcode, string? pollQuestion = null, IReadOnlyList<string>? pollOptions = null, bool pollMultiple = false, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(title);
-        var body = new Body32 { Title = title.Trim(), Body = CheckBody(bbcode) };
+        var body = new Body33 { Title = title.Trim(), Body = CheckBody(bbcode) };
         if (!string.IsNullOrWhiteSpace(pollQuestion) && pollOptions is { Count: >= 2 })
         {
             body.Poll = new Poll { Question = pollQuestion.Trim(), Options = pollOptions.Select(o => o.Trim()).Where(o => o.Length > 0).ToList(), Multiple = pollMultiple };
@@ -116,7 +116,7 @@ public sealed class ForumService(IRoGApiClient client, Uri webBaseUrl)
 
     /// <summary>Reaktion umschalten (Schlüssel aus <see cref="GetReactionsAsync"/>).</summary>
     public async Task ToggleReactionAsync(string postId, string reactionKey, CancellationToken cancellationToken = default) =>
-        await client.V1_forum_posts_reactAsync(postId, new Body36 { Reaction = reactionKey }, cancellationToken).ConfigureAwait(false);
+        await client.V1_forum_posts_reactAsync(postId, new Body37 { Reaction = reactionKey }, cancellationToken).ConfigureAwait(false);
 
     public async Task<IReadOnlyList<ReactionOption>> GetReactionsAsync(CancellationToken cancellationToken = default)
     {
@@ -125,12 +125,12 @@ public sealed class ForumService(IRoGApiClient client, Uri webBaseUrl)
     }
 
     public async Task VoteAsync(string pollId, IReadOnlyList<string> optionIds, CancellationToken cancellationToken = default) =>
-        await client.V1_forum_polls_voteAsync(pollId, new Body38 { Options = optionIds.ToList() }, cancellationToken).ConfigureAwait(false);
+        await client.V1_forum_polls_voteAsync(pollId, new Body39 { Options = optionIds.ToList() }, cancellationToken).ConfigureAwait(false);
 
     /// <summary>Vorschau: BBCode → Dokument (über die API, gleiche Darstellung wie nach dem Absenden).</summary>
     public async Task<RichDocument> PreviewAsync(string bbcode, CancellationToken cancellationToken = default)
     {
-        var response = await client.V1_forum_previewAsync(new Body39 { Body = bbcode }, cancellationToken).ConfigureAwait(false);
+        var response = await client.V1_forum_previewAsync(new Body40 { Body = bbcode }, cancellationToken).ConfigureAwait(false);
         return _html.Parse(response.Data.Html);
     }
 

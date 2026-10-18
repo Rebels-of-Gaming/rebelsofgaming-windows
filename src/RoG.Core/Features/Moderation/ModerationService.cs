@@ -17,7 +17,12 @@ public sealed record ModReport(
     string? Reporter,
     DateTimeOffset? CreatedAt,
     Uri? Url = null,
-    string? Locale = null);
+    string? Locale = null,
+    int Priority = 0)
+{
+    /// <summary>Kinderschutz-Meldung (Website v0.30.3) – rot gekennzeichnet, steht oben.</summary>
+    public bool IsChildSafety => Reason == ModerationService.ChildSafety;
+}
 
 public sealed record ModWarning(string Id, string Reason, int Points, bool Active, DateTimeOffset? CreatedAt, DateTimeOffset? ExpiresAt);
 
@@ -35,12 +40,15 @@ public sealed record WordFilter(string Id, string Pattern, string Action, string
 /// </summary>
 public sealed class ModerationService(IRoGApiClient client)
 {
-    /// <summary>Melde-Gründe wie die Website.</summary>
-    public static readonly IReadOnlyList<string> ReportReasons = ["spam", "insult", "harassment", "illegal", "cheating", "other"];
+    public const string ChildSafety = "child_safety";
 
-    public async Task<Page<ModReport>> ReportsAsync(string status = "open", string? cursor = null, CancellationToken cancellationToken = default)
+    /// <summary>Melde-Gründe wie die Website – Kinderschutz immer zuerst (v0.30.3).</summary>
+    public static readonly IReadOnlyList<string> ReportReasons = [ChildSafety, "spam", "insult", "harassment", "illegal", "cheating", "other"];
+
+    /// <param name="reason">Filter auf einen Grund (<c>filter[reason]</c>), <c>null</c> = alle.</param>
+    public async Task<Page<ModReport>> ReportsAsync(string status = "open", string? cursor = null, string? reason = null, CancellationToken cancellationToken = default)
     {
-        var r = await client.V1_moderation_reports_indexAsync(status, null, cursor, 30, cancellationToken).ConfigureAwait(false);
+        var r = await client.V1_moderation_reports_indexAsync(status, filtertype: null, filterreason: reason, cursor: cursor, per_page: 30, cancellationToken: cancellationToken).ConfigureAwait(false);
         return new Page<ModReport>(
             r.Data.Select(d => new ModReport(
                 d.Id, d.Type, d.Reason, ApiValues.Text(d.Comment), ApiValues.Text(d.Excerpt), d.Status, ApiValues.Text(d.Resolution),
@@ -48,12 +56,15 @@ public sealed class ModerationService(IRoGApiClient client)
                 d.Reporter?.Name,
                 ApiValues.Time(d.Created_at),
                 ApiValues.WebUri(d.Url),
-                ApiValues.Text(d.Locale))).ToList(),
+                ApiValues.Text(d.Locale),
+                d.Priority))
+                // Server sortiert schon; stabil nachsortieren, falls eine ältere Website die Priorität nicht kennt
+                .OrderByDescending(m => m.Priority > 0 || (m.IsChildSafety && m.Status == "open")).ToList(),
             r.Meta?.Next_cursor);
     }
 
     public async Task UpdateReportAsync(string reportId, string status, string? resolution, CancellationToken cancellationToken = default) =>
-        await client.V1_moderation_reports_updateAsync(reportId, new Body111
+        await client.V1_moderation_reports_updateAsync(reportId, new Body112
         {
             Status = status switch { "resolved" => ReportStatus.Resolved, "dismissed" => ReportStatus.Dismissed, _ => ReportStatus.Open },
             Resolution = ApiValues.Text(resolution),
@@ -76,7 +87,7 @@ public sealed class ModerationService(IRoGApiClient client)
     public async Task WarnAsync(string userId, string reason, int points, int? days, string? reportId, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(reason);
-        await client.V1_moderation_warnings_storeAsync(userId, new Body112
+        await client.V1_moderation_warnings_storeAsync(userId, new Body113
         {
             Reason = reason.Trim(),
             Points = Math.Clamp(points, 0, 100),
@@ -92,7 +103,7 @@ public sealed class ModerationService(IRoGApiClient client)
     public async Task BanAsync(string userId, string scope, string reason, int? days, bool isPublic, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(reason);
-        await client.V1_moderation_bans_storeAsync(userId, new Body113
+        await client.V1_moderation_bans_storeAsync(userId, new Body114
         {
             Scope = scope switch { "site" => BanScope.Site, "gameserver" => BanScope.Gameserver, _ => BanScope.Forum },
             Reason = reason.Trim(),
@@ -129,7 +140,7 @@ public sealed class ModerationService(IRoGApiClient client)
     public async Task AddWordAsync(string pattern, string action, string? replacement, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(pattern);
-        await client.V1_moderation_words_storeAsync(new Body114
+        await client.V1_moderation_words_storeAsync(new Body115
         {
             Pattern = pattern.Trim(),
             Action = action switch { "block" => WordAction.Block, "review" => WordAction.Review, _ => WordAction.Replace },
@@ -143,23 +154,24 @@ public sealed class ModerationService(IRoGApiClient client)
     /// <summary>Inhalt melden (alle Angemeldeten, Scope <c>reports:write</c>; 10 je Stunde).</summary>
     /// <param name="locale">Bei <c>wiki_page</c>: Sprache der angezeigten Fassung (de/en/fr), sonst ignoriert.</param>
     public async Task ReportAsync(string type, string id, string reason, string? comment, string? locale = null, CancellationToken cancellationToken = default) =>
-        await client.V1_reports_storeAsync(new Body110
+        await client.V1_reports_storeAsync(new Body111
         {
             Type = type switch
             {
-                "message" => Body110Type.Message,
-                "profile" => Body110Type.Profile,
-                "gallery_item" => Body110Type.Gallery_item,
-                "news_comment" => Body110Type.News_comment,
-                "forum_post" => Body110Type.Forum_post,
-                "wiki_page" => Body110Type.Wiki_page,
-                "wiki_revision" => Body110Type.Wiki_revision,
+                "message" => Body111Type.Message,
+                "profile" => Body111Type.Profile,
+                "gallery_item" => Body111Type.Gallery_item,
+                "news_comment" => Body111Type.News_comment,
+                "forum_post" => Body111Type.Forum_post,
+                "wiki_page" => Body111Type.Wiki_page,
+                "wiki_revision" => Body111Type.Wiki_revision,
                 _ => throw new ArgumentOutOfRangeException(nameof(type)),
             },
             Locale = type == "wiki_page" ? ReportLocale(locale) : null,
             Id = id,
             Reason = reason switch
             {
+                ChildSafety => ReportReason.Child_safety,
                 "spam" => ReportReason.Spam,
                 "insult" => ReportReason.Insult,
                 "harassment" => ReportReason.Harassment,
@@ -170,11 +182,11 @@ public sealed class ModerationService(IRoGApiClient client)
             Comment = ApiValues.Text(comment),
         }, cancellationToken).ConfigureAwait(false);
 
-    private static Body110Locale? ReportLocale(string? locale) => locale?.ToLowerInvariant() switch
+    private static Body111Locale? ReportLocale(string? locale) => locale?.ToLowerInvariant() switch
     {
-        "de" => Body110Locale.De,
-        "en" => Body110Locale.En,
-        "fr" => Body110Locale.Fr,
+        "de" => Body111Locale.De,
+        "en" => Body111Locale.En,
+        "fr" => Body111Locale.Fr,
         _ => null,
     };
 }

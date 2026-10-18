@@ -60,7 +60,7 @@ public sealed class ServerConfigService(IRoGApiClient client, HttpClient http)
 
     public async Task<ConfigPreview> PreviewAsync(string server, string fileId, string content, CancellationToken cancellationToken = default)
     {
-        var d = (await client.V1_servers_configs_previewAsync(server, fileId, new Body50 { Content = content }, cancellationToken).ConfigureAwait(false)).Data;
+        var d = (await client.V1_servers_configs_previewAsync(server, fileId, new Body51 { Content = content }, cancellationToken).ConfigureAwait(false)).Data;
         return new ConfigPreview(
             d.Diff?.Select(l => new DiffLine(l.Type, l.Text, l.Old, l.New)).ToList() ?? [],
             d.Errors?.ToList() ?? [],
@@ -95,7 +95,7 @@ public sealed class ServerConfigService(IRoGApiClient client, HttpClient http)
     }
 
     public async Task RollbackAsync(string server, string versionId, ConfigAfter after, CancellationToken cancellationToken = default) =>
-        await client.V1_servers_configs_rollbackAsync(server, versionId, new Body52 { After = after.ToString().ToLowerInvariant() }, cancellationToken).ConfigureAwait(false);
+        await client.V1_servers_configs_rollbackAsync(server, versionId, new Body53 { After = after.ToString().ToLowerInvariant() }, cancellationToken).ConfigureAwait(false);
 }
 
 public sealed record ServerBackup(string Uuid, string Name, long Bytes, DateTimeOffset? CreatedAt, bool Completed, bool Successful, bool Locked);
@@ -113,7 +113,7 @@ public sealed class ServerBackupService(IRoGApiClient client)
     }
 
     public async Task CreateAsync(string server, string? name, CancellationToken cancellationToken = default) =>
-        await client.V1_servers_backups_storeAsync(server, ApiValues.Text(name) is { } n ? new Body45 { Name = n } : null, cancellationToken).ConfigureAwait(false);
+        await client.V1_servers_backups_storeAsync(server, ApiValues.Text(name) is { } n ? new Body46 { Name = n } : null, cancellationToken).ConfigureAwait(false);
 
     /// <summary>Signierte, kurzlebige Adresse direkt vom Node (ohne Token – im Browser öffnen).</summary>
     public async Task<Uri> DownloadUrlAsync(string server, string uuid, CancellationToken cancellationToken = default)
@@ -125,10 +125,10 @@ public sealed class ServerBackupService(IRoGApiClient client)
     }
 
     public async Task RestoreAsync(string server, string uuid, bool truncate, CancellationToken cancellationToken = default) =>
-        await client.V1_servers_backups_restoreAsync(server, uuid, new Body46 { Truncate = truncate }, cancellationToken).ConfigureAwait(false);
+        await client.V1_servers_backups_restoreAsync(server, uuid, new Body47 { Truncate = truncate }, cancellationToken).ConfigureAwait(false);
 
     public async Task SetLockedAsync(string server, string uuid, bool locked, CancellationToken cancellationToken = default) =>
-        await client.V1_servers_backups_lockAsync(server, uuid, new Body47 { Locked = locked }, cancellationToken).ConfigureAwait(false);
+        await client.V1_servers_backups_lockAsync(server, uuid, new Body48 { Locked = locked }, cancellationToken).ConfigureAwait(false);
 
     public async Task DeleteAsync(string server, string uuid, CancellationToken cancellationToken = default) =>
         await client.V1_servers_backups_destroyAsync(server, uuid, cancellationToken).ConfigureAwait(false);

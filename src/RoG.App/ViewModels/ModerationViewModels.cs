@@ -50,6 +50,16 @@ public sealed partial class ModerationViewModel(AppServices services) : Observab
         new("review", services.Localizer.GetString(StringKeys.ModWordReview)),
     ];
 
+    /// <summary>Filter nach Grund (<c>filter[reason]</c>): alle oder nur Kinderschutz.</summary>
+    public IReadOnlyList<SettingsOption> ReasonOptions { get; } =
+    [
+        new(string.Empty, services.Localizer.GetString(StringKeys.ModReasonAll)),
+        new(ModerationService.ChildSafety, services.Localizer.GetString("Report_Reason_" + ModerationService.ChildSafety)),
+    ];
+
+    [ObservableProperty]
+    public partial SettingsOption? SelectedReason { get; set; }
+
     public ObservableCollection<ReportItemViewModel> Reports { get; } = [];
 
     public ObservableCollection<ModBanItemViewModel> Bans { get; } = [];
@@ -93,6 +103,8 @@ public sealed partial class ModerationViewModel(AppServices services) : Observab
 
     partial void OnSelectedStatusChanged(SettingsOption? value) => _ = LoadReportsAsync(reset: true);
 
+    partial void OnSelectedReasonChanged(SettingsOption? value) => _ = LoadReportsAsync(reset: true);
+
     public async Task LoadReportsAsync(bool reset)
     {
         if (!CanReports)
@@ -115,7 +127,7 @@ public sealed partial class ModerationViewModel(AppServices services) : Observab
 
         await RunAsync(async () =>
         {
-            var page = await _moderation.ReportsAsync(SelectedStatus.Value, _reportsCursor);
+            var page = await _moderation.ReportsAsync(SelectedStatus.Value, _reportsCursor, SelectedReason?.Value is { Length: > 0 } reason ? reason : null);
             if (generation != _loadGeneration)
             {
                 return; // inzwischen neu gefiltert
@@ -303,6 +315,8 @@ public sealed partial class ReportItemViewModel(ModReport report, ModerationView
         report.Reporter is null ? null : string.Format(CultureInfo.CurrentCulture, localizer.GetString(StringKeys.ModReportedBy), report.Reporter),
         report.Target is null ? null : string.Format(CultureInfo.CurrentCulture, localizer.GetString(StringKeys.ModAgainst), report.Target.Name),
     }.Where(s => !string.IsNullOrEmpty(s)));
+
+    public bool IsChildSafety => report.IsChildSafety;
 
     public string Excerpt { get; } = report.Excerpt ?? string.Empty;
 

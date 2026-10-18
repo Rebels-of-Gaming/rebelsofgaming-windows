@@ -139,7 +139,7 @@ public sealed partial class AccountDataViewModel(AppServices services) : Loadabl
             var message = flow.FieldError ?? l.GetError(flow.ErrorCode!);
             if (flow.RetryAfter is { } wait)
             {
-                message += " " + Format(StringKeys.AccountDeleteRetryAfter, Math.Max(1, (int)Math.Ceiling(wait.TotalSeconds)));
+                message += " " + Format(StringKeys.CommonRetryAfter, Math.Max(1, (int)Math.Ceiling(wait.TotalSeconds)));
             }
 
             return (message, InfoBarSeverity.Error);

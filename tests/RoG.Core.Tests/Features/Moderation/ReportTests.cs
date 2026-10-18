@@ -56,4 +56,66 @@ public class ReportTests
             Assert.Equal("fr", report.Locale);
         }
     }
+
+    [Fact]
+    public void Child_safety_is_the_first_reason()
+    {
+        Assert.Equal("child_safety", ModerationService.ReportReasons[0]);
+    }
+
+    [Theory]
+    [InlineData(HttpStatusCode.Created)]
+    [InlineData(HttpStatusCode.OK)] // v0.30.4: erneute Meldung öffnet eine alte wieder
+    public async Task Child_safety_report_is_sent_and_reopen_counts_as_success(HttpStatusCode status)
+    {
+        var (api, stub) = Create("""{"data":{"id":"r1","status":"open"}}""", status);
+        using (api)
+        {
+            await new ModerationService(api.Client).ReportAsync("gallery_item", "01J", "child_safety", null);
+
+            Assert.Contains("\"reason\":\"child_safety\"", Assert.Single(stub.Requests).Body, StringComparison.Ordinal);
+        }
+    }
+
+    [Fact]
+    public async Task Too_many_child_safety_reports_carry_retry_after()
+    {
+        var stub = new StubHttpHandler((_, _) =>
+        {
+            var r = StubHttpHandler.Json(HttpStatusCode.TooManyRequests, """{"type":"about:blank","title":"Too Many Requests","status":429,"code":"too_many_attempts"}""");
+            r.Headers.RetryAfter = new System.Net.Http.Headers.RetryConditionHeaderValue(TimeSpan.FromSeconds(90));
+            return r;
+        });
+        using var api = new RoGApi(RoGEnvironment.Get(RoGEnvironment.Production), new InMemoryTokenStore(), new ApiContext(), innerHandler: stub);
+
+        var ex = await Assert.ThrowsAsync<ApiProblemException>(() => new ModerationService(api.Client).ReportAsync("profile", "01U", "child_safety", null));
+
+        Assert.True(ex.Problem.IsRateLimited);
+        Assert.Equal(TimeSpan.FromSeconds(90), ex.Problem.RetryAfter);
+    }
+
+    [Fact]
+    public async Task Moderation_list_filters_by_reason_and_puts_child_safety_first()
+    {
+        var (api, stub) = Create("""
+            {"data":[
+              {"id":"r1","type":"profile","reportable_id":"01U","reason":"spam","comment":null,"excerpt":null,"url":null,"locale":null,
+               "status":"open","resolution":null,"priority":0,"target":null,"reporter":null,"created_at":"2026-10-18T11:00:00Z","handled_at":null},
+              {"id":"r2","type":"profile","reportable_id":"01X","reason":"child_safety","comment":null,"excerpt":null,"url":null,"locale":null,
+               "status":"open","resolution":null,"priority":1,"target":null,"reporter":null,"created_at":"2026-10-18T10:00:00Z","handled_at":null}],
+             "meta":{"next_cursor":"c2"}}
+            """, HttpStatusCode.OK);
+        using (api)
+        {
+            var page = await new ModerationService(api.Client).ReportsAsync("open", cursor: "c1", reason: "child_safety");
+
+            var query = Uri.UnescapeDataString(Assert.Single(stub.Requests).Uri!.Query);
+            Assert.Contains("filter[reason]=child_safety", query, StringComparison.Ordinal);
+            Assert.Contains("cursor=c1", query, StringComparison.Ordinal);
+            Assert.DoesNotContain("filter[reason]=c1", query, StringComparison.Ordinal);
+            Assert.Equal(["r2", "r1"], page.Items.Select(r => r.Id));
+            Assert.True(page.Items[0].IsChildSafety);
+            Assert.Equal(1, page.Items[0].Priority);
+        }
+    }
 }

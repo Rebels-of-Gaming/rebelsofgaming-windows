@@ -112,6 +112,7 @@
                         <HyperlinkButton x:Uid="SettingsPage_Privacy" Command="{x:Bind ViewModel.OpenPrivacyCommand}" />
                         <HyperlinkButton x:Uid="SettingsPage_Terms" Command="{x:Bind ViewModel.OpenTermsCommand}" />
                         <HyperlinkButton x:Uid="SettingsPage_Imprint" Command="{x:Bind ViewModel.OpenImprintCommand}" />
+                        <HyperlinkButton x:Uid="SettingsPage_ChildSafety" Command="{x:Bind ViewModel.OpenChildSafetyCommand}" />
                     </StackPanel>
                 </StackPanel>
             </Border>

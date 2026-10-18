@@ -92,7 +92,7 @@ public sealed class UploadService(IRoGApiClient client, HttpClient storage)
         }
 
         var uploadId = await PutAsync(content, fileName, size, UploadVisibility.Private, progress, cancellationToken).ConfigureAwait(false);
-        var response = await client.V1_gallery_items_storeAsync(albumSlug, new Body44
+        var response = await client.V1_gallery_items_storeAsync(albumSlug, new Body45
         {
             Upload_id = uploadId,
             Rights_confirmed = true,
@@ -109,7 +109,7 @@ public sealed class UploadService(IRoGApiClient client, HttpClient storage)
     {
         ArgumentNullException.ThrowIfNull(content);
         var mime = MimeFor(fileName) ?? throw new NotSupportedException(fileName);
-        var presign = (await client.V1_uploads_presignAsync(new Body15
+        var presign = (await client.V1_uploads_presignAsync(new Body16
         {
             Filename = Path.GetFileName(fileName),
             Size = checked((int)size),

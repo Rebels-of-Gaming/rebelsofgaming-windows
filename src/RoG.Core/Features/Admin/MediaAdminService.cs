@@ -9,9 +9,12 @@ namespace RoG.Core.Features.Admin;
 public sealed record PendingGalleryItem(string Id, string AlbumSlug, string AlbumTitle, string Kind, string? Caption, string? Author, Uri? Thumb, Uri? Full, DateTimeOffset? CreatedAt);
 
 /// <summary>Gemeldeter Upload (Guide 20) mit Grund, meldender Person und Vorschau.</summary>
-public sealed record UploadReport(string Id, string Reason, string? Reporter, DateTimeOffset? CreatedAt, string? Resolution, string? UploadTitle, string? Owner, Uri? Preview, Uri? Direct)
+public sealed record UploadReport(string Id, string Reason, string? Reporter, DateTimeOffset? CreatedAt, string? Resolution, string? UploadTitle, string? Owner, Uri? Preview, Uri? Direct, string? Category = null)
 {
     public bool IsOpen => Resolution is null;
+
+    /// <summary>Kinderschutz-Meldung (<c>category: child_safety</c>, v0.30.3) – kommt vom Server zuerst.</summary>
+    public bool IsChildSafety => Category == Moderation.ModerationService.ChildSafety;
 }
 
 public sealed record StorageUsage(int Uploads, long Bytes, IReadOnlyList<(string Name, int Uploads, long Bytes)> TopUsers);
@@ -105,7 +108,8 @@ public sealed class MediaAdminService(HttpClient http)
                 ApiValues.Text(S(upload, "title")) ?? S(upload, "original_name"),
                 owner,
                 ApiValues.WebUri(S(links, "thumb") ?? S(links, "preview")),
-                ApiValues.WebUri(S(links, "direct")));
+                ApiValues.WebUri(S(links, "direct")),
+                ApiValues.Text(S(r, "category")));
         }).Where(r => r.Id.Length > 0).ToList();
     }
 

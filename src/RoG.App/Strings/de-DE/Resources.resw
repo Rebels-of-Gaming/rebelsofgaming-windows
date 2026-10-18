@@ -4712,7 +4712,7 @@
   <data name="Account_DeleteLeaveConfirm" xml:space="preserve">
     <value>Wirklich austreten – erneut klicken</value>
   </data>
-  <data name="Account_DeleteRetryAfter" xml:space="preserve">
+  <data name="Common_RetryAfter" xml:space="preserve">
     <value>Erneut möglich in {0} s.</value>
   </data>
   <data name="Error_leave_clan_first" xml:space="preserve">
@@ -4726,5 +4726,23 @@
   </data>
   <data name="Error_not_a_member" xml:space="preserve">
     <value>Du bist kein aktives Clan-Mitglied (mehr).</value>
+  </data>
+  <data name="Mod_ReasonAll" xml:space="preserve">
+    <value>Alle Gründe</value>
+  </data>
+  <data name="Report_Reason_child_safety" xml:space="preserve">
+    <value>Kinderschutz / Gefährdung Minderjähriger</value>
+  </data>
+  <data name="AdminPage_ChildSafetyBadge.Text" xml:space="preserve">
+    <value>KINDERSCHUTZ</value>
+  </data>
+  <data name="AdminPage_ReasonFilter.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Nach Grund filtern</value>
+  </data>
+  <data name="SettingsPage_ChildSafety.Content" xml:space="preserve">
+    <value>Kinderschutz</value>
+  </data>
+  <data name="Error_already_reported" xml:space="preserve">
+    <value>Du hast das schon gemeldet.</value>
   </data>
 </root>

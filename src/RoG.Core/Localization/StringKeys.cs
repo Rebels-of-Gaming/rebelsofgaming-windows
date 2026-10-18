@@ -790,7 +790,9 @@ public static class StringKeys
 
     public const string AccountDeleteLeaveConfirm = "Account_DeleteLeaveConfirm";
 
-    public const string AccountDeleteRetryAfter = "Account_DeleteRetryAfter";
+    public const string CommonRetryAfter = "Common_RetryAfter";
+
+    public const string ModReasonAll = "Mod_ReasonAll";
 
     public const string ErrorPrefix = "Error_";
 

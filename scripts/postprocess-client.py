@@ -5,7 +5,10 @@
    (`GeneratedApiException<ResponseN>`). Laravel antwortet beim Anlegen oft mit 201 – die App würde jede
    Neuanlage als Fehler sehen. Hier werden solche Zweige auf den Rückgabetyp der Methode umgestellt und
    geben das Ergebnis zurück.
-2. `[EnumMember]` allein wirkt nicht mit System.Text.Json; `[JsonStringEnumMemberName]` ergänzen, damit
+2. Erfolgs-Code, den die Spezifikation nicht nennt (z. B. 200 statt 201, wenn die Website eine alte Meldung wieder
+   öffnet): der erste 2xx-Zweig jeder Methode nimmt jede 2xx-Antwort an. Fehler (4xx/5xx) wirft vorher schon
+   `RoGHttpHandler` als `ApiProblemException`.
+3. `[EnumMember]` allein wirkt nicht mit System.Text.Json; `[JsonStringEnumMemberName]` ergänzen, damit
    Enum-Werte so gesendet werden, wie die API sie erwartet (`windows` statt `Windows`).
 """
 import re
@@ -41,7 +44,15 @@ def fix_method(m):
 
 src = method_re.sub(fix_method, src)
 
-# --- 2. Enum-Namen -----------------------------------------------------------------------------------------
+# --- 2. jede 2xx-Antwort als Erfolg ------------------------------------------------------------------------
+any2xx = 0
+parts = src.split("public virtual async System.Threading.Tasks.Task")
+for i in range(1, len(parts)):
+    parts[i], n = re.subn(r"if \(status_ == 2\d\d\)", "if (status_ >= 200 && status_ < 300)", parts[i], count=1)
+    any2xx += n
+src = "public virtual async System.Threading.Tasks.Task".join(parts)
+
+# --- 3. Enum-Namen -----------------------------------------------------------------------------------------
 if "JsonStringEnumMemberName" not in src:
     src = re.sub(
         r'^( *)\[System\.Runtime\.Serialization\.EnumMember\(Value = @"([^"]*)"\)\]$',
@@ -49,4 +60,4 @@ if "JsonStringEnumMemberName" not in src:
         src, flags=re.M)
 
 open(path, "w", encoding="utf-8").write(src)
-print(f"postprocess-client: {fixed} weitere 2xx-Antworten als Erfolg behandelt")
+print(f"postprocess-client: {fixed} weitere 2xx-Antworten als Erfolg behandelt, {any2xx} Methoden nehmen jede 2xx-Antwort an")

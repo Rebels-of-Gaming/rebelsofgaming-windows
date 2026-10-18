@@ -33,7 +33,7 @@ public class MediaAdminServiceTests
     public void Upload_reports_are_parsed()
     {
         using var doc = JsonDocument.Parse("""
-            {"data":[{"id":"r1","reason":"Urheberrecht","reporter":{"id":"u","name":"Ben"},"created_at":"2026-10-16T10:00:00Z","handled_at":null,"resolution":null,
+            {"data":[{"id":"r1","reason":"Urheberrecht","category":"child_safety","reporter":{"id":"u","name":"Ben"},"created_at":"2026-10-16T10:00:00Z","handled_at":null,"resolution":null,
               "upload":{"id":"up","title":null,"original_name":"bild.png","user":{"id":"o","name":"Cem"},"links":{"thumb":"https://i.example/t.webp","direct":"https://i.example/d.png"}}},
               {"id":"r2","reason":"Spam","reporter":null,"created_at":null,"handled_at":"2026-10-16T11:00:00Z","resolution":"kept","upload":null}]}
             """);
@@ -41,6 +41,8 @@ public class MediaAdminServiceTests
         var reports = MediaAdminService.ParseReports(doc.RootElement);
 
         Assert.True(reports[0].IsOpen);
+        Assert.True(reports[0].IsChildSafety);
+        Assert.False(reports[1].IsChildSafety);
         Assert.Equal("bild.png", reports[0].UploadTitle);
         Assert.Equal("Cem", reports[0].Owner);
         Assert.False(reports[1].IsOpen);

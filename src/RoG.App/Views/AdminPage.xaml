@@ -237,6 +237,7 @@
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" Spacing="8">
                 <ComboBox x:Uid="AdminPage_StatusFilter" MinWidth="160" ItemsSource="{x:Bind Moderation.StatusOptions}" SelectedItem="{x:Bind Moderation.SelectedStatus, Mode=TwoWay}" />
+                <ComboBox x:Uid="AdminPage_ReasonFilter" MinWidth="200" ItemsSource="{x:Bind Moderation.ReasonOptions}" SelectedItem="{x:Bind Moderation.SelectedReason, Mode=TwoWay}" />
                 <Button x:Uid="Backup_Reload" Command="{x:Bind Moderation.ReloadReportsCommand}" />
                 <ProgressRing Width="20" Height="20" IsActive="{x:Bind Moderation.IsBusy, Mode=OneWay}" />
             </StackPanel>
@@ -247,6 +248,9 @@
                             <DataTemplate x:DataType="vm:ReportItemViewModel">
                                 <Border Margin="0,0,0,12" Style="{StaticResource RoGCardStyle}" AutomationProperties.Name="{x:Bind Title}">
                                     <StackPanel Spacing="6">
+                                        <Border Style="{StaticResource RoGAlertBadgeStyle}" Visibility="{x:Bind IsChildSafety}">
+                                            <TextBlock x:Uid="AdminPage_ChildSafetyBadge" Style="{StaticResource RoGAlertBadgeTextStyle}" />
+                                        </Border>
                                         <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Title}" />
                                         <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" TextWrapping="Wrap" />
                                         <Border Padding="10" Background="{StaticResource RoGBg3Brush}" CornerRadius="{StaticResource RoGControlRadius}" Visibility="{x:Bind HasExcerpt}">
@@ -400,6 +404,9 @@
                                         <Image Width="120" Height="80" Source="{x:Bind Thumb}" Stretch="UniformToFill" />
                                     </Button>
                                     <StackPanel Grid.Column="1" Spacing="6">
+                                        <Border Style="{StaticResource RoGAlertBadgeStyle}" Visibility="{x:Bind IsChildSafety}">
+                                            <TextBlock x:Uid="AdminPage_ChildSafetyBadge" Style="{StaticResource RoGAlertBadgeTextStyle}" />
+                                        </Border>
                                         <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Title}" TextTrimming="CharacterEllipsis" />
                                         <TextBlock Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Reason}" TextWrapping="Wrap" />
                                         <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" TextWrapping="Wrap" />

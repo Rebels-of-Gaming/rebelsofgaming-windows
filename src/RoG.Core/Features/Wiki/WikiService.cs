@@ -145,7 +145,7 @@ public sealed class WikiService(IRoGApiClient client, HttpClient http, Uri? wiki
     {
         try
         {
-            var result = await client.V1_wiki_pages_updateAsync(pageId, new Body152
+            var result = await client.V1_wiki_pages_updateAsync(pageId, new Body153
             {
                 Locale = locale,
                 Title = title,
@@ -176,7 +176,7 @@ public sealed class WikiService(IRoGApiClient client, HttpClient http, Uri? wiki
             throw new ArgumentException("Titel fehlt", nameof(title));
         }
 
-        var d = (await client.V1_wiki_pages_storeAsync(namespaceSlug, new Body151
+        var d = (await client.V1_wiki_pages_storeAsync(namespaceSlug, new Body152
         {
             Locale = locale,
             Title = title.Trim(),

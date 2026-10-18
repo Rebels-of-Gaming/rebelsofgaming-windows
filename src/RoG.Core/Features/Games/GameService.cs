@@ -19,8 +19,8 @@ public sealed class GameService(IRoGApiClient client)
                 g.Name,
                 g.Short,
                 g.Platform,
-                g.Genre,
-                g.Emoji,
+                g.Genre ?? string.Empty,
+                g.Emoji ?? string.Empty,
                 ApiValues.Text(g.Clan_tag),
                 ApiValues.WebUri(g.Header?.Url),
                 g.Links?

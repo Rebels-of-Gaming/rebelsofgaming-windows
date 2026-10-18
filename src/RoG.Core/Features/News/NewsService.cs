@@ -23,7 +23,8 @@ public sealed record NewsSummary(
 
 public sealed record NewsArticle(NewsSummary Summary, RichDocument Body, bool CommentsEnabled);
 
-public sealed record NewsComment(string Id, string AuthorName, string? AuthorSlug, DateTimeOffset? CreatedAt, string Body);
+/// <summary>Kommentar; bei blockierten Personen <see cref="AuthorBlocked"/> und ohne Text (außer mit „trotzdem anzeigen“).</summary>
+public sealed record NewsComment(string Id, string AuthorName, string? AuthorSlug, DateTimeOffset? CreatedAt, string? Body, bool AuthorBlocked = false);
 
 /// <summary>News (öffentlich, auch im Gastmodus): Liste mit Cursor, Artikel mit nativ gerendertem Text, Kommentare.</summary>
 public sealed class NewsService(IRoGApiClient client, Uri webBaseUrl)
@@ -47,15 +48,16 @@ public sealed class NewsService(IRoGApiClient client, Uri webBaseUrl)
         return new NewsArticle(summary, _html.Parse(data.Body_html), data.Comments_enabled);
     }
 
-    public async Task<IReadOnlyList<NewsComment>> GetCommentsAsync(string slug, CancellationToken cancellationToken = default)
+    /// <param name="showBlocked">Kommentare blockierter Personen doch mit Text laden (<c>?show_blocked=1</c>).</param>
+    public async Task<IReadOnlyList<NewsComment>> GetCommentsAsync(string slug, bool showBlocked = false, CancellationToken cancellationToken = default)
     {
-        var response = await client.V1_news_comments_indexAsync(slug, cancellationToken).ConfigureAwait(false);
+        var response = await client.V1_news_comments_indexAsync(slug, showBlocked ? true : null, cancellationToken).ConfigureAwait(false);
         return response.Data.Where(c => !c.Hidden)
-            .Select(c => new NewsComment(c.Id, c.Author?.Name ?? "—", c.Author?.Slug, ApiValues.Time(c.Created_at), c.Body))
+            .Select(c => new NewsComment(c.Id, c.Author?.Name ?? "—", c.Author?.Slug, ApiValues.Time(c.Created_at), ApiValues.Text(c.Body), c.Author_blocked))
             .ToList();
     }
 
-    private static NewsSummary Map(Data302 d) => new(
+    private static NewsSummary Map(Data303 d) => new(
         d.Id, d.Slug, ApiValues.WebUri(d.Url), d.Title, ApiValues.Text(d.Teaser) ?? d.Summary, d.Pinned,
         ApiValues.Time(d.Published_at), d.Reading_minutes, d.Comments_count, d.Category?.Name, d.Category?.Color,
         d.Squad?.Name, d.Author?.Name,

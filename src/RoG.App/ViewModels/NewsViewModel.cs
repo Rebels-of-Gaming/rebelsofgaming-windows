@@ -197,6 +197,12 @@ public sealed partial class NewsDetailViewModel(AppServices services, NewsServic
     [ObservableProperty]
     public partial bool HasComments { get; set; }
 
+    /// <summary>Mindestens ein Kommentar einer blockierten Person ist ausgeblendet.</summary>
+    [ObservableProperty]
+    public partial bool HasBlockedComments { get; set; }
+
+    private bool _showBlocked;
+
     protected override bool HasData => Title is not null;
 
     public Task ShowAsync(string slug)
@@ -207,6 +213,7 @@ public sealed partial class NewsDetailViewModel(AppServices services, NewsServic
         }
 
         _slug = slug;
+        _showBlocked = false;
         Title = null;
         Body = null;
         Comments.Clear();
@@ -231,14 +238,22 @@ public sealed partial class NewsDetailViewModel(AppServices services, NewsServic
         Body = article.Body;
         WebUrl = s.WebUrl;
 
+        await LoadCommentsAsync(article.CommentsEnabled, cancellationToken);
+    }
+
+    private async Task LoadCommentsAsync(bool enabled, CancellationToken cancellationToken)
+    {
         Comments.Clear();
-        if (article.CommentsEnabled)
+        if (enabled && _slug is not null)
         {
             try
             {
-                foreach (var c in await news.GetCommentsAsync(_slug, cancellationToken))
+                var hidden = Services.Localizer.GetString(StringKeys.NewsCommentBlocked);
+                foreach (var c in await news.GetCommentsAsync(_slug, _showBlocked, cancellationToken))
                 {
-                    Comments.Add(new CommentViewModel(c.Id, c.AuthorName, c.CreatedAt?.ToLocalTime().ToString("g", CultureInfo.CurrentCulture) ?? string.Empty, c.Body, Services.CurrentUser is not null));
+                    var blockedHidden = c.AuthorBlocked && c.Body is null;
+                    Comments.Add(new CommentViewModel(c.Id, c.AuthorName, c.CreatedAt?.ToLocalTime().ToString("g", CultureInfo.CurrentCulture) ?? string.Empty,
+                        blockedHidden ? hidden : c.Body ?? string.Empty, Services.CurrentUser is not null && !blockedHidden, blockedHidden));
                 }
             }
             catch (Exception ex) when (ex is RoG.Core.Api.ApiProblemException or RoG.Core.Api.Generated.GeneratedApiException)
@@ -248,7 +263,16 @@ public sealed partial class NewsDetailViewModel(AppServices services, NewsServic
         }
 
         HasComments = Comments.Count > 0;
+        HasBlockedComments = Comments.Any(c => c.IsHidden);
         CommentsHeader = Format(StringKeys.NewsComments, Comments.Count);
+    }
+
+    /// <summary>„Trotzdem anzeigen“: Kommentare blockierter Personen mit Text nachladen.</summary>
+    [RelayCommand]
+    private async Task ShowBlockedCommentsAsync()
+    {
+        _showBlocked = true;
+        await LoadCommentsAsync(true, CancellationToken.None);
     }
 
     [RelayCommand]
@@ -307,8 +331,11 @@ public sealed partial class NewsDetailViewModel(AppServices services, NewsServic
 }
 
 /// <summary>Klasse statt record: der Command-Generator des Toolkits erzeugt in records nichts (XAML fände ReportCommand nicht).</summary>
-public sealed partial class CommentViewModel(string id, string author, string time, string body, bool canReport)
+public sealed partial class CommentViewModel(string id, string author, string time, string body, bool canReport, bool isHidden = false)
 {
+    /// <summary>Kommentar einer blockierten Person, Text ausgeblendet.</summary>
+    public bool IsHidden => isHidden;
+
     public string Id => id;
 
     public string Author => author;

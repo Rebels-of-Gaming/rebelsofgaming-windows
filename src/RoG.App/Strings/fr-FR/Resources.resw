@@ -4274,4 +4274,10 @@
   <data name="AdminHelp_servers" xml:space="preserve">
     <value>RCON, mots de passe et liste des configs se règlent sur le site.</value>
   </data>
+  <data name="News_CommentBlocked" xml:space="preserve">
+    <value>Commentaire d’une personne que tu as bloquée.</value>
+  </data>
+  <data name="NewsPage_ShowBlocked.Content" xml:space="preserve">
+    <value>Afficher quand même</value>
+  </data>
 </root>

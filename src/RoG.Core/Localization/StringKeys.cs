@@ -724,6 +724,8 @@ public static class StringKeys
 
     public const string AdminFormErrorChoice = "AdminForm_ErrorChoice";
 
+    public const string NewsCommentBlocked = "News_CommentBlocked";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

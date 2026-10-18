@@ -191,12 +191,13 @@
                                                 <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Time}" />
                                                 <HyperlinkButton x:Uid="Common_ReportLink" Padding="0" Command="{x:Bind ReportCommand}" Visibility="{x:Bind CanReport}" />
                                             </StackPanel>
-                                            <TextBlock IsTextSelectionEnabled="True" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Body}" />
+                                            <TextBlock IsTextSelectionEnabled="True" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Body}" TextWrapping="Wrap" />
                                         </StackPanel>
                                     </Border>
                                 </DataTemplate>
                             </ItemsRepeater.ItemTemplate>
                         </ItemsRepeater>
+                        <HyperlinkButton x:Uid="NewsPage_ShowBlocked" Command="{x:Bind ViewModel.Detail.ShowBlockedCommentsCommand}" Visibility="{x:Bind ViewModel.Detail.HasBlockedComments, Mode=OneWay}" />
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>

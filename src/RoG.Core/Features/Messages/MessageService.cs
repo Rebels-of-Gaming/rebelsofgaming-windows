@@ -112,7 +112,7 @@ public sealed class MessageService(IRoGApiClient client)
         _ => ConversationKind.Direct,
     };
 
-    private static ChatMessage Map(Data297 m) => new(
+    private static ChatMessage Map(Data298 m) => new(
         m.Id,
         m.Conversation_id,
         m.Author?.Id,

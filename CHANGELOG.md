@@ -5,6 +5,8 @@ Versionen nach [SemVer](https://semver.org/lang/de/), Regeln in `docs/VERSIONIER
 
 ## [Unveröffentlicht]
 
+- Manifest: nur noch Gerätefamilie `Windows.Desktop` (`Windows.Universal` entfernt), damit der Store keine anderen Gerätefamilien mehr anbietet
+
 Stufe 0 – Fundament (Version 0.1.0, noch nicht im Store).
 
 - Lösung `RoG.sln`: plattformunabhängiger Kern `RoG.Core` (baut und testet unter Linux), Tests `RoG.Core.Tests`, WinUI-3-App `RoG.App` (MSIX, baut auf der Windows-VM)

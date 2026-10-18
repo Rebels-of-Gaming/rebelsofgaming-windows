@@ -67,4 +67,5 @@ jobs:
           name: windows-artifacts
           path: artifacts/
           if-no-files-found: ignore
-          retention-days: 14
+          # Artefakt-Speicher privater Repos ist knapp (0,5 GB): Pakete 7 Tage, reine Build-Protokolle 2 Tage
+          retention-days: ${{ (github.event.inputs.mode == 'Store' || github.event.inputs.mode == 'Sideload') && 7 || 2 }}

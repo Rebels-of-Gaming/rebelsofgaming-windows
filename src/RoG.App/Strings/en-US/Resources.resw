@@ -4280,4 +4280,25 @@
   <data name="NewsPage_ShowBlocked.Content" xml:space="preserve">
     <value>Show anyway</value>
   </data>
+  <data name="WikiPage_Report.Content" xml:space="preserve">
+    <value>REPORT</value>
+  </data>
+  <data name="MediaPage_Report.Content" xml:space="preserve">
+    <value>REPORT</value>
+  </data>
+  <data name="Mod_Type_wiki_page" xml:space="preserve">
+    <value>Wiki page</value>
+  </data>
+  <data name="Mod_Type_wiki_revision" xml:space="preserve">
+    <value>Wiki revision</value>
+  </data>
+  <data name="AdminPage_OpenReported.Content" xml:space="preserve">
+    <value>Open reported content</value>
+  </data>
+  <data name="SettingsPage_Terms.Content" xml:space="preserve">
+    <value>Terms of use</value>
+  </data>
+  <data name="SettingsPage_Imprint.Content" xml:space="preserve">
+    <value>Legal notice</value>
+  </data>
 </root>

@@ -15,7 +15,9 @@ public sealed record ModReport(
     string? Resolution,
     ModPerson? Target,
     string? Reporter,
-    DateTimeOffset? CreatedAt);
+    DateTimeOffset? CreatedAt,
+    Uri? Url = null,
+    string? Locale = null);
 
 public sealed record ModWarning(string Id, string Reason, int Points, bool Active, DateTimeOffset? CreatedAt, DateTimeOffset? ExpiresAt);
 
@@ -44,7 +46,9 @@ public sealed class ModerationService(IRoGApiClient client)
                 d.Id, d.Type, d.Reason, ApiValues.Text(d.Comment), ApiValues.Text(d.Excerpt), d.Status, ApiValues.Text(d.Resolution),
                 d.Target is { } t ? new ModPerson(t.Id, t.Name, t.Slug) : null,
                 d.Reporter?.Name,
-                ApiValues.Time(d.Created_at))).ToList(),
+                ApiValues.Time(d.Created_at),
+                ApiValues.WebUri(d.Url),
+                ApiValues.Text(d.Locale))).ToList(),
             r.Meta?.Next_cursor);
     }
 
@@ -137,7 +141,8 @@ public sealed class ModerationService(IRoGApiClient client)
         await client.V1_moderation_words_destroyAsync(id, cancellationToken).ConfigureAwait(false);
 
     /// <summary>Inhalt melden (alle Angemeldeten, Scope <c>reports:write</c>; 10 je Stunde).</summary>
-    public async Task ReportAsync(string type, string id, string reason, string? comment, CancellationToken cancellationToken = default) =>
+    /// <param name="locale">Bei <c>wiki_page</c>: Sprache der angezeigten Fassung (de/en/fr), sonst ignoriert.</param>
+    public async Task ReportAsync(string type, string id, string reason, string? comment, string? locale = null, CancellationToken cancellationToken = default) =>
         await client.V1_reports_storeAsync(new Body109
         {
             Type = type switch
@@ -147,8 +152,11 @@ public sealed class ModerationService(IRoGApiClient client)
                 "gallery_item" => Body109Type.Gallery_item,
                 "news_comment" => Body109Type.News_comment,
                 "forum_post" => Body109Type.Forum_post,
+                "wiki_page" => Body109Type.Wiki_page,
+                "wiki_revision" => Body109Type.Wiki_revision,
                 _ => throw new ArgumentOutOfRangeException(nameof(type)),
             },
+            Locale = type == "wiki_page" ? ReportLocale(locale) : null,
             Id = id,
             Reason = reason switch
             {
@@ -161,4 +169,12 @@ public sealed class ModerationService(IRoGApiClient client)
             },
             Comment = ApiValues.Text(comment),
         }, cancellationToken).ConfigureAwait(false);
+
+    private static Body109Locale? ReportLocale(string? locale) => locale?.ToLowerInvariant() switch
+    {
+        "de" => Body109Locale.De,
+        "en" => Body109Locale.En,
+        "fr" => Body109Locale.Fr,
+        _ => null,
+    };
 }

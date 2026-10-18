@@ -60,6 +60,9 @@ public sealed partial class MediaViewModel : LoadableViewModel
     [NotifyPropertyChangedFor(nameof(IsViewerOpen))]
     public partial GalleryItemViewModel? Viewed { get; set; }
 
+    /// <summary>Melden nur angemeldet (Scope <c>reports:write</c> entscheidet die API).</summary>
+    public bool CanReport => Services.CurrentUser is not null;
+
     public bool ShowAlbums => Album is null;
 
     public bool ShowItems => Album is not null;
@@ -228,6 +231,9 @@ public sealed partial class GalleryItemViewModel(GalleryItem item)
 
     [RelayCommand]
     private Task OpenInBrowserAsync() => (item.VideoUrl ?? item.WebUrl ?? item.Full) is { } url ? App.Services.Browser.OpenAsync(url) : Task.CompletedTask;
+
+    [RelayCommand]
+    private Task ReportAsync() => Controls.ReportDialog.ShowAsync("gallery_item", item.Id);
 }
 
 public sealed partial class DownloadsViewModel(AppServices services, MediaService media) : LoadableViewModel(services)

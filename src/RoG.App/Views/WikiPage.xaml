@@ -93,6 +93,7 @@
                         <Button x:Uid="WikiPage_Edit" Command="{x:Bind ViewModel.EditCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" Visibility="{x:Bind ViewModel.CanEdit}" />
                         <Button Command="{x:Bind ViewModel.ToggleWatchCommand}" Content="{x:Bind ViewModel.WatchLabel, Mode=OneWay}" Style="{StaticResource RoGSecondaryButtonStyle}" Visibility="{x:Bind ViewModel.CanWatch}" />
                         <Button x:Uid="Common_OpenInBrowser" Command="{x:Bind ViewModel.OpenInBrowserCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                        <Button x:Uid="WikiPage_Report" Command="{x:Bind ViewModel.ReportCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" Visibility="{x:Bind ViewModel.CanWatch}" />
                     </StackPanel>
                     <InfoBar
                         IsOpen="{x:Bind ViewModel.IsFeedbackOpen, Mode=TwoWay}"
@@ -153,6 +154,7 @@
                                         <StackPanel Orientation="Horizontal" Spacing="12">
                                             <HyperlinkButton x:Uid="WikiPage_Compare" Padding="0" Command="{x:Bind CompareCommand}" />
                                             <HyperlinkButton x:Uid="Config_Rollback" Padding="0" Command="{x:Bind RestoreCommand}" Visibility="{x:Bind CanRestore}" />
+                                            <HyperlinkButton x:Uid="Common_ReportLink" Padding="0" Command="{x:Bind ReportCommand}" Visibility="{x:Bind CanReport}" />
                                             <HyperlinkButton x:Uid="Approval_ApproveLink" Padding="0" Command="{x:Bind ApproveCommand}" Visibility="{x:Bind CanDecide}" />
                                             <HyperlinkButton x:Uid="Approval_RejectLink" Padding="0" Command="{x:Bind RejectCommand}" Visibility="{x:Bind CanDecide}" />
                                         </StackPanel>

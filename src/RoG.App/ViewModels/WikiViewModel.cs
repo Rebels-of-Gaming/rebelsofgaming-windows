@@ -416,6 +416,10 @@ public sealed partial class WikiViewModel : LoadableViewModel
         });
     }
 
+    /// <summary>Angezeigte Seite melden – mit der Sprache der Fassung, die gerade zu sehen ist.</summary>
+    [RelayCommand]
+    private Task ReportAsync() => Article is { } page ? Controls.ReportDialog.ShowAsync("wiki_page", page.Id, page.Locale) : Task.CompletedTask;
+
     [RelayCommand]
     private async Task OpenInBrowserAsync()
     {
@@ -603,6 +607,11 @@ public sealed partial class WikiRevisionItemViewModel(WikiRevision revision, Wik
     public bool CanRestore => owner.CanEdit && revision.Status == "approved";
 
     public bool CanDecide => owner.CanApprove && revision.Status == "pending";
+
+    public bool CanReport => owner.CanWatch;
+
+    [RelayCommand]
+    private Task ReportAsync() => Controls.ReportDialog.ShowAsync("wiki_revision", revision.Id);
 
     [RelayCommand]
     private Task CompareAsync() => owner.CompareAsync(this);

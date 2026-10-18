@@ -726,6 +726,10 @@ public static class StringKeys
 
     public const string NewsCommentBlocked = "News_CommentBlocked";
 
+    public const string ModTypewikipage = "Mod_Type_wiki_page";
+
+    public const string ModTypewikirevision = "Mod_Type_wiki_revision";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

@@ -235,7 +235,15 @@ public sealed partial class SettingsViewModel : ObservableObject
     private Task OpenStatusAsync() => _services.Browser.OpenAsync(_services.Environment.StatusUrl);
 
     [RelayCommand]
-    private Task OpenPrivacyAsync() => _services.Browser.OpenAsync(new Uri(_services.Environment.WebBaseUrl, $"{_services.Language}/privacy"));
+    private Task OpenPrivacyAsync() => OpenLegalAsync("privacy");
+
+    [RelayCommand]
+    private Task OpenTermsAsync() => OpenLegalAsync("terms");
+
+    [RelayCommand]
+    private Task OpenImprintAsync() => OpenLegalAsync("imprint");
+
+    private Task OpenLegalAsync(string page) => _services.Browser.OpenAsync(new Uri(_services.Environment.WebBaseUrl, $"{_services.Language}/{page}"));
 
     private string Format(string key, params object[] args) =>
         string.Format(CultureInfo.CurrentCulture, _services.Localizer.GetString(key), args);

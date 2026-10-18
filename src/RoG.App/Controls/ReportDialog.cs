@@ -10,8 +10,9 @@ namespace RoG.App.Controls;
 /// <summary>Inhalt melden (Guide 28): Grund wählen, optional Kommentar; geht an die Moderation, nie an die gemeldete Person.</summary>
 public static class ReportDialog
 {
-    /// <param name="type"><c>message</c>, <c>profile</c>, <c>gallery_item</c>, <c>news_comment</c> oder <c>forum_post</c>.</param>
-    public static async Task ShowAsync(string type, string id)
+    /// <param name="type"><c>message</c>, <c>profile</c>, <c>gallery_item</c>, <c>news_comment</c>, <c>forum_post</c>,
+    /// <c>wiki_page</c> (mit <paramref name="locale"/>) oder <c>wiki_revision</c>.</param>
+    public static async Task ShowAsync(string type, string id, string? locale = null)
     {
         if (App.ActiveXamlRoot is not { } root)
         {
@@ -53,7 +54,7 @@ public static class ReportDialog
                     return;
                 }
 
-                await new ModerationService(services.Api.Client).ReportAsync(type, id, chosen.Value, comment.Text);
+                await new ModerationService(services.Api.Client).ReportAsync(type, id, chosen.Value, comment.Text, locale);
                 sent = true;
             }
             catch (ApiProblemException ex)

@@ -107,7 +107,11 @@
                     <StackPanel Orientation="Horizontal" Spacing="8">
                         <HyperlinkButton x:Uid="SettingsPage_Website" Command="{x:Bind ViewModel.OpenWebsiteCommand}" />
                         <HyperlinkButton x:Uid="SettingsPage_Status" Command="{x:Bind ViewModel.OpenStatusCommand}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Spacing="8">
                         <HyperlinkButton x:Uid="SettingsPage_Privacy" Command="{x:Bind ViewModel.OpenPrivacyCommand}" />
+                        <HyperlinkButton x:Uid="SettingsPage_Terms" Command="{x:Bind ViewModel.OpenTermsCommand}" />
+                        <HyperlinkButton x:Uid="SettingsPage_Imprint" Command="{x:Bind ViewModel.OpenImprintCommand}" />
                     </StackPanel>
                 </StackPanel>
             </Border>

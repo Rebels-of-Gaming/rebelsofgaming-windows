@@ -253,6 +253,7 @@
                                             <TextBlock IsTextSelectionEnabled="True" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Excerpt}" TextWrapping="Wrap" />
                                         </Border>
                                         <TextBlock FontStyle="Italic" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Comment}" TextWrapping="Wrap" Visibility="{x:Bind HasComment}" />
+                                        <HyperlinkButton x:Uid="AdminPage_OpenReported" Padding="0" Command="{x:Bind OpenContentCommand}" Visibility="{x:Bind HasUrl}" />
                                         <StackPanel Spacing="8" Visibility="{x:Bind IsOpen}">
                                             <TextBox x:Uid="AdminPage_Resolution" Text="{x:Bind Resolution, Mode=TwoWay}" />
                                             <StackPanel Orientation="Horizontal" Spacing="8">

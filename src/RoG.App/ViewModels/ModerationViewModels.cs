@@ -327,6 +327,23 @@ public sealed partial class ReportItemViewModel(ModReport report, ModerationView
 
     [RelayCommand]
     private Task ModerateAsync() => report.Target is { } t ? owner.OpenMemberAsync(t.Id, report.Id) : Task.CompletedTask;
+
+    public bool HasUrl => report.Url is not null;
+
+    /// <summary>Gemeldeten Inhalt öffnen – in der App, wenn es eine Seite dafür gibt, sonst im Browser.</summary>
+    [RelayCommand]
+    private Task OpenContentAsync()
+    {
+        if (report.Url is not { } url)
+        {
+            return Task.CompletedTask;
+        }
+
+        var services = App.Services;
+        return RoG.Core.Navigation.AppRoute.FromWebUrl(url, services.Environment) is { } route && services.Navigate(route)
+            ? Task.CompletedTask
+            : services.Browser.OpenAsync(url);
+    }
 }
 
 public sealed partial class ModBanItemViewModel(ModBan ban, ModerationViewModel owner, ILocalizer localizer)

@@ -4280,4 +4280,25 @@
   <data name="NewsPage_ShowBlocked.Content" xml:space="preserve">
     <value>Afficher quand même</value>
   </data>
+  <data name="WikiPage_Report.Content" xml:space="preserve">
+    <value>SIGNALER</value>
+  </data>
+  <data name="MediaPage_Report.Content" xml:space="preserve">
+    <value>SIGNALER</value>
+  </data>
+  <data name="Mod_Type_wiki_page" xml:space="preserve">
+    <value>Page du wiki</value>
+  </data>
+  <data name="Mod_Type_wiki_revision" xml:space="preserve">
+    <value>Version du wiki</value>
+  </data>
+  <data name="AdminPage_OpenReported.Content" xml:space="preserve">
+    <value>Ouvrir le contenu signalé</value>
+  </data>
+  <data name="SettingsPage_Terms.Content" xml:space="preserve">
+    <value>Conditions d’utilisation</value>
+  </data>
+  <data name="SettingsPage_Imprint.Content" xml:space="preserve">
+    <value>Mentions légales</value>
+  </data>
 </root>

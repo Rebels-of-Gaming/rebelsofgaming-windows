@@ -194,6 +194,12 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   `server-console.js`). Chat-Anhänge: Bilder mit Vorschau über `GET /v1/attachments/{id}` (Umleitung auf kurzlebigen
   Link, max. 8 MB), andere Dateien öffnen im Browser. ET-Farbcodes im Clan-Tag werden wie auf der Website entfernt.
 
+- **2.5.2 – Website v0.30.0 (Melden, Blockieren, Rechtstexte):** Client aus `https://api.rebelsofgaming.com/openapi.json`
+  (Typ-Umbenennungen per Abgleich von Methoden und Eigenschaften). Meldetypen `wiki_page` (+ `locale`), `wiki_revision`,
+  Melden-Knopf in Galerie-Großansicht und Wiki; News-Kommentare mit `author_blocked` → Platzhalter + `show_blocked`;
+  Moderations-Meldungen mit `url`/`locale` → „Gemeldeten Inhalt öffnen“ (App-Route, sonst Browser); Einstellungen mit
+  Nutzungsbedingungen und Impressum. Eigene Wiki-Inhalte vom Melden ausnehmen folgt mit v0.30.1 (`last_editor_is_me`).
+
 - **2.5.1 – Konsole, Gerätefamilie:** Konsolen-Token: `level` ist im generierten Client ein Enum mit String-Konverter nur an der
   Eigenschaft – `SerializeToElement(enum).GetString()` warf, die Konsole verband nie. Jetzt direkte Abbildung, Test
   `ServerControlServiceTests`. Manifest nur `Windows.Desktop` (Hinweis Wahke zur Store-Einreichung).
@@ -240,7 +246,7 @@ sich einmal neu an (2FA).
    - App: „Neuer Gameserver“ in der Serververwaltung (eigenes Fenster, Formular dynamisch nach Egg), Status-Badge,
      Ablauf mit Warnung und „Verlängern“, Löschen in einer Gefahrenzone mit Eingabe des Servernamens, nur wenn
      `deletable`. Recht `servers.create` aus `/v1/me` (nur mit 2FA), nie über Rollennamen.
-3. **Mit v0.30.0, kleinere Punkte** (Ankündigung 18.10.)
+3. **Mit v0.30.0, kleinere Punkte** (Ankündigung 18.10.) – **erledigt in 2.5.2**
    - Melden: neue Typen `wiki_page` (Seiten-ULID, optional `locale` der angezeigten Fassung) und `wiki_revision`
      (Versions-ULID) in `ModerationService.ReportAsync`; Melden-Knopf für Galerie-Einträge (`gallery_item`, in Core
      schon da, in der Media-Seite fehlt er), Wiki-Seite und Wiki-Version. Eigene Wiki-Inhalte (`last_editor_is_me`,

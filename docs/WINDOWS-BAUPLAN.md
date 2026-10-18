@@ -240,6 +240,24 @@ sich einmal neu an (2FA).
    - App: „Neuer Gameserver“ in der Serververwaltung (eigenes Fenster, Formular dynamisch nach Egg), Status-Badge,
      Ablauf mit Warnung und „Verlängern“, Löschen in einer Gefahrenzone mit Eingabe des Servernamens, nur wenn
      `deletable`. Recht `servers.create` aus `/v1/me` (nur mit 2FA), nie über Rollennamen.
+3. **Mit v0.30.0, kleinere Punkte** (Ankündigung 18.10.)
+   - Melden: neue Typen `wiki_page` (Seiten-ULID, optional `locale` der angezeigten Fassung) und `wiki_revision`
+     (Versions-ULID) in `ModerationService.ReportAsync`; Melden-Knopf für Galerie-Einträge (`gallery_item`, in Core
+     schon da, in der Media-Seite fehlt er), Wiki-Seite und Wiki-Version. Eigene Wiki-Inhalte (`last_editor_is_me`,
+     erst ab v0.30.1) nicht melden lassen.
+   - Blockierte Personen: News-Kommentare mit `author_blocked: true` / `body: null` als „Kommentar einer blockierten
+     Person“ mit „trotzdem anzeigen“ (`?show_blocked=1`); fehlende Galerie-Einträge brauchen nichts.
+   - Moderation: `url` der Meldung als „Inhalt öffnen“ (App-Route, sonst Browser).
+   - Nutzungsbedingungen `/{locale}/terms` neben Datenschutz/Impressum in Einstellungen und Konto verlinken.
+
+### Geplant – wartet auf Website v0.30.1 (angekündigt 18.10.2026)
+
+- **Clan verlassen vor der Kontolöschung** (Pflicht für die Store-Regeln „Konto in der App löschen“): `DELETE /v1/me`
+  liefert bei aktiven Mitgliedern 409 `leave_clan_first`. Dann im selben Dialog „Clan verlassen“ anbieten
+  (`POST /v1/me/leave-clan`, Body `{confirmation}` – dasselbe Passwort-/Namensfeld, Scope `profile:write`;
+  409 `owner_cannot_leave`/`not_a_member`, 422 falsche Bestätigung, 403 Re-Auth wie beim Löschen), nach Erfolg das
+  Löschen freigeben. 404/405 (ältere Website) → bisheriger Hinweis „an die Clanleitung wenden“. Ablauf wie in der
+  Mobile-App; Logik (Zustände des Dialogs) in `AccountService`/Core mit Tests.
 
 ### Offline, Melden, Verwaltung (2.3.1–2.3.3, 16.10.2026)
 

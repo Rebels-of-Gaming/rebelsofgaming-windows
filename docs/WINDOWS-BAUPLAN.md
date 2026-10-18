@@ -214,6 +214,33 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   **Annahme:** Verwaltungs-Scopes gibt die Website nur mit Recht **und** aktiver TOTP-2FA; wer sie neu braucht, meldet
   sich einmal ab und an.
 
+### Geplant – wartet auf Website v0.30.0 (angekündigt 18.10.2026)
+
+Von der Website-Sitzung angekündigt, Owner möchte beides in der App. **Erst bauen, wenn die Website meldet, dass die
+Version live ist** – dann `scripts/generate-api.sh --from-website` gegen die Live-Spezifikation; die Endpunkte unten sind
+der geplante Stand und können sich noch ändern. Neue Scopes (`social:read`/`social:write`, Server anlegen) kommen ohne
+App-Änderung, weil der Login `meta.app_scopes` von `/v1/auth/scopes` übernimmt (`AppScopes`); wer sie braucht, meldet
+sich einmal neu an (2FA).
+
+1. **Social-Media-Status an der Quelle** (News, Termine, Clanwars, Galerie-Einträge)
+   - Core: `SocialSourceService` – `GET /v1/social/sources/{source}/{id}` (Gesamtstatus none · draft · scheduled ·
+     publishing · published · partial · failed · cancelled; je Kanal Status, Zeit, Link, Fehlergrund),
+     `POST …/targets/{target}/retry` (failed/skipped/cancelled), `POST /v1/social/posts/{post}/retry-failed`,
+     `POST /v1/social/sources/{source}/{id}/redraft`. Logik „welche Aktion ist erlaubt“ in Core mit Tests;
+     bereits gepostete Kanäle nie erneut senden, nur über „neu vorbereiten“ (neuer Entwurf, Freigabe wie bisher).
+   - App: Karte „Social Media“ in `NewsEditorWindow`, Termin-Detail, `MatchEditorWindow` und Galerie (Media-Seite);
+     Status-Symbol in der News-Liste. Sichtbar nur mit Scope `social:read`, Aktionen nur mit `social:write`.
+2. **Gameserver anlegen und löschen** (Pterodactyl Application API über die Website)
+   - Core: `ServerProvisioningService` – `GET /v1/servers/provisioning/catalog` (Locations/Nodes, freie Allocations,
+     Nests/Eggs mit Docker-Images, Startbefehl, Variablen), `POST /v1/servers/provision` (Idempotency-Key über
+     `RoGHttpHandler`), `PATCH /v1/servers/{server}/expiry`, `DELETE /v1/servers/{server}/provision`;
+     `provisioning` {status installing · ready · failed, provisioned_at, expires_at, deletable} an der Server-Ressource.
+     Formular-Logik (Egg-Variablen mit Regeln, Limits, Website-Felder Spiel/Squad/Sichtbarkeit/Query/Passwort) in Core
+     mit Tests.
+   - App: „Neuer Gameserver“ in der Serververwaltung (eigenes Fenster, Formular dynamisch nach Egg), Status-Badge,
+     Ablauf mit Warnung und „Verlängern“, Löschen in einer Gefahrenzone mit Eingabe des Servernamens, nur wenn
+     `deletable`. Recht `servers.create` aus `/v1/me` (nur mit 2FA), nie über Rollennamen.
+
 ### Offline, Melden, Verwaltung (2.3.1–2.3.3, 16.10.2026)
 
 - **Offline-Warteschlange** (`Outbox`, Core): DMs, Forenantworten und Zusagen ohne Netz werden mit festem

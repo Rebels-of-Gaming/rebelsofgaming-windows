@@ -343,7 +343,7 @@ public sealed partial class MemberDetailViewModel(AppServices services, MemberSe
 
     [RelayCommand]
     private Task OpenProfileAsync() =>
-        _slug is null ? Task.CompletedTask : Services.Browser.OpenAsync(new Uri(Services.Environment.WebBaseUrl, $"u/{Uri.EscapeDataString(_slug)}"));
+        _slug is null ? Task.CompletedTask : Services.Browser.OpenAsync(Services.Environment.ProfilePage(Services.Language, _slug));
 
     internal static Brush PresenceBrush(Presence presence) => (Brush)Application.Current.Resources[presence switch
     {

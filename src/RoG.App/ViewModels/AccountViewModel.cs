@@ -144,12 +144,12 @@ public sealed partial class AccountViewModel(AppServices services) : ObservableO
 
     /// <summary>Kontoverwaltung der Website (E-Mail/Passwort, Passkeys, Sitzungen, Export, Löschen) – bis die App das selbst kann.</summary>
     [RelayCommand]
-    private Task OpenWebsiteAccountAsync() => services.Browser.OpenAsync(new Uri(services.Environment.WebBaseUrl, "settings/account"));
+    private Task OpenWebsiteAccountAsync() => services.Browser.OpenAsync(services.Environment.WebPage(services.Language, "settings/account"));
 
     [RelayCommand]
     private Task OpenProfileAsync() =>
         services.CurrentUser is { } user
-            ? services.Browser.OpenAsync(new Uri(services.Environment.WebBaseUrl, $"u/{Uri.EscapeDataString(user.Slug)}"))
+            ? services.Browser.OpenAsync(services.Environment.ProfilePage(services.Language, user.Slug))
             : Task.CompletedTask;
 
     private string Format(string key, params object[] args) =>

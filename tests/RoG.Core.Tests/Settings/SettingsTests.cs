@@ -119,6 +119,19 @@ public sealed class SettingsTests : IDisposable
     }
 
     [Theory]
+    [InlineData("de", "https://rebelsofgaming.com/de/u/sariela")]
+    [InlineData("en", "https://rebelsofgaming.com/en/u/sariela")]
+    [InlineData("fr", "https://rebelsofgaming.com/fr/u/sariela")]
+    [InlineData(null, "https://rebelsofgaming.com/de/u/sariela")]
+    [InlineData("it", "https://rebelsofgaming.com/de/u/sariela")]
+    public void Website_pages_carry_the_language_prefix(string? language, string expected)
+    {
+        var prod = RoGEnvironment.Get(RoGEnvironment.Production);
+        Assert.Equal(expected, prod.ProfilePage(language, "sariela").ToString());
+        Assert.Equal($"https://rebelsofgaming.com/{language switch { "en" or "fr" => language, _ => "de" }}/settings/account", prod.WebPage(language, "/settings/account").ToString());
+    }
+
+    [Theory]
     [InlineData("Wahke", "Windows-App – PC von Wahke")]
     [InlineData("  Wahke\t", "Windows-App – PC von Wahke")]
     [InlineData("", "Windows-App")]

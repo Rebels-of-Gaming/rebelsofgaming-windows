@@ -28,6 +28,20 @@ public sealed record RoGEnvironment(string Name, Uri ApiBaseUrl, Uri WebBaseUrl,
     /// <summary>Seite für den App-Login im System-Browser (Website-Domain, nicht api.).</summary>
     public Uri AuthorizeUrl => new(WebBaseUrl, "auth/app/authorize");
 
+    /// <summary>
+    /// Seite der Website in der App-Sprache: alle Seiten (Profil <c>u/{slug}</c>, <c>settings/account</c>, Regeln …)
+    /// liegen unter <c>/{de|en|fr}/</c>, ohne Präfix antwortet die Website mit 404. Unbekannte Sprache → <c>de</c>.
+    /// </summary>
+    public Uri WebPage(string? language, string path)
+    {
+        ArgumentNullException.ThrowIfNull(path);
+        var lang = language is "de" or "en" or "fr" ? language : "de";
+        return new Uri(WebBaseUrl, $"{lang}/{path.TrimStart('/')}");
+    }
+
+    /// <summary>Öffentliches Profil auf der Website (<c>/{sprache}/u/{slug}</c>).</summary>
+    public Uri ProfilePage(string? language, string slug) => WebPage(language, "u/" + Uri.EscapeDataString(slug));
+
     private static Dictionary<string, RoGEnvironment> Load()
     {
         using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("RoG.Core.Config.environments.json")

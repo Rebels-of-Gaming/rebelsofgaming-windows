@@ -150,6 +150,15 @@ public sealed partial class ToolWindow : Window, IToolBridgeHost, IDisposable
         core.WebResourceRequested += (_, e) => e.Response = environment.CreateWebResourceResponse(null, 403, "Blocked", string.Empty);
 
         core.WebMessageReceived += OnWebMessageReceived;
+
+        // Handshake (Guide 42): der Handler steht vor NavigateToString; nach dem Laden zusätzlich das Theme schicken
+        core.NavigationCompleted += (_, e) =>
+        {
+            if (e.IsSuccess && _bridge is not null)
+            {
+                core.PostWebMessageAsJson(ToolBridge.ThemeMessage(_bridge.Theme));
+            }
+        };
     }
 
     private async void OnWebMessageReceived(CoreWebView2 sender, CoreWebView2WebMessageReceivedEventArgs args)

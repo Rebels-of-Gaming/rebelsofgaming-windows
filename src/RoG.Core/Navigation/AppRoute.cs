@@ -24,6 +24,7 @@ public enum AppSection
     Uploads,
     Media,
     Admin,
+    Tools,
 }
 
 /// <summary>Ziel in der App: Bereich und optional ein Eintrag (Slug/ID) bzw. bei der Suche der Suchbegriff.</summary>
@@ -76,6 +77,7 @@ public sealed record AppRoute(AppSection Section, string? Key = null)
             "rules" or "about" or "partners" or "imprint" or "privacy" or "terms" or "contact" or "pages" or "p" => new AppRoute(AppSection.Info, parts[0]),
             "messages" => new AppRoute(AppSection.Messages, key),
             "settings" or "account" => new AppRoute(AppSection.Account),
+            "tools" => new AppRoute(AppSection.Tools, key),
             _ => null,
         };
     }
@@ -120,6 +122,7 @@ public sealed record AppRoute(AppSection Section, string? Key = null)
             "uploads" => new AppRoute(AppSection.Uploads),
             "media" => new AppRoute(AppSection.Media),
             "admin" => new AppRoute(AppSection.Admin),
+            "tools" => new AppRoute(AppSection.Tools, key),
             "search" => query.TryGetValue("q", out var q) && q.Length > 0 ? new AppRoute(AppSection.Search, q) : null,
             "open" => query.TryGetValue("url", out var url) && Uri.TryCreate(url, UriKind.Absolute, out var web) ? FromWebUrl(web, environment) : null,
             _ => null,

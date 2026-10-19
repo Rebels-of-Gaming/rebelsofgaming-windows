@@ -61,6 +61,7 @@
                 <NavigationViewItem x:Uid="Shell_NavServers" Content="Server" Icon="World" Tag="Nav_Servers" />
                 <NavigationViewItem x:Uid="Shell_NavForum" Content="Forum" Icon="Comment" Tag="Nav_Forum" />
                 <NavigationViewItem x:Uid="Shell_NavWiki" Content="Wiki" Icon="Library" Tag="Nav_Wiki" />
+                <NavigationViewItem x:Uid="Shell_NavTools" Content="Tools" Icon="Repair" Tag="Nav_Tools" />
                 <NavigationViewItem x:Uid="Shell_NavMembers" Content="Mitglieder" Icon="ContactInfo" Tag="Nav_Members" />
                 <NavigationViewItem x:Uid="Shell_NavMatches" Content="Matches" Icon="Flag" Tag="Nav_Matches" />
                 <NavigationViewItem x:Uid="Shell_NavMedia" Content="Medien" Icon="Pictures" Tag="Nav_Media" />

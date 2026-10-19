@@ -102,6 +102,52 @@ public class ServerProvisioningTests
     }
 
     [Fact]
+    public void Additional_ports_are_sent_as_ids_and_auto_count()
+    {
+        var c = Parsed();
+        var node = c.Nodes[0];
+        var egg = c.Eggs[0];
+        var area = ProvisionForm.Area(c, node, egg);
+        Assert.Equal(AdminFieldType.MultiChoice, area.Fields.Single(f => f.Key == "additional_allocations").Type);
+
+        var values = ProvisionForm.Defaults(egg);
+        values["name"] = "CS2 Scrim";
+        values["allocation_id"] = "17";
+        values["additional_allocations"] = "18";
+        values["additional_auto"] = "2";
+        Assert.Empty(ProvisionForm.Validate(area, egg, values));
+
+        var body = ProvisionForm.Body(area, node, egg, values);
+        Assert.Equal([18], body["additional_allocations"]!.AsArray().Select(n => (int)n!));
+        Assert.Equal(2, (long)body["additional_auto"]!);
+
+        // ohne Zusatzports gehen die Felder gar nicht erst raus
+        values["additional_allocations"] = string.Empty;
+        values["additional_auto"] = "0";
+        var plain = ProvisionForm.Body(area, node, egg, values);
+        Assert.False(plain.ContainsKey("additional_allocations"));
+        Assert.False(plain.ContainsKey("additional_auto"));
+    }
+
+    [Fact]
+    public void Additional_ports_reject_the_main_port_and_more_than_ten()
+    {
+        var c = Parsed();
+        var egg = c.Eggs[0];
+        var area = ProvisionForm.Area(c, c.Nodes[0], egg);
+        var values = ProvisionForm.Defaults(egg);
+        values["name"] = "x";
+        values["allocation_id"] = "17";
+        values["additional_allocations"] = "17\n18";
+
+        Assert.Equal("Provision_Rule_AdditionalPrimary", ProvisionForm.Validate(area, egg, values)["additional_allocations"]);
+
+        values["additional_allocations"] = "18";
+        values["additional_auto"] = "10";
+        Assert.Equal("Provision_Rule_AdditionalMax|10", ProvisionForm.Validate(area, egg, values)["additional_allocations"]);
+    }
+
+    [Fact]
     public void Form_reports_egg_rule_and_limit_errors()
     {
         var c = Parsed();

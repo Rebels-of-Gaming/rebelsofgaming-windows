@@ -194,6 +194,25 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   `server-console.js`). Chat-Anhänge: Bilder mit Vorschau über `GET /v1/attachments/{id}` (Umleitung auf kurzlebigen
   Link, max. 8 MB), andere Dateien öffnen im Browser. ET-Farbcodes im Clan-Tag werden wie auf der Website entfernt.
 
+- **2.5.7 – Tool-Baukasten und zusätzliche Ports (Website v0.31.0/v0.32.0, Auftrag Wahke 19.10. über die
+  Website-Sitzung):** `ToolService` (Liste mit `filter[game]`/`filter[squad]`/`filter[status]=all` für Verwaltende,
+  Dokument, Daten, Assets – direkt über `/v1/`, weil Tool-Werte beliebiges JSON sind, ohne ETag-Cache) und
+  `ToolBridge` (Core, 27 Tests): Protokoll aus Guide 42 und `tool-frame.js` – nur `{rog:"bridge",v:1}`, Methodenliste,
+  128 KB, Textlängen, 8 gleichzeitig, Dateien 4 gleichzeitig/250 in der Warteschlange/3 MB, nur Namen aus der
+  Liste, Antwort `{name,mime,size,base64}`; `copy` 1×/s; `openLink` nur http(s) ohne Zugangsdaten, 1/s, 10/min,
+  nach 5 Fehlversuchen 60 s gesperrt. **Annahme:** Statt der Nutzer-Aktivierung (gibt es in WebView2 nicht) fragt
+  die App vor jedem Link mit Ziel-Host nach; abgelehnt → `error.code = cancelled`. Pfadteile aus nur Punkten lehnt
+  Core ab (Uri würde `..` auflösen). App: Navigationspunkt „Tools“ (nach Spiel gruppiert, Entwürfe für Verwaltende),
+  „Tools“ im Squad (aufklappbar), Links `/tools/{slug}` und `rog://tools/{slug}`; jedes Tool im eigenen Fenster
+  (`ToolWindow`): `NavigateToString` (`about:blank`), jede weitere Navigation/Frame-Navigation abgebrochen, keine
+  neuen Fenster, Downloads, Berechtigungen, Skript-Dialoge, DevTools, Kontextmenüs, Browser-Tastenkürzel;
+  `resize` wird nicht gebraucht (das Fenster scrollt). Dokumente über 1,9 Mio. Zeichen (Grenze von
+  `NavigateToString`) → Hinweis „im Browser öffnen“. **Nicht gebaut:** Tool-Verwaltung (anlegen, Code, Versionen,
+  Assets) bleibt auf der Website. Gameserver anlegen: „Zusätzliche Ports“ (Mehrfachauswahl, `additional_allocations`
+  als Zahlen) und „Weitere automatisch“ (`additional_auto`); zusammen höchstens 10, Hauptport nicht doppelt; ohne
+  Zusatzports gehen die Felder nicht raus. `tools/AppCompileCheck` referenziert die WebView2-Projektion selbst.
+  Melden (v0.30.4) gegengeprüft: 429 `too_many_reports` mit Wartezeit, Wiedereröffnung (200) als Erfolg.
+
 - **2.5.6 – Kinderschutz (Website v0.30.3, Auftrag Wahke über die Website-Sitzung 18.10.):** `child_safety` als erster
   Grund in `ModerationService.ReportReasons` (alle Melden-Dialoge); Moderation: `ModReport.Priority`/`IsChildSafety`,
   Filter `filter[reason]` (Auswahl „Alle Gründe“/„Kinderschutz“), rotes Kennzeichen (`RoGAlertBadgeStyle`), offene
@@ -398,6 +417,9 @@ sich einmal neu an (2FA).
   **mit DPAPI verschlüsselt** (ab 2.3.3); Abmelden löscht den Ordner, Deinstallation ebenso.
 - Ab 2.3.3: Offline-Warteschlange `outbox.dat` (Forenantworten, Zusagen; DPAPI-verschlüsselt) – **Direktnachrichten
   nie auf der Platte**, nur im Speicher bis zum Senden. Abmelden leert die Warteschlange.
+- Ab 2.5.7: Tools (Tool-Baukasten) laufen in einer WebView2 im **InPrivate-Modus** (keine Cookies, kein Speicher
+  über das Fenster hinaus) ohne Netzwerk (CSP der Website plus 403 für jede http(s)-Anfrage in der App). Was ein Tool
+  speichert, liegt im Konto auf der Website (`/v1/tools/{slug}/data/*`, im Datenexport enthalten), nicht lokal.
 - Keine Übermittlung an Dritte, keine Telemetrie (`DOTNET_CLI_TELEMETRY_OPTOUT` auch in den Skripten). Schriften eingebettet.
 
 ## Verzeichnisstruktur

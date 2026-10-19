@@ -32,6 +32,8 @@ public sealed partial class SquadsPage : Page
 
     private void OnGalleryExpanding(Expander sender, ExpanderExpandingEventArgs args) => _ = ViewModel.Detail.LoadGalleryAsync();
 
+    private void OnToolsExpanding(Expander sender, ExpanderExpandingEventArgs args) => _ = ViewModel.Detail.LoadToolsAsync();
+
     private void OnModeChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args) =>
         ViewModel.GamesMode = sender.SelectedItem is not null && sender.Items.IndexOf(sender.SelectedItem) == 1;
 

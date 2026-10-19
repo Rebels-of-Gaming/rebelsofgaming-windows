@@ -23,6 +23,8 @@
     <ProjectReference Include="../../src/RoG.Core/RoG.Core.csproj" />
     <PackageReference Include="Microsoft.WindowsAppSDK" ExcludeAssets="build;buildTransitive" />
     <PackageReference Include="CommunityToolkit.Mvvm" />
+    <!-- WebView2 (Tools): die Projektion bindet sonst erst ein Build-Target des Windows App SDK ein -->
+    <Reference Include="$(NuGetPackageRoot)microsoft.web.webview2/*/lib_manual/net8.0-windows10.0.17763.0/Microsoft.Web.WebView2.Core.Projection.dll" />
   </ItemGroup>
   <Target Name="GenerateXamlStubs" BeforeTargets="CoreCompile">
     <Exec Command="python3 -I &quot;$(MSBuildThisFileDirectory)xaml_stubs.py&quot; &quot;$(MSBuildThisFileDirectory)../../src/RoG.App&quot; &quot;$(BaseIntermediateOutputPath)XamlStubs.g.cs&quot;" />

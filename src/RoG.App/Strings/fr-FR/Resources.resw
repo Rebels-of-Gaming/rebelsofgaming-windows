@@ -4745,4 +4745,74 @@
   <data name="Error_already_reported" xml:space="preserve">
     <value>Tu l’as déjà signalé.</value>
   </data>
+  <data name="Nav_Tools" xml:space="preserve">
+    <value>Outils</value>
+  </data>
+  <data name="Tools_NoGame" xml:space="preserve">
+    <value>Autres outils</value>
+  </data>
+  <data name="Tools_Draft" xml:space="preserve">
+    <value>Brouillon</value>
+  </data>
+  <data name="Tools_TooLarge" xml:space="preserve">
+    <value>Cet outil est trop volumineux pour l’app. Ouvre-le dans le navigateur.</value>
+  </data>
+  <data name="Tools_LoadFailed" xml:space="preserve">
+    <value>Impossible de charger l’outil. Si le runtime WebView2 de Microsoft Edge manque, ouvre-le dans le navigateur.</value>
+  </data>
+  <data name="Tools_Copied" xml:space="preserve">
+    <value>Copié : {0}</value>
+  </data>
+  <data name="Tools_OpenLinkTitle" xml:space="preserve">
+    <value>Ouvrir le lien ?</value>
+  </data>
+  <data name="Tools_OpenLinkText" xml:space="preserve">
+    <value>L’outil veut ouvrir une page sur {0} dans ton navigateur :
+{1}</value>
+  </data>
+  <data name="Tools_OpenLinkConfirm" xml:space="preserve">
+    <value>Ouvrir</value>
+  </data>
+  <data name="Tools_SquadEmpty" xml:space="preserve">
+    <value>Ce squad n’a pas encore d’outils.</value>
+  </data>
+  <data name="Shell_NavTools.Content" xml:space="preserve">
+    <value>Outils</value>
+  </data>
+  <data name="ToolsPage_Title.Text" xml:space="preserve">
+    <value>OUTILS</value>
+  </data>
+  <data name="ToolsPage_Intro.Text" xml:space="preserve">
+    <value>Petits outils de la direction du clan pour nos jeux. Chaque outil s’ouvre dans sa propre fenêtre ; ce que tu enregistres est stocké dans ton compte.</value>
+  </data>
+  <data name="ToolsPage_State.EmptyText" xml:space="preserve">
+    <value>Pas encore d’outils pour toi.</value>
+  </data>
+  <data name="ToolWindow_Reload.Content" xml:space="preserve">
+    <value>Recharger</value>
+  </data>
+  <data name="ToolWindow_Web.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Outil</value>
+  </data>
+  <data name="SquadsPage_Tools.Header" xml:space="preserve">
+    <value>Outils</value>
+  </data>
+  <data name="Provision_additional_allocations" xml:space="preserve">
+    <value>Ports supplémentaires</value>
+  </data>
+  <data name="Provision_additional_auto" xml:space="preserve">
+    <value>Autres automatiquement</value>
+  </data>
+  <data name="Provision_Help_additional_allocations" xml:space="preserve">
+    <value>Autres ports libres du même nœud, p. ex. pour query, RCON ou voix. Ne choisis pas le port principal.</value>
+  </data>
+  <data name="Provision_Help_additional_auto" xml:space="preserve">
+    <value>Nombre de ports libres suivants après le port principal (même IP). Avec la liste, 10 au maximum ; le site relève lui-même la limite de ports.</value>
+  </data>
+  <data name="Provision_Rule_AdditionalPrimary" xml:space="preserve">
+    <value>Le port principal ne peut pas être aussi un port supplémentaire.</value>
+  </data>
+  <data name="Provision_Rule_AdditionalMax" xml:space="preserve">
+    <value>{0} ports supplémentaires au maximum.</value>
+  </data>
 </root>

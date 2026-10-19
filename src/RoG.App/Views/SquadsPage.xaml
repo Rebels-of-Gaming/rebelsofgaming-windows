@@ -231,6 +231,26 @@
                         </StackPanel>
                     </Expander>
 
+                    <!-- Tools (Tool-Baukasten) -->
+                    <Expander x:Uid="SquadsPage_Tools" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Expanding="OnToolsExpanding">
+                        <StackPanel Spacing="8">
+                            <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind ViewModel.Detail.ToolsHint, Mode=OneWay}" TextWrapping="Wrap" Visibility="{x:Bind ViewModel.Detail.HasToolsHint, Mode=OneWay}" />
+                            <ItemsRepeater ItemsSource="{x:Bind ViewModel.Detail.Tools}">
+                                <ItemsRepeater.Layout>
+                                    <StackLayout Spacing="8" />
+                                </ItemsRepeater.Layout>
+                                <ItemsRepeater.ItemTemplate>
+                                    <DataTemplate x:DataType="vm:ToolItemViewModel">
+                                        <StackPanel Orientation="Horizontal" Spacing="12">
+                                            <Button Command="{x:Bind OpenCommand}" Content="{x:Bind Name}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                                            <TextBlock VerticalAlignment="Center" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Description}" TextTrimming="CharacterEllipsis" Visibility="{x:Bind HasDescription}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsRepeater.ItemTemplate>
+                            </ItemsRepeater>
+                        </StackPanel>
+                    </Expander>
+
                     <!-- Statistiken -->
                     <Expander x:Uid="SquadsPage_Stats" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Expanding="OnStatsExpanding">
                         <TextBlock FontFamily="Consolas" FontSize="13" IsTextSelectionEnabled="True" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind ViewModel.Detail.StatsText, Mode=OneWay}" TextWrapping="Wrap" />

@@ -17,6 +17,7 @@ public class AppRouteTests
     [InlineData("https://rebelsofgaming.com/forum/general/thread-1", AppSection.Forum, "general/thread-1")]
     [InlineData("https://rebelsofgaming.com/de/privacy", AppSection.Info, "privacy")]
     [InlineData("https://rebelsofgaming.com/", AppSection.Home, null)]
+    [InlineData("https://rebelsofgaming.com/de/tools/et-nickname", AppSection.Tools, "et-nickname")]
     [InlineData("https://wiki.rebelsofgaming.com/Enemy_Territory", AppSection.Wiki, "Enemy_Territory")]
     public void Maps_platform_urls(string url, AppSection section, string? key)
     {

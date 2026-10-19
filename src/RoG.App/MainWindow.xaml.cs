@@ -37,6 +37,7 @@ public sealed partial class MainWindow : Window, IDisposable
         [StringKeys.NavUploads] = typeof(UploadsPage),
         [StringKeys.NavMedia] = typeof(MediaPage),
         [StringKeys.NavWiki] = typeof(WikiPage),
+        [StringKeys.NavTools] = typeof(ToolsPage),
         [StringKeys.NavAdmin] = typeof(AdminPage),
     };
 
@@ -484,6 +485,7 @@ public sealed partial class MainWindow : Window, IDisposable
         AppSection.Uploads => StringKeys.NavUploads,
         AppSection.Media => StringKeys.NavMedia,
         AppSection.Admin => StringKeys.NavAdmin,
+        AppSection.Tools => StringKeys.NavTools,
         _ => null,
     };
 

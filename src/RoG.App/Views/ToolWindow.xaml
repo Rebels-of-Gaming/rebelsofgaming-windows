@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ein Tool aus dem Tool-Baukasten: abgeschottete WebView2 (kein Netzwerk, keine Navigation) mit RoG-Bridge. -->
+<Window
+    x:Class="RoG.App.Views.ToolWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid Background="{StaticResource RoGBgBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid x:Name="TitleBar" Padding="16,0,140,0" Background="{StaticResource RoGBg2Brush}">
+            <TextBlock
+                x:Name="TitleText"
+                VerticalAlignment="Center"
+                FontFamily="{StaticResource RoGDisplaySemiBoldFont}"
+                FontSize="14"
+                CharacterSpacing="60"
+                Foreground="{StaticResource RoGMutedBrush}"
+                TextTrimming="CharacterEllipsis" />
+        </Grid>
+
+        <StackPanel Grid.Row="1" Margin="16,8,16,8" Spacing="8">
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <Button x:Uid="ToolWindow_Reload" Click="OnReloadClick" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                <Button x:Name="BrowserButton" x:Uid="Common_OpenInBrowser" Click="OnBrowserClick" Style="{StaticResource RoGSecondaryButtonStyle}" />
+            </StackPanel>
+            <ProgressBar x:Name="Progress" IsIndeterminate="True" Visibility="Collapsed" />
+            <InfoBar x:Name="Feedback" IsClosable="True" />
+        </StackPanel>
+
+        <WebView2 x:Name="Web" x:Uid="ToolWindow_Web" Grid.Row="2" DefaultBackgroundColor="#1C1F26" />
+    </Grid>
+</Window>

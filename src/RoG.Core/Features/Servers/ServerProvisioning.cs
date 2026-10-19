@@ -372,6 +372,9 @@ public static class ProvisionForm
     public static readonly IReadOnlyList<string> QueryTypes = ["source", "quake3", "minecraft"];
     public static readonly IReadOnlyList<string> PasswordVisibility = ["members", "squad", "managers"];
 
+    /// <summary>Höchstens so viele zusätzliche Ports (Liste + automatisch), wie die Website (<c>ProvisionServer::MAX_ADDITIONAL</c>).</summary>
+    public const int MaxAdditional = 10;
+
     /// <summary>Felder für die Auswahl; <paramref name="node"/>/<paramref name="egg"/> null → nur die allgemeinen.</summary>
     public static AdminArea Area(ProvisionCatalog catalog, ProvisionNode? node, ProvisionEgg? egg)
     {
@@ -386,6 +389,13 @@ public static class ProvisionForm
             fields.Add(new("allocation_id", "Provision_allocation", AdminFieldType.Choice,
                 Choices: node.Allocations.Select(a => new AdminChoice(a.Id.ToString(CultureInfo.InvariantCulture), string.Empty, a.Display)).ToList(),
                 HelpKey: "Provision_Help_allocation"));
+
+            // v0.32.0: weitere Ports (Query/RCON/Voice) – Liste und/oder die nächsten freien nach dem Hauptport
+            fields.Add(new("additional_allocations", "Provision_additional_allocations", AdminFieldType.MultiChoice,
+                Choices: node.Allocations.Select(a => new AdminChoice(a.Id.ToString(CultureInfo.InvariantCulture), string.Empty, a.Display)).ToList(),
+                HelpKey: "Provision_Help_additional_allocations"));
+            fields.Add(new("additional_auto", "Provision_additional_auto", AdminFieldType.WholeNumber, Min: 0, Max: MaxAdditional,
+                HelpKey: "Provision_Help_additional_auto"));
         }
 
         if (egg is not null)
@@ -489,6 +499,20 @@ public static class ProvisionForm
             }
         }
 
+        var additional = AdditionalIds(values);
+        var auto = long.TryParse(values.Text("additional_auto").Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out var n) ? n : 0;
+        if (!errors.ContainsKey("additional_allocations"))
+        {
+            if (additional.Contains(values.Text("allocation_id").Trim(), StringComparer.Ordinal))
+            {
+                errors["additional_allocations"] = "Provision_Rule_AdditionalPrimary";
+            }
+            else if (additional.Count + Math.Max(0, auto) > MaxAdditional)
+            {
+                errors["additional_allocations"] = "Provision_Rule_AdditionalMax|" + MaxAdditional.ToString(CultureInfo.InvariantCulture);
+            }
+        }
+
         return errors;
     }
 
@@ -506,6 +530,18 @@ public static class ProvisionForm
             body["allocation_id"] = id;
         }
 
+        // Allocation-IDs als Zahlen; leer bzw. 0 nicht senden (ältere Website kennt die Felder nicht)
+        body.Remove("additional_allocations");
+        if (AdditionalIds(values) is { Count: > 0 } ids)
+        {
+            body["additional_allocations"] = new JsonArray(ids.Select(i => (JsonNode?)JsonValue.Create(int.Parse(i, NumberStyles.Integer, CultureInfo.InvariantCulture))).ToArray());
+        }
+
+        if (body["additional_auto"] is JsonValue auto && auto.TryGetValue<long>(out var count) && count <= 0)
+        {
+            body.Remove("additional_auto");
+        }
+
         if (body[Expiry] is JsonValue exp && exp.TryGetValue<string>(out var e) && int.TryParse(e, NumberStyles.Integer, CultureInfo.InvariantCulture, out var days))
         {
             body[Expiry] = days;
@@ -513,6 +549,12 @@ public static class ProvisionForm
 
         return body;
     }
+
+    private static List<string> AdditionalIds(AdminFormValues values) =>
+        values.Text("additional_allocations").Split(['\n', ','], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .Where(v => int.TryParse(v, NumberStyles.Integer, CultureInfo.InvariantCulture, out _))
+            .Distinct(StringComparer.Ordinal)
+            .ToList();
 
     private static string? HelpOf(EggVariable v) =>
         string.Join(" · ", new[] { v.Description, v.Env, v.Rules.Length > 0 ? v.Rules : null }.Where(s => !string.IsNullOrWhiteSpace(s)));

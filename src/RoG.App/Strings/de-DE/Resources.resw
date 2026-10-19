@@ -4745,4 +4745,74 @@
   <data name="Error_already_reported" xml:space="preserve">
     <value>Du hast das schon gemeldet.</value>
   </data>
+  <data name="Nav_Tools" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+  <data name="Tools_NoGame" xml:space="preserve">
+    <value>Weitere Tools</value>
+  </data>
+  <data name="Tools_Draft" xml:space="preserve">
+    <value>Entwurf</value>
+  </data>
+  <data name="Tools_TooLarge" xml:space="preserve">
+    <value>Dieses Tool ist zu groß für die App. Öffne es bitte im Browser.</value>
+  </data>
+  <data name="Tools_LoadFailed" xml:space="preserve">
+    <value>Das Tool konnte nicht geladen werden. Fehlt die WebView2-Laufzeit von Microsoft Edge, öffne es im Browser.</value>
+  </data>
+  <data name="Tools_Copied" xml:space="preserve">
+    <value>Kopiert: {0}</value>
+  </data>
+  <data name="Tools_OpenLinkTitle" xml:space="preserve">
+    <value>Link öffnen?</value>
+  </data>
+  <data name="Tools_OpenLinkText" xml:space="preserve">
+    <value>Das Tool möchte eine Seite auf {0} im Browser öffnen:
+{1}</value>
+  </data>
+  <data name="Tools_OpenLinkConfirm" xml:space="preserve">
+    <value>Öffnen</value>
+  </data>
+  <data name="Tools_SquadEmpty" xml:space="preserve">
+    <value>Dieser Squad hat noch keine Tools.</value>
+  </data>
+  <data name="Shell_NavTools.Content" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+  <data name="ToolsPage_Title.Text" xml:space="preserve">
+    <value>TOOLS</value>
+  </data>
+  <data name="ToolsPage_Intro.Text" xml:space="preserve">
+    <value>Kleine Helfer der Clanleitung für unsere Spiele. Jedes Tool öffnet sich in einem eigenen Fenster; was du speicherst, liegt in deinem Konto.</value>
+  </data>
+  <data name="ToolsPage_State.EmptyText" xml:space="preserve">
+    <value>Noch keine Tools für dich.</value>
+  </data>
+  <data name="ToolWindow_Reload.Content" xml:space="preserve">
+    <value>Neu laden</value>
+  </data>
+  <data name="ToolWindow_Web.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Tool</value>
+  </data>
+  <data name="SquadsPage_Tools.Header" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+  <data name="Provision_additional_allocations" xml:space="preserve">
+    <value>Zusätzliche Ports</value>
+  </data>
+  <data name="Provision_additional_auto" xml:space="preserve">
+    <value>Weitere automatisch</value>
+  </data>
+  <data name="Provision_Help_additional_allocations" xml:space="preserve">
+    <value>Weitere freie Ports desselben Nodes, z. B. für Query, RCON oder Voice. Nicht den Hauptport wählen.</value>
+  </data>
+  <data name="Provision_Help_additional_auto" xml:space="preserve">
+    <value>Anzahl der nächsten freien Ports nach dem Hauptport (gleiche IP). Zusammen mit der Liste höchstens 10; das Port-Limit hebt die Website selbst an.</value>
+  </data>
+  <data name="Provision_Rule_AdditionalPrimary" xml:space="preserve">
+    <value>Der Hauptport kann nicht zugleich zusätzlicher Port sein.</value>
+  </data>
+  <data name="Provision_Rule_AdditionalMax" xml:space="preserve">
+    <value>Höchstens {0} zusätzliche Ports.</value>
+  </data>
 </root>

@@ -794,6 +794,26 @@ public static class StringKeys
 
     public const string ModReasonAll = "Mod_ReasonAll";
 
+    public const string NavTools = "Nav_Tools";
+
+    public const string ToolsNoGame = "Tools_NoGame";
+
+    public const string ToolsDraft = "Tools_Draft";
+
+    public const string ToolsTooLarge = "Tools_TooLarge";
+
+    public const string ToolsLoadFailed = "Tools_LoadFailed";
+
+    public const string ToolsCopied = "Tools_Copied";
+
+    public const string ToolsOpenLinkTitle = "Tools_OpenLinkTitle";
+
+    public const string ToolsOpenLinkText = "Tools_OpenLinkText";
+
+    public const string ToolsOpenLinkConfirm = "Tools_OpenLinkConfirm";
+
+    public const string ToolsSquadEmpty = "Tools_SquadEmpty";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

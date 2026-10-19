@@ -229,6 +229,9 @@ public sealed partial class SquadDetailViewModel(AppServices services, SquadServ
         _galleryLoaded = false;
         Gallery.Clear();
         HasNoGallery = false;
+        _toolsLoaded = false;
+        Tools.Clear();
+        ToolsHint = null;
         return LoadAsync();
     }
 
@@ -264,6 +267,49 @@ public sealed partial class SquadDetailViewModel(AppServices services, SquadServ
         {
             _galleryLoaded = false;
             HasNoGallery = true;
+        }
+    }
+
+    private bool _toolsLoaded;
+
+    /// <summary>Tools des Squads (Tool-Baukasten, <c>filter[squad]</c>) – beim ersten Aufklappen geladen.</summary>
+    public ObservableCollection<ToolItemViewModel> Tools { get; } = [];
+
+    /// <summary>Leer- bzw. Fehlerhinweis unter „Tools“; <c>null</c>, wenn es Tools gibt.</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasToolsHint))]
+    public partial string? ToolsHint { get; set; }
+
+    public bool HasToolsHint => ToolsHint is not null;
+
+    public async Task LoadToolsAsync()
+    {
+        if (_toolsLoaded || _slug is null)
+        {
+            return;
+        }
+
+        _toolsLoaded = true;
+        try
+        {
+            var tools = await new RoG.Core.Features.Tools.ToolService(Services.Api.Http).ListAsync(squad: _slug);
+            Tools.Clear();
+            foreach (var tool in tools)
+            {
+                Tools.Add(new ToolItemViewModel(tool, Services));
+            }
+
+            ToolsHint = Tools.Count == 0 ? Services.Localizer.GetString(StringKeys.ToolsSquadEmpty) : null;
+        }
+        catch (ApiProblemException ex)
+        {
+            _toolsLoaded = false;
+            ToolsHint = Services.Localizer.GetError(ex.Problem.Code);
+        }
+        catch (Exception ex) when (ex is HttpRequestException or System.Text.Json.JsonException)
+        {
+            _toolsLoaded = false;
+            ToolsHint = Services.Localizer.GetError(ApiProblem.Codes.Unknown);
         }
     }
 

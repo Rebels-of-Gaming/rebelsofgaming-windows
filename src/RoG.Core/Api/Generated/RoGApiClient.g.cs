@@ -2553,7 +2553,7 @@ namespace RoG.Core.Api.Generated
         /// </summary>
         /// <remarks>
         /// Felder: `name`, `slug` (optional), `game_id`, `squad_id`, `description` ({de,en,fr}), `host`, `port`, `query_port`,
-        /// <br/>`query_type` (quake3|source|minecraft), `query_enabled`, `connect_url`, `pterodactyl_id`, `visibility`
+        /// <br/>`query_type` (source|quake3|quake2|minecraft|mc_query|mc_bedrock|gamespy1|gamespy3|fivem|samp|satisfactory|teeworlds), `query_enabled`, `connect_url`, `pterodactyl_id`, `visibility`
         /// <br/>(public|members|hidden), `production`, `config_approval` (Vier-Augen-Freigabe für alle Configs), `announce_restarts`, `sort`,
         /// <br/>RCON: `rcon_enabled`, `rcon_port` (sonst Spiel-Port bzw. 25575 bei Minecraft), `rcon_password` (nur schreiben;
         /// <br/>leer = unverändert), `rcon_password_clear`, `rcon_commands` (eigene Befehle `ban`, `unban`, `banlist`,
@@ -28420,7 +28420,7 @@ namespace RoG.Core.Api.Generated
         /// </summary>
         /// <remarks>
         /// Felder: `name`, `slug` (optional), `game_id`, `squad_id`, `description` ({de,en,fr}), `host`, `port`, `query_port`,
-        /// <br/>`query_type` (quake3|source|minecraft), `query_enabled`, `connect_url`, `pterodactyl_id`, `visibility`
+        /// <br/>`query_type` (source|quake3|quake2|minecraft|mc_query|mc_bedrock|gamespy1|gamespy3|fivem|samp|satisfactory|teeworlds), `query_enabled`, `connect_url`, `pterodactyl_id`, `visibility`
         /// <br/>(public|members|hidden), `production`, `config_approval` (Vier-Augen-Freigabe für alle Configs), `announce_restarts`, `sort`,
         /// <br/>RCON: `rcon_enabled`, `rcon_port` (sonst Spiel-Port bzw. 25575 bei Minecraft), `rcon_password` (nur schreiben;
         /// <br/>leer = unverändert), `rcon_password_clear`, `rcon_commands` (eigene Befehle `ban`, `unban`, `banlist`,
@@ -84765,7 +84765,7 @@ namespace RoG.Core.Api.Generated
         public string Address { get; set; } = default!;
 
         /// <summary>
-        /// quake3|source|minecraft
+        /// source|quake3|quake2|minecraft|mc_query|mc_bedrock|gamespy1|gamespy3|fivem|samp|satisfactory|teeworlds (Guide 18-server)
         /// </summary>
         [System.Text.Json.Serialization.JsonPropertyName("query_type")]
         public string Query_type { get; set; } = default!;

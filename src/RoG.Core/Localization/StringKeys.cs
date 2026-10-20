@@ -818,6 +818,78 @@ public static class StringKeys
 
     public const string ServersPrimaryPort = "Servers_PrimaryPort";
 
+    public const string GameBansCreated = "GameBans_Created";
+
+    public const string GameBansUpdated = "GameBans_Updated";
+
+    public const string GameBansLifted = "GameBans_Lifted";
+
+    public const string GameBansLiftTitle = "GameBans_LiftTitle";
+
+    public const string GameBansLiftReason = "GameBans_LiftReason";
+
+    public const string GameBansLiftedAt = "GameBans_LiftedAt";
+
+    public const string GameBansIssuedIngame = "GameBans_IssuedIngame";
+
+    public const string GameBansCreatedBy = "GameBans_CreatedBy";
+
+    public const string GameBansMember = "GameBans_Member";
+
+    public const string GameBansNoDeliveries = "GameBans_NoDeliveries";
+
+    public const string GameBansKeyCreate = "GameBans_KeyCreate";
+
+    public const string GameBansKeyRotate = "GameBans_KeyRotate";
+
+    public const string GameBansKeyRotateText = "GameBans_KeyRotateText";
+
+    public const string GameBansKeyNone = "GameBans_KeyNone";
+
+    public const string GameBansKeyRevoked = "GameBans_KeyRevoked";
+
+    public const string GameBansPluginActive = "GameBans_PluginActive";
+
+    public const string GameBansPluginInactive = "GameBans_PluginInactive";
+
+    public const string GameBansPluginOutdated = "GameBans_PluginOutdated";
+
+    public const string GameBansPlayersOnline = "GameBans_PlayersOnline";
+
+    public const string GameBansLastHeartbeat = "GameBans_LastHeartbeat";
+
+    public const string GameBansRightsNeedManage = "GameBans_RightsNeedManage";
+
+    public const string GameBansRightsSaved = "GameBans_RightsSaved";
+
+    public const string GameBansKeyRevoke = "GameBans_KeyRevoke";
+
+    public const string GameBansKeyRevokeText = "GameBans_KeyRevokeText";
+
+    public const string GameBansKeyRevokedDone = "GameBans_KeyRevokedDone";
+
+    public const string GameBansIncidentTitle = "GameBans_IncidentTitle";
+
+    public const string GameBansIncidentText = "GameBans_IncidentText";
+
+    public const string GameBansIncidentDone = "GameBans_IncidentDone";
+
+    public const string GameBansNewDuration = "GameBans_NewDuration";
+
+    public const string GameBansNewReason = "GameBans_NewReason";
+
+    public const string GameBansEditTitle = "GameBans_EditTitle";
+
+    public const string GameBansTokenTitle = "GameBans_TokenTitle";
+
+    public const string GameBansTokenText = "GameBans_TokenText";
+
+    public const string GameBansTokenCopy = "GameBans_TokenCopy";
+
+    public const string GameBansTokenDone = "GameBans_TokenDone";
+
+    public const string GameBansTokenCopied = "GameBans_TokenCopied";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

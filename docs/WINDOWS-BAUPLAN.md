@@ -194,6 +194,21 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   `server-console.js`). Chat-Anhänge: Bilder mit Vorschau über `GET /v1/attachments/{id}` (Umleitung auf kurzlebigen
   Link, max. 8 MB), andere Dateien öffnen im Browser. ET-Farbcodes im Clan-Tag werden wie auf der Website entfernt.
 
+- **2.5.9 – Gameserver-Bans (Website v0.33.0, live 20.10.2026, Guide 43):** `GameBanService` (Core, 30 Tests):
+  `GET /v1/game-bans` mit `filter[server]` (alle dort geltenden Bans), `filter[status]`, `filter[search]`, Cursor;
+  anlegen (Geltung `server`/`game`/`global`, Kennungstyp leer = Typ des Spiels, IP nur mit `gamebans.manage`),
+  `PATCH` (nur Dauer ab jetzt und Grund), aufheben mit optionalem Grund, Einzelabruf mit `deliveries`; Vorfall
+  `POST /v1/servers/{server}/game-bans/lift`; Plugin-Schlüssel `GET|POST|PATCH|DELETE …/plugin-key`. Ban-IDs nur als
+  ULID im Pfad, Prüfung der Eingaben wie Guide 43 (Kennung, Typ, Grund ≤ 200, IP grob; genau prüft der Server).
+  App: Reiter „Bans & Plugin“ im Server-Steuerungsfenster – sichtbar mit Scope `gamebans:manage` plus `servers.bans`
+  (Ability des Servers) oder `gamebans.manage`, bzw. mit Scope `servers:manage` für den Schlüssel; den Schlüssel-Bereich
+  zeigt die App nur, wenn der Server den Status liefert (403/404 → ausgeblendet). Globale Geltung, IP, erweiterte
+  Plugin-Rechte, höchste Geltung über `server` und der Vorfall nur mit `gamebans.manage`. **Schlüssel:** Klartext nur im
+  Dialog direkt nach dem Erstellen (Kopieren auf Wunsch), nie gespeichert, geloggt oder gecacht (ohne ETag-Cache).
+  **Annahme:** Standard-Geltung im Formular „Spiel“ für Ban-Verwaltende, sonst „nur dieser Server“. **Offen:** Wer
+  nur `gamebans.manage` hat, aber keine Steuerungsrechte am Server, erreicht den Reiter nicht (das Fenster öffnet nur mit
+  `control`); eine serverübergreifende Ban-Liste gibt es in der App noch nicht (Website-Admin).
+
 - **2.5.8 – Website v0.32.2 (live 20.10.2026):** Client aus der Live-Spezifikation (Tool-Endpunkte jetzt vollständig).
   Server-Karte: aufklappbare „Ports (n)“ aus `provisioning.allocations` (Hauptport zuerst mit „Hauptport“, Alias statt
   IP, wenn gesetzt; `null` = Panel nicht erreichbar → nichts anzeigen), `ServerAllocation` in Core mit Tests. News-Liste:
@@ -420,6 +435,9 @@ sich einmal neu an (2FA).
   die Hello-Prüfung macht Windows, die App sieht keine biometrischen Daten.
 - Ab 2.2.2: Kartenkacheln kommen nur vom Server der Plattform (signierte Vorlage, nie direkt von OpenStreetMap);
   sie liegen höchstens im Bild-Cache von WinUI während der Laufzeit.
+- Ab 2.5.9: Gameserver-Bans (Kennungen, Namen, Gründe, IP-Netze nur für Ban-Verwaltende) zeigt die App nur an,
+  speichert sie nicht (kein Cache); der Plugin-Schlüssel erscheint einmalig im Dialog und landet nur auf Wunsch in der
+  Zwischenablage.
 - Ab 2.3.0: gelesene Wiki-Seiten (gerendertes HTML, Titel, Bereich) unter `wiki/` im App-Datenordner, je Sprache,
   **mit DPAPI verschlüsselt** (ab 2.3.3); Abmelden löscht den Ordner, Deinstallation ebenso.
 - Ab 2.3.3: Offline-Warteschlange `outbox.dat` (Forenantworten, Zusagen; DPAPI-verschlüsselt) – **Direktnachrichten

@@ -65,6 +65,7 @@
             <SelectorBarItem x:Name="RconTab" x:Uid="Console_TabRcon" />
             <SelectorBarItem x:Name="BansTab" x:Uid="Console_TabBans" />
             <SelectorBarItem x:Name="WhitelistTab" x:Uid="Console_TabWhitelist" />
+            <SelectorBarItem x:Name="GameBansTab" x:Uid="Console_TabGameBans" />
             <SelectorBarItem x:Name="ApprovalsTab" x:Uid="Console_TabApprovals" />
         </SelectorBar>
         </ScrollViewer>
@@ -300,6 +301,103 @@
                 </ItemsControl>
             </ScrollViewer>
         </Grid>
+
+        <!-- Bans & Plugin (zentrale Gameserver-Bans, Plugin-Schlüssel) -->
+        <ScrollViewer x:Name="GameBansPanel" Grid.Row="4" Padding="16,8,16,16" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+            <StackPanel MaxWidth="900" HorizontalAlignment="Left" Spacing="16">
+                <!-- Plugin-Schlüssel -->
+                <Border Padding="12" Background="{StaticResource RoGBg2Brush}" CornerRadius="{StaticResource RoGControlRadius}" Visibility="{x:Bind GameBans.HasKeySection, Mode=OneWay}">
+                    <StackPanel Spacing="8">
+                        <TextBlock x:Uid="GameBans_KeyTitle" Style="{StaticResource RoGSectionTextStyle}" />
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Ellipse VerticalAlignment="Center" Fill="{x:Bind GameBans.KeyBrush, Mode=OneWay}" Style="{StaticResource RoGStatusDotStyle}" />
+                            <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind GameBans.KeyStatus, Mode=OneWay}" />
+                        </StackPanel>
+                        <TextBlock FontSize="12" IsTextSelectionEnabled="True" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind GameBans.KeyDetails, Mode=OneWay}" TextWrapping="Wrap" />
+                        <TextBlock x:Uid="GameBans_KeyHint" FontSize="12" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                        <TextBlock x:Uid="GameBans_RightsTitle" Margin="0,4,0,0" FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" />
+                        <CheckBox x:Uid="GameBans_MayIssue" IsChecked="{x:Bind GameBans.MayIssue, Mode=TwoWay}" />
+                        <StackPanel Spacing="4" Visibility="{x:Bind GameBans.IsManager}">
+                            <CheckBox x:Uid="GameBans_MayLift" IsChecked="{x:Bind GameBans.MayLift, Mode=TwoWay}" />
+                            <CheckBox x:Uid="GameBans_MayLiftAny" IsChecked="{x:Bind GameBans.MayLiftAny, Mode=TwoWay}" />
+                            <CheckBox x:Uid="GameBans_MayIp" IsChecked="{x:Bind GameBans.MayIp, Mode=TwoWay}" />
+                            <CheckBox x:Uid="GameBans_MayBanMembers" IsChecked="{x:Bind GameBans.MayBanMembers, Mode=TwoWay}" />
+                            <ComboBox x:Uid="GameBans_MaxScope" MinWidth="200" ItemsSource="{x:Bind GameBans.MaxScopeOptions}" SelectedItem="{x:Bind GameBans.SelectedMaxScope, Mode=TwoWay}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Button Command="{x:Bind GameBans.CreateKeyCommand}" Content="{x:Bind GameBans.KeyActionText, Mode=OneWay}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                            <Button x:Uid="GameBans_SaveRights" Command="{x:Bind GameBans.SaveRightsCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" Visibility="{x:Bind GameBans.KeyExists, Mode=OneWay}" />
+                            <Button x:Uid="GameBans_Revoke" Command="{x:Bind GameBans.RevokeKeyCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" Visibility="{x:Bind GameBans.KeyExists, Mode=OneWay}" />
+                        </StackPanel>
+                        <StackPanel Margin="0,8,0,0" Spacing="6" Visibility="{x:Bind GameBans.IsManager}">
+                            <TextBlock x:Uid="GameBans_IncidentHeading" FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" />
+                            <TextBlock x:Uid="GameBans_IncidentHint" FontSize="12" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <TextBox x:Uid="GameBans_IncidentReason" Width="360" MaxLength="200" Text="{x:Bind GameBans.IncidentReason, Mode=TwoWay}" />
+                                <Button x:Uid="GameBans_IncidentLift" VerticalAlignment="Bottom" Command="{x:Bind GameBans.LiftPluginBansCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Neuer Ban -->
+                <StackPanel Spacing="8" Visibility="{x:Bind GameBans.CanBans}">
+                    <TextBlock x:Uid="GameBans_NewTitle" Style="{StaticResource RoGSectionTextStyle}" />
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <TextBox x:Uid="GameBans_Identifier" Width="300" IsSpellCheckEnabled="False" MaxLength="64" Text="{x:Bind GameBans.Identifier, Mode=TwoWay}" />
+                        <TextBox x:Uid="GameBans_IdentifierType" Width="160" IsSpellCheckEnabled="False" MaxLength="16" Text="{x:Bind GameBans.IdentifierType, Mode=TwoWay}" />
+                        <TextBox x:Uid="GameBans_Name" Width="200" Text="{x:Bind GameBans.PlayerName, Mode=TwoWay}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <ComboBox x:Uid="GameBans_ScopeBox" MinWidth="180" ItemsSource="{x:Bind GameBans.ScopeOptions}" SelectedItem="{x:Bind GameBans.SelectedScope, Mode=TwoWay}" />
+                        <NumberBox x:Uid="GameBans_Minutes" Width="160" Minimum="0" SpinButtonPlacementMode="Compact" Value="{x:Bind GameBans.Minutes, Mode=TwoWay}" />
+                        <TextBox x:Uid="GameBans_Ip" Width="200" IsSpellCheckEnabled="False" Text="{x:Bind GameBans.Ip, Mode=TwoWay}" Visibility="{x:Bind GameBans.IsManager}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <TextBox x:Uid="GameBans_Reason" Width="480" MaxLength="200" Text="{x:Bind GameBans.Reason, Mode=TwoWay}" />
+                        <Button x:Uid="GameBans_Create" VerticalAlignment="Bottom" Command="{x:Bind GameBans.CreateCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                    </StackPanel>
+                    <TextBlock x:Uid="GameBans_NewHint" FontSize="12" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                </StackPanel>
+
+                <!-- Liste -->
+                <StackPanel Spacing="8" Visibility="{x:Bind GameBans.CanBans}">
+                    <TextBlock x:Uid="GameBans_ListTitle" Style="{StaticResource RoGSectionTextStyle}" />
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <ComboBox x:Uid="GameBans_StatusBox" MinWidth="160" ItemsSource="{x:Bind GameBans.StatusOptions}" SelectedItem="{x:Bind GameBans.SelectedStatus, Mode=TwoWay}" />
+                        <TextBox x:Uid="GameBans_Search" Width="240" KeyDown="OnGameBanSearchKeyDown" Text="{x:Bind GameBans.Search, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <Button x:Uid="GameBans_SearchButton" VerticalAlignment="Bottom" Command="{x:Bind GameBans.SearchCommand}" />
+                        <Button x:Uid="Backup_Reload" VerticalAlignment="Bottom" Command="{x:Bind GameBans.ReloadCommand}" />
+                    </StackPanel>
+                    <ProgressBar IsIndeterminate="True" Visibility="{x:Bind GameBans.IsBusy, Mode=OneWay}" />
+                    <TextBlock x:Uid="GameBans_Empty" Style="{StaticResource RoGMutedTextStyle}" Visibility="{x:Bind GameBans.IsEmpty, Mode=OneWay}" />
+                    <ItemsControl ItemsSource="{x:Bind GameBans.Items}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:GameBanItemViewModel">
+                                <Border Margin="0,0,0,8" Padding="12" AutomationProperties.Name="{x:Bind Title}" Background="{StaticResource RoGBg2Brush}" CornerRadius="{StaticResource RoGControlRadius}">
+                                    <StackPanel Spacing="4">
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
+                                            <Ellipse VerticalAlignment="Center" Fill="{x:Bind StatusBrush}" Style="{StaticResource RoGStatusDotStyle}" />
+                                            <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Title}" />
+                                            <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind StatusText}" />
+                                        </StackPanel>
+                                        <TextBlock FontFamily="Consolas" FontSize="12" IsTextSelectionEnabled="True" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Identity}" />
+                                        <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" TextWrapping="Wrap" />
+                                        <TextBlock FontSize="12" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Deliveries, Mode=OneWay}" TextWrapping="Wrap" Visibility="{x:Bind HasDeliveries, Mode=OneWay}" />
+                                        <StackPanel Margin="0,4,0,0" Orientation="Horizontal" Spacing="8">
+                                            <Button x:Uid="GameBans_Edit" Command="{x:Bind EditCommand}" Visibility="{x:Bind IsActive}" />
+                                            <Button x:Uid="GameBans_Lift" Command="{x:Bind LiftCommand}" Visibility="{x:Bind IsActive}" />
+                                            <Button x:Uid="GameBans_Details" Command="{x:Bind DetailsCommand}" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <Button x:Uid="GameBans_More" HorizontalAlignment="Center" Command="{x:Bind GameBans.LoadMoreCommand}" Visibility="{x:Bind GameBans.HasMore, Mode=OneWay}" />
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
 
         <!-- Freigaben -->
         <Grid x:Name="ApprovalsPanel" Grid.Row="4" Padding="16,8,16,16" RowSpacing="12" Visibility="Collapsed">

@@ -13,7 +13,7 @@ public sealed partial class ServerConsoleWindow : Window
 {
     private static readonly Dictionary<string, ServerConsoleWindow> s_open = new(StringComparer.Ordinal);
 
-    private ServerConsoleWindow(string slug, string name, ServerAbilities abilities)
+    private ServerConsoleWindow(string slug, string serverId, string name, ServerAbilities abilities)
     {
         ViewModel = new ServerConsoleViewModel(App.Services, slug, name, abilities);
         Configs = new ServerConfigsViewModel(App.Services, slug, abilities, ViewModel.Show) { Confirm = ConfirmAsync };
@@ -23,6 +23,13 @@ public sealed partial class ServerConsoleWindow : Window
         Approvals = new ServerApprovalsViewModel(App.Services, slug, ViewModel.Show) { Confirm = ConfirmAsync };
         Files = new ServerFileBrowserViewModel(App.Services, slug, abilities, ViewModel.Show) { Confirm = ConfirmAsync, AskName = AskNameAsync };
         Whitelist = new ServerWhitelistViewModel(App.Services, slug, ViewModel.Show) { Confirm = ConfirmAsync };
+        GameBans = new ServerGameBansViewModel(App.Services, slug, serverId, abilities, ViewModel.Show)
+        {
+            Confirm = ConfirmAsync,
+            AskReason = AskReasonAsync,
+            AskDuration = AskDurationAsync,
+            ShowToken = ShowTokenAsync,
+        };
         InitializeComponent();
         ConsoleTab.Visibility = abilities.Console ? Visibility.Visible : Visibility.Collapsed;
         ConfigsTab.Visibility = abilities.FilesRead || abilities.FilesWrite ? Visibility.Visible : Visibility.Collapsed;
@@ -32,6 +39,7 @@ public sealed partial class ServerConsoleWindow : Window
         FilesTab.Visibility = abilities.FilesRead ? Visibility.Visible : Visibility.Collapsed;
         WhitelistTab.Visibility = abilities.Bans ? Visibility.Visible : Visibility.Collapsed;
         ApprovalsTab.Visibility = abilities.FilesApprove ? Visibility.Visible : Visibility.Collapsed;
+        GameBansTab.Visibility = GameBans.IsAvailable ? Visibility.Visible : Visibility.Collapsed;
         Tabs.SelectedItem = Tabs.Items.FirstOrDefault(t => t.Visibility == Visibility.Visible);
         Tabs.Visibility = Tabs.Items.Count(t => t.Visibility == Visibility.Visible) > 1 ? Visibility.Visible : Visibility.Collapsed;
         TitleText.Text = name.ToUpper(System.Globalization.CultureInfo.CurrentCulture);
@@ -71,11 +79,13 @@ public sealed partial class ServerConsoleWindow : Window
 
     public ServerWhitelistViewModel Whitelist { get; }
 
+    public ServerGameBansViewModel GameBans { get; }
+
     /// <summary>Reiter wechseln; Configs und Backups laden beim ersten Öffnen.</summary>
     private void OnTabChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args)
     {
         if (ConsolePanel is null || ConfigsPanel is null || BackupsPanel is null || RconPanel is null || BansPanel is null || ApprovalsPanel is null
-            || FilesPanel is null || WhitelistPanel is null)
+            || FilesPanel is null || WhitelistPanel is null || GameBansPanel is null)
         {
             return; // feuert schon in InitializeComponent
         }
@@ -89,6 +99,7 @@ public sealed partial class ServerConsoleWindow : Window
         ApprovalsPanel.Visibility = selected == ApprovalsTab ? Visibility.Visible : Visibility.Collapsed;
         FilesPanel.Visibility = selected == FilesTab ? Visibility.Visible : Visibility.Collapsed;
         WhitelistPanel.Visibility = selected == WhitelistTab ? Visibility.Visible : Visibility.Collapsed;
+        GameBansPanel.Visibility = selected == GameBansTab ? Visibility.Visible : Visibility.Collapsed;
         if (selected == ConfigsTab)
         {
             _ = Configs.EnsureLoadedAsync();
@@ -112,6 +123,10 @@ public sealed partial class ServerConsoleWindow : Window
         else if (selected == WhitelistTab)
         {
             _ = Whitelist.EnsureLoadedAsync();
+        }
+        else if (selected == GameBansTab)
+        {
+            _ = GameBans.EnsureLoadedAsync();
         }
     }
 
@@ -155,6 +170,81 @@ public sealed partial class ServerConsoleWindow : Window
         return await dialog.ShowAsync() == ContentDialogResult.Primary && !string.IsNullOrWhiteSpace(box.Text) ? box.Text.Trim() : null;
     }
 
+    /// <summary>Aufheben mit optionalem Grund; <c>null</c> = abgebrochen, sonst der Grund (ggf. leer).</summary>
+    private async Task<string?> AskReasonAsync(string title, string text)
+    {
+        var l = App.Services.Localizer;
+        var box = new TextBox { MinWidth = 420, MaxLength = 200, Header = l.GetString(StringKeys.GameBansLiftReason) };
+        var dialog = new ContentDialog
+        {
+            XamlRoot = Content.XamlRoot,
+            Title = title,
+            Content = new StackPanel { Spacing = 8, Children = { new TextBlock { Text = text, TextWrapping = TextWrapping.Wrap }, box } },
+            PrimaryButtonText = l.GetString(StringKeys.CommonConfirm),
+            CloseButtonText = l.GetString(StringKeys.CommonCancel),
+            DefaultButton = ContentDialogButton.Close,
+        };
+        return await dialog.ShowAsync() == ContentDialogResult.Primary ? box.Text.Trim() : null;
+    }
+
+    /// <summary>Neue Dauer ab jetzt (0 = dauerhaft) und optional neuer Grund für einen aktiven Ban.</summary>
+    private async Task<(int Minutes, string? Reason)?> AskDurationAsync(GameBanItemViewModel item)
+    {
+        var l = App.Services.Localizer;
+        var minutes = new NumberBox { Header = l.GetString(StringKeys.GameBansNewDuration), Minimum = 0, Value = 1440, SpinButtonPlacementMode = NumberBoxSpinButtonPlacementMode.Compact };
+        var reason = new TextBox { Header = l.GetString(StringKeys.GameBansNewReason), MaxLength = 200, Text = item.Ban.Reason ?? string.Empty, MinWidth = 420 };
+        var dialog = new ContentDialog
+        {
+            XamlRoot = Content.XamlRoot,
+            Title = l.GetString(StringKeys.GameBansEditTitle),
+            Content = new StackPanel { Spacing = 8, Children = { new TextBlock { Text = item.Title, TextWrapping = TextWrapping.Wrap }, minutes, reason } },
+            PrimaryButtonText = l.GetString(StringKeys.CommonConfirm),
+            CloseButtonText = l.GetString(StringKeys.CommonCancel),
+            DefaultButton = ContentDialogButton.Primary,
+        };
+        if (await dialog.ShowAsync() != ContentDialogResult.Primary)
+        {
+            return null;
+        }
+
+        var value = double.IsNaN(minutes.Value) ? 0 : (int)Math.Clamp(minutes.Value, 0, int.MaxValue);
+        var text = reason.Text.Trim();
+        return (value, text.Length == 0 || text == item.Ban.Reason ? null : text);
+    }
+
+    /// <summary>Neuen Plugin-Schlüssel einmalig zeigen; er bleibt nur in diesem Dialog und der Zwischenablage (auf Wunsch).</summary>
+    private async Task ShowTokenAsync(string token)
+    {
+        var l = App.Services.Localizer;
+        var box = new TextBox { Text = token, IsReadOnly = true, FontFamily = new Microsoft.UI.Xaml.Media.FontFamily("Consolas"), MinWidth = 460, IsSpellCheckEnabled = false };
+        Microsoft.UI.Xaml.Automation.AutomationProperties.SetName(box, l.GetString(StringKeys.GameBansTokenTitle));
+        var dialog = new ContentDialog
+        {
+            XamlRoot = Content.XamlRoot,
+            Title = l.GetString(StringKeys.GameBansTokenTitle),
+            Content = new StackPanel { Spacing = 8, Children = { new TextBlock { Text = l.GetString(StringKeys.GameBansTokenText), TextWrapping = TextWrapping.Wrap }, box } },
+            PrimaryButtonText = l.GetString(StringKeys.GameBansTokenCopy),
+            CloseButtonText = l.GetString(StringKeys.GameBansTokenDone),
+            DefaultButton = ContentDialogButton.Primary,
+        };
+        if (await dialog.ShowAsync() == ContentDialogResult.Primary)
+        {
+            App.Services.Clipboard.SetText(token);
+            ViewModel.Show(l.GetString(StringKeys.GameBansTokenCopied), InfoBarSeverity.Success);
+        }
+
+        box.Text = string.Empty;
+    }
+
+    private void OnGameBanSearchKeyDown(object sender, KeyRoutedEventArgs e)
+    {
+        if (e.Key == VirtualKey.Enter && GameBans.SearchCommand.CanExecute(null))
+        {
+            e.Handled = true;
+            GameBans.SearchCommand.Execute(null);
+        }
+    }
+
     private void OnFileClick(object sender, ItemClickEventArgs e)
     {
         if (e.ClickedItem is FileItemViewModel item)
@@ -190,7 +280,7 @@ public sealed partial class ServerConsoleWindow : Window
 
         if (!s_open.TryGetValue(server.Slug, out var window))
         {
-            window = new ServerConsoleWindow(server.Slug, server.Name, abilities);
+            window = new ServerConsoleWindow(server.Slug, server.Id, server.Name, abilities);
             s_open[server.Slug] = window;
         }
 

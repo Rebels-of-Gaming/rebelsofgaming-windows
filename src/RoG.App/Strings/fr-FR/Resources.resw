@@ -4821,4 +4821,292 @@
   <data name="Servers_PrimaryPort" xml:space="preserve">
     <value>Port principal</value>
   </data>
+  <data name="GameBans_Created" xml:space="preserve">
+    <value>Ban pour {0} créé.</value>
+  </data>
+  <data name="GameBans_Updated" xml:space="preserve">
+    <value>Ban modifié.</value>
+  </data>
+  <data name="GameBans_Lifted" xml:space="preserve">
+    <value>Ban levé.</value>
+  </data>
+  <data name="GameBans_LiftTitle" xml:space="preserve">
+    <value>Lever le ban ?</value>
+  </data>
+  <data name="GameBans_LiftReason" xml:space="preserve">
+    <value>Raison (facultative)</value>
+  </data>
+  <data name="GameBans_LiftedAt" xml:space="preserve">
+    <value>levé le {0} par {1}</value>
+  </data>
+  <data name="GameBans_IssuedIngame" xml:space="preserve">
+    <value>en jeu par {0} sur {1}</value>
+  </data>
+  <data name="GameBans_CreatedBy" xml:space="preserve">
+    <value>par {0}</value>
+  </data>
+  <data name="GameBans_Member" xml:space="preserve">
+    <value>Membre {0}</value>
+  </data>
+  <data name="GameBans_NoDeliveries" xml:space="preserve">
+    <value>Aucune transmission RCON – appliqué par le plugin.</value>
+  </data>
+  <data name="GameBans_KeyCreate" xml:space="preserve">
+    <value>Créer la clé</value>
+  </data>
+  <data name="GameBans_KeyRotate" xml:space="preserve">
+    <value>Renouveler la clé</value>
+  </data>
+  <data name="GameBans_KeyRotateText" xml:space="preserve">
+    <value>La clé actuelle cesse aussitôt de fonctionner. Saisis tout de suite la nouvelle dans le plugin du serveur.</value>
+  </data>
+  <data name="GameBans_KeyNone" xml:space="preserve">
+    <value>Aucune clé de plugin</value>
+  </data>
+  <data name="GameBans_KeyRevoked" xml:space="preserve">
+    <value>Clé révoquée</value>
+  </data>
+  <data name="GameBans_PluginActive" xml:space="preserve">
+    <value>Plugin actif</value>
+  </data>
+  <data name="GameBans_PluginInactive" xml:space="preserve">
+    <value>Le plugin ne répond pas (aucun signal depuis 10 minutes)</value>
+  </data>
+  <data name="GameBans_PluginOutdated" xml:space="preserve">
+    <value>Plugin obsolète</value>
+  </data>
+  <data name="GameBans_PlayersOnline" xml:space="preserve">
+    <value>{0} joueurs</value>
+  </data>
+  <data name="GameBans_LastHeartbeat" xml:space="preserve">
+    <value>dernier signal {0}</value>
+  </data>
+  <data name="GameBans_RightsNeedManage" xml:space="preserve">
+    <value>Seules les personnes qui gèrent les bans des serveurs de jeu peuvent accorder ces droits.</value>
+  </data>
+  <data name="GameBans_RightsSaved" xml:space="preserve">
+    <value>Droits enregistrés.</value>
+  </data>
+  <data name="GameBans_KeyRevoke" xml:space="preserve">
+    <value>Révoquer la clé ?</value>
+  </data>
+  <data name="GameBans_KeyRevokeText" xml:space="preserve">
+    <value>Le plugin ne pourra plus vérifier ni créer de bans tant que tu n’auras pas créé une nouvelle clé.</value>
+  </data>
+  <data name="GameBans_KeyRevokedDone" xml:space="preserve">
+    <value>Clé révoquée.</value>
+  </data>
+  <data name="GameBans_IncidentTitle" xml:space="preserve">
+    <value>Lever tous les bans du plugin de ce serveur ?</value>
+  </data>
+  <data name="GameBans_IncidentText" xml:space="preserve">
+    <value>Lève tous les bans actifs créés via le plugin de ce serveur. Si la clé a fuité, renouvelle-la ou révoque-la aussi.</value>
+  </data>
+  <data name="GameBans_IncidentDone" xml:space="preserve">
+    <value>{0} bans levés.</value>
+  </data>
+  <data name="GameBans_NewDuration" xml:space="preserve">
+    <value>Nouvelle durée à partir de maintenant (minutes, 0 = définitif)</value>
+  </data>
+  <data name="GameBans_NewReason" xml:space="preserve">
+    <value>Raison</value>
+  </data>
+  <data name="GameBans_EditTitle" xml:space="preserve">
+    <value>Modifier le ban</value>
+  </data>
+  <data name="GameBans_TokenTitle" xml:space="preserve">
+    <value>Nouvelle clé de plugin</value>
+  </data>
+  <data name="GameBans_TokenText" xml:space="preserve">
+    <value>Cette clé n’est affichée que maintenant et n’est enregistrée nulle part. Saisis-la dans la configuration du plugin et ne la partage pas.</value>
+  </data>
+  <data name="GameBans_TokenCopy" xml:space="preserve">
+    <value>Copier</value>
+  </data>
+  <data name="GameBans_TokenDone" xml:space="preserve">
+    <value>Terminé</value>
+  </data>
+  <data name="GameBans_TokenCopied" xml:space="preserve">
+    <value>Clé copiée dans le presse-papiers.</value>
+  </data>
+  <data name="GameBans_Status_active" xml:space="preserve">
+    <value>Actifs</value>
+  </data>
+  <data name="GameBans_Status_expired" xml:space="preserve">
+    <value>Expirés</value>
+  </data>
+  <data name="GameBans_Status_lifted" xml:space="preserve">
+    <value>Levés</value>
+  </data>
+  <data name="GameBans_Status_all" xml:space="preserve">
+    <value>Tous</value>
+  </data>
+  <data name="GameBans_Scope_server" xml:space="preserve">
+    <value>Ce serveur uniquement</value>
+  </data>
+  <data name="GameBans_Scope_game" xml:space="preserve">
+    <value>Tous les serveurs du jeu</value>
+  </data>
+  <data name="GameBans_Scope_global" xml:space="preserve">
+    <value>Tous les serveurs RoG</value>
+  </data>
+  <data name="GameBans_Delivery_active" xml:space="preserve">
+    <value>banni via RCON</value>
+  </data>
+  <data name="GameBans_Delivery_failed" xml:space="preserve">
+    <value>échec RCON</value>
+  </data>
+  <data name="GameBans_Delivery_dry_run" xml:space="preserve">
+    <value>simulation</value>
+  </data>
+  <data name="GameBans_Delivery_lifted" xml:space="preserve">
+    <value>levé via RCON</value>
+  </data>
+  <data name="GameBans_Rule_Identifier" xml:space="preserve">
+    <value>L’identifiant du joueur manque ou contient des caractères invalides.</value>
+  </data>
+  <data name="GameBans_Rule_Type" xml:space="preserve">
+    <value>Type d’identifiant : minuscules, chiffres et _ (2 à 16 caractères).</value>
+  </data>
+  <data name="GameBans_Rule_Reason" xml:space="preserve">
+    <value>Raison manquante (200 caractères max.).</value>
+  </data>
+  <data name="GameBans_Rule_Scope" xml:space="preserve">
+    <value>Portée invalide.</value>
+  </data>
+  <data name="GameBans_Rule_Ip" xml:space="preserve">
+    <value>IP : IPv4 seule ou /24, IPv6 /64.</value>
+  </data>
+  <data name="GameBans_Rule_Minutes" xml:space="preserve">
+    <value>La durée ne peut pas être négative.</value>
+  </data>
+  <data name="Error_already_banned" xml:space="preserve">
+    <value>Un ban actif existe déjà pour cet identifiant.</value>
+  </data>
+  <data name="Error_no_game_account" xml:space="preserve">
+    <value>Le membre n’a pas de compte de jeu pour ce jeu.</value>
+  </data>
+  <data name="Error_ban_not_active" xml:space="preserve">
+    <value>Le ban a déjà été levé ou a expiré.</value>
+  </data>
+  <data name="Error_ban_managed_centrally" xml:space="preserve">
+    <value>Ce ban est géré de façon centrale – lève-le sous « Bans &amp; plugin ».</value>
+  </data>
+  <data name="Console_TabGameBans.Content" xml:space="preserve">
+    <value>Bans &amp; plugin</value>
+  </data>
+  <data name="GameBans_KeyTitle.Text" xml:space="preserve">
+    <value>Clé de plugin</value>
+  </data>
+  <data name="GameBans_KeyHint.Text" xml:space="preserve">
+    <value>Avec cette clé, le plugin RoG du serveur de jeu vérifie les bans à la connexion et crée des bans depuis le jeu. Sans plugin actif, le site applique les bans via RCON.</value>
+  </data>
+  <data name="GameBans_RightsTitle.Text" xml:space="preserve">
+    <value>Droits du plugin</value>
+  </data>
+  <data name="GameBans_MayIssue.Content" xml:space="preserve">
+    <value>Créer des bans depuis le jeu</value>
+  </data>
+  <data name="GameBans_MayLift.Content" xml:space="preserve">
+    <value>Lever des bans</value>
+  </data>
+  <data name="GameBans_MayLiftAny.Content" xml:space="preserve">
+    <value>Lever aussi les bans qui ne viennent pas de ce plugin</value>
+  </data>
+  <data name="GameBans_MayIp.Content" xml:space="preserve">
+    <value>Plages IP sur les bans</value>
+  </data>
+  <data name="GameBans_MayBanMembers.Content" xml:space="preserve">
+    <value>Bannir les membres sous ton rang</value>
+  </data>
+  <data name="GameBans_MaxScope.Header" xml:space="preserve">
+    <value>Portée maximale</value>
+  </data>
+  <data name="GameBans_SaveRights.Content" xml:space="preserve">
+    <value>Enregistrer les droits</value>
+  </data>
+  <data name="GameBans_Revoke.Content" xml:space="preserve">
+    <value>Révoquer</value>
+  </data>
+  <data name="GameBans_IncidentHeading.Text" xml:space="preserve">
+    <value>Incident</value>
+  </data>
+  <data name="GameBans_IncidentHint.Text" xml:space="preserve">
+    <value>Lève tous les bans actifs créés via le plugin de ce serveur – p. ex. si la clé a fuité.</value>
+  </data>
+  <data name="GameBans_IncidentReason.Header" xml:space="preserve">
+    <value>Raison</value>
+  </data>
+  <data name="GameBans_IncidentLift.Content" xml:space="preserve">
+    <value>Lever tous les bans du plugin</value>
+  </data>
+  <data name="GameBans_NewTitle.Text" xml:space="preserve">
+    <value>Nouveau ban</value>
+  </data>
+  <data name="GameBans_Identifier.Header" xml:space="preserve">
+    <value>Identifiant du joueur</value>
+  </data>
+  <data name="GameBans_Identifier.PlaceholderText" xml:space="preserve">
+    <value>GUID, SteamID ou UUID Minecraft</value>
+  </data>
+  <data name="GameBans_IdentifierType.Header" xml:space="preserve">
+    <value>Type d’identifiant</value>
+  </data>
+  <data name="GameBans_IdentifierType.PlaceholderText" xml:space="preserve">
+    <value>Type du jeu</value>
+  </data>
+  <data name="GameBans_Name.Header" xml:space="preserve">
+    <value>Nom en jeu (facultatif)</value>
+  </data>
+  <data name="GameBans_ScopeBox.Header" xml:space="preserve">
+    <value>Portée</value>
+  </data>
+  <data name="GameBans_Minutes.Header" xml:space="preserve">
+    <value>Minutes (0 = définitif)</value>
+  </data>
+  <data name="GameBans_Ip.Header" xml:space="preserve">
+    <value>IP ou plage (facultatif)</value>
+  </data>
+  <data name="GameBans_Ip.PlaceholderText" xml:space="preserve">
+    <value>203.0.113.7 ou 203.0.113.0/24</value>
+  </data>
+  <data name="GameBans_Reason.Header" xml:space="preserve">
+    <value>Raison</value>
+  </data>
+  <data name="GameBans_Create.Content" xml:space="preserve">
+    <value>Bannir</value>
+  </data>
+  <data name="GameBans_NewHint.Text" xml:space="preserve">
+    <value>Selon la portée, les bans centraux s’appliquent à ce serveur, à tous les serveurs du jeu ou à tous les serveurs RoG. Le site convertit les SteamID aux formats STEAM_X:Y:Z et [U:1:N]. Tu ne peux bannir que les membres sous ton rang.</value>
+  </data>
+  <data name="GameBans_ListTitle.Text" xml:space="preserve">
+    <value>Bans sur ce serveur</value>
+  </data>
+  <data name="GameBans_StatusBox.Header" xml:space="preserve">
+    <value>Statut</value>
+  </data>
+  <data name="GameBans_Search.Header" xml:space="preserve">
+    <value>Recherche</value>
+  </data>
+  <data name="GameBans_Search.PlaceholderText" xml:space="preserve">
+    <value>Nom ou identifiant</value>
+  </data>
+  <data name="GameBans_SearchButton.Content" xml:space="preserve">
+    <value>Rechercher</value>
+  </data>
+  <data name="GameBans_Empty.Text" xml:space="preserve">
+    <value>Aucun ban trouvé.</value>
+  </data>
+  <data name="GameBans_Edit.Content" xml:space="preserve">
+    <value>Modifier la durée</value>
+  </data>
+  <data name="GameBans_Lift.Content" xml:space="preserve">
+    <value>Lever</value>
+  </data>
+  <data name="GameBans_Details.Content" xml:space="preserve">
+    <value>Transmissions</value>
+  </data>
+  <data name="GameBans_More.Content" xml:space="preserve">
+    <value>Charger plus</value>
+  </data>
 </root>

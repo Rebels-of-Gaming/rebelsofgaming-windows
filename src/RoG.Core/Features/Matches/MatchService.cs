@@ -63,7 +63,7 @@ public sealed class MatchService(IRoGApiClient client)
         _ => MatchOutcome.None,
     };
 
-    private static MatchItem Map(Data261 m) => new(
+    private static MatchItem Map(Data269 m) => new(
         m.Id,
         m.Slug,
         m.Type,

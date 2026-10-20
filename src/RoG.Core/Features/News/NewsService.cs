@@ -57,7 +57,7 @@ public sealed class NewsService(IRoGApiClient client, Uri webBaseUrl)
             .ToList();
     }
 
-    private static NewsSummary Map(Data313 d) => new(
+    private static NewsSummary Map(Data321 d) => new(
         d.Id, d.Slug, ApiValues.WebUri(d.Url), d.Title, ApiValues.Text(d.Teaser) ?? d.Summary, d.Pinned,
         ApiValues.Time(d.Published_at), d.Reading_minutes, d.Comments_count, d.Category?.Name, d.Category?.Color,
         d.Squad?.Name, d.Author?.Name,

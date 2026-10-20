@@ -23,7 +23,7 @@ public sealed class ShortLinkService(IRoGApiClient client)
             throw new ArgumentException("Nur http(s)-Ziele", nameof(target));
         }
 
-        var response = await client.V1_links_storeAsync(new Body98 { Url = target, Code = ApiValues.Text(code), Title = ApiValues.Text(title) }, cancellationToken).ConfigureAwait(false);
+        var response = await client.V1_links_storeAsync(new Body101 { Url = target, Code = ApiValues.Text(code), Title = ApiValues.Text(title) }, cancellationToken).ConfigureAwait(false);
         return Map(JsonSerializer.SerializeToElement(response.Data));
     }
 

@@ -18,7 +18,7 @@ public class GeneratedClientJsonTests
 
         try
         {
-            await api.Client.V1_me_profile_updateAsync(new Body95 { Motto = "GG", Show_on_map = false });
+            await api.Client.V1_me_profile_updateAsync(new Body98 { Motto = "GG", Show_on_map = false });
         }
         catch (GeneratedApiException)
         {

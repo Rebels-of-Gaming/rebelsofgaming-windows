@@ -507,6 +507,14 @@ public sealed partial class MainWindow : Window, IDisposable
             return true;
         }
 
+        // Ban-Liste: ohne Eintrag in der Seitenleiste (Knopf auf der Server-Seite, Links /bans/…)
+        if (route.Section == AppSection.Bans)
+        {
+            NavView.SelectedItem = null;
+            ContentFrame.Navigate(typeof(BansPage), route.Key ?? string.Empty);
+            return true;
+        }
+
         if (route.Section == AppSection.Search)
         {
             NavView.SelectedItem = null;

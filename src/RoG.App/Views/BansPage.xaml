@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Öffentliche Ban-Liste (Website v0.34.0): gekürzte Kennungen, Einspruch über ein Forum-Thema. -->
+<Page
+    x:Class="RoG.App.Views.BansPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:RoG.App.Controls"
+    xmlns:vm="using:RoG.App.ViewModels"
+    Background="{StaticResource RoGBgBrush}">
+
+    <Page.KeyboardAccelerators>
+        <KeyboardAccelerator Key="F5" Invoked="OnRefreshInvoked" />
+        <KeyboardAccelerator
+            Key="F"
+            Invoked="OnSearchInvoked"
+            Modifiers="Control" />
+    </Page.KeyboardAccelerators>
+
+    <controls:ListDetailPanel DetailClosed="OnDetailClosed" IsDetailOpen="{x:Bind ViewModel.IsDetailOpen, Mode=OneWay}">
+        <controls:ListDetailPanel.List>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackPanel Margin="24,24,24,8" Spacing="12">
+                    <TextBlock x:Uid="BansPage_Title" Style="{StaticResource RoGDisplayTextStyle}" Text="BAN-LISTE" />
+                    <TextBlock x:Uid="BansPage_Intro" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                    <ComboBox
+                        x:Uid="BansPage_StatusFilter"
+                        HorizontalAlignment="Stretch"
+                        DisplayMemberPath="Label"
+                        ItemsSource="{x:Bind ViewModel.StatusOptions}"
+                        SelectedItem="{x:Bind ViewModel.SelectedStatus, Mode=TwoWay}" />
+                    <AutoSuggestBox
+                        x:Name="SearchBox"
+                        x:Uid="BansPage_Search"
+                        QueryIcon="Find"
+                        QuerySubmitted="OnSearchSubmitted"
+                        Text="{x:Bind ViewModel.Search, Mode=TwoWay}" />
+                </StackPanel>
+                <controls:StateView
+                    x:Uid="BansPage_State"
+                    Grid.Row="1"
+                    ErrorMessage="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}"
+                    IsEmpty="{x:Bind ViewModel.IsEmpty, Mode=OneWay}"
+                    IsLoading="{x:Bind ViewModel.IsLoading, Mode=OneWay}"
+                    RetryCommand="{x:Bind ViewModel.RefreshCommand}" />
+                <ListView
+                    x:Uid="BansPage_List"
+                    Grid.Row="1"
+                    Padding="12,0,12,12"
+                    ItemsSource="{x:Bind ViewModel.Items}"
+                    SelectedItem="{x:Bind ViewModel.Selected, Mode=TwoWay}"
+                    Visibility="{x:Bind ViewModel.ShowContent, Mode=OneWay}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="vm:PublicBanItemViewModel">
+                            <StackPanel Padding="0,6" Spacing="2" AutomationProperties.Name="{x:Bind Title}">
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <Ellipse VerticalAlignment="Center" Fill="{x:Bind StatusBrush}" Style="{StaticResource RoGStatusDotStyle}" />
+                                    <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Title}" TextTrimming="CharacterEllipsis" />
+                                </StackPanel>
+                                <TextBlock FontFamily="Consolas" FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Identity}" />
+                                <TextBlock FontSize="12" MaxLines="2" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" TextTrimming="CharacterEllipsis" TextWrapping="Wrap" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.Footer>
+                        <Button
+                            x:Uid="Common_LoadMore"
+                            Margin="0,8,0,0"
+                            HorizontalAlignment="Stretch"
+                            Command="{x:Bind ViewModel.LoadMoreCommand}"
+                            Style="{StaticResource RoGSecondaryButtonStyle}"
+                            Visibility="{x:Bind ViewModel.HasMore, Mode=OneWay}" />
+                    </ListView.Footer>
+                </ListView>
+            </Grid>
+        </controls:ListDetailPanel.List>
+
+        <!-- Ban -->
+        <Grid>
+            <TextBlock
+                x:Uid="BansPage_SelectHint"
+                Margin="32"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Style="{StaticResource RoGMutedTextStyle}"
+                Visibility="{x:Bind ViewModel.ShowSelectHint, Mode=OneWay}" />
+            <controls:StateView
+                ErrorMessage="{x:Bind ViewModel.Detail.ErrorMessage, Mode=OneWay}"
+                IsLoading="{x:Bind ViewModel.Detail.IsLoading, Mode=OneWay}"
+                RetryCommand="{x:Bind ViewModel.Detail.RefreshCommand}" />
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="{x:Bind ViewModel.Detail.ShowContent, Mode=OneWay}">
+                <StackPanel
+                    MaxWidth="{StaticResource RoGReadingWidth}"
+                    Padding="32,24,32,32"
+                    HorizontalAlignment="Left"
+                    Spacing="16">
+                    <StackPanel Spacing="4">
+                        <TextBlock
+                            IsTextSelectionEnabled="True"
+                            Style="{StaticResource RoGTitleTextStyle}"
+                            Text="{x:Bind ViewModel.Detail.Title, Mode=OneWay}"
+                            TextWrapping="Wrap"
+                            AutomationProperties.HeadingLevel="Level1" />
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Ellipse VerticalAlignment="Center" Fill="{x:Bind ViewModel.Detail.StatusBrushValue, Mode=OneWay}" Style="{StaticResource RoGStatusDotStyle}" />
+                            <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind ViewModel.Detail.StatusText, Mode=OneWay}" />
+                        </StackPanel>
+                        <TextBlock FontFamily="Consolas" IsTextSelectionEnabled="True" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind ViewModel.Detail.Identity, Mode=OneWay}" />
+                    </StackPanel>
+
+                    <StackPanel Spacing="4">
+                        <TextBlock x:Uid="BansPage_Reason" Style="{StaticResource RoGSectionTextStyle}" />
+                        <TextBlock IsTextSelectionEnabled="True" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind ViewModel.Detail.Reason, Mode=OneWay}" TextWrapping="Wrap" />
+                        <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind ViewModel.Detail.Facts, Mode=OneWay}" TextWrapping="Wrap" />
+                    </StackPanel>
+
+                    <StackPanel Spacing="8">
+                        <TextBlock x:Uid="BansPage_AppealTitle" Style="{StaticResource RoGSectionTextStyle}" />
+                        <TextBlock Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind ViewModel.Detail.AppealText, Mode=OneWay}" TextWrapping="Wrap" />
+                        <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind ViewModel.Detail.AppealHint, Mode=OneWay}" TextWrapping="Wrap" Visibility="{x:Bind ViewModel.Detail.HasAppealHint, Mode=OneWay}" />
+                        <InfoBar
+                            IsOpen="{x:Bind ViewModel.Detail.IsFeedbackOpen, Mode=TwoWay}"
+                            Message="{x:Bind ViewModel.Detail.FeedbackMessage, Mode=OneWay}"
+                            Severity="{x:Bind ViewModel.Detail.FeedbackSeverity, Mode=OneWay}" />
+                        <StackPanel Spacing="8" Visibility="{x:Bind ViewModel.Detail.CanAppeal, Mode=OneWay}">
+                            <TextBox
+                                x:Uid="BansPage_Statement"
+                                MinHeight="140"
+                                AcceptsReturn="True"
+                                MaxLength="3000"
+                                Text="{x:Bind ViewModel.Detail.Statement, Mode=TwoWay}"
+                                TextWrapping="Wrap" />
+                            <TextBox
+                                x:Uid="BansPage_Code"
+                                MaxWidth="240"
+                                HorizontalAlignment="Left"
+                                MaxLength="16"
+                                Text="{x:Bind ViewModel.Detail.Code, Mode=TwoWay}" />
+                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                <Button x:Uid="BansPage_Submit" Command="{x:Bind ViewModel.Detail.SubmitCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                                <ProgressRing Width="20" Height="20" IsActive="{x:Bind ViewModel.Detail.IsSending, Mode=OneWay}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Button x:Uid="BansPage_OpenThread" Command="{x:Bind ViewModel.Detail.OpenThreadCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" Visibility="{x:Bind ViewModel.Detail.HasThread, Mode=OneWay}" />
+                        <Button x:Uid="BansPage_OpenWeb" Command="{x:Bind ViewModel.Detail.OpenWebCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </controls:ListDetailPanel>
+</Page>

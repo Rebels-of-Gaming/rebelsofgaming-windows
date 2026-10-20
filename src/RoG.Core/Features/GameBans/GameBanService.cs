@@ -42,6 +42,15 @@ public sealed record GameBan(
 
     /// <summary>Anzeigename: Ingame-Name, sonst verknüpftes Mitglied, sonst die Kennung.</summary>
     public string Title => Name ?? UserName ?? Identifier;
+
+    /// <summary>In der öffentlichen Ban-Liste sichtbar (Website v0.34.0; Admins blenden einzelne aus).</summary>
+    public bool IsPublic { get; init; } = true;
+
+    /// <summary>Einspruchs-Code aus der Kick-Nachricht – sehen nur die zuständigen Admins.</summary>
+    public string? AppealCode { get; init; }
+
+    /// <summary>Öffentliche Ban-Seite (<c>/{sprache}/bans/{id}</c>).</summary>
+    public Uri? PublicUrl { get; init; }
 }
 
 /// <summary>Neuer Ban aus der App. <see cref="IdentifierType"/> leer = Typ des Spiels (guid/steamid/mc_uuid).</summary>
@@ -177,6 +186,10 @@ public sealed partial class GameBanService(HttpClient http)
         return ParseData(await SendAsync(HttpMethod.Patch, "game-bans/" + Id(id), body, cancellationToken).ConfigureAwait(false));
     }
 
+    /// <summary>In der öffentlichen Ban-Liste zeigen bzw. ausblenden – geht auch bei beendeten Bans, ändert für Plugins nichts.</summary>
+    public async Task<GameBan> SetPublicAsync(string id, bool isPublic, CancellationToken cancellationToken = default) =>
+        ParseData(await SendAsync(HttpMethod.Patch, "game-bans/" + Id(id), new JsonObject { ["is_public"] = isPublic }, cancellationToken).ConfigureAwait(false));
+
     public async Task<GameBan> LiftAsync(string id, string? reason, CancellationToken cancellationToken = default) =>
         ParseData(await SendAsync(HttpMethod.Post, $"game-bans/{Id(id)}/lift", new JsonObject { ["reason"] = Trimmed(reason) }, cancellationToken).ConfigureAwait(false));
 
@@ -296,7 +309,12 @@ public sealed partial class GameBanService(HttpClient http)
             Time(n, "lifted_at"),
             Str(n["lifted_by"], "name"),
             Str(n, "lift_reason"),
-            deliveries);
+            deliveries)
+        {
+            IsPublic = n["is_public"] is not JsonValue p || p.GetValueKind() != JsonValueKind.False,
+            AppealCode = Str(n, "appeal_code"),
+            PublicUrl = Str(n, "public_url") is { } url && Uri.TryCreate(url, UriKind.Absolute, out var u) && u.Scheme == Uri.UriSchemeHttps ? u : null,
+        };
     }
 
     // --- Plugin-Schlüssel ------------------------------------------------------------------------------------------

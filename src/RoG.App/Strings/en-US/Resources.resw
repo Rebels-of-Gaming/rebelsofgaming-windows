@@ -5109,4 +5109,259 @@
   <data name="GameBans_More.Content" xml:space="preserve">
     <value>Load more</value>
   </data>
+  <data name="Bans_Status_active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="Bans_Status_ended" xml:space="preserve">
+    <value>Ended (30 days)</value>
+  </data>
+  <data name="Bans_Appeal_open" xml:space="preserve">
+    <value>Appeal pending</value>
+  </data>
+  <data name="Bans_Appeal_accepted" xml:space="preserve">
+    <value>Appeal accepted</value>
+  </data>
+  <data name="Bans_Appeal_rejected" xml:space="preserve">
+    <value>Appeal rejected</value>
+  </data>
+  <data name="Bans_EndedAt" xml:space="preserve">
+    <value>ended {0}</value>
+  </data>
+  <data name="Bans_Since" xml:space="preserve">
+    <value>since {0}</value>
+  </data>
+  <data name="Bans_AppealNone" xml:space="preserve">
+    <value>No appeal yet.</value>
+  </data>
+  <data name="Bans_Blocked_not_active" xml:space="preserve">
+    <value>This ban has ended – no appeal needed.</value>
+  </data>
+  <data name="Bans_Blocked_unavailable" xml:space="preserve">
+    <value>Appeals are currently unavailable.</value>
+  </data>
+  <data name="Bans_Blocked_open" xml:space="preserve">
+    <value>An appeal for this ban is already pending.</value>
+  </data>
+  <data name="Bans_Blocked_cooldown" xml:space="preserve">
+    <value>After a rejection, a new appeal is possible after 30 days.</value>
+  </data>
+  <data name="Bans_CooldownUntil" xml:space="preserve">
+    <value>Rejected – a new appeal is possible from {0}.</value>
+  </data>
+  <data name="Bans_SignInToAppeal" xml:space="preserve">
+    <value>Sign in to appeal.</value>
+  </data>
+  <data name="Bans_ScopeMissing" xml:space="preserve">
+    <value>Your sign-in lacks the permission for appeals – please sign out and back in.</value>
+  </data>
+  <data name="Bans_CodeHint" xml:space="preserve">
+    <value>Your account isn’t linked to this ban. Enter the appeal code from the kick message.</value>
+  </data>
+  <data name="Bans_ProofHint" xml:space="preserve">
+    <value>Your account proves you are the banned player – no code needed. The appeal becomes a public forum thread.</value>
+  </data>
+  <data name="Bans_Rule_Statement" xml:space="preserve">
+    <value>The statement needs 20 to 3000 characters.</value>
+  </data>
+  <data name="Bans_Rule_Code" xml:space="preserve">
+    <value>Please enter the appeal code from the kick message.</value>
+  </data>
+  <data name="Bans_AppealSent" xml:space="preserve">
+    <value>Appeal submitted – the forum thread has been created.</value>
+  </data>
+  <data name="Bans_CodeWrong" xml:space="preserve">
+    <value>The code is wrong or has already been used.</value>
+  </data>
+  <data name="BanAppeals_Status_open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="BanAppeals_Status_accepted" xml:space="preserve">
+    <value>Accepted</value>
+  </data>
+  <data name="BanAppeals_Status_rejected" xml:space="preserve">
+    <value>Rejected</value>
+  </data>
+  <data name="BanAppeals_Status_all" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="BanAppeals_AcceptTitle" xml:space="preserve">
+    <value>Accept appeal for {0}?</value>
+  </data>
+  <data name="BanAppeals_RejectTitle" xml:space="preserve">
+    <value>Reject appeal for {0}?</value>
+  </data>
+  <data name="BanAppeals_AcceptText" xml:space="preserve">
+    <value>The ban will be lifted. The reason appears publicly in the forum thread, which is then closed.</value>
+  </data>
+  <data name="BanAppeals_RejectText" xml:space="preserve">
+    <value>The ban stays in place. The reason appears publicly in the forum thread, which is then closed.</value>
+  </data>
+  <data name="BanAppeals_Note" xml:space="preserve">
+    <value>Reason (public, optional)</value>
+  </data>
+  <data name="BanAppeals_Reappeal" xml:space="preserve">
+    <value>Allow a new appeal right away (no 30-day wait)</value>
+  </data>
+  <data name="BanAppeals_Accepted" xml:space="preserve">
+    <value>Appeal accepted – ban lifted.</value>
+  </data>
+  <data name="BanAppeals_Rejected" xml:space="preserve">
+    <value>Appeal rejected.</value>
+  </data>
+  <data name="BanAppeals_By" xml:space="preserve">
+    <value>by {0}</value>
+  </data>
+  <data name="BanAppeals_Proof_linked" xml:space="preserve">
+    <value>Proof: linked account</value>
+  </data>
+  <data name="BanAppeals_Proof_steam" xml:space="preserve">
+    <value>Proof: Steam</value>
+  </data>
+  <data name="BanAppeals_Proof_minecraft" xml:space="preserve">
+    <value>Proof: Minecraft</value>
+  </data>
+  <data name="BanAppeals_Proof_code" xml:space="preserve">
+    <value>Proof: appeal code</value>
+  </data>
+  <data name="BanAppeals_NoBoard" xml:space="preserve">
+    <value>No board (appeals off)</value>
+  </data>
+  <data name="BanAppeals_BoardMissing" xml:space="preserve">
+    <value>No forum board selected – appeals are off.</value>
+  </data>
+  <data name="BanAppeals_BoardActive" xml:space="preserve">
+    <value>Appeals go to the board “{0}”.</value>
+  </data>
+  <data name="BanAppeals_BoardNotPublic" xml:space="preserve">
+    <value>Appeals go to the board “{0}” – the board is not publicly readable.</value>
+  </data>
+  <data name="BanAppeals_BoardSaved" xml:space="preserve">
+    <value>Forum board saved.</value>
+  </data>
+  <data name="GameBans_Hide" xml:space="preserve">
+    <value>Hide</value>
+  </data>
+  <data name="GameBans_Show" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="GameBans_Hidden" xml:space="preserve">
+    <value>Ban hidden from the public list.</value>
+  </data>
+  <data name="GameBans_Shown" xml:space="preserve">
+    <value>Ban is shown publicly again.</value>
+  </data>
+  <data name="GameBans_HiddenBadge" xml:space="preserve">
+    <value>not public</value>
+  </data>
+  <data name="GameBans_AppealCode" xml:space="preserve">
+    <value>Appeal code: {0}</value>
+  </data>
+  <data name="Error_appeal_proof_required" xml:space="preserve">
+    <value>No proof – please enter the appeal code from the kick message.</value>
+  </data>
+  <data name="Error_appeal_open" xml:space="preserve">
+    <value>An appeal for this ban is already pending.</value>
+  </data>
+  <data name="Error_appeal_cooldown" xml:space="preserve">
+    <value>Rejected – a new appeal is only possible after 30 days.</value>
+  </data>
+  <data name="Error_appeals_unavailable" xml:space="preserve">
+    <value>Appeals are currently unavailable (no forum board set up).</value>
+  </data>
+  <data name="Error_appeal_decided" xml:space="preserve">
+    <value>This appeal has already been decided.</value>
+  </data>
+  <data name="BansPage_Title.Text" xml:space="preserve">
+    <value>BAN LIST</value>
+  </data>
+  <data name="BansPage_Intro.Text" xml:space="preserve">
+    <value>Players banned on our game servers – shortened IDs, no IP addresses. If you think you were banned unfairly, you can appeal.</value>
+  </data>
+  <data name="BansPage_StatusFilter.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="BansPage_Search.PlaceholderText" xml:space="preserve">
+    <value>Name or full ID</value>
+  </data>
+  <data name="BansPage_Search.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Search bans</value>
+  </data>
+  <data name="BansPage_State.EmptyText" xml:space="preserve">
+    <value>No bans found.</value>
+  </data>
+  <data name="BansPage_List.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Bans</value>
+  </data>
+  <data name="BansPage_SelectHint.Text" xml:space="preserve">
+    <value>Select a ban.</value>
+  </data>
+  <data name="BansPage_Reason.Text" xml:space="preserve">
+    <value>REASON</value>
+  </data>
+  <data name="BansPage_AppealTitle.Text" xml:space="preserve">
+    <value>APPEAL</value>
+  </data>
+  <data name="BansPage_Statement.Header" xml:space="preserve">
+    <value>Your statement</value>
+  </data>
+  <data name="BansPage_Statement.PlaceholderText" xml:space="preserve">
+    <value>Why do you think the ban is wrong? (20–3000 characters, public in the forum)</value>
+  </data>
+  <data name="BansPage_Code.Header" xml:space="preserve">
+    <value>Appeal code</value>
+  </data>
+  <data name="BansPage_Code.PlaceholderText" xml:space="preserve">
+    <value>e.g. K7QX-4M2P</value>
+  </data>
+  <data name="BansPage_Submit.Content" xml:space="preserve">
+    <value>Submit appeal</value>
+  </data>
+  <data name="BansPage_OpenThread.Content" xml:space="preserve">
+    <value>Open forum thread</value>
+  </data>
+  <data name="BansPage_OpenWeb.Content" xml:space="preserve">
+    <value>Open on the website</value>
+  </data>
+  <data name="ServersPage_BanList.Content" xml:space="preserve">
+    <value>Ban list</value>
+  </data>
+  <data name="AdminPage_TabAppeals.Text" xml:space="preserve">
+    <value>Appeals</value>
+  </data>
+  <data name="BanAppeals_BoardTitle.Text" xml:space="preserve">
+    <value>FORUM BOARD FOR APPEALS</value>
+  </data>
+  <data name="BanAppeals_Board.Header" xml:space="preserve">
+    <value>Board</value>
+  </data>
+  <data name="BanAppeals_SaveBoard.Content" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="BanAppeals_CreateBoard.Content" xml:space="preserve">
+    <value>Create “Ban appeals” board</value>
+  </data>
+  <data name="BanAppeals_StatusFilter.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="BanAppeals_Reload.Content" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="BanAppeals_Empty.Text" xml:space="preserve">
+    <value>No appeals.</value>
+  </data>
+  <data name="BanAppeals_Accept.Content" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="BanAppeals_Reject.Content" xml:space="preserve">
+    <value>Reject</value>
+  </data>
+  <data name="BanAppeals_OpenThread.Content" xml:space="preserve">
+    <value>Forum thread</value>
+  </data>
+  <data name="BanAppeals_OpenBan.Content" xml:space="preserve">
+    <value>View ban</value>
+  </data>
+  <data name="GameBans_OpenPublic.Content" xml:space="preserve">
+    <value>Public page</value>
+  </data>
 </root>

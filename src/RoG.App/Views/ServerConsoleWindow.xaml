@@ -383,11 +383,16 @@
                                         </StackPanel>
                                         <TextBlock FontFamily="Consolas" FontSize="12" IsTextSelectionEnabled="True" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Identity}" />
                                         <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" TextWrapping="Wrap" />
+                                        <TextBlock FontSize="12" IsTextSelectionEnabled="True" Foreground="{StaticResource RoGGoldBrush}" Text="{x:Bind PublicInfo}" TextWrapping="Wrap" Visibility="{x:Bind HasPublicInfo}" />
                                         <TextBlock FontSize="12" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Deliveries, Mode=OneWay}" TextWrapping="Wrap" Visibility="{x:Bind HasDeliveries, Mode=OneWay}" />
                                         <StackPanel Margin="0,4,0,0" Orientation="Horizontal" Spacing="8">
                                             <Button x:Uid="GameBans_Edit" Command="{x:Bind EditCommand}" Visibility="{x:Bind IsActive}" />
                                             <Button x:Uid="GameBans_Lift" Command="{x:Bind LiftCommand}" Visibility="{x:Bind IsActive}" />
                                             <Button x:Uid="GameBans_Details" Command="{x:Bind DetailsCommand}" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
+                                            <Button Command="{x:Bind TogglePublicCommand}" Content="{x:Bind ToggleText}" AutomationProperties.Name="{x:Bind ToggleText}" />
+                                            <Button x:Uid="GameBans_OpenPublic" Command="{x:Bind OpenPublicCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" Visibility="{x:Bind HasPublicUrl}" />
                                         </StackPanel>
                                     </StackPanel>
                                 </Border>

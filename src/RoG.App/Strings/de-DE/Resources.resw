@@ -5109,4 +5109,259 @@
   <data name="GameBans_More.Content" xml:space="preserve">
     <value>Mehr laden</value>
   </data>
+  <data name="Bans_Status_active" xml:space="preserve">
+    <value>Aktiv</value>
+  </data>
+  <data name="Bans_Status_ended" xml:space="preserve">
+    <value>Beendet (30 Tage)</value>
+  </data>
+  <data name="Bans_Appeal_open" xml:space="preserve">
+    <value>Einspruch läuft</value>
+  </data>
+  <data name="Bans_Appeal_accepted" xml:space="preserve">
+    <value>Einspruch angenommen</value>
+  </data>
+  <data name="Bans_Appeal_rejected" xml:space="preserve">
+    <value>Einspruch abgelehnt</value>
+  </data>
+  <data name="Bans_EndedAt" xml:space="preserve">
+    <value>beendet {0}</value>
+  </data>
+  <data name="Bans_Since" xml:space="preserve">
+    <value>seit {0}</value>
+  </data>
+  <data name="Bans_AppealNone" xml:space="preserve">
+    <value>Bisher kein Einspruch.</value>
+  </data>
+  <data name="Bans_Blocked_not_active" xml:space="preserve">
+    <value>Der Ban ist beendet – ein Einspruch ist nicht mehr nötig.</value>
+  </data>
+  <data name="Bans_Blocked_unavailable" xml:space="preserve">
+    <value>Einsprüche sind gerade nicht möglich.</value>
+  </data>
+  <data name="Bans_Blocked_open" xml:space="preserve">
+    <value>Zu diesem Ban läuft schon ein Einspruch.</value>
+  </data>
+  <data name="Bans_Blocked_cooldown" xml:space="preserve">
+    <value>Nach einer Ablehnung ist ein neuer Einspruch erst nach 30 Tagen möglich.</value>
+  </data>
+  <data name="Bans_CooldownUntil" xml:space="preserve">
+    <value>Abgelehnt – ein neuer Einspruch ist ab {0} möglich.</value>
+  </data>
+  <data name="Bans_SignInToAppeal" xml:space="preserve">
+    <value>Melde dich an, um Einspruch einzulegen.</value>
+  </data>
+  <data name="Bans_ScopeMissing" xml:space="preserve">
+    <value>Für Einsprüche fehlt deiner Anmeldung ein Recht – bitte ab- und wieder anmelden.</value>
+  </data>
+  <data name="Bans_CodeHint" xml:space="preserve">
+    <value>Dein Konto ist nicht mit diesem Ban verknüpft. Gib den Einspruchs-Code aus der Kick-Nachricht an.</value>
+  </data>
+  <data name="Bans_ProofHint" xml:space="preserve">
+    <value>Dein Konto weist dich als gesperrte Person aus – ein Code ist nicht nötig. Der Einspruch wird ein öffentliches Forum-Thema.</value>
+  </data>
+  <data name="Bans_Rule_Statement" xml:space="preserve">
+    <value>Die Stellungnahme braucht 20 bis 3000 Zeichen.</value>
+  </data>
+  <data name="Bans_Rule_Code" xml:space="preserve">
+    <value>Bitte den Einspruchs-Code aus der Kick-Nachricht angeben.</value>
+  </data>
+  <data name="Bans_AppealSent" xml:space="preserve">
+    <value>Einspruch eingelegt – das Forum-Thema ist erstellt.</value>
+  </data>
+  <data name="Bans_CodeWrong" xml:space="preserve">
+    <value>Der Code stimmt nicht oder wurde schon benutzt.</value>
+  </data>
+  <data name="BanAppeals_Status_open" xml:space="preserve">
+    <value>Offen</value>
+  </data>
+  <data name="BanAppeals_Status_accepted" xml:space="preserve">
+    <value>Angenommen</value>
+  </data>
+  <data name="BanAppeals_Status_rejected" xml:space="preserve">
+    <value>Abgelehnt</value>
+  </data>
+  <data name="BanAppeals_Status_all" xml:space="preserve">
+    <value>Alle</value>
+  </data>
+  <data name="BanAppeals_AcceptTitle" xml:space="preserve">
+    <value>Einspruch zu {0} annehmen?</value>
+  </data>
+  <data name="BanAppeals_RejectTitle" xml:space="preserve">
+    <value>Einspruch zu {0} ablehnen?</value>
+  </data>
+  <data name="BanAppeals_AcceptText" xml:space="preserve">
+    <value>Der Ban wird aufgehoben. Die Begründung erscheint öffentlich im Forum-Thema, das danach geschlossen wird.</value>
+  </data>
+  <data name="BanAppeals_RejectText" xml:space="preserve">
+    <value>Der Ban bleibt bestehen. Die Begründung erscheint öffentlich im Forum-Thema, das danach geschlossen wird.</value>
+  </data>
+  <data name="BanAppeals_Note" xml:space="preserve">
+    <value>Begründung (öffentlich, optional)</value>
+  </data>
+  <data name="BanAppeals_Reappeal" xml:space="preserve">
+    <value>Neuer Einspruch sofort erlaubt (ohne 30-Tage-Frist)</value>
+  </data>
+  <data name="BanAppeals_Accepted" xml:space="preserve">
+    <value>Einspruch angenommen – Ban aufgehoben.</value>
+  </data>
+  <data name="BanAppeals_Rejected" xml:space="preserve">
+    <value>Einspruch abgelehnt.</value>
+  </data>
+  <data name="BanAppeals_By" xml:space="preserve">
+    <value>von {0}</value>
+  </data>
+  <data name="BanAppeals_Proof_linked" xml:space="preserve">
+    <value>Nachweis: verknüpftes Konto</value>
+  </data>
+  <data name="BanAppeals_Proof_steam" xml:space="preserve">
+    <value>Nachweis: Steam</value>
+  </data>
+  <data name="BanAppeals_Proof_minecraft" xml:space="preserve">
+    <value>Nachweis: Minecraft</value>
+  </data>
+  <data name="BanAppeals_Proof_code" xml:space="preserve">
+    <value>Nachweis: Einspruchs-Code</value>
+  </data>
+  <data name="BanAppeals_NoBoard" xml:space="preserve">
+    <value>Kein Bereich (Einsprüche aus)</value>
+  </data>
+  <data name="BanAppeals_BoardMissing" xml:space="preserve">
+    <value>Kein Forum-Bereich gewählt – Einsprüche sind aus.</value>
+  </data>
+  <data name="BanAppeals_BoardActive" xml:space="preserve">
+    <value>Einsprüche landen im Bereich „{0}“.</value>
+  </data>
+  <data name="BanAppeals_BoardNotPublic" xml:space="preserve">
+    <value>Einsprüche landen im Bereich „{0}“ – der Bereich ist nicht öffentlich lesbar.</value>
+  </data>
+  <data name="BanAppeals_BoardSaved" xml:space="preserve">
+    <value>Forum-Bereich gespeichert.</value>
+  </data>
+  <data name="GameBans_Hide" xml:space="preserve">
+    <value>Ausblenden</value>
+  </data>
+  <data name="GameBans_Show" xml:space="preserve">
+    <value>Einblenden</value>
+  </data>
+  <data name="GameBans_Hidden" xml:space="preserve">
+    <value>Ban aus der öffentlichen Liste ausgeblendet.</value>
+  </data>
+  <data name="GameBans_Shown" xml:space="preserve">
+    <value>Ban wird wieder öffentlich gezeigt.</value>
+  </data>
+  <data name="GameBans_HiddenBadge" xml:space="preserve">
+    <value>nicht öffentlich</value>
+  </data>
+  <data name="GameBans_AppealCode" xml:space="preserve">
+    <value>Einspruchs-Code: {0}</value>
+  </data>
+  <data name="Error_appeal_proof_required" xml:space="preserve">
+    <value>Kein Nachweis – bitte den Einspruchs-Code aus der Kick-Nachricht angeben.</value>
+  </data>
+  <data name="Error_appeal_open" xml:space="preserve">
+    <value>Zu diesem Ban läuft schon ein Einspruch.</value>
+  </data>
+  <data name="Error_appeal_cooldown" xml:space="preserve">
+    <value>Abgelehnt – ein neuer Einspruch ist erst nach 30 Tagen möglich.</value>
+  </data>
+  <data name="Error_appeals_unavailable" xml:space="preserve">
+    <value>Einsprüche sind gerade nicht möglich (kein Forum-Bereich eingerichtet).</value>
+  </data>
+  <data name="Error_appeal_decided" xml:space="preserve">
+    <value>Dieser Einspruch ist schon entschieden.</value>
+  </data>
+  <data name="BansPage_Title.Text" xml:space="preserve">
+    <value>BAN-LISTE</value>
+  </data>
+  <data name="BansPage_Intro.Text" xml:space="preserve">
+    <value>Gesperrte Spieler auf unseren Gameservern – mit gekürzter Kennung, ohne IP-Adressen. Wer sich zu Unrecht gesperrt sieht, kann Einspruch einlegen.</value>
+  </data>
+  <data name="BansPage_StatusFilter.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="BansPage_Search.PlaceholderText" xml:space="preserve">
+    <value>Name oder volle Kennung</value>
+  </data>
+  <data name="BansPage_Search.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Bans durchsuchen</value>
+  </data>
+  <data name="BansPage_State.EmptyText" xml:space="preserve">
+    <value>Keine Bans gefunden.</value>
+  </data>
+  <data name="BansPage_List.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Bans</value>
+  </data>
+  <data name="BansPage_SelectHint.Text" xml:space="preserve">
+    <value>Wähle einen Ban aus.</value>
+  </data>
+  <data name="BansPage_Reason.Text" xml:space="preserve">
+    <value>GRUND</value>
+  </data>
+  <data name="BansPage_AppealTitle.Text" xml:space="preserve">
+    <value>EINSPRUCH</value>
+  </data>
+  <data name="BansPage_Statement.Header" xml:space="preserve">
+    <value>Deine Stellungnahme</value>
+  </data>
+  <data name="BansPage_Statement.PlaceholderText" xml:space="preserve">
+    <value>Warum ist der Ban aus deiner Sicht falsch? (20–3000 Zeichen, öffentlich im Forum)</value>
+  </data>
+  <data name="BansPage_Code.Header" xml:space="preserve">
+    <value>Einspruchs-Code</value>
+  </data>
+  <data name="BansPage_Code.PlaceholderText" xml:space="preserve">
+    <value>z. B. K7QX-4M2P</value>
+  </data>
+  <data name="BansPage_Submit.Content" xml:space="preserve">
+    <value>Einspruch einlegen</value>
+  </data>
+  <data name="BansPage_OpenThread.Content" xml:space="preserve">
+    <value>Forum-Thema öffnen</value>
+  </data>
+  <data name="BansPage_OpenWeb.Content" xml:space="preserve">
+    <value>Auf der Website öffnen</value>
+  </data>
+  <data name="ServersPage_BanList.Content" xml:space="preserve">
+    <value>Ban-Liste</value>
+  </data>
+  <data name="AdminPage_TabAppeals.Text" xml:space="preserve">
+    <value>Einsprüche</value>
+  </data>
+  <data name="BanAppeals_BoardTitle.Text" xml:space="preserve">
+    <value>FORUM-BEREICH FÜR EINSPRÜCHE</value>
+  </data>
+  <data name="BanAppeals_Board.Header" xml:space="preserve">
+    <value>Bereich</value>
+  </data>
+  <data name="BanAppeals_SaveBoard.Content" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="BanAppeals_CreateBoard.Content" xml:space="preserve">
+    <value>Bereich „Ban-Einsprüche“ anlegen</value>
+  </data>
+  <data name="BanAppeals_StatusFilter.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="BanAppeals_Reload.Content" xml:space="preserve">
+    <value>Aktualisieren</value>
+  </data>
+  <data name="BanAppeals_Empty.Text" xml:space="preserve">
+    <value>Keine Einsprüche.</value>
+  </data>
+  <data name="BanAppeals_Accept.Content" xml:space="preserve">
+    <value>Annehmen</value>
+  </data>
+  <data name="BanAppeals_Reject.Content" xml:space="preserve">
+    <value>Ablehnen</value>
+  </data>
+  <data name="BanAppeals_OpenThread.Content" xml:space="preserve">
+    <value>Forum-Thema</value>
+  </data>
+  <data name="BanAppeals_OpenBan.Content" xml:space="preserve">
+    <value>Ban ansehen</value>
+  </data>
+  <data name="GameBans_OpenPublic.Content" xml:space="preserve">
+    <value>Öffentliche Seite</value>
+  </data>
 </root>

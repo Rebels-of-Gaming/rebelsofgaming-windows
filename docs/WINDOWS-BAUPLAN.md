@@ -208,6 +208,20 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   **Annahme:** Standard-Geltung im Formular „Spiel“ für Ban-Verwaltende, sonst „nur dieser Server“. **Offen:** Wer
   nur `gamebans.manage` hat, aber keine Steuerungsrechte am Server, erreicht den Reiter nicht (das Fenster öffnet nur mit
   `control`); eine serverübergreifende Ban-Liste gibt es in der App noch nicht (Website-Admin).
+- **2.5.10 – Ban-Liste und Einsprüche (Website v0.34.0, live 20.10.2026, Guide 43, Annahme 488):** `PublicBanService`
+  (Core, 22 Tests): `GET /v1/bans` (`filter[status]` active/ended, `filter[search]`, Cursor), `GET /v1/bans/{ban}` mit
+  `appeal_info` (available/blocked/cooldown_until/proofs), `POST /v1/bans/{ban}/appeals` (Stellungnahme 20–3000 Zeichen,
+  Code nur ohne Nachweis, Leerzeichen raus), `GET /v1/game-ban-appeals`, `POST …/{appeal}/decision` (`reappeal_allowed`
+  nur beim Ablehnen), `GET|PATCH /v1/game-bans/settings`, `POST …/settings/appeals-board`; `GameBan` mit `is_public`,
+  `appeal_code`, `public_url`, `SetPublicAsync` (PATCH nur `is_public`). Links nur https. App: Seite „Ban-Liste“ ohne
+  Eintrag in der Seitenleiste (Knopf auf der Serverseite, `AppSection.Bans` für `/bans/…` und `rog://bans/…`),
+  Einspruch-Formular nur mit Scope `gamebans:appeal` (sonst Hinweis „ab- und wieder anmelden“), danach öffnet das
+  Forum-Thema in der App; Verwaltung → Reiter „Einsprüche“ mit Scope `gamebans:manage` und `gamebans.manage` bzw.
+  `servers.bans` irgendwo, Entscheiden nur bei `can_decide`, Forum-Bereich nur mit `gamebans.manage`. Antwort-/
+  Bearbeitungssperre in Einspruch-Themen: das Forum der App folgt schon `can_reply`/`can_edit` und zeigt Fehlercodes
+  des Servers. **Korrektur:** Forum-Links `/forum/t/{ulid}/{slug}` gaben den Slug statt der ID weiter.
+  **Annahme:** Die Ban-Liste bekommt keinen eigenen Eintrag in der Seitenleiste (Liste ist schon lang), sondern einen
+  Knopf auf der Serverseite.
 
 - **2.5.8 – Website v0.32.2 (live 20.10.2026):** Client aus der Live-Spezifikation (Tool-Endpunkte jetzt vollständig).
   Server-Karte: aufklappbare „Ports (n)“ aus `provisioning.allocations` (Hauptport zuerst mit „Hauptport“, Alias statt
@@ -438,6 +452,8 @@ sich einmal neu an (2FA).
 - Ab 2.5.9: Gameserver-Bans (Kennungen, Namen, Gründe, IP-Netze nur für Ban-Verwaltende) zeigt die App nur an,
   speichert sie nicht (kein Cache); der Plugin-Schlüssel erscheint einmalig im Dialog und landet nur auf Wunsch in der
   Zwischenablage.
+- Ab 2.5.10: Die öffentliche Ban-Liste und Einsprüche zeigt die App nur an (kein Cache); eine Stellungnahme geht nur an
+  die Plattform und wird dort ein öffentlich lesbares Forum-Thema – darauf weist das Formular hin.
 - Ab 2.3.0: gelesene Wiki-Seiten (gerendertes HTML, Titel, Bereich) unter `wiki/` im App-Datenordner, je Sprache,
   **mit DPAPI verschlüsselt** (ab 2.3.3); Abmelden löscht den Ordner, Deinstallation ebenso.
 - Ab 2.3.3: Offline-Warteschlange `outbox.dat` (Forenantworten, Zusagen; DPAPI-verschlüsselt) – **Direktnachrichten

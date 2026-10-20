@@ -890,6 +890,114 @@ public static class StringKeys
 
     public const string GameBansTokenCopied = "GameBans_TokenCopied";
 
+    public const string BansStatusactive = "Bans_Status_active";
+
+    public const string BansStatusended = "Bans_Status_ended";
+
+    public const string BansAppealopen = "Bans_Appeal_open";
+
+    public const string BansAppealaccepted = "Bans_Appeal_accepted";
+
+    public const string BansAppealrejected = "Bans_Appeal_rejected";
+
+    public const string BansEndedAt = "Bans_EndedAt";
+
+    public const string BansSince = "Bans_Since";
+
+    public const string BansAppealNone = "Bans_AppealNone";
+
+    public const string BansBlockednotactive = "Bans_Blocked_not_active";
+
+    public const string BansBlockedunavailable = "Bans_Blocked_unavailable";
+
+    public const string BansBlockedopen = "Bans_Blocked_open";
+
+    public const string BansBlockedcooldown = "Bans_Blocked_cooldown";
+
+    public const string BansCooldownUntil = "Bans_CooldownUntil";
+
+    public const string BansSignInToAppeal = "Bans_SignInToAppeal";
+
+    public const string BansScopeMissing = "Bans_ScopeMissing";
+
+    public const string BansCodeHint = "Bans_CodeHint";
+
+    public const string BansProofHint = "Bans_ProofHint";
+
+    public const string BansRuleStatement = "Bans_Rule_Statement";
+
+    public const string BansRuleCode = "Bans_Rule_Code";
+
+    public const string BansAppealSent = "Bans_AppealSent";
+
+    public const string BansCodeWrong = "Bans_CodeWrong";
+
+    public const string BanAppealsStatusopen = "BanAppeals_Status_open";
+
+    public const string BanAppealsStatusaccepted = "BanAppeals_Status_accepted";
+
+    public const string BanAppealsStatusrejected = "BanAppeals_Status_rejected";
+
+    public const string BanAppealsStatusall = "BanAppeals_Status_all";
+
+    public const string BanAppealsAcceptTitle = "BanAppeals_AcceptTitle";
+
+    public const string BanAppealsRejectTitle = "BanAppeals_RejectTitle";
+
+    public const string BanAppealsAcceptText = "BanAppeals_AcceptText";
+
+    public const string BanAppealsRejectText = "BanAppeals_RejectText";
+
+    public const string BanAppealsNote = "BanAppeals_Note";
+
+    public const string BanAppealsReappeal = "BanAppeals_Reappeal";
+
+    public const string BanAppealsAccepted = "BanAppeals_Accepted";
+
+    public const string BanAppealsRejected = "BanAppeals_Rejected";
+
+    public const string BanAppealsBy = "BanAppeals_By";
+
+    public const string BanAppealsProoflinked = "BanAppeals_Proof_linked";
+
+    public const string BanAppealsProofsteam = "BanAppeals_Proof_steam";
+
+    public const string BanAppealsProofminecraft = "BanAppeals_Proof_minecraft";
+
+    public const string BanAppealsProofcode = "BanAppeals_Proof_code";
+
+    public const string BanAppealsNoBoard = "BanAppeals_NoBoard";
+
+    public const string BanAppealsBoardMissing = "BanAppeals_BoardMissing";
+
+    public const string BanAppealsBoardActive = "BanAppeals_BoardActive";
+
+    public const string BanAppealsBoardNotPublic = "BanAppeals_BoardNotPublic";
+
+    public const string BanAppealsBoardSaved = "BanAppeals_BoardSaved";
+
+    public const string GameBansHide = "GameBans_Hide";
+
+    public const string GameBansShow = "GameBans_Show";
+
+    public const string GameBansHidden = "GameBans_Hidden";
+
+    public const string GameBansShown = "GameBans_Shown";
+
+    public const string GameBansHiddenBadge = "GameBans_HiddenBadge";
+
+    public const string GameBansAppealCode = "GameBans_AppealCode";
+
+    public const string Errorappealproofrequired = "Error_appeal_proof_required";
+
+    public const string Errorappealopen = "Error_appeal_open";
+
+    public const string Errorappealcooldown = "Error_appeal_cooldown";
+
+    public const string Errorappealsunavailable = "Error_appeals_unavailable";
+
+    public const string Errorappealdecided = "Error_appeal_decided";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

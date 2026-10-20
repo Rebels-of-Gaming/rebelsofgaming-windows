@@ -21,6 +21,7 @@ public sealed partial class AdminPage : Page
             Moderate = user => MemberModerationDialog.ShowAsync(XamlRoot, Moderation, user, null),
         };
         Media = new MediaAdminViewModel(App.Services, Moderation.Show);
+        Appeals = new BanAppealsViewModel(App.Services, Moderation.Show) { AskDecision = AskAppealDecisionAsync };
         InitializeComponent();
         Media.Confirm = ConfirmAsync;
         Moderation.OpenMember = (user, report) => MemberModerationDialog.ShowAsync(XamlRoot, Moderation, user, report);
@@ -31,12 +32,13 @@ public sealed partial class AdminPage : Page
         ApplicationsTab.Visibility = Visible(Applications.CanView);
         ReportsTab.Visibility = Visible(Moderation.CanReports);
         BansTab.Visibility = Visible(Moderation.CanReports);
+        AppealsTab.Visibility = Visible(Appeals.CanView);
         LogTab.Visibility = Visible(Moderation.CanLog);
         WordsTab.Visibility = Visible(Moderation.CanManage);
         GalleryTab.Visibility = Visible(Media.CanGallery);
         UploadsTab.Visibility = Visible(Media.CanUploads);
         WebsiteTab.Visibility = Visible((Overview.Any && Media.HasWebLinks) || Media.HasNativeAreas);
-        var any = Moderation.Any || Applications.CanView || Overview.Any || Members.CanView || Media.CanGallery || Media.CanUploads;
+        var any = Moderation.Any || Applications.CanView || Overview.Any || Members.CanView || Media.CanGallery || Media.CanUploads || Appeals.CanView;
         NoAccess.Visibility = Visible(!any);
         Tabs.Visibility = Visible(any);
         Tabs.SelectedItem = Tabs.Items.FirstOrDefault(t => t.Visibility == Visibility.Visible);
@@ -51,6 +53,8 @@ public sealed partial class AdminPage : Page
     public MembersAdminViewModel Members { get; }
 
     public MediaAdminViewModel Media { get; }
+
+    public BanAppealsViewModel Appeals { get; }
 
     private void OnMemberSearch(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) => Members.SearchNowCommand.Execute(null);
 
@@ -84,6 +88,32 @@ public sealed partial class AdminPage : Page
         return (ok, message.Text, needsDays && !double.IsNaN(days.Value) ? (int)days.Value : null);
     }
 
+    /// <summary>Einspruch entscheiden: öffentliche Begründung (bis 500 Zeichen), beim Ablehnen „sofort neuer Einspruch erlaubt“.</summary>
+    private async Task<(string? Note, bool Reappeal)?> AskAppealDecisionAsync(string title, bool accept)
+    {
+        var l = App.Services.Localizer;
+        var note = new TextBox { Header = l.GetString(StringKeys.BanAppealsNote), AcceptsReturn = true, TextWrapping = TextWrapping.Wrap, MaxLength = RoG.Core.Features.GameBans.PublicBanService.MaxNote, MinHeight = 80 };
+        var reappeal = new CheckBox { Content = l.GetString(StringKeys.BanAppealsReappeal) };
+        var panel = new StackPanel { Spacing = 12, MinWidth = 380 };
+        panel.Children.Add(new TextBlock { Text = l.GetString(accept ? StringKeys.BanAppealsAcceptText : StringKeys.BanAppealsRejectText), TextWrapping = TextWrapping.Wrap });
+        panel.Children.Add(note);
+        if (!accept)
+        {
+            panel.Children.Add(reappeal);
+        }
+
+        var dialog = new ContentDialog
+        {
+            XamlRoot = XamlRoot,
+            Title = title,
+            Content = panel,
+            PrimaryButtonText = l.GetString(StringKeys.CommonConfirm),
+            CloseButtonText = l.GetString(StringKeys.CommonCancel),
+            DefaultButton = ContentDialogButton.Close,
+        };
+        return await dialog.ShowAsync() == ContentDialogResult.Primary ? (note.Text, !accept && reappeal.IsChecked == true) : null;
+    }
+
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
@@ -92,7 +122,7 @@ public sealed partial class AdminPage : Page
 
     private void OnTabChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs? args)
     {
-        if (OverviewPanel is null || MembersPanel is null || ApplicationsPanel is null || ReportsPanel is null || BansPanel is null || LogPanel is null || WordsPanel is null
+        if (OverviewPanel is null || MembersPanel is null || ApplicationsPanel is null || ReportsPanel is null || BansPanel is null || AppealsPanel is null || LogPanel is null || WordsPanel is null
             || GalleryPanel is null || UploadsPanel is null || WebsitePanel is null)
         {
             return; // feuert schon in InitializeComponent
@@ -104,6 +134,7 @@ public sealed partial class AdminPage : Page
         ApplicationsPanel.Visibility = Visible(selected == ApplicationsTab);
         ReportsPanel.Visibility = Visible(selected == ReportsTab);
         BansPanel.Visibility = Visible(selected == BansTab);
+        AppealsPanel.Visibility = Visible(selected == AppealsTab);
         LogPanel.Visibility = Visible(selected == LogTab);
         WordsPanel.Visibility = Visible(selected == WordsTab);
         GalleryPanel.Visibility = Visible(selected == GalleryTab);
@@ -128,6 +159,10 @@ public sealed partial class AdminPage : Page
         else if (selected == BansTab)
         {
             _ = Moderation.LoadBansAsync();
+        }
+        else if (selected == AppealsTab)
+        {
+            _ = Appeals.EnsureLoadedAsync();
         }
         else if (selected == LogTab)
         {

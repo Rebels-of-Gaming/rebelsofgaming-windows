@@ -5109,4 +5109,259 @@
   <data name="GameBans_More.Content" xml:space="preserve">
     <value>Charger plus</value>
   </data>
+  <data name="Bans_Status_active" xml:space="preserve">
+    <value>Actifs</value>
+  </data>
+  <data name="Bans_Status_ended" xml:space="preserve">
+    <value>Terminés (30 jours)</value>
+  </data>
+  <data name="Bans_Appeal_open" xml:space="preserve">
+    <value>Contestation en cours</value>
+  </data>
+  <data name="Bans_Appeal_accepted" xml:space="preserve">
+    <value>Contestation acceptée</value>
+  </data>
+  <data name="Bans_Appeal_rejected" xml:space="preserve">
+    <value>Contestation rejetée</value>
+  </data>
+  <data name="Bans_EndedAt" xml:space="preserve">
+    <value>terminé le {0}</value>
+  </data>
+  <data name="Bans_Since" xml:space="preserve">
+    <value>depuis le {0}</value>
+  </data>
+  <data name="Bans_AppealNone" xml:space="preserve">
+    <value>Aucune contestation pour l’instant.</value>
+  </data>
+  <data name="Bans_Blocked_not_active" xml:space="preserve">
+    <value>Ce ban est terminé – aucune contestation nécessaire.</value>
+  </data>
+  <data name="Bans_Blocked_unavailable" xml:space="preserve">
+    <value>Les contestations sont momentanément indisponibles.</value>
+  </data>
+  <data name="Bans_Blocked_open" xml:space="preserve">
+    <value>Une contestation est déjà en cours pour ce ban.</value>
+  </data>
+  <data name="Bans_Blocked_cooldown" xml:space="preserve">
+    <value>Après un rejet, une nouvelle contestation n’est possible qu’après 30 jours.</value>
+  </data>
+  <data name="Bans_CooldownUntil" xml:space="preserve">
+    <value>Rejetée – nouvelle contestation possible à partir du {0}.</value>
+  </data>
+  <data name="Bans_SignInToAppeal" xml:space="preserve">
+    <value>Connecte-toi pour contester.</value>
+  </data>
+  <data name="Bans_ScopeMissing" xml:space="preserve">
+    <value>Ta connexion n’a pas le droit de contester – déconnecte-toi puis reconnecte-toi.</value>
+  </data>
+  <data name="Bans_CodeHint" xml:space="preserve">
+    <value>Ton compte n’est pas lié à ce ban. Saisis le code de contestation du message d’expulsion.</value>
+  </data>
+  <data name="Bans_ProofHint" xml:space="preserve">
+    <value>Ton compte prouve que tu es la personne bannie – aucun code nécessaire. La contestation devient un sujet public du forum.</value>
+  </data>
+  <data name="Bans_Rule_Statement" xml:space="preserve">
+    <value>La déclaration doit contenir entre 20 et 3000 caractères.</value>
+  </data>
+  <data name="Bans_Rule_Code" xml:space="preserve">
+    <value>Indique le code de contestation du message d’expulsion.</value>
+  </data>
+  <data name="Bans_AppealSent" xml:space="preserve">
+    <value>Contestation envoyée – le sujet du forum a été créé.</value>
+  </data>
+  <data name="Bans_CodeWrong" xml:space="preserve">
+    <value>Le code est incorrect ou a déjà été utilisé.</value>
+  </data>
+  <data name="BanAppeals_Status_open" xml:space="preserve">
+    <value>Ouvertes</value>
+  </data>
+  <data name="BanAppeals_Status_accepted" xml:space="preserve">
+    <value>Acceptées</value>
+  </data>
+  <data name="BanAppeals_Status_rejected" xml:space="preserve">
+    <value>Rejetées</value>
+  </data>
+  <data name="BanAppeals_Status_all" xml:space="preserve">
+    <value>Toutes</value>
+  </data>
+  <data name="BanAppeals_AcceptTitle" xml:space="preserve">
+    <value>Accepter la contestation de {0} ?</value>
+  </data>
+  <data name="BanAppeals_RejectTitle" xml:space="preserve">
+    <value>Rejeter la contestation de {0} ?</value>
+  </data>
+  <data name="BanAppeals_AcceptText" xml:space="preserve">
+    <value>Le ban sera levé. La justification apparaît publiquement dans le sujet du forum, qui est ensuite fermé.</value>
+  </data>
+  <data name="BanAppeals_RejectText" xml:space="preserve">
+    <value>Le ban est maintenu. La justification apparaît publiquement dans le sujet du forum, qui est ensuite fermé.</value>
+  </data>
+  <data name="BanAppeals_Note" xml:space="preserve">
+    <value>Justification (publique, facultative)</value>
+  </data>
+  <data name="BanAppeals_Reappeal" xml:space="preserve">
+    <value>Autoriser une nouvelle contestation immédiatement (sans délai de 30 jours)</value>
+  </data>
+  <data name="BanAppeals_Accepted" xml:space="preserve">
+    <value>Contestation acceptée – ban levé.</value>
+  </data>
+  <data name="BanAppeals_Rejected" xml:space="preserve">
+    <value>Contestation rejetée.</value>
+  </data>
+  <data name="BanAppeals_By" xml:space="preserve">
+    <value>par {0}</value>
+  </data>
+  <data name="BanAppeals_Proof_linked" xml:space="preserve">
+    <value>Preuve : compte lié</value>
+  </data>
+  <data name="BanAppeals_Proof_steam" xml:space="preserve">
+    <value>Preuve : Steam</value>
+  </data>
+  <data name="BanAppeals_Proof_minecraft" xml:space="preserve">
+    <value>Preuve : Minecraft</value>
+  </data>
+  <data name="BanAppeals_Proof_code" xml:space="preserve">
+    <value>Preuve : code de contestation</value>
+  </data>
+  <data name="BanAppeals_NoBoard" xml:space="preserve">
+    <value>Aucune section (contestations désactivées)</value>
+  </data>
+  <data name="BanAppeals_BoardMissing" xml:space="preserve">
+    <value>Aucune section du forum choisie – les contestations sont désactivées.</value>
+  </data>
+  <data name="BanAppeals_BoardActive" xml:space="preserve">
+    <value>Les contestations arrivent dans la section « {0} ».</value>
+  </data>
+  <data name="BanAppeals_BoardNotPublic" xml:space="preserve">
+    <value>Les contestations arrivent dans la section « {0} » – elle n’est pas lisible publiquement.</value>
+  </data>
+  <data name="BanAppeals_BoardSaved" xml:space="preserve">
+    <value>Section du forum enregistrée.</value>
+  </data>
+  <data name="GameBans_Hide" xml:space="preserve">
+    <value>Masquer</value>
+  </data>
+  <data name="GameBans_Show" xml:space="preserve">
+    <value>Afficher</value>
+  </data>
+  <data name="GameBans_Hidden" xml:space="preserve">
+    <value>Ban masqué de la liste publique.</value>
+  </data>
+  <data name="GameBans_Shown" xml:space="preserve">
+    <value>Ban à nouveau affiché publiquement.</value>
+  </data>
+  <data name="GameBans_HiddenBadge" xml:space="preserve">
+    <value>non public</value>
+  </data>
+  <data name="GameBans_AppealCode" xml:space="preserve">
+    <value>Code de contestation : {0}</value>
+  </data>
+  <data name="Error_appeal_proof_required" xml:space="preserve">
+    <value>Aucune preuve – indique le code de contestation du message d’expulsion.</value>
+  </data>
+  <data name="Error_appeal_open" xml:space="preserve">
+    <value>Une contestation est déjà en cours pour ce ban.</value>
+  </data>
+  <data name="Error_appeal_cooldown" xml:space="preserve">
+    <value>Rejetée – nouvelle contestation possible seulement après 30 jours.</value>
+  </data>
+  <data name="Error_appeals_unavailable" xml:space="preserve">
+    <value>Les contestations sont indisponibles (aucune section du forum configurée).</value>
+  </data>
+  <data name="Error_appeal_decided" xml:space="preserve">
+    <value>Cette contestation a déjà été tranchée.</value>
+  </data>
+  <data name="BansPage_Title.Text" xml:space="preserve">
+    <value>LISTE DES BANS</value>
+  </data>
+  <data name="BansPage_Intro.Text" xml:space="preserve">
+    <value>Joueurs bannis de nos serveurs de jeu – identifiants raccourcis, sans adresses IP. Si tu estimes ton ban injustifié, tu peux le contester.</value>
+  </data>
+  <data name="BansPage_StatusFilter.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Statut</value>
+  </data>
+  <data name="BansPage_Search.PlaceholderText" xml:space="preserve">
+    <value>Nom ou identifiant complet</value>
+  </data>
+  <data name="BansPage_Search.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Rechercher des bans</value>
+  </data>
+  <data name="BansPage_State.EmptyText" xml:space="preserve">
+    <value>Aucun ban trouvé.</value>
+  </data>
+  <data name="BansPage_List.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Bans</value>
+  </data>
+  <data name="BansPage_SelectHint.Text" xml:space="preserve">
+    <value>Choisis un ban.</value>
+  </data>
+  <data name="BansPage_Reason.Text" xml:space="preserve">
+    <value>RAISON</value>
+  </data>
+  <data name="BansPage_AppealTitle.Text" xml:space="preserve">
+    <value>CONTESTATION</value>
+  </data>
+  <data name="BansPage_Statement.Header" xml:space="preserve">
+    <value>Ta déclaration</value>
+  </data>
+  <data name="BansPage_Statement.PlaceholderText" xml:space="preserve">
+    <value>Pourquoi ce ban est-il injustifié selon toi ? (20–3000 caractères, public sur le forum)</value>
+  </data>
+  <data name="BansPage_Code.Header" xml:space="preserve">
+    <value>Code de contestation</value>
+  </data>
+  <data name="BansPage_Code.PlaceholderText" xml:space="preserve">
+    <value>p. ex. K7QX-4M2P</value>
+  </data>
+  <data name="BansPage_Submit.Content" xml:space="preserve">
+    <value>Envoyer la contestation</value>
+  </data>
+  <data name="BansPage_OpenThread.Content" xml:space="preserve">
+    <value>Ouvrir le sujet du forum</value>
+  </data>
+  <data name="BansPage_OpenWeb.Content" xml:space="preserve">
+    <value>Ouvrir sur le site</value>
+  </data>
+  <data name="ServersPage_BanList.Content" xml:space="preserve">
+    <value>Liste des bans</value>
+  </data>
+  <data name="AdminPage_TabAppeals.Text" xml:space="preserve">
+    <value>Contestations</value>
+  </data>
+  <data name="BanAppeals_BoardTitle.Text" xml:space="preserve">
+    <value>SECTION DU FORUM POUR LES CONTESTATIONS</value>
+  </data>
+  <data name="BanAppeals_Board.Header" xml:space="preserve">
+    <value>Section</value>
+  </data>
+  <data name="BanAppeals_SaveBoard.Content" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="BanAppeals_CreateBoard.Content" xml:space="preserve">
+    <value>Créer la section « Contestations de ban »</value>
+  </data>
+  <data name="BanAppeals_StatusFilter.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Statut</value>
+  </data>
+  <data name="BanAppeals_Reload.Content" xml:space="preserve">
+    <value>Actualiser</value>
+  </data>
+  <data name="BanAppeals_Empty.Text" xml:space="preserve">
+    <value>Aucune contestation.</value>
+  </data>
+  <data name="BanAppeals_Accept.Content" xml:space="preserve">
+    <value>Accepter</value>
+  </data>
+  <data name="BanAppeals_Reject.Content" xml:space="preserve">
+    <value>Rejeter</value>
+  </data>
+  <data name="BanAppeals_OpenThread.Content" xml:space="preserve">
+    <value>Sujet du forum</value>
+  </data>
+  <data name="BanAppeals_OpenBan.Content" xml:space="preserve">
+    <value>Voir le ban</value>
+  </data>
+  <data name="GameBans_OpenPublic.Content" xml:space="preserve">
+    <value>Page publique</value>
+  </data>
 </root>

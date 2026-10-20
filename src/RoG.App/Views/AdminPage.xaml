@@ -21,6 +21,7 @@
             <SelectorBarItem x:Name="ApplicationsTab" x:Uid="AdminPage_TabApplications" />
             <SelectorBarItem x:Name="ReportsTab" x:Uid="AdminPage_TabReports" />
             <SelectorBarItem x:Name="BansTab" x:Uid="AdminPage_TabBans" />
+            <SelectorBarItem x:Name="AppealsTab" x:Uid="AdminPage_TabAppeals" />
             <SelectorBarItem x:Name="LogTab" x:Uid="AdminPage_TabLog" />
             <SelectorBarItem x:Name="WordsTab" x:Uid="AdminPage_TabWords" />
             <SelectorBarItem x:Name="GalleryTab" x:Uid="AdminPage_TabGallery" />
@@ -295,6 +296,61 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+        </ScrollViewer>
+
+        <!-- Einsprüche gegen Gameserver-Bans -->
+        <ScrollViewer x:Name="AppealsPanel" Grid.Row="3" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+            <StackPanel MaxWidth="{StaticResource RoGReadingWidth}" HorizontalAlignment="Left" Spacing="12">
+                <StackPanel Spacing="8" Visibility="{x:Bind Appeals.HasSettings, Mode=OneWay}">
+                    <TextBlock x:Uid="BanAppeals_BoardTitle" Style="{StaticResource RoGSectionTextStyle}" />
+                    <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Appeals.BoardText, Mode=OneWay}" TextWrapping="Wrap" />
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <ComboBox
+                            x:Uid="BanAppeals_Board"
+                            MinWidth="240"
+                            DisplayMemberPath="Label"
+                            ItemsSource="{x:Bind Appeals.BoardOptions}"
+                            SelectedItem="{x:Bind Appeals.SelectedBoard, Mode=TwoWay}" />
+                        <Button x:Uid="BanAppeals_SaveBoard" VerticalAlignment="Bottom" Command="{x:Bind Appeals.SaveBoardCommand}" />
+                        <Button x:Uid="BanAppeals_CreateBoard" VerticalAlignment="Bottom" Command="{x:Bind Appeals.CreateBoardCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <ComboBox
+                        x:Uid="BanAppeals_StatusFilter"
+                        MinWidth="200"
+                        DisplayMemberPath="Label"
+                        ItemsSource="{x:Bind Appeals.StatusOptions}"
+                        SelectedItem="{x:Bind Appeals.SelectedStatus, Mode=TwoWay}" />
+                    <Button x:Uid="BanAppeals_Reload" VerticalAlignment="Bottom" Command="{x:Bind Appeals.ReloadCommand}" />
+                    <ProgressRing Width="20" Height="20" VerticalAlignment="Bottom" IsActive="{x:Bind Appeals.IsBusy, Mode=OneWay}" />
+                </StackPanel>
+                <TextBlock x:Uid="BanAppeals_Empty" Style="{StaticResource RoGMutedTextStyle}" Visibility="{x:Bind Appeals.IsEmpty, Mode=OneWay}" />
+                <ItemsControl ItemsSource="{x:Bind Appeals.Items}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="vm:BanAppealItemViewModel">
+                            <Border Margin="0,0,0,8" Padding="12" AutomationProperties.Name="{x:Bind Title}" Background="{StaticResource RoGBg2Brush}" CornerRadius="{StaticResource RoGControlRadius}">
+                                <StackPanel Spacing="4">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <Ellipse VerticalAlignment="Center" Fill="{x:Bind StatusBrush}" Style="{StaticResource RoGStatusDotStyle}" />
+                                        <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Title}" />
+                                        <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind StatusText}" />
+                                    </StackPanel>
+                                    <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" TextWrapping="Wrap" />
+                                    <TextBlock FontSize="12" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Note}" TextWrapping="Wrap" Visibility="{x:Bind HasNote}" />
+                                    <StackPanel Margin="0,4,0,0" Orientation="Horizontal" Spacing="8">
+                                        <Button x:Uid="BanAppeals_Accept" Command="{x:Bind AcceptCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" Visibility="{x:Bind CanDecide}" />
+                                        <Button x:Uid="BanAppeals_Reject" Command="{x:Bind RejectCommand}" Visibility="{x:Bind CanDecide}" />
+                                        <Button x:Uid="BanAppeals_OpenThread" Command="{x:Bind OpenThreadCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" Visibility="{x:Bind HasThread}" />
+                                        <Button x:Uid="BanAppeals_OpenBan" Command="{x:Bind OpenBanCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" Visibility="{x:Bind HasBan}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Button x:Uid="Common_LoadMore" Command="{x:Bind Appeals.MoreCommand}" Visibility="{x:Bind Appeals.HasMore, Mode=OneWay}" />
+            </StackPanel>
         </ScrollViewer>
 
         <!-- Mod-Log -->

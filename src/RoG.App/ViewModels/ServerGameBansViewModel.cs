@@ -228,6 +228,20 @@ public sealed partial class ServerGameBansViewModel : ServerTabViewModel
         }
     }
 
+    /// <summary>In der öffentlichen Ban-Liste zeigen bzw. ausblenden (ändert für Plugins nichts).</summary>
+    internal async Task TogglePublicAsync(GameBanItemViewModel item)
+    {
+        GameBan? updated = null;
+        var show = !item.Ban.IsPublic;
+        if (await RunAsync(async () => updated = await _bans.SetPublicAsync(item.Id, show)))
+        {
+            Replace(item, updated!);
+            Show(L(show ? StringKeys.GameBansShown : StringKeys.GameBansHidden), InfoBarSeverity.Success);
+        }
+    }
+
+    internal void OpenPublic(Uri url) => _ = Services.Browser.OpenAsync(url);
+
     internal async Task LoadDetailsAsync(GameBanItemViewModel item)
     {
         GameBan? full = null;
@@ -441,6 +455,19 @@ public sealed partial class GameBanItemViewModel(GameBan ban, ServerGameBansView
         ban.UserName is { } user ? string.Format(CultureInfo.CurrentCulture, localizer.GetString(StringKeys.GameBansMember), user) : null,
     }.Where(s => !string.IsNullOrEmpty(s)));
 
+    /// <summary>Öffentliche Ban-Liste: „ausgeblendet“ bzw. Einspruchs-Code (nur für zuständige Admins).</summary>
+    public string PublicInfo { get; } = string.Join(" · ", new[]
+    {
+        ban.IsPublic ? null : localizer.GetString(StringKeys.GameBansHiddenBadge),
+        ban.AppealCode is { } code ? string.Format(CultureInfo.CurrentCulture, localizer.GetString(StringKeys.GameBansAppealCode), code) : null,
+    }.Where(s => !string.IsNullOrEmpty(s)));
+
+    public bool HasPublicInfo => PublicInfo.Length > 0;
+
+    public string ToggleText => localizer.GetString(ban.IsPublic ? StringKeys.GameBansHide : StringKeys.GameBansShow);
+
+    public bool HasPublicUrl => ban.PublicUrl is not null && ban.IsPublic;
+
     /// <summary>RCON-Zustellungen (aus dem Einzelabruf).</summary>
     [ObservableProperty]
     public partial string Deliveries { get; set; } = string.Empty;
@@ -469,4 +496,16 @@ public sealed partial class GameBanItemViewModel(GameBan ban, ServerGameBansView
 
     [RelayCommand]
     private Task DetailsAsync() => owner.LoadDetailsAsync(this);
+
+    [RelayCommand]
+    private Task TogglePublicAsync() => owner.TogglePublicAsync(this);
+
+    [RelayCommand]
+    private void OpenPublic()
+    {
+        if (ban.PublicUrl is { } url)
+        {
+            owner.OpenPublic(url);
+        }
+    }
 }

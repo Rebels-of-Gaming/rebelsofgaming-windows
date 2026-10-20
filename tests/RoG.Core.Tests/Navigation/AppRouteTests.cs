@@ -15,9 +15,12 @@ public class AppRouteTests
     [InlineData("https://rebelsofgaming.com/fr/events/01JABC", AppSection.Calendar, "01JABC")]
     [InlineData("https://rebelsofgaming.com/matches/rog-vs-xyz", AppSection.Matches, "rog-vs-xyz")]
     [InlineData("https://rebelsofgaming.com/forum/general/thread-1", AppSection.Forum, "general/thread-1")]
+    [InlineData("https://rebelsofgaming.com/de/forum/t/01JBA00000000000000000000A/einspruch-cheater", AppSection.Forum, "01JBA00000000000000000000A")]
     [InlineData("https://rebelsofgaming.com/de/privacy", AppSection.Info, "privacy")]
     [InlineData("https://rebelsofgaming.com/", AppSection.Home, null)]
     [InlineData("https://rebelsofgaming.com/de/tools/et-nickname", AppSection.Tools, "et-nickname")]
+    [InlineData("https://rebelsofgaming.com/de/bans/01JB8Z3K6Q9X2M4N7P1R5T8V0W", AppSection.Bans, "01JB8Z3K6Q9X2M4N7P1R5T8V0W")]
+    [InlineData("https://rebelsofgaming.com/fr/bans", AppSection.Bans, null)]
     [InlineData("https://wiki.rebelsofgaming.com/Enemy_Territory", AppSection.Wiki, "Enemy_Territory")]
     public void Maps_platform_urls(string url, AppSection section, string? key)
     {

@@ -25,6 +25,7 @@ public enum AppSection
     Media,
     Admin,
     Tools,
+    Bans,
 }
 
 /// <summary>Ziel in der App: Bereich und optional ein Eintrag (Slug/ID) bzw. bei der Suche der Suchbegriff.</summary>
@@ -73,11 +74,14 @@ public sealed record AppRoute(AppSection Section, string? Key = null)
             "events" or "calendar" => new AppRoute(AppSection.Calendar, key),
             "matches" or "hall-of-fame" or "tournaments" => new AppRoute(AppSection.Matches, parts[0] == "matches" ? key : null),
             "server" or "servers" => new AppRoute(AppSection.Servers, key),
+            // Themen: /forum/t/{ulid}/{slug?} – nur die ID, der Slug ist Beiwerk
+            "forum" when parts.Count > 2 && parts[1] == "t" => new AppRoute(AppSection.Forum, parts[2]),
             "forum" => new AppRoute(AppSection.Forum, string.Join('/', parts.Skip(1)) is { Length: > 0 } f ? f : null),
             "rules" or "about" or "partners" or "imprint" or "privacy" or "terms" or "contact" or "pages" or "p" => new AppRoute(AppSection.Info, parts[0]),
             "messages" => new AppRoute(AppSection.Messages, key),
             "settings" or "account" => new AppRoute(AppSection.Account),
             "tools" => new AppRoute(AppSection.Tools, key),
+            "bans" => new AppRoute(AppSection.Bans, key),
             _ => null,
         };
     }
@@ -123,6 +127,7 @@ public sealed record AppRoute(AppSection Section, string? Key = null)
             "media" => new AppRoute(AppSection.Media),
             "admin" => new AppRoute(AppSection.Admin),
             "tools" => new AppRoute(AppSection.Tools, key),
+            "bans" => new AppRoute(AppSection.Bans, key),
             "search" => query.TryGetValue("q", out var q) && q.Length > 0 ? new AppRoute(AppSection.Search, q) : null,
             "open" => query.TryGetValue("url", out var url) && Uri.TryCreate(url, UriKind.Absolute, out var web) ? FromWebUrl(web, environment) : null,
             _ => null,

@@ -58,5 +58,7 @@ public sealed partial class ServersPage : Page
 
     private async void OnRefreshClick(object sender, RoutedEventArgs e) => await RefreshCurrentAsync(silent: false);
 
+    private void OnBanListClick(object sender, RoutedEventArgs e) => App.Services.Navigate(new RoG.Core.Navigation.AppRoute(RoG.Core.Navigation.AppSection.Bans));
+
     private Task RefreshCurrentAsync(bool silent) => _tab == 0 ? ViewModel.LoadAsync(silent) : Voice.LoadAsync(silent);
 }

@@ -134,11 +134,8 @@
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <ItemsRepeater ItemsSource="{x:Bind ViewModel.Servers}">
                     <ItemsRepeater.Layout>
-                        <UniformGridLayout
-                            ItemsStretch="Fill"
-                            MinColumnSpacing="16"
-                            MinItemWidth="320"
-                            MinRowSpacing="16" />
+                        <!-- Zeilenhöhe je höchster Karte: aufgeklappte Ports/Auslastung werden nicht abgeschnitten -->
+<controls:CardGridLayout ColumnSpacing="16" MinItemWidth="320" RowSpacing="16" />
                     </ItemsRepeater.Layout>
                     <ItemsRepeater.ItemTemplate>
                         <DataTemplate x:DataType="vm:ServerItemViewModel">

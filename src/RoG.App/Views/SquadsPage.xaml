@@ -261,11 +261,8 @@
                         <TextBlock x:Uid="SquadsPage_Servers" Style="{StaticResource RoGSectionTextStyle}" />
                         <ItemsRepeater ItemsSource="{x:Bind ViewModel.Detail.Servers}">
                             <ItemsRepeater.Layout>
-                                <UniformGridLayout
-                                    ItemsStretch="Fill"
-                                    MinColumnSpacing="16"
-                                    MinItemWidth="300"
-                                    MinRowSpacing="16" />
+                                <!-- Zeilenhöhe je höchster Karte: aufgeklappte Ports/Auslastung werden nicht abgeschnitten -->
+<controls:CardGridLayout ColumnSpacing="16" MinItemWidth="300" RowSpacing="16" />
                             </ItemsRepeater.Layout>
                             <ItemsRepeater.ItemTemplate>
                                 <DataTemplate x:DataType="vm:ServerItemViewModel">

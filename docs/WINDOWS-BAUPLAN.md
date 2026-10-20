@@ -223,6 +223,11 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   **Annahme:** Die Ban-Liste bekommt keinen eigenen Eintrag in der Seitenleiste (Liste ist schon lang), sondern einen
   Knopf auf der Serverseite.
 
+- **2.5.11 – Server-Karten nicht mehr abgeschnitten (Owner-Test 2.5.10):** `UniformGridLayout` misst nur die erste
+  Kachel und zwingt alle Karten auf deren Höhe – eine Karte mit Spielerzahl und Ports wurde unten abgeschnitten. Neues
+  `CardGridLayout` (App, `NonVirtualizingLayout`) mit Spaltenrechnung `CardGrid` in Core (3 Tests): Spalten nach
+  Mindestbreite wie bisher, jede Zeile so hoch wie ihre höchste Karte, aufgeklappte Bereiche wachsen mit. Eingesetzt auf
+  der Server-Seite und bei den Squad-Servern; andere Raster mit gleich hohen Kacheln bleiben beim `UniformGridLayout`.
 - **2.5.8 – Website v0.32.2 (live 20.10.2026):** Client aus der Live-Spezifikation (Tool-Endpunkte jetzt vollständig).
   Server-Karte: aufklappbare „Ports (n)“ aus `provisioning.allocations` (Hauptport zuerst mit „Hauptport“, Alias statt
   IP, wenn gesetzt; `null` = Panel nicht erreichbar → nichts anzeigen), `ServerAllocation` in Core mit Tests. News-Liste:

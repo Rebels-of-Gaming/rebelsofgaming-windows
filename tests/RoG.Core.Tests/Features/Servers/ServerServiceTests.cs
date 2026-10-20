@@ -157,4 +157,25 @@ public class ServerHistoryTests
         Assert.Equal(20, history.Peak);
         Assert.Empty(new ServerHistory("24h", 30, null, []).Polyline(200, 50));
     }
+
+    [Theory]
+    [InlineData("source", ServerQueryType.Source)]
+    [InlineData("quake3", ServerQueryType.Quake3)]
+    [InlineData("minecraft", ServerQueryType.Minecraft)]
+    [InlineData("mc_query", ServerQueryType.Minecraft)]
+    [InlineData("mc_bedrock", ServerQueryType.Minecraft)]
+    [InlineData("fivem", ServerQueryType.Unknown)]
+    [InlineData("teeworlds", ServerQueryType.Unknown)]
+    [InlineData("something_new", ServerQueryType.Unknown)]
+    [InlineData(null, ServerQueryType.Unknown)]
+    public void Query_types_from_v035_are_tolerated(string? value, ServerQueryType expected) =>
+        Assert.Equal(expected, GameServer.ParseQueryType(value));
+
+    [Fact]
+    public void Provision_form_offers_all_website_query_types()
+    {
+        Assert.Equal(12, ProvisionForm.QueryTypes.Count);
+        Assert.Equal("source", ProvisionForm.QueryTypes[0]);
+        Assert.Contains("mc_bedrock", ProvisionForm.QueryTypes);
+    }
 }

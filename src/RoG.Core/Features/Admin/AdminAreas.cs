@@ -1,4 +1,5 @@
 using RoG.Core.Features.Account;
+using RoG.Core.Features.Servers;
 
 namespace RoG.Core.Features.Admin;
 
@@ -375,7 +376,7 @@ public static class AdminAreas
                 F("host", AdminFieldType.Text, required: true, max: 255, read: "admin.host"),
                 F("port", AdminFieldType.WholeNumber, required: true, min: 1, maxValue: 65535, read: "admin.port"),
                 F("query_port", AdminFieldType.WholeNumber, min: 1, maxValue: 65535, read: "admin.query_port"),
-                C("query_type", ["quake3", "source", "minecraft"], required: true),
+                C("query_type", ProvisionForm.QueryTypes, required: true),
                 F("query_enabled", AdminFieldType.Bool, read: "admin.query_enabled"),
                 F("connect_url", AdminFieldType.Text, max: 255, help: "AdminHelp_connect"),
                 F("pterodactyl_id", AdminFieldType.Text, max: 64, read: "admin.pterodactyl_id"),

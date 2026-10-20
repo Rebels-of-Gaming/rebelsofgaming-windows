@@ -4122,13 +4122,13 @@
     <value>Rôle supplémentaire</value>
   </data>
   <data name="AdminChoice_quake3" xml:space="preserve">
-    <value>Quake 3 (ET, RtCW)</value>
+    <value>Quake 3 (ET, RtCW, CoD 4, Xonotic)</value>
   </data>
   <data name="AdminChoice_source" xml:space="preserve">
-    <value>Source (CS2)</value>
+    <value>Steam / Source (A2S)</value>
   </data>
   <data name="AdminChoice_minecraft" xml:space="preserve">
-    <value>Minecraft</value>
+    <value>Minecraft Java (aussi Velocity/BungeeCord)</value>
   </data>
   <data name="AdminIcon_flag" xml:space="preserve">
     <value>Drapeau</value>
@@ -5363,5 +5363,32 @@
   </data>
   <data name="GameBans_OpenPublic.Content" xml:space="preserve">
     <value>Page publique</value>
+  </data>
+  <data name="AdminChoice_quake2" xml:space="preserve">
+    <value>Quake 2</value>
+  </data>
+  <data name="AdminChoice_mc_query" xml:space="preserve">
+    <value>Minecraft Java Query (liste complète des joueurs)</value>
+  </data>
+  <data name="AdminChoice_mc_bedrock" xml:space="preserve">
+    <value>Minecraft Bedrock</value>
+  </data>
+  <data name="AdminChoice_gamespy1" xml:space="preserve">
+    <value>GameSpy 1 (UT99, UT2004, Killing Floor, BF1942)</value>
+  </data>
+  <data name="AdminChoice_gamespy3" xml:space="preserve">
+    <value>GameSpy 3 (Battlefield 2/2142)</value>
+  </data>
+  <data name="AdminChoice_fivem" xml:space="preserve">
+    <value>FiveM / RedM</value>
+  </data>
+  <data name="AdminChoice_samp" xml:space="preserve">
+    <value>SA:MP / open.mp</value>
+  </data>
+  <data name="AdminChoice_satisfactory" xml:space="preserve">
+    <value>Satisfactory</value>
+  </data>
+  <data name="AdminChoice_teeworlds" xml:space="preserve">
+    <value>Teeworlds / DDNet</value>
   </data>
 </root>

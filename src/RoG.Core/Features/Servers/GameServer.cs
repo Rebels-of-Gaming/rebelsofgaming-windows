@@ -11,7 +11,7 @@ public enum ServerQueryType
     /// <summary>Quake-3-Engine (Enemy Territory, RtCW) – Verbinden über <c>et://…</c>.</summary>
     Quake3,
 
-    /// <summary>Minecraft – kein Verbinden-Link, Adresse kopieren.</summary>
+    /// <summary>Minecraft (Java, Java-Query, Bedrock) – kein Verbinden-Link, Adresse kopieren.</summary>
     Minecraft,
 }
 
@@ -44,7 +44,8 @@ public sealed record GameServer(
     {
         "SOURCE" => ServerQueryType.Source,
         "QUAKE3" => ServerQueryType.Quake3,
-        "MINECRAFT" => ServerQueryType.Minecraft,
+        "MINECRAFT" or "MC_QUERY" or "MC_BEDROCK" => ServerQueryType.Minecraft,
+        // weitere Typen (quake2, gamespy1/3, fivem, samp, satisfactory, teeworlds …): Verbinden nur über connect_url
         _ => ServerQueryType.Unknown,
     };
 }

@@ -373,7 +373,12 @@ public static class ProvisionForm
     public const string Expiry = "expires_in_days";
 
     public static readonly IReadOnlyList<string> Visibility = ["hidden", "members", "public"];
-    public static readonly IReadOnlyList<string> QueryTypes = ["source", "quake3", "minecraft"];
+    /// <summary>Abfrage-Typen der Website (<c>query_type</c>, ab v0.35.0 zwölf) – Reihenfolge wie die Website-Auswahl.</summary>
+    public static readonly IReadOnlyList<string> QueryTypes =
+    [
+        "source", "quake3", "quake2", "minecraft", "mc_query", "mc_bedrock",
+        "gamespy1", "gamespy3", "fivem", "samp", "satisfactory", "teeworlds",
+    ];
     public static readonly IReadOnlyList<string> PasswordVisibility = ["members", "squad", "managers"];
 
     /// <summary>Höchstens so viele zusätzliche Ports (Liste + automatisch), wie die Website (<c>ProvisionServer::MAX_ADDITIONAL</c>).</summary>

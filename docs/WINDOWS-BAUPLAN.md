@@ -230,6 +230,13 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   der Server-Seite und bei den Squad-Servern; andere Raster mit gleich hohen Kacheln bleiben beim `UniformGridLayout`.
   Das Auslastungs-Diagramm (Punkte für 280 × 60) skaliert per `Viewbox` auf die Kartenbreite (max. 560) statt fest 280 –
   in schmalen Karten ragte es über den Rand.
+- **2.5.12 – Abfrage-Typen (Website v0.35.0, live 20.10.2026):** Client aus der Live-Spezifikation (nur Doku-Änderungen,
+  `query_type` bleibt ein String). `ProvisionForm.QueryTypes` mit allen zwölf Werten in Website-Reihenfolge, auch im
+  Admin-Bereich „Server“ (vorher nur drei – ein Server mit `mc_query` hätte im Formular keinen Wert gezeigt); Labels
+  `AdminChoice_*` in DE/EN/FR, `source` heißt „Steam / Source (A2S)“. `mc_query`/`mc_bedrock` gelten als Minecraft
+  (Adresse kopieren), übrige neue Typen als `Unknown` (Verbinden nur über `connect_url`); 2 Tests. Neue Live-Fehlercodes
+  (`error`) zeigt die App nicht an – nichts zu tun. **Annahme:** keine eigenen Verbinden-Links für FiveM/SA:MP o. Ä.,
+  solange die Website keinen `connect_url` liefert.
 - **2.5.8 – Website v0.32.2 (live 20.10.2026):** Client aus der Live-Spezifikation (Tool-Endpunkte jetzt vollständig).
   Server-Karte: aufklappbare „Ports (n)“ aus `provisioning.allocations` (Hauptport zuerst mit „Hauptport“, Alias statt
   IP, wenn gesetzt; `null` = Panel nicht erreichbar → nichts anzeigen), `ServerAllocation` in Core mit Tests. News-Liste:

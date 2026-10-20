@@ -72,7 +72,7 @@ public sealed class ServerControlService(IRoGApiClient client)
     }
 
     public async Task PowerAsync(string server, PowerSignal signal, CancellationToken cancellationToken = default) =>
-        await client.V1_servers_powerAsync(server, new Body59 { Signal = signal.ToString().ToLowerInvariant() }, cancellationToken).ConfigureAwait(false);
+        await client.V1_servers_powerAsync(server, new Body65 { Signal = signal.ToString().ToLowerInvariant() }, cancellationToken).ConfigureAwait(false);
 
     public async Task SendCommandAsync(string server, string command, CancellationToken cancellationToken = default)
     {
@@ -83,7 +83,7 @@ public sealed class ServerControlService(IRoGApiClient client)
             throw new ArgumentOutOfRangeException(nameof(command), "Eine Zeile, höchstens 500 Zeichen");
         }
 
-        await client.V1_servers_commandsAsync(server, new Body60 { Command = line }, cancellationToken).ConfigureAwait(false);
+        await client.V1_servers_commandsAsync(server, new Body66 { Command = line }, cancellationToken).ConfigureAwait(false);
     }
 
     public async Task<ConsoleTicket> GetConsoleTicketAsync(string server, CancellationToken cancellationToken = default)
@@ -92,8 +92,8 @@ public sealed class ServerControlService(IRoGApiClient client)
         // Der String-Konverter hängt nur an der Eigenschaft, nicht am Enum – also direkt abbilden
         var level = d.Level switch
         {
-            Data181Level.Power => ConsoleLevel.Power,
-            Data181Level.Command => ConsoleLevel.Command,
+            Data190Level.Power => ConsoleLevel.Power,
+            Data190Level.Command => ConsoleLevel.Command,
             _ => ConsoleLevel.Read,
         };
         if (!Uri.TryCreate(d.Socket, UriKind.Absolute, out var socket) || (socket.Scheme != "wss" && socket.Scheme != "ws"))

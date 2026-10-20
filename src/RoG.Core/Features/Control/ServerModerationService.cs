@@ -27,7 +27,7 @@ public sealed class ServerModerationService(IRoGApiClient client, HttpClient htt
             throw new ArgumentOutOfRangeException(nameof(command), "Eine Zeile, höchstens 500 Zeichen");
         }
 
-        return (await client.V1_servers_rconAsync(server, new Body56 { Command = line }, cancellationToken).ConfigureAwait(false)).Data.Output;
+        return (await client.V1_servers_rconAsync(server, new Body62 { Command = line }, cancellationToken).ConfigureAwait(false)).Data.Output;
     }
 
     public async Task<IReadOnlyList<ServerBan>> BansAsync(string server, CancellationToken cancellationToken = default)
@@ -87,10 +87,10 @@ public sealed class ServerModerationService(IRoGApiClient client, HttpClient htt
     }
 
     public async Task ApproveAsync(string server, string changeId, string? note, CancellationToken cancellationToken = default) =>
-        await client.V1_servers_configChanges_approveAsync(server, changeId, new Body54 { Note = ApiValues.Text(note) }, cancellationToken).ConfigureAwait(false);
+        await client.V1_servers_configChanges_approveAsync(server, changeId, new Body60 { Note = ApiValues.Text(note) }, cancellationToken).ConfigureAwait(false);
 
     public async Task RejectAsync(string server, string changeId, string? note, CancellationToken cancellationToken = default) =>
-        await client.V1_servers_configChanges_rejectAsync(server, changeId, new Body55 { Note = ApiValues.Text(note) }, cancellationToken).ConfigureAwait(false);
+        await client.V1_servers_configChanges_rejectAsync(server, changeId, new Body61 { Note = ApiValues.Text(note) }, cancellationToken).ConfigureAwait(false);
 
     internal static IReadOnlyList<ConfigChange> ParseChanges(JsonElement root)
     {

@@ -47,7 +47,7 @@ public sealed class EventAdminService(IRoGApiClient client, HttpClient http)
 
     /// <summary>Absagen (benachrichtigt Zusagende); <paramref name="series"/> = alle folgenden einer Serie.</summary>
     public async Task CancelAsync(string id, bool series, CancellationToken cancellationToken = default) =>
-        await client.V1_events_cancelAsync(id, new Body79 { Series = series }, cancellationToken).ConfigureAwait(false);
+        await client.V1_events_cancelAsync(id, new Body85 { Series = series }, cancellationToken).ConfigureAwait(false);
 
     public async Task DeleteAsync(string id, bool series, CancellationToken cancellationToken = default) =>
         await client.V1_events_destroyAsync(id, series, cancellationToken).ConfigureAwait(false);

@@ -4815,4 +4815,10 @@
   <data name="Provision_Rule_AdditionalMax" xml:space="preserve">
     <value>{0} ports supplémentaires au maximum.</value>
   </data>
+  <data name="Servers_PortsHeader" xml:space="preserve">
+    <value>Ports ({0})</value>
+  </data>
+  <data name="Servers_PrimaryPort" xml:space="preserve">
+    <value>Port principal</value>
+  </data>
 </root>

@@ -194,6 +194,13 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   `server-console.js`). Chat-Anhänge: Bilder mit Vorschau über `GET /v1/attachments/{id}` (Umleitung auf kurzlebigen
   Link, max. 8 MB), andere Dateien öffnen im Browser. ET-Farbcodes im Clan-Tag werden wie auf der Website entfernt.
 
+- **2.5.8 – Website v0.32.2 (live 20.10.2026):** Client aus der Live-Spezifikation (Tool-Endpunkte jetzt vollständig).
+  Server-Karte: aufklappbare „Ports (n)“ aus `provisioning.allocations` (Hauptport zuerst mit „Hauptport“, Alias statt
+  IP, wenn gesetzt; `null` = Panel nicht erreichbar → nichts anzeigen), `ServerAllocation` in Core mit Tests. News-Liste:
+  Social-Symbole über `GET /v1/social/sources/news?ids[]=…` (W22, je Seite der Liste, Blöcke zu 100, `none` = kein
+  Symbol); die eigene Ableitung aus `/social/posts` (`StateOf`, nur die letzten 100 Posts) ist entfernt. Website-Links
+  (Profil `/u/{slug}`, `/settings/account`) über `RoGEnvironment.WebPage` mit `/{de|en|fr}/` – ohne Präfix 404.
+
 - **2.5.7 – Tool-Baukasten und zusätzliche Ports (Website v0.31.0/v0.32.0, Auftrag Wahke 19.10. über die
   Website-Sitzung):** `ToolService` (Liste mit `filter[game]`/`filter[squad]`/`filter[status]=all` für Verwaltende,
   Dokument, Daten, Assets – direkt über `/v1/`, weil Tool-Werte beliebiges JSON sind, ohne ETag-Cache) und
@@ -243,7 +250,7 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
 - **2.5.3 – Social-Media-Status an der Quelle:** `SocialSourceService` (Core, Tests): Status, Kanal erneut senden,
   alle fehlgeschlagenen erneut senden (meldet nicht nutzbare Kanäle), neu vorbereiten (`repost` nur nach Rückfrage, wenn
   schon überall gepostet). `SocialStatusCard` in News-Editor, Clanwar-Editor, Termin-Detail, Galerie-Album; News-Liste
-  mit Symbol aus einer Abfrage der Posts (W22). Sichtbar nur mit `social.publish` + `social:read`, Aktionen mit
+  mit Symbol aus einer Abfrage der Posts (W22, ab 2.5.8 Sammelabfrage der Website). Sichtbar nur mit `social.publish` + `social:read`, Aktionen mit
   `social:write`. Freigabe der Entwürfe bleibt in der Social-Verwaltung der Website (Link in der Karte).
 
 - **2.5.2 – Website v0.30.0 (Melden, Blockieren, Rechtstexte):** Client aus `https://api.rebelsofgaming.com/openapi.json`

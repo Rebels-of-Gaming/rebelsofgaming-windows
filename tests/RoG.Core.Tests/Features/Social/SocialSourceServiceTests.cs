@@ -119,37 +119,41 @@ public class SocialSourceServiceTests
         }
     }
 
-    [Theory]
-    [InlineData("draft", "", "draft")]
-    [InlineData("cancelled", "", "cancelled")]
-    [InlineData("completed", "published=2", "published")]
-    [InlineData("completed", "published=1,failed=1", "partial")]
-    [InlineData("completed", "failed=1,skipped=1", "failed")]
-    [InlineData("completed", "retracted=2", "retracted")]
-    [InlineData("completed", "", "failed")]
-    [InlineData("weird", "", "none")]
-    public void List_state_follows_the_website(string status, string summary, string expected)
+    [Fact]
+    public async Task States_come_from_the_batch_route_in_chunks_of_100()
     {
-        var map = summary.Split(',', StringSplitOptions.RemoveEmptyEntries)
-            .Select(p => p.Split('='))
-            .ToDictionary(p => p[0], p => int.Parse(p[1], System.Globalization.CultureInfo.InvariantCulture));
+        var (api, stub) = Create((req, _) =>
+        {
+            var ids = req.RequestUri!.Query.TrimStart('?').Split('&').Select(q => Uri.UnescapeDataString(q).Split('=')[1]).ToList();
+            var items = ids.Select(i => $$"""{"id":"{{i}}","state":"{{(i == "n7" ? "none" : "published")}}","post_id":null,"published_count":1,"failed_count":0,"can_retry":false,"channels":[]}""");
+            return StubHttpHandler.Json(HttpStatusCode.OK, "{\"data\":[" + string.Join(",", items) + "]}");
+        });
+        using (api)
+        {
+            var ids = Enumerable.Range(0, 150).Select(i => "n" + i).Append("n1").Append(string.Empty);
+            var states = await new SocialSourceService(api.Http).StatesAsync("news", ids);
 
-        Assert.Equal(expected, SocialSourceService.StateOf(status, map));
+            Assert.Equal(2, stub.Requests.Count);
+            Assert.EndsWith("/v1/social/sources/news", stub.Requests[0].Uri!.AbsolutePath, StringComparison.Ordinal);
+            Assert.StartsWith("?ids%5B%5D=n0&ids%5B%5D=n1&", stub.Requests[0].Uri!.Query, StringComparison.Ordinal);
+            Assert.Equal(149, states.Count);
+            Assert.False(states.ContainsKey("n7"));
+            Assert.Equal("published", states["n149"]);
+        }
     }
 
     [Fact]
-    public void List_takes_newest_post_per_source()
+    public void Batch_answer_skips_none_and_broken_items()
     {
-        var states = SocialSourceService.StatesFromPosts(JsonDocument.Parse("""
+        var states = SocialSourceService.ParseStates(JsonDocument.Parse("""
             {"data":[
-              {"id":"p3","source":"news","source_id":"42","status":"completed","target_summary":{"failed":1}},
-              {"id":"p2","source":"news","source_id":"42","status":"completed","target_summary":{"published":1}},
-              {"id":"p1","source":"news","source_id":"7","status":"scheduled","target_summary":{}}],
-             "meta":{"next_cursor":null,"prev_cursor":null}}
+              {"id":"42","state":"partial","post_id":"p1","published_count":1,"failed_count":1,"can_retry":true,"channels":[{"channel_id":"c1","provider":"mastodon","status":"failed"}]},
+              {"id":"7","state":"none","post_id":null,"published_count":0,"failed_count":0,"can_retry":false,"channels":[]},
+              {"state":"published"}]}
             """).RootElement);
 
-        Assert.Equal("failed", states["42"]);
-        Assert.Equal("scheduled", states["7"]);
+        Assert.Equal("partial", Assert.Single(states).Value);
+        Assert.True(states.ContainsKey("42"));
     }
 
     [Theory]

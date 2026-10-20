@@ -260,6 +260,15 @@ public sealed partial class ServerItemViewModel : ObservableObject
     public Brush ProvisioningBrush => (Brush)Application.Current.Resources[
         Server.Provisioning is { } p && (p.IsFailed || p.ExpiresSoon(DateTimeOffset.Now)) ? "RoGRedBrush" : Server.Provisioning?.IsInstalling == true ? "RoGGoldBrush" : "RoGMutedBrush"];
 
+    /// <summary>Alle zugewiesenen Ports (über die Website angelegt), Hauptport zuerst und gekennzeichnet.</summary>
+    public IReadOnlyList<string> Ports => Server.Provisioning is { } p
+        ? p.Ports.Select(a => a.Primary ? $"{a.Address} · {App.Services.Localizer.GetString(StringKeys.ServersPrimaryPort)}" : a.Address).ToList()
+        : [];
+
+    public bool HasPorts => Server.Provisioning?.Ports.Count > 0;
+
+    public string PortsHeader => string.Format(CultureInfo.CurrentCulture, App.Services.Localizer.GetString(StringKeys.ServersPortsHeader), Server.Provisioning?.Ports.Count ?? 0);
+
     public bool CanManageProvisioning { get; init; }
 
     public Action? ManageProvisioning { get; init; }

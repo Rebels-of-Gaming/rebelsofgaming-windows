@@ -814,6 +814,10 @@ public static class StringKeys
 
     public const string ToolsSquadEmpty = "Tools_SquadEmpty";
 
+    public const string ServersPortsHeader = "Servers_PortsHeader";
+
+    public const string ServersPrimaryPort = "Servers_PrimaryPort";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

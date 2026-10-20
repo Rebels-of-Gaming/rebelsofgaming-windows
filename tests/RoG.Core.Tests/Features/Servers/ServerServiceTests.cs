@@ -108,6 +108,34 @@ public class ServerControlMappingTests
         Assert.Equal(new ServerAbilities(Power: true, Console: true, ConsoleCommand: true, CanCommand: false, ConfigApproval: true), server.Control);
         Assert.True(server.Control!.Any);
     }
+
+    [Fact]
+    public async Task Provisioned_ports_put_the_primary_first_and_prefer_the_alias()
+    {
+        const string provisioned = """
+            {"id":"01HSF","slug":"sotf","name":"RoG Sons Of The Forest","description":null,"game":null,"squad":null,
+             "address":"144.76.242.131:8766","query_type":"source","connect_url":null,"visibility":"public","last_online_at":null,
+             "live":null,"pterodactyl_linked":true,"control":null,
+             "provisioning":{"provisioned":true,"status":"ready","provisioned_at":"2026-10-18T10:00:00Z","expires_at":null,"deletable":false,
+               "allocations":[{"ip":"144.76.242.131","alias":null,"port":27016,"primary":false},
+                              {"ip":"144.76.242.131","alias":"sotf.rogclan.de","port":8766,"primary":true},
+                              {"ip":"144.76.242.131","alias":"","port":9700,"primary":false}]}}
+            """;
+        var page = "{\"data\":[" + provisioned + "],\"links\":{\"first\":null,\"last\":null,\"prev\":null,\"next\":null},"
+            + "\"meta\":{\"path\":\"x\",\"per_page\":50,\"next_cursor\":null,\"prev_cursor\":null}}";
+        var stub = new StubHttpHandler((_, _) => StubHttpHandler.Json(HttpStatusCode.OK, page));
+        var api = new RoGApi(RoGEnvironment.Get(RoGEnvironment.Production), new InMemoryTokenStore(), new ApiContext(), innerHandler: stub);
+
+        var ports = Assert.Single(await new ServerService(api.Client).GetAllAsync()).Provisioning!.Ports;
+
+        Assert.Equal(["sotf.rogclan.de:8766", "144.76.242.131:9700", "144.76.242.131:27016"], ports.Select(p => p.Address));
+        Assert.True(ports[0].Primary);
+        Assert.False(ports[1].Primary);
+    }
+
+    [Fact]
+    public void Ports_are_empty_when_the_panel_was_unreachable() =>
+        Assert.Empty(new ServerProvisioning("ready", null, null, false, null).Ports);
 }
 
 public class ServerHistoryTests

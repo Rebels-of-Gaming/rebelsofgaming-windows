@@ -187,7 +187,8 @@ public class ServerProvisioningTests
     }
 
     private const string Server = """
-        {"data":{"id":"01S","slug":"cs2-scrim","name":"CS2 Scrim","provisioning":{"provisioned":true,"status":"installing","provisioned_at":"2026-10-18T10:00:00Z","expires_at":"2026-10-25T10:00:00Z","deletable":true}}}
+        {"data":{"id":"01S","slug":"cs2-scrim","name":"CS2 Scrim","provisioning":{"provisioned":true,"status":"installing","provisioned_at":"2026-10-18T10:00:00Z","expires_at":"2026-10-25T10:00:00Z","deletable":true,
+          "allocations":[{"ip":"10.0.0.5","alias":null,"port":27015,"primary":true},{"ip":"10.0.0.5","alias":null,"port":0,"primary":false},{"ip":"10.0.0.5","alias":null,"port":27020,"primary":false}]}}}
         """;
 
     [Fact]
@@ -205,6 +206,7 @@ public class ServerProvisioningTests
             Assert.Equal("cs2-scrim", slug);
             Assert.True(p!.IsInstalling);
             Assert.True(p.Deletable);
+            Assert.Equal(["10.0.0.5:27015", "10.0.0.5:27020"], p.Ports.Select(a => a.Address));
             Assert.False(p.ExpiresSoon(new DateTimeOffset(2026, 10, 18, 10, 0, 0, TimeSpan.Zero)));
             Assert.True(p.ExpiresSoon(new DateTimeOffset(2026, 10, 24, 12, 0, 0, TimeSpan.Zero)));
         }

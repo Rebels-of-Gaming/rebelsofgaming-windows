@@ -52,6 +52,25 @@
                     Text="{x:Bind Item.Address, Mode=OneWay}" />
             </StackPanel>
 
+            <!-- zugewiesene Ports (über die Website angelegt), Hauptport gekennzeichnet -->
+            <Expander
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Stretch"
+                Header="{x:Bind Item.PortsHeader, Mode=OneWay}"
+                Visibility="{x:Bind Item.HasPorts, Mode=OneWay}">
+                <ItemsControl ItemsSource="{x:Bind Item.Ports, Mode=OneWay}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="x:String">
+                            <TextBlock
+                                FontFamily="Consolas"
+                                IsTextSelectionEnabled="True"
+                                Style="{StaticResource RoGBodyTextStyle}"
+                                Text="{x:Bind}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Expander>
+
             <!-- Auslastung der letzten 24 h -->
             <Expander x:Uid="ServerCard_History" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Expanding="OnHistoryExpanding">
                 <StackPanel Spacing="6">

@@ -64,7 +64,8 @@ public sealed class ServerService(IRoGApiClient client)
             live?.Player_list?.Select(p => new ServerPlayer(p.Name, p.Score, p.Ping, p.Member?.Name)).ToList(),
             s.Control is { Abilities: { } a } c ? new ServerAbilities(a.Power, a.Console, a.Console_command, c.Can_command, a.Files_read, a.Files_write, a.Files_approve, a.Backups, c.Config_approval, a.Rcon, a.Bans) : null,
             s.Provisioning is { Provisioned: true } p
-                ? new ServerProvisioning(p.Status ?? "installing", ApiValues.Time(p.Provisioned_at), ApiValues.Time(p.Expires_at), p.Deletable)
+                ? new ServerProvisioning(p.Status ?? "installing", ApiValues.Time(p.Provisioned_at), ApiValues.Time(p.Expires_at), p.Deletable,
+                    p.Allocations?.Where(a => a is not null).Select(a => new ServerAllocation(a.Ip, ApiValues.Text(a.Alias), a.Port, a.Primary)).ToList())
                 : null);
     }
 }

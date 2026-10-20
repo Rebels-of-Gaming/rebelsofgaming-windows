@@ -90,9 +90,10 @@ public sealed partial class NewsViewModel : LoadableViewModel
         _ = LoadSocialStatesAsync();
     }
 
-    /// <summary>Social-Media-Symbole für die Redaktion – eine Abfrage für die ganze Liste, Fehler blenden sie nur aus.</summary>
-    private async Task LoadSocialStatesAsync()
+    /// <summary>Social-Media-Symbole für die Redaktion – eine Sammelabfrage je Seite, Fehler blenden sie nur aus.</summary>
+    private async Task LoadSocialStatesAsync(IReadOnlyList<NewsItemViewModel>? items = null)
     {
+        items ??= Items.ToList();
         if (Services.CurrentUser is not { } me || !me.Can(SocialSourceService.Permission) || !me.HasScope(SocialSourceService.ReadScope))
         {
             return;
@@ -100,27 +101,20 @@ public sealed partial class NewsViewModel : LoadableViewModel
 
         try
         {
-            _socialStates = await new SocialSourceService(Services.Api.Http).ListStatesAsync(SocialSources.News);
-            ApplySocial(Items);
+            var states = await new SocialSourceService(Services.Api.Http).StatesAsync(SocialSources.News, items.Select(i => i.Id));
+            ApplySocial(items, states);
         }
-        catch (RoG.Core.Api.ApiProblemException)
+        catch (Exception ex) when (ex is RoG.Core.Api.ApiProblemException or HttpRequestException or System.Text.Json.JsonException)
         {
             // Symbole sind Beiwerk
         }
     }
 
-    private IReadOnlyDictionary<string, string>? _socialStates;
-
-    private void ApplySocial(IEnumerable<NewsItemViewModel> items)
+    private void ApplySocial(IEnumerable<NewsItemViewModel> items, IReadOnlyDictionary<string, string> states)
     {
-        if (_socialStates is null)
-        {
-            return;
-        }
-
         foreach (var item in items)
         {
-            if (_socialStates.TryGetValue(item.Id, out var state))
+            if (states.TryGetValue(item.Id, out var state))
             {
                 item.SetSocial(state, Services.Localizer);
             }
@@ -145,7 +139,7 @@ public sealed partial class NewsViewModel : LoadableViewModel
                 Items.Add(item);
             }
 
-            ApplySocial(added);
+            _ = LoadSocialStatesAsync(added);
 
             _cursor = page.NextCursor;
             HasMore = page.HasMore;

@@ -9,10 +9,13 @@ namespace RoG.Core.Features.Servers;
 
 /// <summary>
 /// Über die Website angelegter Server (<c>provisioning</c> an der Server-Ressource, nur mit <c>servers.manage</c> bzw.
-/// <c>servers.create</c>): Installationsstand installing · ready · failed, optionaler Ablauf, löschbar.
+/// <c>servers.create</c>): Installationsstand installing · ready · failed, optionaler Ablauf, löschbar, zugewiesene Ports
+/// (<c>allocations</c>, Hauptport zuerst; leer, wenn das Panel nicht erreichbar war).
 /// </summary>
-public sealed record ServerProvisioning(string Status, DateTimeOffset? ProvisionedAt, DateTimeOffset? ExpiresAt, bool Deletable)
+public sealed record ServerProvisioning(string Status, DateTimeOffset? ProvisionedAt, DateTimeOffset? ExpiresAt, bool Deletable, IReadOnlyList<ServerAllocation>? Allocations = null)
 {
+    public IReadOnlyList<ServerAllocation> Ports { get; } = ServerAllocation.Ordered(Allocations);
+
     public bool IsInstalling => Status == "installing";
 
     public bool IsFailed => Status == "failed";
@@ -26,7 +29,8 @@ public sealed record ServerProvisioning(string Status, DateTimeOffset? Provision
                 ProvisioningJson.Str(e, "status") ?? "installing",
                 ProvisioningJson.Time(e, "provisioned_at"),
                 ProvisioningJson.Time(e, "expires_at"),
-                e.TryGetProperty("deletable", out var d) && d.ValueKind == JsonValueKind.True)
+                e.TryGetProperty("deletable", out var d) && d.ValueKind == JsonValueKind.True,
+                ServerAllocation.Parse(e))
             : null;
 }
 

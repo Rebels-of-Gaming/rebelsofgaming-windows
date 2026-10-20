@@ -172,18 +172,31 @@ public sealed class SocialSourceService(HttpClient http)
         return doc.RootElement.TryGetProperty("data", out var d) ? Str(d, "id") : null;
     }
 
+    /// <summary>Höchstens so viele IDs je Sammelabfrage (Website: 1–100).</summary>
+    public const int MaxBatch = 100;
+
     /// <summary>
-    /// Zustand je Quell-ID für Listen (z. B. News), aus <c>GET /v1/social/posts?filter[source]=…</c>: neuester Post je
-    /// Quelle, Zustand wie <c>SourceStatuses::stateOf</c> der Website aus <c>target_summary</c>. Eine Abfrage statt
-    /// einer je Eintrag (Sammel-Endpunkt fehlt, API-LUECKEN W22).
+    /// Zustand je Quell-ID für Listen (z. B. News) über <c>GET /v1/social/sources/{source}?ids[]=…</c> (W22), in
+    /// Blöcken zu 100. Der Zustand kommt fertig vom Server; <c>none</c> (nie gepostet, unbekannte ID) fehlt im Ergebnis.
     /// </summary>
-    public async Task<IReadOnlyDictionary<string, string>> ListStatesAsync(string source, CancellationToken cancellationToken = default)
+    public async Task<IReadOnlyDictionary<string, string>> StatesAsync(string source, IEnumerable<string> ids, CancellationToken cancellationToken = default)
     {
-        using var doc = await SendAsync(HttpMethod.Get, $"social/posts?filter[source]={Uri.EscapeDataString(source)}&per_page=100", null, cancellationToken).ConfigureAwait(false);
-        return StatesFromPosts(doc.RootElement);
+        ArgumentNullException.ThrowIfNull(ids);
+        var states = new Dictionary<string, string>(StringComparer.Ordinal);
+        foreach (var chunk in ids.Where(i => !string.IsNullOrEmpty(i)).Distinct(StringComparer.Ordinal).Chunk(MaxBatch))
+        {
+            var query = string.Join("&", chunk.Select(i => "ids%5B%5D=" + Uri.EscapeDataString(i)));
+            using var doc = await SendAsync(HttpMethod.Get, $"social/sources/{Uri.EscapeDataString(source)}?{query}", null, cancellationToken).ConfigureAwait(false);
+            foreach (var (id, state) in ParseStates(doc.RootElement))
+            {
+                states[id] = state;
+            }
+        }
+
+        return states;
     }
 
-    public static IReadOnlyDictionary<string, string> StatesFromPosts(JsonElement root)
+    public static IReadOnlyDictionary<string, string> ParseStates(JsonElement root)
     {
         var states = new Dictionary<string, string>(StringComparer.Ordinal);
         if (!root.TryGetProperty("data", out var data) || data.ValueKind != JsonValueKind.Array)
@@ -191,65 +204,15 @@ public sealed class SocialSourceService(HttpClient http)
             return states;
         }
 
-        // neueste zuerst (Standard-Sortierung) – der erste Post je Quelle zählt
-        foreach (var post in data.EnumerateArray())
+        foreach (var item in data.EnumerateArray())
         {
-            if (Str(post, "source_id") is { } id && !states.ContainsKey(id))
+            if (Str(item, "id") is { } id && Str(item, "state") is { } state && state != "none")
             {
-                states[id] = StateOf(Str(post, "status"), Summary(post));
+                states[id] = state;
             }
         }
 
         return states;
-    }
-
-    /// <summary>Wie die Website: completed → published (alle), partial (einige), retracted, sonst failed.</summary>
-    public static string StateOf(string? postStatus, IReadOnlyDictionary<string, int> targetSummary)
-    {
-        ArgumentNullException.ThrowIfNull(targetSummary);
-        switch (postStatus)
-        {
-            case "draft":
-            case "scheduled":
-            case "publishing":
-            case "cancelled":
-                return postStatus;
-            case "completed":
-                var total = targetSummary.Values.Sum();
-                var published = targetSummary.GetValueOrDefault("published");
-                if (total == 0)
-                {
-                    return "failed";
-                }
-
-                if (published == total)
-                {
-                    return "published";
-                }
-
-                if (published > 0)
-                {
-                    return "partial";
-                }
-
-                return targetSummary.GetValueOrDefault("retracted") > 0 ? "retracted" : "failed";
-            default:
-                return "none";
-        }
-    }
-
-    private static Dictionary<string, int> Summary(JsonElement post)
-    {
-        var map = new Dictionary<string, int>(StringComparer.Ordinal);
-        if (post.TryGetProperty("target_summary", out var s) && s.ValueKind == JsonValueKind.Object)
-        {
-            foreach (var p in s.EnumerateObject().Where(p => p.Value.ValueKind == JsonValueKind.Number))
-            {
-                map[p.Name] = p.Value.GetInt32();
-            }
-        }
-
-        return map;
     }
 
     private async Task<JsonDocument> SendAsync(HttpMethod method, string path, JsonNode? body, CancellationToken cancellationToken)

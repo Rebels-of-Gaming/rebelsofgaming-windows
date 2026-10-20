@@ -228,6 +228,8 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   `CardGridLayout` (App, `NonVirtualizingLayout`) mit Spaltenrechnung `CardGrid` in Core (3 Tests): Spalten nach
   Mindestbreite wie bisher, jede Zeile so hoch wie ihre höchste Karte, aufgeklappte Bereiche wachsen mit. Eingesetzt auf
   der Server-Seite und bei den Squad-Servern; andere Raster mit gleich hohen Kacheln bleiben beim `UniformGridLayout`.
+  Das Auslastungs-Diagramm (Punkte für 280 × 60) skaliert per `Viewbox` auf die Kartenbreite (max. 560) statt fest 280 –
+  in schmalen Karten ragte es über den Rand.
 - **2.5.8 – Website v0.32.2 (live 20.10.2026):** Client aus der Live-Spezifikation (Tool-Endpunkte jetzt vollständig).
   Server-Karte: aufklappbare „Ports (n)“ aus `provisioning.allocations` (Hauptport zuerst mit „Hauptport“, Alias statt
   IP, wenn gesetzt; `null` = Panel nicht erreichbar → nichts anzeigen), `ServerAllocation` in Core mit Tests. News-Liste:

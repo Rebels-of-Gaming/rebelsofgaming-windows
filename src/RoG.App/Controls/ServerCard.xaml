@@ -74,8 +74,13 @@
             <!-- Auslastung der letzten 24 h -->
             <Expander x:Uid="ServerCard_History" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Expanding="OnHistoryExpanding">
                 <StackPanel Spacing="6">
-                    <Border Width="280" Height="60" HorizontalAlignment="Left" Background="{StaticResource RoGBg3Brush}" CornerRadius="4">
-                        <Polyline Points="{x:Bind Item.HistoryPoints, Mode=OneWay}" Stroke="{StaticResource RoGRedBrush}" StrokeThickness="2" />
+                    <!-- Punkte für 280 × 60 berechnet, Viewbox passt sie an die Kartenbreite an (schmale Karten < 280) -->
+                    <Border Height="60" MaxWidth="560" HorizontalAlignment="Stretch" Background="{StaticResource RoGBg3Brush}" CornerRadius="4">
+                        <Viewbox Stretch="Fill">
+                            <Canvas Width="280" Height="60">
+                                <Polyline Points="{x:Bind Item.HistoryPoints, Mode=OneWay}" Stroke="{StaticResource RoGRedBrush}" StrokeThickness="2" />
+                            </Canvas>
+                        </Viewbox>
                     </Border>
                     <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Item.HistoryText, Mode=OneWay}" />
                 </StackPanel>

@@ -105,7 +105,7 @@ public sealed class WikiService(IRoGApiClient client, HttpClient http, Uri? wiki
     public async Task<WikiArticle> PageBySlugAsync(string namespaceSlug, string slug, string? locale = null, CancellationToken cancellationToken = default)
     {
         var d = (await client.V1_wiki_pages_bySlugAsync(namespaceSlug, slug, locale, cancellationToken: cancellationToken).ConfigureAwait(false)).Data;
-        return Map(JsonSerializer.Deserialize<Data482>(JsonSerializer.Serialize(d))!);
+        return Map(JsonSerializer.Deserialize<Data487>(JsonSerializer.Serialize(d))!);
     }
 
     public async Task<IReadOnlyList<WikiRevision>> RevisionsAsync(string pageId, CancellationToken cancellationToken = default) =>
@@ -145,7 +145,7 @@ public sealed class WikiService(IRoGApiClient client, HttpClient http, Uri? wiki
     {
         try
         {
-            var result = await client.V1_wiki_pages_updateAsync(pageId, new Body170
+            var result = await client.V1_wiki_pages_updateAsync(pageId, new Body173
             {
                 Locale = locale,
                 Title = title,
@@ -176,7 +176,7 @@ public sealed class WikiService(IRoGApiClient client, HttpClient http, Uri? wiki
             throw new ArgumentException("Titel fehlt", nameof(title));
         }
 
-        var d = (await client.V1_wiki_pages_storeAsync(namespaceSlug, new Body169
+        var d = (await client.V1_wiki_pages_storeAsync(namespaceSlug, new Body172
         {
             Locale = locale,
             Title = title.Trim(),
@@ -284,7 +284,7 @@ public sealed class WikiService(IRoGApiClient client, HttpClient http, Uri? wiki
             : [];
     }
 
-    internal static WikiArticle Map(Data482 d) => new(
+    internal static WikiArticle Map(Data487 d) => new(
         d.Id,
         d.Slug,
         d.Namespace.Slug,

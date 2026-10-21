@@ -5403,4 +5403,160 @@
   <data name="SettingsPage_CreditLink.NavigateUri" xml:space="preserve">
     <value>https://wahke.lu</value>
   </data>
+  <data name="Minecraft_Prefilled" xml:space="preserve">
+    <value>Code taken from the link. Check it – nothing is linked until you confirm.</value>
+  </data>
+  <data name="Minecraft_CodeFormat" xml:space="preserve">
+    <value>The code has 6 characters (A–Z and 2–9).</value>
+  </data>
+  <data name="Minecraft_Declined" xml:space="preserve">
+    <value>Not linked. If you didn't request the code yourself, don't enter it.</value>
+  </data>
+  <data name="Minecraft_Linked" xml:space="preserve">
+    <value>{0} is now linked to your account.</value>
+  </data>
+  <data name="Minecraft_UnlinkTitle" xml:space="preserve">
+    <value>Unlink Minecraft account?</value>
+  </data>
+  <data name="Minecraft_UnlinkText" xml:space="preserve">
+    <value>{0} will be unlinked from your account. You can link it again any time with a new code from /link.</value>
+  </data>
+  <data name="Minecraft_UnlinkConfirm" xml:space="preserve">
+    <value>Unlink</value>
+  </data>
+  <data name="Minecraft_Unlinked" xml:space="preserve">
+    <value>{0} has been unlinked.</value>
+  </data>
+  <data name="Minecraft_MinutesAgo" xml:space="preserve">
+    <value>{0} min ago</value>
+  </data>
+  <data name="Minecraft_JustNow" xml:space="preserve">
+    <value>just now</value>
+  </data>
+  <data name="Minecraft_Preview" xml:space="preserve">
+    <value>Code for {0} ({1}), requested {2} – is this you?</value>
+  </data>
+  <data name="Minecraft_PreviewServer" xml:space="preserve">
+    <value>Server: {0}</value>
+  </data>
+  <data name="Minecraft_PreviewTitle" xml:space="preserve">
+    <value>Link Minecraft account</value>
+  </data>
+  <data name="Minecraft_Confirm" xml:space="preserve">
+    <value>Yes, link</value>
+  </data>
+  <data name="Minecraft_Decline" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Minecraft_LinkedAt" xml:space="preserve">
+    <value>linked on {0}</value>
+  </data>
+  <data name="Minecraft_LastSeen" xml:space="preserve">
+    <value>last seen {0}</value>
+  </data>
+  <data name="MinecraftAdmin_EditionAll" xml:space="preserve">
+    <value>All editions</value>
+  </data>
+  <data name="MinecraftAdmin_UnlinkText" xml:space="preserve">
+    <value>{0} (account: {1}) will be unlinked. The network is notified immediately.</value>
+  </data>
+  <data name="MinecraftAdmin_User" xml:space="preserve">
+    <value>Account: {0}</value>
+  </data>
+  <data name="MinecraftAdmin_Via" xml:space="preserve">
+    <value>via {0}</value>
+  </data>
+  <data name="Minecraft_Edition_java" xml:space="preserve">
+    <value>Java</value>
+  </data>
+  <data name="Minecraft_Edition_bedrock" xml:space="preserve">
+    <value>Bedrock</value>
+  </data>
+  <data name="Minecraft_Platform_windows" xml:space="preserve">
+    <value>Windows</value>
+  </data>
+  <data name="Minecraft_Platform_android" xml:space="preserve">
+    <value>Android</value>
+  </data>
+  <data name="Minecraft_Platform_ios" xml:space="preserve">
+    <value>iOS</value>
+  </data>
+  <data name="Minecraft_Platform_xbox" xml:space="preserve">
+    <value>Xbox</value>
+  </data>
+  <data name="Minecraft_Platform_playstation" xml:space="preserve">
+    <value>PlayStation</value>
+  </data>
+  <data name="Minecraft_Platform_switch" xml:space="preserve">
+    <value>Switch</value>
+  </data>
+  <data name="Minecraft_Platform_other_bedrock" xml:space="preserve">
+    <value>other platform</value>
+  </data>
+  <data name="Error_minecraft_link_code_invalid" xml:space="preserve">
+    <value>The code is wrong, expired or already used. Type /link in the game again.</value>
+  </data>
+  <data name="Error_minecraft_already_linked" xml:space="preserve">
+    <value>This Minecraft account is already linked to an account.</value>
+  </data>
+  <data name="Error_minecraft_edition_taken" xml:space="preserve">
+    <value>You already have an account of this edition linked. Unlink it first – the code stays valid.</value>
+  </data>
+  <data name="AccountPage_Minecraft.Header" xml:space="preserve">
+    <value>Minecraft</value>
+  </data>
+  <data name="AccountPage_MinecraftIntro.Text" xml:space="preserve">
+    <value>Link your Minecraft account (Java or Bedrock) to your RoG account: type /link on the RoG network and you'll get a 6-character code. Enter it here – before linking, the app shows which account it belongs to. One account per edition.</value>
+  </data>
+  <data name="AccountPage_MinecraftSignIn.Text" xml:space="preserve">
+    <value>Please sign out and back in once for Minecraft accounts – your device doesn't have the required permissions yet.</value>
+  </data>
+  <data name="AccountPage_MinecraftCode.Header" xml:space="preserve">
+    <value>Code from the game</value>
+  </data>
+  <data name="AccountPage_MinecraftCode.PlaceholderText" xml:space="preserve">
+    <value>e.g. K7M2QX</value>
+  </data>
+  <data name="AccountPage_MinecraftCheck.Content" xml:space="preserve">
+    <value>Check code</value>
+  </data>
+  <data name="AccountPage_MinecraftEmpty.Text" xml:space="preserve">
+    <value>No Minecraft account linked yet.</value>
+  </data>
+  <data name="AccountPage_MinecraftUnlink.Content" xml:space="preserve">
+    <value>Unlink</value>
+  </data>
+  <data name="AdminPage_TabMinecraft.Text" xml:space="preserve">
+    <value>Minecraft</value>
+  </data>
+  <data name="MinecraftAdmin_Intro.Text" xml:space="preserve">
+    <value>All linked Minecraft accounts with account and the server they were linked through. Unlinking also takes effect on the network immediately.</value>
+  </data>
+  <data name="MinecraftAdmin_Search.PlaceholderText" xml:space="preserve">
+    <value>Search name or UUID</value>
+  </data>
+  <data name="MinecraftAdmin_Search.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Search Minecraft accounts</value>
+  </data>
+  <data name="MinecraftAdmin_Edition.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Edition</value>
+  </data>
+  <data name="MinecraftAdmin_Reload.Content" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="MinecraftAdmin_Empty.Text" xml:space="preserve">
+    <value>No linked accounts.</value>
+  </data>
+  <data name="MinecraftAdmin_Unlink.Content" xml:space="preserve">
+    <value>Unlink</value>
+  </data>
+  <data name="MinecraftAdmin_OpenProfile.Content" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="GameBans_MayLink.Content" xml:space="preserve">
+    <value>Link Minecraft accounts</value>
+  </data>
+  <data name="GameBans_MayLinkHint.Text" xml:space="preserve">
+    <value>Only for the Minecraft network proxy: request link codes for /link (for any player UUID) and receive the network's live events. Removing it, rotating or revoking the key invalidates open codes.</value>
+  </data>
 </root>

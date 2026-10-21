@@ -322,6 +322,8 @@
                             <CheckBox x:Uid="GameBans_MayLiftAny" IsChecked="{x:Bind GameBans.MayLiftAny, Mode=TwoWay}" />
                             <CheckBox x:Uid="GameBans_MayIp" IsChecked="{x:Bind GameBans.MayIp, Mode=TwoWay}" />
                             <CheckBox x:Uid="GameBans_MayBanMembers" IsChecked="{x:Bind GameBans.MayBanMembers, Mode=TwoWay}" />
+                            <CheckBox x:Uid="GameBans_MayLink" IsChecked="{x:Bind GameBans.MayLink, Mode=TwoWay}" />
+                            <TextBlock x:Uid="GameBans_MayLinkHint" Margin="28,-4,0,0" FontSize="12" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
                             <ComboBox x:Uid="GameBans_MaxScope" MinWidth="200" ItemsSource="{x:Bind GameBans.MaxScopeOptions}" SelectedItem="{x:Bind GameBans.SelectedMaxScope, Mode=TwoWay}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Spacing="8">

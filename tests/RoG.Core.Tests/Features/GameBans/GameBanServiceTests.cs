@@ -260,4 +260,17 @@ public class GameBanServiceTests
 
         Assert.DoesNotContain("rogsrv_secret", status.ToString(), StringComparison.Ordinal);
     }
+
+    [Fact]
+    public void May_link_is_read_kept_and_needs_manage()
+    {
+        var status = GameBanService.ParseKey(JsonNode.Parse("""{"exists":true,"active":true,"may_issue":true,"may_link":true,"max_scope":"server"}"""));
+        Assert.True(status.MayLink);
+        Assert.False(GameBanService.ParseKey(JsonNode.Parse(Key + "}")).MayLink);
+
+        var rights = PluginKeyRights.From(status);
+        Assert.True(rights.MayLink);
+        Assert.True(rights.NeedsManage);
+        Assert.False(PluginKeyRights.Minimal.MayLink);
+    }
 }

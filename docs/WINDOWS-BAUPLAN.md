@@ -241,6 +241,22 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   Copyright by wahke“, „wahke“ klein und als Link auf `https://wahke.lu` (Link-Ziel als Ressource, keine Domain im
   Code), in Einstellungen → Über; Assembly-`Copyright` entsprechend; Store-Copyright in `docs/STORE-TEXTE.md` angepasst
   (im Partner Center von Hand eintragen).
+- **2.5.14 – Minecraft-Kontoverknüpfung (Website v0.36.0, live 21.10.2026, Guide 44, Annahme 490):** `MinecraftService`
+  (Core, 28 Tests inkl. Routen, dazu 1 Test für `may_link`): `GET /v1/me/minecraft/accounts`, `POST /v1/me/minecraft/link` zweistufig (ohne
+  `confirm` Vorschau, mit `confirm: true` verknüpfen; eigener Idempotency-Key je Schritt), `DELETE …/accounts/{id}`,
+  Verwaltung `GET/DELETE /v1/minecraft/accounts` (Suche, Edition, Server, Cursor). Codes wie der Server normalisiert
+  (Groß/klein, Leerzeichen, Bindestriche egal) und vorab geprüft (6 Zeichen A–Z/2–9 ohne O/I) – ein Tippfehler zählt so
+  nicht als Fehlversuch im Raten-Limit. Konto → „Minecraft“ (Expander): Erklärung, Code-Feld, „Code prüfen“ → Dialog
+  „Code für Notch (Java), angefordert vor 2 Min. – bist das du?“ mit „Ja, verknüpfen“/„Nein“ (Nein ist Standard),
+  Liste mit Edition/Plattform, verknüpft am, zuletzt gesehen, UUID, „Trennen“ mit Rückfrage. Ohne die neuen Scopes
+  (alte Geräte-Tokens) Hinweis „einmal ab- und wieder anmelden“. Deep-Link `…/account/minecraft?code=…` (auch mit
+  Sprachpräfix und `rog://account/minecraft?code=…`) → Konto, Bereich aufgeklappt, Code **nur vorbefüllt** (ungültige
+  Codes werden verworfen), nie automatisch eingelöst. Verwaltung → „Minecraft“ (Scope `minecraft:manage` + Recht
+  `minecraft.manage`): Liste mit Konto, Server der Verknüpfung, Suche Name/UUID, Edition, trennen, Profil öffnen.
+  Plugin-Schlüssel: Recht `may_link` („Minecraft-Konten verknüpfen“, nur mit `gamebans.manage`, Hinweis wie Website).
+  Nebenbei: Menüpunkt „Verwaltung“ auch mit `servers.bans` (Einsprüche; vorher unsichtbar). **Offen:** die Liste „über
+  diesen Server verknüpfte Accounts“ im Reiter „Bans & Plugin“ (Website-Admin) – die Verwaltungsliste kann bereits nach
+  Server filtern (`filter[server]`), die Oberfläche dafür fehlt noch.
 - **2.5.8 – Website v0.32.2 (live 20.10.2026):** Client aus der Live-Spezifikation (Tool-Endpunkte jetzt vollständig).
   Server-Karte: aufklappbare „Ports (n)“ aus `provisioning.allocations` (Hauptport zuerst mit „Hauptport“, Alias statt
   IP, wenn gesetzt; `null` = Panel nicht erreichbar → nichts anzeigen), `ServerAllocation` in Core mit Tests. News-Liste:
@@ -472,6 +488,8 @@ sich einmal neu an (2FA).
   Zwischenablage.
 - Ab 2.5.10: Die öffentliche Ban-Liste und Einsprüche zeigt die App nur an (kein Cache); eine Stellungnahme geht nur an
   die Plattform und wird dort ein öffentlich lesbares Forum-Thema – darauf weist das Formular hin.
+- Ab 2.5.14: Minecraft-Accounts (Name, UUID, Edition, Plattform) zeigt die App nur an (kein Cache); der Link-Code geht
+  nur an die Plattform und wird nach dem Verknüpfen aus dem Feld gelöscht.
 - Ab 2.3.0: gelesene Wiki-Seiten (gerendertes HTML, Titel, Bereich) unter `wiki/` im App-Datenordner, je Sprache,
   **mit DPAPI verschlüsselt** (ab 2.3.3); Abmelden löscht den Ordner, Deinstallation ebenso.
 - Ab 2.3.3: Offline-Warteschlange `outbox.dat` (Forenantworten, Zusagen; DPAPI-verschlüsselt) – **Direktnachrichten

@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Navigation;
 using RoG.App.ViewModels;
 using RoG.Core.Features.Account;
 using RoG.Core.Localization;
+using RoG.Core.Navigation;
 
 namespace RoG.App.Views;
 
@@ -17,7 +18,43 @@ public sealed partial class AccountPage : Page
         Absences = new AbsencesViewModel(App.Services);
         Applications = new MyApplicationsViewModel(App.Services);
         Data = new AccountDataViewModel(App.Services);
+        Minecraft = new MinecraftAccountsViewModel(App.Services) { ConfirmLink = ConfirmMinecraftAsync, Confirm = ConfirmAsync };
         InitializeComponent();
+    }
+
+    public MinecraftAccountsViewModel Minecraft { get; }
+
+    private void OnMinecraftExpanding(Expander sender, ExpanderExpandingEventArgs args) => _ = Minecraft.LoadAsync(silent: true);
+
+    /// <summary>„Code für Notch (Java) … – bist das du?“ mit „Ja, verknüpfen“ und „Nein“ (Nein ist Standard).</summary>
+    private async Task<bool> ConfirmMinecraftAsync(string text)
+    {
+        var l = App.Services.Localizer;
+        var dialog = new ContentDialog
+        {
+            XamlRoot = XamlRoot,
+            Title = l.GetString(StringKeys.MinecraftPreviewTitle),
+            Content = new TextBlock { Text = text, TextWrapping = TextWrapping.Wrap },
+            PrimaryButtonText = l.GetString(StringKeys.MinecraftConfirm),
+            CloseButtonText = l.GetString(StringKeys.MinecraftDecline),
+            DefaultButton = ContentDialogButton.Close,
+        };
+        return await dialog.ShowAsync() == ContentDialogResult.Primary;
+    }
+
+    private async Task<bool> ConfirmAsync(string title, string text)
+    {
+        var l = App.Services.Localizer;
+        var dialog = new ContentDialog
+        {
+            XamlRoot = XamlRoot,
+            Title = title,
+            Content = new TextBlock { Text = text, TextWrapping = TextWrapping.Wrap },
+            PrimaryButtonText = l.GetString(StringKeys.MinecraftUnlinkConfirm),
+            CloseButtonText = l.GetString(StringKeys.CommonCancel),
+            DefaultButton = ContentDialogButton.Close,
+        };
+        return await dialog.ShowAsync() == ContentDialogResult.Primary;
     }
 
     public AccountViewModel ViewModel { get; }
@@ -157,6 +194,19 @@ public sealed partial class AccountPage : Page
     protected override async void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
+
+        // Link …/account/minecraft[?code=…]: Bereich aufklappen, Code nur vorbefüllen
+        if (e.Parameter is string key && key.StartsWith(AppRoute.MinecraftKey, StringComparison.Ordinal))
+        {
+            MinecraftExpander.IsExpanded = true;
+            if (new AppRoute(AppSection.Account, key).MinecraftCode is { } code)
+            {
+                Minecraft.Prefill(code);
+            }
+
+            MinecraftCodeBox.Focus(FocusState.Programmatic);
+        }
+
         await ViewModel.LoadAsync();
     }
 

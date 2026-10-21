@@ -22,6 +22,7 @@
             <SelectorBarItem x:Name="ReportsTab" x:Uid="AdminPage_TabReports" />
             <SelectorBarItem x:Name="BansTab" x:Uid="AdminPage_TabBans" />
             <SelectorBarItem x:Name="AppealsTab" x:Uid="AdminPage_TabAppeals" />
+            <SelectorBarItem x:Name="MinecraftTab" x:Uid="AdminPage_TabMinecraft" />
             <SelectorBarItem x:Name="LogTab" x:Uid="AdminPage_TabLog" />
             <SelectorBarItem x:Name="WordsTab" x:Uid="AdminPage_TabWords" />
             <SelectorBarItem x:Name="GalleryTab" x:Uid="AdminPage_TabGallery" />
@@ -350,6 +351,49 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 <Button x:Uid="Common_LoadMore" Command="{x:Bind Appeals.MoreCommand}" Visibility="{x:Bind Appeals.HasMore, Mode=OneWay}" />
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Verknüpfte Minecraft-Accounts -->
+        <ScrollViewer x:Name="MinecraftPanel" Grid.Row="3" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+            <StackPanel MaxWidth="{StaticResource RoGReadingWidth}" HorizontalAlignment="Left" Spacing="12">
+                <TextBlock x:Uid="MinecraftAdmin_Intro" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <AutoSuggestBox
+                        x:Uid="MinecraftAdmin_Search"
+                        Width="260"
+                        VerticalAlignment="Bottom"
+                        QueryIcon="Find"
+                        QuerySubmitted="OnMinecraftSearch"
+                        Text="{x:Bind MinecraftAccounts.Search, Mode=TwoWay}" />
+                    <ComboBox
+                        x:Uid="MinecraftAdmin_Edition"
+                        MinWidth="160"
+                        DisplayMemberPath="Label"
+                        ItemsSource="{x:Bind MinecraftAccounts.EditionOptions}"
+                        SelectedItem="{x:Bind MinecraftAccounts.SelectedEdition, Mode=TwoWay}" />
+                    <Button x:Uid="MinecraftAdmin_Reload" VerticalAlignment="Bottom" Command="{x:Bind MinecraftAccounts.ReloadCommand}" />
+                    <ProgressRing Width="20" Height="20" VerticalAlignment="Bottom" IsActive="{x:Bind MinecraftAccounts.IsBusy, Mode=OneWay}" />
+                </StackPanel>
+                <TextBlock x:Uid="MinecraftAdmin_Empty" Style="{StaticResource RoGMutedTextStyle}" Visibility="{x:Bind MinecraftAccounts.IsEmpty, Mode=OneWay}" />
+                <ItemsControl ItemsSource="{x:Bind MinecraftAccounts.Items}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="vm:MinecraftAdminItemViewModel">
+                            <Border Margin="0,0,0,8" Padding="12" AutomationProperties.Name="{x:Bind Name}" Background="{StaticResource RoGBg2Brush}" CornerRadius="{StaticResource RoGControlRadius}">
+                                <StackPanel Spacing="4">
+                                    <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Name}" />
+                                    <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" TextWrapping="Wrap" />
+                                    <TextBlock FontFamily="Consolas" FontSize="12" IsTextSelectionEnabled="True" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Uuid}" />
+                                    <StackPanel Margin="0,4,0,0" Orientation="Horizontal" Spacing="8">
+                                        <Button x:Uid="MinecraftAdmin_Unlink" Command="{x:Bind UnlinkCommand}" />
+                                        <Button x:Uid="MinecraftAdmin_OpenProfile" Command="{x:Bind OpenProfileCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" Visibility="{x:Bind HasProfile}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Button x:Uid="Common_LoadMore" Command="{x:Bind MinecraftAccounts.MoreCommand}" Visibility="{x:Bind MinecraftAccounts.HasMore, Mode=OneWay}" />
             </StackPanel>
         </ScrollViewer>
 

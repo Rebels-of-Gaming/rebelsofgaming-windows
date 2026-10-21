@@ -5403,4 +5403,160 @@
   <data name="SettingsPage_CreditLink.NavigateUri" xml:space="preserve">
     <value>https://wahke.lu</value>
   </data>
+  <data name="Minecraft_Prefilled" xml:space="preserve">
+    <value>Code repris du lien. Vérifie-le – rien n'est associé avant ta confirmation.</value>
+  </data>
+  <data name="Minecraft_CodeFormat" xml:space="preserve">
+    <value>Le code comporte 6 caractères (A–Z et 2–9).</value>
+  </data>
+  <data name="Minecraft_Declined" xml:space="preserve">
+    <value>Non associé. Si tu n'as pas demandé ce code toi-même, ne le saisis pas.</value>
+  </data>
+  <data name="Minecraft_Linked" xml:space="preserve">
+    <value>{0} est maintenant associé à ton compte.</value>
+  </data>
+  <data name="Minecraft_UnlinkTitle" xml:space="preserve">
+    <value>Dissocier le compte Minecraft ?</value>
+  </data>
+  <data name="Minecraft_UnlinkText" xml:space="preserve">
+    <value>{0} sera dissocié de ton compte. Tu peux le réassocier à tout moment avec un nouveau code de /link.</value>
+  </data>
+  <data name="Minecraft_UnlinkConfirm" xml:space="preserve">
+    <value>Dissocier</value>
+  </data>
+  <data name="Minecraft_Unlinked" xml:space="preserve">
+    <value>{0} a été dissocié.</value>
+  </data>
+  <data name="Minecraft_MinutesAgo" xml:space="preserve">
+    <value>il y a {0} min</value>
+  </data>
+  <data name="Minecraft_JustNow" xml:space="preserve">
+    <value>à l'instant</value>
+  </data>
+  <data name="Minecraft_Preview" xml:space="preserve">
+    <value>Code pour {0} ({1}), demandé {2} – est-ce bien toi ?</value>
+  </data>
+  <data name="Minecraft_PreviewServer" xml:space="preserve">
+    <value>Serveur : {0}</value>
+  </data>
+  <data name="Minecraft_PreviewTitle" xml:space="preserve">
+    <value>Associer le compte Minecraft</value>
+  </data>
+  <data name="Minecraft_Confirm" xml:space="preserve">
+    <value>Oui, associer</value>
+  </data>
+  <data name="Minecraft_Decline" xml:space="preserve">
+    <value>Non</value>
+  </data>
+  <data name="Minecraft_LinkedAt" xml:space="preserve">
+    <value>associé le {0}</value>
+  </data>
+  <data name="Minecraft_LastSeen" xml:space="preserve">
+    <value>vu pour la dernière fois {0}</value>
+  </data>
+  <data name="MinecraftAdmin_EditionAll" xml:space="preserve">
+    <value>Toutes les éditions</value>
+  </data>
+  <data name="MinecraftAdmin_UnlinkText" xml:space="preserve">
+    <value>{0} (compte : {1}) sera dissocié. Le réseau en est informé immédiatement.</value>
+  </data>
+  <data name="MinecraftAdmin_User" xml:space="preserve">
+    <value>Compte : {0}</value>
+  </data>
+  <data name="MinecraftAdmin_Via" xml:space="preserve">
+    <value>via {0}</value>
+  </data>
+  <data name="Minecraft_Edition_java" xml:space="preserve">
+    <value>Java</value>
+  </data>
+  <data name="Minecraft_Edition_bedrock" xml:space="preserve">
+    <value>Bedrock</value>
+  </data>
+  <data name="Minecraft_Platform_windows" xml:space="preserve">
+    <value>Windows</value>
+  </data>
+  <data name="Minecraft_Platform_android" xml:space="preserve">
+    <value>Android</value>
+  </data>
+  <data name="Minecraft_Platform_ios" xml:space="preserve">
+    <value>iOS</value>
+  </data>
+  <data name="Minecraft_Platform_xbox" xml:space="preserve">
+    <value>Xbox</value>
+  </data>
+  <data name="Minecraft_Platform_playstation" xml:space="preserve">
+    <value>PlayStation</value>
+  </data>
+  <data name="Minecraft_Platform_switch" xml:space="preserve">
+    <value>Switch</value>
+  </data>
+  <data name="Minecraft_Platform_other_bedrock" xml:space="preserve">
+    <value>autre plateforme</value>
+  </data>
+  <data name="Error_minecraft_link_code_invalid" xml:space="preserve">
+    <value>Le code est incorrect, expiré ou déjà utilisé. Tape à nouveau /link dans le jeu.</value>
+  </data>
+  <data name="Error_minecraft_already_linked" xml:space="preserve">
+    <value>Ce compte Minecraft est déjà associé à un compte.</value>
+  </data>
+  <data name="Error_minecraft_edition_taken" xml:space="preserve">
+    <value>Tu as déjà associé un compte de cette édition. Dissocie-le d'abord – le code reste valable.</value>
+  </data>
+  <data name="AccountPage_Minecraft.Header" xml:space="preserve">
+    <value>Minecraft</value>
+  </data>
+  <data name="AccountPage_MinecraftIntro.Text" xml:space="preserve">
+    <value>Associe ton compte Minecraft (Java ou Bedrock) à ton compte RoG : tape /link sur le réseau RoG, tu reçois un code de 6 caractères. Saisis-le ici – avant l'association, l'app indique à quel compte il appartient. Un compte par édition.</value>
+  </data>
+  <data name="AccountPage_MinecraftSignIn.Text" xml:space="preserve">
+    <value>Pour les comptes Minecraft, déconnecte-toi puis reconnecte-toi une fois – ton appareil n'a pas encore les droits nécessaires.</value>
+  </data>
+  <data name="AccountPage_MinecraftCode.Header" xml:space="preserve">
+    <value>Code du jeu</value>
+  </data>
+  <data name="AccountPage_MinecraftCode.PlaceholderText" xml:space="preserve">
+    <value>p. ex. K7M2QX</value>
+  </data>
+  <data name="AccountPage_MinecraftCheck.Content" xml:space="preserve">
+    <value>Vérifier le code</value>
+  </data>
+  <data name="AccountPage_MinecraftEmpty.Text" xml:space="preserve">
+    <value>Aucun compte Minecraft associé pour l'instant.</value>
+  </data>
+  <data name="AccountPage_MinecraftUnlink.Content" xml:space="preserve">
+    <value>Dissocier</value>
+  </data>
+  <data name="AdminPage_TabMinecraft.Text" xml:space="preserve">
+    <value>Minecraft</value>
+  </data>
+  <data name="MinecraftAdmin_Intro.Text" xml:space="preserve">
+    <value>Tous les comptes Minecraft associés, avec le compte et le serveur de l'association. La dissociation s'applique aussi immédiatement au réseau.</value>
+  </data>
+  <data name="MinecraftAdmin_Search.PlaceholderText" xml:space="preserve">
+    <value>Rechercher un nom ou un UUID</value>
+  </data>
+  <data name="MinecraftAdmin_Search.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Rechercher des comptes Minecraft</value>
+  </data>
+  <data name="MinecraftAdmin_Edition.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Édition</value>
+  </data>
+  <data name="MinecraftAdmin_Reload.Content" xml:space="preserve">
+    <value>Actualiser</value>
+  </data>
+  <data name="MinecraftAdmin_Empty.Text" xml:space="preserve">
+    <value>Aucun compte associé.</value>
+  </data>
+  <data name="MinecraftAdmin_Unlink.Content" xml:space="preserve">
+    <value>Dissocier</value>
+  </data>
+  <data name="MinecraftAdmin_OpenProfile.Content" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="GameBans_MayLink.Content" xml:space="preserve">
+    <value>Associer des comptes Minecraft</value>
+  </data>
+  <data name="GameBans_MayLinkHint.Text" xml:space="preserve">
+    <value>Uniquement pour le proxy du réseau Minecraft : demander des codes pour /link (pour n'importe quel UUID de joueur) et recevoir les événements en direct du réseau. Le retirer, renouveler ou révoquer la clé invalide les codes ouverts.</value>
+  </data>
 </root>

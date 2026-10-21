@@ -22,7 +22,9 @@ public sealed partial class AdminPage : Page
         };
         Media = new MediaAdminViewModel(App.Services, Moderation.Show);
         Appeals = new BanAppealsViewModel(App.Services, Moderation.Show) { AskDecision = AskAppealDecisionAsync };
+        MinecraftAccounts = new MinecraftAdminViewModel(App.Services, Moderation.Show);
         InitializeComponent();
+        MinecraftAccounts.Confirm = ConfirmAsync;
         Media.Confirm = ConfirmAsync;
         Moderation.OpenMember = (user, report) => MemberModerationDialog.ShowAsync(XamlRoot, Moderation, user, report);
         Moderation.Confirm = ConfirmAsync;
@@ -33,12 +35,14 @@ public sealed partial class AdminPage : Page
         ReportsTab.Visibility = Visible(Moderation.CanReports);
         BansTab.Visibility = Visible(Moderation.CanReports);
         AppealsTab.Visibility = Visible(Appeals.CanView);
+        MinecraftTab.Visibility = Visible(MinecraftAccounts.CanView);
         LogTab.Visibility = Visible(Moderation.CanLog);
         WordsTab.Visibility = Visible(Moderation.CanManage);
         GalleryTab.Visibility = Visible(Media.CanGallery);
         UploadsTab.Visibility = Visible(Media.CanUploads);
         WebsiteTab.Visibility = Visible((Overview.Any && Media.HasWebLinks) || Media.HasNativeAreas);
-        var any = Moderation.Any || Applications.CanView || Overview.Any || Members.CanView || Media.CanGallery || Media.CanUploads || Appeals.CanView;
+        var any = Moderation.Any || Applications.CanView || Overview.Any || Members.CanView || Media.CanGallery || Media.CanUploads || Appeals.CanView
+            || MinecraftAccounts.CanView;
         NoAccess.Visibility = Visible(!any);
         Tabs.Visibility = Visible(any);
         Tabs.SelectedItem = Tabs.Items.FirstOrDefault(t => t.Visibility == Visibility.Visible);
@@ -55,6 +59,10 @@ public sealed partial class AdminPage : Page
     public MediaAdminViewModel Media { get; }
 
     public BanAppealsViewModel Appeals { get; }
+
+    public MinecraftAdminViewModel MinecraftAccounts { get; }
+
+    private void OnMinecraftSearch(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) => MinecraftAccounts.SearchNowCommand.Execute(null);
 
     private void OnMemberSearch(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) => Members.SearchNowCommand.Execute(null);
 
@@ -122,7 +130,7 @@ public sealed partial class AdminPage : Page
 
     private void OnTabChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs? args)
     {
-        if (OverviewPanel is null || MembersPanel is null || ApplicationsPanel is null || ReportsPanel is null || BansPanel is null || AppealsPanel is null || LogPanel is null || WordsPanel is null
+        if (OverviewPanel is null || MembersPanel is null || ApplicationsPanel is null || ReportsPanel is null || BansPanel is null || AppealsPanel is null || MinecraftPanel is null || LogPanel is null || WordsPanel is null
             || GalleryPanel is null || UploadsPanel is null || WebsitePanel is null)
         {
             return; // feuert schon in InitializeComponent
@@ -135,6 +143,7 @@ public sealed partial class AdminPage : Page
         ReportsPanel.Visibility = Visible(selected == ReportsTab);
         BansPanel.Visibility = Visible(selected == BansTab);
         AppealsPanel.Visibility = Visible(selected == AppealsTab);
+        MinecraftPanel.Visibility = Visible(selected == MinecraftTab);
         LogPanel.Visibility = Visible(selected == LogTab);
         WordsPanel.Visibility = Visible(selected == WordsTab);
         GalleryPanel.Visibility = Visible(selected == GalleryTab);
@@ -163,6 +172,10 @@ public sealed partial class AdminPage : Page
         else if (selected == AppealsTab)
         {
             _ = Appeals.EnsureLoadedAsync();
+        }
+        else if (selected == MinecraftTab)
+        {
+            _ = MinecraftAccounts.EnsureLoadedAsync();
         }
         else if (selected == LogTab)
         {

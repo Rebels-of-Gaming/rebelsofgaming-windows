@@ -77,21 +77,25 @@ public sealed record PluginKeyStatus(
     bool PluginOutdated,
     string? GameVersion,
     int? PlayersOnline,
-    bool PluginActive);
+    bool PluginActive)
+{
+    /// <summary>Minecraft-Konten verknüpfen (Website v0.36.0): Link-Codes für beliebige UUIDs – nur für den Proxy des Netzwerks.</summary>
+    public bool MayLink { get; init; }
+}
 
 /// <summary>Rechte des Plugin-Schlüssels (POST/PATCH). Alles über „anlegen, nur dieser Server“ braucht <c>gamebans.manage</c>.</summary>
-public sealed record PluginKeyRights(bool MayIssue, bool MayLift, bool MayLiftAny, bool MayIp, bool MayBanMembers, string MaxScope)
+public sealed record PluginKeyRights(bool MayIssue, bool MayLift, bool MayLiftAny, bool MayIp, bool MayBanMembers, string MaxScope, bool MayLink = false)
 {
     public static PluginKeyRights Minimal { get; } = new(true, false, false, false, false, GameBanService.ScopeServer);
 
     public static PluginKeyRights From(PluginKeyStatus status)
     {
         ArgumentNullException.ThrowIfNull(status);
-        return new(status.MayIssue, status.MayLift, status.MayLiftAny, status.MayIp, status.MayBanMembers, status.MaxScope ?? GameBanService.ScopeServer);
+        return new(status.MayIssue, status.MayLift, status.MayLiftAny, status.MayIp, status.MayBanMembers, status.MaxScope ?? GameBanService.ScopeServer, status.MayLink);
     }
 
     /// <summary>Geht über das hinaus, was ohne <c>gamebans.manage</c> vergeben werden darf.</summary>
-    public bool NeedsManage => MayLift || MayLiftAny || MayIp || MayBanMembers || MaxScope != GameBanService.ScopeServer;
+    public bool NeedsManage => MayLift || MayLiftAny || MayIp || MayBanMembers || MayLink || MaxScope != GameBanService.ScopeServer;
 
     internal JsonObject ToJson() => new()
     {
@@ -100,6 +104,7 @@ public sealed record PluginKeyRights(bool MayIssue, bool MayLift, bool MayLiftAn
         ["may_lift_any"] = MayLiftAny,
         ["may_ip"] = MayIp,
         ["may_ban_members"] = MayBanMembers,
+        ["may_link"] = MayLink,
         ["max_scope"] = MaxScope,
     };
 }
@@ -360,7 +365,10 @@ public sealed partial class GameBanService(HttpClient http)
         Bool(d, "plugin_outdated"),
         Str(d, "game_version"),
         Int(d, "players_online"),
-        Bool(d, "plugin_active"));
+        Bool(d, "plugin_active"))
+    {
+        MayLink = Bool(d, "may_link"),
+    };
 
     private static string KeyPath(string server) => $"servers/{Uri.EscapeDataString(server)}/plugin-key";
 

@@ -296,6 +296,10 @@ public sealed partial class ServerGameBansViewModel : ServerTabViewModel
     [ObservableProperty]
     public partial bool MayBanMembers { get; set; }
 
+    /// <summary>Minecraft-Konten verknüpfen – nur am Schlüssel des Proxys (Codes für beliebige UUIDs).</summary>
+    [ObservableProperty]
+    public partial bool MayLink { get; set; }
+
     [ObservableProperty]
     public partial SettingsOption SelectedMaxScope { get; set; }
 
@@ -304,7 +308,7 @@ public sealed partial class ServerGameBansViewModel : ServerTabViewModel
     [ObservableProperty]
     public partial string IncidentReason { get; set; } = string.Empty;
 
-    private PluginKeyRights Rights => new(MayIssue, MayLift, MayLiftAny, MayIp, MayBanMembers, SelectedMaxScope.Value);
+    private PluginKeyRights Rights => new(MayIssue, MayLift, MayLiftAny, MayIp, MayBanMembers, SelectedMaxScope.Value, MayLink);
 
     private async Task LoadKeyAsync()
     {
@@ -332,7 +336,7 @@ public sealed partial class ServerGameBansViewModel : ServerTabViewModel
         var l = Services.Localizer;
         KeyExists = key.Exists && key.Active;
         var rights = key.Exists ? PluginKeyRights.From(key) : PluginKeyRights.Minimal;
-        (MayIssue, MayLift, MayLiftAny, MayIp, MayBanMembers) = (rights.MayIssue, rights.MayLift, rights.MayLiftAny, rights.MayIp, rights.MayBanMembers);
+        (MayIssue, MayLift, MayLiftAny, MayIp, MayBanMembers, MayLink) = (rights.MayIssue, rights.MayLift, rights.MayLiftAny, rights.MayIp, rights.MayBanMembers, rights.MayLink);
         SelectedMaxScope = MaxScopeOptions.FirstOrDefault(o => o.Value == rights.MaxScope) ?? MaxScopeOptions[0];
         KeyStatus = !KeyExists
             ? l.GetString(key.RevokedAt is null ? StringKeys.GameBansKeyNone : StringKeys.GameBansKeyRevoked)

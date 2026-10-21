@@ -464,7 +464,8 @@ public sealed partial class MainWindow : Window, IDisposable
 
     private static bool IsAdminPermission(string permission) =>
         permission.EndsWith(".manage", StringComparison.Ordinal) || permission.StartsWith("roles.", StringComparison.Ordinal)
-        || permission.StartsWith("moderation.", StringComparison.Ordinal) || permission.StartsWith("admin.", StringComparison.Ordinal);
+        || permission.StartsWith("moderation.", StringComparison.Ordinal) || permission.StartsWith("admin.", StringComparison.Ordinal)
+        || permission == "servers.bans"; // Einsprüche gegen Gameserver-Bans (Reiter „Einsprüche“)
 
     /// <summary>Navigations-Schlüssel je Bereich (Suche hat keinen Eintrag in der Seitenleiste).</summary>
     private static string? TagOf(AppSection section) => section switch

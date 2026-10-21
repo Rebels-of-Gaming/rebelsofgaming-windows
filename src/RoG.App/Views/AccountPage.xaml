@@ -196,6 +196,55 @@
                 </StackPanel>
             </Expander>
 
+            <!-- Minecraft: Code aus /link prüfen und bestätigen (nie automatisch einlösen) -->
+            <Expander
+                x:Name="MinecraftExpander"
+                x:Uid="AccountPage_Minecraft"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Stretch"
+                Expanding="OnMinecraftExpanding"
+                Visibility="{x:Bind ViewModel.ShowProfile, Mode=OneWay}">
+                <StackPanel Spacing="12">
+                    <InfoBar
+                        IsOpen="{x:Bind Minecraft.IsFeedbackOpen, Mode=TwoWay}"
+                        Message="{x:Bind Minecraft.FeedbackMessage, Mode=OneWay}"
+                        Severity="{x:Bind Minecraft.FeedbackSeverity, Mode=OneWay}" />
+                    <TextBlock x:Uid="AccountPage_MinecraftIntro" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                    <TextBlock x:Uid="AccountPage_MinecraftSignIn" Foreground="{StaticResource RoGGoldBrush}" Style="{StaticResource RoGBodyTextStyle}" TextWrapping="Wrap" Visibility="{x:Bind Minecraft.NeedsSignIn}" />
+                    <StackPanel Orientation="Horizontal" Spacing="8" Visibility="{x:Bind Minecraft.CanLink}">
+                        <TextBox
+                            x:Name="MinecraftCodeBox"
+                            x:Uid="AccountPage_MinecraftCode"
+                            Width="200"
+                            CharacterCasing="Upper"
+                            FontFamily="Consolas"
+                            MaxLength="12"
+                            Text="{x:Bind Minecraft.Code, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <Button x:Uid="AccountPage_MinecraftCheck" VerticalAlignment="Bottom" Command="{x:Bind Minecraft.CheckCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                        <ProgressRing Width="20" Height="20" VerticalAlignment="Bottom" IsActive="{x:Bind Minecraft.IsBusy, Mode=OneWay}" />
+                    </StackPanel>
+                    <TextBlock x:Uid="AccountPage_MinecraftEmpty" Style="{StaticResource RoGMutedTextStyle}" Visibility="{x:Bind Minecraft.IsEmpty, Mode=OneWay}" />
+                    <ItemsControl ItemsSource="{x:Bind Minecraft.Items}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:MinecraftAccountItemViewModel">
+                                <Grid Padding="0,6" ColumnSpacing="12" AutomationProperties.Name="{x:Bind Name}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Name}" />
+                                        <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" TextWrapping="Wrap" />
+                                        <TextBlock FontFamily="Consolas" FontSize="12" IsTextSelectionEnabled="True" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Uuid}" />
+                                    </StackPanel>
+                                    <Button x:Uid="AccountPage_MinecraftUnlink" Grid.Column="1" VerticalAlignment="Center" Command="{x:Bind UnlinkCommand}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Expander>
+
             <!-- Geräte & Daten -->
             <Expander
                 x:Uid="AccountPage_Data"

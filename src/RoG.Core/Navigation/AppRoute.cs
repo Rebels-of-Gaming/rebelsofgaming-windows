@@ -1,4 +1,5 @@
 using RoG.Core.Config;
+using RoG.Core.Features.Minecraft;
 
 namespace RoG.Core.Navigation;
 
@@ -79,12 +80,26 @@ public sealed record AppRoute(AppSection Section, string? Key = null)
             "forum" => new AppRoute(AppSection.Forum, string.Join('/', parts.Skip(1)) is { Length: > 0 } f ? f : null),
             "rules" or "about" or "partners" or "imprint" or "privacy" or "terms" or "contact" or "pages" or "p" => new AppRoute(AppSection.Info, parts[0]),
             "messages" => new AppRoute(AppSection.Messages, key),
+            // Konto → Minecraft, optional mit vorbefülltem Code (?code=…) – eingelöst wird er nie automatisch
+            "account" when key == MinecraftKey => Minecraft(url.Query),
             "settings" or "account" => new AppRoute(AppSection.Account),
             "tools" => new AppRoute(AppSection.Tools, key),
             "bans" => new AppRoute(AppSection.Bans, key),
             _ => null,
         };
     }
+
+    /// <summary>Schlüssel für Konto → Minecraft; mit Code als <c>minecraft/K7M2QX</c>.</summary>
+    public const string MinecraftKey = "minecraft";
+
+    /// <summary>Vorbefüllter Link-Code aus einer Konto-Route (<c>minecraft/K7M2QX</c>), sonst <c>null</c>.</summary>
+    public string? MinecraftCode =>
+        Section == AppSection.Account && Key?.StartsWith(MinecraftKey + "/", StringComparison.Ordinal) == true
+            ? MinecraftService.CodeFromQuery("code=" + Key[(MinecraftKey.Length + 1)..])
+            : null;
+
+    private static AppRoute Minecraft(string query) =>
+        new(AppSection.Account, MinecraftService.CodeFromQuery(query) is { } code ? MinecraftKey + "/" + code : MinecraftKey);
 
     /// <summary>Eigenes Schema der App.</summary>
     public const string Scheme = "rog";
@@ -120,6 +135,7 @@ public sealed record AppRoute(AppSection Section, string? Key = null)
             "wiki" => new AppRoute(AppSection.Wiki, key),
             "messages" => new AppRoute(AppSection.Messages, key),
             "notifications" => new AppRoute(AppSection.Notifications),
+            "account" when key == MinecraftKey => Minecraft(uri.Query),
             "account" => new AppRoute(AppSection.Account),
             "settings" => new AppRoute(AppSection.Settings),
             "votes" => new AppRoute(AppSection.Votes),

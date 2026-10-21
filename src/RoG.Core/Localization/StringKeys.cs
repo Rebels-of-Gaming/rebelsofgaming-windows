@@ -1000,6 +1000,48 @@ public static class StringKeys
 
     public const string SettingsPageClanCopyright = "SettingsPage_ClanCopyright";
 
+    public const string MinecraftPrefilled = "Minecraft_Prefilled";
+
+    public const string MinecraftCodeFormat = "Minecraft_CodeFormat";
+
+    public const string MinecraftDeclined = "Minecraft_Declined";
+
+    public const string MinecraftLinked = "Minecraft_Linked";
+
+    public const string MinecraftUnlinkTitle = "Minecraft_UnlinkTitle";
+
+    public const string MinecraftUnlinkText = "Minecraft_UnlinkText";
+
+    public const string MinecraftUnlinkConfirm = "Minecraft_UnlinkConfirm";
+
+    public const string MinecraftUnlinked = "Minecraft_Unlinked";
+
+    public const string MinecraftMinutesAgo = "Minecraft_MinutesAgo";
+
+    public const string MinecraftJustNow = "Minecraft_JustNow";
+
+    public const string MinecraftPreview = "Minecraft_Preview";
+
+    public const string MinecraftPreviewServer = "Minecraft_PreviewServer";
+
+    public const string MinecraftPreviewTitle = "Minecraft_PreviewTitle";
+
+    public const string MinecraftConfirm = "Minecraft_Confirm";
+
+    public const string MinecraftDecline = "Minecraft_Decline";
+
+    public const string MinecraftLinkedAt = "Minecraft_LinkedAt";
+
+    public const string MinecraftLastSeen = "Minecraft_LastSeen";
+
+    public const string MinecraftAdminEditionAll = "MinecraftAdmin_EditionAll";
+
+    public const string MinecraftAdminUnlinkText = "MinecraftAdmin_UnlinkText";
+
+    public const string MinecraftAdminUser = "MinecraftAdmin_User";
+
+    public const string MinecraftAdminVia = "MinecraftAdmin_Via";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

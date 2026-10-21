@@ -114,6 +114,13 @@
                         <HyperlinkButton x:Uid="SettingsPage_Imprint" Command="{x:Bind ViewModel.OpenImprintCommand}" />
                         <HyperlinkButton x:Uid="SettingsPage_ChildSafety" Command="{x:Bind ViewModel.OpenChildSafetyCommand}" />
                     </StackPanel>
+                    <!-- Copyright wie im Website-Footer: Clan, dahinter „Copyright by wahke“ mit Link -->
+                    <TextBlock Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap">
+                        <Run Text="{x:Bind ViewModel.CopyrightText}" />
+                        <Run Text="·" />
+                        <Run x:Uid="SettingsPage_Credit" />
+                        <Hyperlink x:Uid="SettingsPage_CreditLink"><Run x:Uid="SettingsPage_CreditName" /></Hyperlink>
+                    </TextBlock>
                 </StackPanel>
             </Border>
 

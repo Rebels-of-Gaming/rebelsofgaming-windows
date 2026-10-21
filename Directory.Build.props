@@ -8,13 +8,13 @@
     `dotnet build RoG.sln` und `dotnet test RoG.sln` auf dev-linux nur Core und Tests bauen.
   -->
   <PropertyGroup>
-    <RoGVersion>2.5.12</RoGVersion>
+    <RoGVersion>2.5.13</RoGVersion>
     <Version>$(RoGVersion)</Version>
     <AssemblyVersion>$(RoGVersion).0</AssemblyVersion>
     <FileVersion>$(RoGVersion).0</FileVersion>
     <Company>Rebels of Gaming</Company>
     <Product>Rebels of Gaming für Windows</Product>
-    <Copyright>© Rebels of Gaming</Copyright>
+    <Copyright>© 2020–2026 Rebels of Gaming · Copyright by wahke (https://wahke.lu)</Copyright>
 
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>

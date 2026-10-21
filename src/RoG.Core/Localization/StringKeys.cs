@@ -998,6 +998,8 @@ public static class StringKeys
 
     public const string Errorappealdecided = "Error_appeal_decided";
 
+    public const string SettingsPageClanCopyright = "SettingsPage_ClanCopyright";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

@@ -5391,4 +5391,16 @@
   <data name="AdminChoice_teeworlds" xml:space="preserve">
     <value>Teeworlds / DDNet</value>
   </data>
+  <data name="SettingsPage_ClanCopyright" xml:space="preserve">
+    <value>© {0}–{1} Rebels of Gaming</value>
+  </data>
+  <data name="SettingsPage_Credit.Text" xml:space="preserve">
+    <value>Copyright by</value>
+  </data>
+  <data name="SettingsPage_CreditName.Text" xml:space="preserve">
+    <value>wahke</value>
+  </data>
+  <data name="SettingsPage_CreditLink.NavigateUri" xml:space="preserve">
+    <value>https://wahke.lu</value>
+  </data>
 </root>

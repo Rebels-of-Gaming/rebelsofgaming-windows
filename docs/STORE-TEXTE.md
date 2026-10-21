@@ -5,7 +5,7 @@ Mobile-App (`/home/wahke/projects/rog-app/store.config.json`), Du-Form, nur Funk
 Grenzen des Partner Centers: Beschreibung ≤ 10 000 Zeichen, „Neuerungen“ ≤ 1 500, bis zu 20 Funktionen à ≤ 200 Zeichen,
 bis zu 7 Suchbegriffe (zusammen ≤ 21 Wörter).
 
-Weitere Angaben (gleich für alle Sprachen): Entwickelt von **wahke** · Copyright „© 2026 Rebels of Gaming“ ·
+Weitere Angaben (gleich für alle Sprachen): Entwickelt von **wahke** · Copyright „© 2020–2026 Rebels of Gaming · Copyright by wahke (https://wahke.lu)“ ·
 Kategorie **Soziale Netzwerke** · Datenschutz-URL je Sprache `https://rebelsofgaming.com/{de|en|fr}/privacy` ·
 Website `https://rebelsofgaming.com` · Support `https://rebelsofgaming.com/{de|en|fr}/contact`.
 

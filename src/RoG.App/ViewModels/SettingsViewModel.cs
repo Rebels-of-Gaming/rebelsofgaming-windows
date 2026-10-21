@@ -39,6 +39,7 @@ public sealed partial class SettingsViewModel : ObservableObject
         Toasts = services.Settings.ToastNotifications;
         CloseToTray = services.Settings.CloseToTray;
         AppVersionText = Format(StringKeys.SettingsAppVersion, AppServices.AppVersion);
+        CopyrightText = Format(StringKeys.SettingsPageClanCopyright, ClanFounded, DateTime.Now.Year);
         PlatformText = Format(StringKeys.SettingsPlatformVersion, "…");
     }
 
@@ -83,6 +84,12 @@ public sealed partial class SettingsViewModel : ObservableObject
     private bool _autostartLoaded;
 
     public string AppVersionText { get; }
+
+    /// <summary>Gründungsjahr des Clans – Copyright-Zeile wie im Website-Footer (<c>rog.clan.founded</c>).</summary>
+    private const int ClanFounded = 2020;
+
+    /// <summary>„© 2020–Jahr Rebels of Gaming“, dahinter „Copyright by wahke“ als Link (wie die Website).</summary>
+    public string CopyrightText { get; }
 
     [ObservableProperty]
     public partial string PlatformText { get; set; }

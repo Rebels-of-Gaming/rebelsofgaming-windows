@@ -237,6 +237,10 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   (Adresse kopieren), übrige neue Typen als `Unknown` (Verbinden nur über `connect_url`); 2 Tests. Neue Live-Fehlercodes
   (`error`) zeigt die App nicht an – nichts zu tun. **Annahme:** keine eigenen Verbinden-Links für FiveM/SA:MP o. Ä.,
   solange die Website keinen `connect_url` liefert.
+- **2.5.13 – Copyright (Owner-Wunsch 21.10.2026):** wie im Website-Footer – „© 2020–<Jahr> Rebels of Gaming ·
+  Copyright by wahke“, „wahke“ klein und als Link auf `https://wahke.lu` (Link-Ziel als Ressource, keine Domain im
+  Code), in Einstellungen → Über; Assembly-`Copyright` entsprechend; Store-Copyright in `docs/STORE-TEXTE.md` angepasst
+  (im Partner Center von Hand eintragen).
 - **2.5.8 – Website v0.32.2 (live 20.10.2026):** Client aus der Live-Spezifikation (Tool-Endpunkte jetzt vollständig).
   Server-Karte: aufklappbare „Ports (n)“ aus `provisioning.allocations` (Hauptport zuerst mit „Hauptport“, Alias statt
   IP, wenn gesetzt; `null` = Panel nicht erreichbar → nichts anzeigen), `ServerAllocation` in Core mit Tests. News-Liste:

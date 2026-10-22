@@ -1122,6 +1122,36 @@ public static class StringKeys
 
     public const string CoinsStreakOne = "Coins_StreakOne";
 
+    public const string CoinsAdminKindAll = "CoinsAdmin_KindAll";
+
+    public const string CoinsAdminCredit = "CoinsAdmin_Credit";
+
+    public const string CoinsAdminDebit = "CoinsAdmin_Debit";
+
+    public const string CoinsAdminUnknownName = "CoinsAdmin_UnknownName";
+
+    public const string CoinsAdminLastActivity = "CoinsAdmin_LastActivity";
+
+    public const string CoinsAdminMilestonesFormat = "CoinsAdmin_MilestonesFormat";
+
+    public const string CoinsAdminSaved = "CoinsAdmin_Saved";
+
+    public const string CoinsAdminAmountRange = "CoinsAdmin_AmountRange";
+
+    public const string CoinsAdminReasonRequired = "CoinsAdmin_ReasonRequired";
+
+    public const string CoinsAdminConfirmTitle = "CoinsAdmin_ConfirmTitle";
+
+    public const string CoinsAdminConfirmText = "CoinsAdmin_ConfirmText";
+
+    public const string CoinsAdminAdjusted = "CoinsAdmin_Adjusted";
+
+    public const string BanAppealsPluginVersionsInfo = "BanAppeals_PluginVersionsInfo";
+
+    public const string BanAppealsPluginVersionsFormat = "BanAppeals_PluginVersionsFormat";
+
+    public const string BanAppealsPluginVersionsSaved = "BanAppeals_PluginVersionsSaved";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

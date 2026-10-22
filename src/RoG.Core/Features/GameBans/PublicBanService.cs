@@ -67,7 +67,20 @@ public sealed record BanAppeal(
 }
 
 /// <summary>Forum-Bereich für Einsprüche (<c>gamebans.appeals_board</c>) und wählbare Bereiche.</summary>
-public sealed record AppealSettings(string? BoardId, string? BoardName, bool BoardPublic, IReadOnlyList<(string Id, string Name)> BoardOptions);
+public sealed record AppealSettings(string? BoardId, string? BoardName, bool BoardPublic, IReadOnlyList<(string Id, string Name)> BoardOptions)
+{
+    /// <summary>Globale Mindestversion (<c>GAMEBANS_MIN_PLUGIN_VERSION</c>), gilt für Plugins ohne eigenen Eintrag.</summary>
+    public string? MinPluginVersion { get; init; }
+
+    /// <summary>Einträge aus der Server-Konfiguration (nur lesen).</summary>
+    public IReadOnlyList<PluginMinVersion> EnvPluginVersions { get; init; } = [];
+
+    /// <summary>Admin-Einträge – gehen vor den Einträgen aus der Konfiguration.</summary>
+    public IReadOnlyList<PluginMinVersion> PluginVersions { get; init; } = [];
+}
+
+/// <summary>Mindestversion je Plugin (Website v0.40.0) – nur Hinweis „veraltet“, nichts wird gesperrt.</summary>
+public sealed record PluginMinVersion(string Plugin, string Version);
 
 /// <summary>
 /// Öffentliche Ban-Liste und Einsprüche (Website v0.34.0, Guide 43): Liste/Einzelabruf ohne Login, Einspruch mit Scope
@@ -201,6 +214,52 @@ public sealed partial class PublicBanService(HttpClient http)
     public async Task<AppealSettings> SetBoardAsync(string? boardId, CancellationToken cancellationToken = default) =>
         ParseSettings((await SendAsync(HttpMethod.Patch, "game-bans/settings", new JsonObject { ["appeals_board"] = string.IsNullOrEmpty(boardId) ? null : boardId }, cancellationToken).ConfigureAwait(false))?["data"]);
 
+    /// <summary>Ersetzt <b>alle</b> Admin-Einträge der Mindest-Plugin-Versionen (leere Liste entfernt sie).</summary>
+    public async Task<AppealSettings> SetPluginVersionsAsync(IReadOnlyList<PluginMinVersion> versions, CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(versions);
+        if (versions.Count > MaxPluginVersions || versions.Any(v => !PluginNamePattern().IsMatch(v.Plugin) || !PluginVersionPattern().IsMatch(v.Version)))
+        {
+            throw new ArgumentException("Invalid plugin versions.", nameof(versions));
+        }
+
+        var list = new JsonArray(versions.Select(v => (JsonNode)new JsonObject { ["plugin"] = v.Plugin, ["version"] = v.Version }).ToArray());
+        return ParseSettings((await SendAsync(HttpMethod.Patch, "game-bans/settings", new JsonObject { ["min_plugin_versions"] = list }, cancellationToken).ConfigureAwait(false))?["data"]);
+    }
+
+    public const int MaxPluginVersions = 50;
+
+    /// <summary>
+    /// Eine Zeile je Plugin: „rog-proxy 0.6.0“ oder „rog-proxy=0.6.0“ (Name klein, Version 1, 1.2 oder 1.2.3);
+    /// <c>null</c> bei einer ungültigen Zeile oder doppeltem Plugin.
+    /// </summary>
+    public static IReadOnlyList<PluginMinVersion>? ParsePluginVersions(string? text)
+    {
+        var result = new List<PluginMinVersion>();
+        foreach (var line in (text ?? string.Empty).Split(['\n', '\r', ','], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+        {
+            var parts = line.Split([' ', '=', '\t', ':'], StringSplitOptions.RemoveEmptyEntries);
+            if (parts.Length != 2)
+            {
+                return null;
+            }
+
+            var name = parts[0].ToLowerInvariant();
+            var version = parts[1].TrimStart('v', 'V');
+            if (!PluginNamePattern().IsMatch(name) || !PluginVersionPattern().IsMatch(version) || result.Any(v => v.Plugin == name))
+            {
+                return null;
+            }
+
+            result.Add(new PluginMinVersion(name, version));
+        }
+
+        return result.Count > MaxPluginVersions ? null : result;
+    }
+
+    public static string FormatPluginVersions(IEnumerable<PluginMinVersion> versions) =>
+        string.Join("\n", versions.Select(v => v.Plugin + " " + v.Version));
+
     /// <summary>Bereich „Ban-Einsprüche“ anlegen und wählen.</summary>
     public async Task<AppealSettings> CreateBoardAsync(CancellationToken cancellationToken = default) =>
         ParseSettings((await SendAsync(HttpMethod.Post, "game-bans/settings/appeals-board", new JsonObject(), cancellationToken).ConfigureAwait(false))?["data"]);
@@ -277,8 +336,17 @@ public sealed partial class PublicBanService(HttpClient http)
         var options = d?["board_options"] is JsonArray os
             ? os.Select(o => (Id: Str(o, "id"), Name: Str(o, "name"))).Where(o => o.Id is not null).Select(o => (o.Id!, o.Name ?? o.Id!)).ToList()
             : [];
-        return new AppealSettings(Str(board, "id"), Str(board, "name"), Bool(board, "public"), options);
+        return new AppealSettings(Str(board, "id"), Str(board, "name"), Bool(board, "public"), options)
+        {
+            MinPluginVersion = Str(d, "min_plugin_version"),
+            EnvPluginVersions = ParseVersionList(d?["min_plugin_versions_env"]),
+            PluginVersions = ParseVersionList(d?["min_plugin_versions"]),
+        };
     }
+
+    private static List<PluginMinVersion> ParseVersionList(JsonNode? n) => n is JsonArray list
+        ? list.Select(v => Str(v, "plugin") is { } p && Str(v, "version") is { } ver ? new PluginMinVersion(p, ver) : null).OfType<PluginMinVersion>().ToList()
+        : [];
 
     private static string Id(string id) =>
         UlidPattern().IsMatch(id) ? id : throw new ArgumentException("Invalid id.", nameof(id));
@@ -323,4 +391,10 @@ public sealed partial class PublicBanService(HttpClient http)
 
     [GeneratedRegex("^[0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{26}$")]
     private static partial Regex UlidPattern();
+
+    [GeneratedRegex("^[a-z0-9][a-z0-9._-]{0,63}$")]
+    private static partial Regex PluginNamePattern();
+
+    [GeneratedRegex(@"^\d{1,6}(\.\d{1,6}){0,2}$")]
+    private static partial Regex PluginVersionPattern();
 }

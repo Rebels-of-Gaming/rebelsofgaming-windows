@@ -5916,4 +5916,154 @@
   <data name="Coins_StreakOne" xml:space="preserve">
     <value>Daily bonus streak: 1 day (best: {1})</value>
   </data>
+  <data name="CoinsAdmin_KindAll" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="CoinsAdmin_Credit" xml:space="preserve">
+    <value>Credit</value>
+  </data>
+  <data name="CoinsAdmin_Debit" xml:space="preserve">
+    <value>Debit</value>
+  </data>
+  <data name="CoinsAdmin_UnknownName" xml:space="preserve">
+    <value>Unknown player</value>
+  </data>
+  <data name="CoinsAdmin_LastActivity" xml:space="preserve">
+    <value>last active {0}</value>
+  </data>
+  <data name="CoinsAdmin_MilestonesFormat" xml:space="preserve">
+    <value>Please enter streak bonuses as “day: bonus”, separated by commas – e.g. “7: 100, 30: 500” (at most 20, days 1–3650, each day once).</value>
+  </data>
+  <data name="CoinsAdmin_Saved" xml:space="preserve">
+    <value>Settings saved.</value>
+  </data>
+  <data name="CoinsAdmin_AmountRange" xml:space="preserve">
+    <value>Enter an amount between 1 and 1,000,000.</value>
+  </data>
+  <data name="CoinsAdmin_ReasonRequired" xml:space="preserve">
+    <value>A reason is required (3–200 characters) – it is stored with the transaction and in the audit log.</value>
+  </data>
+  <data name="CoinsAdmin_ConfirmTitle" xml:space="preserve">
+    <value>Book this transaction?</value>
+  </data>
+  <data name="CoinsAdmin_ConfirmText" xml:space="preserve">
+    <value>{0} of {1} ⛃ for {2}. The new balance is sent to the network right away.</value>
+  </data>
+  <data name="CoinsAdmin_Adjusted" xml:space="preserve">
+    <value>Transaction booked – new balance {0} ⛃.</value>
+  </data>
+  <data name="BanAppeals_PluginVersionsInfo" xml:space="preserve">
+    <value>Per plugin: entry here → server configuration ({1}) → default {0}. Only an “outdated” hint, nothing is blocked.</value>
+  </data>
+  <data name="BanAppeals_PluginVersionsFormat" xml:space="preserve">
+    <value>One line per plugin, e.g. “rog-proxy 0.6.0” (lowercase name with a–z, 0–9, . _ -; version 1, 1.2 or 1.2.3; at most 50, each plugin once).</value>
+  </data>
+  <data name="BanAppeals_PluginVersionsSaved" xml:space="preserve">
+    <value>Minimum plugin versions saved.</value>
+  </data>
+  <data name="CoinsAdmin_Kind_account" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="CoinsAdmin_Kind_guest" xml:space="preserve">
+    <value>Guest</value>
+  </data>
+  <data name="AdminPage_TabCoins.Text" xml:space="preserve">
+    <value>Rebel Coins</value>
+  </data>
+  <data name="CoinsAdmin_Search.PlaceholderText" xml:space="preserve">
+    <value>Name, account or UUID</value>
+  </data>
+  <data name="CoinsAdmin_Search.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Search wallets</value>
+  </data>
+  <data name="CoinsAdmin_Kind.Header" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="CoinsAdmin_Reload.Content" xml:space="preserve">
+    <value>Reload</value>
+  </data>
+  <data name="CoinsAdmin_Empty.Text" xml:space="preserve">
+    <value>No wallets found. Wallets are created with the first transaction in the Minecraft network.</value>
+  </data>
+  <data name="CoinsAdmin_List.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Wallets</value>
+  </data>
+  <data name="CoinsAdmin_Hint.Text" xml:space="preserve">
+    <value>Every player has a wallet – guests too (pseudonymous via the UUID, deleted after 12 months without activity). Linked accounts of one RoG account share a wallet. Transactions are kept for 12 months. Pick a wallet on the left to see its transactions and credit or debit coins.</value>
+  </data>
+  <data name="CoinsAdmin_OpenProfile.Content" xml:space="preserve">
+    <value>Open profile</value>
+  </data>
+  <data name="CoinsAdmin_Adjust.Text" xml:space="preserve">
+    <value>CREDIT OR DEBIT</value>
+  </data>
+  <data name="CoinsAdmin_Direction.Header" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="CoinsAdmin_Amount.Header" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="CoinsAdmin_Reason.Header" xml:space="preserve">
+    <value>Reason (required, stored in the audit log)</value>
+  </data>
+  <data name="CoinsAdmin_Reason.PlaceholderText" xml:space="preserve">
+    <value>e.g. Winner of the October build contest</value>
+  </data>
+  <data name="CoinsAdmin_Submit.Content" xml:space="preserve">
+    <value>Book</value>
+  </data>
+  <data name="CoinsAdmin_Transactions.Text" xml:space="preserve">
+    <value>TRANSACTIONS</value>
+  </data>
+  <data name="CoinsAdmin_TransactionsEmpty.Text" xml:space="preserve">
+    <value>No transactions yet</value>
+  </data>
+  <data name="CoinsAdmin_Settings.Header" xml:space="preserve">
+    <value>Daily bonus and limits</value>
+  </data>
+  <data name="CoinsAdmin_SettingsHint.Text" xml:space="preserve">
+    <value>Daily bonus on the first join of the day (day boundary midnight Luxembourg time): base per day plus a bonus on specific streak days.</value>
+  </data>
+  <data name="CoinsAdmin_DailyBase.Header" xml:space="preserve">
+    <value>Base per day</value>
+  </data>
+  <data name="CoinsAdmin_Milestones.Header" xml:space="preserve">
+    <value>Streak day bonuses (day: bonus, …)</value>
+  </data>
+  <data name="CoinsAdmin_Milestones.PlaceholderText" xml:space="preserve">
+    <value>7: 100, 30: 500, 100: 2000</value>
+  </data>
+  <data name="CoinsAdmin_LimitsTitle.Text" xml:space="preserve">
+    <value>Abuse limits</value>
+  </data>
+  <data name="CoinsAdmin_LimitsHint.Text" xml:space="preserve">
+    <value>Protection against leaked plugin keys and admin accounts. From 80 % of a key limit the owners get a notice once a day. Calendar day in Luxembourg time.</value>
+  </data>
+  <data name="CoinsAdmin_SystemDailyLimit.Header" xml:space="preserve">
+    <value>System coins per player and day</value>
+  </data>
+  <data name="CoinsAdmin_KeySystemDailyLimit.Header" xml:space="preserve">
+    <value>System coins per plugin key and day</value>
+  </data>
+  <data name="CoinsAdmin_KeyEarningsHourlyLimit.Header" xml:space="preserve">
+    <value>Job earnings per plugin key and hour</value>
+  </data>
+  <data name="CoinsAdmin_PayDailyLimit.Header" xml:space="preserve">
+    <value>Payouts per wallet and day</value>
+  </data>
+  <data name="CoinsAdmin_AdminDailyLimit.Header" xml:space="preserve">
+    <value>Credits per admin and day (not for the owner)</value>
+  </data>
+  <data name="CoinsAdmin_SaveSettings.Content" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="BanAppeals_PluginVersionsTitle.Text" xml:space="preserve">
+    <value>Minimum plugin versions</value>
+  </data>
+  <data name="BanAppeals_PluginVersions.Header" xml:space="preserve">
+    <value>One line per plugin (e.g. rog-proxy 0.6.0)</value>
+  </data>
+  <data name="BanAppeals_SavePluginVersions.Content" xml:space="preserve">
+    <value>Save versions</value>
+  </data>
 </root>

@@ -173,6 +173,35 @@ public sealed partial class BanAppealsViewModel : ObservableObject
     [ObservableProperty]
     public partial bool HasSettings { get; set; }
 
+    /// <summary>Admin-Einträge der Mindest-Plugin-Versionen, eine Zeile je Plugin („rog-proxy 0.6.0“).</summary>
+    [ObservableProperty]
+    public partial string PluginVersions { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial string PluginVersionsInfo { get; set; } = string.Empty;
+
+    [RelayCommand]
+    private async Task SavePluginVersionsAsync()
+    {
+        if (!IsManager)
+        {
+            return;
+        }
+
+        if (PublicBanService.ParsePluginVersions(PluginVersions) is not { } versions)
+        {
+            _show(L(StringKeys.BanAppealsPluginVersionsFormat), InfoBarSeverity.Warning);
+            return;
+        }
+
+        AppealSettings? settings = null;
+        if (await RunAsync(async () => settings = await _appeals.SetPluginVersionsAsync(versions)))
+        {
+            ApplySettings(settings!);
+            _show(L(StringKeys.BanAppealsPluginVersionsSaved), InfoBarSeverity.Success);
+        }
+    }
+
     private async Task LoadSettingsAsync()
     {
         AppealSettings? settings = null;
@@ -195,6 +224,9 @@ public sealed partial class BanAppealsViewModel : ObservableObject
         BoardText = settings.BoardId is null
             ? L(StringKeys.BanAppealsBoardMissing)
             : string.Format(CultureInfo.CurrentCulture, L(settings.BoardPublic ? StringKeys.BanAppealsBoardActive : StringKeys.BanAppealsBoardNotPublic), settings.BoardName ?? settings.BoardId);
+        PluginVersions = PublicBanService.FormatPluginVersions(settings.PluginVersions);
+        var env = settings.EnvPluginVersions.Count > 0 ? string.Join(", ", settings.EnvPluginVersions.Select(v => v.Plugin + " " + v.Version)) : "—";
+        PluginVersionsInfo = string.Format(CultureInfo.CurrentCulture, L(StringKeys.BanAppealsPluginVersionsInfo), settings.MinPluginVersion ?? "1.0.0", env);
         HasSettings = true;
     }
 

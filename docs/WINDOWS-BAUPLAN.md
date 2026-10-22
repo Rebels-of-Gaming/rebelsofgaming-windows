@@ -257,6 +257,15 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   Mitgliederprofil (nur mit Opt-in, sonst ausgeblendet). Plugin-Schlüssel `may_economy` („Rebel-Coins buchen“), braucht
   `gamebans.manage`. Tests: 13 neue. **Annahme:** Wallet-Bereich erscheint, sobald die Wallet lesbar ist – auch ohne
   verknüpften Account (die Wallet bleibt beim Konto).
+- **2.5.19 – Rebel-Coins-Verwaltung und Mindest-Plugin-Versionen (Website v0.39.0/v0.40.0):** `MinecraftService`
+  `EconomyAsync`/`SaveEconomyAsync` (`GET`/`PUT /v1/minecraft/economy`, sendet alle Felder), `WalletsAsync` (Suche,
+  `filter[kind]`, Cursor), `WalletTransactionsAsync`, `AdjustAsync` (`credit`/`debit`, 1 … 1 000 000, Grund 3–200 –
+  ungültig wird nicht gesendet). Serientage als Text „7: 100, 30: 500“ (`ParseMilestones`, höchstens 20, Tage 1–3650,
+  eindeutig). Neuer Admin-Reiter „Rebel-Coins“ nur mit Scope `minecraft:economy` + Recht `minecraft.economy`: Liste
+  links, rechts gewählte Wallet mit Buchungen und Gutschrift/Abzug (Rückfrage), darunter „Tagesbonus und Grenzen“.
+  Rangschutz, eigene Wallet (nur Owner) und Tageslimit je Admin prüft der Server. `AppealSettings` um
+  `min_plugin_version(s)` erweitert, `SetPluginVersionsAsync` ersetzt alle Admin-Einträge; im Reiter Einsprüche eine
+  Zeile je Plugin („rog-proxy 0.6.0“). Tests: 28 neue.
 - **2.5.16 – Freunde (Website v0.38.0, live 22.10.2026, Guide 45, Annahme 492):** `FriendsService` (Core, 15 Tests):
   `GET /v1/me/friends` (Status → `Presence`, `null` = nicht freigegeben, `meta.total`/`meta.limit`),
   `GET /v1/me/friends/requests` (`filter[direction]`), `POST …/requests {user}` (Gegenanfrage → `status: accepted`),

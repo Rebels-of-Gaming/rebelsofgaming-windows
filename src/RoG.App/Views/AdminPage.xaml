@@ -23,6 +23,7 @@
             <SelectorBarItem x:Name="BansTab" x:Uid="AdminPage_TabBans" />
             <SelectorBarItem x:Name="AppealsTab" x:Uid="AdminPage_TabAppeals" />
             <SelectorBarItem x:Name="MinecraftTab" x:Uid="AdminPage_TabMinecraft" />
+            <SelectorBarItem x:Name="CoinsTab" x:Uid="AdminPage_TabCoins" />
             <SelectorBarItem x:Name="LogTab" x:Uid="AdminPage_TabLog" />
             <SelectorBarItem x:Name="WordsTab" x:Uid="AdminPage_TabWords" />
             <SelectorBarItem x:Name="GalleryTab" x:Uid="AdminPage_TabGallery" />
@@ -320,6 +321,15 @@
                         <Button x:Uid="BanAppeals_SaveBoard" VerticalAlignment="Bottom" Command="{x:Bind Appeals.SaveBoardCommand}" />
                         <Button x:Uid="BanAppeals_CreateBoard" VerticalAlignment="Bottom" Command="{x:Bind Appeals.CreateBoardCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
                     </StackPanel>
+                    <TextBlock x:Uid="BanAppeals_PluginVersionsTitle" Margin="0,8,0,0" FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" />
+                    <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Appeals.PluginVersionsInfo, Mode=OneWay}" TextWrapping="Wrap" />
+                    <TextBox
+                        x:Uid="BanAppeals_PluginVersions"
+                        MinHeight="80"
+                        AcceptsReturn="True"
+                        FontFamily="Consolas"
+                        Text="{x:Bind Appeals.PluginVersions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Button x:Uid="BanAppeals_SavePluginVersions" Command="{x:Bind Appeals.SavePluginVersionsCommand}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Spacing="8">
                     <ComboBox
@@ -470,6 +480,123 @@
                 <Button x:Uid="Common_LoadMore" Command="{x:Bind MinecraftAccounts.MoreCommand}" Visibility="{x:Bind MinecraftAccounts.HasMore, Mode=OneWay}" />
             </StackPanel>
         </ScrollViewer>
+
+        <!-- Rebel-Coins: Wallets links, gewählte Wallet und Einstellungen rechts -->
+        <Grid x:Name="CoinsPanel" Grid.Row="3" ColumnSpacing="16" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="340" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid RowSpacing="8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <AutoSuggestBox x:Uid="CoinsAdmin_Search" QueryIcon="Find" QuerySubmitted="OnCoinsSearch" Text="{x:Bind Coins.Search, Mode=TwoWay}" />
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="8">
+                    <ComboBox
+                        x:Uid="CoinsAdmin_Kind"
+                        MinWidth="160"
+                        DisplayMemberPath="Label"
+                        ItemsSource="{x:Bind Coins.KindOptions}"
+                        SelectedItem="{x:Bind Coins.SelectedKind, Mode=TwoWay}" />
+                    <Button x:Uid="CoinsAdmin_Reload" VerticalAlignment="Bottom" Command="{x:Bind Coins.ReloadCommand}" />
+                    <ProgressRing Width="20" Height="20" VerticalAlignment="Bottom" IsActive="{x:Bind Coins.IsBusy, Mode=OneWay}" />
+                </StackPanel>
+                <TextBlock x:Uid="CoinsAdmin_Empty" Grid.Row="2" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" Visibility="{x:Bind Coins.IsEmpty, Mode=OneWay}" />
+                <ListView x:Uid="CoinsAdmin_List" Grid.Row="3" ItemsSource="{x:Bind Coins.Items}" SelectedItem="{x:Bind Coins.Selected, Mode=TwoWay}" SelectionMode="Single">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="vm:CoinWalletItemViewModel">
+                            <Grid Padding="0,6" ColumnSpacing="8" AutomationProperties.Name="{x:Bind Title}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Title}" />
+                                    <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" TextWrapping="Wrap" />
+                                </StackPanel>
+                                <TextBlock Grid.Column="1" VerticalAlignment="Center" Foreground="{StaticResource RoGGoldBrush}" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind BalanceText, Mode=OneWay}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.Footer>
+                        <Button x:Uid="Common_LoadMore" Margin="0,8" Command="{x:Bind Coins.MoreCommand}" Visibility="{x:Bind Coins.HasMore, Mode=OneWay}" />
+                    </ListView.Footer>
+                </ListView>
+            </Grid>
+            <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+                <StackPanel MaxWidth="{StaticResource RoGReadingWidth}" HorizontalAlignment="Left" Spacing="12">
+                    <TextBlock x:Uid="CoinsAdmin_Hint" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+
+                    <StackPanel Spacing="12" Visibility="{x:Bind Coins.HasSelection, Mode=OneWay}">
+                        <TextBlock IsTextSelectionEnabled="True" Style="{StaticResource RoGTitleTextStyle}" Text="{x:Bind Coins.Selected.Title, Mode=OneWay}" />
+                        <TextBlock FontSize="20" FontWeight="SemiBold" Foreground="{StaticResource RoGGoldBrush}" Text="{x:Bind Coins.Selected.BalanceText, Mode=OneWay}" />
+                        <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Coins.Selected.Meta, Mode=OneWay}" TextWrapping="Wrap" />
+                        <TextBlock FontFamily="Consolas" FontSize="12" IsTextSelectionEnabled="True" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Coins.Selected.Uuid, Mode=OneWay}" />
+                        <Button x:Uid="CoinsAdmin_OpenProfile" Command="{x:Bind Coins.Selected.OpenProfileCommand, Mode=OneWay}" Style="{StaticResource RoGSecondaryButtonStyle}" Visibility="{x:Bind Coins.Selected.HasProfile, Mode=OneWay}" />
+
+                        <TextBlock x:Uid="CoinsAdmin_Adjust" Style="{StaticResource RoGSectionTextStyle}" />
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <ComboBox
+                                x:Uid="CoinsAdmin_Direction"
+                                MinWidth="140"
+                                DisplayMemberPath="Label"
+                                ItemsSource="{x:Bind Coins.DirectionOptions}"
+                                SelectedItem="{x:Bind Coins.SelectedDirection, Mode=TwoWay}" />
+                            <NumberBox
+                                x:Uid="CoinsAdmin_Amount"
+                                Width="160"
+                                Maximum="1000000"
+                                Minimum="1"
+                                SpinButtonPlacementMode="Compact"
+                                Value="{x:Bind Coins.Amount, Mode=TwoWay}" />
+                        </StackPanel>
+                        <TextBox x:Uid="CoinsAdmin_Reason" MaxLength="200" Text="{x:Bind Coins.Reason, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <Button x:Uid="CoinsAdmin_Submit" Command="{x:Bind Coins.AdjustCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+
+                        <TextBlock x:Uid="CoinsAdmin_Transactions" Style="{StaticResource RoGSectionTextStyle}" />
+                        <TextBlock x:Uid="CoinsAdmin_TransactionsEmpty" Style="{StaticResource RoGMutedTextStyle}" Visibility="{x:Bind Coins.NoTransactions, Mode=OneWay}" />
+                        <ItemsControl ItemsSource="{x:Bind Coins.Transactions}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="vm:CoinTransactionViewModel">
+                                    <Grid Padding="0,4" ColumnSpacing="12" AutomationProperties.Name="{x:Bind Title}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel>
+                                            <TextBlock Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Title}" />
+                                            <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" TextWrapping="Wrap" />
+                                        </StackPanel>
+                                        <TextBlock Grid.Column="1" VerticalAlignment="Center" FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Amount}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <Button x:Uid="Common_LoadMore" Command="{x:Bind Coins.MoreTransactionsCommand}" Visibility="{x:Bind Coins.HasMoreTransactions, Mode=OneWay}" />
+                    </StackPanel>
+
+                    <Expander x:Uid="CoinsAdmin_Settings" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Visibility="{x:Bind Coins.HasSettings, Mode=OneWay}">
+                        <StackPanel Spacing="12">
+                            <TextBlock x:Uid="CoinsAdmin_SettingsHint" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                            <NumberBox x:Uid="CoinsAdmin_DailyBase" Maximum="1000000" Minimum="0" SpinButtonPlacementMode="Compact" Value="{x:Bind Coins.DailyBase, Mode=TwoWay}" />
+                            <TextBox x:Uid="CoinsAdmin_Milestones" Text="{x:Bind Coins.Milestones, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBlock x:Uid="CoinsAdmin_LimitsTitle" FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" />
+                            <TextBlock x:Uid="CoinsAdmin_LimitsHint" FontSize="12" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                            <NumberBox x:Uid="CoinsAdmin_SystemDailyLimit" Minimum="0" SpinButtonPlacementMode="Compact" Value="{x:Bind Coins.SystemDailyLimit, Mode=TwoWay}" />
+                            <NumberBox x:Uid="CoinsAdmin_KeySystemDailyLimit" Minimum="0" SpinButtonPlacementMode="Compact" Value="{x:Bind Coins.KeySystemDailyLimit, Mode=TwoWay}" />
+                            <NumberBox x:Uid="CoinsAdmin_KeyEarningsHourlyLimit" Minimum="0" SpinButtonPlacementMode="Compact" Value="{x:Bind Coins.KeyEarningsHourlyLimit, Mode=TwoWay}" />
+                            <NumberBox x:Uid="CoinsAdmin_PayDailyLimit" Minimum="0" SpinButtonPlacementMode="Compact" Value="{x:Bind Coins.PayDailyLimit, Mode=TwoWay}" />
+                            <NumberBox x:Uid="CoinsAdmin_AdminDailyLimit" Minimum="0" SpinButtonPlacementMode="Compact" Value="{x:Bind Coins.AdminDailyLimit, Mode=TwoWay}" />
+                            <Button x:Uid="CoinsAdmin_SaveSettings" Command="{x:Bind Coins.SaveSettingsCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                        </StackPanel>
+                    </Expander>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
 
         <!-- Mod-Log -->
         <ListView x:Name="LogPanel" x:Uid="AdminPage_LogList" Grid.Row="3" ItemsSource="{x:Bind Moderation.Log}" SelectionMode="None" Visibility="Collapsed">

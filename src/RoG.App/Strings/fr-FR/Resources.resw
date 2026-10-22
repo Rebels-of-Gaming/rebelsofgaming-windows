@@ -5554,9 +5554,99 @@
     <value>Profil</value>
   </data>
   <data name="GameBans_MayLink.Content" xml:space="preserve">
-    <value>Associer des comptes Minecraft</value>
+    <value>Proxy du réseau (associer des comptes, connexion, sessions)</value>
   </data>
   <data name="GameBans_MayLinkHint.Text" xml:space="preserve">
-    <value>Uniquement pour le proxy du réseau Minecraft : demander des codes pour /link (pour n'importe quel UUID de joueur) et recevoir les événements en direct du réseau. Le retirer, renouveler ou révoquer la clé invalide les codes ouverts.</value>
+    <value>Uniquement pour le proxy du réseau Minecraft : demander des codes pour /link (pour n'importe quel UUID de joueur), recevoir les événements en direct du réseau, vérifier la connexion et synchroniser les joueurs, et envoyer les événements de session (temps de jeu). Les serveurs backend et de mini-jeux n'en ont pas besoin. Le retirer, renouveler ou révoquer la clé invalide les codes ouverts.</value>
+  </data>
+  <data name="MinecraftGroups_ManagedEmpty" xml:space="preserve">
+    <value>Aucun groupe attribué – le proxy ne touche à aucun groupe LuckPerms.</value>
+  </data>
+  <data name="MinecraftGroups_PickRole" xml:space="preserve">
+    <value>Choisis d'abord un rôle.</value>
+  </data>
+  <data name="MinecraftGroups_Format" xml:space="preserve">
+    <value>Les noms de groupe comportent 1 à 36 lettres minuscules, chiffres, « _ » ou « - ».</value>
+  </data>
+  <data name="MinecraftGroups_Saved" xml:space="preserve">
+    <value>Groupe Minecraft enregistré.</value>
+  </data>
+  <data name="MinecraftGroups_Removed" xml:space="preserve">
+    <value>Groupe Minecraft retiré.</value>
+  </data>
+  <data name="MinecraftGroups_RemoveTitle" xml:space="preserve">
+    <value>Retirer l'attribution ?</value>
+  </data>
+  <data name="MinecraftGroups_RemoveText" xml:space="preserve">
+    <value>Retirer l'attribution du rôle « {0} » ? Le proxy retire le groupe immédiatement.</value>
+  </data>
+  <data name="MinecraftGroups_ReleaseTitle" xml:space="preserve">
+    <value>Ne plus gérer ?</value>
+  </data>
+  <data name="MinecraftGroups_ReleaseText" xml:space="preserve">
+    <value>Ne plus gérer le groupe « {0} » ? Les joueurs qui l'ont encore le garderont.</value>
+  </data>
+  <data name="MinecraftGroups_Released" xml:space="preserve">
+    <value>Le groupe n'est plus géré.</value>
+  </data>
+  <data name="MinecraftGroups_Meta" xml:space="preserve">
+    <value>Groupe {0} · priorité {1}</value>
+  </data>
+  <data name="MinecraftGroups_RetiredSince" xml:space="preserve">
+    <value>retiré le {0}</value>
+  </data>
+  <data name="MinecraftGroups_ReleasableFrom" xml:space="preserve">
+    <value>libérable à partir du {0}</value>
+  </data>
+  <data name="MinecraftGroups_Title.Text" xml:space="preserve">
+    <value>Groupes Minecraft</value>
+  </data>
+  <data name="MinecraftGroups_Hint.Text" xml:space="preserve">
+    <value>Les rangs et rôles supplémentaires peuvent être attribués à un groupe LuckPerms ; plusieurs rôles peuvent partager un groupe. Les joueurs associés reçoivent les groupes de tous leurs rôles actifs ; le proxy ne retire que les groupes gérés. Les groupes nommés par ex. « admin », « staff » ou « mod » ne peuvent être attribués que par le owner. Les changements s'appliquent immédiatement.</value>
+  </data>
+  <data name="MinecraftGroups_Managed.Text" xml:space="preserve">
+    <value>Groupes gérés :</value>
+  </data>
+  <data name="MinecraftGroups_Role.Header" xml:space="preserve">
+    <value>Rôle</value>
+  </data>
+  <data name="MinecraftGroups_Group.Header" xml:space="preserve">
+    <value>Groupe LuckPerms</value>
+  </data>
+  <data name="MinecraftGroups_Group.PlaceholderText" xml:space="preserve">
+    <value>p. ex. rog-member</value>
+  </data>
+  <data name="MinecraftGroups_Priority.Header" xml:space="preserve">
+    <value>Priorité</value>
+  </data>
+  <data name="MinecraftGroups_Save.Content" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="MinecraftGroups_Empty.Text" xml:space="preserve">
+    <value>Aucun rôle n'est encore attribué à un groupe.</value>
+  </data>
+  <data name="MinecraftGroups_Edit.Content" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="MinecraftGroups_Remove.Content" xml:space="preserve">
+    <value>Retirer l'attribution</value>
+  </data>
+  <data name="MinecraftGroups_Retired.Text" xml:space="preserve">
+    <value>Groupes retirés</value>
+  </data>
+  <data name="MinecraftGroups_RetiredHint.Text" xml:space="preserve">
+    <value>Ces groupes ne sont plus attribués à un rôle mais restent gérés : le proxy les retire à chaque joueur lors de sa prochaine connexion. Le owner ne devrait les libérer qu'une fois que tous les ont perdus (au plus tôt après 30 jours).</value>
+  </data>
+  <data name="MinecraftGroups_Release.Content" xml:space="preserve">
+    <value>Ne plus gérer</value>
+  </data>
+  <data name="MinecraftAdmin_Title.Text" xml:space="preserve">
+    <value>Comptes associés</value>
+  </data>
+  <data name="Error_role_not_mappable" xml:space="preserve">
+    <value>Les rôles invité et d'escouade ne peuvent pas être attribués à un groupe Minecraft.</value>
+  </data>
+  <data name="Error_group_release_too_early" xml:space="preserve">
+    <value>Ce groupe ne peut être libéré que plus tard (au plus tôt 30 jours après son retrait).</value>
   </data>
 </root>

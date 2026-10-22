@@ -241,6 +241,16 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   Copyright by wahke“, „wahke“ klein und als Link auf `https://wahke.lu` (Link-Ziel als Ressource, keine Domain im
   Code), in Einstellungen → Über; Assembly-`Copyright` entsprechend; Store-Copyright in `docs/STORE-TEXTE.md` angepasst
   (im Partner Center von Hand eintragen).
+- **2.5.15 – Minecraft-Gruppen (Website v0.37.0, live 22.10.2026, Guide 44 „Gruppen (LuckPerms)“):** `MinecraftService`
+  (partiell, `MinecraftGroups.cs`, 13 Tests): `GET /v1/minecraft/group-mappings` (Mappings höchste Priorität zuerst,
+  `meta.managed_groups`, `meta.retired_groups`), `PUT …/{role}` (`group` normalisiert und vorab auf `[a-z0-9_-]{1,36}`
+  geprüft, Priorität auf 0–1000 begrenzt), `DELETE …/{role}`, `DELETE /v1/minecraft/retired-groups/{group}`.
+  Verwaltung → Minecraft oben „Minecraft-Gruppen“: Rolle (Ränge und Zusatzrollen aus `/v1/roles`, Squad-Rollen
+  ausgeblendet), Gruppe, Priorität, Speichern; Liste mit Bearbeiten/Entfernen (Rückfrage); entfernte Gruppen mit
+  „entfernt am“/„freigeben ab“ und „Nicht mehr verwalten“ (vor `releasable_at` deaktiviert). Rangschutz, geschützte
+  Gruppen und Owner-Pflicht entscheidet nur der Server (`403`, `422 role_not_mappable`, `409 group_release_too_early`
+  mit eigenen Texten). Plugin-Schlüssel-Recht `may_link` heißt wie auf der Website „Netzwerk-Proxy (Konten verknüpfen,
+  Login, Sitzungen)“ mit neuem Hinweistext.
 - **2.5.14 – Minecraft-Kontoverknüpfung (Website v0.36.0, live 21.10.2026, Guide 44, Annahme 490):** `MinecraftService`
   (Core, 28 Tests inkl. Routen, dazu 1 Test für `may_link`): `GET /v1/me/minecraft/accounts`, `POST /v1/me/minecraft/link` zweistufig (ohne
   `confirm` Vorschau, mit `confirm: true` verknüpfen; eigener Idempotency-Key je Schritt), `DELETE …/accounts/{id}`,

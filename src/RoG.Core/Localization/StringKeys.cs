@@ -1042,6 +1042,32 @@ public static class StringKeys
 
     public const string MinecraftAdminVia = "MinecraftAdmin_Via";
 
+    public const string MinecraftGroupsManagedEmpty = "MinecraftGroups_ManagedEmpty";
+
+    public const string MinecraftGroupsPickRole = "MinecraftGroups_PickRole";
+
+    public const string MinecraftGroupsFormat = "MinecraftGroups_Format";
+
+    public const string MinecraftGroupsSaved = "MinecraftGroups_Saved";
+
+    public const string MinecraftGroupsRemoved = "MinecraftGroups_Removed";
+
+    public const string MinecraftGroupsRemoveTitle = "MinecraftGroups_RemoveTitle";
+
+    public const string MinecraftGroupsRemoveText = "MinecraftGroups_RemoveText";
+
+    public const string MinecraftGroupsReleaseTitle = "MinecraftGroups_ReleaseTitle";
+
+    public const string MinecraftGroupsReleaseText = "MinecraftGroups_ReleaseText";
+
+    public const string MinecraftGroupsReleased = "MinecraftGroups_Released";
+
+    public const string MinecraftGroupsMeta = "MinecraftGroups_Meta";
+
+    public const string MinecraftGroupsRetiredSince = "MinecraftGroups_RetiredSince";
+
+    public const string MinecraftGroupsReleasableFrom = "MinecraftGroups_ReleasableFrom";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

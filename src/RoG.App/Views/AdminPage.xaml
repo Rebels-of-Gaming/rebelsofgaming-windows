@@ -357,6 +357,75 @@
         <!-- Verknüpfte Minecraft-Accounts -->
         <ScrollViewer x:Name="MinecraftPanel" Grid.Row="3" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
             <StackPanel MaxWidth="{StaticResource RoGReadingWidth}" HorizontalAlignment="Left" Spacing="12">
+                <!-- Gruppen (LuckPerms) -->
+                <TextBlock x:Uid="MinecraftGroups_Title" Style="{StaticResource RoGSectionTextStyle}" />
+                <TextBlock x:Uid="MinecraftGroups_Hint" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                <TextBlock Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap">
+                    <Run x:Uid="MinecraftGroups_Managed" FontWeight="SemiBold" /> <Run Text="{x:Bind MinecraftGroups.ManagedText, Mode=OneWay}" />
+                </TextBlock>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <ComboBox
+                        x:Uid="MinecraftGroups_Role"
+                        MinWidth="180"
+                        DisplayMemberPath="Label"
+                        ItemsSource="{x:Bind MinecraftGroups.RoleOptions}"
+                        SelectedItem="{x:Bind MinecraftGroups.SelectedRole, Mode=TwoWay}" />
+                    <TextBox x:Uid="MinecraftGroups_Group" Width="180" MaxLength="36" Text="{x:Bind MinecraftGroups.NewGroup, Mode=TwoWay}" />
+                    <NumberBox
+                        x:Uid="MinecraftGroups_Priority"
+                        Width="120"
+                        Maximum="1000"
+                        Minimum="0"
+                        SpinButtonPlacementMode="Compact"
+                        Value="{x:Bind MinecraftGroups.NewPriority, Mode=TwoWay}" />
+                    <Button x:Uid="MinecraftGroups_Save" VerticalAlignment="Bottom" Command="{x:Bind MinecraftGroups.SaveCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                    <ProgressRing Width="20" Height="20" VerticalAlignment="Bottom" IsActive="{x:Bind MinecraftGroups.IsBusy, Mode=OneWay}" />
+                </StackPanel>
+                <TextBlock x:Uid="MinecraftGroups_Empty" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" Visibility="{x:Bind MinecraftGroups.IsEmpty, Mode=OneWay}" />
+                <ItemsControl ItemsSource="{x:Bind MinecraftGroups.Mappings}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="vm:MinecraftGroupItemViewModel">
+                            <Grid Margin="0,0,0,8" Padding="12" AutomationProperties.Name="{x:Bind RoleLabel}" Background="{StaticResource RoGBg2Brush}" ColumnSpacing="8" CornerRadius="{StaticResource RoGControlRadius}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Spacing="2">
+                                    <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind RoleLabel}" />
+                                    <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" TextWrapping="Wrap" />
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Orientation="Horizontal" Spacing="8">
+                                    <Button x:Uid="MinecraftGroups_Edit" Command="{x:Bind EditCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                                    <Button x:Uid="MinecraftGroups_Remove" Command="{x:Bind RemoveCommand}" />
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <StackPanel Spacing="8" Visibility="{x:Bind MinecraftGroups.HasRetired, Mode=OneWay}">
+                    <TextBlock x:Uid="MinecraftGroups_Retired" FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" />
+                    <TextBlock x:Uid="MinecraftGroups_RetiredHint" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                    <ItemsControl ItemsSource="{x:Bind MinecraftGroups.Retired}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:MinecraftRetiredItemViewModel">
+                                <Grid Margin="0,0,0,8" Padding="12" AutomationProperties.Name="{x:Bind Group}" Background="{StaticResource RoGBg2Brush}" ColumnSpacing="8" CornerRadius="{StaticResource RoGControlRadius}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Spacing="2">
+                                        <TextBlock FontFamily="Consolas" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Group}" />
+                                        <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" TextWrapping="Wrap" />
+                                    </StackPanel>
+                                    <Button x:Uid="MinecraftGroups_Release" Grid.Column="1" VerticalAlignment="Center" Command="{x:Bind ReleaseCommand}" IsEnabled="{x:Bind CanRelease}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+
+                <!-- Verknüpfte Accounts -->
+                <TextBlock x:Uid="MinecraftAdmin_Title" Margin="0,12,0,0" Style="{StaticResource RoGSectionTextStyle}" />
                 <TextBlock x:Uid="MinecraftAdmin_Intro" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
                 <StackPanel Orientation="Horizontal" Spacing="8">
                     <AutoSuggestBox

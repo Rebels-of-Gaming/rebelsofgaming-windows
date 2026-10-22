@@ -23,8 +23,10 @@ public sealed partial class AdminPage : Page
         Media = new MediaAdminViewModel(App.Services, Moderation.Show);
         Appeals = new BanAppealsViewModel(App.Services, Moderation.Show) { AskDecision = AskAppealDecisionAsync };
         MinecraftAccounts = new MinecraftAdminViewModel(App.Services, Moderation.Show);
+        MinecraftGroups = new MinecraftGroupsViewModel(App.Services, Moderation.Show);
         InitializeComponent();
         MinecraftAccounts.Confirm = ConfirmAsync;
+        MinecraftGroups.Confirm = ConfirmAsync;
         Media.Confirm = ConfirmAsync;
         Moderation.OpenMember = (user, report) => MemberModerationDialog.ShowAsync(XamlRoot, Moderation, user, report);
         Moderation.Confirm = ConfirmAsync;
@@ -61,6 +63,8 @@ public sealed partial class AdminPage : Page
     public BanAppealsViewModel Appeals { get; }
 
     public MinecraftAdminViewModel MinecraftAccounts { get; }
+
+    public MinecraftGroupsViewModel MinecraftGroups { get; }
 
     private void OnMinecraftSearch(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) => MinecraftAccounts.SearchNowCommand.Execute(null);
 
@@ -176,6 +180,7 @@ public sealed partial class AdminPage : Page
         else if (selected == MinecraftTab)
         {
             _ = MinecraftAccounts.EnsureLoadedAsync();
+            _ = MinecraftGroups.EnsureLoadedAsync();
         }
         else if (selected == LogTab)
         {

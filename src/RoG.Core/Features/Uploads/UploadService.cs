@@ -92,7 +92,7 @@ public sealed class UploadService(IRoGApiClient client, HttpClient storage)
         }
 
         var uploadId = await PutAsync(content, fileName, size, UploadVisibility.Private, progress, cancellationToken).ConfigureAwait(false);
-        var response = await client.V1_gallery_items_storeAsync(albumSlug, new Body45
+        var response = await client.V1_gallery_items_storeAsync(albumSlug, new Body46
         {
             Upload_id = uploadId,
             Rights_confirmed = true,

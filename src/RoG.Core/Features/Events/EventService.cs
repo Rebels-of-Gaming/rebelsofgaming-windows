@@ -63,7 +63,7 @@ public sealed class EventService(IRoGApiClient client)
             Rsvp.No => RsvpStatus.No,
             _ => throw new ArgumentOutOfRangeException(nameof(answer)),
         };
-        var response = await client.V1_events_rsvpAsync(id, new Body89 { Status = status, Comment = comment }, cancellationToken).ConfigureAwait(false);
+        var response = await client.V1_events_rsvpAsync(id, new Body90 { Status = status, Comment = comment }, cancellationToken).ConfigureAwait(false);
         return ParseRsvp(response.Data?.Status) is var parsed && parsed != Rsvp.None ? parsed : answer;
     }
 

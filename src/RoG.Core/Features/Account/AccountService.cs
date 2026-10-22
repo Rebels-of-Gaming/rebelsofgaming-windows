@@ -155,7 +155,7 @@ public sealed class AccountDataService(IRoGApiClient client, ITokenStore tokens)
     public async Task DeleteAccountAsync(string confirmation, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(confirmation);
-        await client.V1_me_destroyAsync(new Body90 { Confirmation = confirmation }, cancellationToken).ConfigureAwait(false);
+        await client.V1_me_destroyAsync(new Body91 { Confirmation = confirmation }, cancellationToken).ConfigureAwait(false);
         await tokens.ClearAsync(cancellationToken).ConfigureAwait(false);
     }
 
@@ -167,7 +167,7 @@ public sealed class AccountDataService(IRoGApiClient client, ITokenStore tokens)
     public async Task<bool> LeaveClanAsync(string confirmation, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(confirmation);
-        var response = await client.V1_me_leaveClanAsync(new Body97 { Confirmation = confirmation }, cancellationToken).ConfigureAwait(false);
+        var response = await client.V1_me_leaveClanAsync(new Body98 { Confirmation = confirmation }, cancellationToken).ConfigureAwait(false);
         return response.Data.Is_member;
     }
 }

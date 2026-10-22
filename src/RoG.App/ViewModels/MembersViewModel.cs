@@ -288,6 +288,16 @@ public sealed partial class MemberDetailViewModel(AppServices services, MemberSe
     [ObservableProperty]
     public partial bool HasPlatforms { get; set; }
 
+    /// <summary>Rebel-Coins (nur mit Opt-in des Mitglieds, <c>profile.rebel_coins</c>) – nie Buchungen.</summary>
+    [ObservableProperty]
+    public partial bool HasCoins { get; set; }
+
+    [ObservableProperty]
+    public partial string? CoinsText { get; set; }
+
+    [ObservableProperty]
+    public partial string? CoinsStreakText { get; set; }
+
     protected override bool HasData => Name is not null;
 
     public Task ShowAsync(string slug)
@@ -326,6 +336,9 @@ public sealed partial class MemberDetailViewModel(AppServices services, MemberSe
         Motto = p.Motto;
         Bio = p.Bio;
         Squads = s.Squads.Count > 0 ? string.Join(" · ", s.Squads) : null;
+        HasCoins = p.Coins is not null;
+        CoinsText = p.Coins is { } coins ? Format(StringKeys.CoinsBalance, coins.Balance.ToString("N0", CultureInfo.CurrentCulture)) : null;
+        CoinsStreakText = p.Coins is { } streak ? MinecraftAccountsViewModel.DailySummary(Services.Localizer, streak.Streak, streak.BestStreak) : null;
 
         var facts = new List<string>();
         if (p.Location is not null)

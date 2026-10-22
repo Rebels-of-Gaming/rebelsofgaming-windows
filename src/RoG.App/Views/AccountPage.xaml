@@ -246,6 +246,39 @@
                         <ToggleSwitch x:Uid="AccountPage_MinecraftWebsiteMessages" IsEnabled="{x:Bind Minecraft.CanLink}" IsOn="{x:Bind Minecraft.ShowWebsiteMessages, Mode=TwoWay}" />
                         <TextBlock x:Uid="AccountPage_MinecraftWebsiteMessagesHint" FontSize="12" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
                     </StackPanel>
+
+                    <!-- Rebel-Coins: nur Anzeige, verdient und ausgegeben wird im Spiel -->
+                    <StackPanel Spacing="8" Visibility="{x:Bind Minecraft.HasWallet, Mode=OneWay}">
+                        <TextBlock x:Uid="AccountPage_Coins" Style="{StaticResource RoGSectionTextStyle}" />
+                        <TextBlock x:Uid="AccountPage_CoinsHint" FontSize="12" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                        <TextBlock FontSize="20" FontWeight="SemiBold" Foreground="{StaticResource RoGGoldBrush}" Text="{x:Bind Minecraft.BalanceText, Mode=OneWay}" />
+                        <TextBlock Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Minecraft.DailyText, Mode=OneWay}" TextWrapping="Wrap" />
+                        <ComboBox
+                            x:Uid="AccountPage_CoinsVisibility"
+                            DisplayMemberPath="Label"
+                            ItemsSource="{x:Bind Minecraft.CoinsVisibilityOptions}"
+                            SelectedItem="{x:Bind Minecraft.SelectedCoinsVisibility, Mode=TwoWay}"
+                            Visibility="{x:Bind Minecraft.CanEditCoinsVisibility}" />
+                        <TextBlock x:Uid="AccountPage_CoinsRecent" Margin="0,8,0,0" FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" />
+                        <TextBlock x:Uid="AccountPage_CoinsEmpty" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" Visibility="{x:Bind Minecraft.NoTransactions, Mode=OneWay}" />
+                        <ItemsControl ItemsSource="{x:Bind Minecraft.Transactions}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="vm:CoinTransactionViewModel">
+                                    <Grid Padding="0,4" ColumnSpacing="12" AutomationProperties.Name="{x:Bind Title}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel>
+                                            <TextBlock Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Title}" />
+                                            <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" TextWrapping="Wrap" />
+                                        </StackPanel>
+                                        <TextBlock Grid.Column="1" VerticalAlignment="Center" FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Amount}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
                 </StackPanel>
             </Expander>
 

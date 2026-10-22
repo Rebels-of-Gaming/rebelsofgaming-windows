@@ -273,4 +273,17 @@ public class GameBanServiceTests
         Assert.True(rights.NeedsManage);
         Assert.False(PluginKeyRights.Minimal.MayLink);
     }
+
+    [Fact]
+    public void May_economy_is_read_sent_and_needs_manage()
+    {
+        var status = GameBanService.ParseKey(JsonNode.Parse("""{"exists":true,"active":true,"may_issue":true,"may_economy":true,"max_scope":"server"}"""));
+        Assert.True(status.MayEconomy);
+        Assert.False(status.MayLink);
+
+        var rights = PluginKeyRights.From(status);
+        Assert.True(rights.NeedsManage);
+        Assert.Contains("\"may_economy\":true", rights.ToJson().ToJsonString(), StringComparison.Ordinal);
+        Assert.False(PluginKeyRights.Minimal.MayEconomy);
+    }
 }

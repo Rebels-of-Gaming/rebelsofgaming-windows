@@ -1108,6 +1108,20 @@ public static class StringKeys
 
     public const string ModGameReported = "Mod_GameReported";
 
+    public const string CoinsBalance = "Coins_Balance";
+
+    public const string CoinsStreak = "Coins_Streak";
+
+    public const string CoinsNoStreak = "Coins_NoStreak";
+
+    public const string CoinsClaimedToday = "Coins_ClaimedToday";
+
+    public const string CoinsNotClaimedToday = "Coins_NotClaimedToday";
+
+    public const string CoinsVisibilitySaved = "Coins_VisibilitySaved";
+
+    public const string CoinsStreakOne = "Coins_StreakOne";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

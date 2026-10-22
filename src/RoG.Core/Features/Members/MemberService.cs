@@ -35,7 +35,11 @@ public sealed record MemberProfile(
     DateTimeOffset? JoinedAt,
     DateTimeOffset? LastSeenAt,
     IReadOnlyList<MemberBadge> Badges,
-    IReadOnlyList<(string Platform, string Handle)> Platforms);
+    IReadOnlyList<(string Platform, string Handle)> Platforms,
+    MemberCoins? Coins = null);
+
+/// <summary>Rebel-Coins im Profil (<c>profile.rebel_coins</c>) – nur mit Opt-in des Mitglieds, sonst <c>null</c>.</summary>
+public sealed record MemberCoins(int Balance, int Streak, int BestStreak);
 
 public sealed record TeamGroup(string Name, string? Description, IReadOnlyList<TeamMember> Members);
 
@@ -70,7 +74,8 @@ public sealed class MemberService(IRoGApiClient client)
             ApiValues.Time(d.Joined_at),
             ApiValues.Time(d.Last_seen_at),
             d.Badges?.Select(b => new MemberBadge(b.Name, ApiValues.Text(b.Description), b.Color)).ToList() ?? [],
-            p?.Platform_ids?.Select(x => (x.Name, x.Handle)).ToList() ?? []);
+            p?.Platform_ids?.Select(x => (x.Name, x.Handle)).ToList() ?? [],
+            p?.Rebel_coins is { } c ? new MemberCoins(Math.Max(0, c.Balance), Math.Max(0, c.Streak), Math.Max(0, c.Best_streak)) : null);
     }
 
     public async Task<IReadOnlyList<TeamGroup>> GetTeamAsync(CancellationToken cancellationToken = default)

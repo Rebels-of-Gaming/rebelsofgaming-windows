@@ -221,6 +221,12 @@
                         </ItemsControl>
                     </StackPanel>
 
+                    <StackPanel Spacing="4" Visibility="{x:Bind ViewModel.Detail.HasCoins, Mode=OneWay}">
+                        <TextBlock x:Uid="MembersPage_Coins" Style="{StaticResource RoGSectionTextStyle}" />
+                        <TextBlock Foreground="{StaticResource RoGGoldBrush}" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind ViewModel.Detail.CoinsText, Mode=OneWay}" />
+                        <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind ViewModel.Detail.CoinsStreakText, Mode=OneWay}" />
+                    </StackPanel>
+
                     <StackPanel Orientation="Horizontal" Spacing="8">
                         <Button
                             x:Uid="MembersPage_SendMessage"

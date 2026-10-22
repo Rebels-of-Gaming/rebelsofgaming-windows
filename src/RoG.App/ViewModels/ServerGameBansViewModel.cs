@@ -300,6 +300,10 @@ public sealed partial class ServerGameBansViewModel : ServerTabViewModel
     [ObservableProperty]
     public partial bool MayLink { get; set; }
 
+    /// <summary>Rebel-Coins buchen – nur für Server mit Shop oder Berufen.</summary>
+    [ObservableProperty]
+    public partial bool MayEconomy { get; set; }
+
     [ObservableProperty]
     public partial SettingsOption SelectedMaxScope { get; set; }
 
@@ -308,7 +312,7 @@ public sealed partial class ServerGameBansViewModel : ServerTabViewModel
     [ObservableProperty]
     public partial string IncidentReason { get; set; } = string.Empty;
 
-    private PluginKeyRights Rights => new(MayIssue, MayLift, MayLiftAny, MayIp, MayBanMembers, SelectedMaxScope.Value, MayLink);
+    private PluginKeyRights Rights => new(MayIssue, MayLift, MayLiftAny, MayIp, MayBanMembers, SelectedMaxScope.Value, MayLink, MayEconomy);
 
     private async Task LoadKeyAsync()
     {
@@ -336,7 +340,7 @@ public sealed partial class ServerGameBansViewModel : ServerTabViewModel
         var l = Services.Localizer;
         KeyExists = key.Exists && key.Active;
         var rights = key.Exists ? PluginKeyRights.From(key) : PluginKeyRights.Minimal;
-        (MayIssue, MayLift, MayLiftAny, MayIp, MayBanMembers, MayLink) = (rights.MayIssue, rights.MayLift, rights.MayLiftAny, rights.MayIp, rights.MayBanMembers, rights.MayLink);
+        (MayIssue, MayLift, MayLiftAny, MayIp, MayBanMembers, MayLink, MayEconomy) = (rights.MayIssue, rights.MayLift, rights.MayLiftAny, rights.MayIp, rights.MayBanMembers, rights.MayLink, rights.MayEconomy);
         SelectedMaxScope = MaxScopeOptions.FirstOrDefault(o => o.Value == rights.MaxScope) ?? MaxScopeOptions[0];
         KeyStatus = !KeyExists
             ? l.GetString(key.RevokedAt is null ? StringKeys.GameBansKeyNone : StringKeys.GameBansKeyRevoked)

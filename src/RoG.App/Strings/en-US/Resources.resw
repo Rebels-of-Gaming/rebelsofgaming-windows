@@ -5814,4 +5814,106 @@
   <data name="AdminPage_GameReportHint.Text" xml:space="preserve">
     <value>The chat history was sent by the Minecraft server and has not been verified by the platform.</value>
   </data>
+  <data name="Coins_Balance" xml:space="preserve">
+    <value>{0} ⛃ Rebel Coins</value>
+  </data>
+  <data name="Coins_Streak" xml:space="preserve">
+    <value>Daily bonus streak: {0} days (best: {1})</value>
+  </data>
+  <data name="Coins_NoStreak" xml:space="preserve">
+    <value>No daily bonus streak running (best: {1})</value>
+  </data>
+  <data name="Coins_ClaimedToday" xml:space="preserve">
+    <value>Daily bonus claimed today</value>
+  </data>
+  <data name="Coins_NotClaimedToday" xml:space="preserve">
+    <value>Daily bonus still open today – join the network</value>
+  </data>
+  <data name="Coins_VisibilitySaved" xml:space="preserve">
+    <value>Rebel Coins on the profile: {0}</value>
+  </data>
+  <data name="Coins_Visibility_private" xml:space="preserve">
+    <value>Only me</value>
+  </data>
+  <data name="Coins_Visibility_members" xml:space="preserve">
+    <value>Clan members</value>
+  </data>
+  <data name="Coins_Visibility_public" xml:space="preserve">
+    <value>Everyone (public)</value>
+  </data>
+  <data name="Coins_Type_shop_buy" xml:space="preserve">
+    <value>Server shop purchase</value>
+  </data>
+  <data name="Coins_Type_shop_sell" xml:space="preserve">
+    <value>Sale to the server shop</value>
+  </data>
+  <data name="Coins_Type_player_trade" xml:space="preserve">
+    <value>Player shop</value>
+  </data>
+  <data name="Coins_Type_pay" xml:space="preserve">
+    <value>Transfer</value>
+  </data>
+  <data name="Coins_Type_earning" xml:space="preserve">
+    <value>Job earnings</value>
+  </data>
+  <data name="Coins_Type_daily" xml:space="preserve">
+    <value>Daily bonus</value>
+  </data>
+  <data name="Coins_Type_admin" xml:space="preserve">
+    <value>Administration</value>
+  </data>
+  <data name="Coins_Counterparty_system" xml:space="preserve">
+    <value>Server</value>
+  </data>
+  <data name="Coins_Counterparty_player" xml:space="preserve">
+    <value>Player</value>
+  </data>
+  <data name="Coins_Counterparty_self" xml:space="preserve">
+    <value>own account</value>
+  </data>
+  <data name="Coins_Counterparty_removed" xml:space="preserve">
+    <value>deleted account</value>
+  </data>
+  <data name="AccountPage_Coins.Text" xml:space="preserve">
+    <value>REBEL COINS</value>
+  </data>
+  <data name="AccountPage_CoinsHint.Text" xml:space="preserve">
+    <value>The currency of the Minecraft network – earn and spend it in game only. All your linked Minecraft accounts share this balance.</value>
+  </data>
+  <data name="AccountPage_CoinsVisibility.Header" xml:space="preserve">
+    <value>Visible on your profile to</value>
+  </data>
+  <data name="AccountPage_CoinsVisibility.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Rebel Coins visible on your profile to</value>
+  </data>
+  <data name="AccountPage_CoinsRecent.Text" xml:space="preserve">
+    <value>Recent transactions</value>
+  </data>
+  <data name="AccountPage_CoinsEmpty.Text" xml:space="preserve">
+    <value>No transactions yet. Earn Rebel Coins in the Minecraft network with jobs, the daily bonus or in the server shop.</value>
+  </data>
+  <data name="MembersPage_Coins.Text" xml:space="preserve">
+    <value>REBEL COINS</value>
+  </data>
+  <data name="GameBans_MayEconomy.Content" xml:space="preserve">
+    <value>Book Rebel Coins (shops, trading, jobs)</value>
+  </data>
+  <data name="GameBans_MayEconomyHint.Text" xml:space="preserve">
+    <value>Only for servers with a server shop, player shops or jobs. The plugin may then credit and debit coins – within the abuse limits.</value>
+  </data>
+  <data name="Error_insufficient_funds" xml:space="preserve">
+    <value>Not enough Rebel Coins.</value>
+  </data>
+  <data name="Error_limit_exceeded" xml:space="preserve">
+    <value>A daily Rebel Coins limit has been reached.</value>
+  </data>
+  <data name="Error_wallet_busy" xml:space="preserve">
+    <value>The booking isn’t possible right now – please try again in a moment.</value>
+  </data>
+  <data name="Error_plugin_key_cannot_economy" xml:space="preserve">
+    <value>This plugin key may not book Rebel Coins.</value>
+  </data>
+  <data name="Coins_StreakOne" xml:space="preserve">
+    <value>Daily bonus streak: 1 day (best: {1})</value>
+  </data>
 </root>

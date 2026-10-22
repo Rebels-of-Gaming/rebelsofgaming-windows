@@ -81,21 +81,24 @@ public sealed record PluginKeyStatus(
 {
     /// <summary>Minecraft-Konten verknüpfen (Website v0.36.0): Link-Codes für beliebige UUIDs – nur für den Proxy des Netzwerks.</summary>
     public bool MayLink { get; init; }
+
+    /// <summary>Rebel-Coins buchen (Website v0.39.0): Shops, Handel, Berufe – für Server mit Shop oder Berufen.</summary>
+    public bool MayEconomy { get; init; }
 }
 
 /// <summary>Rechte des Plugin-Schlüssels (POST/PATCH). Alles über „anlegen, nur dieser Server“ braucht <c>gamebans.manage</c>.</summary>
-public sealed record PluginKeyRights(bool MayIssue, bool MayLift, bool MayLiftAny, bool MayIp, bool MayBanMembers, string MaxScope, bool MayLink = false)
+public sealed record PluginKeyRights(bool MayIssue, bool MayLift, bool MayLiftAny, bool MayIp, bool MayBanMembers, string MaxScope, bool MayLink = false, bool MayEconomy = false)
 {
     public static PluginKeyRights Minimal { get; } = new(true, false, false, false, false, GameBanService.ScopeServer);
 
     public static PluginKeyRights From(PluginKeyStatus status)
     {
         ArgumentNullException.ThrowIfNull(status);
-        return new(status.MayIssue, status.MayLift, status.MayLiftAny, status.MayIp, status.MayBanMembers, status.MaxScope ?? GameBanService.ScopeServer, status.MayLink);
+        return new(status.MayIssue, status.MayLift, status.MayLiftAny, status.MayIp, status.MayBanMembers, status.MaxScope ?? GameBanService.ScopeServer, status.MayLink, status.MayEconomy);
     }
 
     /// <summary>Geht über das hinaus, was ohne <c>gamebans.manage</c> vergeben werden darf.</summary>
-    public bool NeedsManage => MayLift || MayLiftAny || MayIp || MayBanMembers || MayLink || MaxScope != GameBanService.ScopeServer;
+    public bool NeedsManage => MayLift || MayLiftAny || MayIp || MayBanMembers || MayLink || MayEconomy || MaxScope != GameBanService.ScopeServer;
 
     internal JsonObject ToJson() => new()
     {
@@ -105,6 +108,7 @@ public sealed record PluginKeyRights(bool MayIssue, bool MayLift, bool MayLiftAn
         ["may_ip"] = MayIp,
         ["may_ban_members"] = MayBanMembers,
         ["may_link"] = MayLink,
+        ["may_economy"] = MayEconomy,
         ["max_scope"] = MaxScope,
     };
 }
@@ -368,6 +372,7 @@ public sealed partial class GameBanService(HttpClient http)
         Bool(d, "plugin_active"))
     {
         MayLink = Bool(d, "may_link"),
+        MayEconomy = Bool(d, "may_economy"),
     };
 
     private static string KeyPath(string server) => $"servers/{Uri.EscapeDataString(server)}/plugin-key";

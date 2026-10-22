@@ -34,6 +34,8 @@ public class RealtimeHubTests
         int? unread = null;
         int? messages = null;
         var live = 0;
+        var friends = 0;
+        hub.FriendsChanged += (_, _) => friends++;
         hub.UnreadChanged += (_, n) => unread = n;
         hub.MessagesUnreadChanged += (_, n) => messages = n;
         hub.LiveChanged += (_, _) => live++;
@@ -45,6 +47,10 @@ public class RealtimeHubTests
         Assert.Equal(5, unread);
         Assert.Equal(2, messages);
         Assert.Equal(1, live);
+        Assert.Equal(0, friends);
+
+        hub.Dispatch(new ReverbEvent("private-App.Models.User.01U", ".friends.changed", """{"at":"2026-10-22T18:04:11.123Z"}"""));
+        Assert.Equal(1, friends);
     }
 
     [Fact]

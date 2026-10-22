@@ -228,6 +228,11 @@
                             Style="{StaticResource RoGPrimaryButtonStyle}"
                             Visibility="{x:Bind ViewModel.Detail.CanMessage, Mode=OneWay}" />
                         <Button
+                            x:Uid="MembersPage_Befriend"
+                            Command="{x:Bind ViewModel.Detail.BefriendCommand}"
+                            Style="{StaticResource RoGSecondaryButtonStyle}"
+                            Visibility="{x:Bind ViewModel.Detail.CanBefriend, Mode=OneWay}" />
+                        <Button
                             x:Uid="AccountPage_OpenProfile"
                             Command="{x:Bind ViewModel.Detail.OpenProfileCommand}"
                             Style="{StaticResource RoGSecondaryButtonStyle}" />
@@ -236,6 +241,10 @@
                             Command="{x:Bind ViewModel.Detail.ReportCommand}"
                             Visibility="{x:Bind ViewModel.Detail.CanReport, Mode=OneWay}" />
                     </StackPanel>
+                    <InfoBar
+                        IsOpen="{x:Bind ViewModel.Detail.IsFriendFeedbackOpen, Mode=TwoWay}"
+                        Message="{x:Bind ViewModel.Detail.FriendFeedback, Mode=OneWay}"
+                        Severity="{x:Bind ViewModel.Detail.FriendFeedbackSeverity, Mode=OneWay}" />
                 </StackPanel>
             </ScrollViewer>
         </Grid>

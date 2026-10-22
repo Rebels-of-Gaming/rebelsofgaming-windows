@@ -1068,6 +1068,36 @@ public static class StringKeys
 
     public const string MinecraftGroupsReleasableFrom = "MinecraftGroups_ReleasableFrom";
 
+    public const string NavFriends = "Nav_Friends";
+
+    public const string FriendsCount = "Friends_Count";
+
+    public const string FriendsAddInvalid = "Friends_AddInvalid";
+
+    public const string FriendsRequestSent = "Friends_RequestSent";
+
+    public const string FriendsNowFriends = "Friends_NowFriends";
+
+    public const string FriendsDeclineTitle = "Friends_DeclineTitle";
+
+    public const string FriendsDeclineText = "Friends_DeclineText";
+
+    public const string FriendsDeclined = "Friends_Declined";
+
+    public const string FriendsCancelled = "Friends_Cancelled";
+
+    public const string FriendsRemoveTitle = "Friends_RemoveTitle";
+
+    public const string FriendsRemoveText = "Friends_RemoveText";
+
+    public const string FriendsRemoved = "Friends_Removed";
+
+    public const string FriendsSince = "Friends_Since";
+
+    public const string FriendsReceivedAt = "Friends_ReceivedAt";
+
+    public const string FriendsSentAt = "Friends_SentAt";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

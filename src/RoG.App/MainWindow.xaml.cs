@@ -38,6 +38,7 @@ public sealed partial class MainWindow : Window, IDisposable
         [StringKeys.NavMedia] = typeof(MediaPage),
         [StringKeys.NavWiki] = typeof(WikiPage),
         [StringKeys.NavTools] = typeof(ToolsPage),
+        [StringKeys.NavFriends] = typeof(FriendsPage),
         [StringKeys.NavAdmin] = typeof(AdminPage),
     };
 
@@ -460,6 +461,9 @@ public sealed partial class MainWindow : Window, IDisposable
         AdminItem.Visibility = user is not null && user.Permissions.Values.Any(p => p.Any(IsAdminPermission))
             ? Visibility.Visible
             : Visibility.Collapsed;
+
+        // Freunde nur angemeldet (die Liste ist privat; ohne Scopes zeigt die Seite den Hinweis zur neuen Anmeldung)
+        FriendsItem.Visibility = user is not null || token is not null ? Visibility.Visible : Visibility.Collapsed;
     }
 
     private static bool IsAdminPermission(string permission) =>
@@ -487,6 +491,7 @@ public sealed partial class MainWindow : Window, IDisposable
         AppSection.Media => StringKeys.NavMedia,
         AppSection.Admin => StringKeys.NavAdmin,
         AppSection.Tools => StringKeys.NavTools,
+        AppSection.Friends => StringKeys.NavFriends,
         _ => null,
     };
 

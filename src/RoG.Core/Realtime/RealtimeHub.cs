@@ -42,6 +42,9 @@ public sealed class RealtimeHub : IAsyncDisposable
     /// <summary>Live-Ticker, TeamSpeak-Viewer usw. haben sich geändert (<c>.live.updated</c>, ohne Inhalt).</summary>
     public event EventHandler? LiveChanged;
 
+    /// <summary>Eigene Freunde oder Anfragen haben sich geändert (<c>.friends.changed</c>, ohne Inhalt – neu laden).</summary>
+    public event EventHandler? FriendsChanged;
+
     public event EventHandler<ServerStatusUpdate>? ServerStatusChanged;
 
     /// <summary>Alle übrigen Ereignisse des eigenen Kanals (z. B. <c>.media.processed</c>) für spätere Module.</summary>
@@ -103,6 +106,9 @@ public sealed class RealtimeHub : IAsyncDisposable
         {
             case "live.updated":
                 LiveChanged?.Invoke(this, EventArgs.Empty);
+                return;
+            case "friends.changed":
+                FriendsChanged?.Invoke(this, EventArgs.Empty);
                 return;
             case "server.status":
                 if (ParseServer(e.DataJson) is { } status)

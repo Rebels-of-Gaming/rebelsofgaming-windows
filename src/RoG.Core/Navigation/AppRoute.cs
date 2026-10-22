@@ -27,6 +27,7 @@ public enum AppSection
     Admin,
     Tools,
     Bans,
+    Friends,
 }
 
 /// <summary>Ziel in der App: Bereich und optional ein Eintrag (Slug/ID) bzw. bei der Suche der Suchbegriff.</summary>
@@ -85,6 +86,7 @@ public sealed record AppRoute(AppSection Section, string? Key = null)
             "settings" or "account" => new AppRoute(AppSection.Account),
             "tools" => new AppRoute(AppSection.Tools, key),
             "bans" => new AppRoute(AppSection.Bans, key),
+            "friends" => new AppRoute(AppSection.Friends),
             _ => null,
         };
     }
@@ -144,6 +146,7 @@ public sealed record AppRoute(AppSection Section, string? Key = null)
             "admin" => new AppRoute(AppSection.Admin),
             "tools" => new AppRoute(AppSection.Tools, key),
             "bans" => new AppRoute(AppSection.Bans, key),
+            "friends" => new AppRoute(AppSection.Friends),
             "search" => query.TryGetValue("q", out var q) && q.Length > 0 ? new AppRoute(AppSection.Search, q) : null,
             "open" => query.TryGetValue("url", out var url) && Uri.TryCreate(url, UriKind.Absolute, out var web) ? FromWebUrl(web, environment) : null,
             _ => null,

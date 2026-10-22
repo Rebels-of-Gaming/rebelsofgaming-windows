@@ -57,6 +57,7 @@
                 <NavigationViewItem x:Uid="Shell_NavNews" Content="News" Icon="PreviewLink" Tag="Nav_News" />
                 <NavigationViewItem x:Uid="Shell_NavSquads" Content="Squads" Icon="People" Tag="Nav_Squads" />
                 <NavigationViewItem x:Uid="Shell_NavMessages" Content="Nachrichten" Icon="Message" Tag="Nav_Messages" />
+                <NavigationViewItem x:Name="FriendsItem" x:Uid="Shell_NavFriends" Content="Freunde" Icon="AddFriend" Tag="Nav_Friends" />
                 <NavigationViewItem x:Uid="Shell_NavCalendar" Content="Termine" Icon="Calendar" Tag="Nav_Calendar" />
                 <NavigationViewItem x:Uid="Shell_NavServers" Content="Server" Icon="World" Tag="Nav_Servers" />
                 <NavigationViewItem x:Uid="Shell_NavForum" Content="Forum" Icon="Comment" Tag="Nav_Forum" />

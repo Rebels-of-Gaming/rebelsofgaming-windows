@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="RoG.App.Views.FriendsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:RoG.App.Controls"
+    xmlns:vm="using:RoG.App.ViewModels"
+    Background="{StaticResource RoGBgBrush}">
+
+    <Grid Padding="{StaticResource RoGPagePadding}" RowSpacing="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock x:Uid="FriendsPage_Title" Style="{StaticResource RoGDisplayTextStyle}" Text="FREUNDE" />
+        <StackPanel Grid.Row="1" Spacing="8">
+            <InfoBar
+                IsOpen="{x:Bind ViewModel.IsFeedbackOpen, Mode=TwoWay}"
+                Message="{x:Bind ViewModel.FeedbackMessage, Mode=OneWay}"
+                Severity="{x:Bind ViewModel.FeedbackSeverity, Mode=OneWay}" />
+            <InfoBar x:Uid="FriendsPage_SignIn" IsClosable="False" IsOpen="{x:Bind ViewModel.NeedsSignIn}" Severity="Warning" />
+        </StackPanel>
+        <controls:StateView
+            x:Uid="FriendsPage_State"
+            Grid.Row="2"
+            ErrorMessage="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}"
+            IsEmpty="{x:Bind ViewModel.IsEmpty, Mode=OneWay}"
+            IsLoading="{x:Bind ViewModel.IsLoading, Mode=OneWay}"
+            RetryCommand="{x:Bind ViewModel.RefreshCommand}" />
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" Visibility="{x:Bind ViewModel.ShowContent, Mode=OneWay}">
+            <StackPanel MaxWidth="{StaticResource RoGReadingWidth}" HorizontalAlignment="Left" Spacing="12">
+                <TextBlock x:Uid="FriendsPage_Intro" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+
+                <!-- Hinzufügen -->
+                <StackPanel Orientation="Horizontal" Spacing="8" Visibility="{x:Bind ViewModel.CanWrite}">
+                    <TextBox x:Name="AddBox" x:Uid="FriendsPage_Add" Width="280" KeyDown="OnAddKeyDown" MaxLength="200" Text="{x:Bind ViewModel.AddInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Button x:Uid="FriendsPage_AddButton" VerticalAlignment="Bottom" Command="{x:Bind ViewModel.AddCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                    <ProgressRing Width="20" Height="20" VerticalAlignment="Bottom" IsActive="{x:Bind ViewModel.IsBusy, Mode=OneWay}" />
+                </StackPanel>
+
+                <!-- Anfragen an mich -->
+                <StackPanel Spacing="8" Visibility="{x:Bind ViewModel.HasIncoming, Mode=OneWay}">
+                    <TextBlock x:Uid="FriendsPage_Incoming" Style="{StaticResource RoGSectionTextStyle}" />
+                    <ItemsControl ItemsSource="{x:Bind ViewModel.Incoming}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:FriendRequestItemViewModel">
+                                <Grid Margin="0,0,0,8" Padding="12" AutomationProperties.Name="{x:Bind Name}" Background="{StaticResource RoGBg2Brush}" ColumnSpacing="12" CornerRadius="{StaticResource RoGControlRadius}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <PersonPicture Width="40" Height="40" DisplayName="{x:Bind Name}" ProfilePicture="{x:Bind Avatar}" AutomationProperties.AccessibilityView="Raw" />
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2">
+                                        <HyperlinkButton Padding="0" Command="{x:Bind OpenProfileCommand}" Content="{x:Bind Name}" />
+                                        <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" />
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2" VerticalAlignment="Center" Orientation="Horizontal" Spacing="8" Visibility="{x:Bind CanWrite}">
+                                        <Button x:Uid="FriendsPage_Accept" Command="{x:Bind AcceptCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                                        <Button x:Uid="FriendsPage_Decline" Command="{x:Bind DeclineCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+
+                <!-- Freunde -->
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <TextBlock x:Uid="FriendsPage_List" Style="{StaticResource RoGSectionTextStyle}" />
+                    <TextBlock VerticalAlignment="Bottom" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind ViewModel.CountText, Mode=OneWay}" />
+                </StackPanel>
+                <TextBlock x:Uid="FriendsPage_Empty" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" Visibility="{x:Bind ViewModel.HasNoFriends, Mode=OneWay}" />
+                <ItemsControl ItemsSource="{x:Bind ViewModel.Friends}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="vm:FriendItemViewModel">
+                            <Grid Margin="0,0,0,8" Padding="12" AutomationProperties.Name="{x:Bind Name}" Background="{StaticResource RoGBg2Brush}" ColumnSpacing="12" CornerRadius="{StaticResource RoGControlRadius}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid>
+                                    <PersonPicture Width="40" Height="40" DisplayName="{x:Bind Name}" ProfilePicture="{x:Bind Avatar}" AutomationProperties.AccessibilityView="Raw" />
+                                    <Ellipse
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Bottom"
+                                        Fill="{x:Bind PresenceBrush}"
+                                        Style="{StaticResource RoGStatusDotStyle}"
+                                        Visibility="{x:Bind HasPresence}" />
+                                </Grid>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2">
+                                    <HyperlinkButton Padding="0" Command="{x:Bind OpenProfileCommand}" Content="{x:Bind Name}" />
+                                    <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" TextWrapping="Wrap" />
+                                </StackPanel>
+                                <StackPanel Grid.Column="2" VerticalAlignment="Center" Orientation="Horizontal" Spacing="8">
+                                    <Button x:Uid="FriendsPage_Message" Command="{x:Bind MessageCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                                    <Button x:Uid="FriendsPage_Remove" Command="{x:Bind RemoveCommand}" Visibility="{x:Bind CanWrite}" />
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <!-- Anfragen von mir -->
+                <StackPanel Spacing="8" Visibility="{x:Bind ViewModel.HasOutgoing, Mode=OneWay}">
+                    <TextBlock x:Uid="FriendsPage_Outgoing" Style="{StaticResource RoGSectionTextStyle}" />
+                    <ItemsControl ItemsSource="{x:Bind ViewModel.Outgoing}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:FriendRequestItemViewModel">
+                                <Grid Margin="0,0,0,8" Padding="12" AutomationProperties.Name="{x:Bind Name}" Background="{StaticResource RoGBg2Brush}" ColumnSpacing="12" CornerRadius="{StaticResource RoGControlRadius}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <PersonPicture Width="32" Height="32" DisplayName="{x:Bind Name}" ProfilePicture="{x:Bind Avatar}" AutomationProperties.AccessibilityView="Raw" />
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2">
+                                        <HyperlinkButton Padding="0" Command="{x:Bind OpenProfileCommand}" Content="{x:Bind Name}" />
+                                        <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" />
+                                    </StackPanel>
+                                    <Button x:Uid="FriendsPage_Cancel" Grid.Column="2" VerticalAlignment="Center" Command="{x:Bind CancelCommand}" Visibility="{x:Bind CanWrite}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

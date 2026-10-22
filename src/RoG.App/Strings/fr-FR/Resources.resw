@@ -5649,4 +5649,133 @@
   <data name="Error_group_release_too_early" xml:space="preserve">
     <value>Ce groupe ne peut être libéré que plus tard (au plus tôt 30 jours après son retrait).</value>
   </data>
+  <data name="Nav_Friends" xml:space="preserve">
+    <value>Amis</value>
+  </data>
+  <data name="Friends_Count" xml:space="preserve">
+    <value>{0} amis sur {1}</value>
+  </data>
+  <data name="Friends_AddInvalid" xml:space="preserve">
+    <value>Saisis un nom tiré du lien de profil (p. ex. nyx) ou un lien de profil.</value>
+  </data>
+  <data name="Friends_RequestSent" xml:space="preserve">
+    <value>Demande d'ami envoyée à {0}.</value>
+  </data>
+  <data name="Friends_NowFriends" xml:space="preserve">
+    <value>{0} et toi êtes maintenant amis.</value>
+  </data>
+  <data name="Friends_DeclineTitle" xml:space="preserve">
+    <value>Refuser la demande ?</value>
+  </data>
+  <data name="Friends_DeclineText" xml:space="preserve">
+    <value>Refuser la demande de {0} ? {0} n'en sera pas informé·e, mais ne pourra pas t'envoyer de nouvelle demande pendant 7 jours.</value>
+  </data>
+  <data name="Friends_Declined" xml:space="preserve">
+    <value>Demande de {0} refusée.</value>
+  </data>
+  <data name="Friends_Cancelled" xml:space="preserve">
+    <value>Demande à {0} retirée.</value>
+  </data>
+  <data name="Friends_RemoveTitle" xml:space="preserve">
+    <value>Retirer l'ami ?</value>
+  </data>
+  <data name="Friends_RemoveText" xml:space="preserve">
+    <value>Retirer {0} de tes amis ? L'amitié prend fin pour vous deux ; {0} ne sera pas prévenu·e.</value>
+  </data>
+  <data name="Friends_Removed" xml:space="preserve">
+    <value>{0} ne fait plus partie de tes amis.</value>
+  </data>
+  <data name="Friends_Since" xml:space="preserve">
+    <value>Amis depuis le {0}</value>
+  </data>
+  <data name="Friends_ReceivedAt" xml:space="preserve">
+    <value>demande reçue le {0}</value>
+  </data>
+  <data name="Friends_SentAt" xml:space="preserve">
+    <value>envoyée le {0}</value>
+  </data>
+  <data name="Shell_NavFriends.Content" xml:space="preserve">
+    <value>Amis</value>
+  </data>
+  <data name="FriendsPage_Title.Text" xml:space="preserve">
+    <value>AMIS</value>
+  </data>
+  <data name="FriendsPage_SignIn.Message" xml:space="preserve">
+    <value>Pour les amis, déconnecte-toi puis reconnecte-toi une fois – ton appareil n'a pas encore les droits nécessaires.</value>
+  </data>
+  <data name="FriendsPage_State.EmptyText" xml:space="preserve">
+    <value>Connecte-toi pour voir tes amis.</value>
+  </data>
+  <data name="FriendsPage_Intro.Text" xml:space="preserve">
+    <value>Toi seul·e vois ta liste d'amis. Elle vaut sur le site, dans les applis et sur le réseau Minecraft (/friend). 100 amis au maximum.</value>
+  </data>
+  <data name="FriendsPage_Add.Header" xml:space="preserve">
+    <value>Ajouter un ami</value>
+  </data>
+  <data name="FriendsPage_Add.PlaceholderText" xml:space="preserve">
+    <value>Nom du lien de profil ou lien</value>
+  </data>
+  <data name="FriendsPage_AddButton.Content" xml:space="preserve">
+    <value>Envoyer la demande</value>
+  </data>
+  <data name="FriendsPage_Incoming.Text" xml:space="preserve">
+    <value>Demandes reçues</value>
+  </data>
+  <data name="FriendsPage_Accept.Content" xml:space="preserve">
+    <value>Accepter</value>
+  </data>
+  <data name="FriendsPage_Decline.Content" xml:space="preserve">
+    <value>Refuser</value>
+  </data>
+  <data name="FriendsPage_List.Text" xml:space="preserve">
+    <value>Tes amis</value>
+  </data>
+  <data name="FriendsPage_Empty.Text" xml:space="preserve">
+    <value>Pas encore d'amis. Envoie une demande via le champ ci-dessus ou depuis le profil d'un membre.</value>
+  </data>
+  <data name="FriendsPage_Message.Content" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="FriendsPage_Remove.Content" xml:space="preserve">
+    <value>Retirer</value>
+  </data>
+  <data name="FriendsPage_Outgoing.Text" xml:space="preserve">
+    <value>Demandes envoyées</value>
+  </data>
+  <data name="FriendsPage_Cancel.Content" xml:space="preserve">
+    <value>Retirer</value>
+  </data>
+  <data name="MembersPage_Befriend.Content" xml:space="preserve">
+    <value>Ajouter en ami</value>
+  </data>
+  <data name="Error_blocked" xml:space="preserve">
+    <value>Impossible – l'un de vous a bloqué l'autre.</value>
+  </data>
+  <data name="Error_email_unverified" xml:space="preserve">
+    <value>Confirme d'abord ton adresse e-mail (ou connecte-toi avec Discord/Steam).</value>
+  </data>
+  <data name="Error_already_friends" xml:space="preserve">
+    <value>Vous êtes déjà amis.</value>
+  </data>
+  <data name="Error_already_requested" xml:space="preserve">
+    <value>Tu as déjà envoyé une demande à cette personne.</value>
+  </data>
+  <data name="Error_request_cooldown" xml:space="preserve">
+    <value>Cette personne a récemment refusé une demande – une nouvelle n'est possible qu'après 7 jours.</value>
+  </data>
+  <data name="Error_user_unavailable" xml:space="preserve">
+    <value>Ce compte est suspendu ou inactif.</value>
+  </data>
+  <data name="Error_friend_limit_reached" xml:space="preserve">
+    <value>L'une des deux listes d'amis est pleine (100 amis au maximum).</value>
+  </data>
+  <data name="Error_outgoing_limit_reached" xml:space="preserve">
+    <value>Tu as déjà 50 demandes en attente – attends des réponses ou retires-en.</value>
+  </data>
+  <data name="Error_request_not_found" xml:space="preserve">
+    <value>Cette demande n'existe plus.</value>
+  </data>
+  <data name="Error_not_friends" xml:space="preserve">
+    <value>Vous n'êtes pas amis.</value>
+  </data>
 </root>

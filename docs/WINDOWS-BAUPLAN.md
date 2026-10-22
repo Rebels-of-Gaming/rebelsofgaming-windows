@@ -241,6 +241,18 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   Copyright by wahke“, „wahke“ klein und als Link auf `https://wahke.lu` (Link-Ziel als Ressource, keine Domain im
   Code), in Einstellungen → Über; Assembly-`Copyright` entsprechend; Store-Copyright in `docs/STORE-TEXTE.md` angepasst
   (im Partner Center von Hand eintragen).
+- **2.5.16 – Freunde (Website v0.38.0, live 22.10.2026, Guide 45, Annahme 492):** `FriendsService` (Core, 15 Tests):
+  `GET /v1/me/friends` (Status → `Presence`, `null` = nicht freigegeben, `meta.total`/`meta.limit`),
+  `GET /v1/me/friends/requests` (`filter[direction]`), `POST …/requests {user}` (Gegenanfrage → `status: accepted`),
+  `POST …/{id}/accept|decline`, `DELETE …/requests/{id}`, `DELETE /v1/me/friends/{user}`. Eingabe „Name oder Profil-Link“
+  wird normalisiert (`@`, `…/u/slug`) und vorab geprüft. Neuer Bereich `AppSection.Friends` (Seitenleiste nur angemeldet,
+  Links `…/friends` und `rog://friends`, damit auch die Benachrichtigungen `friends.request`/`friends.accepted`):
+  Anfragen an mich (Annehmen/Ablehnen mit Hinweis auf die 7-Tage-Sperre), Freunde (online zuerst, Status-Punkt, „Freunde
+  seit“, Nachricht, Entfernen mit Rückfrage), gesendete Anfragen (Zurückziehen), Zähler „x von 100“. Echtzeit
+  `.friends.changed` → `RealtimeHub.FriendsChanged` → Seite lädt still neu. Profil eines Mitglieds: „Als Freund
+  hinzufügen“ (Scope `friends:write`). Ohne Scopes (alte Geräte-Tokens) Hinweis zur neuen Anmeldung. Eigene Fehlertexte
+  für `blocked`, `email_unverified`, `already_friends`, `already_requested`, `request_cooldown`, `user_unavailable`,
+  `friend_limit_reached`, `outgoing_limit_reached`, `request_not_found`, `not_friends`.
 - **2.5.15 – Minecraft-Gruppen (Website v0.37.0, live 22.10.2026, Guide 44 „Gruppen (LuckPerms)“):** `MinecraftService`
   (partiell, `MinecraftGroups.cs`, 13 Tests): `GET /v1/minecraft/group-mappings` (Mappings höchste Priorität zuerst,
   `meta.managed_groups`, `meta.retired_groups`), `PUT …/{role}` (`group` normalisiert und vorab auf `[a-z0-9_-]{1,36}`
@@ -498,6 +510,7 @@ sich einmal neu an (2FA).
   Zwischenablage.
 - Ab 2.5.10: Die öffentliche Ban-Liste und Einsprüche zeigt die App nur an (kein Cache); eine Stellungnahme geht nur an
   die Plattform und wird dort ein öffentlich lesbares Forum-Thema – darauf weist das Formular hin.
+- Ab 2.5.16: Freundesliste und Anfragen zeigt die App nur an (kein Cache, keine lokale Speicherung).
 - Ab 2.5.14: Minecraft-Accounts (Name, UUID, Edition, Plattform) zeigt die App nur an (kein Cache); der Link-Code geht
   nur an die Plattform und wird nach dem Verknüpfen aus dem Feld gelöscht.
 - Ab 2.3.0: gelesene Wiki-Seiten (gerendertes HTML, Titel, Bereich) unter `wiki/` im App-Datenordner, je Sprache,

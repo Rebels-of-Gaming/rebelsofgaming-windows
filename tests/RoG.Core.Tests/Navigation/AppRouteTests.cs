@@ -21,6 +21,7 @@ public class AppRouteTests
     [InlineData("https://rebelsofgaming.com/de/tools/et-nickname", AppSection.Tools, "et-nickname")]
     [InlineData("https://rebelsofgaming.com/de/bans/01JB8Z3K6Q9X2M4N7P1R5T8V0W", AppSection.Bans, "01JB8Z3K6Q9X2M4N7P1R5T8V0W")]
     [InlineData("https://rebelsofgaming.com/fr/bans", AppSection.Bans, null)]
+    [InlineData("https://rebelsofgaming.com/de/friends", AppSection.Friends, null)]
     [InlineData("https://wiki.rebelsofgaming.com/Enemy_Territory", AppSection.Wiki, "Enemy_Territory")]
     public void Maps_platform_urls(string url, AppSection section, string? key)
     {
@@ -47,6 +48,7 @@ public class AppUriTests
     [InlineData("rog://events/01JABC", AppSection.Calendar, "01JABC")]
     [InlineData("rog://servers", AppSection.Servers, null)]
     [InlineData("rog://notifications", AppSection.Notifications, null)]
+    [InlineData("rog://friends", AppSection.Friends, null)]
     [InlineData("rog://search?q=enemy%20territory", AppSection.Search, "enemy territory")]
     [InlineData("rog://open?url=https%3A%2F%2Frebelsofgaming.com%2Fde%2Fnews%2Fx", AppSection.News, "x")]
     [InlineData("ROG://Messages", AppSection.Messages, null)]

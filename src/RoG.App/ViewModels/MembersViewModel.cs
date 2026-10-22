@@ -207,6 +207,50 @@ public sealed partial class MemberDetailViewModel(AppServices services, MemberSe
     [ObservableProperty]
     public partial bool CanReport { get; set; }
 
+    /// <summary>Freundschaftsanfrage senden (fremdes Profil, Scope <c>friends:write</c>; Grenzen/Sperren prüft der Server).</summary>
+    [ObservableProperty]
+    public partial bool CanBefriend { get; set; }
+
+    [ObservableProperty]
+    public partial string? FriendFeedback { get; set; }
+
+    [ObservableProperty]
+    public partial bool IsFriendFeedbackOpen { get; set; }
+
+    [ObservableProperty]
+    public partial Microsoft.UI.Xaml.Controls.InfoBarSeverity FriendFeedbackSeverity { get; set; }
+
+    [RelayCommand]
+    private async Task BefriendAsync()
+    {
+        if (_id is not { } id)
+        {
+            return;
+        }
+
+        IsFriendFeedbackOpen = false;
+        try
+        {
+            var result = await new RoG.Core.Features.Friends.FriendsService(Services.Api.Http).SendAsync(id);
+            FriendFeedback = Format(result.IsAccepted ? StringKeys.FriendsNowFriends : StringKeys.FriendsRequestSent, result.User.Name);
+            FriendFeedbackSeverity = Microsoft.UI.Xaml.Controls.InfoBarSeverity.Success;
+        }
+        catch (RoG.Core.Api.ApiProblemException ex)
+        {
+            FriendFeedback = Services.Localizer.GetError(ex.Problem.Code);
+            FriendFeedbackSeverity = ex.Problem.Code is "already_friends" or "already_requested"
+                ? Microsoft.UI.Xaml.Controls.InfoBarSeverity.Informational
+                : Microsoft.UI.Xaml.Controls.InfoBarSeverity.Error;
+        }
+        catch (Exception ex) when (ex is System.Text.Json.JsonException or InvalidDataException or ArgumentException)
+        {
+            FriendFeedback = Services.Localizer.GetError(RoG.Core.Api.ApiProblem.Codes.Unknown);
+            FriendFeedbackSeverity = Microsoft.UI.Xaml.Controls.InfoBarSeverity.Error;
+        }
+
+        IsFriendFeedbackOpen = true;
+    }
+
     [RelayCommand]
     private Task ReportAsync() => _id is { } id ? Controls.ReportDialog.ShowAsync("profile", id) : Task.CompletedTask;
 
@@ -271,6 +315,8 @@ public sealed partial class MemberDetailViewModel(AppServices services, MemberSe
         var me = Services.CurrentUser?.Id ?? (await Services.Tokens.GetAsync(cancellationToken))?.UserId;
         CanMessage = me is not null && me != s.Id;
         CanReport = CanMessage;
+        CanBefriend = CanMessage && Services.CurrentUser?.HasScope(RoG.Core.Features.Friends.FriendsService.WriteScope) == true;
+        IsFriendFeedbackOpen = false;
         Avatar = s.Avatar is null ? null : new BitmapImage(s.Avatar);
         Banner = p.Banner is null ? null : new BitmapImage(p.Banner);
         Rank = s.RankLabel;

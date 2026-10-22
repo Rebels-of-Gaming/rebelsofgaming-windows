@@ -32,6 +32,7 @@ public sealed partial class RealtimeService : ObservableObject, IAsyncDisposable
         _hub.UnreadChanged += (_, n) => OnUi(() => UnreadNotifications = n);
         _hub.MessagesUnreadChanged += (_, n) => OnUi(() => UnreadMessages = n);
         _hub.LiveChanged += (_, _) => OnUi(() => LiveChanged?.Invoke(this, EventArgs.Empty));
+        _hub.FriendsChanged += (_, _) => OnUi(() => FriendsChanged?.Invoke(this, EventArgs.Empty));
         _hub.ServerStatusChanged += (_, s) => OnUi(() => ServerStatusChanged?.Invoke(this, s));
         _hub.Reconnected += (_, _) => OnUi(() => _ = RefreshCountersAsync());
         _hub.StateChanged += (_, s) => OnUi(() => State = s);
@@ -55,6 +56,9 @@ public sealed partial class RealtimeService : ObservableObject, IAsyncDisposable
     public event EventHandler<NotificationItem>? NotificationReceived;
 
     public event EventHandler? LiveChanged;
+
+    /// <summary>Freunde/Anfragen geändert (auch durch die andere Person oder aus Minecraft) – Freunde-Seite lädt neu.</summary>
+    public event EventHandler? FriendsChanged;
 
     public event EventHandler<ServerStatusUpdate>? ServerStatusChanged;
 

@@ -75,7 +75,7 @@ public sealed class MessageService(IRoGApiClient client)
             throw new ArgumentOutOfRangeException(nameof(body), $"1–{MaxLength} Zeichen");
         }
 
-        var response = await client.V1_conversations_sendAsync(conversationId, new Body130 { Body = text, Quote_id = quoteId }, cancellationToken).ConfigureAwait(false);
+        var response = await client.V1_conversations_sendAsync(conversationId, new Body134 { Body = text, Quote_id = quoteId }, cancellationToken).ConfigureAwait(false);
         // Antwort hat dieselbe Form wie ein Verlaufseintrag
         return MapJson(JsonSerializer.SerializeToElement(response.Data)) ?? throw new InvalidOperationException("Leere Antwort");
     }
@@ -89,7 +89,7 @@ public sealed class MessageService(IRoGApiClient client)
 
     /// <summary>1:1-Unterhaltung mit einem Mitglied öffnen (bestehende wird wiederverwendet); Rückgabe = Unterhaltungs-ID.</summary>
     public async Task<string> StartDirectAsync(string userId, CancellationToken cancellationToken = default) =>
-        (await client.V1_conversations_storeAsync(new Body129 { User = userId }, cancellationToken).ConfigureAwait(false)).Data.Id;
+        (await client.V1_conversations_storeAsync(new Body133 { User = userId }, cancellationToken).ConfigureAwait(false)).Data.Id;
 
     /// <summary>Nachricht aus dem Echtzeit-Ereignis <c>.message.sent</c> (gleiche Form wie der Verlauf).</summary>
     public static ChatMessage? FromRealtime(string json)
@@ -112,7 +112,7 @@ public sealed class MessageService(IRoGApiClient client)
         _ => ConversationKind.Direct,
     };
 
-    private static ChatMessage Map(Data321 m) => new(
+    private static ChatMessage Map(Data326 m) => new(
         m.Id,
         m.Conversation_id,
         m.Author?.Id,

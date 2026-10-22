@@ -67,5 +67,5 @@ jobs:
           name: windows-artifacts
           path: artifacts/
           if-no-files-found: ignore
-          # Artefakt-Speicher privater Repos ist knapp (0,5 GB): Pakete 7 Tage, reine Build-Protokolle 2 Tage
-          retention-days: ${{ (github.event.inputs.mode == 'Store' || github.event.inputs.mode == 'Sideload') && 7 || 2 }}
+          # Artefakt-Speicher der Organisation ist knapp (Kontingent war am 22.10.2026 voll): Pakete 3 Tage, reine Build-Protokolle 1 Tag
+          retention-days: ${{ (github.event.inputs.mode == 'Store' || github.event.inputs.mode == 'Sideload') && 3 || 1 }}

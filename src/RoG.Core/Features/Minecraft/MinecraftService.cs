@@ -80,6 +80,25 @@ public sealed partial class MinecraftService(HttpClient http)
     public async Task UnlinkAsync(string id, CancellationToken cancellationToken = default) =>
         await SendAsync(HttpMethod.Delete, "me/minecraft/accounts/" + Id(id), null, cancellationToken).ConfigureAwait(false);
 
+    // --- Einstellungen (Website v0.38.0) ---------------------------------------------------------------------------
+
+    /// <summary>Direktnachrichten von Freunden aus Website/App auch im Spiel anzeigen (Standard aus).</summary>
+    public async Task<bool> ShowWebsiteMessagesAsync(CancellationToken cancellationToken = default)
+    {
+        var data = (await SendAsync(HttpMethod.Get, "me/minecraft/settings", null, cancellationToken).ConfigureAwait(false))?["data"];
+        return ParseShowWebsiteMessages(data);
+    }
+
+    public async Task<bool> SetShowWebsiteMessagesAsync(bool value, CancellationToken cancellationToken = default)
+    {
+        var body = new JsonObject { ["show_website_messages"] = value };
+        var data = (await SendAsync(new HttpMethod("PATCH"), "me/minecraft/settings", body, cancellationToken).ConfigureAwait(false))?["data"];
+        return ParseShowWebsiteMessages(data);
+    }
+
+    public static bool ParseShowWebsiteMessages(JsonNode? data) =>
+        data?["show_website_messages"] is JsonValue v && v.TryGetValue<bool>(out var b) && b;
+
     // --- Verwaltung ------------------------------------------------------------------------------------------------
 
     /// <summary>Alle verknüpften Accounts, neueste zuerst; Suche nach Name oder UUID, optional Edition bzw. Server (ID).</summary>

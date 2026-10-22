@@ -21,6 +21,15 @@ public class MessageServiceTests
         Assert.Equal("Scrim heute 20 Uhr?", m.Body);
         Assert.Equal("Wann?", m.QuoteBody);
         Assert.True(Assert.Single(m.Attachments).IsImage);
+        Assert.False(m.FromMinecraft);
+    }
+
+    [Fact]
+    public void Minecraft_source_is_recognized()
+    {
+        var m = MessageService.FromRealtime("""{"id":"01M","conversation_id":"01C","author":{"id":"01U","name":"Nyx"},"body":"bin gleich da","deleted":false,"quote":null,"attachments":[],"source":"minecraft","created_at":null}""");
+        Assert.NotNull(m);
+        Assert.True(m.FromMinecraft);
     }
 
     [Fact]

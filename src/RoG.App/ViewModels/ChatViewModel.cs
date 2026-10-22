@@ -221,7 +221,12 @@ public sealed partial class ChatMessageViewModel(ChatMessage message, bool isOwn
 
     public bool HasBody => message.Deleted || !string.IsNullOrEmpty(message.Body);
 
-    public string Time { get; } = message.CreatedAt?.ToLocalTime().ToString(message.CreatedAt?.ToLocalTime().Date == DateTime.Today ? "t" : "g", CultureInfo.CurrentCulture) ?? string.Empty;
+    /// <summary>Zeit, bei Offline-PMs aus dem Minecraft-Netzwerk mit „· aus Minecraft“ (wie auf der Website).</summary>
+    public string Time { get; } = string.Join(" · ", new[]
+    {
+        message.CreatedAt?.ToLocalTime().ToString(message.CreatedAt?.ToLocalTime().Date == DateTime.Today ? "t" : "g", CultureInfo.CurrentCulture),
+        message.FromMinecraft ? App.Services.Localizer.GetString(StringKeys.MessagesFromMinecraft) : null,
+    }.Where(x => !string.IsNullOrEmpty(x)));
 
     public string Quote { get; } = message.QuoteBody is null ? string.Empty : $"{message.QuoteAuthor}: {message.QuoteBody}";
 

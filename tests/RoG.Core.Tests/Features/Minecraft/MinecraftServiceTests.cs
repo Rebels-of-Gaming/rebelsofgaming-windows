@@ -226,4 +226,28 @@ public class MinecraftServiceTests
         Assert.Equal(AppSection.Account, route.Section);
         Assert.Equal("K7M2QX", route.MinecraftCode);
     }
+
+    [Fact]
+    public async Task Settings_are_read_and_patched()
+    {
+        var (api, stub) = Create((r, _) => StubHttpHandler.Json(HttpStatusCode.OK,
+            r.Method == HttpMethod.Get ? """{"data":{"show_website_messages":false}}""" : """{"data":{"show_website_messages":true}}"""));
+        using (api)
+        {
+            var service = new MinecraftService(api.Http);
+            Assert.False(await service.ShowWebsiteMessagesAsync());
+            Assert.True(await service.SetShowWebsiteMessagesAsync(true));
+
+            Assert.EndsWith("/v1/me/minecraft/settings", stub.Requests[1].Uri!.AbsolutePath, StringComparison.Ordinal);
+            Assert.Equal("PATCH", stub.Requests[1].Method.Method);
+            Assert.True((bool)JsonNode.Parse(stub.Requests[1].Body!)!["show_website_messages"]!);
+        }
+    }
+
+    [Theory]
+    [InlineData("""{"show_website_messages":true}""", true)]
+    [InlineData("""{"show_website_messages":"yes"}""", false)]
+    [InlineData("""{}""", false)]
+    public void Missing_or_odd_settings_mean_off(string json, bool expected) =>
+        Assert.Equal(expected, MinecraftService.ParseShowWebsiteMessages(JsonNode.Parse(json)));
 }

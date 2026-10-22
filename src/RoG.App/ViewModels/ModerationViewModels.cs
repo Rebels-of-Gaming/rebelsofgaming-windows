@@ -60,6 +60,18 @@ public sealed partial class ModerationViewModel(AppServices services) : Observab
     [ObservableProperty]
     public partial SettingsOption? SelectedReason { get; set; }
 
+    /// <summary>Filter nach Herkunft (<c>filter[source]</c>): alle, Website oder Minecraft-Netzwerk (v0.38.0).</summary>
+    public IReadOnlyList<SettingsOption> SourceOptions { get; } =
+    [
+        new(string.Empty, services.Localizer.GetString(StringKeys.ModSourceAll)),
+        .. ModerationService.ReportSources.Select(s => new SettingsOption(s, services.Localizer.GetString("Mod_Source_" + s))),
+    ];
+
+    [ObservableProperty]
+    public partial SettingsOption? SelectedSource { get; set; }
+
+    partial void OnSelectedSourceChanged(SettingsOption? value) => _ = LoadReportsAsync(reset: true);
+
     public ObservableCollection<ReportItemViewModel> Reports { get; } = [];
 
     public ObservableCollection<ModBanItemViewModel> Bans { get; } = [];
@@ -127,7 +139,11 @@ public sealed partial class ModerationViewModel(AppServices services) : Observab
 
         await RunAsync(async () =>
         {
-            var page = await _moderation.ReportsAsync(SelectedStatus.Value, _reportsCursor, SelectedReason?.Value is { Length: > 0 } reason ? reason : null);
+            var page = await _moderation.ReportsAsync(
+                SelectedStatus.Value,
+                _reportsCursor,
+                SelectedReason?.Value is { Length: > 0 } reason ? reason : null,
+                SelectedSource?.Value is { Length: > 0 } source ? source : null);
             if (generation != _loadGeneration)
             {
                 return; // inzwischen neu gefiltert
@@ -317,6 +333,22 @@ public sealed partial class ReportItemViewModel(ModReport report, ModerationView
     }.Where(s => !string.IsNullOrEmpty(s)));
 
     public bool IsChildSafety => report.IsChildSafety;
+
+    /// <summary>Spiel-Meldung: „Notch (Java) gemeldet von jeb_ · RoG Network · lobby“.</summary>
+    public string GameText { get; } = report.Game is { } g
+        ? string.Join(" · ", new[]
+        {
+            g.Reported is { } d ? string.Format(CultureInfo.CurrentCulture, localizer.GetString(StringKeys.ModGameReported), Player(localizer, d)) : null,
+            g.Reporter is { } r ? string.Format(CultureInfo.CurrentCulture, localizer.GetString(StringKeys.ModReportedBy), Player(localizer, r)) : null,
+            g.ServerName,
+            g.NetworkServer,
+        }.Where(x => !string.IsNullOrEmpty(x)))
+        : string.Empty;
+
+    public bool IsGame => report.FromMinecraft;
+
+    private static string Player(ILocalizer localizer, ModGamePlayer p) =>
+        p.Edition is { } e ? $"{p.Name} ({MinecraftAccountsViewModel.EditionText(localizer, e, null)})" : p.Name;
 
     public string Excerpt { get; } = report.Excerpt ?? string.Empty;
 

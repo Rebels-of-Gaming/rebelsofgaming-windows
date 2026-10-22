@@ -18,11 +18,25 @@ public sealed record ModReport(
     DateTimeOffset? CreatedAt,
     Uri? Url = null,
     string? Locale = null,
-    int Priority = 0)
+    int Priority = 0,
+    string? Source = null,
+    ModGameReport? Game = null)
 {
+    /// <summary>Meldung per <c>/report</c> im Minecraft-Netzwerk (Website v0.38.0).</summary>
+    public bool FromMinecraft => Source == ModerationService.MinecraftSource;
+
     /// <summary>Kinderschutz-Meldung (Website v0.30.3) – rot gekennzeichnet, steht oben.</summary>
     public bool IsChildSafety => Reason == ModerationService.ChildSafety;
 }
+
+/// <summary>Spieler aus einer Spiel-Meldung (auch Gäste ohne RoG-Konto).</summary>
+public sealed record ModGamePlayer(string? Uuid, string Name, string? Edition);
+
+/// <summary>
+/// <c>details</c> einer Meldung aus dem Minecraft-Netzwerk: beide Spieler, Server des Plugin-Schlüssels, Netzwerk-Server.
+/// Der Verlauf steht als Text in <c>excerpt</c> – vom Minecraft-Server übermittelt, nicht serverseitig geprüft.
+/// </summary>
+public sealed record ModGameReport(ModGamePlayer? Reporter, ModGamePlayer? Reported, string? ServerName, string? NetworkServer, int MessageCount);
 
 public sealed record ModWarning(string Id, string Reason, int Points, bool Active, DateTimeOffset? CreatedAt, DateTimeOffset? ExpiresAt);
 
@@ -43,12 +57,20 @@ public sealed class ModerationService(IRoGApiClient client)
     public const string ChildSafety = "child_safety";
 
     /// <summary>Melde-Gründe wie die Website – Kinderschutz immer zuerst (v0.30.3).</summary>
+    public const string MinecraftSource = "minecraft";
+
+    /// <summary>Herkunft einer Meldung (<c>filter[source]</c>).</summary>
+    public static readonly IReadOnlyList<string> ReportSources = ["website", MinecraftSource];
+
     public static readonly IReadOnlyList<string> ReportReasons = [ChildSafety, "spam", "insult", "harassment", "illegal", "cheating", "other"];
 
     /// <param name="reason">Filter auf einen Grund (<c>filter[reason]</c>), <c>null</c> = alle.</param>
-    public async Task<Page<ModReport>> ReportsAsync(string status = "open", string? cursor = null, string? reason = null, CancellationToken cancellationToken = default)
+    /// <param name="source">Filter auf die Herkunft (<c>website</c>, <c>minecraft</c>), <c>null</c> = alle.</param>
+    public async Task<Page<ModReport>> ReportsAsync(string status = "open", string? cursor = null, string? reason = null, string? source = null, CancellationToken cancellationToken = default)
     {
-        var r = await client.V1_moderation_reports_indexAsync(status, filtertype: null, filterreason: reason, cursor: cursor, per_page: 30, cancellationToken: cancellationToken).ConfigureAwait(false);
+        var r = await client.V1_moderation_reports_indexAsync(
+            status, filtertype: null, filterreason: reason, filtersource: source is not null && ReportSources.Contains(source) ? source : null,
+            cursor: cursor, per_page: 30, cancellationToken: cancellationToken).ConfigureAwait(false);
         return new Page<ModReport>(
             r.Data.Select(d => new ModReport(
                 d.Id, d.Type, d.Reason, ApiValues.Text(d.Comment), ApiValues.Text(d.Excerpt), d.Status, ApiValues.Text(d.Resolution),
@@ -57,11 +79,23 @@ public sealed class ModerationService(IRoGApiClient client)
                 ApiValues.Time(d.Created_at),
                 ApiValues.WebUri(d.Url),
                 ApiValues.Text(d.Locale),
-                d.Priority))
+                d.Priority,
+                ApiValues.Text(d.Source),
+                d.Details is { } g
+                    ? new ModGameReport(
+                        Player(g.Reporter?.Uuid, g.Reporter?.Name, g.Reporter?.Edition),
+                        Player(g.Reported?.Uuid, g.Reported?.Name, g.Reported?.Edition),
+                        ApiValues.Text(g.Server?.Name),
+                        ApiValues.Text(g.Network_server),
+                        g.Messages?.Count ?? 0)
+                    : null))
                 // Server sortiert schon; stabil nachsortieren, falls eine ältere Website die Priorität nicht kennt
                 .OrderByDescending(m => m.Priority > 0 || (m.IsChildSafety && m.Status == "open")).ToList(),
             r.Meta?.Next_cursor);
     }
+
+    private static ModGamePlayer? Player(string? uuid, string? name, string? edition) =>
+        ApiValues.Text(name) is { } n ? new ModGamePlayer(ApiValues.Text(uuid), n, ApiValues.Text(edition)) : null;
 
     public async Task UpdateReportAsync(string reportId, string status, string? resolution, CancellationToken cancellationToken = default) =>
         await client.V1_moderation_reports_updateAsync(reportId, new Body137

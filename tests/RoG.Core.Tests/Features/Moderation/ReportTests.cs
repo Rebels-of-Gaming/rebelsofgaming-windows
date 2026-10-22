@@ -58,6 +58,36 @@ public class ReportTests
     }
 
     [Fact]
+    public async Task Minecraft_reports_carry_source_and_players()
+    {
+        // Form wie in Guide 28 „Meldungen aus dem Minecraft-Netzwerk“ (v0.38.0)
+        var (api, stub) = Create("""
+            {"data":[{"id":"r2","type":"minecraft_player","reportable_id":"069a79f4-44e9-4726-a5be-fca90e38aaf5","reason":"harassment","priority":0,
+              "comment":"Beleidigt mich","excerpt":"[22.10. 12:00] Notch → jeb_: du bist so schlecht","url":null,"locale":null,"status":"open",
+              "source":"minecraft",
+              "details":{"reporter":{"uuid":"853c80ef-3c37-49fd-aa49-938b674adae6","name":"jeb_","edition":"java"},
+                         "reported":{"uuid":"069a79f4-44e9-4726-a5be-fca90e38aaf5","name":"Notch","edition":"java"},
+                         "server":{"id":"01J","name":"RoG Network"},"network_server":"lobby","plugin_key_id":"01J",
+                         "messages":[{"from_uuid":"069a79f4-44e9-4726-a5be-fca90e38aaf5","to_uuid":"853c80ef-3c37-49fd-aa49-938b674adae6","message":"du bist so schlecht","at":"2026-10-22T12:00:00Z"}]},
+              "resolution":null,"target":null,"reporter":{"id":"01J","name":"Jeb"},"created_at":"2026-10-22T12:01:00Z","handled_at":null}],
+             "meta":{"next_cursor":null}}
+            """, HttpStatusCode.OK);
+        using (api)
+        {
+            var report = Assert.Single((await new ModerationService(api.Client).ReportsAsync(source: "minecraft")).Items);
+
+            Assert.Contains("filter[source]=minecraft", Uri.UnescapeDataString(stub.Requests[0].Uri!.Query), StringComparison.Ordinal);
+            Assert.True(report.FromMinecraft);
+            Assert.Equal("Notch", report.Game!.Reported!.Name);
+            Assert.Equal("jeb_", report.Game.Reporter!.Name);
+            Assert.Equal("RoG Network", report.Game.ServerName);
+            Assert.Equal("lobby", report.Game.NetworkServer);
+            Assert.Equal(1, report.Game.MessageCount);
+            Assert.Null(report.Target);
+        }
+    }
+
+    [Fact]
     public void Child_safety_is_the_first_reason()
     {
         Assert.Equal("child_safety", ModerationService.ReportReasons[0]);

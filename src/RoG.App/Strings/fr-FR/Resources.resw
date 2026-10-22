@@ -5778,4 +5778,40 @@
   <data name="Error_not_friends" xml:space="preserve">
     <value>Vous n'êtes pas amis.</value>
   </data>
+  <data name="Messages_FromMinecraft" xml:space="preserve">
+    <value>depuis Minecraft</value>
+  </data>
+  <data name="Minecraft_WebsiteMessagesOn" xml:space="preserve">
+    <value>Les messages d'amis envoyés sur le site ou dans l'appli s'affichent désormais aussi en jeu.</value>
+  </data>
+  <data name="Minecraft_WebsiteMessagesOff" xml:space="preserve">
+    <value>Les messages du site et de l'appli ne s'affichent plus en jeu.</value>
+  </data>
+  <data name="Mod_SourceAll" xml:space="preserve">
+    <value>Toutes les origines</value>
+  </data>
+  <data name="Mod_GameReported" xml:space="preserve">
+    <value>{0} signalé·e</value>
+  </data>
+  <data name="AccountPage_MinecraftWebsiteMessages.Header" xml:space="preserve">
+    <value>Afficher les messages du site en jeu</value>
+  </data>
+  <data name="AccountPage_MinecraftWebsiteMessagesHint.Text" xml:space="preserve">
+    <value>Les messages directs d'amis écrits sur le site ou dans l'appli s'affichent sur le réseau Minecraft à ta connexion – raccourcis et sans pièces jointes. Les conversations de groupe et les messages de non-amis n'apparaissent jamais.</value>
+  </data>
+  <data name="Mod_Source_website" xml:space="preserve">
+    <value>Site web</value>
+  </data>
+  <data name="Mod_Source_minecraft" xml:space="preserve">
+    <value>Réseau Minecraft</value>
+  </data>
+  <data name="Mod_Type_minecraft_player" xml:space="preserve">
+    <value>Joueur Minecraft</value>
+  </data>
+  <data name="AdminPage_SourceFilter.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Filtrer par origine</value>
+  </data>
+  <data name="AdminPage_GameReportHint.Text" xml:space="preserve">
+    <value>L'historique a été transmis par le serveur Minecraft et n'a pas été vérifié par la plateforme.</value>
+  </data>
 </root>

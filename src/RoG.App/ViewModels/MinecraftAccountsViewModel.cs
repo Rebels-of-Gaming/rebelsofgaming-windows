@@ -42,6 +42,49 @@ public sealed partial class MinecraftAccountsViewModel : LoadableViewModel
     public partial string Code { get; set; } = string.Empty;
 
     [ObservableProperty]
+    public partial bool HasAccounts { get; set; }
+
+    /// <summary>Website-/App-Nachrichten von Freunden im Spiel anzeigen (<c>/v1/me/minecraft/settings</c>, Standard aus).</summary>
+    [ObservableProperty]
+    public partial bool ShowWebsiteMessages { get; set; }
+
+    private bool _settingLoaded;
+
+    partial void OnShowWebsiteMessagesChanged(bool value)
+    {
+        if (_settingLoaded)
+        {
+            _ = SaveSettingAsync(value);
+        }
+    }
+
+    private async Task SaveSettingAsync(bool value)
+    {
+        try
+        {
+            await _minecraft.SetShowWebsiteMessagesAsync(value);
+            Show(L(value ? StringKeys.MinecraftWebsiteMessagesOn : StringKeys.MinecraftWebsiteMessagesOff), InfoBarSeverity.Success);
+        }
+        catch (ApiProblemException ex)
+        {
+            Show(Services.Localizer.GetError(ex.Problem.Code), InfoBarSeverity.Error);
+            Revert(!value);
+        }
+        catch (System.Text.Json.JsonException)
+        {
+            Show(Services.Localizer.GetError(ApiProblem.Codes.Unknown), InfoBarSeverity.Error);
+            Revert(!value);
+        }
+    }
+
+    private void Revert(bool value)
+    {
+        _settingLoaded = false;
+        ShowWebsiteMessages = value;
+        _settingLoaded = true;
+    }
+
+    [ObservableProperty]
     public partial bool IsBusy { get; set; }
 
     [ObservableProperty]
@@ -74,6 +117,23 @@ public sealed partial class MinecraftAccountsViewModel : LoadableViewModel
         foreach (var account in list)
         {
             Items.Add(new MinecraftAccountItemViewModel(account, this, Services.Localizer));
+        }
+
+        HasAccounts = Items.Count > 0;
+        if (HasAccounts && !_settingLoaded)
+        {
+            try
+            {
+                ShowWebsiteMessages = await _minecraft.ShowWebsiteMessagesAsync(cancellationToken);
+                _settingLoaded = true;
+            }
+            catch (ApiProblemException)
+            {
+                // Einstellung nicht lesbar (z. B. Server noch ohne v0.38.0) – Schalter bleibt aus und ohne Wirkung
+            }
+            catch (System.Text.Json.JsonException)
+            {
+            }
         }
     }
 
@@ -139,6 +199,7 @@ public sealed partial class MinecraftAccountsViewModel : LoadableViewModel
         {
             await _minecraft.UnlinkAsync(item.Id);
             Items.Remove(item);
+            HasAccounts = Items.Count > 0;
             DataChanged();
             Show(Format(StringKeys.MinecraftUnlinked, item.Name), InfoBarSeverity.Success);
         }

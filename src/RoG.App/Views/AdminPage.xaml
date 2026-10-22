@@ -240,6 +240,7 @@
             <StackPanel Orientation="Horizontal" Spacing="8">
                 <ComboBox x:Uid="AdminPage_StatusFilter" MinWidth="160" ItemsSource="{x:Bind Moderation.StatusOptions}" SelectedItem="{x:Bind Moderation.SelectedStatus, Mode=TwoWay}" />
                 <ComboBox x:Uid="AdminPage_ReasonFilter" MinWidth="200" ItemsSource="{x:Bind Moderation.ReasonOptions}" SelectedItem="{x:Bind Moderation.SelectedReason, Mode=TwoWay}" />
+                <ComboBox x:Uid="AdminPage_SourceFilter" MinWidth="180" ItemsSource="{x:Bind Moderation.SourceOptions}" SelectedItem="{x:Bind Moderation.SelectedSource, Mode=TwoWay}" />
                 <Button x:Uid="Backup_Reload" Command="{x:Bind Moderation.ReloadReportsCommand}" />
                 <ProgressRing Width="20" Height="20" IsActive="{x:Bind Moderation.IsBusy, Mode=OneWay}" />
             </StackPanel>
@@ -255,6 +256,10 @@
                                         </Border>
                                         <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Title}" />
                                         <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" TextWrapping="Wrap" />
+                                        <StackPanel Spacing="2" Visibility="{x:Bind IsGame}">
+                                            <TextBlock FontSize="12" IsTextSelectionEnabled="True" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind GameText}" TextWrapping="Wrap" />
+                                            <TextBlock x:Uid="AdminPage_GameReportHint" FontSize="12" Foreground="{StaticResource RoGGoldBrush}" Style="{StaticResource RoGBodyTextStyle}" TextWrapping="Wrap" />
+                                        </StackPanel>
                                         <Border Padding="10" Background="{StaticResource RoGBg3Brush}" CornerRadius="{StaticResource RoGControlRadius}" Visibility="{x:Bind HasExcerpt}">
                                             <TextBlock IsTextSelectionEnabled="True" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Excerpt}" TextWrapping="Wrap" />
                                         </Border>

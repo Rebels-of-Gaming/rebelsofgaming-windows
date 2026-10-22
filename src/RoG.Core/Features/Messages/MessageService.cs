@@ -33,12 +33,19 @@ public sealed record ChatMessage(
     string? QuoteAuthor,
     string? QuoteBody,
     IReadOnlyList<ChatAttachment> Attachments,
-    DateTimeOffset? CreatedAt);
+    DateTimeOffset? CreatedAt,
+    string? Source = null)
+{
+    /// <summary>Offline-PM, die ein Freund im Minecraft-Netzwerk geschrieben hat (Website v0.38.0) – Hinweis „aus Minecraft“.</summary>
+    public bool FromMinecraft => Source == MessageService.MinecraftSource;
+}
 
 /// <summary>Direktnachrichten (Guide 11): Unterhaltungen, Verlauf, Senden, gelesen markieren, 1:1 starten.</summary>
 public sealed class MessageService(IRoGApiClient client)
 {
     public const int MaxLength = 5000;
+
+    public const string MinecraftSource = "minecraft";
 
     public async Task<Page<ConversationSummary>> ListAsync(string? search = null, string? cursor = null, CancellationToken cancellationToken = default)
     {
@@ -122,7 +129,8 @@ public sealed class MessageService(IRoGApiClient client)
         m.Quote?.Author,
         m.Quote?.Body,
         m.Attachments?.Select(a => new ChatAttachment(a.Id, a.Name, a.Mime, a.Size, a.Image)).ToList() ?? [],
-        ApiValues.Time(m.Created_at));
+        ApiValues.Time(m.Created_at),
+        ApiValues.Text(m.Source));
 
     private static ChatMessage? MapJson(JsonElement e)
     {
@@ -159,6 +167,7 @@ public sealed class MessageService(IRoGApiClient client)
             S(quote, "author"),
             S(quote, "body"),
             attachments,
-            ApiValues.Time(S(e, "created_at")));
+            ApiValues.Time(S(e, "created_at")),
+            S(e, "source"));
     }
 }

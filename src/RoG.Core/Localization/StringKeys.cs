@@ -1098,6 +1098,16 @@ public static class StringKeys
 
     public const string FriendsSentAt = "Friends_SentAt";
 
+    public const string MessagesFromMinecraft = "Messages_FromMinecraft";
+
+    public const string MinecraftWebsiteMessagesOn = "Minecraft_WebsiteMessagesOn";
+
+    public const string MinecraftWebsiteMessagesOff = "Minecraft_WebsiteMessagesOff";
+
+    public const string ModSourceAll = "Mod_SourceAll";
+
+    public const string ModGameReported = "Mod_GameReported";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

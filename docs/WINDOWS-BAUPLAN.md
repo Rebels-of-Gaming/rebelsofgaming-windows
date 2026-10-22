@@ -241,6 +241,13 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   Copyright by wahke“, „wahke“ klein und als Link auf `https://wahke.lu` (Link-Ziel als Ressource, keine Domain im
   Code), in Einstellungen → Über; Assembly-`Copyright` entsprechend; Store-Copyright in `docs/STORE-TEXTE.md` angepasst
   (im Partner Center von Hand eintragen).
+- **2.5.17 – Minecraft-Nachrichten, -Einstellung und Spiel-Meldungen (Website v0.38.0):** `ChatMessage.Source`/`FromMinecraft`
+  (Liste und `.message.sent`) → „· aus Minecraft“ hinter der Uhrzeit. `MinecraftService.ShowWebsiteMessagesAsync`/
+  `SetShowWebsiteMessagesAsync` (`GET`/`PATCH /v1/me/minecraft/settings`, unbekannte Werte = aus) → Schalter unter Konto →
+  Minecraft (nur mit verknüpftem Account; Fehler setzt ihn zurück). Moderation: `ReportsAsync(source)` mit
+  `filter[source]`, `ModReport.Source` und `ModGameReport` aus `details` (beide Spieler mit Edition, Server, Netzwerk-Server,
+  Zahl der Verlaufsnachrichten); Filter „Herkunft“ und am Fall Spieler/Server plus Hinweis „Verlauf vom Minecraft-Server,
+  nicht geprüft“. „Moderieren“ nur mit verknüpftem Konto (`target`). Tests: 6 neue.
 - **2.5.16 – Freunde (Website v0.38.0, live 22.10.2026, Guide 45, Annahme 492):** `FriendsService` (Core, 15 Tests):
   `GET /v1/me/friends` (Status → `Presence`, `null` = nicht freigegeben, `meta.total`/`meta.limit`),
   `GET /v1/me/friends/requests` (`filter[direction]`), `POST …/requests {user}` (Gegenanfrage → `status: accepted`),
@@ -510,6 +517,7 @@ sich einmal neu an (2FA).
   Zwischenablage.
 - Ab 2.5.10: Die öffentliche Ban-Liste und Einsprüche zeigt die App nur an (kein Cache); eine Stellungnahme geht nur an
   die Plattform und wird dort ein öffentlich lesbares Forum-Thema – darauf weist das Formular hin.
+- Ab 2.5.17: Die Einstellung „Website-Nachrichten im Spiel anzeigen“ liegt nur auf dem Server (keine lokale Kopie); Spieler-Angaben aus Spiel-Meldungen zeigt die App nur an.
 - Ab 2.5.16: Freundesliste und Anfragen zeigt die App nur an (kein Cache, keine lokale Speicherung).
 - Ab 2.5.14: Minecraft-Accounts (Name, UUID, Edition, Plattform) zeigt die App nur an (kein Cache); der Link-Code geht
   nur an die Plattform und wird nach dem Verknüpfen aus dem Feld gelöscht.

@@ -5778,4 +5778,40 @@
   <data name="Error_not_friends" xml:space="preserve">
     <value>Ihr seid nicht befreundet.</value>
   </data>
+  <data name="Messages_FromMinecraft" xml:space="preserve">
+    <value>aus Minecraft</value>
+  </data>
+  <data name="Minecraft_WebsiteMessagesOn" xml:space="preserve">
+    <value>Nachrichten von Freunden aus Website und App werden jetzt auch im Spiel angezeigt.</value>
+  </data>
+  <data name="Minecraft_WebsiteMessagesOff" xml:space="preserve">
+    <value>Nachrichten aus Website und App werden nicht mehr im Spiel angezeigt.</value>
+  </data>
+  <data name="Mod_SourceAll" xml:space="preserve">
+    <value>Alle Herkünfte</value>
+  </data>
+  <data name="Mod_GameReported" xml:space="preserve">
+    <value>{0} gemeldet</value>
+  </data>
+  <data name="AccountPage_MinecraftWebsiteMessages.Header" xml:space="preserve">
+    <value>Website-Nachrichten im Spiel anzeigen</value>
+  </data>
+  <data name="AccountPage_MinecraftWebsiteMessagesHint.Text" xml:space="preserve">
+    <value>Direktnachrichten von Freunden, die auf der Website oder in der App geschrieben wurden, zeigt das Minecraft-Netzwerk beim Beitritt an – gekürzt und ohne Anhänge. Gruppen-Gespräche und Nachrichten von Nicht-Freunden kommen nie.</value>
+  </data>
+  <data name="Mod_Source_website" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="Mod_Source_minecraft" xml:space="preserve">
+    <value>Minecraft-Netzwerk</value>
+  </data>
+  <data name="Mod_Type_minecraft_player" xml:space="preserve">
+    <value>Minecraft-Spieler</value>
+  </data>
+  <data name="AdminPage_SourceFilter.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Nach Herkunft filtern</value>
+  </data>
+  <data name="AdminPage_GameReportHint.Text" xml:space="preserve">
+    <value>Der Verlauf wurde vom Minecraft-Server übermittelt und ist nicht serverseitig geprüft.</value>
+  </data>
 </root>

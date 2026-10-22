@@ -5778,4 +5778,40 @@
   <data name="Error_not_friends" xml:space="preserve">
     <value>You are not friends.</value>
   </data>
+  <data name="Messages_FromMinecraft" xml:space="preserve">
+    <value>from Minecraft</value>
+  </data>
+  <data name="Minecraft_WebsiteMessagesOn" xml:space="preserve">
+    <value>Messages from friends sent on the website or in the app are now also shown in game.</value>
+  </data>
+  <data name="Minecraft_WebsiteMessagesOff" xml:space="preserve">
+    <value>Messages from the website and app are no longer shown in game.</value>
+  </data>
+  <data name="Mod_SourceAll" xml:space="preserve">
+    <value>All sources</value>
+  </data>
+  <data name="Mod_GameReported" xml:space="preserve">
+    <value>{0} reported</value>
+  </data>
+  <data name="AccountPage_MinecraftWebsiteMessages.Header" xml:space="preserve">
+    <value>Show website messages in game</value>
+  </data>
+  <data name="AccountPage_MinecraftWebsiteMessagesHint.Text" xml:space="preserve">
+    <value>Direct messages from friends written on the website or in the app are shown by the Minecraft network when you join – shortened and without attachments. Group conversations and messages from non-friends never appear.</value>
+  </data>
+  <data name="Mod_Source_website" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="Mod_Source_minecraft" xml:space="preserve">
+    <value>Minecraft network</value>
+  </data>
+  <data name="Mod_Type_minecraft_player" xml:space="preserve">
+    <value>Minecraft player</value>
+  </data>
+  <data name="AdminPage_SourceFilter.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Filter by source</value>
+  </data>
+  <data name="AdminPage_GameReportHint.Text" xml:space="preserve">
+    <value>The chat history was sent by the Minecraft server and has not been verified by the platform.</value>
+  </data>
 </root>

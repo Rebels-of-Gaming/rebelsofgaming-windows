@@ -242,6 +242,10 @@
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
+                    <StackPanel Spacing="4" Visibility="{x:Bind Minecraft.HasAccounts, Mode=OneWay}">
+                        <ToggleSwitch x:Uid="AccountPage_MinecraftWebsiteMessages" IsEnabled="{x:Bind Minecraft.CanLink}" IsOn="{x:Bind Minecraft.ShowWebsiteMessages, Mode=TwoWay}" />
+                        <TextBlock x:Uid="AccountPage_MinecraftWebsiteMessagesHint" FontSize="12" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                    </StackPanel>
                 </StackPanel>
             </Expander>
 

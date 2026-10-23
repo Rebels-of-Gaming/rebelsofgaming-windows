@@ -37,6 +37,8 @@ jobs:
     name: WinUI-App (Windows)
     runs-on: [self-hosted, Windows]
     timeout-minutes: 60
+    permissions:
+      contents: write
     # Keine weiterlaufenden MSBuild-Knoten/Compiler-Server: sie halten sonst die Ausgabe-Pipe offen und der Schritt
     # hängt nach erfolgreichem Build (beobachtet 16.10.2026 nach „App bauen (x64)“).
     env:
@@ -61,8 +63,32 @@ jobs:
           $mode = '${{ github.event.inputs.mode || 'Build' }}'
           if (Test-Path $pwsh) { & $pwsh -NoProfile -File ./scripts/build-windows.ps1 -Mode $mode } else { ./scripts/build-windows.ps1 -Mode $mode }
           exit $LASTEXITCODE
+      # Pakete zusätzlich als Entwurfs-Release (nur für Repo-Mitglieder sichtbar): zählt nicht zum Artefakt-Kontingent
+      - name: Pakete als Entwurfs-Release ablegen
+        if: success() && (github.event.inputs.mode == 'Store' || github.event.inputs.mode == 'Sideload')
+        shell: powershell
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $mode = '${{ github.event.inputs.mode }}'
+          $version = ([xml](Get-Content Directory.Build.props)).Project.PropertyGroup.RoGVersion | Where-Object { $_ } | Select-Object -First 1
+          $files = @(Get-ChildItem artifacts/msix -Recurse -Include *.msixupload, *.msixbundle, *.msix, *.cer | Where-Object { $_.FullName -notmatch '\\Dependencies\\' })
+          if ($files.Count -eq 0) { Write-Error 'Keine Pakete gefunden'; exit 1 }
+          $headers = @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = 'application/vnd.github+json' }
+          $api = "https://api.github.com/repos/${{ github.repository }}"
+          $body = @{ tag_name = "$($mode.ToLower())-$version-run${{ github.run_id }}"; target_commitish = '${{ github.sha }}'; name = "$mode $version (Lauf ${{ github.run_id }})"; draft = $true; body = "Paket aus CI-Lauf ${{ github.run_id }}, Commit ${{ github.sha }}." } | ConvertTo-Json
+          $release = Invoke-RestMethod -Method Post -Uri "$api/releases" -Headers $headers -Body $body -ContentType 'application/json'
+          foreach ($f in $files) {
+            $uri = ($release.upload_url -replace '\{.*\}', '') + '?name=' + [uri]::EscapeDataString($f.Name)
+            Invoke-RestMethod -Method Post -Uri $uri -Headers $headers -InFile $f.FullName -ContentType 'application/octet-stream' -TimeoutSec 1800 | Out-Null
+            Write-Host "hochgeladen: $($f.Name) ($([math]::Round($f.Length / 1MB)) MB)"
+          }
+          Write-Host "Entwurfs-Release: $($release.html_url)"
       - uses: actions/upload-artifact@v4
         if: always()
+        # Kontingent voll darf den Lauf nicht rot machen, wenn das Paket schon im Release liegt
+        continue-on-error: true
         with:
           name: windows-artifacts
           path: artifacts/

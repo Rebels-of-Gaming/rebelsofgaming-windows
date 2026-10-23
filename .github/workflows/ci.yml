@@ -36,7 +36,7 @@ jobs:
   windows:
     name: WinUI-App (Windows)
     runs-on: [self-hosted, Windows]
-    timeout-minutes: 60
+    timeout-minutes: 90
     permissions:
       contents: write
     # Keine weiterlaufenden MSBuild-Knoten/Compiler-Server: sie halten sonst die Ausgabe-Pipe offen und der Schritt
@@ -73,7 +73,9 @@ jobs:
           $ErrorActionPreference = 'Stop'
           $mode = '${{ github.event.inputs.mode }}'
           $version = ([xml](Get-Content Directory.Build.props)).Project.PropertyGroup.RoGVersion | Where-Object { $_ } | Select-Object -First 1
-          $files = @(Get-ChildItem artifacts/msix -Recurse -Include *.msixupload, *.msixbundle, *.msix, *.cer | Where-Object { $_.FullName -notmatch '\\Dependencies\\' })
+          # Store: nur die .msixupload fürs Partner Center; Sideload: Bundle + Zertifikat (Uplink des Runners ist langsam)
+          $include = if ($mode -eq 'Store') { @('*.msixupload') } else { @('*.msixbundle', '*.cer') }
+          $files = @(Get-ChildItem artifacts/msix -Recurse -Include $include | Where-Object { $_.FullName -notmatch '\\Dependencies\\' })
           if ($files.Count -eq 0) { Write-Error 'Keine Pakete gefunden'; exit 1 }
           $headers = @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = 'application/vnd.github+json' }
           $api = "https://api.github.com/repos/${{ github.repository }}"
@@ -81,7 +83,10 @@ jobs:
           $release = Invoke-RestMethod -Method Post -Uri "$api/releases" -Headers $headers -Body $body -ContentType 'application/json'
           foreach ($f in $files) {
             $uri = ($release.upload_url -replace '\{.*\}', '') + '?name=' + [uri]::EscapeDataString($f.Name)
-            Invoke-RestMethod -Method Post -Uri $uri -Headers $headers -InFile $f.FullName -ContentType 'application/octet-stream' -TimeoutSec 1800 | Out-Null
+            # curl.exe statt Invoke-RestMethod: streamt die Datei, Windows PowerShell bricht bei großen Uploads ab
+            curl.exe --fail-with-body --silent --show-error --retry 3 --retry-all-errors --max-time 3600 -X POST `
+              -H "Authorization: Bearer $env:GH_TOKEN" -H 'Content-Type: application/octet-stream' --data-binary "@$($f.FullName)" $uri -o NUL
+            if ($LASTEXITCODE -ne 0) { Write-Error "Upload fehlgeschlagen: $($f.Name)"; exit 1 }
             Write-Host "hochgeladen: $($f.Name) ($([math]::Round($f.Length / 1MB)) MB)"
           }
           Write-Host "Entwurfs-Release: $($release.html_url)"

@@ -279,6 +279,19 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </StackPanel>
+
+                    <!-- Minecraft-Statistiken (Website v0.41.0): Opt-in, Standard nur ich -->
+                    <StackPanel Spacing="8">
+                        <TextBlock x:Uid="AccountPage_Stats" Style="{StaticResource RoGSectionTextStyle}" />
+                        <TextBlock x:Uid="AccountPage_StatsHint" FontSize="12" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                        <ComboBox
+                            x:Uid="AccountPage_StatsVisibility"
+                            DisplayMemberPath="Label"
+                            ItemsSource="{x:Bind Minecraft.CoinsVisibilityOptions}"
+                            SelectedItem="{x:Bind Minecraft.SelectedStatsVisibility, Mode=TwoWay}"
+                            Visibility="{x:Bind Minecraft.CanEditCoinsVisibility}" />
+                        <Button x:Uid="AccountPage_OpenLeaderboards" Click="OnLeaderboardsClick" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                    </StackPanel>
                 </StackPanel>
             </Expander>
 

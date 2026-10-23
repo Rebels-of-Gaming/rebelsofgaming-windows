@@ -1152,6 +1152,42 @@ public static class StringKeys
 
     public const string BanAppealsPluginVersionsSaved = "BanAppeals_PluginVersionsSaved";
 
+    public const string StatsVisibilitySaved = "Stats_VisibilitySaved";
+
+    public const string WikiInternal = "Wiki_Internal";
+
+    public const string LeaderboardMinMatches = "Leaderboard_MinMatches";
+
+    public const string LeaderboardFrom = "Leaderboard_From";
+
+    public const string LeaderboardMatches = "Leaderboard_Matches";
+
+    public const string StatsPlaytimeHours = "Stats_PlaytimeHours";
+
+    public const string StatsPlaytimeMinutes = "Stats_PlaytimeMinutes";
+
+    public const string StatsPlaytime = "Stats_Playtime";
+
+    public const string StatsSessions = "Stats_Sessions";
+
+    public const string StatsMatches = "Stats_Matches";
+
+    public const string StatsMatchesValue = "Stats_MatchesValue";
+
+    public const string StatsDeaths = "Stats_Deaths";
+
+    public const string StatsPlayerKills = "Stats_PlayerKills";
+
+    public const string StatsBlocks = "Stats_Blocks";
+
+    public const string StatsBlocksValue = "Stats_BlocksValue";
+
+    public const string StatsAdvancements = "Stats_Advancements";
+
+    public const string StatsPlots = "Stats_Plots";
+
+    public const string StatsParkour = "Stats_Parkour";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

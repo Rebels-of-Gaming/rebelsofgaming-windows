@@ -6,7 +6,11 @@ using File = System.IO.File;
 
 namespace RoG.Core.Features.Wiki;
 
-public sealed record WikiNamespace(string Id, string Slug, string Name, string? Description, string Visibility, bool RequiresReview, int Pages, string UploadVisibility = "members");
+public sealed record WikiNamespace(string Id, string Slug, string Name, string? Description, string Visibility, bool RequiresReview, int Pages, string UploadVisibility = "members")
+{
+    /// <summary>Interner Bereich (<c>team</c>): nur mit <c>wiki.internal</c> sichtbar, für alle anderen gibt es ihn nicht.</summary>
+    public bool IsInternal => Visibility == WikiService.VisibilityTeam;
+}
 
 /// <summary>Ergebnis „Seite anlegen“: Seite und Status der ersten Version (<c>pending</c> bei Prüfpflicht).</summary>
 public sealed record WikiCreated(string PageId, string Status);
@@ -220,10 +224,12 @@ public sealed class WikiService(IRoGApiClient client, HttpClient http, Uri? wiki
     }
 
     /// <summary>Sichtbarkeit für Bild-Uploads je Bereich (<c>upload_visibility</c>): <c>squad</c> → privat mit geheimem Link.</summary>
+    public const string VisibilityTeam = "team";
+
     public static Uploads.UploadVisibility UploadVisibilityFor(string? uploadVisibility) => uploadVisibility switch
     {
         "public" => Uploads.UploadVisibility.Public,
-        "private" or "squad" => Uploads.UploadVisibility.Private,
+        "private" or "squad" or VisibilityTeam => Uploads.UploadVisibility.Private,
         _ => Uploads.UploadVisibility.Members,
     };
 

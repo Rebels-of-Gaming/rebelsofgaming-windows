@@ -6066,4 +6066,175 @@
   <data name="BanAppeals_SavePluginVersions.Content" xml:space="preserve">
     <value>Enregistrer les versions</value>
   </data>
+  <data name="Stats_VisibilitySaved" xml:space="preserve">
+    <value>Statistiques Minecraft sur le profil : {0}</value>
+  </data>
+  <data name="Wiki_Internal" xml:space="preserve">
+    <value>Interne</value>
+  </data>
+  <data name="Leaderboard_MinMatches" xml:space="preserve">
+    <value>Taux de victoire à partir de {0} parties</value>
+  </data>
+  <data name="Leaderboard_From" xml:space="preserve">
+    <value>depuis le {0}</value>
+  </data>
+  <data name="Leaderboard_Matches" xml:space="preserve">
+    <value>{0} parties · {1} victoires · {2} %</value>
+  </data>
+  <data name="Stats_PlaytimeHours" xml:space="preserve">
+    <value>{0} h {1} min</value>
+  </data>
+  <data name="Stats_PlaytimeMinutes" xml:space="preserve">
+    <value>{0} min</value>
+  </data>
+  <data name="Stats_Playtime" xml:space="preserve">
+    <value>Temps de jeu</value>
+  </data>
+  <data name="Stats_Sessions" xml:space="preserve">
+    <value>Sessions</value>
+  </data>
+  <data name="Stats_Matches" xml:space="preserve">
+    <value>Mini-jeux</value>
+  </data>
+  <data name="Stats_MatchesValue" xml:space="preserve">
+    <value>{0} parties · {1} victoires</value>
+  </data>
+  <data name="Stats_Deaths" xml:space="preserve">
+    <value>Morts</value>
+  </data>
+  <data name="Stats_PlayerKills" xml:space="preserve">
+    <value>Joueurs tués</value>
+  </data>
+  <data name="Stats_Blocks" xml:space="preserve">
+    <value>Blocs</value>
+  </data>
+  <data name="Stats_BlocksValue" xml:space="preserve">
+    <value>{0} posés · {1} cassés</value>
+  </data>
+  <data name="Stats_Advancements" xml:space="preserve">
+    <value>Progrès</value>
+  </data>
+  <data name="Stats_Plots" xml:space="preserve">
+    <value>Parcelles</value>
+  </data>
+  <data name="Stats_Parkour" xml:space="preserve">
+    <value>Parkour : {0}</value>
+  </data>
+  <data name="Stats_Death_player" xml:space="preserve">
+    <value>joueurs</value>
+  </data>
+  <data name="Stats_Death_mob" xml:space="preserve">
+    <value>monstres</value>
+  </data>
+  <data name="Stats_Death_environment" xml:space="preserve">
+    <value>environnement</value>
+  </data>
+  <data name="Stats_Death_other" xml:space="preserve">
+    <value>autre</value>
+  </data>
+  <data name="Leaderboard_Board_playtime" xml:space="preserve">
+    <value>Temps de jeu</value>
+  </data>
+  <data name="Leaderboard_Board_bedwars" xml:space="preserve">
+    <value>Bedwars</value>
+  </data>
+  <data name="Leaderboard_Board_skywars" xml:space="preserve">
+    <value>Skywars</value>
+  </data>
+  <data name="Leaderboard_Board_tntrun" xml:space="preserve">
+    <value>TNT Run</value>
+  </data>
+  <data name="Leaderboard_Board_buildbattle" xml:space="preserve">
+    <value>Build Battle</value>
+  </data>
+  <data name="Leaderboard_Board_jumprace" xml:space="preserve">
+    <value>Course de saut</value>
+  </data>
+  <data name="Leaderboard_Board_ttt" xml:space="preserve">
+    <value>TTT – Traître</value>
+  </data>
+  <data name="Leaderboard_Board_parkour" xml:space="preserve">
+    <value>Parkour</value>
+  </data>
+  <data name="Leaderboard_Period_all" xml:space="preserve">
+    <value>Depuis le début</value>
+  </data>
+  <data name="Leaderboard_Period_30d" xml:space="preserve">
+    <value>30 derniers jours</value>
+  </data>
+  <data name="Leaderboard_Sort_wins" xml:space="preserve">
+    <value>Victoires</value>
+  </data>
+  <data name="Leaderboard_Sort_win_rate" xml:space="preserve">
+    <value>Taux de victoire</value>
+  </data>
+  <data name="Leaderboard_Sort_objective_correct_kills" xml:space="preserve">
+    <value>Éliminations justes</value>
+  </data>
+  <data name="Leaderboard_Sort_objective_checkpoints" xml:space="preserve">
+    <value>Points de contrôle</value>
+  </data>
+  <data name="AdminChoice_team" xml:space="preserve">
+    <value>Interne (équipe)</value>
+  </data>
+  <data name="LeaderboardsPage_Title.Text" xml:space="preserve">
+    <value>CLASSEMENTS</value>
+  </data>
+  <data name="LeaderboardsPage_Intro.Text" xml:space="preserve">
+    <value>Réseau Minecraft : seuls les membres qui partagent leurs statistiques Minecraft sur leur profil apparaissent ici. Les classements sont recalculés toutes les quelques minutes.</value>
+  </data>
+  <data name="LeaderboardsPage_Board.Header" xml:space="preserve">
+    <value>Classement</value>
+  </data>
+  <data name="LeaderboardsPage_Board.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Classement</value>
+  </data>
+  <data name="LeaderboardsPage_Period.Header" xml:space="preserve">
+    <value>Période</value>
+  </data>
+  <data name="LeaderboardsPage_Period.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Période</value>
+  </data>
+  <data name="LeaderboardsPage_Sort.Header" xml:space="preserve">
+    <value>Classer par</value>
+  </data>
+  <data name="LeaderboardsPage_Sort.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Classer par</value>
+  </data>
+  <data name="LeaderboardsPage_Course.Header" xml:space="preserve">
+    <value>Parcours</value>
+  </data>
+  <data name="LeaderboardsPage_Course.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Parcours</value>
+  </data>
+  <data name="LeaderboardsPage_State.EmptyText" xml:space="preserve">
+    <value>Personne dans ce classement pour l'instant – ou aucun partage.</value>
+  </data>
+  <data name="LeaderboardsPage_List.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Classement</value>
+  </data>
+  <data name="ServersPage_Leaderboards.Content" xml:space="preserve">
+    <value>Classements</value>
+  </data>
+  <data name="MembersPage_Minecraft.Text" xml:space="preserve">
+    <value>Minecraft</value>
+  </data>
+  <data name="MembersPage_Leaderboards.Content" xml:space="preserve">
+    <value>Voir les classements</value>
+  </data>
+  <data name="AccountPage_Stats.Text" xml:space="preserve">
+    <value>Statistiques Minecraft</value>
+  </data>
+  <data name="AccountPage_StatsHint.Text" xml:space="preserve">
+    <value>Temps de jeu, mini-jeux, temps de parkour et récompenses du réseau. Tu décides qui les voit – cela détermine aussi si tu apparais dans les classements.</value>
+  </data>
+  <data name="AccountPage_StatsVisibility.Header" xml:space="preserve">
+    <value>Visible sur le profil pour</value>
+  </data>
+  <data name="AccountPage_StatsVisibility.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Statistiques Minecraft visibles pour</value>
+  </data>
+  <data name="AccountPage_OpenLeaderboards.Content" xml:space="preserve">
+    <value>Classements</value>
+  </data>
 </root>

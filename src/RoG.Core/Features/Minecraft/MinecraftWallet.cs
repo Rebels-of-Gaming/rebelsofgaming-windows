@@ -49,7 +49,7 @@ public sealed partial class MinecraftService
     public const string VisibilityMembers = "members";
     public const string VisibilityPublic = "public";
 
-    /// <summary>Werte für „Rebel-Coins im Profil“, Standard zuerst.</summary>
+    /// <summary>Werte für „Rebel-Coins im Profil“ und „Minecraft-Statistiken“, Standard zuerst.</summary>
     public static IReadOnlyList<string> CoinsVisibilities { get; } = [VisibilityPrivate, VisibilityMembers, VisibilityPublic];
 
     public async Task<MinecraftWallet> WalletAsync(CancellationToken cancellationToken = default)
@@ -58,28 +58,43 @@ public sealed partial class MinecraftService
         return ParseWallet(data);
     }
 
-    public async Task<string> CoinsVisibilityAsync(CancellationToken cancellationToken = default)
+    public const string CoinsField = "coins";
+    public const string StatsField = "minecraft_stats";
+
+    public async Task<string> CoinsVisibilityAsync(CancellationToken cancellationToken = default) =>
+        (await ProfileVisibilityAsync(cancellationToken).ConfigureAwait(false)).Coins;
+
+    /// <summary>„Rebel-Coins im Profil“ und „Minecraft-Statistiken“ aus einem Abruf von <c>/v1/me/profile</c>.</summary>
+    public async Task<(string Coins, string Stats)> ProfileVisibilityAsync(CancellationToken cancellationToken = default)
     {
         var data = (await SendAsync(HttpMethod.Get, "me/profile", null, cancellationToken).ConfigureAwait(false))?["data"];
-        return ParseCoinsVisibility(data);
+        return (ParseVisibility(data, CoinsField), ParseVisibility(data, StatsField));
     }
 
-    /// <summary>Ändert nur <c>visibility.coins</c> – alle anderen Profilfelder bleiben, wie sie sind.</summary>
-    public async Task<string> SetCoinsVisibilityAsync(string visibility, CancellationToken cancellationToken = default)
+    public Task<string> SetCoinsVisibilityAsync(string visibility, CancellationToken cancellationToken = default) =>
+        SetProfileVisibilityAsync(CoinsField, visibility, cancellationToken);
+
+    public Task<string> SetStatsVisibilityAsync(string visibility, CancellationToken cancellationToken = default) =>
+        SetProfileVisibilityAsync(StatsField, visibility, cancellationToken);
+
+    /// <summary>Ändert nur dieses eine Profilfeld in <c>visibility</c> – alle anderen bleiben, wie sie sind.</summary>
+    private async Task<string> SetProfileVisibilityAsync(string field, string visibility, CancellationToken cancellationToken)
     {
         if (!CoinsVisibilities.Contains(visibility))
         {
             throw new ArgumentException("Invalid visibility.", nameof(visibility));
         }
 
-        var body = new JsonObject { ["visibility"] = new JsonObject { ["coins"] = visibility } };
+        var body = new JsonObject { ["visibility"] = new JsonObject { [field] = visibility } };
         var data = (await SendAsync(new HttpMethod("PATCH"), "me/profile", body, cancellationToken).ConfigureAwait(false))?["data"];
-        return data?["visibility"] is null ? visibility : ParseCoinsVisibility(data);
+        return data?["visibility"] is null ? visibility : ParseVisibility(data, field);
     }
 
     /// <summary>Unbekannte oder fehlende Werte gelten als <c>private</c> (Standard des Servers).</summary>
-    public static string ParseCoinsVisibility(JsonNode? profile) =>
-        Str(profile?["visibility"], "coins") is { } v && CoinsVisibilities.Contains(v) ? v : VisibilityPrivate;
+    public static string ParseCoinsVisibility(JsonNode? profile) => ParseVisibility(profile, CoinsField);
+
+    public static string ParseVisibility(JsonNode? profile, string field) =>
+        Str(profile?["visibility"], field) is { } v && CoinsVisibilities.Contains(v) ? v : VisibilityPrivate;
 
     /// <summary>Ohne Wallet liefert der Server <c>balance: 0</c> und keine Buchungen.</summary>
     public static MinecraftWallet ParseWallet(JsonNode? data) => new(

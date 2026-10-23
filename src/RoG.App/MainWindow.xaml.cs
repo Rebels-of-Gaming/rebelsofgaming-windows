@@ -521,6 +521,14 @@ public sealed partial class MainWindow : Window, IDisposable
             return true;
         }
 
+        // Minecraft-Bestenlisten: ohne Eintrag in der Seitenleiste (Knopf auf der Server-Seite und unter Konto → Minecraft)
+        if (route.Section == AppSection.Leaderboards)
+        {
+            NavView.SelectedItem = null;
+            ContentFrame.Navigate(typeof(LeaderboardsPage));
+            return true;
+        }
+
         if (route.Section == AppSection.Search)
         {
             NavView.SelectedItem = null;

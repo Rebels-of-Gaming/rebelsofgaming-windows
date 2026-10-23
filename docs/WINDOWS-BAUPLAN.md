@@ -266,6 +266,18 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   Rangschutz, eigene Wallet (nur Owner) und Tageslimit je Admin prüft der Server. `AppealSettings` um
   `min_plugin_version(s)` erweitert, `SetPluginVersionsAsync` ersetzt alle Admin-Einträge; im Reiter Einsprüche eine
   Zeile je Plugin („rog-proxy 0.6.0“). Tests: 28 neue.
+- **2.5.20 – Minecraft-Statistiken, Bestenlisten, interne Wiki-Bereiche (Website v0.41.0, Guide 44/26, Annahme 495):**
+  `MinecraftService.MemberStatsAsync` (`GET /v1/members/{member}/minecraft-stats`, `403 minecraft_stats_hidden`) und
+  `LeaderboardAsync` (`board`/`period`/`sort`/`course` – nur bekannte Werte werden gesendet, Wertungen je Liste aus
+  `SortsFor`, Kurse aus `meta.courses`). `MemberProfile.Minecraft` aus `profile.minecraft` → Abschnitt „Minecraft“ im
+  Mitgliederprofil (erst Kurzfassung, dann alle Werte). Neuer Bereich `AppSection.Leaderboards` ohne Eintrag in der
+  Seitenleiste (Knöpfe auf Server-Seite, im Profil, unter Konto → Minecraft; Links `/minecraft/leaderboards`,
+  `rog://leaderboards`); Klick auf einen Platz öffnet das Profil. Profil-Sichtbarkeit verallgemeinert
+  (`ProfileVisibilityAsync` liest `coins` und `minecraft_stats` aus einem Abruf, `SetStatsVisibilityAsync` patcht nur
+  das eine Feld). Awards kommen als Badges (`mc-…`) über die vorhandene Badge-Anzeige; Benachrichtigungstypen
+  `minecraft.award`/`minecraft.pool_alert` liefert die API samt Beschriftung. Wiki: `WikiNamespace.IsInternal`
+  (`team`) → „· Intern“ in der Bereichsauswahl, Bilder privat; Admin-Auswahl um „Intern (Team)“ erweitert.
+  Tests: 27 neue.
 - **2.5.16 – Freunde (Website v0.38.0, live 22.10.2026, Guide 45, Annahme 492):** `FriendsService` (Core, 15 Tests):
   `GET /v1/me/friends` (Status → `Presence`, `null` = nicht freigegeben, `meta.total`/`meta.limit`),
   `GET /v1/me/friends/requests` (`filter[direction]`), `POST …/requests {user}` (Gegenanfrage → `status: accepted`),
@@ -536,6 +548,7 @@ sich einmal neu an (2FA).
 - Ab 2.5.10: Die öffentliche Ban-Liste und Einsprüche zeigt die App nur an (kein Cache); eine Stellungnahme geht nur an
   die Plattform und wird dort ein öffentlich lesbares Forum-Thema – darauf weist das Formular hin.
 - Ab 2.5.18: Rebel-Coins (Kontostand, Serie, Buchungen) zeigt die App nur an (kein Cache); die Sichtbarkeit im Profil liegt nur auf dem Server.
+- Ab 2.5.20: Minecraft-Statistiken und Bestenlisten zeigt die App nur an (kein Cache, Abruf ohne ETag); die Freigabe `minecraft_stats` liegt nur auf dem Server.
 - Ab 2.5.17: Die Einstellung „Website-Nachrichten im Spiel anzeigen“ liegt nur auf dem Server (keine lokale Kopie); Spieler-Angaben aus Spiel-Meldungen zeigt die App nur an.
 - Ab 2.5.16: Freundesliste und Anfragen zeigt die App nur an (kein Cache, keine lokale Speicherung).
 - Ab 2.5.14: Minecraft-Accounts (Name, UUID, Edition, Plattform) zeigt die App nur an (kein Cache); der Link-Code geht

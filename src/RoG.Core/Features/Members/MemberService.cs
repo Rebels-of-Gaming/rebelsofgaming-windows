@@ -36,10 +36,14 @@ public sealed record MemberProfile(
     DateTimeOffset? LastSeenAt,
     IReadOnlyList<MemberBadge> Badges,
     IReadOnlyList<(string Platform, string Handle)> Platforms,
-    MemberCoins? Coins = null);
+    MemberCoins? Coins = null,
+    MemberMinecraft? Minecraft = null);
 
 /// <summary>Rebel-Coins im Profil (<c>profile.rebel_coins</c>) – nur mit Opt-in des Mitglieds, sonst <c>null</c>.</summary>
 public sealed record MemberCoins(int Balance, int Streak, int BestStreak);
+
+/// <summary>Kurzfassung der Minecraft-Statistiken (<c>profile.minecraft</c>) – nur mit Opt-in, sonst <c>null</c>.</summary>
+public sealed record MemberMinecraft(long PlaytimeSeconds, int Sessions, int MatchesPlayed, int MatchesWon, int ParkourCourses, int Awards);
 
 public sealed record TeamGroup(string Name, string? Description, IReadOnlyList<TeamMember> Members);
 
@@ -75,7 +79,10 @@ public sealed class MemberService(IRoGApiClient client)
             ApiValues.Time(d.Last_seen_at),
             d.Badges?.Select(b => new MemberBadge(b.Name, ApiValues.Text(b.Description), b.Color)).ToList() ?? [],
             p?.Platform_ids?.Select(x => (x.Name, x.Handle)).ToList() ?? [],
-            p?.Rebel_coins is { } c ? new MemberCoins(Math.Max(0, c.Balance), Math.Max(0, c.Streak), Math.Max(0, c.Best_streak)) : null);
+            p?.Rebel_coins is { } c ? new MemberCoins(Math.Max(0, c.Balance), Math.Max(0, c.Streak), Math.Max(0, c.Best_streak)) : null,
+            p?.Minecraft is { } m
+                ? new MemberMinecraft(Math.Max(0, m.Playtime_seconds), Math.Max(0, m.Sessions), Math.Max(0, m.Matches_played), Math.Max(0, m.Matches_won), Math.Max(0, m.Parkour_courses), m.Awards?.Count ?? 0)
+                : null);
     }
 
     public async Task<IReadOnlyList<TeamGroup>> GetTeamAsync(CancellationToken cancellationToken = default)

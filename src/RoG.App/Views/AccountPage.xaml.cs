@@ -67,6 +67,8 @@ public sealed partial class AccountPage : Page
 
     public AccountDataViewModel Data { get; }
 
+    private void OnLeaderboardsClick(object sender, RoutedEventArgs e) => App.Services.Navigate(new RoG.Core.Navigation.AppRoute(RoG.Core.Navigation.AppSection.Leaderboards));
+
     private void OnDataExpanding(Expander sender, ExpanderExpandingEventArgs args) => _ = Data.LoadAsync(silent: true);
 
     /// <summary>

@@ -25,6 +25,9 @@ public static class AdminAreas
 
     private static readonly string[] Visibility3 = ["public", "members", "squad"];
 
+    /// <summary>Wiki-Bereiche zusätzlich <c>team</c> (intern, Recht <c>wiki.internal</c>; Website v0.41.0).</summary>
+    private static readonly string[] WikiVisibility = ["public", "members", "squad", "team"];
+
     // ---- nur als Auswahlquelle für Verweise (keine eigenen Seiten) ----
 
     private static readonly AdminArea SquadsRef = new("squads", "AdminArea_squads", "squads.manage", "squads:read", "squads:write", "squads", []);
@@ -319,7 +322,7 @@ public static class AdminAreas
                 F("icon", AdminFieldType.Text, max: 30, help: "AdminHelp_icon"),
                 F("game_id", AdminFieldType.Reference, reference: "games"),
                 F("squad_id", AdminFieldType.Reference, reference: "squads"),
-                C("visibility", Visibility3),
+                C("visibility", WikiVisibility),
                 F("requires_review", AdminFieldType.Bool),
                 F("sort", AdminFieldType.WholeNumber, min: 0, maxValue: 9999, help: "AdminHelp_writeOnly"),
             ],

@@ -141,4 +141,21 @@ public class MinecraftWalletTests
             }
         }
     }
+
+    [Fact]
+    public async Task Member_profile_has_the_minecraft_summary_only_with_opt_in()
+    {
+        var json = """
+            {"data":{"id":"01JA","slug":"wahke","name":"Wahke","avatar_url":null,"status":"offline","profile":{"motto":null,
+            "minecraft":{"playtime_seconds":403200,"sessions":112,"matches_played":135,"matches_won":55,"parkour_courses":1,
+            "awards":[{"key":"mc-playtime-100h","name":"Blockveteran","description":"x","icon":"hourglass","color":"#D4AE3C","awarded_at":"2026-10-20T18:02:11Z"}]}}}}
+            """;
+        var (api, _) = Create((_, _) => StubHttpHandler.Json(HttpStatusCode.OK, json));
+        using (api)
+        {
+            var profile = await new MemberService(api.Client).GetAsync("wahke");
+
+            Assert.Equal(new MemberMinecraft(403200, 112, 135, 55, 1, 1), profile.Minecraft);
+        }
+    }
 }

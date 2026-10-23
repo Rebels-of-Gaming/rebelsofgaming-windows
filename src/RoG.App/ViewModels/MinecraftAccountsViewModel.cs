@@ -30,6 +30,7 @@ public sealed partial class MinecraftAccountsViewModel : LoadableViewModel
         CanEditCoinsVisibility = me is not null && me.HasScope("profile:read") && me.HasScope("profile:write");
         CoinsVisibilityOptions = MinecraftService.CoinsVisibilities.Select(v => new SettingsOption(v, L("Coins_Visibility_" + v))).ToList();
         SelectedCoinsVisibility = CoinsVisibilityOptions[0];
+        SelectedStatsVisibility = CoinsVisibilityOptions[0];
     }
 
     public bool CanRead { get; }
@@ -68,22 +69,34 @@ public sealed partial class MinecraftAccountsViewModel : LoadableViewModel
     [ObservableProperty]
     public partial SettingsOption SelectedCoinsVisibility { get; set; }
 
+    /// <summary>„Minecraft-Statistiken“ im Profil (Statistiken, Bestenlisten, Awards) – gleiche Werte wie bei den Coins.</summary>
+    [ObservableProperty]
+    public partial SettingsOption SelectedStatsVisibility { get; set; }
+
     private bool _coinsVisibilityLoaded;
 
     partial void OnSelectedCoinsVisibilityChanged(SettingsOption value)
     {
         if (_coinsVisibilityLoaded && value is not null)
         {
-            _ = SaveCoinsVisibilityAsync(value);
+            _ = SaveVisibilityAsync(() => _minecraft.SetCoinsVisibilityAsync(value.Value), StringKeys.CoinsVisibilitySaved, value.Label);
         }
     }
 
-    private async Task SaveCoinsVisibilityAsync(SettingsOption value)
+    partial void OnSelectedStatsVisibilityChanged(SettingsOption value)
+    {
+        if (_coinsVisibilityLoaded && value is not null)
+        {
+            _ = SaveVisibilityAsync(() => _minecraft.SetStatsVisibilityAsync(value.Value), StringKeys.StatsVisibilitySaved, value.Label);
+        }
+    }
+
+    private async Task SaveVisibilityAsync(Func<Task<string>> save, string messageKey, string label)
     {
         try
         {
-            await _minecraft.SetCoinsVisibilityAsync(value.Value);
-            Show(Format(StringKeys.CoinsVisibilitySaved, value.Label), InfoBarSeverity.Success);
+            await save();
+            Show(Format(messageKey, label), InfoBarSeverity.Success);
         }
         catch (Exception ex) when (ex is ApiProblemException or System.Text.Json.JsonException or ArgumentException)
         {
@@ -118,8 +131,9 @@ public sealed partial class MinecraftAccountsViewModel : LoadableViewModel
         {
             try
             {
-                var value = await _minecraft.CoinsVisibilityAsync(cancellationToken);
-                SelectedCoinsVisibility = CoinsVisibilityOptions.First(o => o.Value == value);
+                var (coins, stats) = await _minecraft.ProfileVisibilityAsync(cancellationToken);
+                SelectedCoinsVisibility = CoinsVisibilityOptions.First(o => o.Value == coins);
+                SelectedStatsVisibility = CoinsVisibilityOptions.First(o => o.Value == stats);
                 _coinsVisibilityLoaded = true;
             }
             catch (Exception ex) when (ex is ApiProblemException or System.Text.Json.JsonException)

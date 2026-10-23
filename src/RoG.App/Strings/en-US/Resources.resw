@@ -6066,4 +6066,175 @@
   <data name="BanAppeals_SavePluginVersions.Content" xml:space="preserve">
     <value>Save versions</value>
   </data>
+  <data name="Stats_VisibilitySaved" xml:space="preserve">
+    <value>Minecraft stats on profile: {0}</value>
+  </data>
+  <data name="Wiki_Internal" xml:space="preserve">
+    <value>Internal</value>
+  </data>
+  <data name="Leaderboard_MinMatches" xml:space="preserve">
+    <value>Win rate from {0} matches</value>
+  </data>
+  <data name="Leaderboard_From" xml:space="preserve">
+    <value>since {0}</value>
+  </data>
+  <data name="Leaderboard_Matches" xml:space="preserve">
+    <value>{0} matches · {1} wins · {2} %</value>
+  </data>
+  <data name="Stats_PlaytimeHours" xml:space="preserve">
+    <value>{0} h {1} min</value>
+  </data>
+  <data name="Stats_PlaytimeMinutes" xml:space="preserve">
+    <value>{0} min</value>
+  </data>
+  <data name="Stats_Playtime" xml:space="preserve">
+    <value>Playtime</value>
+  </data>
+  <data name="Stats_Sessions" xml:space="preserve">
+    <value>Sessions</value>
+  </data>
+  <data name="Stats_Matches" xml:space="preserve">
+    <value>Minigames</value>
+  </data>
+  <data name="Stats_MatchesValue" xml:space="preserve">
+    <value>{0} matches · {1} wins</value>
+  </data>
+  <data name="Stats_Deaths" xml:space="preserve">
+    <value>Deaths</value>
+  </data>
+  <data name="Stats_PlayerKills" xml:space="preserve">
+    <value>Players killed</value>
+  </data>
+  <data name="Stats_Blocks" xml:space="preserve">
+    <value>Blocks</value>
+  </data>
+  <data name="Stats_BlocksValue" xml:space="preserve">
+    <value>{0} placed · {1} broken</value>
+  </data>
+  <data name="Stats_Advancements" xml:space="preserve">
+    <value>Advancements</value>
+  </data>
+  <data name="Stats_Plots" xml:space="preserve">
+    <value>Plots</value>
+  </data>
+  <data name="Stats_Parkour" xml:space="preserve">
+    <value>Parkour: {0}</value>
+  </data>
+  <data name="Stats_Death_player" xml:space="preserve">
+    <value>players</value>
+  </data>
+  <data name="Stats_Death_mob" xml:space="preserve">
+    <value>mobs</value>
+  </data>
+  <data name="Stats_Death_environment" xml:space="preserve">
+    <value>environment</value>
+  </data>
+  <data name="Stats_Death_other" xml:space="preserve">
+    <value>other</value>
+  </data>
+  <data name="Leaderboard_Board_playtime" xml:space="preserve">
+    <value>Playtime</value>
+  </data>
+  <data name="Leaderboard_Board_bedwars" xml:space="preserve">
+    <value>Bedwars</value>
+  </data>
+  <data name="Leaderboard_Board_skywars" xml:space="preserve">
+    <value>Skywars</value>
+  </data>
+  <data name="Leaderboard_Board_tntrun" xml:space="preserve">
+    <value>TNT Run</value>
+  </data>
+  <data name="Leaderboard_Board_buildbattle" xml:space="preserve">
+    <value>Build Battle</value>
+  </data>
+  <data name="Leaderboard_Board_jumprace" xml:space="preserve">
+    <value>Jump race</value>
+  </data>
+  <data name="Leaderboard_Board_ttt" xml:space="preserve">
+    <value>TTT – Traitor</value>
+  </data>
+  <data name="Leaderboard_Board_parkour" xml:space="preserve">
+    <value>Parkour</value>
+  </data>
+  <data name="Leaderboard_Period_all" xml:space="preserve">
+    <value>All time</value>
+  </data>
+  <data name="Leaderboard_Period_30d" xml:space="preserve">
+    <value>Last 30 days</value>
+  </data>
+  <data name="Leaderboard_Sort_wins" xml:space="preserve">
+    <value>Wins</value>
+  </data>
+  <data name="Leaderboard_Sort_win_rate" xml:space="preserve">
+    <value>Win rate</value>
+  </data>
+  <data name="Leaderboard_Sort_objective_correct_kills" xml:space="preserve">
+    <value>Correct kills</value>
+  </data>
+  <data name="Leaderboard_Sort_objective_checkpoints" xml:space="preserve">
+    <value>Checkpoints</value>
+  </data>
+  <data name="AdminChoice_team" xml:space="preserve">
+    <value>Internal (team)</value>
+  </data>
+  <data name="LeaderboardsPage_Title.Text" xml:space="preserve">
+    <value>LEADERBOARDS</value>
+  </data>
+  <data name="LeaderboardsPage_Intro.Text" xml:space="preserve">
+    <value>Minecraft network: only members who share their Minecraft stats on their profile appear here. The lists are recalculated every few minutes.</value>
+  </data>
+  <data name="LeaderboardsPage_Board.Header" xml:space="preserve">
+    <value>Board</value>
+  </data>
+  <data name="LeaderboardsPage_Board.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Board</value>
+  </data>
+  <data name="LeaderboardsPage_Period.Header" xml:space="preserve">
+    <value>Period</value>
+  </data>
+  <data name="LeaderboardsPage_Period.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Period</value>
+  </data>
+  <data name="LeaderboardsPage_Sort.Header" xml:space="preserve">
+    <value>Ranking by</value>
+  </data>
+  <data name="LeaderboardsPage_Sort.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Ranking by</value>
+  </data>
+  <data name="LeaderboardsPage_Course.Header" xml:space="preserve">
+    <value>Course</value>
+  </data>
+  <data name="LeaderboardsPage_Course.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Course</value>
+  </data>
+  <data name="LeaderboardsPage_State.EmptyText" xml:space="preserve">
+    <value>Nobody on this board yet – or nobody shares their stats yet.</value>
+  </data>
+  <data name="LeaderboardsPage_List.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Leaderboard</value>
+  </data>
+  <data name="ServersPage_Leaderboards.Content" xml:space="preserve">
+    <value>Leaderboards</value>
+  </data>
+  <data name="MembersPage_Minecraft.Text" xml:space="preserve">
+    <value>Minecraft</value>
+  </data>
+  <data name="MembersPage_Leaderboards.Content" xml:space="preserve">
+    <value>View leaderboards</value>
+  </data>
+  <data name="AccountPage_Stats.Text" xml:space="preserve">
+    <value>Minecraft stats</value>
+  </data>
+  <data name="AccountPage_StatsHint.Text" xml:space="preserve">
+    <value>Playtime, minigames, parkour times and awards from the network. You decide who sees them – this also decides whether you appear on the leaderboards.</value>
+  </data>
+  <data name="AccountPage_StatsVisibility.Header" xml:space="preserve">
+    <value>Visible on profile to</value>
+  </data>
+  <data name="AccountPage_StatsVisibility.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Minecraft stats visible to</value>
+  </data>
+  <data name="AccountPage_OpenLeaderboards.Content" xml:space="preserve">
+    <value>Leaderboards</value>
+  </data>
 </root>

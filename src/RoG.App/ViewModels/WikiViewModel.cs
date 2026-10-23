@@ -154,7 +154,7 @@ public sealed partial class WikiViewModel : LoadableViewModel
                 Namespaces.Clear();
                 foreach (var n in namespaces)
                 {
-                    Namespaces.Add(new SettingsOption(n.Slug, n.Name));
+                    Namespaces.Add(new SettingsOption(n.Slug, n.IsInternal ? n.Name + " · " + Services.Localizer.GetString(StringKeys.WikiInternal) : n.Name));
                     _namespaceInfo[n.Slug] = n;
                 }
 

@@ -51,4 +51,6 @@ public sealed partial class MembersPage : Page
         args.Handled = true;
         SearchBox.Focus(FocusState.Keyboard);
     }
+
+    private void OnLeaderboardsClick(object sender, RoutedEventArgs e) => App.Services.Navigate(new RoG.Core.Navigation.AppRoute(RoG.Core.Navigation.AppSection.Leaderboards));
 }

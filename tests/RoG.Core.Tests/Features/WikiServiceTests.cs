@@ -148,6 +148,7 @@ public class WikiServiceTests
     [InlineData("public", RoG.Core.Features.Uploads.UploadVisibility.Public)]
     [InlineData("members", RoG.Core.Features.Uploads.UploadVisibility.Members)]
     [InlineData("private", RoG.Core.Features.Uploads.UploadVisibility.Private)]
+    [InlineData("team", RoG.Core.Features.Uploads.UploadVisibility.Private)]
     [InlineData(null, RoG.Core.Features.Uploads.UploadVisibility.Members)]
     public void Upload_visibility_follows_namespace(string? value, RoG.Core.Features.Uploads.UploadVisibility expected) =>
         Assert.Equal(expected, WikiService.UploadVisibilityFor(value));
@@ -187,12 +188,19 @@ public class WikiServiceTests
         Assert.False(revision.IsBy("01X"));
         Assert.False((revision with { AuthorId = null }).IsBy("01U"));
     }
+
+    [Theory]
+    [InlineData("team", true)]
+    [InlineData("squad", false)]
+    [InlineData("members", false)]
+    public void Team_namespaces_are_internal(string visibility, bool expected) =>
+        Assert.Equal(expected, new WikiNamespace("01J", "intern", "Intern", null, visibility, false, 0).IsInternal);
 }
 
-/// <summary>Einfache umkehrbare „Verschlüsselung“ für Tests: prüft, dass wirklich der Protector benutzt wird.</summary>
 internal sealed class XorProtector : RoG.Core.Security.IPayloadProtector
 {
     public Task<byte[]> ProtectAsync(byte[] data, CancellationToken cancellationToken = default) => Task.FromResult(data.Select(b => (byte)(b ^ 0x5A)).ToArray());
 
     public Task<byte[]> UnprotectAsync(byte[] data, CancellationToken cancellationToken = default) => ProtectAsync(data, cancellationToken);
+
 }

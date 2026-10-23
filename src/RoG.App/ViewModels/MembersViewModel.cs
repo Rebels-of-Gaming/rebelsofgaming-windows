@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 using RoG.App.Services;
 using RoG.Core.Features.Members;
+using RoG.Core.Features.Minecraft;
 using RoG.Core.Localization;
 
 namespace RoG.App.ViewModels;
@@ -298,6 +299,12 @@ public sealed partial class MemberDetailViewModel(AppServices services, MemberSe
     [ObservableProperty]
     public partial string? CoinsStreakText { get; set; }
 
+    /// <summary>Minecraft-Statistiken (nur mit Opt-in, <c>profile.minecraft</c> bzw. <c>…/minecraft-stats</c>).</summary>
+    public ObservableCollection<StatLineViewModel> MinecraftLines { get; } = [];
+
+    [ObservableProperty]
+    public partial bool HasMinecraft { get; set; }
+
     protected override bool HasData => Name is not null;
 
     public Task ShowAsync(string slug)
@@ -339,6 +346,7 @@ public sealed partial class MemberDetailViewModel(AppServices services, MemberSe
         HasCoins = p.Coins is not null;
         CoinsText = p.Coins is { } coins ? Format(StringKeys.CoinsBalance, coins.Balance.ToString("N0", CultureInfo.CurrentCulture)) : null;
         CoinsStreakText = p.Coins is { } streak ? MinecraftAccountsViewModel.DailySummary(Services.Localizer, streak.Streak, streak.BestStreak) : null;
+        await LoadMinecraftAsync(s.Slug, p.Minecraft, cancellationToken);
 
         var facts = new List<string>();
         if (p.Location is not null)
@@ -374,6 +382,76 @@ public sealed partial class MemberDetailViewModel(AppServices services, MemberSe
 
         HasPlatforms = Platforms.Count > 0;
         Name = s.Name;
+    }
+
+    /// <summary>Erst die Kurzfassung aus dem Profil, dann – falls abrufbar – alle Werte (Tode, Blöcke, Minispiele, Parkour).</summary>
+    private async Task LoadMinecraftAsync(string slug, MemberMinecraft? summary, CancellationToken cancellationToken)
+    {
+        MinecraftLines.Clear();
+        HasMinecraft = summary is not null;
+        if (summary is null)
+        {
+            return;
+        }
+
+        var playtime = LeaderboardsViewModel.Playtime(Services.Localizer, summary.PlaytimeSeconds);
+        AddStat(StringKeys.StatsPlaytime, playtime);
+        AddStat(StringKeys.StatsSessions, N(summary.Sessions));
+        if (summary.MatchesPlayed > 0)
+        {
+            AddStat(StringKeys.StatsMatches, Format(StringKeys.StatsMatchesValue, N(summary.MatchesPlayed), N(summary.MatchesWon)));
+        }
+
+        try
+        {
+            var stats = await new MinecraftService(Services.Api.Http).MemberStatsAsync(slug, cancellationToken);
+            MinecraftLines.Clear();
+            AddStat(StringKeys.StatsPlaytime, LeaderboardsViewModel.Playtime(Services.Localizer, stats.PlaytimeSeconds));
+            AddStat(StringKeys.StatsSessions, N(stats.Sessions));
+            AddStat(StringKeys.StatsDeaths, N(stats.Deaths) + DeathCauses(stats));
+            AddStat(StringKeys.StatsPlayerKills, N(stats.PlayerKills));
+            AddStat(StringKeys.StatsBlocks, Format(StringKeys.StatsBlocksValue, N(stats.BlocksPlaced), N(stats.BlocksBroken)));
+            AddStat(StringKeys.StatsAdvancements, N(stats.Advancements));
+            if (stats.PlotsClaimed > 0)
+            {
+                AddStat(StringKeys.StatsPlots, N(stats.PlotsClaimed));
+            }
+
+            foreach (var game in stats.Minigames)
+            {
+                MinecraftLines.Add(new StatLineViewModel(game.Label, string.Format(
+                    CultureInfo.CurrentCulture,
+                    Services.Localizer.GetString(StringKeys.LeaderboardMatches),
+                    game.Played,
+                    game.Won,
+                    game.WinRate is { } rate ? rate.ToString("0.#", CultureInfo.CurrentCulture) : "–")));
+            }
+
+            foreach (var course in stats.Parkour)
+            {
+                MinecraftLines.Add(new StatLineViewModel(Format(StringKeys.StatsParkour, course.Label), MinecraftService.FormatDuration(course.BestMs)));
+            }
+        }
+        catch (Exception ex) when (ex is RoG.Core.Api.ApiProblemException or System.Text.Json.JsonException or HttpRequestException)
+        {
+            // Kurzfassung bleibt stehen (z. B. 403 minecraft_stats_hidden nach geänderter Freigabe)
+        }
+    }
+
+    private void AddStat(string key, string value) => MinecraftLines.Add(new StatLineViewModel(Services.Localizer.GetString(key), value));
+
+    private static string N(long value) => value.ToString("N0", CultureInfo.CurrentCulture);
+
+    /// <summary>„ (Spieler 340 · Mobs 25 · Umgebung 15)“ – unbekannte Ursachen mit ihrem Rohnamen.</summary>
+    private string DeathCauses(MinecraftStats stats)
+    {
+        var parts = stats.DeathsBy.Where(d => d.Count > 0).Select(d =>
+        {
+            var key = "Stats_Death_" + d.Cause;
+            var label = Services.Localizer.GetString(key);
+            return (label == key ? d.Cause : label) + " " + N(d.Count);
+        }).ToList();
+        return parts.Count > 0 ? " (" + string.Join(" · ", parts) + ")" : string.Empty;
     }
 
     /// <summary>1:1-Unterhaltung öffnen bzw. starten und in „Nachrichten“ zeigen.</summary>
@@ -432,3 +510,6 @@ public sealed class BadgeViewModel(string name, string? description, string colo
 
     public Brush ChipBrush { get; } = AccountViewModel.ColorFromHex(color) is { } c ? new SolidColorBrush(c) : (Brush)Application.Current.Resources["RoGGoldBrush"];
 }
+
+/// <summary>Eine Zeile „Bezeichnung – Wert“ (Minecraft-Statistiken im Profil).</summary>
+public sealed record StatLineViewModel(string Label, string Value);

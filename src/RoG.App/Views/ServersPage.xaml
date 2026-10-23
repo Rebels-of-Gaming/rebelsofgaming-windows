@@ -23,6 +23,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <TextBlock x:Uid="ServersPage_Title" Style="{StaticResource RoGDisplayTextStyle}" Text="SERVER" />
             <Button
@@ -39,8 +40,14 @@
                 Click="OnBanListClick"
                 Style="{StaticResource RoGSecondaryButtonStyle}" />
             <Button
-                x:Uid="ServersPage_Refresh"
+                x:Uid="ServersPage_Leaderboards"
                 Grid.Column="3"
+                VerticalAlignment="Center"
+                Click="OnLeaderboardsClick"
+                Style="{StaticResource RoGSecondaryButtonStyle}" />
+            <Button
+                x:Uid="ServersPage_Refresh"
+                Grid.Column="4"
                 VerticalAlignment="Center"
                 Click="OnRefreshClick"
                 Style="{StaticResource RoGSecondaryButtonStyle}">

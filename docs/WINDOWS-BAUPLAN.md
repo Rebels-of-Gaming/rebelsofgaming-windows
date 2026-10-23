@@ -278,6 +278,15 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   `minecraft.award`/`minecraft.pool_alert` liefert die API samt Beschriftung. Wiki: `WikiNamespace.IsInternal`
   (`team`) → „· Intern“ in der Bereichsauswahl, Bilder privat; Admin-Auswahl um „Intern (Team)“ erweitert.
   Tests: 27 neue.
+- **2.5.21 – Minecraft-Netzwerk: Betrieb (Website v0.41.0, Guide 47, Annahme 496):** `MinecraftService`
+  `NetworkServersAsync`, `SetServerRoleAsync` (Rollen der Website, bei `minigame` Ordner `[a-z0-9][a-z0-9-]{0,47}`,
+  `null` entfernt), `PoolAsync`/`SavePoolAsync` (Werte auf 1–20/1–100/1–240 begrenzt, `servers` ersetzt die Zuordnung)/
+  `DeletePoolAsync`/`UpdatePoolServerAsync` (`excluded`, `reset_failures`; leer → kein Aufruf), `CheckReleaseAsync`/
+  `ReleaseAsync`, `DeploysAsync`/`DeployAsync`/`StartDeployAsync` (immer `confirm: true`, ohne Auswahl keine
+  `servers` – dann entscheidet der Server, Proxy nur bei Auswahl). Neuer Admin-Reiter „Minecraft-Netzwerk“: Server
+  (Rolle speichern nur mit `minecraft:deploy` + `minecraft.deploy`), Plugins verteilen (Prüfung alle 2 s abgefragt,
+  höchstens 2 Min.; Lauf alle 3 s, höchstens 10 Min.), Minigame-Pool (nur mit `minecraft:pool` + `minecraft.pool`).
+  „Verwaltung“ erscheint jetzt auch mit `minecraft.economy`/`minecraft.pool`/`minecraft.deploy` allein. Tests: 26 neue.
 - **2.5.16 – Freunde (Website v0.38.0, live 22.10.2026, Guide 45, Annahme 492):** `FriendsService` (Core, 15 Tests):
   `GET /v1/me/friends` (Status → `Presence`, `null` = nicht freigegeben, `meta.total`/`meta.limit`),
   `GET /v1/me/friends/requests` (`filter[direction]`), `POST …/requests {user}` (Gegenanfrage → `status: accepted`),
@@ -548,6 +557,7 @@ sich einmal neu an (2FA).
 - Ab 2.5.10: Die öffentliche Ban-Liste und Einsprüche zeigt die App nur an (kein Cache); eine Stellungnahme geht nur an
   die Plattform und wird dort ein öffentlich lesbares Forum-Thema – darauf weist das Formular hin.
 - Ab 2.5.18: Rebel-Coins (Kontostand, Serie, Buchungen) zeigt die App nur an (kein Cache); die Sichtbarkeit im Profil liegt nur auf dem Server.
+- Ab 2.5.21: Netzwerk-Verwaltung (Heartbeat, Pool, Deploy) nur Anzeige und Aufrufe, nichts lokal gespeichert; die auslösende Person eines Deploys speichert die Website.
 - Ab 2.5.20: Minecraft-Statistiken und Bestenlisten zeigt die App nur an (kein Cache, Abruf ohne ETag); die Freigabe `minecraft_stats` liegt nur auf dem Server.
 - Ab 2.5.17: Die Einstellung „Website-Nachrichten im Spiel anzeigen“ liegt nur auf dem Server (keine lokale Kopie); Spieler-Angaben aus Spiel-Meldungen zeigt die App nur an.
 - Ab 2.5.16: Freundesliste und Anfragen zeigt die App nur an (kein Cache, keine lokale Speicherung).

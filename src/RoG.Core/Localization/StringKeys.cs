@@ -1188,6 +1188,76 @@ public static class StringKeys
 
     public const string StatsParkour = "Stats_Parkour";
 
+    public const string NetworkRoleNone = "Network_RoleNone";
+
+    public const string NetworkFolderFormat = "Network_FolderFormat";
+
+    public const string NetworkRoleSaved = "Network_RoleSaved";
+
+    public const string NetworkNoHeartbeat = "Network_NoHeartbeat";
+
+    public const string NetworkFresh = "Network_Fresh";
+
+    public const string NetworkStale = "Network_Stale";
+
+    public const string NetworkDeployConfigured = "Network_DeployConfigured";
+
+    public const string NetworkDeployMissing = "Network_DeployMissing";
+
+    public const string NetworkNotLinked = "Network_NotLinked";
+
+    public const string NetworkMismatch = "Network_Mismatch";
+
+    public const string PoolInfo = "Pool_Info";
+
+    public const string PoolSaved = "Pool_Saved";
+
+    public const string PoolDeleteTitle = "Pool_DeleteTitle";
+
+    public const string PoolDeleteText = "Pool_DeleteText";
+
+    public const string PoolDeleted = "Pool_Deleted";
+
+    public const string PoolSummary = "Pool_Summary";
+
+    public const string PoolNotConfigured = "Pool_NotConfigured";
+
+    public const string PoolLastAction = "Pool_LastAction";
+
+    public const string PoolActionFailed = "Pool_ActionFailed";
+
+    public const string PoolQuarantined = "Pool_Quarantined";
+
+    public const string PoolBackoff = "Pool_Backoff";
+
+    public const string PoolFailures = "Pool_Failures";
+
+    public const string ReleaseFailed = "Release_Failed";
+
+    public const string ReleasePublished = "Release_Published";
+
+    public const string ReleaseSigned = "Release_Signed";
+
+    public const string ReleaseUnsigned = "Release_Unsigned";
+
+    public const string ReleaseValidUntil = "Release_ValidUntil";
+
+    public const string ReleaseIgnored = "Release_Ignored";
+
+    public const string DeployAllTargets = "Deploy_AllTargets";
+
+    public const string DeployConfirmTitle = "Deploy_ConfirmTitle";
+
+    public const string DeployConfirmText = "Deploy_ConfirmText";
+
+    public const string DeployWithRestart = "Deploy_WithRestart";
+
+    public const string DeployWithoutRestart = "Deploy_WithoutRestart";
+
+    public const string DeployFinished = "Deploy_Finished";
+
+    public const string DeployRestarted = "Deploy_Restarted";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

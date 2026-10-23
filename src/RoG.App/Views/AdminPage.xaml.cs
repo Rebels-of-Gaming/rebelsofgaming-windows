@@ -25,8 +25,10 @@ public sealed partial class AdminPage : Page
         MinecraftAccounts = new MinecraftAdminViewModel(App.Services, Moderation.Show);
         MinecraftGroups = new MinecraftGroupsViewModel(App.Services, Moderation.Show);
         Coins = new CoinsAdminViewModel(App.Services, Moderation.Show);
+        Network = new MinecraftOpsViewModel(App.Services, Moderation.Show);
         InitializeComponent();
         Coins.Confirm = ConfirmAsync;
+        Network.Confirm = ConfirmAsync;
         MinecraftAccounts.Confirm = ConfirmAsync;
         MinecraftGroups.Confirm = ConfirmAsync;
         Media.Confirm = ConfirmAsync;
@@ -41,13 +43,14 @@ public sealed partial class AdminPage : Page
         AppealsTab.Visibility = Visible(Appeals.CanView);
         MinecraftTab.Visibility = Visible(MinecraftAccounts.CanView);
         CoinsTab.Visibility = Visible(Coins.CanView);
+        NetworkTab.Visibility = Visible(Network.CanView);
         LogTab.Visibility = Visible(Moderation.CanLog);
         WordsTab.Visibility = Visible(Moderation.CanManage);
         GalleryTab.Visibility = Visible(Media.CanGallery);
         UploadsTab.Visibility = Visible(Media.CanUploads);
         WebsiteTab.Visibility = Visible((Overview.Any && Media.HasWebLinks) || Media.HasNativeAreas);
         var any = Moderation.Any || Applications.CanView || Overview.Any || Members.CanView || Media.CanGallery || Media.CanUploads || Appeals.CanView
-            || MinecraftAccounts.CanView || Coins.CanView;
+            || MinecraftAccounts.CanView || Coins.CanView || Network.CanView;
         NoAccess.Visibility = Visible(!any);
         Tabs.Visibility = Visible(any);
         Tabs.SelectedItem = Tabs.Items.FirstOrDefault(t => t.Visibility == Visibility.Visible);
@@ -70,6 +73,8 @@ public sealed partial class AdminPage : Page
     public MinecraftGroupsViewModel MinecraftGroups { get; }
 
     public CoinsAdminViewModel Coins { get; }
+
+    public MinecraftOpsViewModel Network { get; }
 
     private void OnCoinsSearch(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) => Coins.SearchNowCommand.Execute(null);
 
@@ -141,7 +146,7 @@ public sealed partial class AdminPage : Page
 
     private void OnTabChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs? args)
     {
-        if (OverviewPanel is null || MembersPanel is null || ApplicationsPanel is null || ReportsPanel is null || BansPanel is null || AppealsPanel is null || MinecraftPanel is null || CoinsPanel is null || LogPanel is null || WordsPanel is null
+        if (OverviewPanel is null || MembersPanel is null || ApplicationsPanel is null || ReportsPanel is null || BansPanel is null || AppealsPanel is null || MinecraftPanel is null || CoinsPanel is null || NetworkPanel is null || LogPanel is null || WordsPanel is null
             || GalleryPanel is null || UploadsPanel is null || WebsitePanel is null)
         {
             return; // feuert schon in InitializeComponent
@@ -156,6 +161,7 @@ public sealed partial class AdminPage : Page
         AppealsPanel.Visibility = Visible(selected == AppealsTab);
         MinecraftPanel.Visibility = Visible(selected == MinecraftTab);
         CoinsPanel.Visibility = Visible(selected == CoinsTab);
+        NetworkPanel.Visibility = Visible(selected == NetworkTab);
         LogPanel.Visibility = Visible(selected == LogTab);
         WordsPanel.Visibility = Visible(selected == WordsTab);
         GalleryPanel.Visibility = Visible(selected == GalleryTab);
@@ -193,6 +199,10 @@ public sealed partial class AdminPage : Page
         else if (selected == CoinsTab)
         {
             _ = Coins.EnsureLoadedAsync();
+        }
+        else if (selected == NetworkTab)
+        {
+            _ = Network.EnsureLoadedAsync();
         }
         else if (selected == LogTab)
         {

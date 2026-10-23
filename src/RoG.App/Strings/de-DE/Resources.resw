@@ -6237,4 +6237,412 @@
   <data name="AccountPage_OpenLeaderboards.Content" xml:space="preserve">
     <value>Bestenlisten</value>
   </data>
+  <data name="Network_RoleNone" xml:space="preserve">
+    <value>Keine Rolle (nicht verteilen)</value>
+  </data>
+  <data name="Network_FolderFormat" xml:space="preserve">
+    <value>Ordner: Kleinbuchstaben, Ziffern und Bindestrich, höchstens 48 Zeichen (z. B. bedwars).</value>
+  </data>
+  <data name="Network_RoleSaved" xml:space="preserve">
+    <value>Rolle gespeichert: {0}</value>
+  </data>
+  <data name="Network_NoHeartbeat" xml:space="preserve">
+    <value>Noch kein Heartbeat</value>
+  </data>
+  <data name="Network_Fresh" xml:space="preserve">
+    <value>aktuell</value>
+  </data>
+  <data name="Network_Stale" xml:space="preserve">
+    <value>veraltet</value>
+  </data>
+  <data name="Network_DeployConfigured" xml:space="preserve">
+    <value>Festgelegt: {0} · Ordner {1}</value>
+  </data>
+  <data name="Network_DeployMissing" xml:space="preserve">
+    <value>Keine Rolle festgelegt – wird beim Verteilen übersprungen</value>
+  </data>
+  <data name="Network_NotLinked" xml:space="preserve">
+    <value>Ohne Pterodactyl-Verknüpfung – Pool und Deploy können ihn nicht steuern</value>
+  </data>
+  <data name="Network_Mismatch" xml:space="preserve">
+    <value>Der Heartbeat meldet eine andere Rolle bzw. einen anderen Ordner – wird beim Verteilen übersprungen</value>
+  </data>
+  <data name="Pool_Info" xml:space="preserve">
+    <value>Abkühlzeit nach einem Start: {0} Min. · Nach 3 Fehlstarts kommt ein Server in Quarantäne.</value>
+  </data>
+  <data name="Pool_Saved" xml:space="preserve">
+    <value>Pool-Gruppe gespeichert: {0}</value>
+  </data>
+  <data name="Pool_DeleteTitle" xml:space="preserve">
+    <value>Einstellung entfernen?</value>
+  </data>
+  <data name="Pool_DeleteText" xml:space="preserve">
+    <value>Einstellung und Zuordnung der Gruppe „{0}“ werden entfernt. Der Pool steuert sie danach nicht mehr.</value>
+  </data>
+  <data name="Pool_Deleted" xml:space="preserve">
+    <value>Einstellung entfernt: {0}</value>
+  </data>
+  <data name="Pool_Summary" xml:space="preserve">
+    <value>{0} laufen · {1} joinbar · {2} Spieler</value>
+  </data>
+  <data name="Pool_NotConfigured" xml:space="preserve">
+    <value>noch nicht eingestellt</value>
+  </data>
+  <data name="Pool_LastAction" xml:space="preserve">
+    <value>Zuletzt: {0}</value>
+  </data>
+  <data name="Pool_ActionFailed" xml:space="preserve">
+    <value>fehlgeschlagen</value>
+  </data>
+  <data name="Pool_Quarantined" xml:space="preserve">
+    <value>Quarantäne</value>
+  </data>
+  <data name="Pool_Backoff" xml:space="preserve">
+    <value>wartet nach Fehlstart</value>
+  </data>
+  <data name="Pool_Failures" xml:space="preserve">
+    <value>{0} Fehlstarts</value>
+  </data>
+  <data name="Release_Failed" xml:space="preserve">
+    <value>Prüfung fehlgeschlagen: {0}</value>
+  </data>
+  <data name="Release_Published" xml:space="preserve">
+    <value>veröffentlicht {0}</value>
+  </data>
+  <data name="Release_Signed" xml:space="preserve">
+    <value>signiert</value>
+  </data>
+  <data name="Release_Unsigned" xml:space="preserve">
+    <value>nicht signiert</value>
+  </data>
+  <data name="Release_ValidUntil" xml:space="preserve">
+    <value>gültig bis {0}</value>
+  </data>
+  <data name="Release_Ignored" xml:space="preserve">
+    <value>Nicht verteilt: {0}</value>
+  </data>
+  <data name="Deploy_AllTargets" xml:space="preserve">
+    <value>alle Server mit festgelegter Rolle (ohne Proxy)</value>
+  </data>
+  <data name="Deploy_ConfirmTitle" xml:space="preserve">
+    <value>Plugins verteilen?</value>
+  </data>
+  <data name="Deploy_ConfirmText" xml:space="preserve">
+    <value>Stand {0} wird verteilt an: {1}. {2}</value>
+  </data>
+  <data name="Deploy_WithRestart" xml:space="preserve">
+    <value>Danach starten die Server gestaffelt neu, der Proxy zuletzt.</value>
+  </data>
+  <data name="Deploy_WithoutRestart" xml:space="preserve">
+    <value>Ohne Neustart – die neuen Plugins laden erst beim nächsten Start.</value>
+  </data>
+  <data name="Deploy_Finished" xml:space="preserve">
+    <value>Verteilen beendet: {0}</value>
+  </data>
+  <data name="Deploy_Restarted" xml:space="preserve">
+    <value>neu gestartet</value>
+  </data>
+  <data name="Error_deploy_running" xml:space="preserve">
+    <value>Es läuft bereits ein Verteil-Lauf.</value>
+  </data>
+  <data name="Error_confirmation_required" xml:space="preserve">
+    <value>Bitte bestätigen.</value>
+  </data>
+  <data name="Error_release_expired" xml:space="preserve">
+    <value>Die Prüfung ist abgelaufen (60 Minuten) – bitte das Release erneut prüfen.</value>
+  </data>
+  <data name="Error_release_not_ready" xml:space="preserve">
+    <value>Die Prüfung läuft noch oder ist fehlgeschlagen.</value>
+  </data>
+  <data name="Error_no_targets" xml:space="preserve">
+    <value>Kein passender Server ausgewählt.</value>
+  </data>
+  <data name="Error_invalid_game" xml:space="preserve">
+    <value>Ungültiger Gruppenname.</value>
+  </data>
+  <data name="Error_minecraft_stats_hidden" xml:space="preserve">
+    <value>Dieses Mitglied zeigt seine Minecraft-Statistiken nicht.</value>
+  </data>
+  <data name="Error_invalid_query" xml:space="preserve">
+    <value>Ungültige Auswahl.</value>
+  </data>
+  <data name="Network_Role_proxy" xml:space="preserve">
+    <value>Proxy</value>
+  </data>
+  <data name="Network_Role_lobby" xml:space="preserve">
+    <value>Lobby</value>
+  </data>
+  <data name="Network_Role_freebuild" xml:space="preserve">
+    <value>Freebuild</value>
+  </data>
+  <data name="Network_Role_plots" xml:space="preserve">
+    <value>Plots</value>
+  </data>
+  <data name="Network_Role_minigame_lobby" xml:space="preserve">
+    <value>Minigame-Lobby</value>
+  </data>
+  <data name="Network_Role_minigame" xml:space="preserve">
+    <value>Minigame</value>
+  </data>
+  <data name="Pool_Status_online" xml:space="preserve">
+    <value>online</value>
+  </data>
+  <data name="Pool_Status_starting" xml:space="preserve">
+    <value>startet</value>
+  </data>
+  <data name="Pool_Status_stopping" xml:space="preserve">
+    <value>stoppt</value>
+  </data>
+  <data name="Pool_Status_offline" xml:space="preserve">
+    <value>offline</value>
+  </data>
+  <data name="Pool_Action_start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="Pool_Action_stop" xml:space="preserve">
+    <value>Stopp</value>
+  </data>
+  <data name="Pool_Reason_full" xml:space="preserve">
+    <value>voll</value>
+  </data>
+  <data name="Pool_Reason_no_joinable" xml:space="preserve">
+    <value>keine joinbare Instanz</value>
+  </data>
+  <data name="Pool_Reason_min_running" xml:space="preserve">
+    <value>Mindestanzahl</value>
+  </data>
+  <data name="Pool_Reason_idle" xml:space="preserve">
+    <value>Leerlauf</value>
+  </data>
+  <data name="Pool_Reason_already_running" xml:space="preserve">
+    <value>lief schon</value>
+  </data>
+  <data name="Pool_Reason_manual" xml:space="preserve">
+    <value>manuell</value>
+  </data>
+  <data name="Release_Status_checking" xml:space="preserve">
+    <value>wird geprüft</value>
+  </data>
+  <data name="Release_Status_ready" xml:space="preserve">
+    <value>geprüft</value>
+  </data>
+  <data name="Release_Status_failed" xml:space="preserve">
+    <value>fehlgeschlagen</value>
+  </data>
+  <data name="Release_Error_release_unknown" xml:space="preserve">
+    <value>Release nicht gefunden</value>
+  </data>
+  <data name="Release_Error_download_failed" xml:space="preserve">
+    <value>Download fehlgeschlagen</value>
+  </data>
+  <data name="Release_Error_too_large" xml:space="preserve">
+    <value>zu groß</value>
+  </data>
+  <data name="Release_Error_host_not_allowed" xml:space="preserve">
+    <value>Host nicht erlaubt</value>
+  </data>
+  <data name="Release_Error_checksum_missing" xml:space="preserve">
+    <value>Prüfsumme fehlt</value>
+  </data>
+  <data name="Release_Error_checksum_mismatch" xml:space="preserve">
+    <value>Prüfsumme passt nicht</value>
+  </data>
+  <data name="Release_Error_signature_missing" xml:space="preserve">
+    <value>Signatur fehlt</value>
+  </data>
+  <data name="Release_Error_signature_invalid" xml:space="preserve">
+    <value>Signatur ungültig</value>
+  </data>
+  <data name="Release_Error_signature_key_invalid" xml:space="preserve">
+    <value>Signaturschlüssel ungültig</value>
+  </data>
+  <data name="Release_Error_archive_invalid" xml:space="preserve">
+    <value>Archiv ungültig</value>
+  </data>
+  <data name="Release_Error_archive_unsafe" xml:space="preserve">
+    <value>Archiv enthält unsichere Einträge</value>
+  </data>
+  <data name="Release_Error_archive_too_large" xml:space="preserve">
+    <value>Archiv entpackt zu groß</value>
+  </data>
+  <data name="Release_Error_archive_empty" xml:space="preserve">
+    <value>Archiv ohne Plugins</value>
+  </data>
+  <data name="Release_Error_storage_failed" xml:space="preserve">
+    <value>Speichern fehlgeschlagen</value>
+  </data>
+  <data name="Release_Error_job_failed" xml:space="preserve">
+    <value>Job abgebrochen</value>
+  </data>
+  <data name="Deploy_Status_queued" xml:space="preserve">
+    <value>wartet</value>
+  </data>
+  <data name="Deploy_Status_running" xml:space="preserve">
+    <value>läuft</value>
+  </data>
+  <data name="Deploy_Status_done" xml:space="preserve">
+    <value>fertig</value>
+  </data>
+  <data name="Deploy_Status_failed" xml:space="preserve">
+    <value>fehlgeschlagen</value>
+  </data>
+  <data name="Deploy_Status_pending" xml:space="preserve">
+    <value>offen</value>
+  </data>
+  <data name="Deploy_Status_skipped" xml:space="preserve">
+    <value>übersprungen</value>
+  </data>
+  <data name="Deploy_Message_no_role" xml:space="preserve">
+    <value>keine Rolle festgelegt</value>
+  </data>
+  <data name="Deploy_Message_role_mismatch" xml:space="preserve">
+    <value>Rolle weicht ab</value>
+  </data>
+  <data name="Deploy_Message_not_linked" xml:space="preserve">
+    <value>ohne Pterodactyl</value>
+  </data>
+  <data name="Deploy_Message_folder_missing" xml:space="preserve">
+    <value>Ordner fehlt im Release</value>
+  </data>
+  <data name="Deploy_Message_server_deleted" xml:space="preserve">
+    <value>Server gelöscht</value>
+  </data>
+  <data name="Deploy_Message_unknown_role" xml:space="preserve">
+    <value>unbekannte Rolle</value>
+  </data>
+  <data name="Deploy_Message_cleanup_failed" xml:space="preserve">
+    <value>Aufräumen fehlgeschlagen</value>
+  </data>
+  <data name="Deploy_Message_restart_failed" xml:space="preserve">
+    <value>Neustart fehlgeschlagen</value>
+  </data>
+  <data name="Deploy_Message_rolled_back" xml:space="preserve">
+    <value>zurückgesetzt</value>
+  </data>
+  <data name="Deploy_Message_rollback_failed" xml:space="preserve">
+    <value>Zurücksetzen fehlgeschlagen</value>
+  </data>
+  <data name="Deploy_Message_aborted" xml:space="preserve">
+    <value>abgebrochen</value>
+  </data>
+  <data name="Deploy_Message_release_expired" xml:space="preserve">
+    <value>Prüfung abgelaufen</value>
+  </data>
+  <data name="Deploy_Message_checksum_mismatch" xml:space="preserve">
+    <value>gespeicherter Stand verändert</value>
+  </data>
+  <data name="Deploy_Message_archive_invalid" xml:space="preserve">
+    <value>Archiv ungültig</value>
+  </data>
+  <data name="Deploy_Message_job_failed" xml:space="preserve">
+    <value>Job abgebrochen</value>
+  </data>
+  <data name="Deploy_Message_stale" xml:space="preserve">
+    <value>hing über einen Tag</value>
+  </data>
+  <data name="AdminPage_TabNetwork.Text" xml:space="preserve">
+    <value>Minecraft-Netzwerk</value>
+  </data>
+  <data name="Network_Reload.Content" xml:space="preserve">
+    <value>Aktualisieren</value>
+  </data>
+  <data name="Network_ServersTitle.Text" xml:space="preserve">
+    <value>Server</value>
+  </data>
+  <data name="Network_ServersHint.Text" xml:space="preserve">
+    <value>Stand aus dem Heartbeat (alle 15 s, aktuell bis 90 s). Der Heartbeat steuert nichts: Rolle und Plugin-Ordner legst du hier fest, sie sind für das Verteilen maßgeblich. Häkchen = beim Verteilen nur diese Server.</value>
+  </data>
+  <data name="Network_ServersEmpty.Text" xml:space="preserve">
+    <value>Keine Minecraft-Server.</value>
+  </data>
+  <data name="Network_Role.Header" xml:space="preserve">
+    <value>Rolle</value>
+  </data>
+  <data name="Network_Role.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Rolle</value>
+  </data>
+  <data name="Network_Folder.Header" xml:space="preserve">
+    <value>Ordner</value>
+  </data>
+  <data name="Network_Folder.PlaceholderText" xml:space="preserve">
+    <value>z. B. bedwars</value>
+  </data>
+  <data name="Network_SaveRole.Content" xml:space="preserve">
+    <value>Rolle speichern</value>
+  </data>
+  <data name="Deploy_Title.Text" xml:space="preserve">
+    <value>Plugins verteilen</value>
+  </data>
+  <data name="Deploy_Hint.Text" xml:space="preserve">
+    <value>Die Server holen neue Versionen auch selbst. Zum sofortigen Verteilen: erst das neueste Release prüfen (Prüfsumme, Signatur, Inhalt – gilt 60 Minuten), dann verteilen. Ohne Auswahl gehen die Plugins an alle Server mit festgelegter Rolle, den Proxy nur, wenn du ihn ankreuzt.</value>
+  </data>
+  <data name="Deploy_Check.Content" xml:space="preserve">
+    <value>Release prüfen</value>
+  </data>
+  <data name="Deploy_Restart.Content" xml:space="preserve">
+    <value>Danach neu starten (gestaffelt, Proxy zuletzt)</value>
+  </data>
+  <data name="Deploy_Start.Content" xml:space="preserve">
+    <value>Verteilen</value>
+  </data>
+  <data name="Deploy_Runs.Text" xml:space="preserve">
+    <value>Letzte Läufe</value>
+  </data>
+  <data name="Pool_Title.Text" xml:space="preserve">
+    <value>Minigame-Pool</value>
+  </data>
+  <data name="Pool_Hint.Text" xml:space="preserve">
+    <value>Startet und stoppt Instanzen je Warteschlange automatisch – nur zugeordnete Server mit Pterodactyl. Server, die die Gruppe nur im Heartbeat melden, erscheinen als Vorschlag.</value>
+  </data>
+  <data name="Pool_Empty.Text" xml:space="preserve">
+    <value>Noch keine Gruppen – sie erscheinen, sobald ein Minigame-Server seine Warteschlange meldet.</value>
+  </data>
+  <data name="Pool_Enabled.Header" xml:space="preserve">
+    <value>Automatisch steuern</value>
+  </data>
+  <data name="Pool_Enabled.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Automatisch steuern</value>
+  </data>
+  <data name="Pool_MinRunning.Header" xml:space="preserve">
+    <value>Mindestens laufend</value>
+  </data>
+  <data name="Pool_MinRunning.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Mindestens laufend</value>
+  </data>
+  <data name="Pool_StartThreshold.Header" xml:space="preserve">
+    <value>Startschwelle %</value>
+  </data>
+  <data name="Pool_StartThreshold.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Startschwelle in Prozent</value>
+  </data>
+  <data name="Pool_IdleMinutes.Header" xml:space="preserve">
+    <value>Leerlauf-Stopp (Min.)</value>
+  </data>
+  <data name="Pool_IdleMinutes.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Leerlauf-Stopp in Minuten</value>
+  </data>
+  <data name="Pool_Excluded.Content" xml:space="preserve">
+    <value>Vom Pool ausnehmen (Wartung)</value>
+  </data>
+  <data name="Pool_ResetFailures.Content" xml:space="preserve">
+    <value>Fehlstarts zurücksetzen</value>
+  </data>
+  <data name="Pool_Unassign.Content" xml:space="preserve">
+    <value>Zuordnung entfernen</value>
+  </data>
+  <data name="Pool_Suggestions.Text" xml:space="preserve">
+    <value>Vorschläge aus dem Heartbeat (werden erst nach dem Zuordnen gesteuert):</value>
+  </data>
+  <data name="Pool_Assign.Content" xml:space="preserve">
+    <value>Zuordnen</value>
+  </data>
+  <data name="Pool_Save.Content" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="Pool_Delete.Content" xml:space="preserve">
+    <value>Einstellung entfernen</value>
+  </data>
+  <data name="Pool_Log.Text" xml:space="preserve">
+    <value>Ereignisprotokoll (30 Tage)</value>
+  </data>
 </root>

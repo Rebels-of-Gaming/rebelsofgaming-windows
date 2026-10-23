@@ -24,6 +24,7 @@
             <SelectorBarItem x:Name="AppealsTab" x:Uid="AdminPage_TabAppeals" />
             <SelectorBarItem x:Name="MinecraftTab" x:Uid="AdminPage_TabMinecraft" />
             <SelectorBarItem x:Name="CoinsTab" x:Uid="AdminPage_TabCoins" />
+            <SelectorBarItem x:Name="NetworkTab" x:Uid="AdminPage_TabNetwork" />
             <SelectorBarItem x:Name="LogTab" x:Uid="AdminPage_TabLog" />
             <SelectorBarItem x:Name="WordsTab" x:Uid="AdminPage_TabWords" />
             <SelectorBarItem x:Name="GalleryTab" x:Uid="AdminPage_TabGallery" />
@@ -597,6 +598,155 @@
                 </StackPanel>
             </ScrollViewer>
         </Grid>
+
+        <!-- Minecraft-Netzwerk: Heartbeat-Stand und Rollen, Minigame-Pool, Plugin-Deploy (Website v0.41.0) -->
+        <ScrollViewer x:Name="NetworkPanel" Grid.Row="3" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+            <StackPanel MaxWidth="{StaticResource RoGReadingWidth}" HorizontalAlignment="Left" Spacing="12">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <Button x:Uid="Network_Reload" Command="{x:Bind Network.ReloadCommand}" />
+                    <ProgressRing Width="20" Height="20" IsActive="{x:Bind Network.IsBusy, Mode=OneWay}" />
+                </StackPanel>
+
+                <!-- Server -->
+                <TextBlock x:Uid="Network_ServersTitle" Style="{StaticResource RoGSectionTextStyle}" />
+                <TextBlock x:Uid="Network_ServersHint" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                <TextBlock x:Uid="Network_ServersEmpty" Style="{StaticResource RoGMutedTextStyle}" Visibility="{x:Bind Network.NoServers, Mode=OneWay}" />
+                <ItemsControl ItemsSource="{x:Bind Network.Servers}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="vm:NetworkServerItemViewModel">
+                            <Border Margin="0,0,0,8" Padding="12" AutomationProperties.Name="{x:Bind Name}" Background="{StaticResource RoGBg2Brush}" CornerRadius="{StaticResource RoGControlRadius}">
+                                <StackPanel Spacing="4">
+                                    <CheckBox Content="{x:Bind Name}" IsChecked="{x:Bind IsSelected, Mode=TwoWay}" IsEnabled="{x:Bind CanSelect}" Visibility="{x:Bind CanSelect}" />
+                                    <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Name}" Visibility="{x:Bind NotSelectable}" />
+                                    <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind StateText}" TextWrapping="Wrap" />
+                                    <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind DeployText}" TextWrapping="Wrap" />
+                                    <TextBlock FontSize="12" Foreground="{StaticResource RoGGoldBrush}" Text="{x:Bind WarningText}" TextWrapping="Wrap" Visibility="{x:Bind HasWarning}" />
+                                    <StackPanel Margin="0,4,0,0" Orientation="Horizontal" Spacing="8" Visibility="{x:Bind CanEditRole}">
+                                        <ComboBox
+                                            x:Uid="Network_Role"
+                                            MinWidth="160"
+                                            DisplayMemberPath="Label"
+                                            ItemsSource="{x:Bind RoleOptions}"
+                                            SelectedItem="{x:Bind SelectedRole, Mode=TwoWay}" />
+                                        <TextBox x:Uid="Network_Folder" Width="160" MaxLength="48" Text="{x:Bind Folder, Mode=TwoWay}" Visibility="{x:Bind ShowFolder, Mode=OneWay}" />
+                                        <Button x:Uid="Network_SaveRole" VerticalAlignment="Bottom" Command="{x:Bind SaveRoleCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <!-- Plugin-Deploy -->
+                <StackPanel Spacing="8" Visibility="{x:Bind Network.CanDeploy}">
+                    <TextBlock x:Uid="Deploy_Title" Margin="0,12,0,0" Style="{StaticResource RoGSectionTextStyle}" />
+                    <TextBlock x:Uid="Deploy_Hint" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Button x:Uid="Deploy_Check" Command="{x:Bind Network.CheckReleaseCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                        <ProgressRing Width="20" Height="20" IsActive="{x:Bind Network.IsChecking, Mode=OneWay}" />
+                    </StackPanel>
+                    <StackPanel Spacing="4" Visibility="{x:Bind Network.HasRelease, Mode=OneWay}">
+                        <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Network.ReleaseText, Mode=OneWay}" TextWrapping="Wrap" />
+                        <TextBlock FontFamily="Consolas" FontSize="12" IsTextSelectionEnabled="True" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Network.ReleaseFiles, Mode=OneWay}" TextWrapping="Wrap" />
+                    </StackPanel>
+                    <CheckBox x:Uid="Deploy_Restart" IsChecked="{x:Bind Network.Restart, Mode=TwoWay}" />
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Button x:Uid="Deploy_Start" Command="{x:Bind Network.StartDeployCommand}" IsEnabled="{x:Bind Network.CanStartDeploy, Mode=OneWay}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                        <ProgressRing Width="20" Height="20" IsActive="{x:Bind Network.IsDeploying, Mode=OneWay}" />
+                    </StackPanel>
+                    <TextBlock x:Uid="Deploy_Runs" Margin="0,8,0,0" FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" />
+                    <ItemsControl ItemsSource="{x:Bind Network.Deploys}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:DeployItemViewModel">
+                                <StackPanel Margin="0,0,0,8" Padding="12" AutomationProperties.Name="{x:Bind Title}" Background="{StaticResource RoGBg2Brush}" CornerRadius="{StaticResource RoGControlRadius}" Spacing="2">
+                                    <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Title}" TextWrapping="Wrap" />
+                                    <ItemsControl ItemsSource="{x:Bind Targets}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate x:DataType="x:String">
+                                                <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind}" TextWrapping="Wrap" />
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+
+                <!-- Minigame-Pool -->
+                <StackPanel Spacing="8" Visibility="{x:Bind Network.CanPool}">
+                    <TextBlock x:Uid="Pool_Title" Margin="0,12,0,0" Style="{StaticResource RoGSectionTextStyle}" />
+                    <TextBlock x:Uid="Pool_Hint" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                    <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Network.PoolInfo, Mode=OneWay}" TextWrapping="Wrap" />
+                    <TextBlock x:Uid="Pool_Empty" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" Visibility="{x:Bind Network.NoGroups, Mode=OneWay}" />
+                    <ItemsControl ItemsSource="{x:Bind Network.Groups}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:PoolGroupItemViewModel">
+                                <Border Margin="0,0,0,8" Padding="12" AutomationProperties.Name="{x:Bind Game}" Background="{StaticResource RoGBg2Brush}" CornerRadius="{StaticResource RoGControlRadius}">
+                                    <StackPanel Spacing="8">
+                                        <TextBlock FontFamily="Consolas" FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Game}" />
+                                        <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Summary}" TextWrapping="Wrap" />
+                                        <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind LastAction}" TextWrapping="Wrap" Visibility="{x:Bind HasLastAction}" />
+                                        <ToggleSwitch x:Uid="Pool_Enabled" IsOn="{x:Bind Enabled, Mode=TwoWay}" />
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
+                                            <NumberBox x:Uid="Pool_MinRunning" Width="130" Maximum="20" Minimum="1" SpinButtonPlacementMode="Compact" Value="{x:Bind MinRunning, Mode=TwoWay}" />
+                                            <NumberBox x:Uid="Pool_StartThreshold" Width="130" Maximum="100" Minimum="1" SpinButtonPlacementMode="Compact" Value="{x:Bind StartThreshold, Mode=TwoWay}" />
+                                            <NumberBox x:Uid="Pool_IdleMinutes" Width="130" Maximum="240" Minimum="1" SpinButtonPlacementMode="Compact" Value="{x:Bind IdleMinutes, Mode=TwoWay}" />
+                                        </StackPanel>
+                                        <ItemsControl ItemsSource="{x:Bind Instances}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate x:DataType="vm:PoolInstanceItemViewModel">
+                                                    <Grid Padding="0,4" AutomationProperties.Name="{x:Bind Name}" ColumnSpacing="8">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="Auto" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <StackPanel>
+                                                            <TextBlock Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Name}" />
+                                                            <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind StatusText}" TextWrapping="Wrap" />
+                                                            <CheckBox x:Uid="Pool_Excluded" IsChecked="{x:Bind Excluded, Mode=TwoWay}" />
+                                                        </StackPanel>
+                                                        <StackPanel Grid.Column="1" VerticalAlignment="Center" Orientation="Horizontal" Spacing="8">
+                                                            <Button x:Uid="Pool_ResetFailures" Command="{x:Bind ResetFailuresCommand}" Visibility="{x:Bind HasFailures}" />
+                                                            <Button x:Uid="Pool_Unassign" Command="{x:Bind UnassignCommand}" />
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                        <StackPanel Spacing="4" Visibility="{x:Bind HasSuggestions}">
+                                            <TextBlock x:Uid="Pool_Suggestions" FontSize="12" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                                            <ItemsControl ItemsSource="{x:Bind Suggestions}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate x:DataType="vm:PoolSuggestionItemViewModel">
+                                                        <StackPanel Padding="0,2" AutomationProperties.Name="{x:Bind Name}" Orientation="Horizontal" Spacing="8">
+                                                            <TextBlock VerticalAlignment="Center" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Name}" />
+                                                            <Button x:Uid="Pool_Assign" Command="{x:Bind AssignCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
+                                            <Button x:Uid="Pool_Save" Command="{x:Bind SaveCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                                            <Button x:Uid="Pool_Delete" Command="{x:Bind DeleteCommand}" Visibility="{x:Bind Configured}" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <TextBlock x:Uid="Pool_Log" FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" />
+                    <ItemsControl ItemsSource="{x:Bind Network.PoolLog}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="x:String">
+                                <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind}" TextWrapping="Wrap" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
 
         <!-- Mod-Log -->
         <ListView x:Name="LogPanel" x:Uid="AdminPage_LogList" Grid.Row="3" ItemsSource="{x:Bind Moderation.Log}" SelectionMode="None" Visibility="Collapsed">

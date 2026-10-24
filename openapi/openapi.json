@@ -32678,6 +32678,7 @@
                                                     "swords",
                                                     "home",
                                                     "globe",
+                                                    "map",
                                                     "link",
                                                     "printer",
                                                     "vote",
@@ -32936,6 +32937,7 @@
                                                     "swords",
                                                     "home",
                                                     "globe",
+                                                    "map",
                                                     "link",
                                                     "printer",
                                                     "vote",
@@ -47535,7 +47537,7 @@
         "/minecraft/join": {
             "get": {
                 "operationId": "v1.minecraft.join.show",
-                "description": "Adresse und Port f\u00fcr Java (Standard-Port 25565 \u2013 Apps zeigen den Port nur, wenn er davon abweicht) und Bedrock\n(Handy, Tablet, Windows) sowie der Gamertag f\u00fcr Konsolen (Xbox, PlayStation, Switch: Freund hinzuf\u00fcgen, dann \u00fcber\n\u201ebeitretbare Welten\u201c beitreten). `console.enabled = false` \u2192 Konsolen-Anleitung ausblenden, `gamertag` und `hint`\nsind dann `null`. `console.hint` ist ein optionaler Hinweis in der Sprache aus `Accept-Language` (Fallback Deutsch).\n\n\u00d6ffentlich (Gastmodus); mit Token Scope `servers:read`.\n\n**Gastmodus:** ohne Token lesbar \u2013 dann nur, was G\u00e4ste auf der Website sehen (Rate-Limit je IP). Mit Token gelten Scope und Rechte wie sonst; ein ung\u00fcltiger Token ist `401`. Ohne Token im Vorschau-/Wartungsmodus `503 preview_mode` bzw. `503 maintenance`.",
+                "description": "Adresse und Port f\u00fcr Java (Standard-Port 25565 \u2013 Apps zeigen den Port nur, wenn er davon abweicht) und Bedrock\n(Handy, Tablet, Windows) sowie der Gamertag f\u00fcr Konsolen (Xbox, PlayStation, Switch: Freund hinzuf\u00fcgen, dann \u00fcber\n\u201ebeitretbare Welten\u201c beitreten). `console.enabled = false` \u2192 Konsolen-Anleitung ausblenden, `gamertag` und `hint`\nsind dann `null`. `console.hint` ist ein optionaler Hinweis in der Sprache aus `Accept-Language` (Fallback Deutsch).\n\n\u00d6ffentlich (Gastmodus); mit Token Scope `servers:read`. Verwaltende (Token-Scope `minecraft:manage` und Recht\n`minecraft.manage`) bekommen zus\u00e4tzlich `console.hints` mit den Hinweisen aller Sprachen f\u00fcrs Bearbeiten-Formular.\n\n**Gastmodus:** ohne Token lesbar \u2013 dann nur, was G\u00e4ste auf der Website sehen (Rate-Limit je IP). Mit Token gelten Scope und Rechte wie sonst; ein ung\u00fcltiger Token ist `401`. Ohne Token im Vorschau-/Wartungsmodus `503 preview_mode` bzw. `503 maintenance`.",
                 "summary": "So kommst du auf den Server",
                 "tags": [
                     "Minecraft",
@@ -47598,6 +47600,25 @@
                                                             "type": [
                                                                 "string",
                                                                 "null"
+                                                            ]
+                                                        },
+                                                        "hints": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "de": {
+                                                                    "type": "string"
+                                                                },
+                                                                "en": {
+                                                                    "type": "string"
+                                                                },
+                                                                "fr": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "de",
+                                                                "en",
+                                                                "fr"
                                                             ]
                                                         }
                                                     },
@@ -47890,6 +47911,1842 @@
                                             "type": "string",
                                             "enum": [
                                                 "validation_failed"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/minecraft/map": {
+            "get": {
+                "operationId": "v1.minecraft.map.index",
+                "description": "Alle Server mit Welten auf der Karte (nur f\u00fcr den Betrachter sichtbare Server, im Admin nicht ausgeblendet). Je Welt\nUmgebung, Spawn, Zoomstufen, Warps (`markers`) und das Adress-Schema der Kacheln `tiles.url` mit den Platzhaltern\n`{zoom}`, `{x}`, `{z}`, `{version}` \u2013 welche Kacheln es gibt (mit `version`), liefert\n`GET /v1/minecraft/map/worlds/{world}/tiles?zoom=`. Kacheln sind PNG 512 \u00d7 512, unver\u00e4nderlich (lange cachebar).\n\n**Koordinaten:** Zoom 0 = 1 Block je Pixel; Zoom n = 2\u207f Bl\u00f6cke je Pixel; Kachel (x, z) auf Stufe n beginnt bei Block\n(x\u00b7512\u00b72\u207f, z\u00b7512\u00b72\u207f); Norden (\u2212z) oben. Leaflet: `CRS.Simple`, Leaflet-Zoom = \u2212n.\n\n`server` in Links aus dem Spiel ist die Netzwerk-ID (`network_id`) oder `id` (Server-Slug). `live_players` sagt,\nob **dieser Betrachter** Live-Spieler sieht; `live_players_mode` ist die Einstellung (`off`, `auth` = nur\nEingeloggte, `public`).\n\n\u00d6ffentlich (Gastmodus); mit Token Scope `servers:read`. Verwaltende (Scope `minecraft:manage` und Recht\n`minecraft.manage`) bekommen zus\u00e4tzlich ausgeblendete Server/Welten (nur Server, die sie auch sonst sehen d\u00fcrfen)\nmit `hidden`, `public`, `bytes` (je Server und Welt), `names` (je Sprache), `generation` und `quota`.\n\n**Gastmodus:** ohne Token lesbar \u2013 dann nur, was G\u00e4ste auf der Website sehen (Rate-Limit je IP). Mit Token gelten Scope und Rechte wie sonst; ein ung\u00fcltiger Token ist `401`. Ohne Token im Vorschau-/Wartungsmodus `503 preview_mode` bzw. `503 maintenance`.",
+                "summary": "Weltkarte mit Servern und Welten",
+                "tags": [
+                    "Minecraft",
+                    "MinecraftMap"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "live_players": {
+                                                    "type": "boolean"
+                                                },
+                                                "live_players_mode": {
+                                                    "type": "string"
+                                                },
+                                                "quota": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "used": {
+                                                            "type": "integer"
+                                                        },
+                                                        "total": {
+                                                            "type": "integer"
+                                                        },
+                                                        "warn_at": {
+                                                            "type": "integer"
+                                                        },
+                                                        "per_server": {
+                                                            "type": "integer"
+                                                        },
+                                                        "warned": {
+                                                            "type": "boolean"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "used",
+                                                        "total",
+                                                        "warn_at",
+                                                        "per_server",
+                                                        "warned"
+                                                    ]
+                                                },
+                                                "servers": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string"
+                                                            },
+                                                            "network_id": {
+                                                                "type": [
+                                                                    "string",
+                                                                    "null"
+                                                                ]
+                                                            },
+                                                            "name": {
+                                                                "type": "string"
+                                                            },
+                                                            "hidden": {
+                                                                "type": "boolean"
+                                                            },
+                                                            "public": {
+                                                                "type": "boolean"
+                                                            },
+                                                            "bytes": {
+                                                                "type": "integer"
+                                                            },
+                                                            "worlds": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "string"
+                                                                        },
+                                                                        "world": {
+                                                                            "type": "string"
+                                                                        },
+                                                                        "name": {
+                                                                            "type": "string"
+                                                                        },
+                                                                        "environment": {
+                                                                            "type": "string"
+                                                                        },
+                                                                        "loaded": {
+                                                                            "type": "boolean"
+                                                                        },
+                                                                        "spawn": {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "x": {
+                                                                                    "type": "integer"
+                                                                                },
+                                                                                "z": {
+                                                                                    "type": "integer"
+                                                                                }
+                                                                            },
+                                                                            "required": [
+                                                                                "x",
+                                                                                "z"
+                                                                            ]
+                                                                        },
+                                                                        "tile_size": {
+                                                                            "type": "integer"
+                                                                        },
+                                                                        "zoom_levels": {
+                                                                            "type": "integer"
+                                                                        },
+                                                                        "tiles": {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "count": {
+                                                                                    "type": "integer"
+                                                                                },
+                                                                                "region_size": {
+                                                                                    "type": "integer"
+                                                                                },
+                                                                                "url": {
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "updated_at": {
+                                                                                    "type": [
+                                                                                        "string",
+                                                                                        "null"
+                                                                                    ]
+                                                                                }
+                                                                            },
+                                                                            "required": [
+                                                                                "count",
+                                                                                "region_size",
+                                                                                "url",
+                                                                                "updated_at"
+                                                                            ]
+                                                                        },
+                                                                        "markers": {
+                                                                            "type": "array",
+                                                                            "items": {
+                                                                                "type": "object",
+                                                                                "properties": {
+                                                                                    "type": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "id": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "label": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "x": {
+                                                                                        "type": "integer"
+                                                                                    },
+                                                                                    "z": {
+                                                                                        "type": "integer"
+                                                                                    }
+                                                                                },
+                                                                                "required": [
+                                                                                    "type",
+                                                                                    "id",
+                                                                                    "label",
+                                                                                    "x",
+                                                                                    "z"
+                                                                                ]
+                                                                            }
+                                                                        },
+                                                                        "reported_at": {
+                                                                            "type": [
+                                                                                "string",
+                                                                                "null"
+                                                                            ]
+                                                                        },
+                                                                        "hidden": {
+                                                                            "type": "boolean"
+                                                                        },
+                                                                        "names": {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "de": {
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "en": {
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "fr": {
+                                                                                    "type": "string"
+                                                                                }
+                                                                            },
+                                                                            "required": [
+                                                                                "de",
+                                                                                "en",
+                                                                                "fr"
+                                                                            ]
+                                                                        },
+                                                                        "bytes": {
+                                                                            "type": "integer"
+                                                                        },
+                                                                        "generation": {
+                                                                            "type": "string"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "id",
+                                                                        "world",
+                                                                        "name",
+                                                                        "environment",
+                                                                        "loaded",
+                                                                        "spawn",
+                                                                        "tile_size",
+                                                                        "zoom_levels",
+                                                                        "tiles",
+                                                                        "markers",
+                                                                        "reported_at"
+                                                                    ]
+                                                                }
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "id",
+                                                            "network_id",
+                                                            "name",
+                                                            "worlds"
+                                                        ]
+                                                    }
+                                                }
+                                            },
+                                            "required": [
+                                                "live_players",
+                                                "live_players_mode",
+                                                "servers"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {},
+                    {
+                        "http": []
+                    }
+                ]
+            }
+        },
+        "/minecraft/map/live": {
+            "get": {
+                "operationId": "v1.minecraft.map.live",
+                "description": "Spieler auf den sichtbaren Welten des Servers mit Position (`x`, `z`, Blickrichtung `yaw`), Bedrock-Kennzeichen und\nKopf-Bild (`head_url`, nur aus dem eigenen Speicher; `null` \u2192 Initiale anzeigen). Stand h\u00f6chstens ~30 s alt\n(`updated_at`), sonst leer. Positionen werden nicht gespeichert. F\u00fcr Live-Ansichten alle 5 s abfragen.\n**\u00d6ffentlich mit Namen** (Owner-Entscheidung) \u2013 Spieler blenden sich im Spiel mit `/map hide` aus.\n`enabled: false` \u2192 im Admin abgeschaltet bzw. nur f\u00fcr Eingeloggte freigegeben und ohne Anmeldung abgefragt.\n\n\u00d6ffentlich (Gastmodus); mit Token Scope `servers:read`.\n\n**Gastmodus:** ohne Token lesbar \u2013 dann nur, was G\u00e4ste auf der Website sehen (Rate-Limit je IP). Mit Token gelten Scope und Rechte wie sonst; ein ung\u00fcltiger Token ist `401`. Ohne Token im Vorschau-/Wartungsmodus `503 preview_mode` bzw. `503 maintenance`.",
+                "summary": "Live-Spieler auf der Weltkarte",
+                "tags": [
+                    "Minecraft",
+                    "MinecraftMap"
+                ],
+                "parameters": [
+                    {
+                        "name": "server",
+                        "in": "query",
+                        "required": true,
+                        "description": "Netzwerk-ID oder Server-Slug",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "freebuild-1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "server": {
+                                                    "type": "string"
+                                                },
+                                                "enabled": {
+                                                    "type": "boolean"
+                                                },
+                                                "updated_at": {
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
+                                                },
+                                                "players": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "uuid": {
+                                                                "type": "string"
+                                                            },
+                                                            "name": {
+                                                                "type": "string"
+                                                            },
+                                                            "world": {
+                                                                "type": "string"
+                                                            },
+                                                            "world_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "x": {
+                                                                "type": "number"
+                                                            },
+                                                            "z": {
+                                                                "type": "number"
+                                                            },
+                                                            "yaw": {
+                                                                "type": [
+                                                                    "number",
+                                                                    "null"
+                                                                ]
+                                                            },
+                                                            "bedrock": {
+                                                                "type": "boolean"
+                                                            },
+                                                            "head_url": {
+                                                                "type": [
+                                                                    "string",
+                                                                    "null"
+                                                                ]
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "uuid",
+                                                            "name",
+                                                            "world",
+                                                            "world_id",
+                                                            "x",
+                                                            "z",
+                                                            "yaw",
+                                                            "bedrock",
+                                                            "head_url"
+                                                        ]
+                                                    }
+                                                }
+                                            },
+                                            "required": [
+                                                "server",
+                                                "enabled",
+                                                "updated_at",
+                                                "players"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "`validation_failed`: `server` fehlt",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "validation_failed"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "`map_server_not_found`: Server unbekannt, ausgeblendet oder nicht sichtbar",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "map_server_not_found"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {},
+                    {
+                        "http": []
+                    }
+                ]
+            }
+        },
+        "/minecraft/map/worlds/{world}/tiles": {
+            "get": {
+                "operationId": "v1.minecraft.map.worlds.tiles.index",
+                "description": "Vorhandene Kacheln **einer Region** (32 \u00d7 32 Kacheln, `tiles.region_size` aus `GET /v1/minecraft/map`) einer\nZoomstufe als Liste `[x, z, version]`, sortiert nach `x`, dann `z` \u2013 damit nur vorhandene Kacheln geladen werden und\ndie Adresse (`tiles.url`) mit `version` gebildet werden kann. Region einer Kachel: `rx = floor(x / 32)`,\n`rz = floor(z / 32)`; Apps laden nur die Regionen, die gerade sichtbar sind. Stand h\u00f6chstens ~15 s alt. Mit `ETag`.\n\n\u00d6ffentlich (Gastmodus); mit Token Scope `servers:read`.\n\n**Gastmodus:** ohne Token lesbar \u2013 dann nur, was G\u00e4ste auf der Website sehen (Rate-Limit je IP). Mit Token gelten Scope und Rechte wie sonst; ein ung\u00fcltiger Token ist `401`. Ohne Token im Vorschau-/Wartungsmodus `503 preview_mode` bzw. `503 maintenance`.",
+                "summary": "Kachel-Index einer Kartenwelt",
+                "tags": [
+                    "Minecraft",
+                    "MinecraftMap"
+                ],
+                "parameters": [
+                    {
+                        "name": "world",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "zoom",
+                        "in": "query",
+                        "required": true,
+                        "description": "Zoomstufe (0 = 1 Block je Pixel)",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 0
+                    },
+                    {
+                        "name": "region",
+                        "in": "query",
+                        "required": true,
+                        "description": "Region als `rx,rz` (floor(Kachel-Index / 32))",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "-1,0"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "world": {
+                                                    "type": "string"
+                                                },
+                                                "zoom": {
+                                                    "type": "integer"
+                                                },
+                                                "region": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "x": {
+                                                            "type": "integer"
+                                                        },
+                                                        "z": {
+                                                            "type": "integer"
+                                                        },
+                                                        "size": {
+                                                            "type": "integer"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "x",
+                                                        "z",
+                                                        "size"
+                                                    ]
+                                                },
+                                                "tiles": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": [
+                                                                "integer",
+                                                                "string"
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "required": [
+                                                "world",
+                                                "zoom",
+                                                "region",
+                                                "tiles"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "`validation_failed`: `zoom` fehlt oder liegt au\u00dferhalb 0 \u2026 `zoom_levels`; `region` fehlt, ist kein `rx,rz` oder liegt au\u00dferhalb der Weltgrenze",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "validation_failed"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "`not_found`: Welt unbekannt oder nicht sichtbar",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "not_found"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {},
+                    {
+                        "http": []
+                    }
+                ]
+            },
+            "delete": {
+                "operationId": "v1.minecraft.map.worlds.tiles.destroy",
+                "description": "Entfernt alle Kacheln der Welt (Dateien im Hintergrund). Das Plugin l\u00e4dt sie nach `/map render` bzw. `/map upload`\nneu. Audit `minecraft.map_tiles_cleared`. Antwort `204`.\n\nBen\u00f6tigt Token-Scope `minecraft:manage` und das Recht `minecraft.manage`.",
+                "summary": "Kacheln einer Kartenwelt l\u00f6schen",
+                "tags": [
+                    "Minecraft",
+                    "MinecraftMap"
+                ],
+                "parameters": [
+                    {
+                        "name": "world",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "404": {
+                        "description": "`not_found`: Welt unbekannt",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "not_found"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    },
+                    "403": {
+                        "description": "`forbidden`: Recht `minecraft.manage` fehlt oder Server f\u00fcr die Person nicht sichtbar",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "forbidden"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/minecraft/map/settings": {
+            "patch": {
+                "operationId": "v1.minecraft.map.settings.update",
+                "description": "`live_players`: `off` (aus), `auth` (nur Eingeloggte \u2013 Website-Sitzung oder Token), `public` (\u00f6ffentlich, Standard).\n`true`/`false` gelten weiter als `public`/`off`. Audit `settings.changed`.\n\nBen\u00f6tigt Token-Scope `minecraft:manage` und das Recht `minecraft.manage`.",
+                "summary": "Einstellungen der Weltkarte \u00e4ndern",
+                "tags": [
+                    "Minecraft",
+                    "MinecraftMap"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "live_players": {
+                                        "type": "string",
+                                        "description": "Live-Spieler: off, auth oder public (true/false = public/off)",
+                                        "examples": [
+                                            "public"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "live_players"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "live_players": {
+                                                    "type": "boolean"
+                                                },
+                                                "live_players_mode": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "live_players",
+                                                "live_players_mode"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "`validation_failed`: Ung\u00fcltige Werte",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "validation_failed"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    },
+                    "403": {
+                        "description": "`forbidden`: Recht `minecraft.manage` fehlt",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "forbidden"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/minecraft/map/servers/{server}": {
+            "patch": {
+                "operationId": "v1.minecraft.map.servers.update",
+                "description": "`hidden: true` nimmt den Server mit allen Welten und Live-Spielern von der Karte. Mit `clear_tiles: true` werden\nbeim Ausblenden zus\u00e4tzlich alle Kacheln seiner Welten gel\u00f6scht \u2013 **ohne** bleiben bereits bekannte Kachel-Adressen\nim \u00f6ffentlichen Speicher abrufbar, bis die Kacheln gel\u00f6scht sind. Audit `settings.changed` (bzw.\n`minecraft.map_tiles_cleared` je Welt).\n\nBen\u00f6tigt Token-Scope `minecraft:manage` und das Recht `minecraft.manage`; nur Server, die die Person auch sonst\nsehen darf.",
+                "summary": "Server auf der Weltkarte ein- oder ausblenden",
+                "tags": [
+                    "Minecraft",
+                    "MinecraftMap"
+                ],
+                "parameters": [
+                    {
+                        "name": "server",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "hidden": {
+                                        "type": "boolean",
+                                        "description": "Server auf der Karte ausblenden",
+                                        "examples": [
+                                            true
+                                        ]
+                                    },
+                                    "clear_tiles": {
+                                        "type": "boolean",
+                                        "description": "Beim Ausblenden alle Kacheln l\u00f6schen",
+                                        "examples": [
+                                            false
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "hidden"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string"
+                                                },
+                                                "hidden": {
+                                                    "type": "boolean"
+                                                }
+                                            },
+                                            "required": [
+                                                "id",
+                                                "hidden"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/ValidationException"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    },
+                    "403": {
+                        "description": "`forbidden`: Recht `minecraft.manage` fehlt oder Server f\u00fcr die Person nicht sichtbar",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "forbidden"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "`not_found`: Server unbekannt",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "not_found"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/minecraft/map/worlds/{world}": {
+            "patch": {
+                "operationId": "v1.minecraft.map.worlds.update",
+                "description": "`hidden` blendet die Welt aus; `names` setzt den Anzeigenamen je Sprache (`de`, `en`, `fr`, h\u00f6chstens 64 Zeichen,\nleer = Weltname). `clear_tiles: true` l\u00f6scht bei ausgeblendeter Welt zus\u00e4tzlich alle Kacheln (bekannte\nKachel-Adressen bleiben sonst \u00f6ffentlich abrufbar). Nur gesendete Felder \u00e4ndern sich. Audit\n`minecraft.map_world_updated`.\n\nBen\u00f6tigt Token-Scope `minecraft:manage` und das Recht `minecraft.manage`; nur Welten von Servern, die die Person\nauch sonst sehen darf.",
+                "summary": "Kartenwelt \u00e4ndern",
+                "tags": [
+                    "Minecraft",
+                    "MinecraftMap"
+                ],
+                "parameters": [
+                    {
+                        "name": "world",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "hidden": {
+                                        "type": "boolean",
+                                        "description": "Welt ausblenden",
+                                        "examples": [
+                                            false
+                                        ]
+                                    },
+                                    "clear_tiles": {
+                                        "type": "boolean",
+                                        "description": "Bei ausgeblendeter Welt alle Kacheln l\u00f6schen",
+                                        "examples": [
+                                            false
+                                        ]
+                                    },
+                                    "names": {
+                                        "type": "object",
+                                        "description": "Anzeigename je Sprache",
+                                        "examples": [
+                                            {
+                                                "de": "Farmwelt",
+                                                "en": "Farm world",
+                                                "fr": "Monde de ressources"
+                                            }
+                                        ],
+                                        "properties": {
+                                            "de": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ]
+                                            },
+                                            "en": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ]
+                                            },
+                                            "fr": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string"
+                                                },
+                                                "world": {
+                                                    "type": "string"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "environment": {
+                                                    "type": "string"
+                                                },
+                                                "loaded": {
+                                                    "type": "boolean"
+                                                },
+                                                "spawn": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "x": {
+                                                            "type": "integer"
+                                                        },
+                                                        "z": {
+                                                            "type": "integer"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "x",
+                                                        "z"
+                                                    ]
+                                                },
+                                                "tile_size": {
+                                                    "type": "integer"
+                                                },
+                                                "zoom_levels": {
+                                                    "type": "integer"
+                                                },
+                                                "tiles": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "count": {
+                                                            "type": "integer"
+                                                        },
+                                                        "url": {
+                                                            "type": "string"
+                                                        },
+                                                        "updated_at": {
+                                                            "type": [
+                                                                "string",
+                                                                "null"
+                                                            ]
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "count",
+                                                        "url",
+                                                        "updated_at"
+                                                    ]
+                                                },
+                                                "markers": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "type": {
+                                                                "type": "string"
+                                                            },
+                                                            "id": {
+                                                                "type": "string"
+                                                            },
+                                                            "label": {
+                                                                "type": "string"
+                                                            },
+                                                            "x": {
+                                                                "type": "integer"
+                                                            },
+                                                            "z": {
+                                                                "type": "integer"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "type",
+                                                            "id",
+                                                            "label",
+                                                            "x",
+                                                            "z"
+                                                        ]
+                                                    }
+                                                },
+                                                "reported_at": {
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
+                                                },
+                                                "hidden": {
+                                                    "type": "boolean"
+                                                },
+                                                "names": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "de": {
+                                                            "type": "string"
+                                                        },
+                                                        "en": {
+                                                            "type": "string"
+                                                        },
+                                                        "fr": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "de",
+                                                        "en",
+                                                        "fr"
+                                                    ]
+                                                },
+                                                "bytes": {
+                                                    "type": "integer"
+                                                },
+                                                "generation": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "id",
+                                                "world",
+                                                "name",
+                                                "environment",
+                                                "loaded",
+                                                "spawn",
+                                                "tile_size",
+                                                "zoom_levels",
+                                                "tiles",
+                                                "markers",
+                                                "reported_at",
+                                                "hidden",
+                                                "names",
+                                                "bytes",
+                                                "generation"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "`not_found`: Welt unbekannt",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "not_found"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    },
+                    "403": {
+                        "description": "`forbidden`: Recht `minecraft.manage` fehlt oder Server f\u00fcr die Person nicht sichtbar",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "forbidden"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "`validation_failed`: Ung\u00fcltige Werte",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "validation_failed"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/minecraft/resource-pack": {
+            "get": {
+                "operationId": "v1.minecraft.resource-pack.show",
+                "description": "`url` ist der empfohlene, versionierte Link (`\u2026/minecraft/resourcepack/<name>-<sha1>.zip`, unver\u00e4nderlich,\n`Cache-Control: immutable`): liefert ohne Login und ohne Weiterleitung direkt die ZIP (`application/zip`).\n`latest_url` ist ein fester Alias mit kurzem Cache (5 Minuten) oder `null`, wenn abgeschaltet \u2013 f\u00fcr\n`resourcepack.url` mit `resourcepack.sha1` nicht geeignet, weil der Inhalt wechselt. `sha1` (40 hex, klein) ist\ngenau der Wert f\u00fcr `resourcepack.sha1`, `size` in Bytes, `updated_at` der Zeitpunkt des Hochladens. Nach dem\nErsetzen bleibt die alte Datei noch 24 Stunden abrufbar.\n\n\u00d6ffentlich (Gastmodus); mit Token Scope `servers:read`. Der Minecraft-Proxy darf seinen Plugin-Schl\u00fcssel\n(`Authorization: Bearer rogsrv_\u2026`) mitschicken \u2013 er wird ignoriert, die Anfrage gilt als Gast.\n\n**Gastmodus:** ohne Token lesbar \u2013 dann nur, was G\u00e4ste auf der Website sehen (Rate-Limit je IP). Mit Token gelten Scope und Rechte wie sonst; ein ung\u00fcltiger Token ist `401`. Ohne Token im Vorschau-/Wartungsmodus `503 preview_mode` bzw. `503 maintenance`.",
+                "summary": "Aktuelles Ressourcenpaket",
+                "tags": [
+                    "Minecraft",
+                    "MinecraftResourcePack"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "url": {
+                                                    "type": "string"
+                                                },
+                                                "latest_url": {
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
+                                                },
+                                                "sha1": {
+                                                    "type": "string"
+                                                },
+                                                "size": {
+                                                    "type": "integer"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "url",
+                                                "latest_url",
+                                                "sha1",
+                                                "size",
+                                                "updated_at"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "`resource_pack_not_found`: Kein Ressourcenpaket hochgeladen",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "resource_pack_not_found"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {},
+                    {
+                        "http": []
+                    }
+                ]
+            },
+            "post": {
+                "operationId": "v1.minecraft.resource-pack.store",
+                "description": "`multipart/form-data` mit Feld `file`: `.zip`, MIME `application/zip`, h\u00f6chstens 50 MB, g\u00fcltiges ZIP mit\n`pack.mcmeta` (JSON mit `pack`) im Wurzelverzeichnis, ohne unsichere Eintr\u00e4ge (`..`, absolute Pfade, Backslashes,\nSymlinks). Ein vorheriges Paket mit anderer SHA-1 wird nach 24 Stunden gel\u00f6scht. Audit\n`minecraft.resource_pack_uploaded`.\n\nBen\u00f6tigt Token-Scope `minecraft:manage` und das Recht `minecraft.manage`.",
+                "summary": "Ressourcenpaket hochladen oder ersetzen",
+                "tags": [
+                    "Minecraft",
+                    "MinecraftResourcePack"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "file": {
+                                        "type": "string",
+                                        "format": "binary",
+                                        "contentMediaType": "application/octet-stream"
+                                    }
+                                },
+                                "required": [
+                                    "file"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "url": {
+                                                    "type": "string"
+                                                },
+                                                "latest_url": {
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ]
+                                                },
+                                                "sha1": {
+                                                    "type": "string"
+                                                },
+                                                "size": {
+                                                    "type": "integer"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "url",
+                                                "latest_url",
+                                                "sha1",
+                                                "size",
+                                                "updated_at"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "`validation_failed`: Keine/ung\u00fcltige ZIP, zu gro\u00df, `pack.mcmeta` fehlt, unsicherer Eintrag",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "validation_failed"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    },
+                    "403": {
+                        "description": "`forbidden`: Recht `minecraft.manage` fehlt",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "forbidden"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "503": {
+                        "description": "`resource_pack_storage_unavailable`: Speicher nicht erreichbar",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "resource_pack_storage_unavailable"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "v1.minecraft.resource-pack.destroy",
+                "description": "Der Alias `latest` verschwindet sofort, die versionierte Datei nach 24 Stunden (verbundene Clients). Danach liefert\n`GET /v1/minecraft/resource-pack` `404`. Audit `minecraft.resource_pack_deleted`.\n\nBen\u00f6tigt Token-Scope `minecraft:manage` und das Recht `minecraft.manage`.",
+                "summary": "Ressourcenpaket l\u00f6schen",
+                "tags": [
+                    "Minecraft",
+                    "MinecraftResourcePack"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    },
+                    "403": {
+                        "description": "`forbidden`: Recht `minecraft.manage` fehlt",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "forbidden"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "`resource_pack_not_found`: Kein Ressourcenpaket hochgeladen",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "resource_pack_not_found"
                                             ]
                                         }
                                     },
@@ -57952,6 +59809,1041 @@
                 ]
             }
         },
+        "/gameserver/minecraft/map/worlds": {
+            "post": {
+                "operationId": "v1.gameserver.minecraft.map.worlds.store",
+                "description": "Beim Start, bei neuen Welten und alle 10 Minuten. **Ersetzt** die Weltliste dieses Servers: Welten, die fehlen,\ngelten als gerade nicht geladen (`loaded: false`) \u2013 ihre Kacheln und die Einstellungen aus dem Admin bleiben.\nWeicht `generation` vom gespeicherten Stand ab (Welt unter gleichem Namen neu erzeugt), werden alle Kacheln der\nWelt gel\u00f6scht; Kachel-Pakete mit der alten Generation bekommen danach `409 map_generation_outdated`.\n\nGrenzen: h\u00f6chstens 16 Welten je Meldung (`rog.minecraft.map.max_worlds`) und 32 Welten je Server insgesamt, auch\nnicht geladene (`rog.minecraft.map.max_worlds_total`, sonst `422 map_world_limit_reached`), 500 Marker je Welt,\nLabel \u2264 64 Zeichen (Steuerzeichen und `\u00a7`-Farbcodes werden entfernt), `zoom_levels` 0\u20138, `tile_size` immer 512,\nKoordinaten innerhalb der Weltgrenze (\u00b130 000 000). Weltname und `generation`: `[A-Za-z0-9_.:-]`, 1\u201364 Zeichen. Body\nh\u00f6chstens 512 KiB (`413 payload_too_large`), h\u00f6chstens 6 Meldungen je Minute und Schl\u00fcssel (`429`). Ein\n`Idempotency-Key` wiederholt die Antwort.\n\nScope: Plugin-Schl\u00fcssel eines Minecraft-Servers.",
+                "summary": "Welten f\u00fcr die Karte melden",
+                "tags": [
+                    "Minecraft-Netzwerk (Plugin-Schnittstelle)",
+                    "MinecraftMapPlugin"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "worlds": {
+                                        "type": "array",
+                                        "description": "Alle geladenen Kartenwelten des Servers",
+                                        "examples": [
+                                            [
+                                                {
+                                                    "world": "world",
+                                                    "environment": "normal",
+                                                    "generation": "1b4e9c-3f9a2c",
+                                                    "spawn": {
+                                                        "x": 0,
+                                                        "z": 0
+                                                    },
+                                                    "tile_size": 512,
+                                                    "zoom_levels": 4,
+                                                    "markers": [
+                                                        {
+                                                            "type": "warp",
+                                                            "id": "shop",
+                                                            "label": "shop",
+                                                            "x": 120,
+                                                            "z": -40
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        ],
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "world": {
+                                                    "type": "string"
+                                                },
+                                                "environment": {
+                                                    "type": "string"
+                                                },
+                                                "generation": {
+                                                    "type": "string"
+                                                },
+                                                "spawn": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "x": {
+                                                            "type": "integer"
+                                                        },
+                                                        "z": {
+                                                            "type": "integer"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "x",
+                                                        "z"
+                                                    ]
+                                                },
+                                                "tile_size": {
+                                                    "type": "integer"
+                                                },
+                                                "zoom_levels": {
+                                                    "type": "integer"
+                                                },
+                                                "markers": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "type": {
+                                                                "type": "string"
+                                                            },
+                                                            "id": {
+                                                                "type": "string"
+                                                            },
+                                                            "label": {
+                                                                "type": "string"
+                                                            },
+                                                            "x": {
+                                                                "type": "integer"
+                                                            },
+                                                            "z": {
+                                                                "type": "integer"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "type",
+                                                            "id",
+                                                            "label",
+                                                            "x",
+                                                            "z"
+                                                        ]
+                                                    }
+                                                }
+                                            },
+                                            "required": [
+                                                "world",
+                                                "environment",
+                                                "generation",
+                                                "tile_size",
+                                                "zoom_levels"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "worlds"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "401": {
+                        "description": "`plugin_key_invalid`: Plugin-Schl\u00fcssel fehlt, ist ung\u00fcltig oder widerrufen",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "plugin_key_invalid"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "`minecraft_server_required`: Der Schl\u00fcssel geh\u00f6rt zu keinem Minecraft-Server",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "minecraft_server_required"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "413": {
+                        "description": "`payload_too_large`: Body gr\u00f6\u00dfer als 512 KiB",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "payload_too_large"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "`map_world_limit_reached`: Mehr als 32 Welten f\u00fcr diesen Server \u00b7 `validation_failed`: Ung\u00fcltige Weltliste",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "map_world_limit_reached",
+                                                "validation_failed"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "`rate_limited`: Mehr als 6 Meldungen je Minute",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "rate_limited"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "pluginKey": []
+                    }
+                ]
+            }
+        },
+        "/gameserver/minecraft/map/tiles": {
+            "post": {
+                "operationId": "v1.gameserver.minecraft.map.tiles.store",
+                "description": "Neue oder ge\u00e4nderte Kacheln **einer** Welt, h\u00f6chstens 32 je Anfrage (`rog.minecraft.map.tiles_per_request`), Body\nh\u00f6chstens 3 MiB (`rog.minecraft.map.tiles_max_body_bytes`, sonst `413 payload_too_large` \u2013 vor Idempotency und\nSchl\u00fcsselpr\u00fcfung). Jede Kachel: PNG 512 \u00d7 512 als Base64 (`png`), dekodiert **und** nach dem Neukodieren h\u00f6chstens\n512 KiB. Gepr\u00fcft werden Signatur, IHDR-Gr\u00f6\u00dfe und das Bild selbst; gespeichert wird eine neu kodierte PNG (Metadaten\nentfernt, Transparenz bleibt). `zoom` 0 \u2026 `zoom_levels` der Welt, `x`/`z` innerhalb der Weltgrenze auf dieser Stufe.\n\n**Einzelne ung\u00fcltige Kacheln** werden verworfen und in `rejected` genannt (`index` = Position im Paket ab 0, `zoom`,\n`x`, `z`, `reason`: `base64`, `too_large`, `not_png`, `dimensions`, `corrupt`, `zoom`, `index`); die \u00fcbrigen werden\ngespeichert (`200`). Sind **alle** Kacheln ung\u00fcltig \u2192 `422 map_tile_invalid` mit `tile` = `{index, zoom, x, z}` der\nersten, `reason` und `rejected`. Kaputter Umschlag (Pflichtfelder, mehr als 32 Kacheln, doppelte Kachel) \u2192\n`422 validation_failed`, nichts gespeichert.\n\nNur **\u00f6ffentliche** Server (Sichtbarkeit `public`) nehmen Kacheln an, sonst `409 map_server_not_public` (Plugin\npausiert 10 Minuten). Die Welt muss vorher \u00fcber `map/worlds` gemeldet sein (`409 map_world_unknown`). Weicht\n`generation` ab, werden zuerst alle alten Kacheln der Welt gel\u00f6scht (`reset: true`); die unmittelbar vorherige\nGeneration \u2013 oder ein Reset, der w\u00e4hrend des Pakets passiert \u2013 wird abgelehnt (`409 map_generation_outdated`,\nverwerfen). Gleiche Kachel erneut = \u00fcberschreiben; gleicher Inhalt z\u00e4hlt als `unchanged`.\n\nQuoten: 200 000 Kacheln je Welt (`422 map_tile_limit_reached`), 10 GB je Server bzw. 50 GB f\u00fcr alle Server\n(`422 map_quota_reached` mit `scope` `server` oder `total`). Rate-Limit: 30 Pakete je Minute und Schl\u00fcssel\n(`rog.minecraft.map.tiles_per_minute`, nur dieser Endpunkt).\n\nScope: Plugin-Schl\u00fcssel eines Minecraft-Servers.",
+                "summary": "Kacheln hochladen",
+                "tags": [
+                    "Minecraft-Netzwerk (Plugin-Schnittstelle)",
+                    "MinecraftMapPlugin"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "world": {
+                                        "type": "string",
+                                        "description": "Weltname",
+                                        "examples": [
+                                            "world"
+                                        ]
+                                    },
+                                    "generation": {
+                                        "type": "string",
+                                        "description": "Generation der Welt",
+                                        "examples": [
+                                            "1b4e9c-3f9a2c"
+                                        ]
+                                    },
+                                    "tile_size": {
+                                        "type": "integer",
+                                        "description": "Kachelgr\u00f6\u00dfe (immer 512)",
+                                        "examples": [
+                                            512
+                                        ]
+                                    },
+                                    "tiles": {
+                                        "type": "array",
+                                        "description": "Kacheln (1\u201332)",
+                                        "examples": [
+                                            [
+                                                {
+                                                    "zoom": 0,
+                                                    "x": -1,
+                                                    "z": 2,
+                                                    "png": "iVBORw0KGgo\u2026"
+                                                }
+                                            ]
+                                        ],
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "zoom": {
+                                                    "type": "integer"
+                                                },
+                                                "x": {
+                                                    "type": "integer"
+                                                },
+                                                "z": {
+                                                    "type": "integer"
+                                                },
+                                                "png": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "zoom",
+                                                "x",
+                                                "z",
+                                                "png"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "world",
+                                    "generation",
+                                    "tile_size",
+                                    "tiles"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "stored": {
+                                                    "type": "integer"
+                                                },
+                                                "unchanged": {
+                                                    "type": "integer"
+                                                },
+                                                "reset": {
+                                                    "type": "boolean",
+                                                    "description": "true, wenn die Generation gewechselt hat und alte Kacheln gel\u00f6scht wurden"
+                                                },
+                                                "rejected": {
+                                                    "type": "array",
+                                                    "description": "einzeln verworfene Kacheln (index = Position im Paket ab 0)",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "index": {
+                                                                "type": "integer"
+                                                            },
+                                                            "zoom": {
+                                                                "type": "integer"
+                                                            },
+                                                            "x": {
+                                                                "type": "integer"
+                                                            },
+                                                            "z": {
+                                                                "type": "integer"
+                                                            },
+                                                            "reason": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "index",
+                                                            "zoom",
+                                                            "x",
+                                                            "z",
+                                                            "reason"
+                                                        ]
+                                                    }
+                                                }
+                                            },
+                                            "required": [
+                                                "stored",
+                                                "unchanged",
+                                                "reset",
+                                                "rejected"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "`plugin_key_invalid`: Plugin-Schl\u00fcssel fehlt, ist ung\u00fcltig oder widerrufen",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "plugin_key_invalid"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "`minecraft_server_required`: Der Schl\u00fcssel geh\u00f6rt zu keinem Minecraft-Server",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "minecraft_server_required"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "`map_server_not_public`: Server ist nicht \u00f6ffentlich \u2013 keine Kacheln \u00b7 `map_world_unknown`: Welt nicht \u00fcber map/worlds gemeldet \u00b7 `map_generation_outdated`: Paket der vorherigen Generation",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "map_server_not_public",
+                                                "map_world_unknown",
+                                                "map_generation_outdated"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "413": {
+                        "description": "`payload_too_large`: Body zu gro\u00df",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "payload_too_large"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "`map_tile_invalid`: Alle Kacheln des Pakets ung\u00fcltig \u00b7 `map_tile_limit_reached`: H\u00f6chstzahl Kacheln der Welt erreicht \u00b7 `map_quota_reached`: Speicherquote des Servers oder gesamt erreicht \u00b7 `validation_failed`: Ung\u00fcltiger Umschlag (Felder, Anzahl, doppelte Kachel)",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "map_tile_invalid",
+                                                "map_tile_limit_reached",
+                                                "map_quota_reached",
+                                                "validation_failed"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "`rate_limited`: Zu viele Pakete",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "rate_limited"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "503": {
+                        "description": "`map_storage_unavailable`: Speicher nicht erreichbar \u2013 sp\u00e4ter erneut senden (`Retry-After`)",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "map_storage_unavailable"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "pluginKey": []
+                    }
+                ]
+            }
+        },
+        "/gameserver/minecraft/map/live": {
+            "post": {
+                "operationId": "v1.gameserver.minecraft.map.live.store",
+                "description": "Alle 5 s, solange Spieler auf Kartenwelten sind, danach einmal leer. **Ersetzt** die Liste dieses Servers. Die\nListe liegt **nur im Cache** (30 s, `rog.minecraft.map.live_ttl_seconds`) \u2013 ohne neue Meldung gilt sie danach als\nleer; in der Datenbank wird nichts gespeichert. Nicht senden: Vanish, Zuschauer, Spieler mit `rog.map.hidden`\n(`/map hide`); Eintr\u00e4ge mit `hidden: true` werden zus\u00e4tzlich verworfen. Bis 500 Spieler, Name \u2264 32 Zeichen,\nKoordinaten auf 0,1 gerundet. Body h\u00f6chstens 128 KiB (`413 payload_too_large`). Ein `Idempotency-Key` wird ignoriert\n(immer der aktuelle Stand).\n\nScope: Plugin-Schl\u00fcssel eines Minecraft-Servers.",
+                "summary": "Live-Spieler melden",
+                "tags": [
+                    "Minecraft-Netzwerk (Plugin-Schnittstelle)",
+                    "MinecraftMapPlugin"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "players": {
+                                        "type": "array",
+                                        "description": "Spieler auf Kartenwelten",
+                                        "examples": [
+                                            [
+                                                {
+                                                    "uuid": "069a79f4-44e9-4726-a5be-fca90e38aaf5",
+                                                    "name": "wahke",
+                                                    "world": "world",
+                                                    "x": 12.5,
+                                                    "z": -40.2,
+                                                    "yaw": 90,
+                                                    "bedrock": false
+                                                }
+                                            ]
+                                        ],
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "uuid": {
+                                                    "type": "string"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "world": {
+                                                    "type": "string"
+                                                },
+                                                "x": {
+                                                    "type": "number"
+                                                },
+                                                "z": {
+                                                    "type": "number"
+                                                },
+                                                "yaw": {
+                                                    "type": [
+                                                        "number",
+                                                        "null"
+                                                    ]
+                                                },
+                                                "bedrock": {
+                                                    "type": "boolean"
+                                                },
+                                                "hidden": {
+                                                    "type": "boolean"
+                                                }
+                                            },
+                                            "required": [
+                                                "uuid",
+                                                "name",
+                                                "world",
+                                                "x",
+                                                "z"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "players"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "401": {
+                        "description": "`plugin_key_invalid`: Plugin-Schl\u00fcssel fehlt, ist ung\u00fcltig oder widerrufen",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "plugin_key_invalid"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "`minecraft_server_required`: Der Schl\u00fcssel geh\u00f6rt zu keinem Minecraft-Server",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "minecraft_server_required"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "413": {
+                        "description": "`payload_too_large`: Body gr\u00f6\u00dfer als 128 KiB",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "payload_too_large"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "`validation_failed`: Ung\u00fcltige Spielerliste",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "validation_failed"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "pluginKey": []
+                    }
+                ]
+            }
+        },
         "/gameserver/minecraft/wallets/{uuid}": {
             "get": {
                 "operationId": "v1.gameserver.minecraft.wallets.show",
@@ -61409,6 +64301,7 @@
                                                     "swords",
                                                     "home",
                                                     "globe",
+                                                    "map",
                                                     "link",
                                                     "printer",
                                                     "vote",
@@ -61760,6 +64653,7 @@
                                                     "swords",
                                                     "home",
                                                     "globe",
+                                                    "map",
                                                     "link",
                                                     "printer",
                                                     "vote",
@@ -100892,6 +103786,7 @@
                             "swords",
                             "home",
                             "globe",
+                            "map",
                             "link",
                             "printer",
                             "vote",
@@ -101567,6 +104462,7 @@
                             "swords",
                             "home",
                             "globe",
+                            "map",
                             "link",
                             "printer",
                             "vote",

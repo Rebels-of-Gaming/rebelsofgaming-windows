@@ -1298,6 +1298,22 @@ public static class StringKeys
 
     public const string MinecraftMapWorldAdminNotPublic = "MinecraftMap_WorldAdminNotPublic";
 
+    public const string ResourcePackInfo = "ResourcePack_Info";
+
+    public const string ResourcePackInfoNoDate = "ResourcePack_InfoNoDate";
+
+    public const string ResourcePackNone = "ResourcePack_None";
+
+    public const string ResourcePackInvalid = "ResourcePack_Invalid";
+
+    public const string ResourcePackUploaded = "ResourcePack_Uploaded";
+
+    public const string ResourcePackDeleteTitle = "ResourcePack_DeleteTitle";
+
+    public const string ResourcePackDeleteText = "ResourcePack_DeleteText";
+
+    public const string ResourcePackDeleted = "ResourcePack_Deleted";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

@@ -6960,4 +6960,67 @@
   <data name="McJoin_Map.Content" xml:space="preserve">
     <value>Weltkarte</value>
   </data>
+  <data name="ResourcePack_Info" xml:space="preserve">
+    <value>Paket: {0} · Stand {1}</value>
+  </data>
+  <data name="ResourcePack_InfoNoDate" xml:space="preserve">
+    <value>Paket: {0}</value>
+  </data>
+  <data name="ResourcePack_None" xml:space="preserve">
+    <value>Gerade gibt es kein Ressourcenpaket.</value>
+  </data>
+  <data name="ResourcePack_Invalid" xml:space="preserve">
+    <value>Bitte eine .zip-Datei mit höchstens 50 MB wählen.</value>
+  </data>
+  <data name="ResourcePack_Uploaded" xml:space="preserve">
+    <value>Ressourcenpaket hochgeladen. Neue Spieler bekommen es ab sofort, das alte bleibt 24 Stunden erreichbar.</value>
+  </data>
+  <data name="ResourcePack_DeleteTitle" xml:space="preserve">
+    <value>Ressourcenpaket löschen?</value>
+  </data>
+  <data name="ResourcePack_DeleteText" xml:space="preserve">
+    <value>Der feste Link verschwindet sofort; Spieler bekommen beim Beitreten kein Paket mehr.</value>
+  </data>
+  <data name="ResourcePack_Deleted" xml:space="preserve">
+    <value>Ressourcenpaket gelöscht.</value>
+  </data>
+  <data name="Error_resource_pack_not_found" xml:space="preserve">
+    <value>Es gibt kein Ressourcenpaket.</value>
+  </data>
+  <data name="Error_resource_pack_storage_unavailable" xml:space="preserve">
+    <value>Der Speicher für das Ressourcenpaket ist gerade nicht erreichbar. Bitte später erneut versuchen.</value>
+  </data>
+  <data name="McJoin_PackTitle.Text" xml:space="preserve">
+    <value>RESSOURCENPAKET (JAVA)</value>
+  </data>
+  <data name="McJoin_PackText.Text" xml:space="preserve">
+    <value>Der Server bietet es dir beim Beitreten an – einfach annehmen. Du kannst es auch selbst herunterladen und in Minecraft unter Optionen → Ressourcenpakete einfügen.</value>
+  </data>
+  <data name="McJoin_PackDownload.Content" xml:space="preserve">
+    <value>Herunterladen</value>
+  </data>
+  <data name="McJoin_PackSha1.Text" xml:space="preserve">
+    <value>SHA-1</value>
+  </data>
+  <data name="McJoin_PackCopySha1.Content" xml:space="preserve">
+    <value>Kopieren</value>
+  </data>
+  <data name="McJoin_PackCopySha1.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>SHA-1 kopieren</value>
+  </data>
+  <data name="McJoin_PackAdminHint.Text" xml:space="preserve">
+    <value>ZIP mit pack.mcmeta im Wurzelverzeichnis, höchstens 50 MB. Für resource-pack-sha1 im Proxy immer den versionierten Link mit diesem SHA-1 nehmen.</value>
+  </data>
+  <data name="McJoin_PackUpload.Content" xml:space="preserve">
+    <value>Neues Paket hochladen</value>
+  </data>
+  <data name="McJoin_PackDelete.Content" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="McJoin_PackDelete.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Ressourcenpaket löschen</value>
+  </data>
+  <data name="McJoin_PackBusy.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Ressourcenpaket wird übertragen</value>
+  </data>
 </root>

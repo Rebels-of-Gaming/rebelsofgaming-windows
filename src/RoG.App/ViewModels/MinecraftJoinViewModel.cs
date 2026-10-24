@@ -42,6 +42,32 @@ public sealed partial class MinecraftJoinViewModel(AppServices services) : Obser
 
     public bool HasJoin => Join is not null;
 
+    // --- Ressourcenpaket (Website v0.44.0) ---------------------------------------------------------------------------
+
+    public Func<string, string, Task<bool>> Confirm { get; set; } = (_, _) => Task.FromResult(false);
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasPack), nameof(PackInfo), nameof(PackSha1), nameof(ShowPackCard))]
+    public partial MinecraftResourcePack? Pack { get; set; }
+
+    [ObservableProperty]
+    public partial bool IsPackBusy { get; set; }
+
+    public bool HasPack => Pack is not null;
+
+    /// <summary>Karte zeigen, wenn es ein Paket gibt – Verwaltende sehen sie immer (zum Hochladen).</summary>
+    public bool ShowPackCard => HasPack || CanEdit;
+
+    public string PackInfo => Pack is { } p
+        ? string.Format(
+            CultureInfo.CurrentCulture,
+            services.Localizer.GetString(p.UpdatedAt is null ? StringKeys.ResourcePackInfoNoDate : StringKeys.ResourcePackInfo),
+            MinecraftMapGeometry.FormatBytes(p.Size),
+            p.UpdatedAt?.ToLocalTime().ToString("g", CultureInfo.CurrentCulture) ?? string.Empty)
+        : services.Localizer.GetString(StringKeys.ResourcePackNone);
+
+    public string PackSha1 => Pack?.Sha1 ?? string.Empty;
+
     public string JavaAddress => Join?.JavaText ?? string.Empty;
 
     public string BedrockAddress => Join?.Bedrock.Address ?? string.Empty;
@@ -112,6 +138,7 @@ public sealed partial class MinecraftJoinViewModel(AppServices services) : Obser
         }
 
         IsLoading = true;
+        _ = LoadPackAsync();
         try
         {
             Apply(await _minecraft.JoinAsync());
@@ -200,6 +227,90 @@ public sealed partial class MinecraftJoinViewModel(AppServices services) : Obser
         finally
         {
             IsSaving = false;
+        }
+    }
+
+    private async Task LoadPackAsync()
+    {
+        try
+        {
+            Pack = await _minecraft.ResourcePackAsync();
+        }
+        catch (Exception ex) when (ex is ApiProblemException or System.Text.Json.JsonException)
+        {
+            Pack = null; // Paket ist Beiwerk – die Anleitung bleibt nutzbar
+        }
+    }
+
+    [RelayCommand]
+    private async Task DownloadPackAsync()
+    {
+        if (Pack is { } p)
+        {
+            await services.Browser.OpenAsync(p.Url);
+        }
+    }
+
+    [RelayCommand]
+    private void CopyPackSha1() => Copy(PackSha1);
+
+    /// <summary>Neues Paket hochladen (Datei aus dem Dateidialog der Seite); prüft Endung und Größe vorab.</summary>
+    public async Task UploadPackAsync(Stream content, string fileName, ulong size)
+    {
+        if (!CanEdit || IsPackBusy)
+        {
+            return;
+        }
+
+        if (!MinecraftService.IsResourcePackName(fileName) || size > MinecraftService.ResourcePackMaxBytes)
+        {
+            ShowFeedback(services.Localizer.GetString(StringKeys.ResourcePackInvalid), InfoBarSeverity.Warning);
+            return;
+        }
+
+        IsPackBusy = true;
+        try
+        {
+            Pack = await _minecraft.UploadResourcePackAsync(content, fileName) ?? await _minecraft.ResourcePackAsync();
+            ShowFeedback(services.Localizer.GetString(StringKeys.ResourcePackUploaded), InfoBarSeverity.Success);
+        }
+        catch (Exception ex) when (ex is ApiProblemException or System.Text.Json.JsonException or HttpRequestException or IOException)
+        {
+            ShowFeedback(ErrorText(ex), InfoBarSeverity.Error);
+        }
+        finally
+        {
+            IsPackBusy = false;
+        }
+    }
+
+    [RelayCommand]
+    private async Task DeletePackAsync()
+    {
+        if (!CanEdit || IsPackBusy || Pack is null)
+        {
+            return;
+        }
+
+        if (!await Confirm(services.Localizer.GetString(StringKeys.ResourcePackDeleteTitle), services.Localizer.GetString(StringKeys.ResourcePackDeleteText)))
+        {
+            return;
+        }
+
+        IsPackBusy = true;
+        try
+        {
+            await _minecraft.DeleteResourcePackAsync();
+            Pack = null;
+            ShowFeedback(services.Localizer.GetString(StringKeys.ResourcePackDeleted), InfoBarSeverity.Success);
+        }
+        catch (Exception ex) when (ex is ApiProblemException or System.Text.Json.JsonException)
+        {
+            ShowFeedback(ErrorText(ex), InfoBarSeverity.Error);
+        }
+        finally
+        {
+            IsPackBusy = false;
         }
     }
 

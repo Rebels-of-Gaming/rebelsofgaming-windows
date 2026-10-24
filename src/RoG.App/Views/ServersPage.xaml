@@ -206,6 +206,44 @@
                         </StackPanel>
                     </Border>
 
+                    <!-- Ressourcenpaket (Java) -->
+                    <Border Style="{StaticResource RoGCardStyle}" Visibility="{x:Bind Join.ShowPackCard, Mode=OneWay}">
+                        <StackPanel Spacing="8">
+                            <TextBlock x:Uid="McJoin_PackTitle" Style="{StaticResource RoGSectionTextStyle}" />
+                            <TextBlock x:Uid="McJoin_PackText" Style="{StaticResource RoGBodyTextStyle}" TextWrapping="Wrap" />
+                            <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Join.PackInfo, Mode=OneWay}" TextWrapping="Wrap" />
+                            <Button
+                                x:Uid="McJoin_PackDownload"
+                                Command="{x:Bind Join.DownloadPackCommand}"
+                                Style="{StaticResource RoGSecondaryButtonStyle}"
+                                Visibility="{x:Bind Join.HasPack, Mode=OneWay}" />
+                            <StackPanel Spacing="8" Visibility="{x:Bind Join.CanEdit}">
+                                <StackPanel Orientation="Horizontal" Spacing="12" Visibility="{x:Bind Join.HasPack, Mode=OneWay}">
+                                    <TextBlock x:Uid="McJoin_PackSha1" VerticalAlignment="Center" Style="{StaticResource RoGMutedTextStyle}" />
+                                    <TextBlock
+                                        VerticalAlignment="Center"
+                                        FontFamily="Consolas"
+                                        FontSize="12"
+                                        IsTextSelectionEnabled="True"
+                                        Style="{StaticResource RoGBodyTextStyle}"
+                                        Text="{x:Bind Join.PackSha1, Mode=OneWay}"
+                                        TextWrapping="Wrap" />
+                                    <Button x:Uid="McJoin_PackCopySha1" Command="{x:Bind Join.CopyPackSha1Command}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                                </StackPanel>
+                                <TextBlock x:Uid="McJoin_PackAdminHint" FontSize="12" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                                <StackPanel Orientation="Horizontal" Spacing="12">
+                                    <Button x:Uid="McJoin_PackUpload" Click="OnPackUploadClick" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                                    <Button
+                                        x:Uid="McJoin_PackDelete"
+                                        Command="{x:Bind Join.DeletePackCommand}"
+                                        Style="{StaticResource RoGSecondaryButtonStyle}"
+                                        Visibility="{x:Bind Join.HasPack, Mode=OneWay}" />
+                                    <ProgressRing x:Uid="McJoin_PackBusy" Width="20" Height="20" IsActive="{x:Bind Join.IsPackBusy, Mode=OneWay}" />
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
                     <!-- Bedrock -->
                     <Border Style="{StaticResource RoGCardStyle}">
                         <StackPanel Spacing="8">

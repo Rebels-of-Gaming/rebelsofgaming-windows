@@ -20,7 +20,7 @@ public sealed partial class ServersPage : Page
     {
         ViewModel = new ServersViewModel(App.Services);
         Voice = new VoiceViewModel(App.Services);
-        Join = new MinecraftJoinViewModel(App.Services);
+        Join = new MinecraftJoinViewModel(App.Services) { Confirm = ConfirmAsync };
         InitializeComponent();
         _refresh.Tick += async (_, _) => await RefreshCurrentAsync(silent: true);
     }
@@ -81,6 +81,36 @@ public sealed partial class ServersPage : Page
         App.Services.Navigate(new RoG.Core.Navigation.AppRoute(RoG.Core.Navigation.AppSection.Account, RoG.Core.Navigation.AppRoute.MinecraftKey));
 
     private async void OnJoinEditExpanding(Expander sender, ExpanderExpandingEventArgs args) => await Join.LoadEditAsync();
+
+    private async void OnPackUploadClick(object sender, RoutedEventArgs e)
+    {
+        var picker = new Windows.Storage.Pickers.FileOpenPicker();
+        picker.FileTypeFilter.Add(".zip");
+        WinRT.Interop.InitializeWithWindow.Initialize(picker, App.MainWindowHandle);
+        if (await picker.PickSingleFileAsync() is not { } file)
+        {
+            return;
+        }
+
+        var size = (await file.GetBasicPropertiesAsync()).Size;
+        using var stream = await file.OpenStreamForReadAsync();
+        await Join.UploadPackAsync(stream, file.Name, size);
+    }
+
+    private async Task<bool> ConfirmAsync(string title, string text)
+    {
+        var l = App.Services.Localizer;
+        var dialog = new ContentDialog
+        {
+            XamlRoot = XamlRoot,
+            Title = title,
+            Content = new TextBlock { Text = text, TextWrapping = TextWrapping.Wrap },
+            PrimaryButtonText = l.GetString(RoG.Core.Localization.StringKeys.CommonConfirm),
+            CloseButtonText = l.GetString(RoG.Core.Localization.StringKeys.CommonCancel),
+            DefaultButton = ContentDialogButton.Close,
+        };
+        return await dialog.ShowAsync() == ContentDialogResult.Primary;
+    }
 
     private void OnBanListClick(object sender, RoutedEventArgs e) => App.Services.Navigate(new RoG.Core.Navigation.AppRoute(RoG.Core.Navigation.AppSection.Bans));
 

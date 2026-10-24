@@ -90,15 +90,33 @@ public class MinecraftJoinTests
     }
 
     [Fact]
-    public async Task Loading_for_edit_sends_an_empty_update()
+    public async Task Loading_for_edit_uses_hints_from_get_when_present()
+    {
+        var (api, stub) = Create((_, _) => StubHttpHandler.Json(HttpStatusCode.OK, """
+            {"data":{"java":{"address":"mc.rogclan.de","port":25565},"bedrock":{"address":"mc.rogclan.de","port":19132},
+              "console":{"enabled":true,"gamertag":"RoG6328","hint":"Hallo","hints":{"de":"Hallo","en":"Hello","fr":""}}}}
+            """));
+        using (api)
+        {
+            var join = await new MinecraftService(api.Http).JoinForEditAsync();
+
+            Assert.Equal(HttpMethod.Get, Assert.Single(stub.Requests).Method);
+            Assert.Equal("Hello", join!.Hints!["en"]);
+        }
+    }
+
+    [Fact]
+    public async Task Loading_for_edit_falls_back_to_an_empty_update_without_hints()
     {
         var (api, stub) = Create((_, _) => StubHttpHandler.Json(HttpStatusCode.OK, Join));
         using (api)
         {
             await new MinecraftService(api.Http).JoinForEditAsync();
 
-            Assert.Equal(HttpMethod.Put, stub.Requests[0].Method);
-            Assert.Equal("{}", stub.Requests[0].Body);
+            Assert.Equal(2, stub.Requests.Count);
+            Assert.Equal(HttpMethod.Get, stub.Requests[0].Method);
+            Assert.Equal(HttpMethod.Put, stub.Requests[1].Method);
+            Assert.Equal("{}", stub.Requests[1].Body);
         }
     }
 

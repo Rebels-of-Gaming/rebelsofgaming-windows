@@ -110,11 +110,15 @@ public sealed partial class MinecraftService
     }
 
     /// <summary>
-    /// Aktuelle Werte samt Hinweisen aller Sprachen fürs Formular – <c>GET</c> liefert nur die App-Sprache, darum ein
-    /// leerer <c>PUT</c> (die Website speichert nur echte Änderungen, also kein Audit). Lücke in <c>docs/API-LUECKEN.md</c>.
+    /// Aktuelle Werte samt Hinweisen aller Sprachen fürs Formular. Ab dem Website-Release nach v0.43.0 liefert <c>GET</c>
+    /// für Verwaltende <c>console.hints</c> mit (API-Lücke W23); fehlt es noch, ein leerer <c>PUT</c> als Übergang
+    /// (die Website speichert nur echte Änderungen, also kein Audit).
     /// </summary>
-    public Task<MinecraftJoin?> JoinForEditAsync(CancellationToken cancellationToken = default) =>
-        UpdateJoinAsync(new MinecraftJoinUpdate(), cancellationToken);
+    public async Task<MinecraftJoin?> JoinForEditAsync(CancellationToken cancellationToken = default)
+    {
+        var join = await JoinAsync(cancellationToken).ConfigureAwait(false);
+        return join?.Hints is not null ? join : await UpdateJoinAsync(new MinecraftJoinUpdate(), cancellationToken).ConfigureAwait(false);
+    }
 
     internal static MinecraftJoin? ParseJoin(JsonNode? n)
     {

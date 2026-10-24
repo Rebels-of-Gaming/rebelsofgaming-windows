@@ -287,6 +287,9 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   (Rolle speichern nur mit `minecraft:deploy` + `minecraft.deploy`), Plugins verteilen (Prüfung alle 2 s abgefragt,
   höchstens 2 Min.; Lauf alle 3 s, höchstens 10 Min.), Minigame-Pool (nur mit `minecraft:pool` + `minecraft.pool`).
   „Verwaltung“ erscheint jetzt auch mit `minecraft.economy`/`minecraft.pool`/`minecraft.deploy` allein. Tests: 26 neue.
+- **2.5.23 – W23:** `JoinForEditAsync` liest zuerst `GET /v1/minecraft/join` – liefert die Website `console.hints`
+  (Verwaltende, ab dem Release nach v0.43.0), reicht das; sonst der leere `PUT` als Übergang. Den Rückfall nach dem
+  Release entfernen. Tests: 1 neuer.
 - **2.5.22 – Minecraft-Beitritt (Website v0.42.0/v0.43.0, Annahme 498):** `MinecraftService.JoinAsync`
   (`GET /v1/minecraft/join`, ohne Token im Gastmodus), `UpdateJoinAsync` (`PUT`, nur gesetzte Felder, Hinweise je Sprache
   auf 500 Zeichen gekürzt), Prüfung von Adresse/Port/Gamertag wie die Website; `MinecraftJoin.JavaText` hängt den Port

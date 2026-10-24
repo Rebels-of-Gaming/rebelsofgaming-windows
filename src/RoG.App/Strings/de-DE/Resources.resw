@@ -6645,4 +6645,169 @@
   <data name="Pool_Log.Text" xml:space="preserve">
     <value>Ereignisprotokoll (30 Tage)</value>
   </data>
+  <data name="MinecraftJoin_Saved" xml:space="preserve">
+    <value>Beitrittsdaten gespeichert.</value>
+  </data>
+  <data name="MinecraftJoin_InvalidAddress" xml:space="preserve">
+    <value>Adressen: Hostname oder IP-Adresse, ohne Port und ohne http://.</value>
+  </data>
+  <data name="MinecraftJoin_InvalidPort" xml:space="preserve">
+    <value>Ports müssen zwischen 1 und 65535 liegen.</value>
+  </data>
+  <data name="MinecraftJoin_InvalidGamertag" xml:space="preserve">
+    <value>Gamertag: bis 15 Buchstaben, Ziffern oder Leerzeichen, optional mit #1234.</value>
+  </data>
+  <data name="ServersPage_TabMinecraft.Text" xml:space="preserve">
+    <value>Minecraft</value>
+  </data>
+  <data name="ServersPage_McState.EmptyText" xml:space="preserve">
+    <value>Keine Beitrittsdaten verfügbar.</value>
+  </data>
+  <data name="McJoin_Title.Text" xml:space="preserve">
+    <value>So kommst du auf den Server</value>
+  </data>
+  <data name="McJoin_Lead.Text" xml:space="preserve">
+    <value>Java und Bedrock auf einem Server: Lobby, Freebuild, Plotwelt und Minigames. Wähle deine Plattform – Adresse und Port kannst du mit einem Klick kopieren.</value>
+  </data>
+  <data name="McJoin_JavaTitle.Text" xml:space="preserve">
+    <value>JAVA EDITION</value>
+  </data>
+  <data name="McJoin_JavaPlatforms.Text" xml:space="preserve">
+    <value>PC, Mac, Linux</value>
+  </data>
+  <data name="McJoin_JavaStep1.Text" xml:space="preserve">
+    <value>1. Minecraft Java starten und „Mehrspieler“ öffnen.</value>
+  </data>
+  <data name="McJoin_JavaStep2.Text" xml:space="preserve">
+    <value>2. „Server hinzufügen“ wählen und die Adresse unten eintragen.</value>
+  </data>
+  <data name="McJoin_JavaStep3.Text" xml:space="preserve">
+    <value>3. „Fertig“ und doppelt auf den Server klicken.</value>
+  </data>
+  <data name="McJoin_Address.Text" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="McJoin_Port.Text" xml:space="preserve">
+    <value>Port</value>
+  </data>
+  <data name="McJoin_Gamertag.Text" xml:space="preserve">
+    <value>Gamertag</value>
+  </data>
+  <data name="McJoin_DefaultPort.Text" xml:space="preserve">
+    <value>Port 25565 ist Standard und muss nicht eingetragen werden.</value>
+  </data>
+  <data name="McJoin_CopyJava.Content" xml:space="preserve">
+    <value>Kopieren</value>
+  </data>
+  <data name="McJoin_CopyJava.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Java-Adresse kopieren</value>
+  </data>
+  <data name="McJoin_BedrockTitle.Text" xml:space="preserve">
+    <value>BEDROCK EDITION</value>
+  </data>
+  <data name="McJoin_BedrockPlatforms.Text" xml:space="preserve">
+    <value>Handy, Tablet, Windows</value>
+  </data>
+  <data name="McJoin_BedrockStep1.Text" xml:space="preserve">
+    <value>1. Minecraft starten und „Spielen → Server“ öffnen.</value>
+  </data>
+  <data name="McJoin_BedrockStep2.Text" xml:space="preserve">
+    <value>2. Ganz unten „Server hinzufügen“ wählen.</value>
+  </data>
+  <data name="McJoin_BedrockStep3.Text" xml:space="preserve">
+    <value>3. Einen Namen, die Adresse und den Port unten eintragen, speichern und beitreten.</value>
+  </data>
+  <data name="McJoin_CopyBedrockAddress.Content" xml:space="preserve">
+    <value>Kopieren</value>
+  </data>
+  <data name="McJoin_CopyBedrockAddress.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Bedrock-Adresse kopieren</value>
+  </data>
+  <data name="McJoin_CopyBedrockPort.Content" xml:space="preserve">
+    <value>Kopieren</value>
+  </data>
+  <data name="McJoin_CopyBedrockPort.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Bedrock-Port kopieren</value>
+  </data>
+  <data name="McJoin_ConsoleTitle.Text" xml:space="preserve">
+    <value>KONSOLE</value>
+  </data>
+  <data name="McJoin_ConsolePlatforms.Text" xml:space="preserve">
+    <value>Xbox, PlayStation, Nintendo Switch</value>
+  </data>
+  <data name="McJoin_ConsoleIntro.Text" xml:space="preserve">
+    <value>Auf Konsolen kann man keine eigene Server-Adresse eintragen. Du kommst über den Freunde-Tab rein:</value>
+  </data>
+  <data name="McJoin_ConsoleStep1.Text" xml:space="preserve">
+    <value>1. In Minecraft mit deinem Microsoft-Konto anmelden. Für Online-Spiel brauchst du außerdem das Abo deiner Konsole (Nintendo Switch Online, PlayStation Plus bzw. Xbox Game Pass).</value>
+  </data>
+  <data name="McJoin_ConsoleStep2.Text" xml:space="preserve">
+    <value>2. „Spielen → Freunde → Freunde hinzufügen“ öffnen und den Gamertag unten hinzufügen.</value>
+  </data>
+  <data name="McJoin_ConsoleStep3.Text" xml:space="preserve">
+    <value>3. Nach etwa einer Minute folgt dir der Server zurück. Unter „Spielen → Freunde“ erscheint er bei den beitretbaren Welten: antippen, fertig.</value>
+  </data>
+  <data name="McJoin_ConsoleTrouble.Text" xml:space="preserve">
+    <value>Erscheint der Server nicht? Kurz warten, Minecraft neu starten und in den Xbox-Datenschutzeinstellungen Mehrspieler und Freunde erlauben.</value>
+  </data>
+  <data name="McJoin_CopyGamertag.Content" xml:space="preserve">
+    <value>Kopieren</value>
+  </data>
+  <data name="McJoin_CopyGamertag.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Gamertag kopieren</value>
+  </data>
+  <data name="McJoin_LinkTip.Text" xml:space="preserve">
+    <value>Tipp: Gib im Spiel /link ein und verknüpfe deinen Account mit deinem RoG-Konto. Dann bekommst du deinen Rang, Freunde, Rebel-Coins und Statistiken.</value>
+  </data>
+  <data name="McJoin_Leaderboards.Content" xml:space="preserve">
+    <value>Bestenlisten</value>
+  </data>
+  <data name="McJoin_LinkAccount.Content" xml:space="preserve">
+    <value>Konto verknüpfen</value>
+  </data>
+  <data name="McJoin_Edit.Header" xml:space="preserve">
+    <value>Beitrittsdaten bearbeiten</value>
+  </data>
+  <data name="McJoin_Edit.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Beitrittsdaten bearbeiten</value>
+  </data>
+  <data name="McJoin_EditLoading.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Beitrittsdaten werden geladen</value>
+  </data>
+  <data name="McJoin_EditLead.Text" xml:space="preserve">
+    <value>Gilt auch für die Seite „Minecraft“ der Website und alle Apps. Jede Änderung steht im Audit-Log.</value>
+  </data>
+  <data name="McJoin_EditJavaAddress.Header" xml:space="preserve">
+    <value>Java-Adresse (Hostname oder IP, ohne Port)</value>
+  </data>
+  <data name="McJoin_EditJavaPort.Header" xml:space="preserve">
+    <value>Java-Port (bei 25565 wird kein Port angezeigt)</value>
+  </data>
+  <data name="McJoin_EditBedrockAddress.Header" xml:space="preserve">
+    <value>Bedrock-Adresse (Hostname oder IP, ohne Port)</value>
+  </data>
+  <data name="McJoin_EditBedrockPort.Header" xml:space="preserve">
+    <value>Bedrock-Port</value>
+  </data>
+  <data name="McJoin_EditConsoleEnabled.Header" xml:space="preserve">
+    <value>Konsolen-Anleitung anzeigen</value>
+  </data>
+  <data name="McJoin_EditGamertag.Header" xml:space="preserve">
+    <value>Gamertag des Servers</value>
+  </data>
+  <data name="McJoin_EditHintNote.Text" xml:space="preserve">
+    <value>Hinweis für Konsolen, optional (z. B. „Konsolen-Beitritt kann derzeit noch scheitern“). Leer = kein Hinweis; ohne Übersetzung gilt Deutsch.</value>
+  </data>
+  <data name="McJoin_EditHintDe.Header" xml:space="preserve">
+    <value>Hinweis Deutsch</value>
+  </data>
+  <data name="McJoin_EditHintEn.Header" xml:space="preserve">
+    <value>Hinweis Englisch</value>
+  </data>
+  <data name="McJoin_EditHintFr.Header" xml:space="preserve">
+    <value>Hinweis Französisch</value>
+  </data>
+  <data name="McJoin_EditSave.Content" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
 </root>

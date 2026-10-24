@@ -90,6 +90,8 @@ public sealed record AppRoute(AppSection Section, string? Key = null)
             "friends" => new AppRoute(AppSection.Friends),
             // Minecraft-Bestenlisten: /minecraft/leaderboards (Website v0.41.0)
             "minecraft" when key == "leaderboards" => new AppRoute(AppSection.Leaderboards),
+            // Beitritts-Anleitung: /minecraft (Website v0.43.0) → Server, Reiter Minecraft
+            "minecraft" when key is null => new AppRoute(AppSection.Servers, MinecraftKey),
             _ => null,
         };
     }

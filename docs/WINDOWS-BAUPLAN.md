@@ -287,6 +287,15 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   (Rolle speichern nur mit `minecraft:deploy` + `minecraft.deploy`), Plugins verteilen (Prüfung alle 2 s abgefragt,
   höchstens 2 Min.; Lauf alle 3 s, höchstens 10 Min.), Minigame-Pool (nur mit `minecraft:pool` + `minecraft.pool`).
   „Verwaltung“ erscheint jetzt auch mit `minecraft.economy`/`minecraft.pool`/`minecraft.deploy` allein. Tests: 26 neue.
+- **2.5.22 – Minecraft-Beitritt (Website v0.42.0/v0.43.0, Annahme 498):** `MinecraftService.JoinAsync`
+  (`GET /v1/minecraft/join`, ohne Token im Gastmodus), `UpdateJoinAsync` (`PUT`, nur gesetzte Felder, Hinweise je Sprache
+  auf 500 Zeichen gekürzt), Prüfung von Adresse/Port/Gamertag wie die Website; `MinecraftJoin.JavaText` hängt den Port
+  nur an, wenn er nicht 25565 ist; bei `console.enabled = false` kein Gamertag/Hinweis. Server-Seite: Reiter „Minecraft“
+  (Index 1) mit Java/Bedrock/Konsole und Kopier-Knöpfen, Formular nur mit `minecraft:manage` + `minecraft.manage`.
+  Annahme: Das Formular lädt die Hinweise aller Sprachen über einen leeren `PUT` (die Website speichert nur echte
+  Änderungen, also kein Audit) – `GET` liefert nur die App-Sprache (API-Lücke W23). Web-Link `/minecraft` → Server,
+  Reiter Minecraft. TTT-Bestenliste und `objective:`-Sortierungen gab es schon (2.5.20); die Awards `mc-ttt-*` kommen
+  als Badges. Tests: 22 neue.
 - **2.5.16 – Freunde (Website v0.38.0, live 22.10.2026, Guide 45, Annahme 492):** `FriendsService` (Core, 15 Tests):
   `GET /v1/me/friends` (Status → `Presence`, `null` = nicht freigegeben, `meta.total`/`meta.limit`),
   `GET /v1/me/friends/requests` (`filter[direction]`), `POST …/requests {user}` (Gegenanfrage → `status: accepted`),
@@ -557,6 +566,7 @@ sich einmal neu an (2FA).
 - Ab 2.5.10: Die öffentliche Ban-Liste und Einsprüche zeigt die App nur an (kein Cache); eine Stellungnahme geht nur an
   die Plattform und wird dort ein öffentlich lesbares Forum-Thema – darauf weist das Formular hin.
 - Ab 2.5.18: Rebel-Coins (Kontostand, Serie, Buchungen) zeigt die App nur an (kein Cache); die Sichtbarkeit im Profil liegt nur auf dem Server.
+- Ab 2.5.22: Die Minecraft-Beitrittsdaten zeigt die App nur an (kein Cache); geändert werden sie nur auf dem Server.
 - Ab 2.5.21: Netzwerk-Verwaltung (Heartbeat, Pool, Deploy) nur Anzeige und Aufrufe, nichts lokal gespeichert; die auslösende Person eines Deploys speichert die Website.
 - Ab 2.5.20: Minecraft-Statistiken und Bestenlisten zeigt die App nur an (kein Cache, Abruf ohne ETag); die Freigabe `minecraft_stats` liegt nur auf dem Server.
 - Ab 2.5.17: Die Einstellung „Website-Nachrichten im Spiel anzeigen“ liegt nur auf dem Server (keine lokale Kopie); Spieler-Angaben aus Spiel-Meldungen zeigt die App nur an.

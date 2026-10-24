@@ -64,6 +64,7 @@
             Grid.Row="1"
             SelectionChanged="OnTabChanged">
             <SelectorBarItem x:Uid="ServersPage_TabGame" IsSelected="True" />
+            <SelectorBarItem x:Uid="ServersPage_TabMinecraft" />
             <SelectorBarItem x:Uid="ServersPage_TabTeamSpeak" />
             <SelectorBarItem x:Uid="ServersPage_TabDiscord" />
         </SelectorBar>
@@ -88,6 +89,12 @@
             IsOpen="{x:Bind Voice.IsFeedbackOpen, Mode=TwoWay}"
             Message="{x:Bind Voice.FeedbackMessage, Mode=OneWay}"
             Severity="{x:Bind Voice.FeedbackSeverity, Mode=OneWay}" />
+
+        <InfoBar
+            Grid.Row="3"
+            IsOpen="{x:Bind Join.IsFeedbackOpen, Mode=TwoWay}"
+            Message="{x:Bind Join.FeedbackMessage, Mode=OneWay}"
+            Severity="{x:Bind Join.FeedbackSeverity, Mode=OneWay}" />
 
         <Grid x:Name="GamePanel" Grid.Row="4">
             <!-- Laden -->
@@ -150,6 +157,181 @@
                         </DataTemplate>
                     </ItemsRepeater.ItemTemplate>
                 </ItemsRepeater>
+            </ScrollViewer>
+        </Grid>
+
+        <!-- Minecraft: So kommst du auf den Server -->
+        <Grid
+            x:Name="MinecraftPanel"
+            Grid.Row="4"
+            Visibility="Collapsed">
+            <controls:StateView
+                x:Uid="ServersPage_McState"
+                ErrorMessage="{x:Bind Join.ErrorMessage, Mode=OneWay}"
+                IsLoading="{x:Bind Join.IsLoading, Mode=OneWay}"
+                RetryCommand="{x:Bind Join.RefreshCommand}" />
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="{x:Bind Join.HasJoin, Mode=OneWay}">
+                <StackPanel
+                    MaxWidth="{StaticResource RoGReadingWidth}"
+                    HorizontalAlignment="Left"
+                    Spacing="16">
+                    <StackPanel Spacing="4">
+                        <TextBlock x:Uid="McJoin_Title" Style="{StaticResource RoGTitleTextStyle}" />
+                        <TextBlock x:Uid="McJoin_Lead" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                    </StackPanel>
+
+                    <!-- Java -->
+                    <Border Style="{StaticResource RoGCardStyle}">
+                        <StackPanel Spacing="8">
+                            <TextBlock x:Uid="McJoin_JavaTitle" Style="{StaticResource RoGSectionTextStyle}" />
+                            <TextBlock x:Uid="McJoin_JavaPlatforms" Style="{StaticResource RoGMutedTextStyle}" />
+                            <TextBlock x:Uid="McJoin_JavaStep1" Style="{StaticResource RoGBodyTextStyle}" TextWrapping="Wrap" />
+                            <TextBlock x:Uid="McJoin_JavaStep2" Style="{StaticResource RoGBodyTextStyle}" TextWrapping="Wrap" />
+                            <TextBlock x:Uid="McJoin_JavaStep3" Style="{StaticResource RoGBodyTextStyle}" TextWrapping="Wrap" />
+                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                <TextBlock x:Uid="McJoin_Address" VerticalAlignment="Center" Style="{StaticResource RoGMutedTextStyle}" />
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    IsTextSelectionEnabled="True"
+                                    FontWeight="SemiBold"
+                                    Style="{StaticResource RoGBodyTextStyle}"
+                                    Text="{x:Bind Join.JavaAddress, Mode=OneWay}" />
+                                <Button x:Uid="McJoin_CopyJava" Command="{x:Bind Join.CopyJavaCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                            </StackPanel>
+                            <TextBlock
+                                x:Uid="McJoin_DefaultPort"
+                                Style="{StaticResource RoGMutedTextStyle}"
+                                TextWrapping="Wrap"
+                                Visibility="{x:Bind Join.ShowDefaultPortNote, Mode=OneWay}" />
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Bedrock -->
+                    <Border Style="{StaticResource RoGCardStyle}">
+                        <StackPanel Spacing="8">
+                            <TextBlock x:Uid="McJoin_BedrockTitle" Style="{StaticResource RoGSectionTextStyle}" />
+                            <TextBlock x:Uid="McJoin_BedrockPlatforms" Style="{StaticResource RoGMutedTextStyle}" />
+                            <TextBlock x:Uid="McJoin_BedrockStep1" Style="{StaticResource RoGBodyTextStyle}" TextWrapping="Wrap" />
+                            <TextBlock x:Uid="McJoin_BedrockStep2" Style="{StaticResource RoGBodyTextStyle}" TextWrapping="Wrap" />
+                            <TextBlock x:Uid="McJoin_BedrockStep3" Style="{StaticResource RoGBodyTextStyle}" TextWrapping="Wrap" />
+                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                <TextBlock x:Uid="McJoin_Address" VerticalAlignment="Center" Style="{StaticResource RoGMutedTextStyle}" />
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    IsTextSelectionEnabled="True"
+                                    FontWeight="SemiBold"
+                                    Style="{StaticResource RoGBodyTextStyle}"
+                                    Text="{x:Bind Join.BedrockAddress, Mode=OneWay}" />
+                                <Button x:Uid="McJoin_CopyBedrockAddress" Command="{x:Bind Join.CopyBedrockAddressCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                <TextBlock x:Uid="McJoin_Port" VerticalAlignment="Center" Style="{StaticResource RoGMutedTextStyle}" />
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    IsTextSelectionEnabled="True"
+                                    FontWeight="SemiBold"
+                                    Style="{StaticResource RoGBodyTextStyle}"
+                                    Text="{x:Bind Join.BedrockPort, Mode=OneWay}" />
+                                <Button x:Uid="McJoin_CopyBedrockPort" Command="{x:Bind Join.CopyBedrockPortCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Konsole -->
+                    <Border Style="{StaticResource RoGCardStyle}" Visibility="{x:Bind Join.ShowConsole, Mode=OneWay}">
+                        <StackPanel Spacing="8">
+                            <TextBlock x:Uid="McJoin_ConsoleTitle" Style="{StaticResource RoGSectionTextStyle}" />
+                            <TextBlock x:Uid="McJoin_ConsolePlatforms" Style="{StaticResource RoGMutedTextStyle}" />
+                            <InfoBar
+                                IsClosable="False"
+                                IsOpen="{x:Bind Join.HasHint, Mode=OneWay}"
+                                Message="{x:Bind Join.Hint, Mode=OneWay}"
+                                Severity="Warning" />
+                            <TextBlock x:Uid="McJoin_ConsoleIntro" Style="{StaticResource RoGBodyTextStyle}" TextWrapping="Wrap" />
+                            <TextBlock x:Uid="McJoin_ConsoleStep1" Style="{StaticResource RoGBodyTextStyle}" TextWrapping="Wrap" />
+                            <TextBlock x:Uid="McJoin_ConsoleStep2" Style="{StaticResource RoGBodyTextStyle}" TextWrapping="Wrap" />
+                            <TextBlock x:Uid="McJoin_ConsoleStep3" Style="{StaticResource RoGBodyTextStyle}" TextWrapping="Wrap" />
+                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                <TextBlock x:Uid="McJoin_Gamertag" VerticalAlignment="Center" Style="{StaticResource RoGMutedTextStyle}" />
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    IsTextSelectionEnabled="True"
+                                    FontWeight="SemiBold"
+                                    Style="{StaticResource RoGBodyTextStyle}"
+                                    Text="{x:Bind Join.Gamertag, Mode=OneWay}" />
+                                <Button x:Uid="McJoin_CopyGamertag" Command="{x:Bind Join.CopyGamertagCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                            </StackPanel>
+                            <TextBlock x:Uid="McJoin_ConsoleTrouble" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Border>
+
+                    <TextBlock x:Uid="McJoin_LinkTip" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <Button x:Uid="McJoin_Leaderboards" Click="OnLeaderboardsClick" Style="{StaticResource RoGSecondaryButtonStyle}" />
+                        <Button
+                            x:Uid="McJoin_LinkAccount"
+                            Click="OnLinkAccountClick"
+                            Style="{StaticResource RoGSecondaryButtonStyle}"
+                            Visibility="{x:Bind Join.IsSignedIn}" />
+                    </StackPanel>
+
+                    <!-- Bearbeiten (minecraft.manage) -->
+                    <Expander
+                        x:Uid="McJoin_Edit"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Stretch"
+                        Expanding="OnJoinEditExpanding"
+                        Visibility="{x:Bind Join.CanEdit}">
+                        <StackPanel Spacing="12">
+                            <ProgressRing x:Uid="McJoin_EditLoading" IsActive="{x:Bind Join.IsEditLoading, Mode=OneWay}" />
+                            <TextBlock x:Uid="McJoin_EditLead" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                            <TextBox x:Uid="McJoin_EditJavaAddress" MaxLength="253" Text="{x:Bind Join.EditJavaAddress, Mode=TwoWay}" />
+                            <NumberBox
+                                x:Uid="McJoin_EditJavaPort"
+                                Width="200"
+                                HorizontalAlignment="Left"
+                                Maximum="65535"
+                                Minimum="1"
+                                SpinButtonPlacementMode="Compact"
+                                Value="{x:Bind Join.EditJavaPort, Mode=TwoWay}" />
+                            <TextBox x:Uid="McJoin_EditBedrockAddress" MaxLength="253" Text="{x:Bind Join.EditBedrockAddress, Mode=TwoWay}" />
+                            <NumberBox
+                                x:Uid="McJoin_EditBedrockPort"
+                                Width="200"
+                                HorizontalAlignment="Left"
+                                Maximum="65535"
+                                Minimum="1"
+                                SpinButtonPlacementMode="Compact"
+                                Value="{x:Bind Join.EditBedrockPort, Mode=TwoWay}" />
+                            <ToggleSwitch x:Uid="McJoin_EditConsoleEnabled" IsOn="{x:Bind Join.EditConsoleEnabled, Mode=TwoWay}" />
+                            <TextBox x:Uid="McJoin_EditGamertag" MaxLength="20" Text="{x:Bind Join.EditGamertag, Mode=TwoWay}" />
+                            <TextBlock x:Uid="McJoin_EditHintNote" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                            <TextBox
+                                x:Uid="McJoin_EditHintDe"
+                                AcceptsReturn="True"
+                                MaxLength="500"
+                                Text="{x:Bind Join.EditHintDe, Mode=TwoWay}"
+                                TextWrapping="Wrap" />
+                            <TextBox
+                                x:Uid="McJoin_EditHintEn"
+                                AcceptsReturn="True"
+                                MaxLength="500"
+                                Text="{x:Bind Join.EditHintEn, Mode=TwoWay}"
+                                TextWrapping="Wrap" />
+                            <TextBox
+                                x:Uid="McJoin_EditHintFr"
+                                AcceptsReturn="True"
+                                MaxLength="500"
+                                Text="{x:Bind Join.EditHintFr, Mode=TwoWay}"
+                                TextWrapping="Wrap" />
+                            <Button
+                                x:Uid="McJoin_EditSave"
+                                Command="{x:Bind Join.SaveCommand}"
+                                IsEnabled="{x:Bind Join.CanSave, Mode=OneWay}"
+                                Style="{StaticResource RoGPrimaryButtonStyle}" />
+                        </StackPanel>
+                    </Expander>
+                </StackPanel>
             </ScrollViewer>
         </Grid>
 

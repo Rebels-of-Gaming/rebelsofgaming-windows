@@ -1258,6 +1258,14 @@ public static class StringKeys
 
     public const string DeployRestarted = "Deploy_Restarted";
 
+    public const string MinecraftJoinSaved = "MinecraftJoin_Saved";
+
+    public const string MinecraftJoinInvalidAddress = "MinecraftJoin_InvalidAddress";
+
+    public const string MinecraftJoinInvalidPort = "MinecraftJoin_InvalidPort";
+
+    public const string MinecraftJoinInvalidGamertag = "MinecraftJoin_InvalidGamertag";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

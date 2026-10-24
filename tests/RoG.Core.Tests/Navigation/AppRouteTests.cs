@@ -23,6 +23,7 @@ public class AppRouteTests
     [InlineData("https://rebelsofgaming.com/fr/bans", AppSection.Bans, null)]
     [InlineData("https://rebelsofgaming.com/de/friends", AppSection.Friends, null)]
     [InlineData("https://rebelsofgaming.com/de/minecraft/leaderboards", AppSection.Leaderboards, null)]
+    [InlineData("https://rebelsofgaming.com/en/minecraft", AppSection.Servers, "minecraft")]
     [InlineData("https://wiki.rebelsofgaming.com/Enemy_Territory", AppSection.Wiki, "Enemy_Territory")]
     public void Maps_platform_urls(string url, AppSection section, string? key)
     {
@@ -51,6 +52,7 @@ public class AppUriTests
     [InlineData("rog://notifications", AppSection.Notifications, null)]
     [InlineData("rog://friends", AppSection.Friends, null)]
     [InlineData("rog://leaderboards", AppSection.Leaderboards, null)]
+    [InlineData("rog://servers/minecraft", AppSection.Servers, "minecraft")]
     [InlineData("rog://search?q=enemy%20territory", AppSection.Search, "enemy territory")]
     [InlineData("rog://open?url=https%3A%2F%2Frebelsofgaming.com%2Fde%2Fnews%2Fx", AppSection.News, "x")]
     [InlineData("ROG://Messages", AppSection.Messages, null)]

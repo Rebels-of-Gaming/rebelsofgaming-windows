@@ -47291,7 +47291,7 @@
         "/minecraft/leaderboards": {
             "get": {
                 "operationId": "v1.minecraft.leaderboards",
-                "description": "`board`: `playtime` (Spielzeit in Sekunden), je Minispiel `bedwars`, `skywars`, `tntrun`, `buildbattle`, `jumprace`\n(Jump-Rennen; Liste aus der Konfiguration, weitere Spiele k\u00f6nnen dazukommen \u2013 Siege bzw. mit\n`sort=win_rate` Siegquote in Prozent \u2013 erst ab `meta.min_matches` Spielen im Zeitraum) oder `parkour` (Bestzeit in\nMillisekunden auf `course` \u2013 Lobby-Parkour, nicht das Jump-Rennen \u2013, kleinste zuerst; ohne `course` der erste Kurs aus `meta.courses`). `period`: `all`\n(Standard, Summen) oder `30d` (letzte 30 Tage aus den Rohdaten). H\u00f6chstens 50 Pl\u00e4tze, Gleichstand = gleicher Rang.\n\n**Opt-in:** es erscheinen nur Konten, deren Profilfeld `minecraft_stats` f\u00fcr den Anfragenden sichtbar ist \u2013 ohne Token\nund f\u00fcr Nicht-Mitglieder nur `public`, f\u00fcr Clan-Mitglieder `public` und `members`. Zwischengespeichert (Standard\n5 Minuten); ein Opt-out (Sichtbarkeit ge\u00e4ndert), eine Sperre, ein getrennter Account oder eine Kontol\u00f6schung wirken\nsofort.\n\nBen\u00f6tigt Token-Scope `members:read` (ohne Token: Gastmodus).\n\n**Gastmodus:** ohne Token lesbar \u2013 dann nur, was G\u00e4ste auf der Website sehen (Rate-Limit je IP). Mit Token gelten Scope und Rechte wie sonst; ein ung\u00fcltiger Token ist `401`. Ohne Token im Vorschau-/Wartungsmodus `503 preview_mode` bzw. `503 maintenance`.",
+                "description": "`board`: `playtime` (Spielzeit in Sekunden), je Minispiel `bedwars`, `skywars`, `tntrun`, `buildbattle`, `jumprace`\n(Jump-Rennen), `ttt` (TTT \u2013 Verr\u00e4ter; Liste aus der Konfiguration, weitere Spiele k\u00f6nnen dazukommen \u2013 Siege bzw. mit\n`sort=win_rate` Siegquote in Prozent \u2013 erst ab `meta.min_matches` Spielen im Zeitraum; einzelne Spiele zus\u00e4tzlich\n`sort=objective:<name>` = Summe eines Ziel-Z\u00e4hlers im Zeitraum: `ttt` `objective:correct_kills`, `jumprace`\n`objective:checkpoints`) oder `parkour` (Bestzeit in\nMillisekunden auf `course` \u2013 Lobby-Parkour, nicht das Jump-Rennen \u2013, kleinste zuerst; ohne `course` der erste Kurs aus `meta.courses`). `period`: `all`\n(Standard, Summen) oder `30d` (letzte 30 Tage aus den Rohdaten). H\u00f6chstens 50 Pl\u00e4tze, Gleichstand = gleicher Rang.\n\n**Opt-in:** es erscheinen nur Konten, deren Profilfeld `minecraft_stats` f\u00fcr den Anfragenden sichtbar ist \u2013 ohne Token\nund f\u00fcr Nicht-Mitglieder nur `public`, f\u00fcr Clan-Mitglieder `public` und `members`. Zwischengespeichert (Standard\n5 Minuten); ein Opt-out (Sichtbarkeit ge\u00e4ndert), eine Sperre, ein getrennter Account oder eine Kontol\u00f6schung wirken\nsofort.\n\nBen\u00f6tigt Token-Scope `members:read` (ohne Token: Gastmodus).\n\n**Gastmodus:** ohne Token lesbar \u2013 dann nur, was G\u00e4ste auf der Website sehen (Rate-Limit je IP). Mit Token gelten Scope und Rechte wie sonst; ein ung\u00fcltiger Token ist `401`. Ohne Token im Vorschau-/Wartungsmodus `503 preview_mode` bzw. `503 maintenance`.",
                 "summary": "Minecraft-Bestenlisten",
                 "tags": [
                     "Minecraft",
@@ -47301,7 +47301,7 @@
                     {
                         "name": "board",
                         "in": "query",
-                        "description": "Liste: `playtime`, `bedwars`, `skywars`, `tntrun`, `buildbattle`, `jumprace`, `parkour`",
+                        "description": "Liste: `playtime`, `bedwars`, `skywars`, `tntrun`, `buildbattle`, `jumprace`, `ttt`, `parkour`",
                         "schema": {
                             "type": "string",
                             "default": "playtime"
@@ -47321,7 +47321,7 @@
                     {
                         "name": "sort",
                         "in": "query",
-                        "description": "Nur Minispiele: `wins` oder `win_rate`",
+                        "description": "Nur Minispiele: `wins`, `win_rate` oder \u2013 je nach Spiel \u2013 `objective:<name>` (`ttt`: `objective:correct_kills`, `jumprace`: `objective:checkpoints`)",
                         "schema": {
                             "type": "string",
                             "default": "wins"
@@ -47484,7 +47484,7 @@
                         }
                     },
                     "422": {
-                        "description": "`invalid_query`: Unbekannter Wert f\u00fcr `board`, `period` oder `sort` (`allowed` nennt die g\u00fcltigen).",
+                        "description": "`invalid_query`: Unbekannter Wert f\u00fcr `board`, `period` oder `sort` (`allowed` nennt die g\u00fcltigen \u2013 bei `sort`",
                         "content": {
                             "application/problem+json": {
                                 "schema": {
@@ -47530,6 +47530,381 @@
                         "http": []
                     }
                 ]
+            }
+        },
+        "/minecraft/join": {
+            "get": {
+                "operationId": "v1.minecraft.join.show",
+                "description": "Adresse und Port f\u00fcr Java (Standard-Port 25565 \u2013 Apps zeigen den Port nur, wenn er davon abweicht) und Bedrock\n(Handy, Tablet, Windows) sowie der Gamertag f\u00fcr Konsolen (Xbox, PlayStation, Switch: Freund hinzuf\u00fcgen, dann \u00fcber\n\u201ebeitretbare Welten\u201c beitreten). `console.enabled = false` \u2192 Konsolen-Anleitung ausblenden, `gamertag` und `hint`\nsind dann `null`. `console.hint` ist ein optionaler Hinweis in der Sprache aus `Accept-Language` (Fallback Deutsch).\n\n\u00d6ffentlich (Gastmodus); mit Token Scope `servers:read`.\n\n**Gastmodus:** ohne Token lesbar \u2013 dann nur, was G\u00e4ste auf der Website sehen (Rate-Limit je IP). Mit Token gelten Scope und Rechte wie sonst; ein ung\u00fcltiger Token ist `401`. Ohne Token im Vorschau-/Wartungsmodus `503 preview_mode` bzw. `503 maintenance`.",
+                "summary": "So kommst du auf den Server",
+                "tags": [
+                    "Minecraft",
+                    "MinecraftJoin"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "java": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "address": {
+                                                            "type": "string"
+                                                        },
+                                                        "port": {
+                                                            "type": "integer"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "address",
+                                                        "port"
+                                                    ]
+                                                },
+                                                "bedrock": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "address": {
+                                                            "type": "string"
+                                                        },
+                                                        "port": {
+                                                            "type": "integer"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "address",
+                                                        "port"
+                                                    ]
+                                                },
+                                                "console": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "enabled": {
+                                                            "type": "boolean"
+                                                        },
+                                                        "gamertag": {
+                                                            "type": [
+                                                                "string",
+                                                                "null"
+                                                            ]
+                                                        },
+                                                        "hint": {
+                                                            "type": [
+                                                                "string",
+                                                                "null"
+                                                            ]
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "enabled",
+                                                        "gamertag",
+                                                        "hint"
+                                                    ]
+                                                }
+                                            },
+                                            "required": [
+                                                "java",
+                                                "bedrock",
+                                                "console"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {},
+                    {
+                        "http": []
+                    }
+                ]
+            },
+            "put": {
+                "operationId": "v1.minecraft.join.update",
+                "description": "Nur gesendete Felder \u00e4ndern sich. Adressen: Hostname oder IPv4 ohne Port; Ports 1\u201365535; Gamertag bis 15 Zeichen\n(optional `#1234`); `console_hint` je Sprache (`de`, `en`, `fr`, h\u00f6chstens 500 Zeichen, leer = kein Hinweis) oder\nein Text f\u00fcr Deutsch. Jede \u00c4nderung im Audit-Log (`settings.changed`). Die Antwort enth\u00e4lt die \u00f6ffentliche Sicht\nplus `console.hints` (alle Sprachen).\n\nBen\u00f6tigt Token-Scope `minecraft:manage` und das Recht `minecraft.manage`.",
+                "summary": "Beitrittsdaten \u00e4ndern",
+                "tags": [
+                    "Minecraft",
+                    "MinecraftJoin"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "java_address": {
+                                        "type": "string",
+                                        "description": "Java-Adresse (Hostname oder IPv4)",
+                                        "examples": [
+                                            "mc.rogclan.de"
+                                        ]
+                                    },
+                                    "java_port": {
+                                        "type": "integer",
+                                        "description": "Java-Port (1\u201365535)",
+                                        "examples": [
+                                            25565
+                                        ]
+                                    },
+                                    "bedrock_address": {
+                                        "type": "string",
+                                        "description": "Bedrock-Adresse (Hostname oder IPv4)",
+                                        "examples": [
+                                            "mc.rogclan.de"
+                                        ]
+                                    },
+                                    "bedrock_port": {
+                                        "type": "integer",
+                                        "description": "Bedrock-Port (1\u201365535)",
+                                        "examples": [
+                                            19132
+                                        ]
+                                    },
+                                    "console_enabled": {
+                                        "type": "boolean",
+                                        "description": "Konsolen-Anleitung anzeigen",
+                                        "examples": [
+                                            true
+                                        ]
+                                    },
+                                    "console_gamertag": {
+                                        "type": "string",
+                                        "description": "Gamertag des Servers",
+                                        "examples": [
+                                            "RoG6328"
+                                        ]
+                                    },
+                                    "console_hint": {
+                                        "type": "object",
+                                        "description": "Hinweis f\u00fcr Konsolen je Sprache",
+                                        "examples": [
+                                            {
+                                                "de": "Konsolen-Beitritt kann derzeit noch scheitern."
+                                            }
+                                        ],
+                                        "properties": {
+                                            "de": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ]
+                                            },
+                                            "en": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ]
+                                            },
+                                            "fr": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "java": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "address": {
+                                                            "type": "string"
+                                                        },
+                                                        "port": {
+                                                            "type": "integer"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "address",
+                                                        "port"
+                                                    ]
+                                                },
+                                                "bedrock": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "address": {
+                                                            "type": "string"
+                                                        },
+                                                        "port": {
+                                                            "type": "integer"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "address",
+                                                        "port"
+                                                    ]
+                                                },
+                                                "console": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "enabled": {
+                                                            "type": "boolean"
+                                                        },
+                                                        "gamertag": {
+                                                            "type": [
+                                                                "string",
+                                                                "null"
+                                                            ]
+                                                        },
+                                                        "hint": {
+                                                            "type": [
+                                                                "string",
+                                                                "null"
+                                                            ]
+                                                        },
+                                                        "hints": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "de": {
+                                                                    "type": "string"
+                                                                },
+                                                                "en": {
+                                                                    "type": "string"
+                                                                },
+                                                                "fr": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "de",
+                                                                "en",
+                                                                "fr"
+                                                            ]
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "enabled",
+                                                        "gamertag",
+                                                        "hint",
+                                                        "hints"
+                                                    ]
+                                                }
+                                            },
+                                            "required": [
+                                                "java",
+                                                "bedrock",
+                                                "console"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/AuthenticationException"
+                    },
+                    "403": {
+                        "description": "`forbidden`: Recht `minecraft.manage` fehlt",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "forbidden"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "`validation_failed`: Ung\u00fcltige Werte",
+                        "content": {
+                            "application/problem+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "detail": {
+                                            "type": "string"
+                                        },
+                                        "instance": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "enum": [
+                                                "validation_failed"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "status",
+                                        "instance",
+                                        "code"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "/me/minecraft/accounts": {

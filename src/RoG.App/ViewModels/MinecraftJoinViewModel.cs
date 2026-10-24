@@ -19,6 +19,7 @@ public sealed partial class MinecraftJoinViewModel(AppServices services) : Obser
     private readonly MinecraftService _minecraft = new(services.Api.Http);
     private bool _loaded;
     private bool _editLoaded;
+    private bool _hintsKnown; // Hinweise nur senden, wenn sie gelesen wurden – sonst würden leere Felder sie löschen
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(HasJoin))]
@@ -183,7 +184,7 @@ public sealed partial class MinecraftJoinViewModel(AppServices services) : Obser
                 (int)EditBedrockPort,
                 EditConsoleEnabled,
                 EditConsoleEnabled || !string.IsNullOrWhiteSpace(EditGamertag) ? EditGamertag : null,
-                new Dictionary<string, string?> { ["de"] = EditHintDe, ["en"] = EditHintEn, ["fr"] = EditHintFr });
+                _hintsKnown ? new Dictionary<string, string?> { ["de"] = EditHintDe, ["en"] = EditHintEn, ["fr"] = EditHintFr } : null);
             if (await _minecraft.UpdateJoinAsync(update) is { } join)
             {
                 Apply(join);
@@ -265,6 +266,7 @@ public sealed partial class MinecraftJoinViewModel(AppServices services) : Obser
 
         if (join.Hints is { } hints)
         {
+            _hintsKnown = true;
             EditHintDe = hints.GetValueOrDefault("de") ?? string.Empty;
             EditHintEn = hints.GetValueOrDefault("en") ?? string.Empty;
             EditHintFr = hints.GetValueOrDefault("fr") ?? string.Empty;

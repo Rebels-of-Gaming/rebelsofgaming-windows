@@ -9,7 +9,7 @@ public sealed record JoinEndpoint(string Address, int Port);
 /// <summary>
 /// „So kommst du auf den Server“ (Website v0.43.0): Java, Bedrock und – bei <see cref="ConsoleEnabled"/> – der Gamertag
 /// für Konsolen (Freund hinzufügen, dann über „beitretbare Welten“). <see cref="Hint"/> in der App-Sprache;
-/// <see cref="Hints"/> (alle Sprachen) nur in der Antwort auf das Ändern.
+/// <see cref="Hints"/> (alle Sprachen) nur für Verwaltende.
 /// </summary>
 public sealed record MinecraftJoin(
     JoinEndpoint Java,
@@ -110,15 +110,10 @@ public sealed partial class MinecraftService
     }
 
     /// <summary>
-    /// Aktuelle Werte samt Hinweisen aller Sprachen fürs Formular. Ab dem Website-Release nach v0.43.0 liefert <c>GET</c>
-    /// für Verwaltende <c>console.hints</c> mit (API-Lücke W23); fehlt es noch, ein leerer <c>PUT</c> als Übergang
-    /// (die Website speichert nur echte Änderungen, also kein Audit).
+    /// Aktuelle Werte samt Hinweisen aller Sprachen fürs Formular: <c>GET</c> liefert Verwaltenden (<c>minecraft:manage</c>
+    /// + <c>minecraft.manage</c>) zusätzlich <c>console.hints</c> (Website v0.44.0, API-Lücke W23).
     /// </summary>
-    public async Task<MinecraftJoin?> JoinForEditAsync(CancellationToken cancellationToken = default)
-    {
-        var join = await JoinAsync(cancellationToken).ConfigureAwait(false);
-        return join?.Hints is not null ? join : await UpdateJoinAsync(new MinecraftJoinUpdate(), cancellationToken).ConfigureAwait(false);
-    }
+    public Task<MinecraftJoin?> JoinForEditAsync(CancellationToken cancellationToken = default) => JoinAsync(cancellationToken);
 
     internal static MinecraftJoin? ParseJoin(JsonNode? n)
     {

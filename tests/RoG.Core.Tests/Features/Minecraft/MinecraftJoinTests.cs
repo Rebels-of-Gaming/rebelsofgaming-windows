@@ -106,17 +106,15 @@ public class MinecraftJoinTests
     }
 
     [Fact]
-    public async Task Loading_for_edit_falls_back_to_an_empty_update_without_hints()
+    public async Task Loading_for_edit_never_writes()
     {
         var (api, stub) = Create((_, _) => StubHttpHandler.Json(HttpStatusCode.OK, Join));
         using (api)
         {
-            await new MinecraftService(api.Http).JoinForEditAsync();
+            var join = await new MinecraftService(api.Http).JoinForEditAsync();
 
-            Assert.Equal(2, stub.Requests.Count);
-            Assert.Equal(HttpMethod.Get, stub.Requests[0].Method);
-            Assert.Equal(HttpMethod.Put, stub.Requests[1].Method);
-            Assert.Equal("{}", stub.Requests[1].Body);
+            Assert.Equal(HttpMethod.Get, Assert.Single(stub.Requests).Method);
+            Assert.Null(join!.Hints);
         }
     }
 

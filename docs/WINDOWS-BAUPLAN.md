@@ -287,6 +287,8 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   (Rolle speichern nur mit `minecraft:deploy` + `minecraft.deploy`), Plugins verteilen (Prüfung alle 2 s abgefragt,
   höchstens 2 Min.; Lauf alle 3 s, höchstens 10 Min.), Minigame-Pool (nur mit `minecraft:pool` + `minecraft.pool`).
   „Verwaltung“ erscheint jetzt auch mit `minecraft.economy`/`minecraft.pool`/`minecraft.deploy` allein. Tests: 26 neue.
+- **2.5.24 – W23 live (Website v0.44.0):** `JoinForEditAsync` liest nur noch `GET` (kein leerer `PUT` mehr); fehlen
+  `console.hints`, sendet das Formular keine Hinweise (leere Felder würden sie sonst löschen). Client aus v0.44.0.
 - **2.5.23 – W23:** `JoinForEditAsync` liest zuerst `GET /v1/minecraft/join` – liefert die Website `console.hints`
   (Verwaltende, ab dem Release nach v0.43.0), reicht das; sonst der leere `PUT` als Übergang. Den Rückfall nach dem
   Release entfernen. Tests: 1 neuer.

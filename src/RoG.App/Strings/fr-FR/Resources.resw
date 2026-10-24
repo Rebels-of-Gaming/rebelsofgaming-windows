@@ -6810,4 +6810,154 @@
   <data name="McJoin_EditSave.Content" xml:space="preserve">
     <value>Enregistrer</value>
   </data>
+  <data name="MinecraftMap_Spawn" xml:space="preserve">
+    <value>Aller au spawn</value>
+  </data>
+  <data name="MinecraftMap_ViewName" xml:space="preserve">
+    <value>Carte du monde – fais glisser pour déplacer, flèches, plus et moins pour zoomer, Début pour le spawn</value>
+  </data>
+  <data name="MinecraftMap_WorldInfo" xml:space="preserve">
+    <value>{0} tuiles · {1} · état du {2}</value>
+  </data>
+  <data name="MinecraftMap_WorldInfoNoDate" xml:space="preserve">
+    <value>{0} tuiles · {1}</value>
+  </data>
+  <data name="MinecraftMap_Hidden" xml:space="preserve">
+    <value>masqué</value>
+  </data>
+  <data name="MinecraftMap_LiveSaved" xml:space="preserve">
+    <value>Joueurs en direct : {0}</value>
+  </data>
+  <data name="MinecraftMap_Saved" xml:space="preserve">
+    <value>Carte du monde enregistrée.</value>
+  </data>
+  <data name="MinecraftMap_ClearTitle" xml:space="preserve">
+    <value>Supprimer les tuiles ?</value>
+  </data>
+  <data name="MinecraftMap_ClearText" xml:space="preserve">
+    <value>Toutes les tuiles de « {0} » seront supprimées. Le plugin ne les renvoie qu’après /map render ou /map upload.</value>
+  </data>
+  <data name="MinecraftMap_Cleared" xml:space="preserve">
+    <value>Tuiles supprimées.</value>
+  </data>
+  <data name="MinecraftMap_LiveSignIn" xml:space="preserve">
+    <value>Seuls les membres connectés voient les joueurs en direct.</value>
+  </data>
+  <data name="MinecraftMap_LiveOff" xml:space="preserve">
+    <value>Les joueurs en direct sont désactivés.</value>
+  </data>
+  <data name="MinecraftMap_NoPlayers" xml:space="preserve">
+    <value>Personne n’est dans ce monde en ce moment.</value>
+  </data>
+  <data name="MinecraftMap_Quota" xml:space="preserve">
+    <value>Stockage : {0} sur {1} utilisés ({2} max. par serveur).</value>
+  </data>
+  <data name="MinecraftMap_WorldAdmin" xml:space="preserve">
+    <value>Monde « {0} » · {1} de tuiles</value>
+  </data>
+  <data name="MinecraftMap_WorldAdminNotPublic" xml:space="preserve">
+    <value>Monde « {0} » · {1} de tuiles · serveur non public – n’accepte pas de nouvelles tuiles</value>
+  </data>
+  <data name="Error_map_server_not_found" xml:space="preserve">
+    <value>Ce serveur n’est pas (ou plus) sur la carte.</value>
+  </data>
+  <data name="MinecraftMap_Live_off" xml:space="preserve">
+    <value>Désactivés</value>
+  </data>
+  <data name="MinecraftMap_Live_auth" xml:space="preserve">
+    <value>Membres connectés uniquement</value>
+  </data>
+  <data name="MinecraftMap_Live_public" xml:space="preserve">
+    <value>Publics</value>
+  </data>
+  <data name="MinecraftMap_Env_normal" xml:space="preserve">
+    <value>Surface</value>
+  </data>
+  <data name="MinecraftMap_Env_nether" xml:space="preserve">
+    <value>Nether</value>
+  </data>
+  <data name="MinecraftMap_Env_the_end" xml:space="preserve">
+    <value>End</value>
+  </data>
+  <data name="MinecraftMapPage_Title.Text" xml:space="preserve">
+    <value>CARTE DU MONDE</value>
+  </data>
+  <data name="MinecraftMapPage_Intro.Text" xml:space="preserve">
+    <value>Les mondes de notre réseau Minecraft vus du ciel – avec les warps et les joueurs actuellement en ligne.</value>
+  </data>
+  <data name="MinecraftMapPage_World.Header" xml:space="preserve">
+    <value>Monde</value>
+  </data>
+  <data name="MinecraftMapPage_World.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Monde</value>
+  </data>
+  <data name="MinecraftMapPage_ShowLive.Header" xml:space="preserve">
+    <value>Joueurs en direct</value>
+  </data>
+  <data name="MinecraftMapPage_Refresh.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Actualiser</value>
+  </data>
+  <data name="MinecraftMapPage_Refresh.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Actualiser (F5)</value>
+  </data>
+  <data name="MinecraftMapPage_State.EmptyText" xml:space="preserve">
+    <value>Aucun monde sur la carte pour l’instant. Il apparaît ici dès qu’un serveur le signale.</value>
+  </data>
+  <data name="MinecraftMapPage_NoTiles.Text" xml:space="preserve">
+    <value>Il n’y a pas encore de tuiles pour ce monde. Elles apparaissent dès que le serveur les a dessinées.</value>
+  </data>
+  <data name="MinecraftMapPage_PlayersTitle.Text" xml:space="preserve">
+    <value>JOUEURS</value>
+  </data>
+  <data name="MinecraftMapPage_Players.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Joueurs en direct</value>
+  </data>
+  <data name="MinecraftMapPage_Privacy.Text" xml:space="preserve">
+    <value>Les positions sont visibles en direct avec les noms et ne sont pas enregistrées. Avec /map hide, tu te masques en jeu (à nouveau : /map show).</value>
+  </data>
+  <data name="MinecraftMapPage_WarpsTitle.Text" xml:space="preserve">
+    <value>WARPS</value>
+  </data>
+  <data name="MinecraftMapPage_Warps.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Warps</value>
+  </data>
+  <data name="MinecraftMapPage_Admin.Header" xml:space="preserve">
+    <value>Gérer la carte du monde</value>
+  </data>
+  <data name="MinecraftMapPage_Admin.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Gérer la carte du monde</value>
+  </data>
+  <data name="MinecraftMapPage_LiveMode.Header" xml:space="preserve">
+    <value>Afficher les joueurs en direct pour</value>
+  </data>
+  <data name="MinecraftMapPage_LiveMode.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Afficher les joueurs en direct pour</value>
+  </data>
+  <data name="MinecraftMapPage_WorldHidden.Header" xml:space="preserve">
+    <value>Masquer le monde</value>
+  </data>
+  <data name="MinecraftMapPage_ServerHidden.Header" xml:space="preserve">
+    <value>Masquer tout le serveur</value>
+  </data>
+  <data name="MinecraftMapPage_NameDe.Header" xml:space="preserve">
+    <value>Nom affiché allemand (vide = nom du monde)</value>
+  </data>
+  <data name="MinecraftMapPage_NameEn.Header" xml:space="preserve">
+    <value>Nom affiché anglais</value>
+  </data>
+  <data name="MinecraftMapPage_NameFr.Header" xml:space="preserve">
+    <value>Nom affiché français</value>
+  </data>
+  <data name="MinecraftMapPage_SaveWorld.Content" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="MinecraftMapPage_ClearHint.Text" xml:space="preserve">
+    <value>Les mondes masqués restent accessibles via les adresses de tuiles connues jusqu’à la suppression des tuiles.</value>
+  </data>
+  <data name="MinecraftMapPage_ClearTiles.Content" xml:space="preserve">
+    <value>Supprimer les tuiles</value>
+  </data>
+  <data name="McJoin_Map.Content" xml:space="preserve">
+    <value>Carte du monde</value>
+  </data>
 </root>

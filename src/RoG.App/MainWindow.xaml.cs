@@ -530,6 +530,14 @@ public sealed partial class MainWindow : Window, IDisposable
             return true;
         }
 
+        // Minecraft-Weltkarte: ohne Eintrag in der Seitenleiste (Knopf im Reiter Server → Minecraft, Links /minecraft/karte)
+        if (route.Section == AppSection.MinecraftMap)
+        {
+            NavView.SelectedItem = null;
+            ContentFrame.Navigate(typeof(MinecraftMapPage), route.Key ?? string.Empty);
+            return true;
+        }
+
         if (route.Section == AppSection.Search)
         {
             NavView.SelectedItem = null;

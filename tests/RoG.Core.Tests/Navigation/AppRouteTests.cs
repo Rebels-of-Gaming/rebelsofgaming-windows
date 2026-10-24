@@ -24,6 +24,8 @@ public class AppRouteTests
     [InlineData("https://rebelsofgaming.com/de/friends", AppSection.Friends, null)]
     [InlineData("https://rebelsofgaming.com/de/minecraft/leaderboards", AppSection.Leaderboards, null)]
     [InlineData("https://rebelsofgaming.com/en/minecraft", AppSection.Servers, "minecraft")]
+    [InlineData("https://rebelsofgaming.com/de/minecraft/karte", AppSection.MinecraftMap, null)]
+    [InlineData("https://rebelsofgaming.com/de/minecraft/karte?server=freebuild-1&world=farmwelt&x=12&z=-4", AppSection.MinecraftMap, "server=freebuild-1&world=farmwelt&x=12&z=-4")]
     [InlineData("https://wiki.rebelsofgaming.com/Enemy_Territory", AppSection.Wiki, "Enemy_Territory")]
     public void Maps_platform_urls(string url, AppSection section, string? key)
     {
@@ -53,6 +55,7 @@ public class AppUriTests
     [InlineData("rog://friends", AppSection.Friends, null)]
     [InlineData("rog://leaderboards", AppSection.Leaderboards, null)]
     [InlineData("rog://servers/minecraft", AppSection.Servers, "minecraft")]
+    [InlineData("rog://map?server=freebuild-1", AppSection.MinecraftMap, "server=freebuild-1")]
     [InlineData("rog://search?q=enemy%20territory", AppSection.Search, "enemy territory")]
     [InlineData("rog://open?url=https%3A%2F%2Frebelsofgaming.com%2Fde%2Fnews%2Fx", AppSection.News, "x")]
     [InlineData("ROG://Messages", AppSection.Messages, null)]

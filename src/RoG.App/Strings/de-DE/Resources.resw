@@ -6810,4 +6810,154 @@
   <data name="McJoin_EditSave.Content" xml:space="preserve">
     <value>Speichern</value>
   </data>
+  <data name="MinecraftMap_Spawn" xml:space="preserve">
+    <value>Zum Spawn</value>
+  </data>
+  <data name="MinecraftMap_ViewName" xml:space="preserve">
+    <value>Weltkarte – Ziehen zum Verschieben, Pfeiltasten, Plus und Minus zum Zoomen, Pos1 zum Spawn</value>
+  </data>
+  <data name="MinecraftMap_WorldInfo" xml:space="preserve">
+    <value>{0} Kacheln · {1} · Stand {2}</value>
+  </data>
+  <data name="MinecraftMap_WorldInfoNoDate" xml:space="preserve">
+    <value>{0} Kacheln · {1}</value>
+  </data>
+  <data name="MinecraftMap_Hidden" xml:space="preserve">
+    <value>ausgeblendet</value>
+  </data>
+  <data name="MinecraftMap_LiveSaved" xml:space="preserve">
+    <value>Live-Spieler: {0}</value>
+  </data>
+  <data name="MinecraftMap_Saved" xml:space="preserve">
+    <value>Weltkarte gespeichert.</value>
+  </data>
+  <data name="MinecraftMap_ClearTitle" xml:space="preserve">
+    <value>Kacheln löschen?</value>
+  </data>
+  <data name="MinecraftMap_ClearText" xml:space="preserve">
+    <value>Alle Kacheln von „{0}“ werden gelöscht. Das Plugin lädt sie erst nach /map render bzw. /map upload neu.</value>
+  </data>
+  <data name="MinecraftMap_Cleared" xml:space="preserve">
+    <value>Kacheln gelöscht.</value>
+  </data>
+  <data name="MinecraftMap_LiveSignIn" xml:space="preserve">
+    <value>Live-Spieler sehen nur angemeldete Mitglieder.</value>
+  </data>
+  <data name="MinecraftMap_LiveOff" xml:space="preserve">
+    <value>Live-Spieler sind ausgeschaltet.</value>
+  </data>
+  <data name="MinecraftMap_NoPlayers" xml:space="preserve">
+    <value>Gerade ist niemand in dieser Welt.</value>
+  </data>
+  <data name="MinecraftMap_Quota" xml:space="preserve">
+    <value>Speicher: {0} von {1} belegt (je Server höchstens {2}).</value>
+  </data>
+  <data name="MinecraftMap_WorldAdmin" xml:space="preserve">
+    <value>Welt „{0}“ · {1} Kacheln-Speicher</value>
+  </data>
+  <data name="MinecraftMap_WorldAdminNotPublic" xml:space="preserve">
+    <value>Welt „{0}“ · {1} Kacheln-Speicher · Server nicht öffentlich – nimmt keine neuen Kacheln an</value>
+  </data>
+  <data name="Error_map_server_not_found" xml:space="preserve">
+    <value>Diesen Server gibt es auf der Karte nicht (mehr).</value>
+  </data>
+  <data name="MinecraftMap_Live_off" xml:space="preserve">
+    <value>Aus</value>
+  </data>
+  <data name="MinecraftMap_Live_auth" xml:space="preserve">
+    <value>Nur angemeldete Mitglieder</value>
+  </data>
+  <data name="MinecraftMap_Live_public" xml:space="preserve">
+    <value>Öffentlich</value>
+  </data>
+  <data name="MinecraftMap_Env_normal" xml:space="preserve">
+    <value>Oberwelt</value>
+  </data>
+  <data name="MinecraftMap_Env_nether" xml:space="preserve">
+    <value>Nether</value>
+  </data>
+  <data name="MinecraftMap_Env_the_end" xml:space="preserve">
+    <value>End</value>
+  </data>
+  <data name="MinecraftMapPage_Title.Text" xml:space="preserve">
+    <value>WELTKARTE</value>
+  </data>
+  <data name="MinecraftMapPage_Intro.Text" xml:space="preserve">
+    <value>Die Welten unseres Minecraft-Netzwerks von oben – mit Warps und den Spielern, die gerade online sind.</value>
+  </data>
+  <data name="MinecraftMapPage_World.Header" xml:space="preserve">
+    <value>Welt</value>
+  </data>
+  <data name="MinecraftMapPage_World.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Welt</value>
+  </data>
+  <data name="MinecraftMapPage_ShowLive.Header" xml:space="preserve">
+    <value>Live-Spieler</value>
+  </data>
+  <data name="MinecraftMapPage_Refresh.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Aktualisieren</value>
+  </data>
+  <data name="MinecraftMapPage_Refresh.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Aktualisieren (F5)</value>
+  </data>
+  <data name="MinecraftMapPage_State.EmptyText" xml:space="preserve">
+    <value>Noch keine Welt auf der Karte. Sobald ein Server sie meldet, erscheint sie hier.</value>
+  </data>
+  <data name="MinecraftMapPage_NoTiles.Text" xml:space="preserve">
+    <value>Für diese Welt gibt es noch keine Kacheln. Sie erscheinen, sobald der Server sie gezeichnet hat.</value>
+  </data>
+  <data name="MinecraftMapPage_PlayersTitle.Text" xml:space="preserve">
+    <value>SPIELER</value>
+  </data>
+  <data name="MinecraftMapPage_Players.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Live-Spieler</value>
+  </data>
+  <data name="MinecraftMapPage_Privacy.Text" xml:space="preserve">
+    <value>Positionen sind live mit Namen sichtbar und werden nicht gespeichert. Mit /map hide blendest du dich im Spiel aus (wieder: /map show).</value>
+  </data>
+  <data name="MinecraftMapPage_WarpsTitle.Text" xml:space="preserve">
+    <value>WARPS</value>
+  </data>
+  <data name="MinecraftMapPage_Warps.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Warps</value>
+  </data>
+  <data name="MinecraftMapPage_Admin.Header" xml:space="preserve">
+    <value>Weltkarte verwalten</value>
+  </data>
+  <data name="MinecraftMapPage_Admin.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Weltkarte verwalten</value>
+  </data>
+  <data name="MinecraftMapPage_LiveMode.Header" xml:space="preserve">
+    <value>Live-Spieler zeigen für</value>
+  </data>
+  <data name="MinecraftMapPage_LiveMode.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Live-Spieler zeigen für</value>
+  </data>
+  <data name="MinecraftMapPage_WorldHidden.Header" xml:space="preserve">
+    <value>Welt ausblenden</value>
+  </data>
+  <data name="MinecraftMapPage_ServerHidden.Header" xml:space="preserve">
+    <value>Ganzen Server ausblenden</value>
+  </data>
+  <data name="MinecraftMapPage_NameDe.Header" xml:space="preserve">
+    <value>Anzeigename Deutsch (leer = Weltname)</value>
+  </data>
+  <data name="MinecraftMapPage_NameEn.Header" xml:space="preserve">
+    <value>Anzeigename Englisch</value>
+  </data>
+  <data name="MinecraftMapPage_NameFr.Header" xml:space="preserve">
+    <value>Anzeigename Französisch</value>
+  </data>
+  <data name="MinecraftMapPage_SaveWorld.Content" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="MinecraftMapPage_ClearHint.Text" xml:space="preserve">
+    <value>Ausgeblendete Welten bleiben über bekannte Kachel-Adressen abrufbar, bis die Kacheln gelöscht sind.</value>
+  </data>
+  <data name="MinecraftMapPage_ClearTiles.Content" xml:space="preserve">
+    <value>Kacheln löschen</value>
+  </data>
+  <data name="McJoin_Map.Content" xml:space="preserve">
+    <value>Weltkarte</value>
+  </data>
 </root>

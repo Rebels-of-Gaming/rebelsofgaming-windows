@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Minecraft-Weltkarte (Website v0.44.0, Guide 48): Kacheln, Warps und Live-Spieler; Verwaltung mit minecraft.manage. -->
+<Page
+    x:Class="RoG.App.Views.MinecraftMapPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:RoG.App.Controls"
+    xmlns:vm="using:RoG.App.ViewModels"
+    Background="{StaticResource RoGBgBrush}">
+
+    <Page.KeyboardAccelerators>
+        <KeyboardAccelerator Key="F5" Invoked="OnRefreshInvoked" />
+    </Page.KeyboardAccelerators>
+
+    <Grid Padding="{StaticResource RoGPagePadding}" RowSpacing="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel MaxWidth="{StaticResource RoGReadingWidth}" HorizontalAlignment="Left" Spacing="8">
+            <TextBlock x:Uid="MinecraftMapPage_Title" Style="{StaticResource RoGDisplayTextStyle}" Text="WELTKARTE" />
+            <TextBlock x:Uid="MinecraftMapPage_Intro" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+        </StackPanel>
+
+        <StackPanel
+            Grid.Row="1"
+            Orientation="Horizontal"
+            Spacing="12">
+            <ComboBox
+                x:Uid="MinecraftMapPage_World"
+                MinWidth="260"
+                DisplayMemberPath="Label"
+                ItemsSource="{x:Bind ViewModel.Worlds}"
+                SelectedItem="{x:Bind ViewModel.SelectedWorld, Mode=TwoWay}" />
+            <ToggleSwitch
+                x:Uid="MinecraftMapPage_ShowLive"
+                VerticalAlignment="Bottom"
+                IsEnabled="{x:Bind ViewModel.LiveAvailable, Mode=OneWay}"
+                IsOn="{x:Bind ViewModel.ShowLive, Mode=TwoWay}" />
+            <Button
+                x:Uid="MinecraftMapPage_Refresh"
+                VerticalAlignment="Bottom"
+                Command="{x:Bind ViewModel.RefreshCommand}"
+                Style="{StaticResource RoGSecondaryButtonStyle}">
+                <FontIcon FontSize="16" Glyph="&#xE72C;" />
+            </Button>
+        </StackPanel>
+
+        <InfoBar
+            Grid.Row="2"
+            IsOpen="{x:Bind ViewModel.IsFeedbackOpen, Mode=TwoWay}"
+            Message="{x:Bind ViewModel.FeedbackMessage, Mode=OneWay}"
+            Severity="{x:Bind ViewModel.FeedbackSeverity, Mode=OneWay}" />
+
+        <controls:StateView
+            x:Uid="MinecraftMapPage_State"
+            Grid.Row="3"
+            ErrorMessage="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}"
+            IsEmpty="{x:Bind ViewModel.IsEmpty, Mode=OneWay}"
+            IsLoading="{x:Bind ViewModel.IsLoading, Mode=OneWay}"
+            RetryCommand="{x:Bind ViewModel.RefreshCommand}" />
+
+        <Grid
+            x:Name="Body"
+            Grid.Row="3"
+            ColumnSpacing="16"
+            RowSpacing="16"
+            Visibility="{x:Bind ViewModel.HasWorld, Mode=OneWay}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition x:Name="SideColumn" Width="300" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition x:Name="SideRow" Height="0" />
+            </Grid.RowDefinitions>
+
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup>
+                    <VisualState>
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="1000" />
+                        </VisualState.StateTriggers>
+                    </VisualState>
+                    <VisualState>
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="0" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter Target="SideColumn.Width" Value="0" />
+                            <Setter Target="SideRow.Height" Value="*" />
+                            <Setter Target="SidePanel.(Grid.Column)" Value="0" />
+                            <Setter Target="SidePanel.(Grid.Row)" Value="1" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+
+            <Border
+                MinHeight="320"
+                BorderBrush="{StaticResource RoGLineBrush}"
+                BorderThickness="1"
+                CornerRadius="4">
+                <Grid>
+                    <controls:MinecraftMapView x:Name="Map" />
+                    <TextBlock
+                        x:Uid="MinecraftMapPage_NoTiles"
+                        MaxWidth="360"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        HorizontalTextAlignment="Center"
+                        IsHitTestVisible="False"
+                        Style="{StaticResource RoGMutedTextStyle}"
+                        TextWrapping="Wrap"
+                        Visibility="{x:Bind ViewModel.HasNoTiles, Mode=OneWay}" />
+                </Grid>
+            </Border>
+
+            <ScrollViewer
+                x:Name="SidePanel"
+                Grid.Column="1"
+                VerticalScrollBarVisibility="Auto">
+                <StackPanel Spacing="12">
+                    <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind ViewModel.WorldInfo, Mode=OneWay}" TextWrapping="Wrap" />
+
+                    <TextBlock x:Uid="MinecraftMapPage_PlayersTitle" Style="{StaticResource RoGSectionTextStyle}" />
+                    <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind ViewModel.LiveInfo, Mode=OneWay}" TextWrapping="Wrap" />
+                    <ListView
+                        x:Uid="MinecraftMapPage_Players"
+                        IsItemClickEnabled="True"
+                        ItemClick="OnPointClick"
+                        ItemsSource="{x:Bind ViewModel.Players}"
+                        SelectionMode="None"
+                        Visibility="{x:Bind ViewModel.HasPlayers, Mode=OneWay}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="vm:MapPointItem">
+                                <StackPanel Padding="0,4" AutomationProperties.Name="{x:Bind Label}">
+                                    <TextBlock Foreground="{StaticResource RoGGreenBrush}" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Label}" />
+                                    <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Detail}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <TextBlock
+                        x:Uid="MinecraftMapPage_Privacy"
+                        FontSize="12"
+                        Style="{StaticResource RoGMutedTextStyle}"
+                        TextWrapping="Wrap" />
+
+                    <TextBlock x:Uid="MinecraftMapPage_WarpsTitle" Style="{StaticResource RoGSectionTextStyle}" Visibility="{x:Bind ViewModel.HasWarps, Mode=OneWay}" />
+                    <ListView
+                        x:Uid="MinecraftMapPage_Warps"
+                        MaxHeight="320"
+                        IsItemClickEnabled="True"
+                        ItemClick="OnPointClick"
+                        ItemsSource="{x:Bind ViewModel.Warps}"
+                        SelectionMode="None"
+                        Visibility="{x:Bind ViewModel.HasWarps, Mode=OneWay}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="vm:MapPointItem">
+                                <StackPanel Padding="0,4" AutomationProperties.Name="{x:Bind Label}">
+                                    <TextBlock Foreground="{StaticResource RoGGoldBrush}" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Label}" />
+                                    <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Detail}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <!-- Verwaltung (minecraft.manage) -->
+                    <Expander
+                        x:Uid="MinecraftMapPage_Admin"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Stretch"
+                        Visibility="{x:Bind ViewModel.CanManage}">
+                        <StackPanel Spacing="12">
+                            <ComboBox
+                                x:Uid="MinecraftMapPage_LiveMode"
+                                HorizontalAlignment="Stretch"
+                                DisplayMemberPath="Label"
+                                ItemsSource="{x:Bind ViewModel.LiveModeOptions}"
+                                SelectedItem="{x:Bind ViewModel.SelectedLiveMode, Mode=TwoWay}" />
+                            <TextBlock
+                                FontSize="12"
+                                Style="{StaticResource RoGMutedTextStyle}"
+                                Text="{x:Bind ViewModel.QuotaText, Mode=OneWay}"
+                                TextWrapping="Wrap"
+                                Visibility="{x:Bind ViewModel.HasQuota, Mode=OneWay}" />
+                            <TextBlock
+                                FontSize="12"
+                                Style="{StaticResource RoGMutedTextStyle}"
+                                Text="{x:Bind ViewModel.WorldAdminInfo, Mode=OneWay}"
+                                TextWrapping="Wrap" />
+                            <ToggleSwitch x:Uid="MinecraftMapPage_WorldHidden" IsOn="{x:Bind ViewModel.EditWorldHidden, Mode=TwoWay}" />
+                            <ToggleSwitch x:Uid="MinecraftMapPage_ServerHidden" IsOn="{x:Bind ViewModel.EditServerHidden, Mode=TwoWay}" />
+                            <TextBox x:Uid="MinecraftMapPage_NameDe" MaxLength="64" Text="{x:Bind ViewModel.EditNameDe, Mode=TwoWay}" />
+                            <TextBox x:Uid="MinecraftMapPage_NameEn" MaxLength="64" Text="{x:Bind ViewModel.EditNameEn, Mode=TwoWay}" />
+                            <TextBox x:Uid="MinecraftMapPage_NameFr" MaxLength="64" Text="{x:Bind ViewModel.EditNameFr, Mode=TwoWay}" />
+                            <Button
+                                x:Uid="MinecraftMapPage_SaveWorld"
+                                HorizontalAlignment="Stretch"
+                                Command="{x:Bind ViewModel.SaveWorldCommand}"
+                                Style="{StaticResource RoGPrimaryButtonStyle}" />
+                            <TextBlock
+                                x:Uid="MinecraftMapPage_ClearHint"
+                                FontSize="12"
+                                Style="{StaticResource RoGMutedTextStyle}"
+                                TextWrapping="Wrap" />
+                            <Button
+                                x:Uid="MinecraftMapPage_ClearTiles"
+                                HorizontalAlignment="Stretch"
+                                Command="{x:Bind ViewModel.ClearTilesCommand}"
+                                Style="{StaticResource RoGSecondaryButtonStyle}" />
+                        </StackPanel>
+                    </Expander>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

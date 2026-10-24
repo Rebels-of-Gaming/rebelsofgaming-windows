@@ -267,6 +267,7 @@
 
                     <TextBlock x:Uid="McJoin_LinkTip" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
                     <StackPanel Orientation="Horizontal" Spacing="12">
+                        <Button x:Uid="McJoin_Map" Click="OnMapClick" Style="{StaticResource RoGPrimaryButtonStyle}" />
                         <Button x:Uid="McJoin_Leaderboards" Click="OnLeaderboardsClick" Style="{StaticResource RoGSecondaryButtonStyle}" />
                         <Button
                             x:Uid="McJoin_LinkAccount"

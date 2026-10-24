@@ -287,6 +287,18 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   (Rolle speichern nur mit `minecraft:deploy` + `minecraft.deploy`), Plugins verteilen (Prüfung alle 2 s abgefragt,
   höchstens 2 Min.; Lauf alle 3 s, höchstens 10 Min.), Minigame-Pool (nur mit `minecraft:pool` + `minecraft.pool`).
   „Verwaltung“ erscheint jetzt auch mit `minecraft.economy`/`minecraft.pool`/`minecraft.deploy` allein. Tests: 26 neue.
+- **2.5.25 – Minecraft-Weltkarte (Website v0.44.0, Guide 48, Annahme 500):** `MinecraftService.MapAsync`/
+  `MapTilesAsync` (Index je Region `region=rx,rz`)/`MapLiveAsync` (Netzwerk-ID, sonst Slug) und Verwaltung
+  `SetMapLiveModeAsync`, `SetMapServerHiddenAsync`, `UpdateMapWorldAsync` (nur gesetzte Felder, `clear_tiles` nur beim
+  Ausblenden, Namen je Sprache ≤ 64), `ClearMapTilesAsync`. `MinecraftMapGeometry` (Kachel-/Regions-Index, Weltgrenze wie
+  die Website, Stufe je Vergrößerung, Kachel-Adresse nur `https` mit Hex-Version) und `MapViewport` (Block ↔ Bildschirm,
+  Zoom um den Zeiger, sichtbare Kacheln/Regionen, Mitte zuerst) – alles in Core getestet. App: `MinecraftMapView`
+  (Kacheln als Bilder, nur laut Index vorhandene; Index je Region einmal je Weltstand im Speicher, „Aktualisieren“ lädt
+  neu), Seite `MinecraftMapPage` ohne Eintrag in der Seitenleiste (Knopf im Minecraft-Reiter, Links
+  `/minecraft/karte?server=&world=&x=&z=` und `rog://map?…`). Live-Spieler alle 5 s nur bei offener Seite und
+  `live_players = true`; Köpfe nur über `head_url` (eigener Speicher), sonst Initiale. Annahme: Ein Speichern in der
+  Verwaltung sendet Ausblenden der Welt immer, Namen nur, wenn die Website sie geliefert hat, und den Server nur bei
+  Änderung. Tests: 41 neue.
 - **2.5.24 – W23 live (Website v0.44.0):** `JoinForEditAsync` liest nur noch `GET` (kein leerer `PUT` mehr); fehlen
   `console.hints`, sendet das Formular keine Hinweise (leere Felder würden sie sonst löschen). Client aus v0.44.0.
 - **2.5.23 – W23:** `JoinForEditAsync` liest zuerst `GET /v1/minecraft/join` – liefert die Website `console.hints`
@@ -571,6 +583,7 @@ sich einmal neu an (2FA).
 - Ab 2.5.10: Die öffentliche Ban-Liste und Einsprüche zeigt die App nur an (kein Cache); eine Stellungnahme geht nur an
   die Plattform und wird dort ein öffentlich lesbares Forum-Thema – darauf weist das Formular hin.
 - Ab 2.5.18: Rebel-Coins (Kontostand, Serie, Buchungen) zeigt die App nur an (kein Cache); die Sichtbarkeit im Profil liegt nur auf dem Server.
+- Ab 2.5.25: Weltkarte – Kachel-Index und Live-Positionen nur im Arbeitsspeicher, solange die Seite offen ist (kein Cache, nichts auf der Platte); Kachelbilder und Köpfe nur vom eigenen Speicher/CDN der Plattform.
 - Ab 2.5.22: Die Minecraft-Beitrittsdaten zeigt die App nur an (kein Cache); geändert werden sie nur auf dem Server.
 - Ab 2.5.21: Netzwerk-Verwaltung (Heartbeat, Pool, Deploy) nur Anzeige und Aufrufe, nichts lokal gespeichert; die auslösende Person eines Deploys speichert die Website.
 - Ab 2.5.20: Minecraft-Statistiken und Bestenlisten zeigt die App nur an (kein Cache, Abruf ohne ETag); die Freigabe `minecraft_stats` liegt nur auf dem Server.

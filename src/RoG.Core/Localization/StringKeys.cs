@@ -1266,6 +1266,38 @@ public static class StringKeys
 
     public const string MinecraftJoinInvalidGamertag = "MinecraftJoin_InvalidGamertag";
 
+    public const string MinecraftMapSpawn = "MinecraftMap_Spawn";
+
+    public const string MinecraftMapViewName = "MinecraftMap_ViewName";
+
+    public const string MinecraftMapWorldInfo = "MinecraftMap_WorldInfo";
+
+    public const string MinecraftMapWorldInfoNoDate = "MinecraftMap_WorldInfoNoDate";
+
+    public const string MinecraftMapHidden = "MinecraftMap_Hidden";
+
+    public const string MinecraftMapLiveSaved = "MinecraftMap_LiveSaved";
+
+    public const string MinecraftMapSaved = "MinecraftMap_Saved";
+
+    public const string MinecraftMapClearTitle = "MinecraftMap_ClearTitle";
+
+    public const string MinecraftMapClearText = "MinecraftMap_ClearText";
+
+    public const string MinecraftMapCleared = "MinecraftMap_Cleared";
+
+    public const string MinecraftMapLiveSignIn = "MinecraftMap_LiveSignIn";
+
+    public const string MinecraftMapLiveOff = "MinecraftMap_LiveOff";
+
+    public const string MinecraftMapNoPlayers = "MinecraftMap_NoPlayers";
+
+    public const string MinecraftMapQuota = "MinecraftMap_Quota";
+
+    public const string MinecraftMapWorldAdmin = "MinecraftMap_WorldAdmin";
+
+    public const string MinecraftMapWorldAdminNotPublic = "MinecraftMap_WorldAdminNotPublic";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

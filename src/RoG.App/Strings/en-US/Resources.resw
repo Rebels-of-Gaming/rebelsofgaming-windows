@@ -6810,4 +6810,154 @@
   <data name="McJoin_EditSave.Content" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="MinecraftMap_Spawn" xml:space="preserve">
+    <value>Go to spawn</value>
+  </data>
+  <data name="MinecraftMap_ViewName" xml:space="preserve">
+    <value>World map – drag to move, arrow keys, plus and minus to zoom, Home for spawn</value>
+  </data>
+  <data name="MinecraftMap_WorldInfo" xml:space="preserve">
+    <value>{0} tiles · {1} · as of {2}</value>
+  </data>
+  <data name="MinecraftMap_WorldInfoNoDate" xml:space="preserve">
+    <value>{0} tiles · {1}</value>
+  </data>
+  <data name="MinecraftMap_Hidden" xml:space="preserve">
+    <value>hidden</value>
+  </data>
+  <data name="MinecraftMap_LiveSaved" xml:space="preserve">
+    <value>Live players: {0}</value>
+  </data>
+  <data name="MinecraftMap_Saved" xml:space="preserve">
+    <value>World map saved.</value>
+  </data>
+  <data name="MinecraftMap_ClearTitle" xml:space="preserve">
+    <value>Delete tiles?</value>
+  </data>
+  <data name="MinecraftMap_ClearText" xml:space="preserve">
+    <value>All tiles of “{0}” will be deleted. The plugin only uploads them again after /map render or /map upload.</value>
+  </data>
+  <data name="MinecraftMap_Cleared" xml:space="preserve">
+    <value>Tiles deleted.</value>
+  </data>
+  <data name="MinecraftMap_LiveSignIn" xml:space="preserve">
+    <value>Only signed-in members can see live players.</value>
+  </data>
+  <data name="MinecraftMap_LiveOff" xml:space="preserve">
+    <value>Live players are turned off.</value>
+  </data>
+  <data name="MinecraftMap_NoPlayers" xml:space="preserve">
+    <value>Nobody is in this world right now.</value>
+  </data>
+  <data name="MinecraftMap_Quota" xml:space="preserve">
+    <value>Storage: {0} of {1} used (at most {2} per server).</value>
+  </data>
+  <data name="MinecraftMap_WorldAdmin" xml:space="preserve">
+    <value>World “{0}” · {1} tile storage</value>
+  </data>
+  <data name="MinecraftMap_WorldAdminNotPublic" xml:space="preserve">
+    <value>World “{0}” · {1} tile storage · server not public – accepts no new tiles</value>
+  </data>
+  <data name="Error_map_server_not_found" xml:space="preserve">
+    <value>This server is not (or no longer) on the map.</value>
+  </data>
+  <data name="MinecraftMap_Live_off" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="MinecraftMap_Live_auth" xml:space="preserve">
+    <value>Signed-in members only</value>
+  </data>
+  <data name="MinecraftMap_Live_public" xml:space="preserve">
+    <value>Public</value>
+  </data>
+  <data name="MinecraftMap_Env_normal" xml:space="preserve">
+    <value>Overworld</value>
+  </data>
+  <data name="MinecraftMap_Env_nether" xml:space="preserve">
+    <value>Nether</value>
+  </data>
+  <data name="MinecraftMap_Env_the_end" xml:space="preserve">
+    <value>End</value>
+  </data>
+  <data name="MinecraftMapPage_Title.Text" xml:space="preserve">
+    <value>WORLD MAP</value>
+  </data>
+  <data name="MinecraftMapPage_Intro.Text" xml:space="preserve">
+    <value>The worlds of our Minecraft network from above – with warps and the players who are online right now.</value>
+  </data>
+  <data name="MinecraftMapPage_World.Header" xml:space="preserve">
+    <value>World</value>
+  </data>
+  <data name="MinecraftMapPage_World.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>World</value>
+  </data>
+  <data name="MinecraftMapPage_ShowLive.Header" xml:space="preserve">
+    <value>Live players</value>
+  </data>
+  <data name="MinecraftMapPage_Refresh.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="MinecraftMapPage_Refresh.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Refresh (F5)</value>
+  </data>
+  <data name="MinecraftMapPage_State.EmptyText" xml:space="preserve">
+    <value>No world on the map yet. It appears here as soon as a server reports it.</value>
+  </data>
+  <data name="MinecraftMapPage_NoTiles.Text" xml:space="preserve">
+    <value>There are no tiles for this world yet. They appear once the server has drawn them.</value>
+  </data>
+  <data name="MinecraftMapPage_PlayersTitle.Text" xml:space="preserve">
+    <value>PLAYERS</value>
+  </data>
+  <data name="MinecraftMapPage_Players.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Live players</value>
+  </data>
+  <data name="MinecraftMapPage_Privacy.Text" xml:space="preserve">
+    <value>Positions are visible live with names and are not stored. Use /map hide in the game to hide yourself (again: /map show).</value>
+  </data>
+  <data name="MinecraftMapPage_WarpsTitle.Text" xml:space="preserve">
+    <value>WARPS</value>
+  </data>
+  <data name="MinecraftMapPage_Warps.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Warps</value>
+  </data>
+  <data name="MinecraftMapPage_Admin.Header" xml:space="preserve">
+    <value>Manage world map</value>
+  </data>
+  <data name="MinecraftMapPage_Admin.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Manage world map</value>
+  </data>
+  <data name="MinecraftMapPage_LiveMode.Header" xml:space="preserve">
+    <value>Show live players to</value>
+  </data>
+  <data name="MinecraftMapPage_LiveMode.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Show live players to</value>
+  </data>
+  <data name="MinecraftMapPage_WorldHidden.Header" xml:space="preserve">
+    <value>Hide world</value>
+  </data>
+  <data name="MinecraftMapPage_ServerHidden.Header" xml:space="preserve">
+    <value>Hide whole server</value>
+  </data>
+  <data name="MinecraftMapPage_NameDe.Header" xml:space="preserve">
+    <value>Display name German (empty = world name)</value>
+  </data>
+  <data name="MinecraftMapPage_NameEn.Header" xml:space="preserve">
+    <value>Display name English</value>
+  </data>
+  <data name="MinecraftMapPage_NameFr.Header" xml:space="preserve">
+    <value>Display name French</value>
+  </data>
+  <data name="MinecraftMapPage_SaveWorld.Content" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="MinecraftMapPage_ClearHint.Text" xml:space="preserve">
+    <value>Hidden worlds stay reachable through known tile addresses until the tiles are deleted.</value>
+  </data>
+  <data name="MinecraftMapPage_ClearTiles.Content" xml:space="preserve">
+    <value>Delete tiles</value>
+  </data>
+  <data name="McJoin_Map.Content" xml:space="preserve">
+    <value>World map</value>
+  </data>
 </root>

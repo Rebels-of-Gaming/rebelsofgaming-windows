@@ -50,6 +50,10 @@ scripts/remote-build.sh --mode store --committed  # .msixupload für das Partner
 
 Direkt auf Windows: `pwsh -File scripts/build-windows.ps1 [-Mode Build|Sideload|Store]`.
 
+## Lizenz
+
+GPL-3.0-or-later (`LICENSE`). Name „Rebels of Gaming“, Logo und Grafiken sind ausgenommen – siehe `TRADEMARKS.md`.
+
 ## Lizenzen Dritter
 
 - Barlow Condensed – SIL Open Font License 1.1 (`src/RoG.App/Fonts/OFL.txt`)

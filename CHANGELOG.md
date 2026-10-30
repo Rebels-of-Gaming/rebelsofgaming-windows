@@ -5,6 +5,10 @@ Versionen nach [SemVer](https://semver.org/lang/de/), Regeln in `docs/VERSIONIER
 
 ## [Unveröffentlicht]
 
+### Lizenz
+
+- Quelltext unter GPL-3.0-or-later (`LICENSE`), das Repo wird öffentlich; Name „Rebels of Gaming“, Logo und Grafiken sind ausgenommen (`TRADEMARKS.md`). CI: Linux-Teil auf GitHub-Runnern, der Windows-Teil auf `rog-win-1` läuft nie für Pull-Requests aus Forks
+
 Stufe 0 – Fundament (Version 0.1.0, noch nicht im Store).
 
 - Lösung `RoG.sln`: plattformunabhängiger Kern `RoG.Core` (baut und testet unter Linux), Tests `RoG.Core.Tests`, WinUI-3-App `RoG.App` (MSIX, baut auf der Windows-VM)

@@ -13,11 +13,10 @@ on:
 jobs:
   core:
     name: Core + Tests (Linux)
-    runs-on: [self-hosted, Linux, rog]
+    # Öffentliches Repo: GitHub-Runner statt eigener – Pull-Requests aus Forks laufen nie auf unseren Maschinen
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     env:
-      # Eigene Runner ohne root: .NET ins Benutzerverzeichnis statt /usr/share/dotnet
-      DOTNET_INSTALL_DIR: ${{ github.workspace }}/../.dotnet
       DOTNET_CLI_TELEMETRY_OPTOUT: '1'
     steps:
       - uses: actions/checkout@v4
@@ -35,6 +34,9 @@ jobs:
 
   windows:
     name: WinUI-App (Windows)
+    # Eigener Windows-Runner (Signatur, Store-Paket): nie für Pull-Requests aus Forks – fremder Code liefe sonst auf
+    # rog-win-1. Forks bekommen nur den Core-Job oben (GitHub-Runner).
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: [self-hosted, Windows]
     timeout-minutes: 90
     permissions:

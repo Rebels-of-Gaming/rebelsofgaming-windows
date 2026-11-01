@@ -60,7 +60,7 @@ public sealed class ServerConfigService(IRoGApiClient client, HttpClient http)
 
     public async Task<ConfigPreview> PreviewAsync(string server, string fileId, string content, CancellationToken cancellationToken = default)
     {
-        var d = (await client.V1_servers_configs_previewAsync(server, fileId, new Body61 { Content = content }, cancellationToken).ConfigureAwait(false)).Data;
+        var d = (await client.V1_servers_configs_previewAsync(server, fileId, new Body65 { Content = content }, cancellationToken).ConfigureAwait(false)).Data;
         return new ConfigPreview(
             d.Diff?.Select(l => new DiffLine(l.Type, l.Text, l.Old, l.New)).ToList() ?? [],
             d.Errors?.ToList() ?? [],
@@ -95,7 +95,7 @@ public sealed class ServerConfigService(IRoGApiClient client, HttpClient http)
     }
 
     public async Task RollbackAsync(string server, string versionId, ConfigAfter after, CancellationToken cancellationToken = default) =>
-        await client.V1_servers_configs_rollbackAsync(server, versionId, new Body63 { After = after.ToString().ToLowerInvariant() }, cancellationToken).ConfigureAwait(false);
+        await client.V1_servers_configs_rollbackAsync(server, versionId, new Body67 { After = after.ToString().ToLowerInvariant() }, cancellationToken).ConfigureAwait(false);
 }
 
 public sealed record ServerBackup(string Uuid, string Name, long Bytes, DateTimeOffset? CreatedAt, bool Completed, bool Successful, bool Locked);

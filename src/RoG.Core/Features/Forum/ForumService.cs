@@ -91,7 +91,7 @@ public sealed class ForumService(IRoGApiClient client, Uri webBaseUrl)
     public async Task<ForumPost> GetPostAsync(string postId, CancellationToken cancellationToken = default)
     {
         var p = (await client.V1_forum_posts_showAsync(postId, cancellationToken).ConfigureAwait(false)).Data;
-        return Map(System.Text.Json.JsonSerializer.Deserialize<Data116>(System.Text.Json.JsonSerializer.Serialize(p))!);
+        return Map(System.Text.Json.JsonSerializer.Deserialize<Data117>(System.Text.Json.JsonSerializer.Serialize(p))!);
     }
 
     /// <summary>Antworten (BBCode); Rückgabe = neuer Beitrag (kann <c>pending</c> sein: Spamschutz).</summary>
@@ -146,7 +146,7 @@ public sealed class ForumService(IRoGApiClient client, Uri webBaseUrl)
         return text;
     }
 
-    private ForumPost Map(Data116 p) => new(
+    private ForumPost Map(Data117 p) => new(
         p.Id,
         p.Author?.Id,
         p.Author?.Name ?? "—",

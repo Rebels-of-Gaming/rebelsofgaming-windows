@@ -49,4 +49,15 @@ public class VoiceServiceTests
         Assert.True(lobby.HasPeople);
         Assert.False(ts.Channels[1].HasPeople);
     }
+
+    [Theory]
+    [InlineData("[cspacer]Squads", "Squads")]
+    [InlineData("[*spacer0]  Gäste ", "Gäste")]
+    [InlineData("[spacer1]---", null)]
+    [InlineData("[*spacer]___", null)]
+    [InlineData("Lobby", "Lobby")]
+    public void SpacerTitle_strips_the_prefix_and_drops_pure_lines(string name, string? expected)
+    {
+        Assert.Equal(expected, VoiceService.SpacerTitle(name));
+    }
 }

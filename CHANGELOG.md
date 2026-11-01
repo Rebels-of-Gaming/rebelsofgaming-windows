@@ -5,6 +5,10 @@ Versionen nach [SemVer](https://semver.org/lang/de/), Regeln in `docs/VERSIONIER
 
 ## [Unveröffentlicht]
 
+### Website v0.45–v0.55
+
+- TeamSpeak: Trenner-Kanäle („[cspacer]Squads“) erscheinen als Überschrift, ihre Unterkanäle (so liefert die Website die Squad-Kanäle) sind wieder sichtbar – bisher fehlten sie samt Personen
+
 ### Lizenz
 
 - Quelltext unter GPL-3.0-or-later (`LICENSE`), das Repo wird öffentlich; Name „Rebels of Gaming“, Logo und Grafiken sind ausgenommen (`TRADEMARKS.md`). CI: Linux-Teil auf GitHub-Runnern, der Windows-Teil auf `rog-win-1` läuft nie für Pull-Requests aus Forks

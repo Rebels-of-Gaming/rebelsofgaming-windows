@@ -78,6 +78,22 @@ public sealed class VoiceService(IRoGApiClient client)
         return new Uri("ts3server://" + host + (query.Count > 0 ? "?" + string.Join("&", query) : string.Empty));
     }
 
+    /// <summary>
+    /// Überschrift eines Trenners: TeamSpeak-Präfix <c>[cspacer]</c>/<c>[*spacer0]</c> weg; reine Linien („---“, „___“)
+    /// ergeben keine Überschrift. Unterkanäle eines Trenners bleiben sichtbar (die Website liefert sie als Kinder).
+    /// </summary>
+    public static string? SpacerTitle(string name)
+    {
+        var text = name.Trim();
+        if (text.StartsWith('[') && text.IndexOf(']', StringComparison.Ordinal) is var end and > 0
+            && text[..end].Contains("spacer", StringComparison.OrdinalIgnoreCase))
+        {
+            text = text[(end + 1)..].Trim();
+        }
+
+        return text.Trim('-', '_', '=', '.', '*', '~', ' ').Length > 0 ? text : null;
+    }
+
     /// <summary>Unterkanäle sind in der Spec untypisiert (rekursiv) – aus dem JSON lesen.</summary>
     internal static TsChannel? ParseChild(IDictionary<string, object> child)
     {

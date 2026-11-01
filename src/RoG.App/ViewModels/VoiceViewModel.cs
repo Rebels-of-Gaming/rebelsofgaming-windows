@@ -131,20 +131,31 @@ public sealed partial class VoiceViewModel(AppServices services) : LoadableViewM
 
     private void Add(TsChannel channel, int depth)
     {
-        if (channel.Spacer || (!ShowEmptyChannels && !channel.HasPeople))
+        if (!ShowEmptyChannels && !channel.HasPeople)
         {
             return;
         }
 
-        TeamSpeakRows.Add(VoiceRow.Channel(channel.Name, depth, false));
-        foreach (var client in channel.Clients)
+        if (channel.Spacer)
         {
-            TeamSpeakRows.Add(VoiceRow.Person(client.Nickname, depth + 1, client.MemberName, client.Away, client.Muted, null));
+            // Trenner: Überschrift, Unterkanäle auf derselben Ebene (so liefert die Produktion die Squad-Kanäle)
+            if (VoiceService.SpacerTitle(channel.Name) is { } title)
+            {
+                TeamSpeakRows.Add(VoiceRow.Section(title, depth));
+            }
+        }
+        else
+        {
+            TeamSpeakRows.Add(VoiceRow.Channel(channel.Name, depth, false));
+            foreach (var client in channel.Clients)
+            {
+                TeamSpeakRows.Add(VoiceRow.Person(client.Nickname, depth + 1, client.MemberName, client.Away, client.Muted, null));
+            }
         }
 
         foreach (var child in channel.Children)
         {
-            Add(child, depth + 1);
+            Add(child, channel.Spacer ? depth : depth + 1);
         }
     }
 
@@ -202,6 +213,14 @@ public sealed class VoiceRow
     public ImageSource? Avatar { get; init; }
 
     public bool HasDetail => !string.IsNullOrEmpty(Detail);
+
+    /// <summary>TeamSpeak-Trenner als Überschrift (ohne Symbol).</summary>
+    public static VoiceRow Section(string title, int depth) => new()
+    {
+        Text = title,
+        IsChannel = true,
+        Indent = new Thickness(depth * 20, 12, 0, 2),
+    };
 
     public static VoiceRow Channel(string name, int depth, bool locked) => new()
     {

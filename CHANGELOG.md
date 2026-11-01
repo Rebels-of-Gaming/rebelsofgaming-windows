@@ -7,6 +7,7 @@ Versionen nach [SemVer](https://semver.org/lang/de/), Regeln in `docs/VERSIONIER
 
 ### Website v0.45–v0.55
 
+- Kern für die Linux-App: Plattform statt fest „windows“ (`ClientPlatform`, `IApiContext.Platform` → User-Agent `RoG-<Plattform>`, Reverb `client=rog-<plattform>`, `RegisterDeviceAsync` mit Plattform, `DeviceName.For`), `SquadInternalService` für `GET /v1/squads/{squad}/intern`; Windows verhält sich unverändert
 - TeamSpeak: Trenner-Kanäle („[cspacer]Squads“) erscheinen als Überschrift, ihre Unterkanäle (so liefert die Website die Squad-Kanäle) sind wieder sichtbar – bisher fehlten sie samt Personen
 
 ### Lizenz

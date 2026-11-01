@@ -14,6 +14,9 @@ public interface IApiContext
 
     /// <summary>App-Version für den User-Agent, z. B. <c>0.1.0</c>.</summary>
     string AppVersion { get; }
+
+    /// <summary>Plattform für User-Agent und Geräte-Registrierung, siehe <see cref="ClientPlatform"/>.</summary>
+    string Platform => ClientPlatform.Windows;
 }
 
 /// <summary>Einfacher, veränderbarer Kontext.</summary>
@@ -22,6 +25,8 @@ public sealed class ApiContext(string language = "de", string appVersion = "0.1.
     public string Language { get; set; } = language;
 
     public string AppVersion { get; set; } = appVersion;
+
+    public string Platform { get; set; } = ClientPlatform.Windows;
 }
 
 /// <summary>
@@ -193,7 +198,7 @@ public sealed class RoGHttpHandler : DelegatingHandler
         request.Headers.AcceptLanguage.Add(new StringWithQualityHeaderValue(_context.Language));
         if (request.Headers.UserAgent.Count == 0)
         {
-            request.Headers.UserAgent.Add(new ProductInfoHeaderValue("RoG-Windows", _context.AppVersion));
+            request.Headers.UserAgent.Add(new ProductInfoHeaderValue(ClientPlatform.Product(_context.Platform), _context.AppVersion));
         }
 
         if (token is not null && request.Headers.Authorization is null)

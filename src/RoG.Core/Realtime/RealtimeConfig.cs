@@ -16,12 +16,12 @@ public sealed record RealtimeConfig(string Key, string Host, int Port, string Sc
     public bool UseTls => string.Equals(Scheme, "https", StringComparison.OrdinalIgnoreCase)
         || string.Equals(Scheme, "wss", StringComparison.OrdinalIgnoreCase);
 
-    /// <summary><c>wss://host:port/app/{key}?protocol=7&amp;client=rog-windows&amp;version=…&amp;flash=false</c></summary>
-    public Uri BuildSocketUri(string clientVersion)
+    /// <summary><c>wss://host:port/app/{key}?protocol=7&amp;client=rog-&lt;plattform&gt;&amp;version=…&amp;flash=false</c></summary>
+    public Uri BuildSocketUri(string clientVersion, string platform = ClientPlatform.Windows)
     {
         var scheme = UseTls ? "wss" : "ws";
         var query = string.Create(CultureInfo.InvariantCulture,
-            $"protocol={ProtocolVersion}&client=rog-windows&version={Uri.EscapeDataString(clientVersion)}&flash=false");
+            $"protocol={ProtocolVersion}&client={ClientPlatform.ClientId(platform)}&version={Uri.EscapeDataString(clientVersion)}&flash=false");
         return new UriBuilder(scheme, Host, Port, $"/app/{Uri.EscapeDataString(Key)}") { Query = query }.Uri;
     }
 

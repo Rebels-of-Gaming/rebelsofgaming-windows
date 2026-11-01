@@ -21,7 +21,11 @@ public sealed class AccountService(IRoGApiClient client, ITokenStore tokens)
     /// Ohne Scope <c>devices:manage</c> (ältere Tokens) passiert nichts – das ist kein Fehler für die Oberfläche.
     /// Kein Name: Den hat der Login gesetzt, umbenennen geht auf der Website (Annahme 4).
     /// </summary>
-    public async Task<bool> RegisterDeviceAsync(string appVersion, CancellationToken cancellationToken = default)
+    public Task<bool> RegisterDeviceAsync(string appVersion, CancellationToken cancellationToken = default)
+        => RegisterDeviceAsync(appVersion, ManageDevicesPlatform.Windows, cancellationToken);
+
+    /// <summary>Wie oben, mit Plattform (die Linux-App meldet <see cref="ManageDevicesPlatform.Linux"/>).</summary>
+    public async Task<bool> RegisterDeviceAsync(string appVersion, ManageDevicesPlatform platform, CancellationToken cancellationToken = default)
     {
         var token = await tokens.GetAsync(cancellationToken).ConfigureAwait(false);
         if (token is null || !ScopeMatcher.Allows(token.Scopes, "devices:manage"))
@@ -31,7 +35,7 @@ public sealed class AccountService(IRoGApiClient client, ITokenStore tokens)
 
         try
         {
-            await client.V1_devices_storeAsync(new ManageDevices { Platform = ManageDevicesPlatform.Windows, App_version = appVersion }, cancellationToken).ConfigureAwait(false);
+            await client.V1_devices_storeAsync(new ManageDevices { Platform = platform, App_version = appVersion }, cancellationToken).ConfigureAwait(false);
             return true;
         }
         catch (ApiProblemException ex) when (ex.Problem.Status is 403 or 409 or 422)

@@ -1,6 +1,7 @@
 using System.Net;
 using System.Text.Json;
 using RoG.Core.Api;
+using RoG.Core.Api.Generated;
 using RoG.Core.Auth;
 using RoG.Core.Config;
 using RoG.Core.Features.Account;
@@ -86,6 +87,17 @@ public class AccountServiceTests
         using var body = JsonDocument.Parse(req.Body!);
         Assert.Equal("windows", body.RootElement.GetProperty("platform").GetString());
         Assert.Equal("2.0.1", body.RootElement.GetProperty("app_version").GetString());
+    }
+
+    [Fact]
+    public async Task Registers_the_device_with_another_platform()
+    {
+        var h = Create((_, _) => Json("""{"data":{"id":"01D","name":"PC","platform":"linux","app_version":"0.3.0","push":false,"push_provider":null,"scopes":[],"current":true,"last_active_at":null,"created_at":null}}""", HttpStatusCode.Created));
+
+        Assert.True(await h.Service.RegisterDeviceAsync("0.3.0", ManageDevicesPlatform.Linux));
+
+        using var body = JsonDocument.Parse(Assert.Single(h.Stub.Requests).Body!);
+        Assert.Equal("linux", body.RootElement.GetProperty("platform").GetString());
     }
 
     [Fact]

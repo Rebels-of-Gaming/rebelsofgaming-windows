@@ -13,15 +13,18 @@ public static class DeviceName
 
     /// <summary>„Windows-App – PC von &lt;Name&gt;“, ohne Namen nur „Windows-App“.</summary>
     /// <param name="owner">Anzeigename (z. B. Windows-Benutzername); Steuerzeichen werden entfernt.</param>
-    public static string ForWindows(string? owner)
+    public static string ForWindows(string? owner) => For(WindowsPrefix, owner);
+
+    /// <summary>„&lt;Präfix&gt; – &lt;Gerät&gt; von &lt;Name&gt;“, z. B. „Linux-App – Steam Deck von …“; ohne Namen nur das Präfix.</summary>
+    public static string For(string prefix, string? owner, string device = "PC")
     {
         var clean = new string((owner ?? string.Empty).Where(c => !char.IsControl(c)).ToArray()).Trim();
         if (clean.Length == 0)
         {
-            return WindowsPrefix;
+            return prefix;
         }
 
-        var name = $"{WindowsPrefix} – PC von {clean}";
+        var name = $"{prefix} – {device} von {clean}";
         return name.Length <= MaxLength ? name : name[..MaxLength].TrimEnd();
     }
 }

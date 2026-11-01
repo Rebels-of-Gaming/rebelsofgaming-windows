@@ -71,6 +71,27 @@ public class RoGHttpHandlerTests
     }
 
     [Fact]
+    public async Task User_agent_follows_the_platform_of_the_context()
+    {
+        var h = Create((_, _) => Ok());
+        h.Context.Platform = ClientPlatform.Linux;
+        using var _ = await h.Http.GetAsync(new Uri("me", UriKind.Relative));
+
+        Assert.StartsWith("RoG-Linux/0.1.0", Assert.Single(h.Stub.Requests).Headers["User-Agent"]);
+    }
+
+    [Theory]
+    [InlineData("windows", "RoG-Windows", "rog-windows")]
+    [InlineData(" Linux ", "RoG-Linux", "rog-linux")]
+    [InlineData("", "RoG-Windows", "rog-windows")]
+    [InlineData("bad/value", "RoG-Windows", "rog-windows")]
+    public void Client_platform_names(string platform, string product, string clientId)
+    {
+        Assert.Equal(product, ClientPlatform.Product(platform));
+        Assert.Equal(clientId, ClientPlatform.ClientId(platform));
+    }
+
+    [Fact]
     public async Task Language_change_applies_to_next_request()
     {
         var h = Create((_, _) => Ok());

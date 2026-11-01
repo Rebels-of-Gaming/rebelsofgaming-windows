@@ -139,6 +139,13 @@ public sealed class SettingsTests : IDisposable
     public void Device_name_for_windows(string? owner, string expected) => Assert.Equal(expected, DeviceName.ForWindows(owner));
 
     [Fact]
+    public void Device_name_with_own_prefix_and_device()
+    {
+        Assert.Equal("Linux-App – Steam Deck von Wahke", DeviceName.For("Linux-App", "Wahke", "Steam Deck"));
+        Assert.Equal("Linux-App", DeviceName.For("Linux-App", " "));
+    }
+
+    [Fact]
     public void Device_name_is_capped_at_80_chars()
     {
         var name = DeviceName.ForWindows(new string('x', 200));

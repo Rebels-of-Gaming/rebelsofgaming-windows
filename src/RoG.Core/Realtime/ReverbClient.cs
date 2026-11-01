@@ -35,6 +35,7 @@ public sealed class ReverbClient : IAsyncDisposable
     private readonly IChannelAuthorizer _authorizer;
     private readonly Func<IWebSocketConnection> _socketFactory;
     private readonly string _clientVersion;
+    private readonly string _platform;
     private readonly Func<TimeSpan, CancellationToken, Task> _delay;
     private readonly Func<TimeSpan, CancellationToken, Task> _idleDelay;
     private readonly ConcurrentDictionary<string, ReverbChannel> _channels = new(StringComparer.Ordinal);
@@ -52,12 +53,14 @@ public sealed class ReverbClient : IAsyncDisposable
         Func<IWebSocketConnection> socketFactory,
         string clientVersion,
         Func<TimeSpan, CancellationToken, Task>? delay = null,
-        Func<TimeSpan, CancellationToken, Task>? idleDelay = null)
+        Func<TimeSpan, CancellationToken, Task>? idleDelay = null,
+        string platform = ClientPlatform.Windows)
     {
         _config = config ?? throw new ArgumentNullException(nameof(config));
         _authorizer = authorizer ?? throw new ArgumentNullException(nameof(authorizer));
         _socketFactory = socketFactory ?? throw new ArgumentNullException(nameof(socketFactory));
         _clientVersion = clientVersion;
+        _platform = platform;
         _delay = delay ?? Task.Delay;
         _idleDelay = idleDelay ?? Task.Delay;
     }
@@ -177,7 +180,7 @@ public sealed class ReverbClient : IAsyncDisposable
         using var timeout = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _lifetime.Token);
         timeout.CancelAfter(s_connectTimeout);
 
-        await socket.ConnectAsync(_config.BuildSocketUri(_clientVersion), timeout.Token).ConfigureAwait(false);
+        await socket.ConnectAsync(_config.BuildSocketUri(_clientVersion, _platform), timeout.Token).ConfigureAwait(false);
         _socket = socket;
         _loop = Task.Run(() => ReceiveLoopAsync(socket), CancellationToken.None);
 

@@ -58,6 +58,12 @@ public class ReverbClientTests
     }
 
     [Fact]
+    public void Socket_uri_names_the_platform()
+    {
+        Assert.Contains("client=rog-linux&", s_config.BuildSocketUri("0.1.0", ClientPlatform.Linux).Query, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void Config_is_read_from_get_v1_data_realtime()
     {
         var api = new Uri("https://api.example.test/v1/");

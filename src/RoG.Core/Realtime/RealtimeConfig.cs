@@ -49,8 +49,23 @@ public sealed record RealtimeConfig(string Key, string Host, int Port, string Sc
                 return null;
             }
 
-            var authUri = string.IsNullOrEmpty(auth) ? new Uri(apiBaseUrl, "broadcasting/auth") : new Uri(apiBaseUrl, auth);
-            return new RealtimeConfig(key, host, port, scheme, authUri);
+            // Mit https-API (Produktion, Staging) nur verschlüsselt; sonst Echtzeit aus statt Klartext-Verbindung
+            var config = new RealtimeConfig(key, host, port, scheme, new Uri(apiBaseUrl, "broadcasting/auth"));
+            if (apiBaseUrl.Scheme == Uri.UriSchemeHttps && !config.UseTls)
+            {
+                return null;
+            }
+
+            // Autorisierung schickt den Token: eine absolute Adresse nur auf dem eigenen API-Host
+            if (!string.IsNullOrEmpty(auth) && Uri.TryCreate(apiBaseUrl, auth, out var authUri)
+                && authUri.Scheme == apiBaseUrl.Scheme
+                && string.Equals(authUri.IdnHost, apiBaseUrl.IdnHost, StringComparison.OrdinalIgnoreCase)
+                && authUri.Port == apiBaseUrl.Port)
+            {
+                config = config with { AuthEndpoint = authUri };
+            }
+
+            return config;
         }
         catch (JsonException)
         {

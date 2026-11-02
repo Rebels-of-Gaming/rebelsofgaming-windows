@@ -134,8 +134,13 @@ public sealed class AppServices : IDisposable
         // Paket-Apps: steuert, welche Strings/<Sprache>/Resources.resw geladen wird. Wechsel wirkt nach Neustart.
         Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = LanguageResolver.ToResourceTag(language);
 
-        var environment = RoGEnvironment.Get(settings.Environment);
-        var tokens = new PasswordVaultTokenStore(Path.Combine(localFolder, "account.json"));
+#if DEBUG
+        const bool allowLocal = true;
+#else
+        const bool allowLocal = false; // Release (Store): keine http-Umgebung „local“
+#endif
+        var environment = RoGEnvironment.Resolve(settings.Environment, allowLocal);
+        var tokens = new PasswordVaultTokenStore(Path.Combine(localFolder, environment.AccountFileName), environment.TokenResource);
         var apiContext = new ApiContext(language, AppVersion);
         // Persistenter, verschlüsselter Antwort-Cache: letzter Stand sofort und ohne Netz (DMs nie auf der Platte)
         var cache = new PersistentEtagCache(Path.Combine(localFolder, "cache"), new DpapiProtector());

@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Shapes;
+using RoG.App.Services;
 using RoG.Core.Features.Minecraft;
 using RoG.Core.Localization;
 using Windows.System;
@@ -268,7 +269,7 @@ public sealed partial class MinecraftMapView : UserControl
                 wanted.Add(key);
                 if (!_images.TryGetValue(key, out var image))
                 {
-                    image = new Image { Source = new BitmapImage(uri), Stretch = Stretch.Fill, IsHitTestVisible = false };
+                    image = new Image { Source = RemoteImage.From(uri), Stretch = Stretch.Fill, IsHitTestVisible = false };
                     _images[key] = image;
                     _tileLayer.Children.Add(image);
                 }
@@ -371,7 +372,7 @@ public sealed partial class MinecraftMapView : UserControl
         head.Children.Add(new Ellipse { Fill = Brush("RoGBg3Brush"), Stroke = Brush("RoGGreenBrush"), StrokeThickness = 2 });
         if (player.HeadUrl is { } url && Uri.TryCreate(url, UriKind.Absolute, out var uri) && uri.Scheme == Uri.UriSchemeHttps)
         {
-            head.Children.Add(new Image { Source = new BitmapImage(uri) { DecodePixelWidth = 32 }, Width = 14, Height = 14 });
+            head.Children.Add(new Image { Source = RemoteImage.From(uri, 32), Width = 14, Height = 14 });
         }
         else
         {

@@ -201,7 +201,7 @@ public sealed class RoGHttpHandler : DelegatingHandler
             request.Headers.UserAgent.Add(new ProductInfoHeaderValue(ClientPlatform.Product(_context.Platform), _context.AppVersion));
         }
 
-        if (token is not null && request.Headers.Authorization is null)
+        if (token is not null && request.Headers.Authorization is null && IsOwnApi(request.RequestUri))
         {
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
         }
@@ -212,6 +212,25 @@ public sealed class RoGHttpHandler : DelegatingHandler
         {
             request.Headers.TryAddWithoutValidation(IdempotencyHeader, Guid.NewGuid().ToString());
         }
+    }
+
+    /// <summary>
+    /// Basis der API (<c>https://api…/v1/</c>). Gesetzt geht der Token nur an genau diesen Host (Schema, Host, Port) –
+    /// absolute Adressen aus API-Daten (CDN, fremde Hosts) bekommen ihn nie.
+    /// </summary>
+    public Uri? ApiBaseUrl { get; init; }
+
+    internal bool IsOwnApi(Uri? requestUri)
+    {
+        if (ApiBaseUrl is null)
+        {
+            return true;
+        }
+
+        return requestUri is { IsAbsoluteUri: true }
+            && string.Equals(requestUri.Scheme, ApiBaseUrl.Scheme, StringComparison.OrdinalIgnoreCase)
+            && string.Equals(requestUri.IdnHost, ApiBaseUrl.IdnHost, StringComparison.OrdinalIgnoreCase)
+            && requestUri.Port == ApiBaseUrl.Port;
     }
 
     private HttpResponseMessage Stale(HttpRequestMessage request, EtagEntry cached)

@@ -242,7 +242,7 @@ public sealed partial class FriendItemViewModel(FriendEntry friend, FriendsViewM
 
     public string Name => friend.User.Name;
 
-    public ImageSource? Avatar { get; } = friend.User.AvatarUrl is { } url ? new BitmapImage(url) : null;
+    public ImageSource? Avatar { get; } = friend.User.AvatarUrl is { } url ? RemoteImage.From(url) : null;
 
     public bool HasPresence => friend.Status is not null;
 
@@ -272,7 +272,7 @@ public sealed partial class FriendRequestItemViewModel(FriendRequest request, Fr
 
     public string Name => request.User.Name;
 
-    public ImageSource? Avatar { get; } = request.User.AvatarUrl is { } url ? new BitmapImage(url) : null;
+    public ImageSource? Avatar { get; } = request.User.AvatarUrl is { } url ? RemoteImage.From(url) : null;
 
     public string Meta { get; } = request.CreatedAt is { } at
         ? string.Format(CultureInfo.CurrentCulture, localizer.GetString(request.Incoming ? StringKeys.FriendsReceivedAt : StringKeys.FriendsSentAt), at.ToLocalTime().ToString("g", CultureInfo.CurrentCulture))

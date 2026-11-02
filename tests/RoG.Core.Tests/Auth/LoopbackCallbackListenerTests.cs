@@ -59,6 +59,21 @@ public class LoopbackCallbackListenerTests
     }
 
     [Fact]
+    public async Task Wrong_state_gets_the_failure_page_and_keeps_waiting()
+    {
+        await using var listener = LoopbackCallbackListener.Start();
+        using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(10));
+        var wait = listener.WaitForCallbackAsync("good", cts.Token);
+
+        using var forged = await s_browser.GetAsync(new Uri(listener.RedirectUri, "?error=access_denied&state=forged"), cts.Token);
+        Assert.Equal(HttpStatusCode.BadRequest, forged.StatusCode);
+        Assert.False(wait.IsCompleted);
+
+        using var response = await s_browser.GetAsync(new Uri(listener.RedirectUri, "?code=c&state=good"), cts.Token);
+        Assert.Equal("c", (await wait).Code);
+    }
+
+    [Fact]
     public async Task Error_callback_shows_failure_page_in_given_language()
     {
         var texts = new LoopbackPageTexts("en", "Rebels of Gaming", "Done.", "Sign-in was not completed.");

@@ -116,6 +116,7 @@ public sealed class MediaService(IRoGApiClient client, HttpClient storage)
             throw new ApiProblemException(new ApiProblem { Code = "checksum_mismatch", Status = 0 });
         }
 
+        MarkOfTheWeb.TryApply(path, url);
         return path;
     }
 

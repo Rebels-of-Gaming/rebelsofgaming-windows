@@ -238,6 +238,6 @@ public sealed class VoiceRow
         Indent = new Thickness(depth * 20, 2, 0, 2),
         Glyph = muted ? "" : away ? "" : "",
         Foreground = (Brush)Application.Current.Resources[away ? "RoGMutedBrush" : "RoGInkBrush"],
-        Avatar = avatar is null ? null : new BitmapImage(avatar) { DecodePixelWidth = 48 },
+        Avatar = avatar is null ? null : RemoteImage.From(avatar, 48),
     };
 }

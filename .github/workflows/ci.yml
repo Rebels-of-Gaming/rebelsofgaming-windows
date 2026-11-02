@@ -8,7 +8,13 @@ on:
     inputs:
       mode:
         description: 'Build | Sideload | Store'
+        type: choice
+        options: [Build, Sideload, Store]
         default: Build
+
+# Standard: nur lesen; der Windows-Job fordert contents: write für das Entwurfs-Release selbst an
+permissions:
+  contents: read
 
 jobs:
   core:
@@ -19,8 +25,10 @@ jobs:
     env:
       DOTNET_CLI_TELEMETRY_OPTOUT: '1'
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4.3.1
         with:
           global-json-file: global.json
       - run: dotnet build RoG.sln -c Release
@@ -34,9 +42,9 @@ jobs:
 
   windows:
     name: WinUI-App (Windows)
-    # Eigener Windows-Runner (Signatur, Store-Paket): nie für Pull-Requests aus Forks – fremder Code liefe sonst auf
-    # rog-win-1. Forks bekommen nur den Core-Job oben (GitHub-Runner).
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    # Eigener Windows-Runner (Signatur, Store-Paket): nie für Pull-Requests (auch nicht aus dem eigenen Repo) – fremder
+    # Code liefe sonst auf rog-win-1. Nur push und workflow_dispatch; Pull-Requests bekommen den Core-Job oben.
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     runs-on: [self-hosted, Windows]
     timeout-minutes: 90
     permissions:
@@ -48,7 +56,10 @@ jobs:
       DOTNET_CLI_USE_MSBUILD_SERVER: '0'
       UseSharedCompilation: 'false'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          # kein Token im .git/config des eigenen Runners
+          persist-credentials: false
       - name: Werkzeuge prüfen
         shell: powershell
         run: |
@@ -60,28 +71,36 @@ jobs:
           if ($missing.Count -gt 0) { Write-Error ("Auf dem Runner fehlt: " + ($missing -join ', ') + " - siehe docs/BUILD-VM.md Abschnitt 3"); exit 1 }
       - name: Build, Tests, MSIX
         shell: powershell
+        # Eingaben nur über env: – keine Ausdrücke direkt im Skript
+        env:
+          MODE: ${{ inputs.mode || 'Build' }}
         run: |
           $pwsh = Join-Path $env:ProgramFiles 'PowerShell\7\pwsh.exe'
-          $mode = '${{ github.event.inputs.mode || 'Build' }}'
+          $mode = $env:MODE
+          if ($mode -notin 'Build', 'Sideload', 'Store') { Write-Error "Unbekannter Modus: $mode"; exit 1 }
           if (Test-Path $pwsh) { & $pwsh -NoProfile -File ./scripts/build-windows.ps1 -Mode $mode } else { ./scripts/build-windows.ps1 -Mode $mode }
           exit $LASTEXITCODE
       # Pakete zusätzlich als Entwurfs-Release (nur für Repo-Mitglieder sichtbar): zählt nicht zum Artefakt-Kontingent
       - name: Pakete als Entwurfs-Release ablegen
-        if: success() && (github.event.inputs.mode == 'Store' || github.event.inputs.mode == 'Sideload')
+        if: success() && (inputs.mode == 'Store' || inputs.mode == 'Sideload')
         shell: powershell
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MODE: ${{ inputs.mode }}
+          REPO: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+          SHA: ${{ github.sha }}
         run: |
           $ErrorActionPreference = 'Stop'
-          $mode = '${{ github.event.inputs.mode }}'
+          $mode = $env:MODE
           $version = ([xml](Get-Content Directory.Build.props)).Project.PropertyGroup.RoGVersion | Where-Object { $_ } | Select-Object -First 1
           # Store: nur die .msixupload fürs Partner Center; Sideload: Bundle + Zertifikat (Uplink des Runners ist langsam)
           $include = if ($mode -eq 'Store') { @('*.msixupload') } else { @('*.msixbundle', '*.cer') }
           $files = @(Get-ChildItem artifacts/msix -Recurse -Include $include | Where-Object { $_.FullName -notmatch '\\Dependencies\\' })
           if ($files.Count -eq 0) { Write-Error 'Keine Pakete gefunden'; exit 1 }
           $headers = @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = 'application/vnd.github+json' }
-          $api = "https://api.github.com/repos/${{ github.repository }}"
-          $body = @{ tag_name = "$($mode.ToLower())-$version-run${{ github.run_id }}"; target_commitish = '${{ github.sha }}'; name = "$mode $version (Lauf ${{ github.run_id }})"; draft = $true; body = "Paket aus CI-Lauf ${{ github.run_id }}, Commit ${{ github.sha }}." } | ConvertTo-Json
+          $api = "https://api.github.com/repos/$env:REPO"
+          $body = @{ tag_name = "$($mode.ToLower())-$version-run$env:RUN_ID"; target_commitish = $env:SHA; name = "$mode $version (Lauf $env:RUN_ID)"; draft = $true; body = "Paket aus CI-Lauf $env:RUN_ID, Commit $env:SHA." } | ConvertTo-Json
           $release = Invoke-RestMethod -Method Post -Uri "$api/releases" -Headers $headers -Body $body -ContentType 'application/json'
           foreach ($f in $files) {
             $uri = ($release.upload_url -replace '\{.*\}', '') + '?name=' + [uri]::EscapeDataString($f.Name)
@@ -92,7 +111,7 @@ jobs:
             Write-Host "hochgeladen: $($f.Name) ($([math]::Round($f.Length / 1MB)) MB)"
           }
           Write-Host "Entwurfs-Release: $($release.html_url)"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: always()
         # Kontingent voll darf den Lauf nicht rot machen, wenn das Paket schon im Release liegt
         continue-on-error: true
@@ -101,4 +120,4 @@ jobs:
           path: artifacts/
           if-no-files-found: ignore
           # Artefakt-Speicher der Organisation ist knapp (Kontingent war am 22.10.2026 voll): Pakete 3 Tage, reine Build-Protokolle 1 Tag
-          retention-days: ${{ (github.event.inputs.mode == 'Store' || github.event.inputs.mode == 'Sideload') && 3 || 1 }}
+          retention-days: ${{ (inputs.mode == 'Store' || inputs.mode == 'Sideload') && 3 || 1 }}

@@ -211,7 +211,7 @@ public sealed class HonoraryViewModel(string name, Uri? avatar, string? period, 
 {
     public string Name => name;
 
-    public ImageSource? Avatar { get; } = avatar is null ? null : new BitmapImage(avatar) { DecodePixelWidth = 96 };
+    public ImageSource? Avatar { get; } = avatar is null ? null : RemoteImage.From(avatar, 96);
 
     public string Period => period ?? string.Empty;
 

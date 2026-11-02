@@ -216,7 +216,7 @@ public sealed partial class NewsItemViewModel(NewsSummary news) : ObservableObje
 
     public bool HasCategory => news.CategoryName is not null;
 
-    public ImageSource? Cover { get; } = news.Cover is null ? null : new BitmapImage(news.Cover) { DecodePixelWidth = 640 };
+    public ImageSource? Cover { get; } = news.Cover is null ? null : RemoteImage.From(news.Cover, 640);
 
     public bool HasCover => news.Cover is not null;
 
@@ -301,7 +301,7 @@ public sealed partial class NewsDetailViewModel(AppServices services, NewsServic
         Title = s.Title;
         Meta = MetaOf(s);
         Category = s.CategoryName?.ToUpper(CultureInfo.CurrentCulture);
-        Cover = s.Cover is null ? null : new BitmapImage(s.Cover);
+        Cover = s.Cover is null ? null : RemoteImage.From(s.Cover);
         CoverAlt = s.CoverAlt ?? s.Title;
         Body = article.Body;
         WebUrl = s.WebUrl;

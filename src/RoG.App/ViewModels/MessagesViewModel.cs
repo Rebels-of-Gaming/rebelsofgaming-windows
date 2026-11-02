@@ -153,7 +153,7 @@ public sealed partial class ConversationItemViewModel(ConversationSummary conver
 
     public string Name => conversation.Name;
 
-    public ImageSource? Avatar { get; } = conversation.Avatar is null ? null : new BitmapImage(conversation.Avatar) { DecodePixelWidth = 64 };
+    public ImageSource? Avatar { get; } = conversation.Avatar is null ? null : RemoteImage.From(conversation.Avatar, 64);
 
     public string Preview { get; } = conversation.LastMessagePreview is null
         ? string.Empty

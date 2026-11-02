@@ -109,7 +109,7 @@ public sealed partial class AccountViewModel(AppServices services) : ObservableO
         Name = user.Name;
         RankText = user.RankLabel;
         RankBrush = ColorFromHex(user.RankColor) is { } c ? new SolidColorBrush(c) : null;
-        Avatar = Uri.TryCreate(user.AvatarUrl, UriKind.Absolute, out var uri) && uri.Scheme == Uri.UriSchemeHttps ? new BitmapImage(uri) : null;
+        Avatar = Uri.TryCreate(user.AvatarUrl, UriKind.Absolute, out var uri) && uri.Scheme == Uri.UriSchemeHttps ? RemoteImage.From(uri) : null;
         Email = user.Email;
         Squads = user.SquadNames.Count > 0 ? string.Join(" · ", user.SquadNames) : null;
         Joined = DateTimeOffset.TryParse(user.JoinedAt, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out var joined)

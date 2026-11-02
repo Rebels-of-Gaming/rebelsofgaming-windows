@@ -120,7 +120,7 @@ public sealed class SquadItemViewModel(SquadSummary squad, ILocalizer localizer)
 
     public string Subtitle { get; } = string.Join(" · ", new[] { squad.GameName, squad.ClanTagText, squad.Tagline }.Where(s => !string.IsNullOrEmpty(s)));
 
-    public ImageSource? Logo { get; } = squad.Logo is null ? null : new BitmapImage(squad.Logo) { DecodePixelWidth = 96 };
+    public ImageSource? Logo { get; } = squad.Logo is null ? null : RemoteImage.From(squad.Logo, 96);
 
     public string RecruitingText { get; } = SquadDetailViewModel.TextForRecruiting(squad.Recruiting, localizer);
 
@@ -364,8 +364,8 @@ public sealed partial class SquadDetailViewModel(AppServices services, SquadServ
         CanManage = AdminRights.Any;
 
         Subtitle = string.Join(" · ", new[] { s.GameName, s.LeaderName is null ? null : Format(StringKeys.SquadsLeader, s.LeaderName) }.Where(x => !string.IsNullOrEmpty(x)));
-        Header = s.Header is null ? null : new BitmapImage(s.Header);
-        Logo = s.Logo is null ? null : new BitmapImage(s.Logo);
+        Header = s.Header is null ? null : RemoteImage.From(s.Header);
+        Logo = s.Logo is null ? null : RemoteImage.From(s.Logo);
         RecruitingText = TextForRecruiting(s.Recruiting, Services.Localizer);
         RecruitingBrush = BrushForRecruiting(s.Recruiting);
         CanApply = s.Recruiting is Recruiting.Open or Recruiting.Waitlist && await Services.Tokens.GetAsync(cancellationToken) is not null;
@@ -466,7 +466,7 @@ public sealed class MemberRowViewModel(string name, string slug, Uri? avatar, st
 
     public string Slug => slug;
 
-    public ImageSource? Avatar { get; } = avatar is null ? null : new BitmapImage(avatar) { DecodePixelWidth = 64 };
+    public ImageSource? Avatar { get; } = avatar is null ? null : RemoteImage.From(avatar, 64);
 
     public string Role => role ?? string.Empty;
 
@@ -507,7 +507,7 @@ public sealed partial class LinkViewModel(string label, Uri url, string? code, A
 /// <summary>Vorschaubild der Squad-Galerie; Klick öffnet den Eintrag (Albumseite mit Lightbox).</summary>
 public sealed partial class SquadGalleryItemViewModel(RoG.Core.Features.Media.GalleryItem item, AppServices services)
 {
-    public ImageSource? Thumb { get; } = item.Thumb is { } u ? new BitmapImage(u) : null;
+    public ImageSource? Thumb { get; } = item.Thumb is { } u ? RemoteImage.From(u) : null;
 
     public string Caption { get; } = item.Caption ?? item.Author ?? string.Empty;
 

@@ -71,6 +71,33 @@ public class RoGHttpHandlerTests
     }
 
     [Fact]
+    public async Task Token_goes_only_to_the_own_api_host()
+    {
+        var tokens = new InMemoryTokenStore();
+        await tokens.SetAsync(new StoredToken("42|tok", "01U", "Wahke", ["profile:read"], "PC", DateTimeOffset.UtcNow));
+        var stub = new StubHttpHandler((_, _) => Ok());
+        var handler = new RoGHttpHandler(tokens, new ApiContext()) { InnerHandler = stub, ApiBaseUrl = s_base };
+        using var http = new HttpClient(handler) { BaseAddress = s_base };
+
+        using (await http.GetAsync(new Uri("me", UriKind.Relative))) { }
+        using (await http.GetAsync(new Uri("https://cdn.example.test/tiles/0.png"))) { }
+        using (await http.GetAsync(new Uri("http://api.example.test/v1/me"))) { }
+
+        Assert.Equal("Bearer 42|tok", stub.Requests[0].Headers["Authorization"]);
+        Assert.False(stub.Requests[1].Headers.ContainsKey("Authorization"));
+        Assert.False(stub.Requests[2].Headers.ContainsKey("Authorization"));
+    }
+
+    [Theory]
+    [InlineData("https://rebelsofgaming.com/x", true)]
+    [InlineData("mailto:info@example.test", true)]
+    [InlineData("file:///C:/Windows/System32/calc.exe", false)]
+    [InlineData("ms-settings:privacy", false)]
+    [InlineData("steam://connect/1.2.3.4", false)]
+    public void Only_web_and_mail_addresses_are_browsable(string uri, bool expected) =>
+        Assert.Equal(expected, ApiValues.IsBrowsable(new Uri(uri)));
+
+    [Fact]
     public async Task User_agent_follows_the_platform_of_the_context()
     {
         var h = Create((_, _) => Ok());

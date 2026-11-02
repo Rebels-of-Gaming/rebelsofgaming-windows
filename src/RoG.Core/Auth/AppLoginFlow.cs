@@ -138,7 +138,7 @@ public sealed class AppLoginFlow
         {
             try
             {
-                callback = await listener.WaitForCallbackAsync(linked.Token).ConfigureAwait(false);
+                callback = await listener.WaitForCallbackAsync(state, linked.Token).ConfigureAwait(false);
             }
             catch (OperationCanceledException) when (timeoutCts.IsCancellationRequested && !cancellationToken.IsCancellationRequested)
             {
@@ -146,7 +146,8 @@ public sealed class AppLoginFlow
             }
         }
 
-        // state zuerst: ein fremder Rücksprung darf weder Fehler noch Code auslösen.
+        // state zuerst: ein fremder Rücksprung darf weder Fehler noch Code auslösen (der Empfänger filtert schon, hier
+        // nur zur Sicherheit).
         if (!Pkce.StateMatches(state, callback.State))
         {
             throw new AppLoginException(AppLoginException.StateMismatch, description: null);

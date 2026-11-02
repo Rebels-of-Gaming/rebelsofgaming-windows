@@ -138,6 +138,32 @@ public sealed class SettingsTests : IDisposable
     [InlineData(null, "Windows-App")]
     public void Device_name_for_windows(string? owner, string expected) => Assert.Equal(expected, DeviceName.ForWindows(owner));
 
+    [Theory]
+    [InlineData("https://cdn.rogclan.de/avatars/1.webp", true)]
+    [InlineData("https://rebelsofgaming.com/media/external?u=x&signature=y", true)]
+    [InlineData("https://api.rebelsofgaming.com/v1/map/tiles/1/2/3.png", true)]
+    [InlineData("http://cdn.rogclan.de/a.png", false)]
+    [InlineData("https://cdn.discordapp.com/avatars/1.png", false)]
+    [InlineData("https://evilrogclan.de/a.png", false)]
+    [InlineData("https://rogclan.de.evil.example/a.png", false)]
+    public void Images_load_only_from_own_https_hosts(string uri, bool expected) =>
+        Assert.Equal(expected, RoGEnvironment.Get(RoGEnvironment.Production).IsOwnMedia(new Uri(uri)));
+
+    [Fact]
+    public void Release_builds_never_use_the_local_environment_and_tokens_are_kept_per_environment()
+    {
+        Assert.Equal(RoGEnvironment.Production, RoGEnvironment.Resolve(RoGEnvironment.Local, allowLocal: false).Name);
+        Assert.Equal(RoGEnvironment.Local, RoGEnvironment.Resolve(RoGEnvironment.Local, allowLocal: true).Name);
+        Assert.Equal(RoGEnvironment.Staging, RoGEnvironment.Resolve(RoGEnvironment.Staging, allowLocal: false).Name);
+
+        var prod = RoGEnvironment.Get(RoGEnvironment.Production);
+        var staging = RoGEnvironment.Get(RoGEnvironment.Staging);
+        Assert.Equal("RebelsOfGaming.DeviceToken", prod.TokenResource);
+        Assert.Equal("account.json", prod.AccountFileName);
+        Assert.Equal("RebelsOfGaming.DeviceToken.staging", staging.TokenResource);
+        Assert.Equal("account.staging.json", staging.AccountFileName);
+    }
+
     [Fact]
     public void Device_name_with_own_prefix_and_device()
     {

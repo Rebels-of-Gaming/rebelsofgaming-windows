@@ -6,11 +6,14 @@ using Windows.ApplicationModel.DataTransfer;
 
 namespace RoG.App.Services;
 
-/// <summary>Öffnet Adressen im Standardbrowser des Systems (App-Login nach RFC 8252: nie in einer WebView).</summary>
+/// <summary>
+/// Öffnet Adressen im Standardbrowser des Systems (App-Login nach RFC 8252: nie in einer WebView). Nur http, https und
+/// mailto – Spiele-Links laufen über <see cref="WindowsExternalLauncher"/>.
+/// </summary>
 public sealed class LauncherBrowser : IBrowserLauncher
 {
     public async Task<bool> OpenAsync(Uri uri, CancellationToken cancellationToken = default) =>
-        await Windows.System.Launcher.LaunchUriAsync(uri);
+        RoG.Core.Api.ApiValues.IsBrowsable(uri) && await Windows.System.Launcher.LaunchUriAsync(uri);
 }
 
 /// <summary>Startet Spiele-Links (<c>steam://</c>, <c>et://</c> …) über das Programm, das Windows dafür registriert hat.</summary>

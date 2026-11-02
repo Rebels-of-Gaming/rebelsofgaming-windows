@@ -65,8 +65,14 @@ public sealed class LoopbackCallbackListener : IAsyncDisposable, IDisposable
     /// <summary>
     /// Wartet auf den Rücksprung. Anfragen an andere Pfade (z. B. <c>/favicon.ico</c>) bekommen 404 und werden
     /// ignoriert. Abbruch über <paramref name="cancellationToken"/> (Timeout setzt der Aufrufer).
+    /// Mit <c>expectedState</c> bekommt ein Rücksprung mit falschem <c>state</c> (fremde Seite, alter Tab)
+    /// die Fehlerseite, und der Empfänger wartet weiter – so kann niemand den laufenden Login abbrechen.
     /// </summary>
-    public async Task<LoopbackCallback> WaitForCallbackAsync(CancellationToken cancellationToken)
+    public async Task<LoopbackCallback> WaitForCallbackAsync(CancellationToken cancellationToken) =>
+        await WaitForCallbackAsync(expectedState: null, cancellationToken).ConfigureAwait(false);
+
+    /// <inheritdoc cref="WaitForCallbackAsync(CancellationToken)"/>
+    public async Task<LoopbackCallback> WaitForCallbackAsync(string? expectedState, CancellationToken cancellationToken)
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
         while (true)
@@ -93,6 +99,12 @@ public sealed class LoopbackCallbackListener : IAsyncDisposable, IDisposable
             if (target is null || !TryParseCallback(target, out var callback))
             {
                 await WriteResponseAsync(stream, 404, "Not Found", "text/plain; charset=utf-8", "Not Found", cancellationToken).ConfigureAwait(false);
+                continue;
+            }
+
+            if (expectedState is not null && !Pkce.StateMatches(expectedState, callback.State))
+            {
+                await WriteResponseAsync(stream, 400, "Bad Request", "text/html; charset=utf-8", BuildPage(_texts.Failure), cancellationToken).ConfigureAwait(false);
                 continue;
             }
 

@@ -30,7 +30,7 @@ public sealed class MemberMapService(IRoGApiClient client)
         var t = response.Meta?.Tiles;
         MapTiles? tiles = t is { Url: { Length: > 0 } url } && Uri.TryCreate(url.Replace("{z}", "0", StringComparison.Ordinal).Replace("{x}", "0", StringComparison.Ordinal).Replace("{y}", "0", StringComparison.Ordinal), UriKind.Absolute, out var check) && check.Scheme == Uri.UriSchemeHttps
             ? new MapTiles(url, ApiValues.Time(t.Expires_at), t.Min_zoom, t.Max_zoom, t.Tile_size > 0 ? t.Tile_size : 256, t.Attribution,
-                Uri.TryCreate(t.Attribution_url, UriKind.Absolute, out var a) ? a : null)
+                ApiValues.WebUri(t.Attribution_url))
             : null;
         return new MemberMap(pins, tiles);
     }

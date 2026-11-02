@@ -66,7 +66,7 @@ public class ReverbClientTests
     [Fact]
     public void Config_is_read_from_get_v1_data_realtime()
     {
-        var api = new Uri("https://api.example.test/v1/");
+        var api = new Uri("https://api.rebelsofgaming.com/v1/");
         var config = RealtimeConfig.FromStatusResponse("""
             {"data":{"name":"RoG","version":"v1","realtime":{"key":"k","host":"ws.rebelsofgaming.com","port":443,"scheme":"https",
              "auth_endpoint":"https://api.rebelsofgaming.com/v1/broadcasting/auth"}}}
@@ -78,6 +78,25 @@ public class ReverbClientTests
         Assert.Equal("https://api.rebelsofgaming.com/v1/broadcasting/auth", config.AuthEndpoint.ToString());
         Assert.Null(RealtimeConfig.FromStatusResponse("""{"data":{"realtime":null}}""", api));
         Assert.Null(RealtimeConfig.FromStatusResponse("kein json", api));
+    }
+
+    [Fact]
+    public void Config_refuses_plain_sockets_and_foreign_auth_hosts_with_an_https_api()
+    {
+        var api = new Uri("https://api.rebelsofgaming.com/v1/");
+        Assert.Null(RealtimeConfig.FromStatusResponse("""
+            {"data":{"realtime":{"key":"k","host":"ws.rebelsofgaming.com","port":80,"scheme":"http"}}}
+            """, api));
+
+        var foreign = RealtimeConfig.FromStatusResponse("""
+            {"data":{"realtime":{"key":"k","host":"ws.rebelsofgaming.com","port":443,"scheme":"https","auth_endpoint":"https://evil.example/auth"}}}
+            """, api);
+        Assert.Equal("https://api.rebelsofgaming.com/v1/broadcasting/auth", foreign!.AuthEndpoint.ToString());
+
+        var local = RealtimeConfig.FromStatusResponse("""
+            {"data":{"realtime":{"key":"k","host":"ws.rog.test","port":8080,"scheme":"http"}}}
+            """, new Uri("http://api.rog.test/v1/"));
+        Assert.False(local!.UseTls);
     }
 
     [Fact]

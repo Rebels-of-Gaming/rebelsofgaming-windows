@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Documents;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Shapes;
+using RoG.App.Services;
 using RoG.Core.Content;
 using RoG.Core.Localization;
 using Windows.UI.Text;
@@ -283,7 +284,7 @@ public sealed partial class RichContentView : UserControl
     {
         var picture = new Image
         {
-            Source = new BitmapImage(image.Source),
+            Source = RemoteImage.From(image.Source),
             Stretch = Stretch.Uniform,
             MaxWidth = 720,
             MaxHeight = 540,

@@ -247,7 +247,7 @@ public sealed partial class UploadItemViewModel(UploadItem item, UploadsViewMode
         item.Failed ? item.ErrorMessage : item.IsReady ? null : App.Services.Localizer.GetString(StringKeys.UploadsProcessing),
     }.Where(s => !string.IsNullOrEmpty(s)));
 
-    public ImageSource? Thumb { get; } = item.Links.Thumb is { } t && item.Visibility == UploadVisibility.Public ? new BitmapImage(t) { DecodePixelWidth = 160 } : null;
+    public ImageSource? Thumb { get; } = item.Links.Thumb is { } t && item.Visibility == UploadVisibility.Public ? RemoteImage.From(t, 160) : null;
 
     public string Direct => item.Links.Direct?.ToString() ?? string.Empty;
 

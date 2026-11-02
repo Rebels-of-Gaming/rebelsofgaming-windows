@@ -216,7 +216,7 @@ public sealed class AlbumItemViewModel(GalleryAlbum album, ILocalizer localizer)
         album.SquadName,
     }.Where(s => !string.IsNullOrEmpty(s)));
 
-    public ImageSource? Cover { get; } = album.Cover is null ? null : new BitmapImage(album.Cover) { DecodePixelWidth = 480 };
+    public ImageSource? Cover { get; } = album.Cover is null ? null : RemoteImage.From(album.Cover, 480);
 }
 
 public sealed partial class GalleryItemViewModel(GalleryItem item)
@@ -227,10 +227,10 @@ public sealed partial class GalleryItemViewModel(GalleryItem item)
 
     public string AutomationName => item.Caption ?? item.Author ?? item.Id;
 
-    public ImageSource? Thumb { get; } = item.Thumb is null ? null : new BitmapImage(item.Thumb) { DecodePixelWidth = 320 };
+    public ImageSource? Thumb { get; } = item.Thumb is null ? null : RemoteImage.From(item.Thumb, 320);
 
     /// <summary>Großansicht erst beim Öffnen laden.</summary>
-    public ImageSource? Full => (item.Full ?? item.Medium) is { } uri ? new BitmapImage(uri) : null;
+    public ImageSource? Full => (item.Full ?? item.Medium) is { } uri ? RemoteImage.From(uri) : null;
 
     public string Meta { get; } = string.Join(" · ", new[] { item.Author, item.CreatedAt?.ToLocalTime().ToString("d", CultureInfo.CurrentCulture) }.Where(s => !string.IsNullOrEmpty(s)));
 

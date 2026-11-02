@@ -16,6 +16,7 @@ public sealed class RoGApi : IDisposable
         Environment = environment;
         Handler = new RoGHttpHandler(tokens, context, etags ?? new InMemoryEtagCache())
         {
+            ApiBaseUrl = environment.ApiBaseUrl,
             InnerHandler = innerHandler ?? new SocketsHttpHandler
             {
                 PooledConnectionLifetime = TimeSpan.FromMinutes(5),

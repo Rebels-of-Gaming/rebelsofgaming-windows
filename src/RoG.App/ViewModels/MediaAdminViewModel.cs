@@ -173,7 +173,7 @@ public sealed partial class PendingGalleryItemViewModel(PendingGalleryItem item,
         item.Kind == "image" ? null : item.Kind,
     }.Where(s => !string.IsNullOrEmpty(s)));
 
-    public ImageSource? Thumb { get; } = item.Thumb is null ? null : new BitmapImage(item.Thumb) { DecodePixelWidth = 320 };
+    public ImageSource? Thumb { get; } = item.Thumb is null ? null : RemoteImage.From(item.Thumb, 320);
 
     [RelayCommand]
     private Task ApproveAsync() => owner.DecideAsync(this, approve: true);
@@ -202,7 +202,7 @@ public sealed partial class UploadReportItemViewModel(UploadReport report, Media
         report.CreatedAt?.ToLocalTime().ToString("g", CultureInfo.CurrentCulture),
     }.Where(s => !string.IsNullOrEmpty(s)));
 
-    public ImageSource? Thumb { get; } = report.Preview is null ? null : new BitmapImage(report.Preview) { DecodePixelWidth = 320 };
+    public ImageSource? Thumb { get; } = report.Preview is null ? null : RemoteImage.From(report.Preview, 320);
 
     [RelayCommand]
     private Task KeepAsync() => owner.ResolveAsync(this, delete: false);

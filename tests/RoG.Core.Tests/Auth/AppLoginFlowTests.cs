@@ -107,14 +107,14 @@ public class AppLoginFlowTests
     }
 
     [Fact]
-    public async Task Wrong_state_is_rejected_before_any_token_exchange()
+    public async Task Wrong_state_is_ignored_and_the_login_keeps_waiting_without_token_exchange()
     {
         var browser = new FakeBrowser(_ => "code=CODE123&state=forged");
         var (flow, stub, tokens) = Create(browser, (_, _) => StubHttpHandler.Json(HttpStatusCode.OK, TokenJson()));
 
-        var ex = await Assert.ThrowsAsync<AppLoginException>(() => flow.LoginAsync(["profile:read"], "PC", timeout: TimeSpan.FromSeconds(10)));
+        var ex = await Assert.ThrowsAsync<AppLoginException>(() => flow.LoginAsync(["profile:read"], "PC", timeout: TimeSpan.FromSeconds(2)));
 
-        Assert.Equal(AppLoginException.StateMismatch, ex.Code);
+        Assert.Equal(AppLoginException.LoginTimeout, ex.Code);
         Assert.Empty(stub.Requests);
         Assert.Null(await tokens.GetAsync());
     }
@@ -133,13 +133,13 @@ public class AppLoginFlowTests
     }
 
     [Fact]
-    public async Task Error_with_wrong_state_counts_as_state_mismatch()
+    public async Task Error_with_wrong_state_does_not_cancel_the_login()
     {
         var browser = new FakeBrowser(_ => "error=access_denied&state=forged");
         var (flow, _, _) = Create(browser, (_, _) => StubHttpHandler.Json(HttpStatusCode.OK, TokenJson()));
 
-        var ex = await Assert.ThrowsAsync<AppLoginException>(() => flow.LoginAsync(["profile:read"], "PC", timeout: TimeSpan.FromSeconds(10)));
-        Assert.Equal(AppLoginException.StateMismatch, ex.Code);
+        var ex = await Assert.ThrowsAsync<AppLoginException>(() => flow.LoginAsync(["profile:read"], "PC", timeout: TimeSpan.FromSeconds(2)));
+        Assert.Equal(AppLoginException.LoginTimeout, ex.Code);
     }
 
     [Fact]

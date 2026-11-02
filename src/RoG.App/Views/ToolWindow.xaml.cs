@@ -103,6 +103,15 @@ public sealed partial class ToolWindow : Window, IToolBridgeHost, IDisposable
         }
     }
 
+    private const string DisableWebRtcScript = """
+        (() => {
+          for (const name of ['RTCPeerConnection', 'webkitRTCPeerConnection', 'RTCDataChannel', 'RTCSessionDescription', 'RTCIceCandidate']) {
+            try { Object.defineProperty(window, name, { value: undefined, writable: false, configurable: false }); } catch (e) { }
+          }
+          try { if (navigator.mediaDevices) { Object.defineProperty(navigator, 'mediaDevices', { value: undefined, configurable: false }); } } catch (e) { }
+        })();
+        """;
+
     private async Task EnsureWebViewAsync()
     {
         if (Web.CoreWebView2 is not null)
@@ -110,7 +119,11 @@ public sealed partial class ToolWindow : Window, IToolBridgeHost, IDisposable
             return;
         }
 
-        var environment = await CoreWebView2Environment.CreateAsync();
+        // WebRTC: keine UDP-Verbindungen am Proxy vorbei (sonst verrät ICE die lokale/öffentliche IP trotz Netzsperre)
+        var environment = await CoreWebView2Environment.CreateWithOptionsAsync(null, null, new CoreWebView2EnvironmentOptions
+        {
+            AdditionalBrowserArguments = "--force-webrtc-ip-handling-policy=disable_non_proxied_udp",
+        });
         var options = environment.CreateCoreWebView2ControllerOptions();
         options.IsInPrivateModeEnabled = true;
         await Web.EnsureCoreWebView2Async(environment, options);
@@ -150,6 +163,9 @@ public sealed partial class ToolWindow : Window, IToolBridgeHost, IDisposable
         core.WebResourceRequested += (_, e) => e.Response = environment.CreateWebResourceResponse(null, 403, "Blocked", string.Empty);
 
         core.WebMessageReceived += OnWebMessageReceived;
+
+        // WebRTC-Schnittstellen vor jedem Skript des Tools entfernen (Netzsperre oben greift für ICE/STUN nicht)
+        await core.AddScriptToExecuteOnDocumentCreatedAsync(DisableWebRtcScript);
 
         // Handshake (Guide 42): der Handler steht vor NavigateToString; nach dem Laden zusätzlich das Theme schicken
         core.NavigationCompleted += (_, e) =>

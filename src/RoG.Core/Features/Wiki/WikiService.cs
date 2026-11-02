@@ -305,7 +305,7 @@ public sealed class WikiService(IRoGApiClient client, HttpClient http, Uri? wiki
         ApiValues.Text(d.Revision_id),
         ApiValues.Time(d.Updated_at),
         d.Watching,
-        Uri.TryCreate(d.Url, UriKind.Absolute, out var u) ? u : null,
+        ApiValues.WebUri(d.Url),
         ApiValues.Text(d.Last_editor?.Id));
 
     private static StringContent JsonContent(object body) => new(JsonSerializer.Serialize(body), System.Text.Encoding.UTF8, "application/json");

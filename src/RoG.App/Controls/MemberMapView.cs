@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Shapes;
+using RoG.App.Services;
 using RoG.Core.Features.Map;
 using Windows.System;
 
@@ -184,7 +185,7 @@ public sealed partial class MemberMapView : UserControl
                     {
                         Width = size,
                         Height = size,
-                        Source = new BitmapImage(WebMercator.TileUrl(tiles.UrlTemplate, _zoom, x, y)),
+                        Source = RemoteImage.From(WebMercator.TileUrl(tiles.UrlTemplate, _zoom, x, y)),
                         IsHitTestVisible = false,
                     };
                     _tiles[(column, y)] = image;

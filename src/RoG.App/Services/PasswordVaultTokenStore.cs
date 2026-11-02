@@ -7,11 +7,10 @@ namespace RoG.App.Services;
 /// <summary>
 /// Geräte-Token in der Windows-Anmeldeinformationsverwaltung (<see cref="PasswordVault"/>, verschlüsselt, an den
 /// Windows-Benutzer gebunden). Nicht geheime Metadaten (Konto-ID, Name, Scopes, Gerätename) liegen als JSON im
-/// App-Datenordner – nie der Token selbst.
+/// App-Datenordner – nie der Token selbst. Je Umgebung ein eigener Tresor-Eintrag (`RoGEnvironment.TokenResource`).
 /// </summary>
-public sealed class PasswordVaultTokenStore(string metadataPath) : ITokenStore, IDisposable
+public sealed class PasswordVaultTokenStore(string metadataPath, string resource) : ITokenStore, IDisposable
 {
-    private const string Resource = "RebelsOfGaming.DeviceToken";
     private const int ElementNotFound = unchecked((int)0x80070490);
 
     private static readonly JsonSerializerOptions s_json = new(JsonSerializerDefaults.Web);
@@ -52,7 +51,7 @@ public sealed class PasswordVaultTokenStore(string metadataPath) : ITokenStore, 
         try
         {
             RemoveAll();
-            new PasswordVault().Add(new PasswordCredential(Resource, string.IsNullOrEmpty(token.UserId) ? "rog" : token.UserId, token.AccessToken));
+            new PasswordVault().Add(new PasswordCredential(resource, string.IsNullOrEmpty(token.UserId) ? "rog" : token.UserId, token.AccessToken));
             var meta = new Metadata(token.UserId, token.UserName, token.Scopes.ToList(), token.DeviceName, token.CreatedAt);
             await File.WriteAllTextAsync(metadataPath, JsonSerializer.Serialize(meta, s_json), cancellationToken);
             _cached = token;
@@ -89,7 +88,7 @@ public sealed class PasswordVaultTokenStore(string metadataPath) : ITokenStore, 
         PasswordCredential credential;
         try
         {
-            var all = new PasswordVault().FindAllByResource(Resource);
+            var all = new PasswordVault().FindAllByResource(resource);
             if (all.Count == 0)
             {
                 return null;
@@ -125,12 +124,12 @@ public sealed class PasswordVaultTokenStore(string metadataPath) : ITokenStore, 
             meta?.CreatedAt ?? DateTimeOffset.MinValue);
     }
 
-    private static void RemoveAll()
+    private void RemoveAll()
     {
         var vault = new PasswordVault();
         try
         {
-            foreach (var credential in vault.FindAllByResource(Resource))
+            foreach (var credential in vault.FindAllByResource(resource))
             {
                 vault.Remove(credential);
             }

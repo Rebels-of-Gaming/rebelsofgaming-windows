@@ -17,6 +17,13 @@ public static class ApiValues
     public static Uri? WebUri(string? value) =>
         Uri.TryCreate(value, UriKind.Absolute, out var uri) && (uri.Scheme == Uri.UriSchemeHttps || uri.Scheme == Uri.UriSchemeHttp) ? uri : null;
 
+    /// <summary>
+    /// Darf die Adresse im Standardbrowser geöffnet werden? Nur <c>http</c>, <c>https</c> und <c>mailto</c> – andere
+    /// Schemata (<c>file:</c>, <c>ms-settings:</c>, registrierte Programme …) aus API-Daten nie starten.
+    /// </summary>
+    public static bool IsBrowsable(Uri? uri) =>
+        uri is { IsAbsoluteUri: true } && (uri.Scheme == Uri.UriSchemeHttps || uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeMailto);
+
     /// <summary>Leerer Text → <c>null</c>.</summary>
     public static string? Text(string? value) => string.IsNullOrWhiteSpace(value) ? null : value.Trim();
 

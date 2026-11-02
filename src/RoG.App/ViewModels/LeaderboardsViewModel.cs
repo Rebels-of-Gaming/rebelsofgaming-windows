@@ -180,7 +180,7 @@ public sealed partial class LeaderboardEntryViewModel(AppServices services, Lead
 
     public string ValueText { get; } = valueText;
 
-    public ImageSource? Avatar { get; } = entry.Avatar is null ? null : new BitmapImage(entry.Avatar);
+    public ImageSource? Avatar { get; } = entry.Avatar is null ? null : RemoteImage.From(entry.Avatar);
 
     /// <summary>Gold für die ersten drei Plätze (Rang/Auszeichnung), sonst gedämpft.</summary>
     public Brush RankBrush { get; } = (Brush)Microsoft.UI.Xaml.Application.Current.Resources[entry.Rank <= 3 ? "RoGGoldBrush" : "RoGMutedBrush"];

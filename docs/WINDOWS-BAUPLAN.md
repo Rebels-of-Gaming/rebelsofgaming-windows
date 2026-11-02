@@ -287,6 +287,17 @@ Laufend gepflegt. Grundlage: `docs/WINDOWS-PFLICHTENHEFT.md`, API-Spec `openapi/
   (Rolle speichern nur mit `minecraft:deploy` + `minecraft.deploy`), Plugins verteilen (Prüfung alle 2 s abgefragt,
   höchstens 2 Min.; Lauf alle 3 s, höchstens 10 Min.), Minigame-Pool (nur mit `minecraft:pool` + `minecraft.pool`).
   „Verwaltung“ erscheint jetzt auch mit `minecraft.economy`/`minecraft.pool`/`minecraft.deploy` allein. Tests: 26 neue.
+- **Unveröffentlicht – Website v0.45–v0.55 und Sicherheitsaudit:** Client aus der v0.55.0-Spec. TeamSpeak-Trenner
+  als Überschrift (`VoiceService.SpacerTitle`), Unterkanäle sichtbar. Kern für die Linux-App: `ClientPlatform`/
+  `IApiContext.Platform` (User-Agent, Reverb `client=`), `RegisterDeviceAsync` mit Plattform, `DeviceName.For`,
+  `SquadInternalService`. Sicherheit: Token nur an den eigenen API-Host, Reverb mit https-API nur `wss`, Auth-Adresse nur
+  eigener Host, falscher `state` bricht den Login nicht ab, Browser nur http/https/mailto, WebRTC im Tool-Fenster aus,
+  Tresor je Umgebung, `local` nur in Debug, Mark-of-the-Web auf Downloads, Bilder nur von `media`-Domains, CI gehärtet.
+  Neu: Store-Update-Hinweis (`StoreUpdateMonitor`, `StoreContext`, nur Store-Installationen, alle 6 h), Rebel Royale in
+  den Bestenlisten, Lobby-Secrets (Profil-Karte, Seite `/minecraft/secrets`, `rog://secrets`), Uploads auf Gameserver
+  (Reiter „Uploads“ im Server-Fenster, Vier-Augen-Freigabe mit Archiv-Einträgen), Kopf-Katalog und App-Statistik in der
+  Verwaltung, Shop & Spenden (nur Anzeige und Bestellungen, Kaufen/Spenden als Link auf die Website – Annahme 23).
+  Mindest-Plugin-Versionen: API unverändert, gemeldete Stände fehlen (W24).
 - **2.5.26 – Ressourcenpaket (Website v0.44.0, Guide 44, Annahme 501):** `MinecraftService.ResourcePackAsync`
   (`404 resource_pack_not_found` → `null`, nur `https`-Links und 40-stelliges SHA-1), `UploadResourcePackAsync`
   (multipart `file`, `application/zip`, nur `.zip`; die App prüft vorab ≤ 50 MB), `DeleteResourcePackAsync`. Karte im
@@ -588,6 +599,7 @@ sich einmal neu an (2FA).
 - Ab 2.5.10: Die öffentliche Ban-Liste und Einsprüche zeigt die App nur an (kein Cache); eine Stellungnahme geht nur an
   die Plattform und wird dort ein öffentlich lesbares Forum-Thema – darauf weist das Formular hin.
 - Ab 2.5.18: Rebel-Coins (Kontostand, Serie, Buchungen) zeigt die App nur an (kein Cache); die Sichtbarkeit im Profil liegt nur auf dem Server.
+- Unveröffentlicht (Audit 01.11.2026): Bilder lädt die App nur von den Domains der Plattform (`media` in `environments.json`), nie direkt von fremden Hosts; der Geräte-Token geht nur an den eigenen API-Host; Token-Tresor je Umgebung (Konto-Metadaten `account.<umgebung>.json` außer Produktion); Downloads bekommen die Mark-of-the-Web (Datenstrom `Zone.Identifier` mit Quell-Adresse ohne Abfrage).
 - Ab 2.5.26: Ein hochgeladenes Ressourcenpaket geht nur an die Plattform (kein lokaler Speicher); Herunterladen läuft über den Browser vom eigenen CDN.
 - Ab 2.5.25: Weltkarte – Kachel-Index und Live-Positionen nur im Arbeitsspeicher, solange die Seite offen ist (kein Cache, nichts auf der Platte); Kachelbilder und Köpfe nur vom eigenen Speicher/CDN der Plattform.
 - Ab 2.5.22: Die Minecraft-Beitrittsdaten zeigt die App nur an (kein Cache); geändert werden sie nur auf dem Server.
@@ -680,6 +692,12 @@ docs/
 
 22. **Mitgliederkarte ohne Karten-Bibliothek.** Die WinUI-`MapControl` braucht Azure Maps (Fremdanbieter, Schlüssel);
     die App zeichnet die Kacheln der Plattform selbst. Pins nach Ort gruppiert wie die API, ohne weitere Cluster.
+23. **Shop & Spenden nur anzeigen (01.11.2026).** Kaufen und Spenden öffnen die Website; die App startet keinen
+    Checkout (`POST /v1/shop/checkout` ungenutzt), weil der Microsoft Store digitale Güter in Apps eigenen Regeln
+    unterwirft. Entscheidung des Owners steht aus.
+24. **Store-Updates (01.11.2026):** Abfrage 20 s nach dem Start und danach stündlich, sobald 6 h vergangen sind; nur bei
+    Paket-Signatur `Store`. „Später“ blendet bis zur nächsten Abfrage aus, Pflicht-Updates (`IsMandatory`) bleiben
+    sichtbar und haben kein „Später“.
 
 ## Offene Fragen (an Wahke)
 

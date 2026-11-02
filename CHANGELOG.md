@@ -5,9 +5,27 @@ Versionen nach [SemVer](https://semver.org/lang/de/), Regeln in `docs/VERSIONIER
 
 ## [Unveröffentlicht]
 
+### Sicherheit (Audit 01.11.2026)
+
+- CI: Windows-Job (eigener Runner `rog-win-1`) nie bei Pull-Requests, nur bei push/workflow_dispatch; `persist-credentials: false`; Actions auf Commit-SHA gepinnt; Standard-Rechte `contents: read`; Eingabe `mode` als Auswahl und nur über `env:` ans Skript; Dependabot für Actions und NuGet
+- Browser-Start nur für http, https und mailto (Adressen aus API-Daten wie Wiki-Links und Karten-Quellen werden zusätzlich auf http(s) geprüft)
+- Kern: Geräte-Token nur an den eigenen API-Host (Schema, Host, Port); Echtzeit mit https-API nur verschlüsselt, Autorisierungs-Adresse nur auf dem eigenen Host
+- Login: ein Rücksprung mit falschem `state` (fremde Seite, alter Tab) zeigt die Fehlerseite und bricht den laufenden Login nicht mehr ab
+- Werkzeug-Fenster: WebRTC gesperrt (Schnittstellen entfernt, keine UDP-Verbindungen am Proxy vorbei)
+- Token-Tresor je Umgebung (Produktion behält den Eintrag), Umgebung `local` (http) in Release-Builds gesperrt
+- Downloads tragen die Mark-of-the-Web (Zone Internet) – SmartScreen/Office prüfen sie wie Browser-Downloads
+- Bilder nur von den Domains der Plattform (`media` in `environments.json`), fremde Hosts werden nicht geladen
+
 ### Website v0.45–v0.55
 
 - Kern für die Linux-App: Plattform statt fest „windows“ (`ClientPlatform`, `IApiContext.Platform` → User-Agent `RoG-<Plattform>`, Reverb `client=rog-<plattform>`, `RegisterDeviceAsync` mit Plattform, `DeviceName.For`), `SquadInternalService` für `GET /v1/squads/{squad}/intern`; Windows verhält sich unverändert
+- Store-Update-Hinweis: Die Store-Version fragt beim Start und alle 6 Stunden im Hintergrund, ob ein Update bereitliegt, und zeigt dann unten eine Leiste „Update verfügbar“ mit „Jetzt aktualisieren“ (Fortschritt, die App startet danach neu) und „Später“; Pflicht-Updates deutlicher und ohne „Später“. Sideload- und Testpakete fragen nie
+- Rebel Royale in den Minecraft-Bestenlisten (Siege, Siegquote) und – vom Server benannt – in den Profil-Statistiken
+- Lobby-Secrets: im Profil unter Minecraft „Erfolge: Lobby-Secrets“ mit Fortschritt je Gruppe („5 von 7“), gefundene mit Datum, ungefundene als „???“ mit Hinweis; neue Seite „Minecraft-Secrets“ mit allen Secrets, Hinweisen und Anzahl der Finder (Links im Minecraft-Reiter, bei den Bestenlisten und im Profil, `/minecraft/secrets`, `rog://secrets`)
+- Uploads auf Gameserver: neuer Reiter „Uploads“ im Server-Fenster (Recht „Dateien hochladen“) – Upload-Ordner wählen (Endungen, Größenlimit, Freigabe-Hinweis), Datei hochladen mit Fortschritt, Notiz, „Vorhandene Datei ersetzen“, eigene Uploads zurückziehen; mit „Dateien freigeben“ fremde Uploads nach Prüfung der Archiv-Einträge (Code zuerst) freigeben oder ablehnen
+- Verwaltung → Köpfe: Kopf-Katalog durchsuchen und nach Kategorie filtern, Vorschaubild, Namen DE/EN/FR, Kategorie, Tags und Preis bearbeiten, löschen und per Textur-Hash anlegen (Recht „Minecraft verwalten“)
+- Verwaltung → Apps: App-Statistik mit Store-Downloads und angemeldeten App-Geräten je Plattform samt häufigsten Versionen (Recht „App-Statistik“)
+- Shop & Spenden (Konto → Shop & Spenden, Links `/shop`, `/donate`, `/minecraft/vip`, `rog://shop`): Unterstützer-Ränge mit Preis und Laufzeit, Spenden-Rahmen und Danke-Liste, eigene Bestellungen und Spenden mit Status und Quittung; gekauft und gespendet wird auf der Website
 - TeamSpeak: Trenner-Kanäle („[cspacer]Squads“) erscheinen als Überschrift, ihre Unterkanäle (so liefert die Website die Squad-Kanäle) sind wieder sichtbar – bisher fehlten sie samt Personen
 
 ### Lizenz

@@ -29,6 +29,9 @@ public sealed partial class LeaderboardsPage : Page
         }
     }
 
+    private void OnSecretsClick(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) =>
+        App.Services.Navigate(new RoG.Core.Navigation.AppRoute(RoG.Core.Navigation.AppSection.MinecraftSecrets));
+
     private async void OnRefreshInvoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
     {
         args.Handled = true;

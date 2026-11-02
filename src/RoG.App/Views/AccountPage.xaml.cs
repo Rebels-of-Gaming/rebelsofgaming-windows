@@ -230,4 +230,7 @@ public sealed partial class AccountPage : Page
             await ViewModel.SignOutAsync();
         }
     }
+
+    private void OnShopClick(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) =>
+        App.Services.Navigate(new RoG.Core.Navigation.AppRoute(RoG.Core.Navigation.AppSection.Shop));
 }

@@ -7023,4 +7023,457 @@
   <data name="McJoin_PackBusy.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Ressourcenpaket wird übertragen</value>
   </data>
+  <data name="Update_AvailableTitle" xml:space="preserve">
+    <value>Update verfügbar</value>
+  </data>
+  <data name="Update_AvailableMessage" xml:space="preserve">
+    <value>Eine neue Version von Rebels of Gaming liegt im Microsoft Store bereit.</value>
+  </data>
+  <data name="Update_MandatoryTitle" xml:space="preserve">
+    <value>Wichtiges Update</value>
+  </data>
+  <data name="Update_MandatoryMessage" xml:space="preserve">
+    <value>Diese Version wird bald nicht mehr unterstützt. Bitte jetzt aktualisieren – die App startet danach neu.</value>
+  </data>
+  <data name="Update_Installing" xml:space="preserve">
+    <value>Update wird geladen und installiert … {0} %</value>
+  </data>
+  <data name="Update_Failed" xml:space="preserve">
+    <value>Das Update konnte nicht installiert werden. Bitte später erneut versuchen oder im Microsoft Store aktualisieren.</value>
+  </data>
+  <data name="Shell_UpdateNow.Content" xml:space="preserve">
+    <value>Jetzt aktualisieren</value>
+  </data>
+  <data name="Shell_UpdateLater.Content" xml:space="preserve">
+    <value>Später</value>
+  </data>
+  <data name="Shell_UpdateLater.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Update später</value>
+  </data>
+  <data name="Shell_UpdateProgress.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Fortschritt des Updates</value>
+  </data>
+  <data name="Leaderboard_Board_royale" xml:space="preserve">
+    <value>Rebel Royale</value>
+  </data>
+  <data name="Secrets_FoundOf" xml:space="preserve">
+    <value>{0} von {1}</value>
+  </data>
+  <data name="Secrets_Total" xml:space="preserve">
+    <value>{0} Secrets</value>
+  </data>
+  <data name="Secrets_Finders" xml:space="preserve">
+    <value>Gefunden von {0}</value>
+  </data>
+  <data name="Secrets_FoundAt" xml:space="preserve">
+    <value>von dir gefunden am {0}</value>
+  </data>
+  <data name="SecretsPage_Title.Text" xml:space="preserve">
+    <value>MINECRAFT-SECRETS</value>
+  </data>
+  <data name="SecretsPage_Intro.Text" xml:space="preserve">
+    <value>In der Lobby sind Secrets versteckt. Der erste Fund bringt dir im Spiel eine Belohnung und im Profil einen Erfolg. Wo sie liegen, verraten wir nicht – nur einen Hinweis.</value>
+  </data>
+  <data name="SecretsPage_Leaderboards.Content" xml:space="preserve">
+    <value>Bestenlisten</value>
+  </data>
+  <data name="SecretsPage_State.EmptyText" xml:space="preserve">
+    <value>Noch keine Secrets sichtbar.</value>
+  </data>
+  <data name="LeaderboardsPage_Secrets.Content" xml:space="preserve">
+    <value>Minecraft-Secrets</value>
+  </data>
+  <data name="McJoin_Secrets.Content" xml:space="preserve">
+    <value>Minecraft-Secrets in der Lobby</value>
+  </data>
+  <data name="MembersPage_Secrets.Text" xml:space="preserve">
+    <value>ERFOLGE: LOBBY-SECRETS</value>
+  </data>
+  <data name="MembersPage_AllSecrets.Content" xml:space="preserve">
+    <value>Alle Secrets</value>
+  </data>
+  <data name="Upload_FilterOpen" xml:space="preserve">
+    <value>Offene Uploads</value>
+  </data>
+  <data name="Upload_FilterPending" xml:space="preserve">
+    <value>Warten auf Freigabe</value>
+  </data>
+  <data name="Upload_FilterAll" xml:space="preserve">
+    <value>Alle Uploads</value>
+  </data>
+  <data name="Upload_Extensions" xml:space="preserve">
+    <value>Endungen: {0}</value>
+  </data>
+  <data name="Upload_MaxSize" xml:space="preserve">
+    <value>bis {0} MB</value>
+  </data>
+  <data name="Upload_FolderApproval" xml:space="preserve">
+    <value>jede Datei nur nach Freigabe</value>
+  </data>
+  <data name="Upload_CodeApproval" xml:space="preserve">
+    <value>Code ({0}) nur nach Freigabe</value>
+  </data>
+  <data name="Upload_Sent" xml:space="preserve">
+    <value>Hochgeladen. Die Datei wird geprüft und dann zum Server übertragen.</value>
+  </data>
+  <data name="Upload_SentForApproval" xml:space="preserve">
+    <value>Hochgeladen. Nach der Prüfung wartet die Datei auf die Freigabe einer zweiten Person.</value>
+  </data>
+  <data name="Upload_CancelTitle" xml:space="preserve">
+    <value>Upload zurückziehen?</value>
+  </data>
+  <data name="Upload_ApproveTitle" xml:space="preserve">
+    <value>Upload freigeben und zum Server übertragen?</value>
+  </data>
+  <data name="Upload_RejectTitle" xml:space="preserve">
+    <value>Upload ablehnen?</value>
+  </data>
+  <data name="Upload_Approved" xml:space="preserve">
+    <value>Freigegeben – die Datei wird übertragen.</value>
+  </data>
+  <data name="Upload_Rejected" xml:space="preserve">
+    <value>Abgelehnt – die Datei wurde verworfen.</value>
+  </data>
+  <data name="Upload_Overwrites" xml:space="preserve">
+    <value>ersetzt vorhandene Datei</value>
+  </data>
+  <data name="Upload_ReasonCode" xml:space="preserve">
+    <value>Code – Vier-Augen-Freigabe</value>
+  </data>
+  <data name="Upload_ReasonApproval" xml:space="preserve">
+    <value>braucht Freigabe</value>
+  </data>
+  <data name="Upload_DecidedBy" xml:space="preserve">
+    <value>entschieden von {0}</value>
+  </data>
+  <data name="Upload_Entries" xml:space="preserve">
+    <value>Archiv mit {0} Einträgen</value>
+  </data>
+  <data name="Upload_CodeEntries" xml:space="preserve">
+    <value>Enthält Code:</value>
+  </data>
+  <data name="Upload_Status_awaiting" xml:space="preserve">
+    <value>wartet auf Datei</value>
+  </data>
+  <data name="Upload_Status_verifying" xml:space="preserve">
+    <value>wird geprüft</value>
+  </data>
+  <data name="Upload_Status_pending" xml:space="preserve">
+    <value>wartet auf Freigabe</value>
+  </data>
+  <data name="Upload_Status_queued" xml:space="preserve">
+    <value>in der Warteschlange</value>
+  </data>
+  <data name="Upload_Status_transferring" xml:space="preserve">
+    <value>wird übertragen</value>
+  </data>
+  <data name="Upload_Status_completed" xml:space="preserve">
+    <value>auf dem Server</value>
+  </data>
+  <data name="Upload_Status_failed" xml:space="preserve">
+    <value>fehlgeschlagen</value>
+  </data>
+  <data name="Upload_Status_rejected" xml:space="preserve">
+    <value>abgelehnt</value>
+  </data>
+  <data name="Upload_Status_cancelled" xml:space="preserve">
+    <value>zurückgezogen</value>
+  </data>
+  <data name="Upload_Status_expired" xml:space="preserve">
+    <value>abgelaufen</value>
+  </data>
+  <data name="Error_target_exists" xml:space="preserve">
+    <value>Die Datei gibt es auf dem Server schon. Zum Ersetzen „Vorhandene Datei ersetzen“ wählen (nur nach Freigabe).</value>
+  </data>
+  <data name="Error_server_not_linked" xml:space="preserve">
+    <value>Der Server ist nicht mit dem Panel verknüpft.</value>
+  </data>
+  <data name="Error_file_too_large" xml:space="preserve">
+    <value>Die Datei ist größer als für diesen Ordner erlaubt.</value>
+  </data>
+  <data name="Error_invalid_filename" xml:space="preserve">
+    <value>Ungültiger Dateiname – bitte mit Endung und ohne Pfad.</value>
+  </data>
+  <data name="Error_upload_target_forbidden" xml:space="preserve">
+    <value>In diesen Ordner bzw. diese Datei darf nicht hochgeladen werden.</value>
+  </data>
+  <data name="Error_extension_not_allowed" xml:space="preserve">
+    <value>Diese Dateiendung ist in diesem Ordner nicht erlaubt.</value>
+  </data>
+  <data name="Error_too_many_open_uploads" xml:space="preserve">
+    <value>Zu viele offene Uploads – bitte erst abschließen oder zurückziehen.</value>
+  </data>
+  <data name="Error_too_many_requests" xml:space="preserve">
+    <value>Zu viele Anfragen – bitte etwas warten.</value>
+  </data>
+  <data name="Error_presign_unavailable" xml:space="preserve">
+    <value>Der Zwischenspeicher für Uploads ist gerade nicht verfügbar.</value>
+  </data>
+  <data name="Error_upload_not_cancellable" xml:space="preserve">
+    <value>Der Upload wird schon übertragen und lässt sich nicht mehr zurückziehen.</value>
+  </data>
+  <data name="Error_upload_not_awaiting" xml:space="preserve">
+    <value>Der Upload wurde schon abgeschlossen.</value>
+  </data>
+  <data name="Error_upload_expired" xml:space="preserve">
+    <value>Der Upload ist abgelaufen – bitte neu hochladen.</value>
+  </data>
+  <data name="Error_file_missing" xml:space="preserve">
+    <value>Die Datei ist noch nicht im Zwischenspeicher angekommen.</value>
+  </data>
+  <data name="Error_invalid_file" xml:space="preserve">
+    <value>Die Datei ist leer, beschädigt oder passt nicht zu ihrer Endung.</value>
+  </data>
+  <data name="Error_own_upload" xml:space="preserve">
+    <value>Eigene Uploads gibt eine zweite Person frei.</value>
+  </data>
+  <data name="Error_upload_not_pending" xml:space="preserve">
+    <value>Über diesen Upload wurde schon entschieden.</value>
+  </data>
+  <data name="Console_TabUploads.Text" xml:space="preserve">
+    <value>Uploads</value>
+  </data>
+  <data name="Upload_NoTargets.Text" xml:space="preserve">
+    <value>Für diesen Server sind keine Upload-Ordner eingerichtet.</value>
+  </data>
+  <data name="Upload_Target.Header" xml:space="preserve">
+    <value>Ordner</value>
+  </data>
+  <data name="Upload_Pick.Content" xml:space="preserve">
+    <value>Datei hochladen …</value>
+  </data>
+  <data name="Upload_Overwrite.Content" xml:space="preserve">
+    <value>Vorhandene Datei ersetzen</value>
+  </data>
+  <data name="Upload_Note.Header" xml:space="preserve">
+    <value>Notiz für die Freigabe (optional)</value>
+  </data>
+  <data name="Upload_Progress.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Fortschritt des Uploads</value>
+  </data>
+  <data name="Upload_Filter.Header" xml:space="preserve">
+    <value>Anzeigen</value>
+  </data>
+  <data name="Upload_Empty.Text" xml:space="preserve">
+    <value>Keine Uploads in dieser Ansicht.</value>
+  </data>
+  <data name="Upload_Cancel.Content" xml:space="preserve">
+    <value>Zurückziehen</value>
+  </data>
+  <data name="Heads_AllCategories" xml:space="preserve">
+    <value>Alle Kategorien</value>
+  </data>
+  <data name="Heads_NewTitle" xml:space="preserve">
+    <value>NEUER KOPF</value>
+  </data>
+  <data name="Heads_EditTitle" xml:space="preserve">
+    <value>KOPF BEARBEITEN</value>
+  </data>
+  <data name="Heads_InvalidName" xml:space="preserve">
+    <value>Namen: Deutsch ist Pflicht, je höchstens 48 Zeichen Klartext (keine §-Farbcodes oder &lt;Tags&gt;).</value>
+  </data>
+  <data name="Heads_InvalidPrice" xml:space="preserve">
+    <value>Preis: leer lassen (Kategoriepreis) oder 1 bis 1.000.000 Rebel-Coins.</value>
+  </data>
+  <data name="Heads_InvalidTexture" xml:space="preserve">
+    <value>Textur: 40–64 Hex-Zeichen oder eine Adresse textures.minecraft.net/texture/….</value>
+  </data>
+  <data name="Heads_Saved" xml:space="preserve">
+    <value>Kopf gespeichert. Die Server übernehmen ihn in wenigen Minuten.</value>
+  </data>
+  <data name="Heads_Created" xml:space="preserve">
+    <value>Kopf angelegt. Das Vorschaubild entsteht im Hintergrund.</value>
+  </data>
+  <data name="Heads_DeleteTitle" xml:space="preserve">
+    <value>Kopf aus dem Katalog löschen?</value>
+  </data>
+  <data name="Heads_Deleted" xml:space="preserve">
+    <value>Kopf gelöscht. Bereits gekaufte Köpfe bleiben im Inventar.</value>
+  </data>
+  <data name="Heads_PriceValue" xml:space="preserve">
+    <value>{0} Rebel-Coins</value>
+  </data>
+  <data name="Heads_CategoryPrice" xml:space="preserve">
+    <value>Kategoriepreis</value>
+  </data>
+  <data name="Error_head_exists" xml:space="preserve">
+    <value>Diese Textur ist schon im Katalog.</value>
+  </data>
+  <data name="AdminPage_TabHeads.Text" xml:space="preserve">
+    <value>Köpfe</value>
+  </data>
+  <data name="Heads_Search.PlaceholderText" xml:space="preserve">
+    <value>Name, Tag oder Textur suchen</value>
+  </data>
+  <data name="Heads_Search.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Köpfe suchen</value>
+  </data>
+  <data name="Heads_CategoryFilter.Header" xml:space="preserve">
+    <value>Kategorie</value>
+  </data>
+  <data name="Heads_New.Content" xml:space="preserve">
+    <value>Neuer Kopf</value>
+  </data>
+  <data name="Heads_Empty.Text" xml:space="preserve">
+    <value>Keine Köpfe gefunden.</value>
+  </data>
+  <data name="Heads_List.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Köpfe im Katalog</value>
+  </data>
+  <data name="Heads_Hint.Text" xml:space="preserve">
+    <value>Die Plugins holen den Katalog alle 5 Minuten. Spieler kaufen Köpfe im Spiel mit /koepfe für Rebel-Coins. Die Textur lässt sich nach dem Anlegen nicht mehr ändern.</value>
+  </data>
+  <data name="Heads_Texture.Header" xml:space="preserve">
+    <value>Textur-Hash (textures.minecraft.net)</value>
+  </data>
+  <data name="Heads_NameDe.Header" xml:space="preserve">
+    <value>Name (Deutsch)</value>
+  </data>
+  <data name="Heads_NameEn.Header" xml:space="preserve">
+    <value>Name (Englisch, optional)</value>
+  </data>
+  <data name="Heads_NameFr.Header" xml:space="preserve">
+    <value>Name (Französisch, optional)</value>
+  </data>
+  <data name="Heads_Category.Header" xml:space="preserve">
+    <value>Kategorie</value>
+  </data>
+  <data name="Heads_Tags.Header" xml:space="preserve">
+    <value>Tags (mit Komma getrennt, höchstens 10)</value>
+  </data>
+  <data name="Heads_Price.Header" xml:space="preserve">
+    <value>Preis in Rebel-Coins (leer = Kategoriepreis)</value>
+  </data>
+  <data name="Heads_Save.Content" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="Heads_Delete.Content" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="Heads_Category_alphabet" xml:space="preserve">
+    <value>Alphabet</value>
+  </data>
+  <data name="Heads_Category_animals" xml:space="preserve">
+    <value>Tiere</value>
+  </data>
+  <data name="Heads_Category_blocks" xml:space="preserve">
+    <value>Blöcke</value>
+  </data>
+  <data name="Heads_Category_decoration" xml:space="preserve">
+    <value>Deko</value>
+  </data>
+  <data name="Heads_Category_food" xml:space="preserve">
+    <value>Essen</value>
+  </data>
+  <data name="Heads_Category_humans" xml:space="preserve">
+    <value>Menschen</value>
+  </data>
+  <data name="Heads_Category_monsters" xml:space="preserve">
+    <value>Monster</value>
+  </data>
+  <data name="Heads_Category_plants" xml:space="preserve">
+    <value>Pflanzen</value>
+  </data>
+  <data name="Heads_Category_misc" xml:space="preserve">
+    <value>Sonstiges</value>
+  </data>
+  <data name="Heads_Category_rog" xml:space="preserve">
+    <value>RoG</value>
+  </data>
+  <data name="Shop_DonationRange" xml:space="preserve">
+    <value>Betrag frei wählbar: {0} bis {1}</value>
+  </data>
+  <data name="Shop_Permanent" xml:space="preserve">
+    <value>dauerhaft</value>
+  </data>
+  <data name="Shop_Duration" xml:space="preserve">
+    <value>{0} Tage</value>
+  </data>
+  <data name="Shop_ValidUntil" xml:space="preserve">
+    <value>gültig bis {0}</value>
+  </data>
+  <data name="Shop_Sandbox" xml:space="preserve">
+    <value>Testzahlung</value>
+  </data>
+  <data name="Shop_Donation" xml:space="preserve">
+    <value>Spende</value>
+  </data>
+  <data name="Shop_Product" xml:space="preserve">
+    <value>Bestellung</value>
+  </data>
+  <data name="Shop_Status_pending" xml:space="preserve">
+    <value>offen</value>
+  </data>
+  <data name="Shop_Status_paid" xml:space="preserve">
+    <value>bezahlt</value>
+  </data>
+  <data name="Shop_Status_failed" xml:space="preserve">
+    <value>fehlgeschlagen</value>
+  </data>
+  <data name="Shop_Status_refunded" xml:space="preserve">
+    <value>erstattet</value>
+  </data>
+  <data name="Shop_Status_expired" xml:space="preserve">
+    <value>abgelaufen</value>
+  </data>
+  <data name="ShopPage_Title.Text" xml:space="preserve">
+    <value>SHOP &amp; SPENDEN</value>
+  </data>
+  <data name="ShopPage_Intro.Text" xml:space="preserve">
+    <value>Mit einem Unterstützer-Rang oder einer Spende hilfst du, Server und Website zu bezahlen. Ränge sind rein kosmetisch – keine Vorteile im Spiel. Bezahlt wird auf der Website über die sicheren Seiten der Zahlungsanbieter.</value>
+  </data>
+  <data name="ShopPage_State.EmptyText" xml:space="preserve">
+    <value>Gerade gibt es nichts im Shop.</value>
+  </data>
+  <data name="ShopPage_Closed.Text" xml:space="preserve">
+    <value>Shop und Spenden sind gerade geschlossen.</value>
+  </data>
+  <data name="ShopPage_BuyOnWebsite.Content" xml:space="preserve">
+    <value>Auf der Website kaufen</value>
+  </data>
+  <data name="ShopPage_DonateTitle.Text" xml:space="preserve">
+    <value>SPENDEN</value>
+  </data>
+  <data name="ShopPage_DonateText.Text" xml:space="preserve">
+    <value>Eine Spende ist freiwillig und ohne Gegenleistung. Auf Wunsch erscheinst du auf der Danke-Liste (nur Name und Monat, nie der Betrag).</value>
+  </data>
+  <data name="ShopPage_DonateOnWebsite.Content" xml:space="preserve">
+    <value>Auf der Website spenden</value>
+  </data>
+  <data name="ShopPage_Supporters.Text" xml:space="preserve">
+    <value>Danke an</value>
+  </data>
+  <data name="ShopPage_Orders.Text" xml:space="preserve">
+    <value>MEINE BESTELLUNGEN &amp; SPENDEN</value>
+  </data>
+  <data name="ShopPage_Receipt.Content" xml:space="preserve">
+    <value>Quittung auf der Website</value>
+  </data>
+  <data name="AccountPage_Shop.Content" xml:space="preserve">
+    <value>Shop &amp; Spenden</value>
+  </data>
+  <data name="AppStats_Summary" xml:space="preserve">
+    <value>Downloads gesamt {0} · letzte 30 Tage {1} · App-Geräte {2} (aktiv {3})</value>
+  </data>
+  <data name="AppStats_LastImport" xml:space="preserve">
+    <value>Store-Berichte zuletzt abgerufen: {0}</value>
+  </data>
+  <data name="AppStats_NoStore" xml:space="preserve">
+    <value>Noch kein Store</value>
+  </data>
+  <data name="AppStats_Store" xml:space="preserve">
+    <value>Store: {0} Downloads · 30 Tage {1} · Updates 30 Tage {2}</value>
+  </data>
+  <data name="AppStats_StoreNotConfigured" xml:space="preserve">
+    <value>Store-Bericht nicht eingerichtet</value>
+  </data>
+  <data name="AppStats_Devices" xml:space="preserve">
+    <value>Geräte {0} · aktiv {1} · Konten {2}</value>
+  </data>
+  <data name="AdminPage_TabApps.Text" xml:space="preserve">
+    <value>Apps</value>
+  </data>
+  <data name="AppStats_Hint.Text" xml:space="preserve">
+    <value>Store-Zahlen kommen mit 1–2 Tagen Verzögerung. Nur Summen, keine personenbezogenen Daten.</value>
+  </data>
 </root>

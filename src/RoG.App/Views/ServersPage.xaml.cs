@@ -75,6 +75,8 @@ public sealed partial class ServersPage : Page
 
     private void OnLeaderboardsClick(object sender, RoutedEventArgs e) => App.Services.Navigate(new RoG.Core.Navigation.AppRoute(RoG.Core.Navigation.AppSection.Leaderboards));
 
+    private void OnSecretsClick(object sender, RoutedEventArgs e) => App.Services.Navigate(new RoG.Core.Navigation.AppRoute(RoG.Core.Navigation.AppSection.MinecraftSecrets));
+
     private void OnMapClick(object sender, RoutedEventArgs e) => App.Services.Navigate(new RoG.Core.Navigation.AppRoute(RoG.Core.Navigation.AppSection.MinecraftMap));
 
     private void OnLinkAccountClick(object sender, RoutedEventArgs e) =>

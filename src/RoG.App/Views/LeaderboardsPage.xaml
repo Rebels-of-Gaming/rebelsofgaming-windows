@@ -22,6 +22,7 @@
         <StackPanel MaxWidth="720" HorizontalAlignment="Left" Spacing="8">
             <TextBlock x:Uid="LeaderboardsPage_Title" Style="{StaticResource RoGDisplayTextStyle}" Text="BESTENLISTEN" />
             <TextBlock x:Uid="LeaderboardsPage_Intro" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+            <HyperlinkButton x:Uid="LeaderboardsPage_Secrets" Padding="0" Click="OnSecretsClick" />
         </StackPanel>
 
         <StackPanel Grid.Row="1" Spacing="8">

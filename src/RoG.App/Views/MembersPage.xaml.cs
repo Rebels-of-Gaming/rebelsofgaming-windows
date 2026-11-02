@@ -52,5 +52,7 @@ public sealed partial class MembersPage : Page
         SearchBox.Focus(FocusState.Keyboard);
     }
 
+    private void OnSecretsClick(object sender, RoutedEventArgs e) => App.Services.Navigate(new RoG.Core.Navigation.AppRoute(RoG.Core.Navigation.AppSection.MinecraftSecrets));
+
     private void OnLeaderboardsClick(object sender, RoutedEventArgs e) => App.Services.Navigate(new RoG.Core.Navigation.AppRoute(RoG.Core.Navigation.AppSection.Leaderboards));
 }

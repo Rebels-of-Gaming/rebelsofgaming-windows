@@ -25,6 +25,8 @@
             <SelectorBarItem x:Name="MinecraftTab" x:Uid="AdminPage_TabMinecraft" />
             <SelectorBarItem x:Name="CoinsTab" x:Uid="AdminPage_TabCoins" />
             <SelectorBarItem x:Name="NetworkTab" x:Uid="AdminPage_TabNetwork" />
+            <SelectorBarItem x:Name="HeadsTab" x:Uid="AdminPage_TabHeads" />
+            <SelectorBarItem x:Name="AppsTab" x:Uid="AdminPage_TabApps" />
             <SelectorBarItem x:Name="LogTab" x:Uid="AdminPage_TabLog" />
             <SelectorBarItem x:Name="WordsTab" x:Uid="AdminPage_TabWords" />
             <SelectorBarItem x:Name="GalleryTab" x:Uid="AdminPage_TabGallery" />
@@ -483,6 +485,99 @@
         </ScrollViewer>
 
         <!-- Rebel-Coins: Wallets links, gewählte Wallet und Einstellungen rechts -->
+        <!-- App-Statistik (Website v0.53.0): nur Summen -->
+        <ScrollViewer x:Name="AppsPanel" Grid.Row="3" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+            <StackPanel MaxWidth="{StaticResource RoGReadingWidth}" HorizontalAlignment="Left" Spacing="12">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <Button x:Uid="CoinsAdmin_Reload" Command="{x:Bind AppStats.ReloadCommand}" />
+                    <ProgressRing Width="20" Height="20" IsActive="{x:Bind AppStats.IsBusy, Mode=OneWay}" />
+                </StackPanel>
+                <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind AppStats.Summary, Mode=OneWay}" TextWrapping="Wrap" />
+                <ItemsControl ItemsSource="{x:Bind AppStats.Platforms}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="vm:StatLineViewModel">
+                            <StackPanel Padding="0,6" Spacing="2">
+                                <TextBlock Style="{StaticResource RoGSectionTextStyle}" Text="{x:Bind Label}" />
+                                <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Value}" TextWrapping="Wrap" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind AppStats.LastImport, Mode=OneWay}" />
+                <TextBlock x:Uid="AppStats_Hint" FontSize="12" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Kopf-Katalog (Website v0.48.0) -->
+        <Grid x:Name="HeadsPanel" Grid.Row="3" ColumnSpacing="16" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="360" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid RowSpacing="8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <AutoSuggestBox x:Uid="Heads_Search" QueryIcon="Find" QuerySubmitted="OnHeadsSearch" Text="{x:Bind Heads.Search, Mode=TwoWay}" />
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="8">
+                    <ComboBox
+                        x:Uid="Heads_CategoryFilter"
+                        MinWidth="180"
+                        DisplayMemberPath="Label"
+                        ItemsSource="{x:Bind Heads.CategoryFilterOptions}"
+                        SelectedItem="{x:Bind Heads.SelectedCategoryFilter, Mode=TwoWay}" />
+                    <Button x:Uid="Heads_New" VerticalAlignment="Bottom" Command="{x:Bind Heads.NewCommand}" />
+                    <ProgressRing Width="20" Height="20" VerticalAlignment="Bottom" IsActive="{x:Bind Heads.IsBusy, Mode=OneWay}" />
+                </StackPanel>
+                <TextBlock x:Uid="Heads_Empty" Grid.Row="2" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" Visibility="{x:Bind Heads.IsEmpty, Mode=OneWay}" />
+                <ListView x:Uid="Heads_List" Grid.Row="3" ItemsSource="{x:Bind Heads.Items}" SelectedItem="{x:Bind Heads.Selected, Mode=TwoWay}" SelectionMode="Single">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="vm:HeadItemViewModel">
+                            <Grid Padding="0,6" ColumnSpacing="12" AutomationProperties.Name="{x:Bind Name}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image Width="40" Height="40" Source="{x:Bind Preview}" AutomationProperties.AccessibilityView="Raw" />
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock FontWeight="SemiBold" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Name}" />
+                                    <TextBlock FontSize="12" Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Meta}" TextWrapping="Wrap" />
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.Footer>
+                        <Button x:Uid="Common_LoadMore" Margin="0,8" Command="{x:Bind Heads.MoreCommand}" Visibility="{x:Bind Heads.HasMore, Mode=OneWay}" />
+                    </ListView.Footer>
+                </ListView>
+            </Grid>
+            <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+                <StackPanel MaxWidth="{StaticResource RoGReadingWidth}" HorizontalAlignment="Left" Spacing="12">
+                    <TextBlock Style="{StaticResource RoGTitleTextStyle}" Text="{x:Bind Heads.FormTitle, Mode=OneWay}" />
+                    <TextBlock x:Uid="Heads_Hint" Style="{StaticResource RoGMutedTextStyle}" TextWrapping="Wrap" />
+                    <TextBox x:Uid="Heads_Texture" IsReadOnly="{x:Bind Heads.IsExisting, Mode=OneWay}" Text="{x:Bind Heads.EditTexture, Mode=TwoWay}" />
+                    <TextBox x:Uid="Heads_NameDe" MaxLength="48" Text="{x:Bind Heads.EditNameDe, Mode=TwoWay}" />
+                    <TextBox x:Uid="Heads_NameEn" MaxLength="48" Text="{x:Bind Heads.EditNameEn, Mode=TwoWay}" />
+                    <TextBox x:Uid="Heads_NameFr" MaxLength="48" Text="{x:Bind Heads.EditNameFr, Mode=TwoWay}" />
+                    <ComboBox
+                        x:Uid="Heads_Category"
+                        MinWidth="200"
+                        DisplayMemberPath="Label"
+                        ItemsSource="{x:Bind Heads.CategoryOptions}"
+                        SelectedItem="{x:Bind Heads.EditCategory, Mode=TwoWay}" />
+                    <TextBox x:Uid="Heads_Tags" Text="{x:Bind Heads.EditTags, Mode=TwoWay}" />
+                    <TextBox x:Uid="Heads_Price" InputScope="Number" MaxLength="7" Text="{x:Bind Heads.EditPrice, Mode=TwoWay}" />
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Button x:Uid="Heads_Save" Command="{x:Bind Heads.SaveCommand}" Style="{StaticResource RoGPrimaryButtonStyle}" />
+                        <Button x:Uid="Heads_Delete" Command="{x:Bind Heads.DeleteCommand}" Style="{StaticResource RoGSecondaryButtonStyle}" Visibility="{x:Bind Heads.IsExisting, Mode=OneWay}" />
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
         <Grid x:Name="CoinsPanel" Grid.Row="3" ColumnSpacing="16" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="340" />

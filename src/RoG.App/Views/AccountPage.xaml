@@ -196,6 +196,9 @@
                 </StackPanel>
             </Expander>
 
+            <!-- Shop & Spenden (Website v0.47.0): Anzeige und eigene Bestellungen in der App, bezahlt wird auf der Website -->
+            <Button x:Uid="AccountPage_Shop" Click="OnShopClick" Style="{StaticResource RoGSecondaryButtonStyle}" />
+
             <!-- Minecraft: Code aus /link prüfen und bestätigen (nie automatisch einlösen) -->
             <Expander
                 x:Name="MinecraftExpander"

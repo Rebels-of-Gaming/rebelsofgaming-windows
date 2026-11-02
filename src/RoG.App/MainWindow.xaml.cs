@@ -1,4 +1,6 @@
+using System.Globalization;
 using Microsoft.UI;
+using Microsoft.UI.Dispatching;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -8,6 +10,7 @@ using RoG.Core.Api;
 using RoG.Core.Localization;
 using RoG.Core.Navigation;
 using RoG.Core.Settings;
+using RoG.Core.Updates;
 using Windows.Graphics;
 
 namespace RoG.App;
@@ -45,6 +48,9 @@ public sealed partial class MainWindow : Window, IDisposable
     private const string SettingsKey = "Settings";
 
     private readonly AppServices _services;
+    private StoreUpdateMonitor? _updates;
+    private DispatcherQueueTimer? _updateTimer;
+    private bool _updateInstalling;
 
     public MainWindow(AppServices services)
     {
@@ -208,7 +214,78 @@ public sealed partial class MainWindow : Window, IDisposable
         {
             ShowLogin();
         }
+
+        StartUpdateChecks();
     }
+
+    /// <summary>Store-Updates: kurz nach dem Start, dann stündlich prüfen, ob die 6-Stunden-Abfrage fällig ist.</summary>
+    private void StartUpdateChecks()
+    {
+        _updates = new StoreUpdateMonitor(new WindowsStoreUpdateSource(() => App.MainWindowHandle));
+        _updates.Changed += (_, _) => DispatcherQueue.TryEnqueue(ShowUpdateBanner);
+        _updateTimer = DispatcherQueue.CreateTimer();
+        _updateTimer.Interval = TimeSpan.FromHours(1);
+        _updateTimer.Tick += (_, _) => _ = _updates.CheckAsync();
+        _updateTimer.Start();
+        DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low, async () =>
+        {
+            await Task.Delay(TimeSpan.FromSeconds(20));
+            await _updates.CheckAsync();
+        });
+    }
+
+    private void ShowUpdateBanner()
+    {
+        if (_updates is null || _updateInstalling)
+        {
+            return;
+        }
+
+        var banner = _updates.Banner;
+        UpdateBar.IsOpen = banner != StoreUpdateBanner.None;
+        var mandatory = banner == StoreUpdateBanner.Mandatory;
+        UpdateBar.Severity = mandatory ? InfoBarSeverity.Warning : InfoBarSeverity.Informational;
+        UpdateBar.Title = _services.Localizer.GetString(mandatory ? StringKeys.UpdateMandatoryTitle : StringKeys.UpdateAvailableTitle);
+        UpdateBar.Message = _services.Localizer.GetString(mandatory ? StringKeys.UpdateMandatoryMessage : StringKeys.UpdateAvailableMessage);
+        UpdateLaterButton.Visibility = mandatory ? Visibility.Collapsed : Visibility.Visible;
+        UpdateNowButton.IsEnabled = true;
+        UpdateProgress.Visibility = Visibility.Collapsed;
+    }
+
+    private async void OnUpdateNowClick(object sender, RoutedEventArgs e)
+    {
+        if (_updates is null)
+        {
+            return;
+        }
+
+        _updateInstalling = true;
+        UpdateNowButton.IsEnabled = false;
+        UpdateLaterButton.Visibility = Visibility.Collapsed;
+        UpdateProgress.Visibility = Visibility.Visible;
+        UpdateProgress.Value = 0;
+        var format = _services.Localizer.GetString(StringKeys.UpdateInstalling);
+        UpdateBar.Message = string.Format(CultureInfo.CurrentCulture, format, 0);
+        var progress = new Progress<double>(p =>
+        {
+            var percent = (int)Math.Round(Math.Clamp(p, 0, 1) * 100);
+            UpdateProgress.Value = percent;
+            UpdateBar.Message = string.Format(CultureInfo.CurrentCulture, format, percent);
+        });
+
+        // Bei Erfolg beendet der Store die App und startet sie neu
+        var result = await _updates.InstallAsync(progress);
+        _updateInstalling = false;
+        ShowUpdateBanner();
+        if (result == StoreInstallResult.Failed)
+        {
+            UpdateBar.IsOpen = true;
+            UpdateBar.Severity = InfoBarSeverity.Error;
+            UpdateBar.Message = _services.Localizer.GetString(StringKeys.UpdateFailed);
+        }
+    }
+
+    private void OnUpdateLaterClick(object sender, RoutedEventArgs e) => _updates?.Later();
 
     private void ShowLogin()
     {
@@ -527,6 +604,22 @@ public sealed partial class MainWindow : Window, IDisposable
         {
             NavView.SelectedItem = null;
             ContentFrame.Navigate(typeof(LeaderboardsPage));
+            return true;
+        }
+
+        // Shop & Spenden: ohne Eintrag in der Seitenleiste (Konto → Shop & Spenden, Links /shop, /donate, /minecraft/vip)
+        if (route.Section == AppSection.Shop)
+        {
+            NavView.SelectedItem = null;
+            ContentFrame.Navigate(typeof(ShopPage));
+            return true;
+        }
+
+        // Minecraft-Secrets: ohne Eintrag in der Seitenleiste (Knopf im Reiter Server → Minecraft und bei den Bestenlisten)
+        if (route.Section == AppSection.MinecraftSecrets)
+        {
+            NavView.SelectedItem = null;
+            ContentFrame.Navigate(typeof(MinecraftSecretsPage));
             return true;
         }
 

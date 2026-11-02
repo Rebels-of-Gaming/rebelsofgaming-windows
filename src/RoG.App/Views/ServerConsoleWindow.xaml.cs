@@ -22,6 +22,7 @@ public sealed partial class ServerConsoleWindow : Window
         Bans = new ServerBansViewModel(App.Services, slug, ViewModel.Show) { Confirm = ConfirmAsync };
         Approvals = new ServerApprovalsViewModel(App.Services, slug, ViewModel.Show) { Confirm = ConfirmAsync };
         Files = new ServerFileBrowserViewModel(App.Services, slug, abilities, ViewModel.Show) { Confirm = ConfirmAsync, AskName = AskNameAsync };
+        Uploads = new ServerUploadsViewModel(App.Services, slug, abilities, ViewModel.Show) { Confirm = ConfirmAsync };
         Whitelist = new ServerWhitelistViewModel(App.Services, slug, ViewModel.Show) { Confirm = ConfirmAsync };
         GameBans = new ServerGameBansViewModel(App.Services, slug, serverId, abilities, ViewModel.Show)
         {
@@ -37,6 +38,7 @@ public sealed partial class ServerConsoleWindow : Window
         RconTab.Visibility = abilities.Rcon ? Visibility.Visible : Visibility.Collapsed;
         BansTab.Visibility = abilities.Bans ? Visibility.Visible : Visibility.Collapsed;
         FilesTab.Visibility = abilities.FilesRead ? Visibility.Visible : Visibility.Collapsed;
+        UploadsTab.Visibility = abilities.Uploads ? Visibility.Visible : Visibility.Collapsed;
         WhitelistTab.Visibility = abilities.Bans ? Visibility.Visible : Visibility.Collapsed;
         ApprovalsTab.Visibility = abilities.FilesApprove ? Visibility.Visible : Visibility.Collapsed;
         GameBansTab.Visibility = GameBans.IsAvailable ? Visibility.Visible : Visibility.Collapsed;
@@ -79,13 +81,15 @@ public sealed partial class ServerConsoleWindow : Window
 
     public ServerWhitelistViewModel Whitelist { get; }
 
+    public ServerUploadsViewModel Uploads { get; }
+
     public ServerGameBansViewModel GameBans { get; }
 
     /// <summary>Reiter wechseln; Configs und Backups laden beim ersten Öffnen.</summary>
     private void OnTabChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args)
     {
         if (ConsolePanel is null || ConfigsPanel is null || BackupsPanel is null || RconPanel is null || BansPanel is null || ApprovalsPanel is null
-            || FilesPanel is null || WhitelistPanel is null || GameBansPanel is null)
+            || FilesPanel is null || UploadsPanel is null || WhitelistPanel is null || GameBansPanel is null)
         {
             return; // feuert schon in InitializeComponent
         }
@@ -98,6 +102,7 @@ public sealed partial class ServerConsoleWindow : Window
         BansPanel.Visibility = selected == BansTab ? Visibility.Visible : Visibility.Collapsed;
         ApprovalsPanel.Visibility = selected == ApprovalsTab ? Visibility.Visible : Visibility.Collapsed;
         FilesPanel.Visibility = selected == FilesTab ? Visibility.Visible : Visibility.Collapsed;
+        UploadsPanel.Visibility = selected == UploadsTab ? Visibility.Visible : Visibility.Collapsed;
         WhitelistPanel.Visibility = selected == WhitelistTab ? Visibility.Visible : Visibility.Collapsed;
         GameBansPanel.Visibility = selected == GameBansTab ? Visibility.Visible : Visibility.Collapsed;
         if (selected == ConfigsTab)
@@ -120,6 +125,10 @@ public sealed partial class ServerConsoleWindow : Window
         {
             _ = Files.EnsureLoadedAsync();
         }
+        else if (selected == UploadsTab)
+        {
+            _ = Uploads.EnsureLoadedAsync();
+        }
         else if (selected == WhitelistTab)
         {
             _ = Whitelist.EnsureLoadedAsync();
@@ -128,6 +137,35 @@ public sealed partial class ServerConsoleWindow : Window
         {
             _ = GameBans.EnsureLoadedAsync();
         }
+    }
+
+    /// <summary>Datei wählen (nur die Endungen des Ordners) und hochladen.</summary>
+    private async void OnUploadPickClick(object sender, RoutedEventArgs e)
+    {
+        var picker = new Windows.Storage.Pickers.FileOpenPicker();
+        WinRT.Interop.InitializeWithWindow.Initialize(picker, WinRT.Interop.WindowNative.GetWindowHandle(this));
+        var extensions = Uploads.PickerExtensions;
+        if (extensions.Count == 0)
+        {
+            picker.FileTypeFilter.Add("*");
+        }
+        else
+        {
+            foreach (var ext in extensions)
+            {
+                picker.FileTypeFilter.Add(ext);
+            }
+        }
+
+        var file = await picker.PickSingleFileAsync();
+        if (file is null)
+        {
+            return;
+        }
+
+        var size = (await file.GetBasicPropertiesAsync()).Size;
+        await using var stream = await file.OpenStreamForReadAsync();
+        await Uploads.UploadAsync(stream, file.Name, (long)size);
     }
 
     private async Task<bool> ConfirmAsync(string title, string text)

@@ -843,3 +843,239 @@ public sealed partial class WhitelistItemViewModel(WhitelistEntry entry, ServerW
     [RelayCommand]
     private Task RemoveAsync() => owner.RemoveAsync(this);
 }
+
+/// <summary>
+/// Dateien auf den Server hochladen (Website v0.54.0): Upload-Ordner wählen, Datei hochladen, Stand verfolgen; mit
+/// <c>servers.files.approve</c> fremde Uploads (Code, Überschreiben) nach Prüfung der Archiv-Einträge freigeben.
+/// </summary>
+public sealed partial class ServerUploadsViewModel(AppServices services, string slug, ServerAbilities abilities, Action<string, InfoBarSeverity> show)
+    : ServerTabViewModel(services, slug, show)
+{
+    private readonly ServerUploadService _uploads = new(services.Api.Http, services.StorageHttp);
+    private bool _loaded;
+
+    public bool CanUpload => abilities.FilesUpload;
+
+    public bool CanApprove => abilities.FilesApprove;
+
+    public ObservableCollection<UploadTargetOption> Targets { get; } = [];
+
+    public ObservableCollection<ServerUploadItemViewModel> Items { get; } = [];
+
+    public IReadOnlyList<SettingsOption> FilterOptions { get; } =
+    [
+        new(ServerUploadService.FilterOpen, services.Localizer.GetString(StringKeys.UploadFilterOpen)),
+        new(ServerUploadService.Pending, services.Localizer.GetString(StringKeys.UploadFilterPending)),
+        new(ServerUploadService.FilterAll, services.Localizer.GetString(StringKeys.UploadFilterAll)),
+    ];
+
+    [ObservableProperty]
+    public partial SettingsOption? SelectedFilter { get; set; }
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(TargetHint), nameof(HasTarget))]
+    public partial UploadTargetOption? SelectedTarget { get; set; }
+
+    [ObservableProperty]
+    public partial bool Overwrite { get; set; }
+
+    [ObservableProperty]
+    public partial string Note { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial bool IsUploading { get; set; }
+
+    [ObservableProperty]
+    public partial double Progress { get; set; }
+
+    [ObservableProperty]
+    public partial bool IsEmpty { get; set; }
+
+    [ObservableProperty]
+    public partial bool HasNoTargets { get; set; }
+
+    public bool HasTarget => SelectedTarget is not null;
+
+    /// <summary>„Endungen: pk3 · bis 200 MB · Code nur nach Freigabe“.</summary>
+    public string TargetHint => SelectedTarget?.Hint ?? string.Empty;
+
+    public async Task EnsureLoadedAsync()
+    {
+        if (!_loaded)
+        {
+            _loaded = true;
+            SelectedFilter ??= FilterOptions[CanApprove ? 1 : 0];
+            await RunAsync(async () =>
+            {
+                var targets = await _uploads.TargetsAsync(Slug);
+                Targets.Clear();
+                foreach (var t in targets)
+                {
+                    Targets.Add(new UploadTargetOption(t, Services.Localizer));
+                }
+
+                SelectedTarget = Targets.FirstOrDefault();
+                HasNoTargets = CanUpload && Targets.Count == 0;
+            });
+            await ReloadAsync();
+        }
+    }
+
+    partial void OnSelectedFilterChanged(SettingsOption? value)
+    {
+        if (_loaded && value is not null)
+        {
+            _ = ReloadAsync();
+        }
+    }
+
+    [RelayCommand]
+    private Task ReloadAsync() => RunAsync(async () =>
+    {
+        var list = await _uploads.ListAsync(Slug, SelectedFilter?.Value ?? ServerUploadService.FilterOpen);
+        var me = Services.CurrentUser?.Id;
+        Items.Clear();
+        foreach (var u in list)
+        {
+            Items.Add(new ServerUploadItemViewModel(u, this, Services.Localizer, mine: me is not null && u.Author?.Id == me));
+        }
+
+        IsEmpty = Items.Count == 0;
+    });
+
+    /// <summary>Datei-Endungen für die Dateiauswahl (<c>.pk3</c>); leer = alle.</summary>
+    public IReadOnlyList<string> PickerExtensions => SelectedTarget?.Target.Extensions.Select(e => "." + e).ToList() ?? [];
+
+    /// <summary>Hochladen aus der Dateiauswahl; prüft Endung und Größe vorab wie der Server.</summary>
+    public async Task UploadAsync(Stream content, string fileName, long size)
+    {
+        if (SelectedTarget is not { } target || IsUploading)
+        {
+            return;
+        }
+
+        if (ServerUploadService.Validate(target.Target, fileName, size) is { } problem)
+        {
+            Show(Services.Localizer.GetError(problem), InfoBarSeverity.Error);
+            return;
+        }
+
+        IsUploading = true;
+        Progress = 0;
+        try
+        {
+            var progress = new Progress<double>(p => Progress = p * 100);
+            ServerUpload? result = null;
+            var ok = await RunAsync(async () => result = await _uploads.UploadAsync(Slug, target.Target.Directory, fileName, content, size, Overwrite, Note, progress));
+            if (ok && result is not null)
+            {
+                Note = string.Empty;
+                Overwrite = false;
+                Show(L(result.RequiresApproval || target.Target.NeedsApproval(fileName) ? StringKeys.UploadSentForApproval : StringKeys.UploadSent), InfoBarSeverity.Success);
+                await ReloadAsync();
+            }
+        }
+        finally
+        {
+            IsUploading = false;
+        }
+    }
+
+    internal async Task CancelAsync(ServerUploadItemViewModel item)
+    {
+        if (!await Confirm(L(StringKeys.UploadCancelTitle), item.Title))
+        {
+            return;
+        }
+
+        if (await RunAsync(() => _uploads.CancelAsync(Slug, item.Id)))
+        {
+            await ReloadAsync();
+        }
+    }
+
+    internal async Task DecideAsync(ServerUploadItemViewModel item, bool approve)
+    {
+        if (!await Confirm(L(approve ? StringKeys.UploadApproveTitle : StringKeys.UploadRejectTitle), item.Title))
+        {
+            return;
+        }
+
+        if (await RunAsync(() => approve ? _uploads.ApproveAsync(Slug, item.Id, item.DecisionNote) : _uploads.RejectAsync(Slug, item.Id, item.DecisionNote)))
+        {
+            Show(L(approve ? StringKeys.UploadApproved : StringKeys.UploadRejected), InfoBarSeverity.Success);
+            await ReloadAsync();
+        }
+    }
+}
+
+public sealed class UploadTargetOption(UploadTarget target, ILocalizer localizer)
+{
+    public UploadTarget Target { get; } = target;
+
+    public string Label => Target.Directory + "/";
+
+    public string Hint => string.Join(" · ", new[]
+    {
+        Target.Extensions.Count > 0 ? string.Format(CultureInfo.CurrentCulture, localizer.GetString(StringKeys.UploadExtensions), string.Join(", ", Target.Extensions)) : null,
+        string.Format(CultureInfo.CurrentCulture, localizer.GetString(StringKeys.UploadMaxSize), Target.MaxMb),
+        Target.Approval
+            ? localizer.GetString(StringKeys.UploadFolderApproval)
+            : Target.ApprovalExtensions.Count > 0 ? string.Format(CultureInfo.CurrentCulture, localizer.GetString(StringKeys.UploadCodeApproval), string.Join(", ", Target.ApprovalExtensions)) : null,
+    }.Where(s => s is not null));
+}
+
+public sealed partial class ServerUploadItemViewModel(ServerUpload upload, ServerUploadsViewModel owner, ILocalizer localizer, bool mine) : ObservableObject
+{
+    public string Id => upload.Id;
+
+    public string Title => upload.Path;
+
+    public string Status
+    {
+        get
+        {
+            var key = "Upload_Status_" + upload.Status;
+            var text = localizer.GetString(key);
+            return string.IsNullOrEmpty(text) || text == key ? upload.Status : text;
+        }
+    }
+
+    public string Meta => string.Join(" · ", new[]
+    {
+        ServerPaths.FormatSize(upload.Size),
+        upload.Author?.Name,
+        upload.CreatedAt?.ToLocalTime().ToString("g", CultureInfo.CurrentCulture),
+        upload.Overwrite ? localizer.GetString(StringKeys.UploadOverwrites) : null,
+        upload.RequiresApproval ? localizer.GetString(upload.ApprovalReason == "code" ? StringKeys.UploadReasonCode : StringKeys.UploadReasonApproval) : null,
+        upload.Note,
+        upload.DecidedBy is { } d ? string.Format(CultureInfo.CurrentCulture, localizer.GetString(StringKeys.UploadDecidedBy), d.Name) + (upload.DecisionNote is { } n ? ": " + n : string.Empty) : null,
+        upload.Error is { } e ? localizer.GetError(e) : null,
+    }.Where(s => !string.IsNullOrEmpty(s)));
+
+    /// <summary>Archiv-Inhalt für Freigebende: Code-Einträge zuerst, dann die übrigen (die API liefert höchstens 200).</summary>
+    public string Entries => upload.EntriesTotal == 0
+        ? string.Empty
+        : string.Format(CultureInfo.CurrentCulture, localizer.GetString(StringKeys.UploadEntries), upload.EntriesTotal)
+            + (upload.CodeEntries.Count > 0 ? "\n" + localizer.GetString(StringKeys.UploadCodeEntries) + "\n  " + string.Join("\n  ", upload.CodeEntries) : string.Empty)
+            + "\n" + string.Join("\n", upload.Entries.Take(50));
+
+    public bool HasEntries => upload.EntriesTotal > 0;
+
+    public bool CanCancel => mine && upload.IsCancellable;
+
+    /// <summary>Freigeben nie für eigene Uploads (Vier-Augen-Prinzip, der Server prüft es ebenfalls).</summary>
+    public bool CanDecide => owner.CanApprove && upload.IsPending && !mine;
+
+    [ObservableProperty]
+    public partial string DecisionNote { get; set; } = string.Empty;
+
+    [RelayCommand]
+    private Task CancelAsync() => owner.CancelAsync(this);
+
+    [RelayCommand]
+    private Task ApproveAsync() => owner.DecideAsync(this, approve: true);
+
+    [RelayCommand]
+    private Task RejectAsync() => owner.DecideAsync(this, approve: false);
+}

@@ -94,6 +94,26 @@
             IsClosable="True"
             Severity="Warning" />
 
+        <!-- Store-Update: dezent unten; Pflicht-Updates ohne „Später“ (Logik in RoG.Core.Updates.StoreUpdateMonitor). -->
+        <InfoBar
+            x:Name="UpdateBar"
+            Grid.Row="1"
+            MaxWidth="560"
+            Margin="0,0,0,16"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Canvas.ZIndex="10"
+            IsClosable="False"
+            Severity="Informational">
+            <InfoBar.ActionButton>
+                <Button x:Name="UpdateNowButton" x:Uid="Shell_UpdateNow" Click="OnUpdateNowClick" Style="{StaticResource RoGPrimaryButtonStyle}" />
+            </InfoBar.ActionButton>
+            <StackPanel Margin="0,0,0,12" Spacing="8">
+                <ProgressBar x:Name="UpdateProgress" x:Uid="Shell_UpdateProgress" Maximum="100" Visibility="Collapsed" />
+                <HyperlinkButton x:Name="UpdateLaterButton" x:Uid="Shell_UpdateLater" Click="OnUpdateLaterClick" />
+            </StackPanel>
+        </InfoBar>
+
         <!-- Login liegt über der Shell, solange weder Token noch Gastmodus da sind. -->
         <Frame x:Name="LoginFrame" Grid.Row="1" Visibility="Collapsed" />
 

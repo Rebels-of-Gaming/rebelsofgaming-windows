@@ -243,7 +243,27 @@
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
-                        <HyperlinkButton x:Uid="MembersPage_Leaderboards" Padding="0" Click="OnLeaderboardsClick" />
+                        <StackPanel Margin="0,8,0,0" Spacing="4" Visibility="{x:Bind ViewModel.Detail.HasSecrets, Mode=OneWay}">
+                            <TextBlock x:Uid="MembersPage_Secrets" Style="{StaticResource RoGSectionTextStyle}" />
+                            <ItemsControl ItemsSource="{x:Bind ViewModel.Detail.SecretLines}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate x:DataType="vm:StatLineViewModel">
+                                        <Grid Padding="0,2" ColumnSpacing="12">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Style="{StaticResource RoGMutedTextStyle}" Text="{x:Bind Label}" TextWrapping="Wrap" />
+                                            <TextBlock Grid.Column="1" Foreground="{StaticResource RoGGoldBrush}" Style="{StaticResource RoGBodyTextStyle}" Text="{x:Bind Value}" TextAlignment="Right" TextWrapping="Wrap" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="16">
+                            <HyperlinkButton x:Uid="MembersPage_Leaderboards" Padding="0" Click="OnLeaderboardsClick" />
+                            <HyperlinkButton x:Uid="MembersPage_AllSecrets" Padding="0" Click="OnSecretsClick" />
+                        </StackPanel>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Spacing="8">

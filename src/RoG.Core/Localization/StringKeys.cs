@@ -520,10 +520,6 @@ public static class StringKeys
 
     public const string TemplateInvalid = "Template_Invalid";
 
-    public const string Errornotemplate = "Error_no_template";
-
-    public const string Errorwhitelistnotsupported = "Error_whitelist_not_supported";
-
     public const string WikiCreated = "Wiki_Created";
 
     public const string WikiNoParent = "Wiki_NoParent";
@@ -988,16 +984,6 @@ public static class StringKeys
 
     public const string GameBansAppealCode = "GameBans_AppealCode";
 
-    public const string Errorappealproofrequired = "Error_appeal_proof_required";
-
-    public const string Errorappealopen = "Error_appeal_open";
-
-    public const string Errorappealcooldown = "Error_appeal_cooldown";
-
-    public const string Errorappealsunavailable = "Error_appeals_unavailable";
-
-    public const string Errorappealdecided = "Error_appeal_decided";
-
     public const string SettingsPageClanCopyright = "SettingsPage_ClanCopyright";
 
     public const string MinecraftPrefilled = "Minecraft_Prefilled";
@@ -1313,6 +1299,130 @@ public static class StringKeys
     public const string ResourcePackDeleteText = "ResourcePack_DeleteText";
 
     public const string ResourcePackDeleted = "ResourcePack_Deleted";
+
+    public const string UpdateAvailableTitle = "Update_AvailableTitle";
+
+    public const string UpdateAvailableMessage = "Update_AvailableMessage";
+
+    public const string UpdateMandatoryTitle = "Update_MandatoryTitle";
+
+    public const string UpdateMandatoryMessage = "Update_MandatoryMessage";
+
+    public const string UpdateInstalling = "Update_Installing";
+
+    public const string UpdateFailed = "Update_Failed";
+
+    public const string SecretsFoundOf = "Secrets_FoundOf";
+
+    public const string SecretsTotal = "Secrets_Total";
+
+    public const string SecretsFinders = "Secrets_Finders";
+
+    public const string SecretsFoundAt = "Secrets_FoundAt";
+
+    public const string UploadFilterOpen = "Upload_FilterOpen";
+
+    public const string UploadFilterPending = "Upload_FilterPending";
+
+    public const string UploadFilterAll = "Upload_FilterAll";
+
+    public const string UploadExtensions = "Upload_Extensions";
+
+    public const string UploadMaxSize = "Upload_MaxSize";
+
+    public const string UploadFolderApproval = "Upload_FolderApproval";
+
+    public const string UploadCodeApproval = "Upload_CodeApproval";
+
+    public const string UploadSent = "Upload_Sent";
+
+    public const string UploadSentForApproval = "Upload_SentForApproval";
+
+    public const string UploadCancelTitle = "Upload_CancelTitle";
+
+    public const string UploadApproveTitle = "Upload_ApproveTitle";
+
+    public const string UploadRejectTitle = "Upload_RejectTitle";
+
+    public const string UploadApproved = "Upload_Approved";
+
+    public const string UploadRejected = "Upload_Rejected";
+
+    public const string UploadOverwrites = "Upload_Overwrites";
+
+    public const string UploadReasonCode = "Upload_ReasonCode";
+
+    public const string UploadReasonApproval = "Upload_ReasonApproval";
+
+    public const string UploadDecidedBy = "Upload_DecidedBy";
+
+    public const string UploadEntries = "Upload_Entries";
+
+    public const string UploadCodeEntries = "Upload_CodeEntries";
+
+    public const string Errornotemplate = "Error_no_template";
+
+    public const string Errorwhitelistnotsupported = "Error_whitelist_not_supported";
+
+    public const string Errorappealproofrequired = "Error_appeal_proof_required";
+
+    public const string Errorappealopen = "Error_appeal_open";
+
+    public const string Errorappealcooldown = "Error_appeal_cooldown";
+
+    public const string Errorappealsunavailable = "Error_appeals_unavailable";
+
+    public const string Errorappealdecided = "Error_appeal_decided";
+
+    public const string HeadsAllCategories = "Heads_AllCategories";
+
+    public const string HeadsNewTitle = "Heads_NewTitle";
+
+    public const string HeadsEditTitle = "Heads_EditTitle";
+
+    public const string HeadsInvalidName = "Heads_InvalidName";
+
+    public const string HeadsInvalidPrice = "Heads_InvalidPrice";
+
+    public const string HeadsInvalidTexture = "Heads_InvalidTexture";
+
+    public const string HeadsSaved = "Heads_Saved";
+
+    public const string HeadsCreated = "Heads_Created";
+
+    public const string HeadsDeleteTitle = "Heads_DeleteTitle";
+
+    public const string HeadsDeleted = "Heads_Deleted";
+
+    public const string HeadsPriceValue = "Heads_PriceValue";
+
+    public const string HeadsCategoryPrice = "Heads_CategoryPrice";
+
+    public const string ShopDonationRange = "Shop_DonationRange";
+
+    public const string ShopPermanent = "Shop_Permanent";
+
+    public const string ShopDuration = "Shop_Duration";
+
+    public const string ShopValidUntil = "Shop_ValidUntil";
+
+    public const string ShopSandbox = "Shop_Sandbox";
+
+    public const string ShopDonation = "Shop_Donation";
+
+    public const string ShopProduct = "Shop_Product";
+
+    public const string AppStatsSummary = "AppStats_Summary";
+
+    public const string AppStatsLastImport = "AppStats_LastImport";
+
+    public const string AppStatsNoStore = "AppStats_NoStore";
+
+    public const string AppStatsStore = "AppStats_Store";
+
+    public const string AppStatsStoreNotConfigured = "AppStats_StoreNotConfigured";
+
+    public const string AppStatsDevices = "AppStats_Devices";
 
     public const string ErrorPrefix = "Error_";
 

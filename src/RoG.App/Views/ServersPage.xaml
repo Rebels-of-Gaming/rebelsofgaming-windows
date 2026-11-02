@@ -313,6 +313,7 @@
                             Style="{StaticResource RoGSecondaryButtonStyle}"
                             Visibility="{x:Bind Join.IsSignedIn}" />
                     </StackPanel>
+                    <HyperlinkButton x:Uid="McJoin_Secrets" Padding="0" Click="OnSecretsClick" />
 
                     <!-- Bearbeiten (minecraft.manage) -->
                     <Expander

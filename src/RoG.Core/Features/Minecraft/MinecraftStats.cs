@@ -28,7 +28,11 @@ public sealed record MinecraftStats(
     IReadOnlyList<MinigameStats> Minigames,
     IReadOnlyList<ParkourBest> Parkour,
     IReadOnlyList<MinecraftAward> Awards,
-    bool HasStats);
+    bool HasStats)
+{
+    /// <summary>Lobby-Secrets je Gruppe (seit Website v0.55.0 Teil der Statistik), sonst leer.</summary>
+    public IReadOnlyList<SecretGroupProgress> Secrets { get; init; } = [];
+}
 
 /// <summary>Was <see cref="LeaderboardEntry.Value"/> bedeutet.</summary>
 public enum LeaderboardValueKind
@@ -68,7 +72,7 @@ public sealed partial class MinecraftService
     public const string ObjectivePrefix = "objective:";
 
     /// <summary>Bekannte Listen der Registry <c>rog.minecraft.games</c>; Spielzeit zuerst, Parkour zuletzt.</summary>
-    public static IReadOnlyList<string> Boards { get; } = [BoardPlaytime, "bedwars", "skywars", "tntrun", "buildbattle", "jumprace", "ttt", BoardParkour];
+    public static IReadOnlyList<string> Boards { get; } = [BoardPlaytime, "bedwars", "skywars", "tntrun", "buildbattle", "jumprace", "ttt", "royale", BoardParkour];
 
     public static IReadOnlyList<string> Periods { get; } = [PeriodAll, Period30Days];
 
@@ -140,7 +144,10 @@ public sealed partial class MinecraftService
                 ? parkour.Select(p => Str(p, "course") is { } course ? new ParkourBest(course, Str(p, "label") ?? course, Math.Max(0, LongOf(p, "best_ms"))) : null).OfType<ParkourBest>().ToList()
                 : [],
             d?["awards"] is JsonArray awards ? awards.Select(ParseAward).OfType<MinecraftAward>().ToList() : [],
-            d?["has_stats"] is JsonValue v && v.TryGetValue<bool>(out var has) && has);
+            d?["has_stats"] is JsonValue v && v.TryGetValue<bool>(out var has) && has)
+        {
+            Secrets = ParseSecretProgress(d?["secrets"]),
+        };
     }
 
     public static MinigameStats? ParseMinigame(JsonNode? n) =>

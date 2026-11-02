@@ -198,7 +198,7 @@ public sealed class UploadService(IRoGApiClient client, HttpClient storage)
     }
 
     /// <summary>Stream-Inhalt mit Fortschrittsmeldung (0…1).</summary>
-    private sealed class ProgressContent(Stream source, long length, IProgress<double>? progress) : HttpContent
+    internal sealed class ProgressContent(Stream source, long length, IProgress<double>? progress) : HttpContent
     {
         protected override async Task SerializeToStreamAsync(Stream stream, System.Net.TransportContext? context)
         {

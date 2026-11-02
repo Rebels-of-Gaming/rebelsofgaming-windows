@@ -30,6 +30,8 @@ public enum AppSection
     Friends,
     Leaderboards,
     MinecraftMap,
+    MinecraftSecrets,
+    Shop,
 }
 
 /// <summary>Ziel in der App: Bereich und optional ein Eintrag (Slug/ID) bzw. bei der Suche der Suchbegriff.</summary>
@@ -91,6 +93,10 @@ public sealed record AppRoute(AppSection Section, string? Key = null)
             "friends" => new AppRoute(AppSection.Friends),
             // Minecraft-Bestenlisten: /minecraft/leaderboards (Website v0.41.0)
             "minecraft" when key == "leaderboards" => new AppRoute(AppSection.Leaderboards),
+            "minecraft" when key == "secrets" => new AppRoute(AppSection.MinecraftSecrets),
+            // Shop & Spenden (Website v0.47.0): /shop, /shop/{produkt}, /shop/orders, /donate, /spenden, /minecraft/vip
+            "minecraft" when key == "vip" => new AppRoute(AppSection.Shop),
+            "shop" or "donate" or "spenden" => new AppRoute(AppSection.Shop),
             // Weltkarte: /minecraft/karte?server=&world=&x=&z= (Website v0.44.0, Link aus dem Spiel)
             "minecraft" when key == "karte" => Map(url.Query),
             // Beitritts-Anleitung: /minecraft (Website v0.43.0) → Server, Reiter Minecraft
@@ -159,6 +165,8 @@ public sealed record AppRoute(AppSection Section, string? Key = null)
             "bans" => new AppRoute(AppSection.Bans, key),
             "friends" => new AppRoute(AppSection.Friends),
             "leaderboards" => new AppRoute(AppSection.Leaderboards),
+            "secrets" => new AppRoute(AppSection.MinecraftSecrets),
+            "shop" => new AppRoute(AppSection.Shop),
             "map" => Map(uri.Query),
             "search" => query.TryGetValue("q", out var q) && q.Length > 0 ? new AppRoute(AppSection.Search, q) : null,
             "open" => query.TryGetValue("url", out var url) && Uri.TryCreate(url, UriKind.Absolute, out var web) ? FromWebUrl(web, environment) : null,

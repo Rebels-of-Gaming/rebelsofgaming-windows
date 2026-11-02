@@ -65,9 +65,13 @@ public sealed record ServerAbilities(
     bool Backups = false,
     bool ConfigApproval = false,
     bool Rcon = false,
-    bool Bans = false)
+    bool Bans = false,
+    bool FilesUpload = false)
 {
-    public bool Any => Power || Console || FilesRead || FilesWrite || FilesApprove || Backups || Rcon || Bans;
+    public bool Any => Power || Console || FilesRead || FilesWrite || FilesUpload || FilesApprove || Backups || Rcon || Bans;
+
+    /// <summary>Reiter „Uploads“ (Website v0.54.0): hochladen, freigeben oder nur lesen.</summary>
+    public bool Uploads => FilesUpload || FilesApprove || FilesRead;
 }
 
 /// <summary>Messpunkt der Auslastung (Spieler im Mittel je Zeitfenster).</summary>

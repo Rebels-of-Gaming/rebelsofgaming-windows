@@ -7023,4 +7023,457 @@
   <data name="McJoin_PackBusy.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Transfert du pack de ressources</value>
   </data>
+  <data name="Update_AvailableTitle" xml:space="preserve">
+    <value>Mise à jour disponible</value>
+  </data>
+  <data name="Update_AvailableMessage" xml:space="preserve">
+    <value>Une nouvelle version de Rebels of Gaming est disponible dans le Microsoft Store.</value>
+  </data>
+  <data name="Update_MandatoryTitle" xml:space="preserve">
+    <value>Mise à jour importante</value>
+  </data>
+  <data name="Update_MandatoryMessage" xml:space="preserve">
+    <value>Cette version ne sera bientôt plus prise en charge. Mets à jour maintenant – l’application redémarre ensuite.</value>
+  </data>
+  <data name="Update_Installing" xml:space="preserve">
+    <value>Téléchargement et installation de la mise à jour … {0} %</value>
+  </data>
+  <data name="Update_Failed" xml:space="preserve">
+    <value>La mise à jour n’a pas pu être installée. Réessaie plus tard ou mets à jour dans le Microsoft Store.</value>
+  </data>
+  <data name="Shell_UpdateNow.Content" xml:space="preserve">
+    <value>Mettre à jour</value>
+  </data>
+  <data name="Shell_UpdateLater.Content" xml:space="preserve">
+    <value>Plus tard</value>
+  </data>
+  <data name="Shell_UpdateLater.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Mettre à jour plus tard</value>
+  </data>
+  <data name="Shell_UpdateProgress.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Progression de la mise à jour</value>
+  </data>
+  <data name="Leaderboard_Board_royale" xml:space="preserve">
+    <value>Rebel Royale</value>
+  </data>
+  <data name="Secrets_FoundOf" xml:space="preserve">
+    <value>{0} sur {1}</value>
+  </data>
+  <data name="Secrets_Total" xml:space="preserve">
+    <value>{0} secrets</value>
+  </data>
+  <data name="Secrets_Finders" xml:space="preserve">
+    <value>Trouvé par {0}</value>
+  </data>
+  <data name="Secrets_FoundAt" xml:space="preserve">
+    <value>trouvé par toi le {0}</value>
+  </data>
+  <data name="SecretsPage_Title.Text" xml:space="preserve">
+    <value>SECRETS MINECRAFT</value>
+  </data>
+  <data name="SecretsPage_Intro.Text" xml:space="preserve">
+    <value>Des secrets sont cachés dans le lobby. Ta première trouvaille te rapporte une récompense en jeu et un succès sur ton profil. Nous ne révélons pas où ils sont – seulement un indice.</value>
+  </data>
+  <data name="SecretsPage_Leaderboards.Content" xml:space="preserve">
+    <value>Classements</value>
+  </data>
+  <data name="SecretsPage_State.EmptyText" xml:space="preserve">
+    <value>Aucun secret visible pour l’instant.</value>
+  </data>
+  <data name="LeaderboardsPage_Secrets.Content" xml:space="preserve">
+    <value>Secrets Minecraft</value>
+  </data>
+  <data name="McJoin_Secrets.Content" xml:space="preserve">
+    <value>Secrets Minecraft dans le lobby</value>
+  </data>
+  <data name="MembersPage_Secrets.Text" xml:space="preserve">
+    <value>SUCCÈS : SECRETS DU LOBBY</value>
+  </data>
+  <data name="MembersPage_AllSecrets.Content" xml:space="preserve">
+    <value>Tous les secrets</value>
+  </data>
+  <data name="Upload_FilterOpen" xml:space="preserve">
+    <value>Envois en cours</value>
+  </data>
+  <data name="Upload_FilterPending" xml:space="preserve">
+    <value>En attente de validation</value>
+  </data>
+  <data name="Upload_FilterAll" xml:space="preserve">
+    <value>Tous les envois</value>
+  </data>
+  <data name="Upload_Extensions" xml:space="preserve">
+    <value>Extensions : {0}</value>
+  </data>
+  <data name="Upload_MaxSize" xml:space="preserve">
+    <value>jusqu’à {0} Mo</value>
+  </data>
+  <data name="Upload_FolderApproval" xml:space="preserve">
+    <value>chaque fichier doit être validé</value>
+  </data>
+  <data name="Upload_CodeApproval" xml:space="preserve">
+    <value>code ({0}) soumis à validation</value>
+  </data>
+  <data name="Upload_Sent" xml:space="preserve">
+    <value>Envoyé. Le fichier est vérifié puis transféré vers le serveur.</value>
+  </data>
+  <data name="Upload_SentForApproval" xml:space="preserve">
+    <value>Envoyé. Après vérification, le fichier attend la validation d’une deuxième personne.</value>
+  </data>
+  <data name="Upload_CancelTitle" xml:space="preserve">
+    <value>Retirer l’envoi ?</value>
+  </data>
+  <data name="Upload_ApproveTitle" xml:space="preserve">
+    <value>Valider l’envoi et le transférer vers le serveur ?</value>
+  </data>
+  <data name="Upload_RejectTitle" xml:space="preserve">
+    <value>Refuser l’envoi ?</value>
+  </data>
+  <data name="Upload_Approved" xml:space="preserve">
+    <value>Validé – le fichier est en cours de transfert.</value>
+  </data>
+  <data name="Upload_Rejected" xml:space="preserve">
+    <value>Refusé – le fichier a été supprimé.</value>
+  </data>
+  <data name="Upload_Overwrites" xml:space="preserve">
+    <value>remplace le fichier existant</value>
+  </data>
+  <data name="Upload_ReasonCode" xml:space="preserve">
+    <value>code – double validation</value>
+  </data>
+  <data name="Upload_ReasonApproval" xml:space="preserve">
+    <value>nécessite une validation</value>
+  </data>
+  <data name="Upload_DecidedBy" xml:space="preserve">
+    <value>décidé par {0}</value>
+  </data>
+  <data name="Upload_Entries" xml:space="preserve">
+    <value>Archive de {0} entrées</value>
+  </data>
+  <data name="Upload_CodeEntries" xml:space="preserve">
+    <value>Contient du code :</value>
+  </data>
+  <data name="Upload_Status_awaiting" xml:space="preserve">
+    <value>en attente du fichier</value>
+  </data>
+  <data name="Upload_Status_verifying" xml:space="preserve">
+    <value>vérification</value>
+  </data>
+  <data name="Upload_Status_pending" xml:space="preserve">
+    <value>en attente de validation</value>
+  </data>
+  <data name="Upload_Status_queued" xml:space="preserve">
+    <value>en file d’attente</value>
+  </data>
+  <data name="Upload_Status_transferring" xml:space="preserve">
+    <value>transfert en cours</value>
+  </data>
+  <data name="Upload_Status_completed" xml:space="preserve">
+    <value>sur le serveur</value>
+  </data>
+  <data name="Upload_Status_failed" xml:space="preserve">
+    <value>échec</value>
+  </data>
+  <data name="Upload_Status_rejected" xml:space="preserve">
+    <value>refusé</value>
+  </data>
+  <data name="Upload_Status_cancelled" xml:space="preserve">
+    <value>retiré</value>
+  </data>
+  <data name="Upload_Status_expired" xml:space="preserve">
+    <value>expiré</value>
+  </data>
+  <data name="Error_target_exists" xml:space="preserve">
+    <value>Le fichier existe déjà sur le serveur. Choisis « Remplacer le fichier existant » (validation requise).</value>
+  </data>
+  <data name="Error_server_not_linked" xml:space="preserve">
+    <value>Le serveur n’est pas lié au panneau.</value>
+  </data>
+  <data name="Error_file_too_large" xml:space="preserve">
+    <value>Le fichier dépasse la taille autorisée pour ce dossier.</value>
+  </data>
+  <data name="Error_invalid_filename" xml:space="preserve">
+    <value>Nom de fichier invalide – avec extension et sans chemin.</value>
+  </data>
+  <data name="Error_upload_target_forbidden" xml:space="preserve">
+    <value>L’envoi vers ce dossier ou ce fichier n’est pas autorisé.</value>
+  </data>
+  <data name="Error_extension_not_allowed" xml:space="preserve">
+    <value>Cette extension n’est pas autorisée dans ce dossier.</value>
+  </data>
+  <data name="Error_too_many_open_uploads" xml:space="preserve">
+    <value>Trop d’envois en cours – termine ou retire-en d’abord.</value>
+  </data>
+  <data name="Error_too_many_requests" xml:space="preserve">
+    <value>Trop de requêtes – patiente un peu.</value>
+  </data>
+  <data name="Error_presign_unavailable" xml:space="preserve">
+    <value>Le stockage des envois est indisponible pour le moment.</value>
+  </data>
+  <data name="Error_upload_not_cancellable" xml:space="preserve">
+    <value>L’envoi est déjà en cours de transfert et ne peut plus être retiré.</value>
+  </data>
+  <data name="Error_upload_not_awaiting" xml:space="preserve">
+    <value>L’envoi a déjà été finalisé.</value>
+  </data>
+  <data name="Error_upload_expired" xml:space="preserve">
+    <value>L’envoi a expiré – recommence.</value>
+  </data>
+  <data name="Error_file_missing" xml:space="preserve">
+    <value>Le fichier n’est pas encore arrivé dans le stockage.</value>
+  </data>
+  <data name="Error_invalid_file" xml:space="preserve">
+    <value>Le fichier est vide, endommagé ou ne correspond pas à son extension.</value>
+  </data>
+  <data name="Error_own_upload" xml:space="preserve">
+    <value>Tes propres envois doivent être validés par une autre personne.</value>
+  </data>
+  <data name="Error_upload_not_pending" xml:space="preserve">
+    <value>Une décision a déjà été prise pour cet envoi.</value>
+  </data>
+  <data name="Console_TabUploads.Text" xml:space="preserve">
+    <value>Envois</value>
+  </data>
+  <data name="Upload_NoTargets.Text" xml:space="preserve">
+    <value>Aucun dossier d’envoi n’est configuré pour ce serveur.</value>
+  </data>
+  <data name="Upload_Target.Header" xml:space="preserve">
+    <value>Dossier</value>
+  </data>
+  <data name="Upload_Pick.Content" xml:space="preserve">
+    <value>Envoyer un fichier …</value>
+  </data>
+  <data name="Upload_Overwrite.Content" xml:space="preserve">
+    <value>Remplacer le fichier existant</value>
+  </data>
+  <data name="Upload_Note.Header" xml:space="preserve">
+    <value>Note pour la validation (facultatif)</value>
+  </data>
+  <data name="Upload_Progress.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Progression de l’envoi</value>
+  </data>
+  <data name="Upload_Filter.Header" xml:space="preserve">
+    <value>Afficher</value>
+  </data>
+  <data name="Upload_Empty.Text" xml:space="preserve">
+    <value>Aucun envoi dans cette vue.</value>
+  </data>
+  <data name="Upload_Cancel.Content" xml:space="preserve">
+    <value>Retirer</value>
+  </data>
+  <data name="Heads_AllCategories" xml:space="preserve">
+    <value>Toutes les catégories</value>
+  </data>
+  <data name="Heads_NewTitle" xml:space="preserve">
+    <value>NOUVELLE TÊTE</value>
+  </data>
+  <data name="Heads_EditTitle" xml:space="preserve">
+    <value>MODIFIER LA TÊTE</value>
+  </data>
+  <data name="Heads_InvalidName" xml:space="preserve">
+    <value>Noms : l’allemand est obligatoire, 48 caractères max. en texte brut (pas de codes § ni de &lt;balises&gt;).</value>
+  </data>
+  <data name="Heads_InvalidPrice" xml:space="preserve">
+    <value>Prix : laisser vide (prix de la catégorie) ou 1 à 1 000 000 Rebel Coins.</value>
+  </data>
+  <data name="Heads_InvalidTexture" xml:space="preserve">
+    <value>Texture : 40 à 64 caractères hexadécimaux ou une adresse textures.minecraft.net/texture/….</value>
+  </data>
+  <data name="Heads_Saved" xml:space="preserve">
+    <value>Tête enregistrée. Les serveurs la reprennent en quelques minutes.</value>
+  </data>
+  <data name="Heads_Created" xml:space="preserve">
+    <value>Tête créée. L’aperçu est généré en arrière-plan.</value>
+  </data>
+  <data name="Heads_DeleteTitle" xml:space="preserve">
+    <value>Supprimer la tête du catalogue ?</value>
+  </data>
+  <data name="Heads_Deleted" xml:space="preserve">
+    <value>Tête supprimée. Les têtes déjà achetées restent dans les inventaires.</value>
+  </data>
+  <data name="Heads_PriceValue" xml:space="preserve">
+    <value>{0} Rebel Coins</value>
+  </data>
+  <data name="Heads_CategoryPrice" xml:space="preserve">
+    <value>prix de la catégorie</value>
+  </data>
+  <data name="Error_head_exists" xml:space="preserve">
+    <value>Cette texture est déjà dans le catalogue.</value>
+  </data>
+  <data name="AdminPage_TabHeads.Text" xml:space="preserve">
+    <value>Têtes</value>
+  </data>
+  <data name="Heads_Search.PlaceholderText" xml:space="preserve">
+    <value>Rechercher nom, tag ou texture</value>
+  </data>
+  <data name="Heads_Search.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Rechercher des têtes</value>
+  </data>
+  <data name="Heads_CategoryFilter.Header" xml:space="preserve">
+    <value>Catégorie</value>
+  </data>
+  <data name="Heads_New.Content" xml:space="preserve">
+    <value>Nouvelle tête</value>
+  </data>
+  <data name="Heads_Empty.Text" xml:space="preserve">
+    <value>Aucune tête trouvée.</value>
+  </data>
+  <data name="Heads_List.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Têtes du catalogue</value>
+  </data>
+  <data name="Heads_Hint.Text" xml:space="preserve">
+    <value>Les plugins récupèrent le catalogue toutes les 5 minutes. Les joueurs achètent des têtes en jeu avec /heads contre des Rebel Coins. La texture ne peut plus être modifiée après la création.</value>
+  </data>
+  <data name="Heads_Texture.Header" xml:space="preserve">
+    <value>Hash de texture (textures.minecraft.net)</value>
+  </data>
+  <data name="Heads_NameDe.Header" xml:space="preserve">
+    <value>Nom (allemand)</value>
+  </data>
+  <data name="Heads_NameEn.Header" xml:space="preserve">
+    <value>Nom (anglais, facultatif)</value>
+  </data>
+  <data name="Heads_NameFr.Header" xml:space="preserve">
+    <value>Nom (français, facultatif)</value>
+  </data>
+  <data name="Heads_Category.Header" xml:space="preserve">
+    <value>Catégorie</value>
+  </data>
+  <data name="Heads_Tags.Header" xml:space="preserve">
+    <value>Tags (séparés par des virgules, 10 max.)</value>
+  </data>
+  <data name="Heads_Price.Header" xml:space="preserve">
+    <value>Prix en Rebel Coins (vide = prix de la catégorie)</value>
+  </data>
+  <data name="Heads_Save.Content" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="Heads_Delete.Content" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="Heads_Category_alphabet" xml:space="preserve">
+    <value>Alphabet</value>
+  </data>
+  <data name="Heads_Category_animals" xml:space="preserve">
+    <value>Animaux</value>
+  </data>
+  <data name="Heads_Category_blocks" xml:space="preserve">
+    <value>Blocs</value>
+  </data>
+  <data name="Heads_Category_decoration" xml:space="preserve">
+    <value>Décoration</value>
+  </data>
+  <data name="Heads_Category_food" xml:space="preserve">
+    <value>Nourriture</value>
+  </data>
+  <data name="Heads_Category_humans" xml:space="preserve">
+    <value>Humains</value>
+  </data>
+  <data name="Heads_Category_monsters" xml:space="preserve">
+    <value>Monstres</value>
+  </data>
+  <data name="Heads_Category_plants" xml:space="preserve">
+    <value>Plantes</value>
+  </data>
+  <data name="Heads_Category_misc" xml:space="preserve">
+    <value>Divers</value>
+  </data>
+  <data name="Heads_Category_rog" xml:space="preserve">
+    <value>RoG</value>
+  </data>
+  <data name="Shop_DonationRange" xml:space="preserve">
+    <value>Montant libre : de {0} à {1}</value>
+  </data>
+  <data name="Shop_Permanent" xml:space="preserve">
+    <value>permanent</value>
+  </data>
+  <data name="Shop_Duration" xml:space="preserve">
+    <value>{0} jours</value>
+  </data>
+  <data name="Shop_ValidUntil" xml:space="preserve">
+    <value>valable jusqu’au {0}</value>
+  </data>
+  <data name="Shop_Sandbox" xml:space="preserve">
+    <value>paiement de test</value>
+  </data>
+  <data name="Shop_Donation" xml:space="preserve">
+    <value>Don</value>
+  </data>
+  <data name="Shop_Product" xml:space="preserve">
+    <value>Commande</value>
+  </data>
+  <data name="Shop_Status_pending" xml:space="preserve">
+    <value>en attente</value>
+  </data>
+  <data name="Shop_Status_paid" xml:space="preserve">
+    <value>payé</value>
+  </data>
+  <data name="Shop_Status_failed" xml:space="preserve">
+    <value>échoué</value>
+  </data>
+  <data name="Shop_Status_refunded" xml:space="preserve">
+    <value>remboursé</value>
+  </data>
+  <data name="Shop_Status_expired" xml:space="preserve">
+    <value>expiré</value>
+  </data>
+  <data name="ShopPage_Title.Text" xml:space="preserve">
+    <value>BOUTIQUE &amp; DONS</value>
+  </data>
+  <data name="ShopPage_Intro.Text" xml:space="preserve">
+    <value>Un rang de soutien ou un don aide à financer les serveurs et le site. Les rangs sont purement cosmétiques – aucun avantage en jeu. Le paiement se fait sur le site via les pages sécurisées des prestataires.</value>
+  </data>
+  <data name="ShopPage_State.EmptyText" xml:space="preserve">
+    <value>Il n’y a rien dans la boutique pour le moment.</value>
+  </data>
+  <data name="ShopPage_Closed.Text" xml:space="preserve">
+    <value>La boutique et les dons sont fermés pour le moment.</value>
+  </data>
+  <data name="ShopPage_BuyOnWebsite.Content" xml:space="preserve">
+    <value>Acheter sur le site</value>
+  </data>
+  <data name="ShopPage_DonateTitle.Text" xml:space="preserve">
+    <value>FAIRE UN DON</value>
+  </data>
+  <data name="ShopPage_DonateText.Text" xml:space="preserve">
+    <value>Un don est volontaire et sans contrepartie. Si tu le souhaites, tu apparais sur la liste de remerciements (nom et mois uniquement, jamais le montant).</value>
+  </data>
+  <data name="ShopPage_DonateOnWebsite.Content" xml:space="preserve">
+    <value>Faire un don sur le site</value>
+  </data>
+  <data name="ShopPage_Supporters.Text" xml:space="preserve">
+    <value>Merci à</value>
+  </data>
+  <data name="ShopPage_Orders.Text" xml:space="preserve">
+    <value>MES COMMANDES &amp; DONS</value>
+  </data>
+  <data name="ShopPage_Receipt.Content" xml:space="preserve">
+    <value>Reçu sur le site</value>
+  </data>
+  <data name="AccountPage_Shop.Content" xml:space="preserve">
+    <value>Boutique &amp; dons</value>
+  </data>
+  <data name="AppStats_Summary" xml:space="preserve">
+    <value>Téléchargements au total {0} · 30 derniers jours {1} · appareils {2} (actifs {3})</value>
+  </data>
+  <data name="AppStats_LastImport" xml:space="preserve">
+    <value>Rapports des stores récupérés le : {0}</value>
+  </data>
+  <data name="AppStats_NoStore" xml:space="preserve">
+    <value>Pas encore de store</value>
+  </data>
+  <data name="AppStats_Store" xml:space="preserve">
+    <value>Store : {0} téléchargements · 30 jours {1} · mises à jour 30 jours {2}</value>
+  </data>
+  <data name="AppStats_StoreNotConfigured" xml:space="preserve">
+    <value>rapport du store non configuré</value>
+  </data>
+  <data name="AppStats_Devices" xml:space="preserve">
+    <value>appareils {0} · actifs {1} · comptes {2}</value>
+  </data>
+  <data name="AdminPage_TabApps.Text" xml:space="preserve">
+    <value>Apps</value>
+  </data>
+  <data name="AppStats_Hint.Text" xml:space="preserve">
+    <value>Les chiffres des stores arrivent avec 1 à 2 jours de retard. Uniquement des totaux, aucune donnée personnelle.</value>
+  </data>
 </root>

@@ -175,7 +175,7 @@ public sealed class MemberListItem(string slug, string name, Uri? avatar, string
 
     public string Name => name;
 
-    public ImageSource? Avatar { get; } = avatar is null ? null : new BitmapImage(avatar) { DecodePixelWidth = 64 };
+    public ImageSource? Avatar { get; } = avatar is null ? null : RemoteImage.From(avatar, 64);
 
     public string Subtitle => subtitle ?? string.Empty;
 
@@ -302,6 +302,12 @@ public sealed partial class MemberDetailViewModel(AppServices services, MemberSe
     /// <summary>Minecraft-Statistiken (nur mit Opt-in, <c>profile.minecraft</c> bzw. <c>…/minecraft-stats</c>).</summary>
     public ObservableCollection<StatLineViewModel> MinecraftLines { get; } = [];
 
+    /// <summary>Lobby-Secrets als Erfolg: je Gruppe „5 von 7“, gefundene mit Datum, ungefundene als „???“ mit Hinweis.</summary>
+    public ObservableCollection<StatLineViewModel> SecretLines { get; } = [];
+
+    [ObservableProperty]
+    public partial bool HasSecrets { get; set; }
+
     [ObservableProperty]
     public partial bool HasMinecraft { get; set; }
 
@@ -334,8 +340,8 @@ public sealed partial class MemberDetailViewModel(AppServices services, MemberSe
         CanReport = CanMessage;
         CanBefriend = CanMessage && Services.CurrentUser?.HasScope(RoG.Core.Features.Friends.FriendsService.WriteScope) == true;
         IsFriendFeedbackOpen = false;
-        Avatar = s.Avatar is null ? null : new BitmapImage(s.Avatar);
-        Banner = p.Banner is null ? null : new BitmapImage(p.Banner);
+        Avatar = s.Avatar is null ? null : RemoteImage.From(s.Avatar);
+        Banner = p.Banner is null ? null : RemoteImage.From(p.Banner);
         Rank = s.RankLabel;
         RankBrush = AccountViewModel.ColorFromHex(s.RankColor) is { } c ? new SolidColorBrush(c) : (Brush)Application.Current.Resources["RoGGoldBrush"];
         PresenceBrushValue = PresenceBrush(s.Presence);
@@ -388,6 +394,8 @@ public sealed partial class MemberDetailViewModel(AppServices services, MemberSe
     private async Task LoadMinecraftAsync(string slug, MemberMinecraft? summary, CancellationToken cancellationToken)
     {
         MinecraftLines.Clear();
+        SecretLines.Clear();
+        HasSecrets = false;
         HasMinecraft = summary is not null;
         if (summary is null)
         {
@@ -431,6 +439,20 @@ public sealed partial class MemberDetailViewModel(AppServices services, MemberSe
             {
                 MinecraftLines.Add(new StatLineViewModel(Format(StringKeys.StatsParkour, course.Label), MinecraftService.FormatDuration(course.BestMs)));
             }
+
+            SecretLines.Clear();
+            foreach (var group in stats.Secrets)
+            {
+                SecretLines.Add(new StatLineViewModel(group.Label, Format(StringKeys.SecretsFoundOf, group.Found, group.Total)));
+                foreach (var secret in group.Secrets)
+                {
+                    SecretLines.Add(secret.Found
+                        ? new StatLineViewModel("✓ " + secret.Name, secret.FoundAt?.ToLocalTime().ToString("d", CultureInfo.CurrentCulture) ?? string.Empty)
+                        : new StatLineViewModel("??? " + (secret.Hint is { Length: > 0 } hint ? "– " + hint : string.Empty), string.Empty));
+                }
+            }
+
+            HasSecrets = SecretLines.Count > 0;
         }
         catch (Exception ex) when (ex is RoG.Core.Api.ApiProblemException or System.Text.Json.JsonException or HttpRequestException)
         {

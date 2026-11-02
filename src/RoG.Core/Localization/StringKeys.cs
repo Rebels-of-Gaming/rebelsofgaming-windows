@@ -1424,6 +1424,38 @@ public static class StringKeys
 
     public const string AppStatsDevices = "AppStats_Devices";
 
+    public const string TourTitle = "Tour_Title";
+
+    public const string TourNext = "Tour_Next";
+
+    public const string TourBack = "Tour_Back";
+
+    public const string TourSkip = "Tour_Skip";
+
+    public const string TourDone = "Tour_Done";
+
+    public const string TourStep = "Tour_Step";
+
+    public const string ReviewPromptTitle = "ReviewPrompt_Title";
+
+    public const string ReviewPromptText = "ReviewPrompt_Text";
+
+    public const string ReviewPromptRate = "ReviewPrompt_Rate";
+
+    public const string ReviewPromptLater = "ReviewPrompt_Later";
+
+    public const string ReviewPromptNever = "ReviewPrompt_Never";
+
+    public const string ShareAppTitle = "ShareApp_Title";
+
+    public const string ShareAppMessage = "ShareApp_Message";
+
+    public const string ShareAppMicrosoftStore = "ShareApp_MicrosoftStore";
+
+    public const string ShareAppAppStore = "ShareApp_AppStore";
+
+    public const string ShareAppPlayStore = "ShareApp_PlayStore";
+
     public const string ErrorPrefix = "Error_";
 
     /// <summary>Fehlercodes, für die es immer einen Text geben muss (Pipeline, Login, Guide 35).</summary>

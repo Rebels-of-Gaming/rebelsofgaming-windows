@@ -123,6 +123,7 @@ public sealed partial class ChatViewModel : LoadableViewModel, IDisposable
             Draft = string.Empty;
             QuoteTarget = null;
             Append(sent);
+            Services.PositiveMoment();
         }
         catch (ApiProblemException ex) when (ex.Problem.IsNetworkError)
         {

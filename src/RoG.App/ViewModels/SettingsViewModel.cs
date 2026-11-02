@@ -85,6 +85,38 @@ public sealed partial class SettingsViewModel : ObservableObject
 
     public string AppVersionText { get; }
 
+    private RoG.Core.Features.About.StoreLinks _storeLinks = RoG.Core.Features.About.StoreLinks.None;
+
+    /// <summary>„App teilen“ nur, wenn die Website Store-Links eingetragen hat (<c>data.apps</c>).</summary>
+    [ObservableProperty]
+    public partial bool CanShareApp { get; set; }
+
+    /// <summary>Store-Bewertung (Dialog des Stores, sonst Bewertungsseite in der Store-App, zuletzt der Store-Link im Browser).</summary>
+    [RelayCommand]
+    private async Task RateAppAsync()
+    {
+        if (!await StoreReviewService.RequestAsync() && _storeLinks.MicrosoftStore is { } web)
+        {
+            await _services.Browser.OpenAsync(web);
+        }
+    }
+
+    /// <summary>Windows-Teilen-Dialog mit den Store-Links aller Apps (wie „App weitergeben“ in der Handy-App).</summary>
+    [RelayCommand]
+    private void ShareApp()
+    {
+        var l = _services.Localizer;
+        if (_storeLinks.ShareText(l.GetString(StringKeys.ShareAppMessage), l.GetString(StringKeys.ShareAppMicrosoftStore),
+            l.GetString(StringKeys.ShareAppAppStore), l.GetString(StringKeys.ShareAppPlayStore)) is { } text)
+        {
+            ShareService.ShareText(l.GetString(StringKeys.ShareAppTitle), text);
+        }
+    }
+
+    /// <summary>Funktions-Tour erneut zeigen.</summary>
+    [RelayCommand]
+    private Task ShowTourAsync() => _services.TourPresenter?.Invoke() ?? Task.CompletedTask;
+
     /// <summary>Gründungsjahr des Clans – Copyright-Zeile wie im Website-Footer (<c>rog.clan.founded</c>).</summary>
     private const int ClanFounded = 2020;
 
@@ -105,6 +137,8 @@ public sealed partial class SettingsViewModel : ObservableObject
         {
             var platform = await _services.Account.GetPlatformAsync();
             PlatformText = Format(StringKeys.SettingsPlatformVersion, platform.Version);
+            _storeLinks = platform.StoreLinks;
+            CanShareApp = _storeLinks.HasAny;
         }
         catch (ApiProblemException)
         {

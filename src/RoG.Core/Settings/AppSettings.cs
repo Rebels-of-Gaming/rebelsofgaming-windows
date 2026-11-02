@@ -50,6 +50,21 @@ public sealed record AppSettings
 
     /// <summary>Zuletzt geöffneter Bereich (Navigations-Schlüssel wie <c>Nav_Servers</c>).</summary>
     public string? LastSection { get; init; }
+
+    /// <summary>Erster Start dieser Installation (für die Bewertungsbitte frühestens nach einer Woche).</summary>
+    public DateTimeOffset? FirstRunAt { get; init; }
+
+    /// <summary>Zuletzt gesehene Version der Funktions-Tour (<c>FeatureTour.Version</c>); 0 = noch nie.</summary>
+    public int TourVersion { get; init; }
+
+    /// <summary>Positive Momente seit der letzten Bewertungsbitte (gedeckelt).</summary>
+    public int ReviewMoments { get; init; }
+
+    /// <summary>Zeitpunkt der letzten Bewertungsbitte.</summary>
+    public DateTimeOffset? ReviewAskedAt { get; init; }
+
+    /// <summary>„Nicht mehr fragen“ bei der Bewertungsbitte gewählt.</summary>
+    public bool ReviewNeverAsk { get; init; }
 }
 
 /// <summary>Gemerkter Fensterzustand.</summary>

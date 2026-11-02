@@ -7476,4 +7476,97 @@
   <data name="AppStats_Hint.Text" xml:space="preserve">
     <value>Store figures arrive 1–2 days late. Totals only, no personal data.</value>
   </data>
+  <data name="Tour_Title" xml:space="preserve">
+    <value>Welcome to RoG</value>
+  </data>
+  <data name="Tour_Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="Tour_Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Tour_Skip" xml:space="preserve">
+    <value>Skip</value>
+  </data>
+  <data name="Tour_Done" xml:space="preserve">
+    <value>Let’s go</value>
+  </data>
+  <data name="Tour_Step" xml:space="preserve">
+    <value>{0} of {1}</value>
+  </data>
+  <data name="ReviewPrompt_Title" xml:space="preserve">
+    <value>Rate the app?</value>
+  </data>
+  <data name="ReviewPrompt_Text" xml:space="preserve">
+    <value>If you like the app, a short review in the Microsoft Store helps more people find the clan. Completely optional – we ask at most every few months.</value>
+  </data>
+  <data name="ReviewPrompt_Rate" xml:space="preserve">
+    <value>Rate</value>
+  </data>
+  <data name="ReviewPrompt_Later" xml:space="preserve">
+    <value>Later</value>
+  </data>
+  <data name="ReviewPrompt_Never" xml:space="preserve">
+    <value>Don’t ask again</value>
+  </data>
+  <data name="ShareApp_Title" xml:space="preserve">
+    <value>Share the app</value>
+  </data>
+  <data name="ShareApp_Message" xml:space="preserve">
+    <value>Rebels of Gaming – the clan app</value>
+  </data>
+  <data name="ShareApp_MicrosoftStore" xml:space="preserve">
+    <value>Microsoft Store (Windows)</value>
+  </data>
+  <data name="ShareApp_AppStore" xml:space="preserve">
+    <value>App Store (iPhone, iPad)</value>
+  </data>
+  <data name="ShareApp_PlayStore" xml:space="preserve">
+    <value>Google Play (Android)</value>
+  </data>
+  <data name="SettingsPage_RateApp.Content" xml:space="preserve">
+    <value>Rate app</value>
+  </data>
+  <data name="SettingsPage_ShareApp.Content" xml:space="preserve">
+    <value>Share app</value>
+  </data>
+  <data name="SettingsPage_Tour.Content" xml:space="preserve">
+    <value>Feature tour</value>
+  </data>
+  <data name="Tour_Forum_Title" xml:space="preserve">
+    <value>Forum</value>
+  </data>
+  <data name="Tour_Forum_Text" xml:space="preserve">
+    <value>Discuss in boards and threads, vote in polls and reply with formatting, quotes and images.</value>
+  </data>
+  <data name="Tour_Messages_Title" xml:space="preserve">
+    <value>Messages</value>
+  </data>
+  <data name="Tour_Messages_Text" xml:space="preserve">
+    <value>Real-time direct messages – any conversation in its own window if you like, even next to your game.</value>
+  </data>
+  <data name="Tour_Events_Title" xml:space="preserve">
+    <value>Events</value>
+  </data>
+  <data name="Tour_Events_Text" xml:space="preserve">
+    <value>Clan nights, matches and tournaments in the calendar: RSVP, see who’s coming and add them to your calendar.</value>
+  </data>
+  <data name="Tour_Servers_Title" xml:space="preserve">
+    <value>Game servers &amp; stats</value>
+  </data>
+  <data name="Tour_Servers_Text" xml:space="preserve">
+    <value>See live who’s playing on our servers, connect with one click and compare yourself on the leaderboards.</value>
+  </data>
+  <data name="Tour_Notifications_Title" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="Tour_Notifications_Text" xml:space="preserve">
+    <value>Replies, messages and events as Windows notifications – choose what you get under Settings.</value>
+  </data>
+  <data name="Tour_Profile_Title" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="Tour_Profile_Text" xml:space="preserve">
+    <value>Show off your games, squads and achievements. You can find this tour again any time under Settings → About.</value>
+  </data>
 </root>

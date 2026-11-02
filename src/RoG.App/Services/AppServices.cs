@@ -82,6 +82,29 @@ public sealed class AppServices : IDisposable
 
     public void RequestSignIn() => SignInRequested?.Invoke(this, EventArgs.Empty);
 
+    /// <summary>Zeigt die Funktions-Tour (setzt das Hauptfenster).</summary>
+    public Func<Task>? TourPresenter { get; set; }
+
+    /// <summary>Ein positiver Moment wurde gezählt (Beitrag, Nachricht, Zusage); das Hauptfenster prüft die Bewertungsbitte.</summary>
+    public event EventHandler? PositiveMomentRecorded;
+
+    /// <summary>Positiven Moment zählen (für die seltene Bewertungsbitte, <see cref="RoG.Core.Features.About.ReviewPrompt"/>).</summary>
+    public void PositiveMoment() => _ = PositiveMomentAsync();
+
+    private async Task PositiveMomentAsync()
+    {
+        try
+        {
+            await UpdateSettingsAsync(RoG.Core.Features.About.ReviewPrompt.Moment);
+        }
+        catch (IOException)
+        {
+            return; // Einstellungsdatei gesperrt – Moment verfällt
+        }
+
+        PositiveMomentRecorded?.Invoke(this, EventArgs.Empty);
+    }
+
     /// <summary>Vom Hauptfenster gesetzt: öffnet einen Bereich (optional mit Eintrag); <c>false</c> = gibt es in der App nicht.</summary>
     public Func<RoG.Core.Navigation.AppRoute, bool>? Navigator { get; set; }
 

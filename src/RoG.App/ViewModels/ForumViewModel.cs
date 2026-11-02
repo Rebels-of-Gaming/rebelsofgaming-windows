@@ -164,6 +164,7 @@ public sealed partial class ForumViewModel : LoadableViewModel, IDisposable
         await LoadThreadsAsync(category, null);
         ThreadForced = true;
         await Thread.ShowAsync(id);
+        Services.PositiveMoment();
         return id;
     }
 
@@ -411,6 +412,7 @@ public sealed partial class ThreadViewModel(AppServices services, ForumService f
             Draft = string.Empty;
             ShowPreview = false;
             Show(Services.Localizer.GetString(StringKeys.ForumReplySent), InfoBarSeverity.Success);
+            Services.PositiveMoment();
             await LoadAsync(silent: true);
         }
         catch (ApiProblemException ex) when (ex.Problem.IsNetworkError)

@@ -599,6 +599,10 @@ sich einmal neu an (2FA).
 - Ab 2.5.10: Die öffentliche Ban-Liste und Einsprüche zeigt die App nur an (kein Cache); eine Stellungnahme geht nur an
   die Plattform und wird dort ein öffentlich lesbares Forum-Thema – darauf weist das Formular hin.
 - Ab 2.5.18: Rebel-Coins (Kontostand, Serie, Buchungen) zeigt die App nur an (kein Cache); die Sichtbarkeit im Profil liegt nur auf dem Server.
+- Unveröffentlicht (02.11.2026): In den Einstellungen (JSON im App-Datenordner) liegen zusätzlich Zeitpunkt des ersten
+  Starts, gesehene Tour-Version, Zähler positiver Momente (höchstens 3), Zeitpunkt der letzten Bewertungsbitte und
+  „Nicht mehr fragen“ – nur lokal, nichts davon geht an die Plattform oder Dritte. „App teilen“ übergibt nur die
+  Store-Links an den Windows-Teilen-Dialog; wohin geteilt wird, entscheidet die Person.
 - Unveröffentlicht (Audit 01.11.2026): Bilder lädt die App nur von den Domains der Plattform (`media` in `environments.json`), nie direkt von fremden Hosts; der Geräte-Token geht nur an den eigenen API-Host; Token-Tresor je Umgebung (Konto-Metadaten `account.<umgebung>.json` außer Produktion); Downloads bekommen die Mark-of-the-Web (Datenstrom `Zone.Identifier` mit Quell-Adresse ohne Abfrage).
 - Ab 2.5.26: Ein hochgeladenes Ressourcenpaket geht nur an die Plattform (kein lokaler Speicher); Herunterladen läuft über den Browser vom eigenen CDN.
 - Ab 2.5.25: Weltkarte – Kachel-Index und Live-Positionen nur im Arbeitsspeicher, solange die Seite offen ist (kein Cache, nichts auf der Platte); Kachelbilder und Köpfe nur vom eigenen Speicher/CDN der Plattform.
@@ -698,6 +702,14 @@ docs/
 24. **Store-Updates (01.11.2026):** Abfrage 20 s nach dem Start und danach stündlich, sobald 6 h vergangen sind; nur bei
     Paket-Signatur `Store`. „Später“ blendet bis zur nächsten Abfrage aus, Pflicht-Updates (`IsMandatory`) bleiben
     sichtbar und haben kein „Später“.
+25. **Bewertungsbitte (02.11.2026):** nur bei Store-Installation, frühestens 7 Tage nach dem ersten Start, erst nach der
+    Funktions-Tour und nach 3 positiven Momenten (Forenbeitrag/-thema, gesendete Direktnachricht, Zusage zu einem
+    Termin), höchstens einmal je Start und alle 120 Tage; „Nicht mehr fragen“ gilt dauerhaft. Neutral formuliert, ohne
+    Sterne-Vorgabe oder Anreiz – „Bewerten“ öffnet den Dialog des Stores (`RequestRateAndReviewAppAsync`).
+26. **Funktions-Tour (02.11.2026):** sechs Karten (Forum, Nachrichten, Termine, Gameserver & Statistiken,
+    Benachrichtigungen, Profil) als Dialog einmal nach der Anmeldung (als Gast nie), vor dem Hinweis auf neue Regeln;
+    Überspringen zählt als gesehen, erneut unter Einstellungen → Über die App. `FeatureTour.Version` erhöhen zeigt sie
+    nach größeren Änderungen noch einmal.
 
 ## Offene Fragen (an Wahke)
 

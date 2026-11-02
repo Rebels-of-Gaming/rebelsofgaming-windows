@@ -1,5 +1,8 @@
 # Store-Texte – Rebels of Gaming für Windows
 
+> **Neu (02.11.2026):** Die aktuellen Store-Einträge stehen in `docs/store/msstore-de.md`, `msstore-en.md` und
+> `msstore-fr.md`. Die Texte unten gehören zu 2.5.1 und bleiben als Verlauf stehen.
+
 Texte für den Store-Eintrag im Partner Center (Abschnitt „Store-Einträge“, je Sprache). Angelehnt an die Texte der
 Mobile-App (`/home/wahke/projects/rog-app/store.config.json`), Du-Form, nur Funktionen, die die App wirklich hat.
 Grenzen des Partner Centers: Beschreibung ≤ 10 000 Zeichen, „Neuerungen“ ≤ 1 500, bis zu 20 Funktionen à ≤ 200 Zeichen,

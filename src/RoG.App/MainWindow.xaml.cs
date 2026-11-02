@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Controls;
 using RoG.App.Services;
 using RoG.App.Views;
 using RoG.Core.Api;
+using RoG.Core.Features.About;
 using RoG.Core.Localization;
 using RoG.Core.Navigation;
 using RoG.Core.Settings;
@@ -77,7 +78,9 @@ public sealed partial class MainWindow : Window, IDisposable
         });
         services.SignInRequested += (_, _) => ShowLogin();
         services.CurrentUserChanged += (_, _) => UpdateAccountItem();
+        services.PositiveMomentRecorded += (_, _) => DispatcherQueue.TryEnqueue(() => _ = PromptReviewAsync());
         services.Navigator = Navigate;
+        services.TourPresenter = ShowTourAsync;
         services.Realtime.PropertyChanged += (_, e) =>
         {
             if (e.PropertyName == nameof(RealtimeService.UnreadNotifications))
@@ -200,6 +203,11 @@ public sealed partial class MainWindow : Window, IDisposable
     private async Task InitializeAsync()
     {
         SyncLockSettings();
+        if (_services.Settings.FirstRunAt is null)
+        {
+            await _services.UpdateSettingsAsync(s => s with { FirstRunAt = DateTimeOffset.UtcNow });
+        }
+
         var token = await _services.Tokens.GetAsync();
         if (token is not null && _lock.OnStart())
         {
@@ -471,6 +479,7 @@ public sealed partial class MainWindow : Window, IDisposable
             _services.CurrentUser = await _services.Account.GetMeAsync();
             _ = _services.Account.RegisterDeviceAsync(AppServices.AppVersion);
             StartOutbox();
+            await ShowTourIfDueAsync();
             _ = PromptPendingRulesAsync();
         }
         catch (ApiProblemException)
@@ -480,6 +489,92 @@ public sealed partial class MainWindow : Window, IDisposable
         catch (RoG.Core.Api.Generated.GeneratedApiException)
         {
             // unerwartete Antwort – ohne Profil weiter
+        }
+    }
+
+    private bool _dialogOpen;
+    private bool _reviewPrompted;
+
+    /// <summary>Funktions-Tour einmal nach der ersten Anmeldung (als Gast nie); Überspringen zählt als gesehen.</summary>
+    private async Task ShowTourIfDueAsync()
+    {
+        if (!FeatureTour.ShouldShow(_services.Settings, signedIn: true))
+        {
+            return;
+        }
+
+        await _services.UpdateSettingsAsync(FeatureTour.Seen);
+        await ShowTourAsync();
+    }
+
+    /// <summary>Tour anzeigen (auch aus Einstellungen → Über die App).</summary>
+    public async Task ShowTourAsync()
+    {
+        if (_dialogOpen || Content?.XamlRoot is not { } root)
+        {
+            return;
+        }
+
+        _dialogOpen = true;
+        try
+        {
+            await FeatureTourDialog.ShowAsync(root, _services.Localizer);
+        }
+        catch (Exception ex) when (ex is InvalidOperationException or System.Runtime.InteropServices.COMException)
+        {
+            // schon ein anderer Dialog offen
+        }
+        finally
+        {
+            _dialogOpen = false;
+        }
+    }
+
+    /// <summary>
+    /// Seltene Bitte um eine Store-Bewertung nach einem positiven Moment (<see cref="ReviewPrompt"/>): höchstens einmal je
+    /// Start, nie während eines anderen Dialogs (Tour, Regeln). Neutral formuliert, ohne Sterne-Vorgabe oder Anreiz.
+    /// </summary>
+    private async Task PromptReviewAsync()
+    {
+        if (_reviewPrompted || _dialogOpen || !ReviewPrompt.ShouldAsk(_services.Settings, DateTimeOffset.UtcNow, StoreReviewService.IsStoreInstall)
+            || Content?.XamlRoot is not { } root)
+        {
+            return;
+        }
+
+        _reviewPrompted = true;
+        await _services.UpdateSettingsAsync(s => ReviewPrompt.Asked(s, DateTimeOffset.UtcNow, never: false));
+        var l = _services.Localizer;
+        var dialog = new ContentDialog
+        {
+            XamlRoot = root,
+            Title = l.GetString(StringKeys.ReviewPromptTitle),
+            Content = new TextBlock { Text = l.GetString(StringKeys.ReviewPromptText), TextWrapping = TextWrapping.Wrap },
+            PrimaryButtonText = l.GetString(StringKeys.ReviewPromptRate),
+            SecondaryButtonText = l.GetString(StringKeys.ReviewPromptNever),
+            CloseButtonText = l.GetString(StringKeys.ReviewPromptLater),
+            DefaultButton = ContentDialogButton.Close,
+        };
+        _dialogOpen = true;
+        try
+        {
+            switch (await dialog.ShowAsync())
+            {
+                case ContentDialogResult.Primary:
+                    await StoreReviewService.RequestAsync();
+                    break;
+                case ContentDialogResult.Secondary:
+                    await _services.UpdateSettingsAsync(s => s with { ReviewNeverAsk = true });
+                    break;
+            }
+        }
+        catch (Exception ex) when (ex is InvalidOperationException or System.Runtime.InteropServices.COMException)
+        {
+            // schon ein anderer Dialog offen
+        }
+        finally
+        {
+            _dialogOpen = false;
         }
     }
 
@@ -497,6 +592,7 @@ public sealed partial class MainWindow : Window, IDisposable
         }
 
         _rulesPrompted = true;
+        _dialogOpen = true;
         try
         {
             var pending = (await new RoG.Core.Features.Info.InfoService(_services.Api.Client, _services.Environment.WebBaseUrl).ListAsync())
@@ -524,6 +620,10 @@ public sealed partial class MainWindow : Window, IDisposable
         catch (Exception ex) when (ex is ApiProblemException or RoG.Core.Api.Generated.GeneratedApiException or InvalidOperationException)
         {
             // still – z. B. schon ein anderer Dialog offen
+        }
+        finally
+        {
+            _dialogOpen = false;
         }
     }
 

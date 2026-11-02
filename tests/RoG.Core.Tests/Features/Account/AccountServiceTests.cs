@@ -149,6 +149,18 @@ public class AccountServiceTests
     }
 
     [Fact]
+    public async Task Reads_store_links_https_only()
+    {
+        var h = Create((_, _) => Json("""{"data":{"name":"Rebels of Gaming","version":"v1","app":{"version":"0.55.0","commit":null,"deployed_at":null},"time":"2026-11-02T12:00:00Z","realtime":null,"apps":{"app_store_url":"http://apps.example/rog","play_store_url":"https://play.example/rog","microsoft_store_url":"https://ms.example/rog"}},"links":{}}"""));
+
+        var links = (await h.Service.GetPlatformAsync()).StoreLinks;
+
+        Assert.Null(links.AppStore);
+        Assert.Equal(new Uri("https://play.example/rog"), links.PlayStore);
+        Assert.Equal(new Uri("https://ms.example/rog"), links.MicrosoftStore);
+    }
+
+    [Fact]
     public async Task Reads_the_live_ticker()
     {
         var h = Create((_, _) => Json("""{"data":[{"key":"online","label":"Online","icon":"activity","tone":"green","value":12,"hint":null},{"key":"server","label":"Auf Servern","icon":"server","tone":"red","value":3,"hint":"ET #1"},{"key":"next_event","label":"Nächstes Event","icon":"calendar","tone":"gold","value":"Sa., 18.10. 20:00","hint":"Clanwar"},{"label":"ohne Schlüssel","value":1}],"meta":{"updated_at":"2026-10-16T12:00:00Z","ttl":30}}"""));

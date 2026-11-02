@@ -50,7 +50,7 @@ public sealed class WindowsStoreUpdateSource(Func<nint> windowHandle) : IStoreUp
         return _context;
     }
 
-    private static bool DetectStoreInstall()
+    internal static bool DetectStoreInstall()
     {
         try
         {

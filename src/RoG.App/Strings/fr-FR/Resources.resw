@@ -7476,4 +7476,97 @@
   <data name="AppStats_Hint.Text" xml:space="preserve">
     <value>Les chiffres des stores arrivent avec 1 à 2 jours de retard. Uniquement des totaux, aucune donnée personnelle.</value>
   </data>
+  <data name="Tour_Title" xml:space="preserve">
+    <value>Bienvenue chez RoG</value>
+  </data>
+  <data name="Tour_Next" xml:space="preserve">
+    <value>Suivant</value>
+  </data>
+  <data name="Tour_Back" xml:space="preserve">
+    <value>Retour</value>
+  </data>
+  <data name="Tour_Skip" xml:space="preserve">
+    <value>Passer</value>
+  </data>
+  <data name="Tour_Done" xml:space="preserve">
+    <value>C’est parti</value>
+  </data>
+  <data name="Tour_Step" xml:space="preserve">
+    <value>{0} sur {1}</value>
+  </data>
+  <data name="ReviewPrompt_Title" xml:space="preserve">
+    <value>Évaluer l’app ?</value>
+  </data>
+  <data name="ReviewPrompt_Text" xml:space="preserve">
+    <value>Si l’app te plaît, un petit avis dans le Microsoft Store aide d’autres joueurs à trouver le clan. Totalement facultatif – on ne demande au plus que tous les quelques mois.</value>
+  </data>
+  <data name="ReviewPrompt_Rate" xml:space="preserve">
+    <value>Évaluer</value>
+  </data>
+  <data name="ReviewPrompt_Later" xml:space="preserve">
+    <value>Plus tard</value>
+  </data>
+  <data name="ReviewPrompt_Never" xml:space="preserve">
+    <value>Ne plus demander</value>
+  </data>
+  <data name="ShareApp_Title" xml:space="preserve">
+    <value>Partager l’app</value>
+  </data>
+  <data name="ShareApp_Message" xml:space="preserve">
+    <value>Rebels of Gaming – l’app du clan</value>
+  </data>
+  <data name="ShareApp_MicrosoftStore" xml:space="preserve">
+    <value>Microsoft Store (Windows)</value>
+  </data>
+  <data name="ShareApp_AppStore" xml:space="preserve">
+    <value>App Store (iPhone, iPad)</value>
+  </data>
+  <data name="ShareApp_PlayStore" xml:space="preserve">
+    <value>Google Play (Android)</value>
+  </data>
+  <data name="SettingsPage_RateApp.Content" xml:space="preserve">
+    <value>Évaluer l’app</value>
+  </data>
+  <data name="SettingsPage_ShareApp.Content" xml:space="preserve">
+    <value>Partager l’app</value>
+  </data>
+  <data name="SettingsPage_Tour.Content" xml:space="preserve">
+    <value>Visite guidée</value>
+  </data>
+  <data name="Tour_Forum_Title" xml:space="preserve">
+    <value>Forum</value>
+  </data>
+  <data name="Tour_Forum_Text" xml:space="preserve">
+    <value>Discute dans les sections et sujets, vote aux sondages et réponds avec mise en forme, citations et images.</value>
+  </data>
+  <data name="Tour_Messages_Title" xml:space="preserve">
+    <value>Messages</value>
+  </data>
+  <data name="Tour_Messages_Text" xml:space="preserve">
+    <value>Messages privés en temps réel – chaque conversation dans sa propre fenêtre si tu veux, même à côté du jeu.</value>
+  </data>
+  <data name="Tour_Events_Title" xml:space="preserve">
+    <value>Événements</value>
+  </data>
+  <data name="Tour_Events_Text" xml:space="preserve">
+    <value>Soirées du clan, matchs et tournois dans le calendrier : réponds, vois les participants et ajoute-les à ton agenda.</value>
+  </data>
+  <data name="Tour_Servers_Title" xml:space="preserve">
+    <value>Serveurs &amp; statistiques</value>
+  </data>
+  <data name="Tour_Servers_Text" xml:space="preserve">
+    <value>Vois en direct qui joue sur nos serveurs, connecte-toi en un clic et compare-toi dans les classements.</value>
+  </data>
+  <data name="Tour_Notifications_Title" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="Tour_Notifications_Text" xml:space="preserve">
+    <value>Réponses, messages et événements en notifications Windows – choisis ce que tu reçois dans les Paramètres.</value>
+  </data>
+  <data name="Tour_Profile_Title" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="Tour_Profile_Text" xml:space="preserve">
+    <value>Montre tes jeux, escouades et succès. Tu retrouves cette visite à tout moment sous Paramètres → À propos.</value>
+  </data>
 </root>

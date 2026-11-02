@@ -5,7 +5,11 @@ using RoG.Core.Auth;
 namespace RoG.Core.Features.Account;
 
 /// <summary>Plattform-Stand aus <c>GET /v1</c> (für „Plattform vA.B.C“ in Einstellungen → Über).</summary>
-public sealed record PlatformInfo(string Name, string Version, string? Commit);
+public sealed record PlatformInfo(string Name, string Version, string? Commit)
+{
+    /// <summary>Store-Links der Apps (<c>data.apps</c>) für „App teilen“.</summary>
+    public RoG.Core.Features.About.StoreLinks StoreLinks { get; init; } = RoG.Core.Features.About.StoreLinks.None;
+}
 
 /// <summary>Konto der App: Profil (<c>/v1/me</c>), Gerät melden (<c>POST /v1/devices</c>), Abmelden.</summary>
 public sealed class AccountService(IRoGApiClient client, ITokenStore tokens)
@@ -79,7 +83,12 @@ public sealed class AccountService(IRoGApiClient client, ITokenStore tokens)
     public async Task<PlatformInfo> GetPlatformAsync(CancellationToken cancellationToken = default)
     {
         var data = (await client.V1_statusAsync(cancellationToken).ConfigureAwait(false)).Data;
-        return new PlatformInfo(data.Name, data.App?.Version ?? data.Version, data.App?.Commit);
+        return new PlatformInfo(data.Name, data.App?.Version ?? data.Version, data.App?.Commit)
+        {
+            StoreLinks = data.Apps is { } apps
+                ? RoG.Core.Features.About.StoreLinks.From(apps.App_store_url, apps.Play_store_url, apps.Microsoft_store_url)
+                : RoG.Core.Features.About.StoreLinks.None,
+        };
     }
 
     internal static UserProfile Map(MeResource me) => new(

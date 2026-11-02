@@ -595,6 +595,10 @@ public sealed partial class EventDetailViewModel(AppServices services, EventServ
             Apply(updated);
             Changed?.Invoke(this, updated);
             Show(Format(StringKeys.EventsRsvpSaved, RsvpLabel(result, Services.Localizer)), InfoBarSeverity.Success);
+            if (answer == Rsvp.Yes)
+            {
+                Services.PositiveMoment();
+            }
         }
         catch (ApiProblemException ex) when (ex.Problem.IsNetworkError)
         {

@@ -28,6 +28,13 @@ Versionen nach [SemVer](https://semver.org/lang/de/), Regeln in `docs/VERSIONIER
 - Shop & Spenden (Konto → Shop & Spenden, Links `/shop`, `/donate`, `/minecraft/vip`, `rog://shop`): Unterstützer-Ränge mit Preis und Laufzeit, Spenden-Rahmen und Danke-Liste, eigene Bestellungen und Spenden mit Status und Quittung; gekauft und gespendet wird auf der Website
 - TeamSpeak: Trenner-Kanäle („[cspacer]Squads“) erscheinen als Überschrift, ihre Unterkanäle (so liefert die Website die Squad-Kanäle) sind wieder sichtbar – bisher fehlten sie samt Personen
 
+### Bewerten, Teilen, Tour und Store-Texte (02.11.2026)
+
+- Einstellungen → Über die App: „App bewerten“ (Bewertungsdialog des Microsoft Store, ohne Store-Installation die Bewertungsseite in der Store-App), „App teilen“ (Windows-Teilen-Dialog mit den Store-Links aus `GET /v1` → `data.apps`, nur wenn die Website welche eingetragen hat) und „Funktions-Tour“
+- Seltene Bitte um eine Bewertung nach positiven Momenten (Beitrag, Nachricht, Zusage): nur Store-Version, frühestens nach einer Woche und nach der Tour, höchstens alle 120 Tage, „Nicht mehr fragen“, ohne Sterne-Vorgabe oder Anreiz
+- Funktions-Tour mit sechs Karten (Forum, Nachrichten, Termine, Gameserver & Statistiken, Benachrichtigungen, Profil) einmal nach der ersten Anmeldung – Weiter/Zurück/Überspringen, mit Tastatur und Sprachausgabe bedienbar
+- Neue Store-Texte für den Microsoft Store auf Deutsch, Englisch und Französisch (`docs/store/msstore-*.md`)
+
 ### Lizenz
 
 - Quelltext unter GPL-3.0-or-later (`LICENSE`), das Repo wird öffentlich; Name „Rebels of Gaming“, Logo und Grafiken sind ausgenommen (`TRADEMARKS.md`). CI: Linux-Teil auf GitHub-Runnern, der Windows-Teil auf `rog-win-1` läuft nie für Pull-Requests aus Forks

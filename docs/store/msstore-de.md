@@ -99,3 +99,14 @@ dich als Gast umsehen. Die App ist auf Deutsch, Englisch und Französisch und qu
 5. Discord
 6. Clan Forum
 7. Gaming Events
+
+## Neuerungen (2.6.0)
+
+Neu in 2.6.0:
+• Updates direkt in der App: Liegt im Store eine neue Version bereit, erscheint ein Hinweis mit „Jetzt aktualisieren“.
+• Kurze Funktions-Tour nach der ersten Anmeldung – jederzeit erneut unter Einstellungen → Über die App.
+• App bewerten und teilen: Store-Bewertung und Store-Links für Freunde mit einem Klick.
+• Minecraft: Lobby-Secrets mit Fortschritt im Profil und eigener Seite, Rebel Royale in den Bestenlisten.
+• Shop & Spenden: Unterstützer-Ränge, Spenden und deine eigenen Bestellungen ansehen (gekauft wird auf der Website).
+• Für das Team: Uploads auf Gameserver mit Vier-Augen-Freigabe, Kopf-Katalog und App-Statistik in der Verwaltung.
+• Mehr Sicherheit: Bilder nur von den Servern der Plattform, Downloads mit Windows-Sicherheitsprüfung und eine noch besser geschützte Anmeldung.

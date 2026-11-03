@@ -101,3 +101,14 @@ Sans compte, tu peux faire un tour en invité. L’app est disponible en alleman
 5. Discord
 6. forum de clan
 7. événements gaming
+
+## Nouveautés (2.6.0)
+
+Nouveau dans la 2.6.0 :
+• Mises à jour dans l’app : quand une nouvelle version est prête dans le Store, un bandeau propose « Mettre à jour ».
+• Une courte visite guidée après ta première connexion – à revoir à tout moment sous Paramètres → À propos.
+• Évaluer et partager l’app : avis dans le Store et liens du Store pour tes amis en un clic.
+• Minecraft : secrets du lobby avec progression sur ton profil et page dédiée, Rebel Royale dans les classements.
+• Boutique et dons : rangs de soutien, dons et tes propres commandes (les achats se font sur le site).
+• Pour l’équipe : téléversements sur les serveurs de jeu avec validation à quatre yeux, catalogue de têtes et statistiques de l’app dans l’administration.
+• Plus de sécurité : images uniquement depuis les serveurs de la plateforme, téléchargements vérifiés par la sécurité Windows et une connexion encore mieux protégée.

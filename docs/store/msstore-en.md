@@ -99,3 +99,14 @@ is available in German, English and French and is open source (GPL-3.0).
 5. Discord
 6. clan forum
 7. gaming events
+
+## What’s new (2.6.0)
+
+New in 2.6.0:
+• Updates right in the app: when a new version is ready in the Store, a banner offers “Update now”.
+• A short feature tour after your first sign-in – available again any time under Settings → About.
+• Rate and share the app: store review and store links for your friends in one click.
+• Minecraft: lobby secrets with progress on your profile and their own page, Rebel Royale on the leaderboards.
+• Shop & donations: supporter ranks, donations and your own orders (purchases happen on the website).
+• For the team: uploads to game servers with four-eyes approval, head catalogue and app statistics in administration.
+• More security: images only from the platform’s servers, downloads checked by Windows security and an even better protected sign-in.

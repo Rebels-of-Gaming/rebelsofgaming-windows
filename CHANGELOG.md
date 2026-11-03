@@ -5,6 +5,8 @@ Versionen nach [SemVer](https://semver.org/lang/de/), Regeln in `docs/VERSIONIER
 
 ## [Unveröffentlicht]
 
+## [2.6.0] – 2026-11-03
+
 ### Sicherheit (Audit 01.11.2026)
 
 - CI: Windows-Job (eigener Runner `rog-win-1`) nie bei Pull-Requests, nur bei push/workflow_dispatch; `persist-credentials: false`; Actions auf Commit-SHA gepinnt; Standard-Rechte `contents: read`; Eingabe `mode` als Auswahl und nur über `env:` ans Skript; Dependabot für Actions und NuGet

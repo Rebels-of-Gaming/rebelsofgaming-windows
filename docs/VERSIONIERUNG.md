@@ -49,3 +49,4 @@ und meldet `X.Y.Z` als `app_version` an `/v1/devices`.
 - `2.3.1`–`2.3.4` (16.10.2026): Moderation, Melden, Offline-Warteschlange, DPAPI, Verwaltung, Teilen-Ziel.
 - `2.4.0` (17.10.2026): Stufe 2 komplett (Spiele, Auslastung, Monatsansicht), Offline-Cache, Termine verwalten.
 - `2.0.1` (16.10.2026): Stufe 1 Konto + Start (Konto, Einstellungen, Live-Ticker, Einzelinstanz). Version setzen mit `scripts/bump-version.sh patch|minor`.
+- `2.6.0` (03.11.2026): Website v0.45–v0.55 (Lobby-Secrets, Rebel Royale, Server-Uploads, Köpfe, App-Statistik, Shop), Sicherheits-Audit, Store-Update-Hinweis, Bewerten/Teilen/Tour, neue Store-Texte.

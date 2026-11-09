@@ -25,10 +25,10 @@ jobs:
     env:
       DOTNET_CLI_TELEMETRY_OPTOUT: '1'
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4.3.1
+      - uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
         with:
           global-json-file: global.json
       - run: dotnet build RoG.sln -c Release
@@ -56,7 +56,7 @@ jobs:
       DOTNET_CLI_USE_MSBUILD_SERVER: '0'
       UseSharedCompilation: 'false'
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           # kein Token im .git/config des eigenen Runners
           persist-credentials: false
@@ -111,7 +111,7 @@ jobs:
             Write-Host "hochgeladen: $($f.Name) ($([math]::Round($f.Length / 1MB)) MB)"
           }
           Write-Host "Entwurfs-Release: $($release.html_url)"
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         # Kontingent voll darf den Lauf nicht rot machen, wenn das Paket schon im Release liegt
         continue-on-error: true
